@@ -41,19 +41,100 @@ def main():
     data = np.array(img, dtype=np.float32)
     playable = data[2048:10240, 2048:10240]
     
-    # Forest checking helpers (Elevation >= 55m is forest in the new DEM)
+    # Forest polygon extraction (elevations >= 55m in the new DEM). Pulled up here
+    # because the forest ways AND the is_in_forest() queries below are both driven
+    # by the same kept polygons.
+    def get_border(pt):
+        x, y = pt
+        if math.isclose(x, 0.0, abs_tol=1e-3): return 'W'
+        if math.isclose(x, 8192.0, abs_tol=1e-3): return 'E'
+        if math.isclose(y, 0.0, abs_tol=1e-3): return 'N'
+        if math.isclose(y, 8192.0, abs_tol=1e-3): return 'S'
+        return None
+
+    def close_segment(seg):
+        start = seg[0]
+        end = seg[-1]
+
+        if np.allclose(start, end, atol=1e-3):
+            return [tuple(pt) for pt in seg]
+
+        border_start = get_border(start)
+        border_end = get_border(end)
+
+        path = [tuple(pt) for pt in seg]
+
+        if border_start and border_end:
+            if border_start == border_end:
+                path.append(tuple(start))
+            else:
+                corners = {
+                    ('E', 'S'): (8192.0, 8192.0),
+                    ('S', 'E'): (8192.0, 8192.0),
+                    ('W', 'S'): (0.0, 8192.0),
+                    ('S', 'W'): (0.0, 8192.0),
+                    ('E', 'N'): (8192.0, 0.0),
+                    ('N', 'E'): (8192.0, 0.0),
+                    ('W', 'N'): (0.0, 0.0),
+                    ('N', 'W'): (0.0, 0.0),
+                }
+                pair = (border_end, border_start)
+                if pair in corners:
+                    path.append(corners[pair])
+                path.append(tuple(start))
+        else:
+            path.append(tuple(start))
+
+        return path
+
+    def get_forest_polygons():
+        grid_size = 257
+        idx = np.linspace(0, 8191, grid_size, dtype=int)
+        playable_sub = playable[idx, :][:, idx]
+
+        x_grid = np.linspace(0, 8192, grid_size)
+        y_grid = np.linspace(0, 8192, grid_size)
+        X, Y = np.meshgrid(x_grid, y_grid)
+
+        fig, ax = plt.subplots()
+        cs = ax.contour(X, Y, playable_sub, levels=[5500.0])
+        plt.close(fig)
+
+        segs = cs.allsegs[0]
+        polygons = []
+        for seg in segs:
+            closed_poly = close_segment(seg)
+            polygons.append(closed_poly)
+
+        return polygons
+
+    # All DEM forest contours are kept: the central-western band and the eastern
+    # mountain's forest ring. What no longer exists is the old elevation blanket -
+    # is_in_forest() below is driven by these polygons instead of raw elevation, so
+    # only the contoured woods block fields and roads, and the flats around the
+    # mountain get farmed.
+    forest_polys_kept = get_forest_polygons()
+
+    # Rasterise the kept forest for the clearance queries below. is_in_forest() is
+    # driven by the kept polygons, not by raw elevation, so the high ground where
+    # the eastern forest stood is reclaimed by fields and roads.
+    FOREST_MASK_SCALE = 4.0     # metres per pixel
+    mask_n = int(round(8192.0 / FOREST_MASK_SCALE))
+    _fimg = Image.new('L', (mask_n, mask_n), 0)
+    _fdraw = ImageDraw.Draw(_fimg)
+    for _poly in forest_polys_kept:
+        _fdraw.polygon([(px / FOREST_MASK_SCALE, py / FOREST_MASK_SCALE)
+                        for px, py in _poly], fill=255, outline=255)
+    forest_mask = np.array(_fimg) > 0
+
     def is_in_forest(x, y, buffer_m=5.0):
-        # The DEM decides on its own: wherever the terrain reaches 55m it is
-        # forest, on either side of the Southern Link Road.
-        x_min = max(0, int(x - buffer_m))
-        x_max = min(8191, int(x + buffer_m))
-        y_min = max(0, int(y - buffer_m))
-        y_max = min(8191, int(y + buffer_m))
-        
-        sub = playable[y_min:y_max+1, x_min:x_max+1]
-        if sub.size > 0 and np.any(sub >= 5500.0):
-            return True
-        return False
+        x_min = max(0, int((x - buffer_m) / FOREST_MASK_SCALE))
+        x_max = min(mask_n - 1, int((x + buffer_m) / FOREST_MASK_SCALE))
+        y_min = max(0, int((y - buffer_m) / FOREST_MASK_SCALE))
+        y_max = min(mask_n - 1, int((y + buffer_m) / FOREST_MASK_SCALE))
+        if x_max < x_min or y_max < y_min:
+            return False
+        return bool(forest_mask[y_min:y_max+1, x_min:x_max+1].any())
 
     def get_forest_limit_y(x, y_start, y_end, buffer_m=5.0):
         # Scan from y_start to y_end to find forest entry point, then step back by buffer_m
@@ -149,77 +230,31 @@ def main():
     # Spans from X: 0 to X: 8192.
     xs_sec = [7037.0, 7237.0, 7437.0, 7457.0, 7557.0]
     xs_ter_v = [800.0, 1600.0, 2400.0, 3200.0, 4000.0, 4800.0, 5600.0, 6400.0]
-    xs_primary_all = sorted([7022.0] + xs_ter_v + xs_sec)
+    xs_primary_all = sorted(xs_ter_v + xs_sec)
     primary_coords = [(0.0, 985.0)] + [(x, 985.0) for x in xs_primary_all] + [(8192.0, 985.0)]
     add_way(primary_coords, {'highway': 'primary', 'name': 'Primary Road'})
 
-    # 7b. New Southern-to-Western Primary Road
-    def bezier_curve(p0, p1, p2, num_pts=10):
-        pts = []
-        for i in range(num_pts):
-            t = i / (num_pts - 1)
-            x = (1-t)**2 * p0[0] + 2*(1-t)*t * p1[0] + t**2 * p2[0]
-            y = (1-t)**2 * p0[1] + 2*(1-t)*t * p1[1] + t**2 * p2[1]
-            pts.append((x, y))
-        return pts
+    # 7b. Southern Primary Road (straight East-West)
+    # Runs the full width of the map at Y = 7650 and no longer bends north, so it
+    # never joins the northern primary road.
+    new_primary_coords_base = [(0.0, 7650.0), (8192.0, 7650.0)]
 
-    new_primary_coords_base = []
-    # Segment 1: West edge to start of Curve 1
-    new_primary_coords_base.append((0.0, 7650.0))
-    new_primary_coords_base.append((5068.0, 7650.0))
-    
-    # Curve 1
-    c1_pts = bezier_curve((5068.0, 7650.0), (5368.0, 7650.0), (5580.13, 7437.87))
-    new_primary_coords_base.extend(c1_pts[1:-1])
-    
-    # Segment 2: end of Curve 1 to start of Curve 2
-    new_primary_coords_base.append((5580.13, 7437.87))
-    new_primary_coords_base.append((6890.87, 6127.13))
-    
-    # Curve 2
-    c2_pts = bezier_curve((6890.87, 6127.13), (7022.0, 5996.0), (7022.0, 5615.0))
-    new_primary_coords_base.extend(c2_pts[1:-1])
-    
-    # Segment 3: end of Curve 2 to connection with northern primary road
-    new_primary_coords_base.append((7022.0, 5615.0))
-    new_primary_coords_base.append((7022.0, 1500.0))
-    new_primary_coords_base.append((7022.0, 1250.0))
-    new_primary_coords_base.append((7022.0, 1000.0))
-    new_primary_coords_base.append((7022.0, 985.0))
-
-    # Set up interpolation variables for the road shape
-    road_pts_filtered = [pt for pt in new_primary_coords_base if pt[0] < 7022.0]
-    road_pts_filtered.sort(key=lambda pt: pt[0])
-    road_xs_interp = [pt[0] for pt in road_pts_filtered] + [7022.0]
-    road_ys_interp = [pt[1] for pt in road_pts_filtered] + [5615.0]
-
+    # The road is a straight horizontal line, so its Y is constant everywhere.
     def get_road_y(x):
-        if x >= 7022.0:
-            return 5615.0
-        return np.interp(x, road_xs_interp, road_ys_interp)
+        return 7650.0
 
-    road_pts_sorted_by_y = sorted(new_primary_coords_base, key=lambda pt: pt[1])
-    road_xs_y = [pt[0] for pt in road_pts_sorted_by_y]
-    road_ys_y = [pt[1] for pt in road_pts_sorted_by_y]
-
-    # Collect and insert road-grid intersection nodes
+    # Collect and insert road-grid intersection nodes: only the vertical tertiary
+    # roads meet it now, each one straight down on the road line.
     ys_ter_h = [1809.0, 2609.0, 3409.0, 4209.0, 5009.0, 5809.0, 6609.0, 7409.0]
-    intersections = []
-    for x in xs_ter_v:
-        y_int = get_road_y(x)
-        intersections.append((x, y_int))
-    for y in ys_ter_h:
-        x_int = np.interp(y, road_ys_y, road_xs_y)
-        intersections.append((x_int, y))
+    intersections = [(x, 7650.0) for x in xs_ter_v]
 
-    # Junction where the forest haul road leaves the Southern Link Road (section 12).
-    # It sits on the straight vertical run of Segment 3, so it lands on the road line exactly.
+    # The forest haul road used to leave from the removed vertical run of this road.
+    # Kept only for the (disabled) forestry-track code in section 12; it no longer
+    # sits on any road.
     forest_access_pt = (7022.0, 3200.0)
-    intersections.append(forest_access_pt)
 
-    # Add intersections to primary road way, sort by X-Y (strictly monotonic along road path)
-    all_road_nodes = list(set(new_primary_coords_base + intersections))
-    all_road_nodes.sort(key=lambda pt: pt[0] - pt[1])
+    all_road_nodes = sorted(set(new_primary_coords_base + intersections),
+                            key=lambda pt: pt[0])
     add_way(all_road_nodes, {'highway': 'primary', 'name': 'Southern Link Road'})
 
     # 8. Railway
@@ -234,7 +269,9 @@ def main():
         v_coords = [(x, y) for y in ys_sec_v]
         add_way(v_coords, {'highway': 'secondary'})
 
-    xs_sec_h = [7022.0] + xs_sec
+    # The town's horizontal roads start at the town itself (x=7037); there is no
+    # longer a primary road at x=7022 for them to reach.
+    xs_sec_h = xs_sec
     ys_sec_h = [1000.0, 1250.0, 1500.0]
     for y in ys_sec_h:
         h_coords = [(x, y) for x in xs_sec_h]
@@ -373,7 +410,9 @@ def main():
 
     # Horizontal tertiary roads
     for y in ys_ter_h:
-        x_int = np.interp(y, road_ys_y, road_xs_y)
+        # With the primary road straight along the south, the grid's eastern edge
+        # is the fixed PLSS boundary at x=7022 instead of the road's old vertical run.
+        x_int = 7022.0
         h_pts = [(0.0, y)]
         for x in xs_ter_v:
             if x < x_int - 0.1:
@@ -735,16 +774,18 @@ def main():
     # Pack fields for each column, keeping track of last horizontal road Y
     import random
     rng = random.Random(404)
-    col_last_ys = [1500.0, 1500.0, 2200.0]
+    # Columns that overlap the Town Reservoir (x >= 7577, down to y = 2200) start
+    # below it; only column 1 lies entirely west of the lake.
+    col_last_ys = [1500.0, 2200.0, 2200.0]
     col_has_fields = [False, False, False]
-    
+
     for c_idx, (x_s, x_e) in enumerate(col_xs):
-        y_curr = 2215.0 if c_idx == 2 else 1515.0
+        y_curr = 1515.0 if c_idx == 0 else 2215.0
         choices = [30, 30, 45]
         f_idx = 1
         
         # Determine column road boundaries
-        x_road_start = 7022.0 if c_idx == 0 else vertical_gaps[c_idx - 1]
+        x_road_start = 7037.0 if c_idx == 0 else vertical_gaps[c_idx - 1]
         x_road_end = 8177.0 if c_idx == 2 else vertical_gaps[c_idx]
         
         while True:
@@ -853,78 +894,15 @@ def main():
     # Pocket B: between bottom-left forest and Southern Link Road curve 1
     pack_south_pocket(2675.4, 5053.0, p_name="B")
 
-    # 10. Forest polygons (elevations >= 370m)
-    def get_border(pt):
-        x, y = pt
-        if math.isclose(x, 0.0, abs_tol=1e-3): return 'W'
-        if math.isclose(x, 8192.0, abs_tol=1e-3): return 'E'
-        if math.isclose(y, 0.0, abs_tol=1e-3): return 'N'
-        if math.isclose(y, 8192.0, abs_tol=1e-3): return 'S'
-        return None
-
-    def close_segment(seg):
-        start = seg[0]
-        end = seg[-1]
-        
-        if np.allclose(start, end, atol=1e-3):
-            return [tuple(pt) for pt in seg]
-            
-        border_start = get_border(start)
-        border_end = get_border(end)
-        
-        path = [tuple(pt) for pt in seg]
-        
-        if border_start and border_end:
-            if border_start == border_end:
-                path.append(tuple(start))
-            else:
-                corners = {
-                    ('E', 'S'): (8192.0, 8192.0),
-                    ('S', 'E'): (8192.0, 8192.0),
-                    ('W', 'S'): (0.0, 8192.0),
-                    ('S', 'W'): (0.0, 8192.0),
-                    ('E', 'N'): (8192.0, 0.0),
-                    ('N', 'E'): (8192.0, 0.0),
-                    ('W', 'N'): (0.0, 0.0),
-                    ('N', 'W'): (0.0, 0.0),
-                }
-                pair = (border_end, border_start)
-                if pair in corners:
-                    path.append(corners[pair])
-                path.append(tuple(start))
-        else:
-            path.append(tuple(start))
-            
-        return path
-
-    def get_forest_polygons():
-        grid_size = 257
-        idx = np.linspace(0, 8191, grid_size, dtype=int)
-        playable_sub = playable[idx, :][:, idx]
-        
-        x_grid = np.linspace(0, 8192, grid_size)
-        y_grid = np.linspace(0, 8192, grid_size)
-        X, Y = np.meshgrid(x_grid, y_grid)
-        
-        fig, ax = plt.subplots()
-        cs = ax.contour(X, Y, playable_sub, levels=[5500.0])
-        plt.close(fig)
-        
-        segs = cs.allsegs[0]
-        polygons = []
-        for seg in segs:
-            closed_poly = close_segment(seg)
-            polygons.append(closed_poly)
-            
-        return polygons
-
+    # 10. Forest polygons (extracted and filtered in section 0; the eastern mass is
+    # already dropped there).
     # The south-western forest has a box of its own: the gap the two southern pockets
     # leave between them (see pack_south_pocket above), bounded north by the straight run
     # of the Southern Link Road. The 55 m contour pokes a narrow tongue out of it to the
     # north, across the road and into the wooded PLSS cell behind, so that forest is
     # clipped back to the box. Its X already sits inside with the same 15 m clearance the
     # southern fields keep, so only the northern edge needs cutting.
-    SOUTH_FOREST_STRAIGHT_X = 5068.0    # where the Southern Link Road stops running E-W
+    SOUTH_FOREST_STRAIGHT_X = 5068.0    # x limit that singles out the south-western forest
     SOUTH_FOREST_BOX = (1981.8 + 15.0, 7650.0 + 15.0, 2675.4 - 15.0)  # x from, y from, x to
 
     def clip_to_south_of(poly, y_min):
@@ -943,8 +921,8 @@ def main():
                 out.append((float(a[0] + t * (b[0] - a[0])), y_min))
         return out + [out[0]] if len(out) >= 3 else None
 
-    print("   Extracting and generating forest areas from DEM (elevation >= 55m)...")
-    forest_polys = get_forest_polygons()
+    print("   Generating forest areas kept from the DEM (elevation >= 55m)...")
+    forest_polys = forest_polys_kept
     for i, poly in enumerate(forest_polys):
         # Everywhere else there is no clipping against the Southern Link Road: the 55m
         # contour is followed as-is, so the forest spills over to the North/West side
@@ -970,6 +948,100 @@ def main():
             'leaf_type': 'needleleave'
         })
         print(f"   Added forest way {i+1} with {len(poly)} nodes.")
+
+    # 10b. Cut the dirt roads out of the mountain forests. The PLSS roads only test
+    # for forest at the 800 m grid crossings, so a band lying between two crossings
+    # gets run straight through; here every tertiary way is resampled against the
+    # forest mask, split at the forest edge, and the stretches inside the woods are
+    # dropped along with orphan fragments.
+    def cut_tertiary_out_of_forest():
+        MIN_PIECE_M = 30.0
+        SAMPLE_M = 2.0
+
+        def inside(p):
+            px = min(max(int(p[0] / FOREST_MASK_SCALE), 0), mask_n - 1)
+            py = min(max(int(p[1] / FOREST_MASK_SCALE), 0), mask_n - 1)
+            return bool(forest_mask[py, px])
+
+        def length(pts):
+            return sum(math.dist(pts[i], pts[i+1]) for i in range(len(pts) - 1))
+
+        kept = []
+        to_add = []
+        n_cut = n_dropped = 0
+        for w in ways:
+            if w['tags'].get('highway') != 'tertiary':
+                kept.append(w)
+                continue
+            pts = w['coords']
+            pieces = []     # (coords, starts_at_cut, ends_at_cut)
+            state = inside(pts[0])
+            cur = None if state else [pts[0]]
+            cur_from_cut = False
+            prev = pts[0]
+            for k in range(len(pts) - 1):
+                a, b = pts[k], pts[k+1]
+                n_s = max(1, int(math.ceil(math.dist(a, b) / SAMPLE_M)))
+                for i2 in range(1, n_s + 1):
+                    t = i2 / n_s
+                    p = (a[0] + t * (b[0] - a[0]), a[1] + t * (b[1] - a[1]))
+                    s = inside(p)
+                    if s != state:
+                        if s:
+                            # Entering the forest: close at the last outside sample.
+                            if not cur or cur[-1] != prev:
+                                cur.append(prev)
+                            pieces.append((cur, cur_from_cut, True))
+                            cur = None
+                        else:
+                            cur = [p]
+                            cur_from_cut = True
+                        state = s
+                    elif not s and i2 == n_s:
+                        cur.append(p)
+                    prev = p
+            if cur is not None:
+                pieces.append((cur, cur_from_cut, False))
+
+            if len(pieces) == 1 and not pieces[0][1] and not pieces[0][2]:
+                kept.append(w)      # untouched: keep the original way as-is
+                continue
+            n_cut += 1
+            for pc, from_cut, to_cut in pieces:
+                # A fragment floating between two forest walls, or too short to
+                # matter, goes away with the forest stretch.
+                if length(pc) < MIN_PIECE_M or (from_cut and to_cut):
+                    n_dropped += 1
+                    continue
+                to_add.append((pc, dict(w['tags'])))
+
+        # A piece that shares no node with any other road is a stranded stub: the
+        # forest swallowed the stretch that used to tie it into the network, so it
+        # now just runs across fields ending nowhere. Those go away too.
+        def ckey(pt):
+            return (round(pt[0], 3), round(pt[1], 3))
+        coord_count = {}
+        for coords in ([w['coords'] for w in kept
+                        if 'highway' in w['tags'] or 'railway' in w['tags']]
+                       + [pc for pc, _ in to_add]):
+            for pt in coords:
+                coord_count[ckey(pt)] = coord_count.get(ckey(pt), 0) + 1
+        connected = []
+        for pc, tags in to_add:
+            if any(coord_count[ckey(pt)] >= 2 for pt in pc):
+                connected.append((pc, tags))
+            else:
+                n_dropped += 1
+        to_add = connected
+
+        ways[:] = kept
+        for pc, tags in to_add:
+            add_way(pc, tags)
+        print(f"   Cut {n_cut} tertiary roads at the forest edge "
+              f"({len(to_add)} pieces kept, {n_dropped} fragments dropped).")
+
+    cut_tertiary_out_of_forest()
+
 
     # 11. Forest infill: absorb the leftover open ground next to the forests.
     # Everything generated so far is rasterised into an occupancy mask; whatever
@@ -1051,7 +1123,16 @@ def main():
         thick_ids[np.unique(lab[core])] = True
         thick_ids[0] = False
 
-        near_ids = np.concatenate(([False], near <= INFILL_NEAR_M)) & thick_ids
+        # A pocket south of the Southern Link Road never becomes forest, however
+        # close the woods across the road are: the forests there were explicitly
+        # removed, so that ground stays open instead.
+        south = np.zeros((n, n), dtype=bool)
+        south[int(round(7650.0 / INFILL_SCALE_M)):, :] = True
+        south_frac = np.atleast_1d(
+            ndimage.mean(south.astype(np.float32), lab, range(1, n_lab + 1)))
+
+        near_ids = np.concatenate(
+            ([False], (near <= INFILL_NEAR_M) & (south_frac < 0.5))) & thick_ids
         far_ids = thick_ids & ~near_ids
 
         def trace(selected_ids):
@@ -1097,14 +1178,135 @@ def main():
 
     print("   Filling unoccupied land next to the forests...")
     (wood_polys, wood_ha), (yard_polys, yard_ha) = build_infill_polygons()
-    for i, poly in enumerate(wood_polys):
-        add_way(poly, {
-            'natural': 'wood',
-            'landuse': 'farmyard',
-            'leaf_type': 'needleleave',
-            'name': f'Forest Infill {i+1}'
-        })
-    print(f"   Added {len(wood_polys)} infill forest areas covering {wood_ha:.1f} ha.")
+
+    # No forest infill any more: a pocket that would have grown into the woods
+    # becomes farmland instead when it is worth working (over 1 ha), and is
+    # dropped entirely when it is not.
+    def ring_area_ha(poly):
+        return abs(sum(poly[k][0] * poly[k+1][1] - poly[k+1][0] * poly[k][1]
+                       for k in range(len(poly) - 1))) / 2.0 / 10000.0
+
+    # A pocket the size of a whole district must not come out as one huge field:
+    # anything over INFILL_SPLIT_HA is cut on a ~670 m grid (parcels of ~45 ha,
+    # matching the eastern columns) separated by 10 m gaps.
+    INFILL_SPLIT_HA = 100.0
+    INFILL_PARCEL_M = 670.0
+    INFILL_GAP_M = 10.0
+
+    def split_infill_poly(poly):
+        s = INFILL_SCALE_M
+        n = int(round(8192.0 / s))
+        img = Image.new('L', (n, n), 0)
+        ImageDraw.Draw(img).polygon([(x / s, y / s) for x, y in poly],
+                                    fill=255, outline=255)
+        full = np.array(img) > 0
+        mask = full.copy()
+        pitch = max(1, int(round(INFILL_PARCEL_M / s)))
+        gap = max(1, int(round(INFILL_GAP_M / s)))
+        cuts = list(range(pitch, n, pitch))
+        for g in cuts:
+            mask[:, g:g+gap] = False
+            mask[g:g+gap, :] = False
+        lab, k = ndimage.label(mask)
+        pieces = []
+        for lid in range(1, k + 1):
+            padded = np.zeros((n + 2, n + 2), dtype=np.float32)
+            padded[1:-1, 1:-1] = (lab == lid)
+            axis = (np.arange(n + 2) - 0.5) * s
+            gx, gy = np.meshgrid(axis, axis)
+            fig, ax = plt.subplots()
+            cs = ax.contour(gx, gy, padded, levels=[0.5])
+            plt.close(fig)
+            if not cs.allsegs[0]:
+                continue
+            seg = max(cs.allsegs[0], key=len)
+            pts = [(min(max(px, 0.0), 8192.0), min(max(py, 0.0), 8192.0))
+                   for px, py in seg]
+            if pts[0] != pts[-1]:
+                pts.append(pts[0])
+            pts = simplify(pts, INFILL_SIMPLIFY_M)
+            if len(pts) < 4:
+                continue
+            if pts[0] != pts[-1]:
+                pts.append(pts[0])
+            pieces.append(pts)
+
+        # Dirt roads along the cut corridors, wherever the pocket actually spans
+        # them, so every parcel is reachable. Runs shorter than MIN_ROAD_M are
+        # fringe slivers and get no road.
+        MIN_ROAD_M = 50.0
+
+        def runs(line):
+            found = []
+            r0 = None
+            for r, v in enumerate(line):
+                if v and r0 is None:
+                    r0 = r
+                elif not v and r0 is not None:
+                    found.append((r0, r - 1))
+                    r0 = None
+            if r0 is not None:
+                found.append((r0, len(line) - 1))
+            return [(a, b) for a, b in found if (b - a + 1) * s >= MIN_ROAD_M]
+
+        roads = []
+        for g in cuts:
+            c = (g + gap / 2.0) * s
+            for r0, r1 in runs(full[:, g]):
+                roads.append([(c, r0 * s), (c, (r1 + 1) * s)])
+            for r0, r1 in runs(full[g, :]):
+                roads.append([(r0 * s, c), ((r1 + 1) * s, c)])
+        return pieces, roads
+
+    def splice_into_named_way(way_name, pt):
+        # Insert pt as a shared node into an already-emitted way; the Southern
+        # Link Road is a straight x-sorted line, so the geometry does not change.
+        for w in ways:
+            if w['tags'].get('name') == way_name:
+                for k in range(len(w['coords']) - 1):
+                    if w['coords'][k][0] < pt[0] < w['coords'][k+1][0]:
+                        w['coords'].insert(k + 1, (float(pt[0]), float(pt[1])))
+                        w['node_refs'].insert(k + 1, get_node(*pt))
+                        return True
+        return False
+
+    infill_field_idx = 1
+    dropped = 0
+    split_count = 0
+    for poly in wood_polys:
+        ha = ring_area_ha(poly)
+        if ha <= 1.0:
+            dropped += 1
+            continue
+        if ha > INFILL_SPLIT_HA:
+            parts, dirt_roads = split_infill_poly(poly)
+            split_count += 1
+            n_spliced = 0
+            for rd in dirt_roads:
+                (x0, y0), (x1, y1) = rd
+                # A vertical corridor ending against the Southern Link Road gets
+                # extended onto it and joined with a shared node.
+                if x0 == x1 and max(y0, y1) >= 7635.0:
+                    rd = [(x0, min(y0, y1)), (x0, 7650.0)]
+                    if splice_into_named_way('Southern Link Road', (x0, 7650.0)):
+                        n_spliced += 1
+                add_way(rd, {'highway': 'tertiary'})
+            print(f"   Split a {ha:.1f} ha infill pocket into {len(parts)} parcels "
+                  f"with {len(dirt_roads)} dirt roads ({n_spliced} joined to the "
+                  f"Southern Link Road).")
+        else:
+            parts = [poly]
+        for part in parts:
+            p_ha = ring_area_ha(part)
+            if p_ha <= 1.0:
+                dropped += 1
+                continue
+            add_way(part, {'landuse': 'farmland',
+                           'name': f'Field I{infill_field_idx} ({p_ha:.1f} ha)'})
+            infill_field_idx += 1
+    print(f"   Converted infill pockets into {infill_field_idx - 1} farmland fields "
+          f"({split_count} split up), dropped {dropped} under 1 ha "
+          f"(was {wood_ha:.1f} ha of forest infill).")
 
     # Pockets too far from any wood to be absorbed by it stay open ground: they are
     # tagged farmyard only, so they read as yard rather than as forest or field.
