@@ -123,7 +123,7 @@ def main():
     H_north_plain = 3500.0
     terrain_inside = w_flat * H_north_plain + (1.0 - w_flat) * terrain_inside
     
-    print("4.2. Implementing lake (600m x 1200m), farmyard (5 ha) and town (20 ha) at the East...")
+    print("4.2. Implementing lake (600m x 1200m), farmyard (5 ha) and town (48 ha) at the East...")
     # Lake: 600m width x 1200m height, starts 15m from East playable border
     # X: [10240 - 15 - 600, 10240 - 15] = [9625, 10225]
     # Y: [2048 + 1000, 2048 + 1000 + 1200] = [3048, 4248] (1 km from North playable border)
@@ -137,15 +137,30 @@ def main():
     fy_x0, fy_x1 = lake_x0 - 20.0 - 100.0, lake_x0 - 20.0
     fy_y0, fy_y1 = lake_y0, lake_y0 + 500.0
     
-    # Town: 20 ha = 400m width x 500m height, starts to the West of farmyard with 20m gap
+    # Town: 48 ha = 400m width x 1200m height, starts to the West of farmyard with
+    # 20m gap and is extended south level with the lake (both end at Y=4248)
     # X: [9505 - 20 - 400, 9505 - 20] = [9085, 9485]
-    # Y: [3048, 3548]
+    # Y: [3048, 4248]
     t_x0, t_x1 = fy_x0 - 20.0 - 400.0, fy_x0 - 20.0
-    t_y0, t_y1 = fy_y0, fy_y1
-    
-    # Explicitly set height values to H_plain (3500.0) in these zones inside terrain_inside
+    t_y0, t_y1 = fy_y0, lake_y1
+
+    # Explicitly set height values to H_plain (3500.0) in the farmyard zone
     terrain_inside[int(fy_y0):int(fy_y1), int(fy_x0):int(fy_x1)] = 3500.0
-    terrain_inside[int(t_y0):int(t_y1), int(t_x0):int(t_x1)] = 3500.0
+
+    # Town plateau: exactly H_plain inside the rect, with a 100m cosine skirt
+    # into the surroundings. North of y=3548 the surroundings are the flat plain
+    # itself (already H_plain), so the skirt only shows along the southern
+    # extension, where the plateau meets the rolling noise at lake level.
+    dx_t = np.maximum(0.0, np.maximum(t_x0 - x_m, x_m - t_x1))
+    dy_t = np.maximum(0.0, np.maximum(t_y0 - y_m, y_m - t_y1))
+    dist_t = np.sqrt(dx_t*dx_t + dy_t*dy_t)
+    W_TRANS_TOWN = 100.0
+    w_town = np.zeros_like(dist_t)
+    w_town[dist_t == 0] = 1.0
+    trans_mask_town = (dist_t > 0) & (dist_t <= W_TRANS_TOWN)
+    t_town = dist_t[trans_mask_town] / W_TRANS_TOWN
+    w_town[trans_mask_town] = 0.5 * (1.0 + np.cos(np.pi * t_town))
+    terrain_inside = w_town * H_plain + (1.0 - w_town) * terrain_inside
 
     print("4.4. Implementing South-East farmyard (50 ha = 1000m x 500m)...")
     # SE Farmyard: 50 ha = 1000m width x 500m height, starts 15m from East and South playable borders in-game
@@ -275,7 +290,7 @@ def main():
     rect_farmyard = plt.Rectangle((fy_x0, fy_y0), (fy_x1 - fy_x0), (fy_y1 - fy_y0),
                                   fill=False, edgecolor='green', linewidth=1.5, linestyle='-', label='Farmyard (5 ha)')
     rect_town = plt.Rectangle((t_x0, t_y0), (t_x1 - t_x0), (t_y1 - t_y0),
-                              fill=False, edgecolor='cyan', linewidth=1.5, linestyle='-', label='Town (20 ha)')
+                              fill=False, edgecolor='cyan', linewidth=1.5, linestyle='-', label='Town (48 ha)')
     rect_lake = plt.Rectangle((lake_x0, lake_y0), (lake_x1 - lake_x0), (lake_y1 - lake_y0),
                               fill=False, edgecolor='blue', linewidth=1.5, linestyle='-', label='Lake (600x1200m)')
     rect_se_farmyard = plt.Rectangle((se_x0, se_y0), (se_x1 - se_x0), (se_y1 - se_y0),
@@ -341,7 +356,7 @@ def main():
     ax.add_patch(rect_lake_det)
     ax.add_patch(rect_se_farmyard_det)
     ax.text((fy_x0 - offset_m) + 5, (fy_y0 - offset_m) - 10, "Farmyard\n(5 ha)", color='green', fontsize=8, fontweight='bold')
-    ax.text((t_x0 - offset_m) + 10, (t_y0 - offset_m) - 10, "Town (20 ha)", color='cyan', fontsize=8, fontweight='bold')
+    ax.text((t_x0 - offset_m) + 10, (t_y0 - offset_m) - 10, "Town (48 ha)", color='cyan', fontsize=8, fontweight='bold')
     ax.text((lake_x0 - offset_m) + 5, (lake_y0 - offset_m) + 100, "Lake\n(15m Depth)", color='blue', fontsize=8, fontweight='bold')
     ax.text((se_x0 - offset_m) + 50, (se_y0 - offset_m) + 200, "SE Farmyard\n(50 ha)", color='magenta', fontsize=9, fontweight='bold')
     

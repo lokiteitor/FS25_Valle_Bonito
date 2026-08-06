@@ -244,10 +244,18 @@ def main():
     print("Generating shaded relief terrain texture...")
     shade_and_save(base_color_img, output_texture_path, "terrain texture")
 
-    # 3.5. Soil type map from Precision Farming (pf_generator/soilMap.png).
-    # The soil map covers the playable area only, so it lands on the same central
-    # band of the canvas as the OSM features.
+    # 3.5. Soil type map from Precision Farming (pf_generator). A plain
+    # soilMap.png wins; otherwise the newest of the seed-prefixed maps
+    # (<field>_seed_<n>_soilMap.png) is used. The *_vis.png files are RGB
+    # renderings, not index maps, so they never qualify.
+    import glob
     soil_path = os.path.join(project_root, "pf_generator", "soilMap.png")
+    if not os.path.exists(soil_path):
+        seed_maps = [p for p in
+                     glob.glob(os.path.join(project_root, "pf_generator", "*soilMap.png"))
+                     if not p.endswith("_vis.png")]
+        if seed_maps:
+            soil_path = max(seed_maps, key=os.path.getmtime)
     output_soil_texture_path = os.path.join(current_dir, "soil_1024_texture.png")
     output_soil_index_path = os.path.join(current_dir, "soil_1024_index.png")
 

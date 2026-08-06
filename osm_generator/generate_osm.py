@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import os
 import math
+import re
 import xml.etree.ElementTree as ET
 import xml.dom.minidom as minidom
 import numpy as np
@@ -215,12 +216,13 @@ def main():
     # Removed in the new DEM (subsumed by the lake)
 
     # 6. Town
-    # X: 7037 to 7437, Y: 1000 to 1500
+    # X: 7037 to 7437, Y: 1000 to 2200 - extended south level with the Town
+    # Reservoir, whose southern shore sits at y=2200.
     town_coords = [
         (7037.0, 1000.0),
         (7437.0, 1000.0),
-        (7437.0, 1500.0),
-        (7037.0, 1500.0),
+        (7437.0, 2200.0),
+        (7037.0, 2200.0),
         (7037.0, 1000.0) # Closed
     ]
     add_way(town_coords, {'landuse': 'farmyard', 'name': 'Town'})
@@ -230,7 +232,9 @@ def main():
     # Spans from X: 0 to X: 8192.
     xs_sec = [7037.0, 7237.0, 7437.0, 7457.0, 7557.0]
     xs_ter_v = [800.0, 1600.0, 2400.0, 3200.0, 4000.0, 4800.0, 5600.0, 6400.0]
-    xs_primary_all = sorted(xs_ter_v + xs_sec)
+    # 7022 is where the Mountain Pass Road (7c) leaves southwards; putting it in
+    # the list gives both primaries a shared junction node.
+    xs_primary_all = sorted(xs_ter_v + xs_sec + [7022.0])
     primary_coords = [(0.0, 985.0)] + [(x, 985.0) for x in xs_primary_all] + [(8192.0, 985.0)]
     add_way(primary_coords, {'highway': 'primary', 'name': 'Primary Road'})
 
@@ -246,7 +250,8 @@ def main():
     # Collect and insert road-grid intersection nodes: only the vertical tertiary
     # roads meet it now, each one straight down on the road line.
     ys_ter_h = [1809.0, 2609.0, 3409.0, 4209.0, 5009.0, 5809.0, 6609.0, 7409.0]
-    intersections = [(x, 7650.0) for x in xs_ter_v]
+    # (2450, 7650) is where the Mountain Pass Road (7c) comes in from the north.
+    intersections = [(x, 7650.0) for x in xs_ter_v] + [(2450.0, 7650.0)]
 
     # The forest haul road used to leave from the removed vertical run of this road.
     # Kept only for the (disabled) forestry-track code in section 12; it no longer
@@ -257,6 +262,92 @@ def main():
                             key=lambda pt: pt[0])
     add_way(all_road_nodes, {'highway': 'primary', 'name': 'Southern Link Road'})
 
+    # 7c. Mountain Pass Road (North-South primary link)
+    # Joins the two east-west primaries. It drops straight south past the town
+    # along the PLSS eastern boundary (x=7022, where fields already stop at
+    # 7017), crosses the flats diagonally along the NW flank of the eastern
+    # mountain, threads the saddle between the two forest massifs, and runs the
+    # last stretch straight south beside Cell Forest 1 (the wooded PLSS cell
+    # x[1600-2400] y[7409-7650]) into the Southern Link Road. The bends were
+    # fitted against the forest mask; minimum clearance to any wood is ~70 m.
+    MOUNTAIN_PASS_CTRL = [
+        (7022.0, 985.0),    # shared junction node on the Primary Road
+        (7022.0, 1809.0),   # shared node with the first PLSS section-line road
+        (7022.0, 2000.0),   # end of the straight run beside the town
+        (5700.0, 2500.0),   # heading SW across the northern flats
+        (5150.0, 4250.0),   # along the NW flank of the eastern mountain
+        (4960.0, 4620.0),   # pass entry
+        (4650.0, 4760.0),   # saddle between the two forests
+        (4250.0, 4850.0),   # pass exit
+        (2450.0, 6900.0),   # SW descent across the fields
+        (2450.0, 7650.0),   # shared junction node on the Southern Link Road
+    ]
+
+    # Open curves instead of sharp corners: every bend is swept with a
+    # tangent-continuous arc (a quadratic Bezier whose control point is the
+    # original corner, so it leaves and enters the straights along their own
+    # directions). Collinear vertices - the shared node at y=1809 - have no
+    # turn and pass through exactly, keeping their junction coordinate.
+    MOUNTAIN_PASS_BEND_R = 200.0    # target curve radius at each bend
+    MOUNTAIN_PASS_ARC_STEP = 25.0   # sampling distance along each arc
+
+    def fillet_polyline(pts, radius, step):
+        lens, dirs, phis = [], [], [0.0] * len(pts)
+        for a, b in zip(pts[:-1], pts[1:]):
+            L = math.dist(a, b)
+            lens.append(L)
+            dirs.append(((b[0] - a[0]) / L, (b[1] - a[1]) / L))
+        t_fil = [0.0] * len(pts)
+        for k in range(1, len(pts) - 1):
+            dot = max(-1.0, min(1.0,
+                      dirs[k-1][0] * dirs[k][0] + dirs[k-1][1] * dirs[k][1]))
+            phis[k] = math.acos(dot)
+            if phis[k] >= math.radians(2.0):
+                t_fil[k] = radius * math.tan(phis[k] / 2.0)
+        # The two arcs eating into a leg from either end must leave some of the
+        # straight in between; scale them back where a leg is too short.
+        for k, L in enumerate(lens):
+            used = t_fil[k] + t_fil[k+1]
+            if used > 0.9 * L:
+                sc = 0.9 * L / used
+                t_fil[k] *= sc
+                t_fil[k+1] *= sc
+        out = [pts[0]]
+        for k in range(1, len(pts) - 1):
+            if t_fil[k] <= 0.0:
+                out.append(pts[k])
+                continue
+            t = t_fil[k]
+            p = pts[k]
+            a = (p[0] - dirs[k-1][0] * t, p[1] - dirs[k-1][1] * t)
+            b = (p[0] + dirs[k][0] * t, p[1] + dirs[k][1] * t)
+            arc_len = (t / math.tan(phis[k] / 2.0)) * phis[k]
+            n_s = max(2, int(math.ceil(arc_len / step)))
+            for i in range(n_s + 1):
+                u = i / n_s
+                out.append(((1-u)*(1-u) * a[0] + 2*u*(1-u) * p[0] + u*u * b[0],
+                            (1-u)*(1-u) * a[1] + 2*u*(1-u) * p[1] + u*u * b[1]))
+        out.append(pts[-1])
+        return out
+
+    MOUNTAIN_PASS_PTS = fillet_polyline(MOUNTAIN_PASS_CTRL, MOUNTAIN_PASS_BEND_R,
+                                        MOUNTAIN_PASS_ARC_STEP)
+    add_way(MOUNTAIN_PASS_PTS, {'highway': 'primary', 'name': 'Mountain Pass Road'})
+    mountain_pass_way = ways[-1]
+
+    # The polyline sampled every ~10 m, for the box tests below (random-forest
+    # placement and the field-cutting pass both need to know what the road runs
+    # through, and a sample landing in a box is cheaper and more robust than
+    # segment-rectangle intersection).
+    mountain_pass_samples = []
+    for _a, _b in zip(MOUNTAIN_PASS_PTS[:-1], MOUNTAIN_PASS_PTS[1:]):
+        _ns = max(1, int(math.dist(_a, _b) / 10.0))
+        for _i in range(_ns):
+            _t = _i / _ns
+            mountain_pass_samples.append((_a[0] + _t * (_b[0] - _a[0]),
+                                          _a[1] + _t * (_b[1] - _a[1])))
+    mountain_pass_samples.append(MOUNTAIN_PASS_PTS[-1])
+
     # 8. Railway
     # Passing 15m north of Primary Road (Y: 985 - 15 = 970)
     # Parallel to Primary Road
@@ -264,17 +355,29 @@ def main():
     # add_way(rail_coords, {'railway': 'rail', 'name': 'Railway'})
 
     # 9. Secondary Roads (Grid in Town)
+    # The town proper (x 7037-7437) runs down to y=2200 since its extension to
+    # the lake's southern shore; the Town Farmyard streets (x 7457/7557) still
+    # stop at 1500.
     ys_sec_v = [985.0, 1000.0, 1250.0, 1500.0]
+    ys_sec_v_town = ys_sec_v + [1750.0, 2000.0, 2200.0]
     for x in xs_sec:
-        v_coords = [(x, y) for y in ys_sec_v]
+        v_coords = [(x, y) for y in (ys_sec_v_town if x <= 7437.0 else ys_sec_v)]
         add_way(v_coords, {'highway': 'secondary'})
 
-    # The town's horizontal roads start at the town itself (x=7037); there is no
-    # longer a primary road at x=7022 for them to reach.
+    # The horizontal streets reach x=7022 again: the Mountain Pass Road (7c)
+    # runs straight down that line as far as y~1860, which gives the grid its
+    # junctions with the primary network back (section 13 splices the shared
+    # nodes). The streets south of where the road curves away start at the town
+    # itself, and the Town Farmyard rows keep their old x extent.
     xs_sec_h = xs_sec
     ys_sec_h = [1000.0, 1250.0, 1500.0]
     for y in ys_sec_h:
-        h_coords = [(x, y) for x in xs_sec_h]
+        h_coords = [(7022.0, y)] + [(x, y) for x in xs_sec_h]
+        add_way(h_coords, {'highway': 'secondary'})
+    xs_sec_town = [7037.0, 7237.0, 7437.0]
+    for y in [1750.0, 2000.0, 2200.0]:
+        h_coords = ([(7022.0, y)] if y < 1860.0 else []) \
+            + [(x, y) for x in xs_sec_town]
         add_way(h_coords, {'highway': 'secondary'})
 
     # The PLSS grid. Defined here rather than in section 9c, where the cells are filled,
@@ -327,7 +430,16 @@ def main():
                 (x_f_end, y_f_end),
                 (x_f_start, y_f_end)
             ]
-            if not any(is_in_forest(cx, cy, buffer_m=5.0) for cx, cy in corners):
+            # ...and clear of the Mountain Pass Road too: a box the corridor
+            # runs through cannot hold a forest, so the road never gets walled
+            # in by one of the random woods.
+            ROAD_BOX_CLEAR_M = 25.0
+            near_road = any(
+                x_f_start - ROAD_BOX_CLEAR_M <= sx <= x_f_end + ROAD_BOX_CLEAR_M
+                and y_f_start - ROAD_BOX_CLEAR_M <= sy <= y_f_end + ROAD_BOX_CLEAR_M
+                for sx, sy in mountain_pass_samples)
+            if (not near_road
+                    and not any(is_in_forest(cx, cy, buffer_m=5.0) for cx, cy in corners)):
                 clear_cells.add((i, j))
 
     print(f"   Found {len(candidates)} candidate cells for 10-hectare random forests "
@@ -774,13 +886,14 @@ def main():
     # Pack fields for each column, keeping track of last horizontal road Y
     import random
     rng = random.Random(404)
-    # Columns that overlap the Town Reservoir (x >= 7577, down to y = 2200) start
-    # below it; only column 1 lies entirely west of the lake.
-    col_last_ys = [1500.0, 2200.0, 2200.0]
+    # Every column now starts below y=2200: columns 2-3 because they overlap the
+    # Town Reservoir (x >= 7577, down to y=2200), column 1 because the extended
+    # town itself reaches that line.
+    col_last_ys = [2200.0, 2200.0, 2200.0]
     col_has_fields = [False, False, False]
 
     for c_idx, (x_s, x_e) in enumerate(col_xs):
-        y_curr = 1515.0 if c_idx == 0 else 2215.0
+        y_curr = 2215.0
         choices = [30, 30, 45]
         f_idx = 1
         
@@ -1042,24 +1155,9 @@ def main():
 
     cut_tertiary_out_of_forest()
 
-
-    # 11. Forest infill: absorb the leftover open ground next to the forests.
-    # Everything generated so far is rasterised into an occupancy mask; whatever
-    # is left unoccupied and sits next to a wood becomes forest too. Pockets on
-    # the far side of the Southern Link Road qualify as well - a road splits the
-    # empty ground into separate pockets and each one is judged on its own.
-    INFILL_SCALE_M = 4.0        # raster resolution (metres per pixel)
-    INFILL_MIN_RADIUS_M = 25.0  # a pocket must fit a disk of this radius to count
-    INFILL_NEAR_M = 80.0        # ...and lie within this distance of an existing wood
-    INFILL_SIMPLIFY_M = 8.0     # Douglas-Peucker tolerance for the emitted outlines
-    ROAD_CORRIDOR_M = 15.0      # width reserved around linear features
-
-    def disk_structure(radius_px):
-        yy, xx = np.ogrid[-radius_px:radius_px+1, -radius_px:radius_px+1]
-        return (xx*xx + yy*yy) <= radius_px*radius_px
-
+    # Iterative Douglas-Peucker (the raster outlines are far too dense to keep).
+    # Defined here because both the road cut below (10c) and the infill (11) use it.
     def simplify(points, tol):
-        # Iterative Douglas-Peucker (the raster outlines are far too dense to keep)
         keep = np.zeros(len(points), dtype=bool)
         keep[0] = keep[-1] = True
         stack = [(0, len(points) - 1)]
@@ -1083,6 +1181,128 @@ def main():
                 stack.append((i0, k))
                 stack.append((k, i1))
         return [tuple(p) for p in pts[keep]]
+
+    # 10c. Cut the fields along the Mountain Pass Road. The PLSS grid and the
+    # packers laid their parcels out before the road existed, so every farmland
+    # (or procedurally-placed wood) the corridor crosses is rasterised, the
+    # corridor subtracted, and the surviving pieces re-emitted. Slivers - tiny
+    # or long-and-thin leftovers pinched off against the roadside - vanish into
+    # the verge instead of surviving as unworkable parcels.
+    ROAD_CUT_HALF_M = 16.0       # half-width of the reserved corridor
+    ROAD_CUT_MIN_HA = 1.0        # pieces smaller than this are dropped
+    ROAD_CUT_MIN_WIDTH_M = 35.0  # ...as are pieces with a mean width below this
+
+    def cut_fields_along_mountain_pass():
+        s = 4.0
+        gn = int(round(8192.0 / s))
+        corr_img = Image.new('L', (gn, gn), 0)
+        ImageDraw.Draw(corr_img).line(
+            [(x / s, y / s) for x, y in MOUNTAIN_PASS_PTS],
+            fill=255, width=max(1, int(round(2 * ROAD_CUT_HALF_M / s))), joint='curve')
+        corridor = np.array(corr_img) > 0
+
+        def pieces_of(poly):
+            # None = the corridor never touches this polygon; otherwise the list
+            # of surviving pieces as (outline, hectares).
+            pimg = Image.new('L', (gn, gn), 0)
+            ImageDraw.Draw(pimg).polygon([(x / s, y / s) for x, y in poly],
+                                         fill=255, outline=255)
+            pmask = np.array(pimg) > 0
+            if not (pmask & corridor).any():
+                return None
+            lab, k = ndimage.label(pmask & ~corridor)
+            out = []
+            for lid in range(1, k + 1):
+                comp = lab == lid
+                area_ha = comp.sum() * s * s / 10000.0
+                if area_ha < ROAD_CUT_MIN_HA:
+                    continue
+                padded = np.zeros((gn + 2, gn + 2), dtype=np.float32)
+                padded[1:-1, 1:-1] = comp
+                axis = (np.arange(gn + 2) - 0.5) * s
+                gx, gy = np.meshgrid(axis, axis)
+                fig, ax = plt.subplots()
+                cs = ax.contour(gx, gy, padded, levels=[0.5])
+                plt.close(fig)
+                if not cs.allsegs[0]:
+                    continue
+                seg = max(cs.allsegs[0], key=len)
+                pts = [(min(max(px, 0.0), 8192.0), min(max(py, 0.0), 8192.0))
+                       for px, py in seg]
+                if pts[0] != pts[-1]:
+                    pts.append(pts[0])
+                pts = simplify(pts, 8.0)
+                if len(pts) < 4:
+                    continue
+                if pts[0] != pts[-1]:
+                    pts.append(pts[0])
+                perim = sum(math.dist(pts[q], pts[q+1]) for q in range(len(pts) - 1))
+                if perim > 0 and (2.0 * area_ha * 10000.0 / perim) < ROAD_CUT_MIN_WIDTH_M:
+                    continue
+                out.append((pts, area_ha))
+            return out
+
+        kept = []
+        pieces_to_add = []
+        n_cut = n_dropped = 0
+        for w in ways:
+            tags = w['tags']
+            # Farmland, plus the named procedural woods (Random Forest / Cell
+            # Forest boxes). The DEM forests, water and the hand-placed yards
+            # are never crossed, and the roads must obviously survive.
+            cuttable = (tags.get('landuse') == 'farmland'
+                        or (tags.get('natural') == 'wood' and 'name' in tags))
+            if not cuttable:
+                kept.append(w)
+                continue
+            xs = [p[0] for p in w['coords']]
+            ys = [p[1] for p in w['coords']]
+            pad = ROAD_CUT_HALF_M + 5.0
+            if not any(min(xs) - pad <= sx <= max(xs) + pad
+                       and min(ys) - pad <= sy <= max(ys) + pad
+                       for sx, sy in mountain_pass_samples):
+                kept.append(w)
+                continue
+            res = pieces_of(w['coords'])
+            if res is None:
+                kept.append(w)
+                continue
+            n_cut += 1
+            base = tags.get('name', '')
+            had_ha = re.search(r' \(\d+(?:\.\d+)? ha\)$', base)
+            if had_ha:
+                base = base[:had_ha.start()]
+            n_dropped += 1 if not res else 0
+            for p_idx, (pts, area_ha) in enumerate(res):
+                new_tags = dict(tags)
+                if base:
+                    name = base if len(res) == 1 else f"{base}{chr(ord('a') + p_idx)}"
+                    if had_ha:
+                        name += f" ({area_ha:.1f} ha)"
+                    new_tags['name'] = name
+                pieces_to_add.append((pts, new_tags))
+        ways[:] = kept
+        for pts, tags in pieces_to_add:
+            add_way(pts, tags)
+        print(f"   Mountain Pass Road cut {n_cut} parcels into "
+              f"{len(pieces_to_add)} pieces ({n_dropped} vanished entirely).")
+
+    cut_fields_along_mountain_pass()
+
+    # 11. Forest infill: absorb the leftover open ground next to the forests.
+    # Everything generated so far is rasterised into an occupancy mask; whatever
+    # is left unoccupied and sits next to a wood becomes forest too. Pockets on
+    # the far side of the Southern Link Road qualify as well - a road splits the
+    # empty ground into separate pockets and each one is judged on its own.
+    INFILL_SCALE_M = 4.0        # raster resolution (metres per pixel)
+    INFILL_MIN_RADIUS_M = 25.0  # a pocket must fit a disk of this radius to count
+    INFILL_NEAR_M = 80.0        # ...and lie within this distance of an existing wood
+    INFILL_SIMPLIFY_M = 8.0     # Douglas-Peucker tolerance for the emitted outlines
+    ROAD_CORRIDOR_M = 15.0      # width reserved around linear features
+
+    def disk_structure(radius_px):
+        yy, xx = np.ogrid[-radius_px:radius_px+1, -radius_px:radius_px+1]
+        return (xx*xx + yy*yy) <= radius_px*radius_px
 
     def build_infill_polygons():
         n = int(round(8192.0 / INFILL_SCALE_M))
@@ -1317,6 +1537,33 @@ def main():
         })
     print(f"   Added {len(yard_polys)} leftover farmyard areas covering {yard_ha:.1f} ha.")
 
+    # 11b. Fields retired from farming. These parcels stay in the map as open
+    # ground (farmyard) instead of farmland: mostly infill slivers and road-cut
+    # leftovers not worth working. Matched by their base field token, with or
+    # without the trailing hectare suffix.
+    RETIRED_FIELDS = {
+        'I3', 'I5', 'I8', 'I11', 'I15', 'I19', 'I22', 'I25', 'I28',
+        'I31', 'I33', 'I34', 'I36', 'I44', '51b', '33a', '26a',
+    }
+
+    def retire_fields():
+        pat = re.compile(r'^Field (\S+)( \(\d+(?:\.\d+)? ha\))?$')
+        n_retired = 0
+        for w in ways:
+            if w['tags'].get('landuse') != 'farmland':
+                continue
+            m = pat.match(w['tags'].get('name', ''))
+            if not m or m.group(1) not in RETIRED_FIELDS:
+                continue
+            w['tags']['landuse'] = 'farmyard'
+            w['tags']['name'] = f"Open Ground {m.group(1)}{m.group(2) or ''}"
+            n_retired += 1
+        missing = n_retired != len(RETIRED_FIELDS)
+        print(f"   Retired {n_retired}/{len(RETIRED_FIELDS)} fields to open ground."
+              + (" WARNING: some retired field names were not found." if missing else ""))
+
+    retire_fields()
+
     # 12. Forestry tracks in the south-eastern forest.
     # Three dirt tracks run along contour lines, so machinery works on the level and
     # crosses the forest instead of climbing it. On their own they would be stranded
@@ -1469,6 +1716,62 @@ def main():
 
     # print("   Laying out forestry tracks in the south-eastern forest...")
     # build_forest_tracks()
+
+    # 13. Shared nodes at every at-grade crossing of the Mountain Pass Road.
+    # The grid roads were emitted independently of it, so each intersection
+    # point is spliced into both ways; without this the junctions would only
+    # overlap visually and never share a node. Runs last so it also catches the
+    # tertiary pieces reshaped in 10b and the infill dirt roads from 11.
+    def connect_mountain_pass_crossings():
+        def seg_int(a, b, c, d):
+            rx, ry = b[0] - a[0], b[1] - a[1]
+            sx, sy = d[0] - c[0], d[1] - c[1]
+            den = rx * sy - ry * sx
+            if abs(den) < 1e-12:
+                return None
+            t = ((c[0] - a[0]) * sy - (c[1] - a[1]) * sx) / den
+            u = ((c[0] - a[0]) * ry - (c[1] - a[1]) * rx) / den
+            if -1e-9 <= t <= 1 + 1e-9 and -1e-9 <= u <= 1 + 1e-9:
+                return (a[0] + t * rx, a[1] + t * ry), t, u
+            return None
+
+        def has_vertex(coords, p):
+            return any(abs(v[0] - p[0]) < 1e-3 and abs(v[1] - p[1]) < 1e-3
+                       for v in coords)
+
+        prim = mountain_pass_way
+        prim_inserts = []
+        prim_seen = set()
+        n_junctions = 0
+        for w in ways:
+            if w is prim or 'highway' not in w['tags']:
+                continue
+            w_inserts = []
+            for i in range(len(prim['coords']) - 1):
+                for j in range(len(w['coords']) - 1):
+                    hit = seg_int(prim['coords'][i], prim['coords'][i+1],
+                                  w['coords'][j], w['coords'][j+1])
+                    if not hit:
+                        continue
+                    p, t, u = hit
+                    p = (round(p[0], 3), round(p[1], 3))
+                    n_junctions += 1
+                    if not has_vertex(w['coords'], p):
+                        w_inserts.append((j, u, p))
+                    if not has_vertex(prim['coords'], p) and p not in prim_seen:
+                        prim_seen.add(p)
+                        prim_inserts.append((i, t, p))
+            # Deepest segment first, so earlier insertion indices stay valid.
+            for j, u, p in sorted(w_inserts, key=lambda z: (-z[0], -z[1])):
+                w['coords'].insert(j + 1, p)
+                w['node_refs'].insert(j + 1, get_node(*p))
+        for i, t, p in sorted(prim_inserts, key=lambda z: (-z[0], -z[1])):
+            prim['coords'].insert(i + 1, p)
+            prim['node_refs'].insert(i + 1, get_node(*p))
+        print(f"   Mountain Pass Road: {n_junctions} crossings, "
+              f"{len(prim_inserts)} nodes spliced into the pass road itself.")
+
+    connect_mountain_pass_crossings()
 
     # Generate XML
     osm_elem = ET.Element('osm', version='0.6', generator='Antigravity')
