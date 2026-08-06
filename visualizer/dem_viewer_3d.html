@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizador 3D - DEM Granja Bonita</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Three.js and OrbitControls via CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    
+    <style>
+        :root {
+            --bg-color: #0d0e12;
+            --panel-bg: rgba(18, 20, 26, 0.75);
+            --panel-border: rgba(255, 255, 255, 0.1);
+            --accent-color: #4f46e5;
+            --accent-hover: #6366f1;
+            --text-color: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Outfit', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        #canvas-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* HUD overlay */
+        .hud-panel {
+            position: absolute;
+            z-index: 10;
+            background: var(--panel-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--panel-border);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hud-panel:hover {
+            border-color: rgba(255, 255, 255, 0.18);
+        }
+
+        /* Header Panel */
+        #header-panel {
+            top: 20px;
+            left: 20px;
+            max-width: 400px;
+        }
+
+        h1 {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 4px;
+            background: linear-gradient(135deg, #fff 30%, var(--text-muted) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 16px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            padding: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        /* Control Panel */
+        #control-panel {
+            top: 20px;
+            right: 20px;
+            width: 320px;
+            max-height: calc(100vh - 40px);
+            overflow-y: auto;
+        }
+
+        .control-group {
+            margin-bottom: 20px;
+        }
+
+        .control-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .group-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .control-row {
+            margin-bottom: 12px;
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        /* Inputs and Sliders */
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        input[type="range"] {
+            flex: 1;
+            -webkit-appearance: none;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            outline: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            background: var(--accent-hover);
+        }
+
+        .slider-value {
+            font-size: 12px;
+            width: 35px;
+            text-align: right;
+            font-weight: 600;
+        }
+
+        /* Buttons and Selectors */
+        .btn-toggle-group {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 4px;
+            border-radius: 8px;
+        }
+
+        .btn-toggle {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 8px 4px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 11px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .btn-toggle.active {
+            background: var(--accent-color);
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(79, 70, 229, 0.4);
+        }
+
+        .btn-toggle:hover:not(.active) {
+            color: var(--text-color);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            border: none;
+            color: #fff;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            box-shadow: 0 4px 16px rgba(79, 70, 229, 0.4);
+        }
+
+        /* Switch checkbox */
+        .switch-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .switch-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: .3s;
+            border-radius: 20px;
+        }
+
+        .switch-slider:before {
+            position: absolute;
+            content: "";
+            height: 14px;
+            width: 14px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .switch-slider {
+            background-color: var(--accent-color);
+        }
+
+        input:checked + .switch-slider:before {
+            transform: translateX(20px);
+        }
+
+        /* OSM legend */
+        .legend {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px 10px;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .legend-swatch {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+            flex-shrink: 0;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        /* First person mode */
+        #crosshair {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 18px;
+            height: 18px;
+            margin: -9px 0 0 -9px;
+            z-index: 12;
+            display: none;
+            pointer-events: none;
+        }
+
+        #crosshair:before, #crosshair:after {
+            content: "";
+            position: absolute;
+            background: rgba(255, 255, 255, 0.75);
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+        }
+
+        #crosshair:before { left: 8px; top: 0; width: 2px; height: 18px; }
+        #crosshair:after { top: 8px; left: 0; height: 2px; width: 18px; }
+
+        #pov-panel {
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: auto;
+            max-width: 620px;
+            display: none;
+            padding: 14px 20px;
+            text-align: center;
+        }
+
+        #pov-panel .pov-keys {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 10px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        #pov-panel .pov-keys span b {
+            color: var(--text-color);
+            font-family: monospace;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-right: 4px;
+        }
+
+        /* Probe Panel */
+        #probe-panel {
+            bottom: 20px;
+            left: 20px;
+            width: 320px;
+            display: none;
+        }
+
+        .probe-value {
+            font-family: monospace;
+            font-size: 13px;
+        }
+
+        /* Help overlay */
+        #help-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            font-weight: bold;
+            font-size: 18px;
+            backdrop-filter: blur(12px);
+        }
+
+        #help-modal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            z-index: 100;
+            width: 90%;
+            max-width: 450px;
+            background: rgba(18, 20, 26, 0.95);
+            border: 1px solid var(--panel-border);
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        #help-modal.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .modal-body p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .modal-controls {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 12px;
+            margin-top: 16px;
+            font-size: 13px;
+        }
+
+        .control-key {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .close-modal {
+            margin-top: 24px;
+        }
+
+        #loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-color);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--accent-color);
+            animation: spin 1s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        #loading-text {
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: var(--text-color);
+        }
+
+        #loading-progress {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loading-overlay">
+        <div class="spinner"></div>
+        <div id="loading-text">CARGANDO ELEVACIÓN 3D...</div>
+        <div id="loading-progress">Inicializando WebGL</div>
+    </div>
+
+    <div id="canvas-container"></div>
+
+    <!-- Header / Info Panel -->
+    <div id="header-panel" class="hud-panel">
+        <div class="subtitle">Farming Simulator 25</div>
+        <h1>DEM Granja Bonita 3D</h1>
+        <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Procedural Heightmap &amp; Layout Viewer</p>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Lienzo DEM</div>
+                <div class="stat-value">12.29 × 12.29 km</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Rango Alturas</div>
+                <div class="stat-value">111.3m - 488.6m</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Área Jugable</div>
+                <div class="stat-value">8.19 × 8.19 km</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Vértices 3D</div>
+                <div class="stat-value" id="mesh-vertices">262,144</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Controls Panel -->
+    <div id="control-panel" class="hud-panel">
+        <div class="control-group">
+            <div class="group-title">Visualización</div>
+            <div class="control-row">
+                <label>Modo de Superficie</label>
+                <div class="btn-toggle-group" id="mode-buttons">
+                    <button class="btn-toggle active" onclick="setRenderMode('texture')">Textura</button>
+                    <button class="btn-toggle" onclick="setRenderMode('elevation')">Elevación</button>
+                    <button class="btn-toggle" onclick="setRenderMode('wireframe')">Malla</button>
+                </div>
+            </div>
+            <div class="control-row">
+                <label>Resolución de Malla (Vértices)</label>
+                <div class="btn-toggle-group" id="res-buttons" style="grid-template-columns: repeat(3, 1fr);">
+                    <button class="btn-toggle" onclick="changeMeshResolution(256)">256²</button>
+                    <button class="btn-toggle active" onclick="changeMeshResolution(512)">512²</button>
+                    <button class="btn-toggle" onclick="changeMeshResolution(1024)">1024²</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <div class="group-title">Parámetros del Relieve</div>
+            <div class="control-row">
+                <label>Exageración Vertical</label>
+                <div class="slider-container">
+                    <input type="range" id="exaggeration-slider" min="0.1" max="5.0" step="0.1" value="1.5" oninput="updateExaggeration(this.value)">
+                    <div class="slider-value" id="exaggeration-val">1.5x</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <div class="group-title">Límites & Guías</div>
+            
+            <div class="switch-container">
+                <span style="font-size: 13px;">Límite Jugable (8.19km)</span>
+                <label class="switch">
+                    <input type="checkbox" id="toggle-playable" checked onchange="togglePlayableBox(this.checked)">
+                    <span class="switch-slider"></span>
+                </label>
+            </div>
+
+            <div class="switch-container" style="">
+                <span style="font-size: 13px;">Mapa de Suelo (Precision Farming)</span>
+                <label class="switch">
+                    <input type="checkbox" id="toggle-soil" onchange="toggleSoilLayer(this.checked)">
+                    <span class="switch-slider"></span>
+                </label>
+            </div>
+
+            <div class="legend" id="soil-legend" style="display: none;">
+                <div class="legend-item"><span class="legend-swatch" style="background:#DCB950"></span>Arena Limosa (75%)</div>
+                <div class="legend-item"><span class="legend-swatch" style="background:#B4823C"></span>Franco Arenoso (100%)</div>
+                <div class="legend-item"><span class="legend-swatch" style="background:#469632"></span>Franco (125%)</div>
+                <div class="legend-item"><span class="legend-swatch" style="background:#7846A0"></span>Arcilla Limosa (80%)</div>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <div class="group-title">Vista en Primera Persona</div>
+            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">
+                Cámara a la altura de los ojos de un jugador (1.80 m) sobre el terreno.
+            </p>
+            <button class="btn-primary" id="pov-btn" onclick="togglePov(!povMode)">Entrar en Modo POV</button>
+        </div>
+
+        <div class="control-group">
+            <div class="group-title">Iluminación (Sol)</div>
+            <div class="control-row">
+                <label>Dirección del Sol (Ángulo)</label>
+                <div class="slider-container">
+                    <input type="range" id="sun-angle" min="0" max="360" value="135" oninput="updateSunAngle(this.value)">
+                    <div class="slider-value" id="sun-angle-val">135°</div>
+                </div>
+            </div>
+            <div class="control-row">
+                <label>Altitud del Sol</label>
+                <div class="slider-container">
+                    <input type="range" id="sun-alt" min="10" max="90" value="45" oninput="updateSunAltitude(this.value)">
+                    <div class="slider-value" id="sun-alt-val">45°</div>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn-primary" onclick="resetCamera()">Restablecer Cámara</button>
+    </div>
+
+    <!-- Hover Probe Panel -->
+    <div id="probe-panel" class="hud-panel">
+        <div class="group-title" style="margin-bottom: 8px;">Información de Punto</div>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+            <div style="display: flex; justify-content: space-between;">
+                <span style="font-size: 12px; color: var(--text-muted);">Coordenadas X, Y:</span>
+                <span class="probe-value" id="probe-coords">0m, 0m</span>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <span style="font-size: 12px; color: var(--text-muted);">Elevación Real:</span>
+                <span class="probe-value" id="probe-height" style="color: #60a5fa; font-weight: bold;">0.0m</span>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <span style="font-size: 12px; color: var(--text-muted);">Zona:</span>
+                <span class="probe-value" id="probe-zone" style="font-weight: 600;">Zona de Juego</span>
+            </div>
+            <div style="display: flex; justify-content: space-between;" id="probe-soil-row">
+                <span style="font-size: 12px; color: var(--text-muted);">Tipo de Suelo:</span>
+                <span class="probe-value" id="probe-soil" style="font-weight: 600;">-</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="crosshair"></div>
+
+    <div id="pov-panel" class="hud-panel">
+        <div style="font-size: 13px; font-weight: 600;">
+            Modo POV — altura de ojos <span id="pov-eye">1.80</span> m
+        </div>
+        <div class="pov-keys">
+            <span><b>Clic</b>Capturar ratón</span>
+            <span><b>W A S D</b>Moverse (25 m/s)</span>
+            <span><b>Shift</b>Correr (120 m/s)</span>
+            <span><b>Q / E</b>Altura de ojos</span>
+            <span><b>Esc</b>Salir</span>
+        </div>
+    </div>
+
+    <div id="help-btn" onclick="toggleHelp(true)">?</div>
+
+    <div id="help-modal">
+        <div class="modal-title">Navegación 3D</div>
+        <div class="modal-body">
+            <p>Usa tu ratón (o gestos táctiles) para rotar, trasladar y hacer zoom en el modelo del terreno:</p>
+            <div class="modal-controls">
+                <span class="control-key">Clic Izq + Arrastrar</span>
+                <span>Rotar la cámara sobre el terreno</span>
+                
+                <span class="control-key">Rueda del Ratón</span>
+                <span>Acercar y alejar (Zoom)</span>
+                
+                <span class="control-key">Clic Der + Arrastrar</span>
+                <span>Trasladar / Panorámica (Mover la vista)</span>
+            </div>
+            <p style="margin-top: 16px;">Coloca el puntero del ratón sobre el mapa para analizar las coordenadas, la elevación y el tipo de suelo en tiempo real.</p>
+
+            <div class="modal-title" style="font-size: 16px; margin-top: 20px;">Modo POV (primera persona)</div>
+            <div class="modal-controls">
+                <span class="control-key">P</span>
+                <span>Entrar o salir de la vista de jugador (1.80 m)</span>
+
+                <span class="control-key">W A S D</span>
+                <span>Caminar (Shift para correr)</span>
+
+                <span class="control-key">Ratón</span>
+                <span>Mirar alrededor (haz clic para capturar el puntero)</span>
+
+                <span class="control-key">Q / E</span>
+                <span>Bajar o subir la altura de los ojos</span>
+            </div>
+            <p style="margin-top: 16px;">En modo POV la exageración vertical vuelve a 1x para que las pendientes se vean a escala real.</p>
+        </div>
+        <button class="btn-primary close-modal" onclick="toggleHelp(false)">¡Entendido!</button>
+    </div>
+
+    <script>
+        // Elevation ranges from Python
+        const MIN_HEIGHT = 111.32;
+        const MAX_HEIGHT = 488.64;
+        const MAP_SIZE = 12288;        // Full DEM canvas in metres
+        const PLAYABLE_SIZE = 8192; // Playable area, centered in the canvas
+        const PLAYABLE_OFFSET = (MAP_SIZE - PLAYABLE_SIZE) / 2;
+
+        // OSM bounds and data, read straight from the source .osm file
+        const MIN_LON = -95.1956038394;
+        const MAX_LON = -95.0945534815;
+        const MIN_LAT = 43.1088283205;
+        const MAX_LAT = 43.1825563942;
+        const OSM_DATA = [{"id": "1", "tags": {"landuse": "farmyard", "name": "Yard 7"}, "coords": [[43.1135533252, -95.1952954582], [43.1135533252, -95.1891278338], [43.1090533207, -95.1891278338], [43.1090533207, -95.1952954582], [43.1135533252, -95.1952954582]]}, {"id": "2", "tags": {"landuse": "farmyard", "name": "Town Farmyard"}, "coords": [[43.173340385, -95.0999069794], [43.173340385, -95.0951702439], [43.1687323804, -95.0951702439], [43.1687323804, -95.0999069794], [43.173340385, -95.0999069794]]}, {"id": "3", "tags": {"natural": "water", "name": "Town Reservoir"}, "coords": [[43.1719723836, -95.0999069794], [43.1719723836, -95.0954662899], [43.1687323804, -95.0954662899], [43.1687323804, -95.0999069794], [43.1719723836, -95.0999069794]]}, {"id": "4", "tags": {"natural": "water", "name": "East Canal"}, "coords": [[43.1703973821, -95.0954662899], [43.1703973821, -95.0920864317], [43.170307382, -95.0920864317], [43.170307382, -95.0954662899], [43.1703973821, -95.0954662899]]}, {"id": "5", "tags": {"landuse": "farmyard", "name": "Town"}, "coords": [[43.173340385, -95.1078015386], [43.173340385, -95.0999069794], [43.1687323804, -95.0999069794], [43.1687323804, -95.1078015386], [43.173340385, -95.1078015386]]}, {"id": "6", "tags": {"highway": "primary", "name": "Primary Road"}, "coords": [[43.1734753851, -95.1956038394], [43.1734753851, -95.1857356404], [43.1734753851, -95.1758674413], [43.1734753851, -95.1659992423], [43.1734753851, -95.1561310433], [43.1734753851, -95.1462628443], [43.1734753851, -95.1363946453], [43.1734753851, -95.1265264463], [43.1734753851, -95.1166582473], [43.1734753851, -95.1079865674], [43.1734753851, -95.1078015386], [43.1734753851, -95.1058278988], [43.1734753851, -95.103854259], [43.1734753851, -95.1018806192], [43.1734753851, -95.0999069794], [43.1734753851, -95.0945534815]]}, {"id": "7", "tags": {"highway": "primary", "name": "Southern Link Road"}, "coords": [[43.1137063254, -95.1956038394], [43.1137063254, -95.1857356404], [43.1137063254, -95.1758674413], [43.1137063254, -95.1659992423], [43.1137063254, -95.1561310433], [43.1137063254, -95.1462628443], [43.1137063254, -95.1363946453], [43.1137063254, -95.1330887986], [43.1137298954, -95.1322798302], [43.1138006055, -95.1314976246], [43.1139184556, -95.130742182], [43.1140834457, -95.1300135023], [43.114295576, -95.1293115855], [43.1145548462, -95.1286364317], [43.1148612565, -95.1279880408], [43.1152148069, -95.1273664128], [43.1156154973, -95.1267715477], [43.1157943275, -95.1265264463], [43.1158753275, -95.126415429], [43.120334166, -95.1203042261], [43.1229943347, -95.1166582473], [43.1230753347, -95.11654723], [43.1274121691, -95.1106032437], [43.1278461928, -95.1100540647], [43.1282997433, -95.109569495], [43.1287728204, -95.1091495346], [43.1292654243, -95.1087941835], [43.1297775548, -95.1085034417], [43.1302753419, -95.1082917153], [43.130309212, -95.1082773092], [43.1308603959, -95.108115786], [43.1314311064, -95.108018872], [43.1320213437, -95.1079865674], [43.1374753491, -95.1079865674], [43.1446753563, -95.1079865674], [43.1518753635, -95.1079865674], [43.1590753707, -95.1079865674], [43.1662753779, -95.1079865674], [43.1687323804, -95.1079865674], [43.1710363827, -95.1079865674], [43.173340385, -95.1079865674], [43.1734753851, -95.1079865674]]}, {"id": "8", "tags": {"railway": "rail", "name": "Railway"}, "coords": [[43.1736103853, -95.1956038394], [43.1736103853, -95.0945534815]]}, {"id": "9", "tags": {"highway": "secondary"}, "coords": [[43.1734753851, -95.1078015386], [43.173340385, -95.1078015386], [43.1710363827, -95.1078015386], [43.1687323804, -95.1078015386]]}, {"id": "10", "tags": {"highway": "secondary"}, "coords": [[43.1734753851, -95.1058278988], [43.173340385, -95.1058278988], [43.1710363827, -95.1058278988], [43.1687323804, -95.1058278988]]}, {"id": "11", "tags": {"highway": "secondary"}, "coords": [[43.1734753851, -95.103854259], [43.173340385, -95.103854259], [43.1710363827, -95.103854259], [43.1687323804, -95.103854259]]}, {"id": "12", "tags": {"highway": "secondary"}, "coords": [[43.1734753851, -95.1018806192], [43.173340385, -95.1018806192], [43.1710363827, -95.1018806192], [43.1687323804, -95.1018806192]]}, {"id": "13", "tags": {"highway": "secondary"}, "coords": [[43.1734753851, -95.0999069794], [43.173340385, -95.0999069794], [43.1710363827, -95.0999069794], [43.1687323804, -95.0999069794]]}, {"id": "14", "tags": {"highway": "secondary"}, "coords": [[43.173340385, -95.1079865674], [43.173340385, -95.1078015386], [43.173340385, -95.1058278988], [43.173340385, -95.103854259], [43.173340385, -95.1018806192], [43.173340385, -95.0999069794]]}, {"id": "15", "tags": {"highway": "secondary"}, "coords": [[43.1710363827, -95.1079865674], [43.1710363827, -95.1078015386], [43.1710363827, -95.1058278988], [43.1710363827, -95.103854259], [43.1710363827, -95.1018806192], [43.1710363827, -95.0999069794]]}, {"id": "16", "tags": {"highway": "secondary"}, "coords": [[43.1687323804, -95.1079865674], [43.1687323804, -95.1078015386], [43.1687323804, -95.1058278988], [43.1687323804, -95.103854259], [43.1687323804, -95.1018806192], [43.1687323804, -95.0999069794]]}, {"id": "17", "tags": {"highway": "tertiary"}, "coords": [[43.1734753851, -95.1857356404], [43.1662753779, -95.1857356404], [43.1590753707, -95.1857356404], [43.1518753635, -95.1857356404], [43.1446753563, -95.1857356404], [43.1374753491, -95.1857356404], [43.1302753419, -95.1857356404], [43.1230753347, -95.1857356404], [43.1158753275, -95.1857356404], [43.1137063254, -95.1857356404]]}, {"id": "18", "tags": {"highway": "tertiary"}, "coords": [[43.1734753851, -95.1758674413], [43.1662753779, -95.1758674413], [43.1590753707, -95.1758674413], [43.1518753635, -95.1758674413], [43.1446753563, -95.1758674413], [43.1374753491, -95.1758674413], [43.1302753419, -95.1758674413], [43.1230753347, -95.1758674413], [43.1158753275, -95.1758674413], [43.1137063254, -95.1758674413]]}, {"id": "19", "tags": {"highway": "tertiary"}, "coords": [[43.1734753851, -95.1659992423], [43.1662753779, -95.1659992423], [43.1590753707, -95.1659992423], [43.1518753635, -95.1659992423], [43.1446753563, -95.1659992423], [43.1374753491, -95.1659992423], [43.1302753419, -95.1659992423], [43.1230753347, -95.1659992423], [43.1158753275, -95.1659992423], [43.1137063254, -95.1659992423]]}, {"id": "20", "tags": {"highway": "tertiary"}, "coords": [[43.1734753851, -95.1561310433], [43.1662753779, -95.1561310433], [43.1590753707, -95.1561310433], [43.1518753635, -95.1561310433], [43.1446753563, -95.1561310433], [43.1374753491, -95.1561310433], [43.1302753419, -95.1561310433], [43.1230753347, -95.1561310433], [43.1158753275, -95.1561310433], [43.1137063254, -95.1561310433]]}, {"id": "21", "tags": {"highway": "tertiary"}, "coords": [[43.1734753851, -95.1462628443], [43.1662753779, -95.1462628443], [43.1590753707, -95.1462628443], [43.1518753635, -95.1462628443], [43.1446753563, -95.1462628443], [43.1374753491, -95.1462628443], [43.1302753419, -95.1462628443], [43.1230753347, -95.1462628443], [43.1158753275, -95.1462628443], [43.1137063254, -95.1462628443]]}, {"id": "22", "tags": {"highway": "tertiary"}, "coords": [[43.1734753851, -95.1363946453], [43.1662753779, -95.1363946453], [43.1590753707, -95.1363946453], [43.1518753635, -95.1363946453], [43.1446753563, -95.1363946453], [43.1374753491, -95.1363946453], [43.1302753419, -95.1363946453], [43.1230753347, -95.1363946453], [43.1158753275, -95.1363946453], [43.1137063254, -95.1363946453]]}, {"id": "23", "tags": {"highway": "tertiary"}, "coords": [[43.1734753851, -95.1265264463], [43.1662753779, -95.1265264463], [43.1590753707, -95.1265264463], [43.1518753635, -95.1265264463], [43.1446753563, -95.1265264463], [43.1374753491, -95.1265264463], [43.1302753419, -95.1265264463], [43.1230753347, -95.1265264463], [43.1200333317, -95.1265264463]]}, {"id": "24", "tags": {"highway": "tertiary"}, "coords": [[43.1734753851, -95.1166582473], [43.1662753779, -95.1166582473], [43.1590753707, -95.1166582473], [43.1518753635, -95.1166582473], [43.1446753563, -95.1166582473], [43.1374753491, -95.1166582473], [43.1302753419, -95.1166582473], [43.1230753347, -95.1166582473], [43.1229943347, -95.1166582473]]}, {"id": "25", "tags": {"highway": "tertiary"}, "coords": [[43.1662753779, -95.1956038394], [43.1662753779, -95.1857356404], [43.1662753779, -95.1758674413], [43.1662753779, -95.1659992423], [43.1662753779, -95.1561310433], [43.1662753779, -95.1462628443], [43.1662753779, -95.1363946453], [43.1662753779, -95.1265264463], [43.1662753779, -95.1166582473], [43.1662753779, -95.1079865674]]}, {"id": "26", "tags": {"highway": "tertiary"}, "coords": [[43.1590753707, -95.1956038394], [43.1590753707, -95.1857356404], [43.1590753707, -95.1758674413], [43.1590753707, -95.1659992423], [43.1590753707, -95.1561310433], [43.1590753707, -95.1462628443], [43.1590753707, -95.1363946453], [43.1590753707, -95.1265264463], [43.1590753707, -95.1166582473], [43.1590753707, -95.1079865674]]}, {"id": "27", "tags": {"highway": "tertiary"}, "coords": [[43.1518753635, -95.1956038394], [43.1518753635, -95.1857356404], [43.1518753635, -95.1758674413], [43.1518753635, -95.1659992423], [43.1518753635, -95.1561310433], [43.1518753635, -95.1462628443], [43.1518753635, -95.1363946453], [43.1518753635, -95.1265264463], [43.1518753635, -95.1166582473], [43.1518753635, -95.1079865674]]}, {"id": "28", "tags": {"highway": "tertiary"}, "coords": [[43.1446753563, -95.1956038394], [43.1446753563, -95.1857356404], [43.1446753563, -95.1758674413], [43.1446753563, -95.1659992423], [43.1446753563, -95.1561310433], [43.1446753563, -95.1462628443], [43.1446753563, -95.1363946453], [43.1446753563, -95.1265264463], [43.1446753563, -95.1166582473], [43.1446753563, -95.1079865674]]}, {"id": "29", "tags": {"highway": "tertiary"}, "coords": [[43.1374753491, -95.1956038394], [43.1374753491, -95.1857356404], [43.1374753491, -95.1758674413], [43.1374753491, -95.1659992423], [43.1374753491, -95.1561310433], [43.1374753491, -95.1462628443], [43.1374753491, -95.1363946453], [43.1374753491, -95.1265264463], [43.1374753491, -95.1166582473], [43.1374753491, -95.1079865674]]}, {"id": "30", "tags": {"highway": "tertiary"}, "coords": [[43.1302753419, -95.1956038394], [43.1302753419, -95.1857356404], [43.1302753419, -95.1758674413], [43.1302753419, -95.1659992423], [43.1302753419, -95.1561310433], [43.1302753419, -95.1462628443], [43.1302753419, -95.1363946453], [43.1302753419, -95.1265264463], [43.1302753419, -95.1166582473], [43.1302753419, -95.1082917153]]}, {"id": "31", "tags": {"highway": "tertiary"}, "coords": [[43.1230753347, -95.1956038394], [43.1230753347, -95.1857356404], [43.1230753347, -95.1758674413], [43.1230753347, -95.1659992423], [43.1230753347, -95.1561310433], [43.1230753347, -95.1462628443], [43.1230753347, -95.1363946453], [43.1230753347, -95.1265264463], [43.1230753347, -95.1166582473], [43.1230753347, -95.11654723]]}, {"id": "32", "tags": {"highway": "tertiary"}, "coords": [[43.1158753275, -95.1956038394], [43.1158753275, -95.1857356404], [43.1158753275, -95.1758674413], [43.1158753275, -95.1659992423], [43.1158753275, -95.1561310433], [43.1158753275, -95.1462628443], [43.1158753275, -95.1363946453], [43.1158753275, -95.1288331378]]}, {"id": "33", "tags": {"landuse": "farmland", "name": "Field 1"}, "coords": [[43.1734303851, -95.1955421631], [43.1734303851, -95.1931059515], [43.1734303851, -95.1906697399], [43.1734303851, -95.1882335282], [43.1734303851, -95.1857973166], [43.166320378, -95.1857973166], [43.166320378, -95.1882335282], [43.166320378, -95.1906697399], [43.166320378, -95.1931059515], [43.166320378, -95.1955421631], [43.1734303851, -95.1955421631]]}, {"id": "34", "tags": {"landuse": "farmland", "name": "Field 2"}, "coords": [[43.1662303779, -95.1955421631], [43.1662303779, -95.1931059515], [43.1662303779, -95.1906697399], [43.1662303779, -95.1882335282], [43.1662303779, -95.1857973166], [43.1591203708, -95.1857973166], [43.1591203708, -95.1882335282], [43.1591203708, -95.1906697399], [43.1591203708, -95.1931059515], [43.1591203708, -95.1955421631], [43.1662303779, -95.1955421631]]}, {"id": "35", "tags": {"landuse": "farmland", "name": "Field 3"}, "coords": [[43.1590303707, -95.1955421631], [43.1590303707, -95.1931059515], [43.1590303707, -95.1906697399], [43.1590303707, -95.1882335282], [43.1590303707, -95.1857973166], [43.1519203636, -95.1857973166], [43.1519203636, -95.1882335282], [43.1519203636, -95.1906697399], [43.1519203636, -95.1931059515], [43.1519203636, -95.1955421631], [43.1590303707, -95.1955421631]]}, {"id": "36", "tags": {"landuse": "farmland", "name": "Field 4"}, "coords": [[43.1518303635, -95.1955421631], [43.1518303635, -95.1931059515], [43.1518303635, -95.1906697399], [43.1518303635, -95.1882335282], [43.1518303635, -95.1857973166], [43.1447203564, -95.1857973166], [43.1447203564, -95.1882335282], [43.1447203564, -95.1906697399], [43.1447203564, -95.1931059515], [43.1447203564, -95.1955421631], [43.1518303635, -95.1955421631]]}, {"id": "37", "tags": {"natural": "wood", "landuse": "farmyard", "leaf_type": "broadleave", "name": "Random Forest 1"}, "coords": [[43.1446303563, -95.1955421631], [43.1446303563, -95.1916414244], [43.1417843104, -95.1916414244], [43.1417843104, -95.1955421631], [43.1446303563, -95.1955421631]]}, {"id": "38", "tags": {"landuse": "farmland", "name": "Field 5"}, "coords": [[43.1446303563, -95.1915180719], [43.1446303563, -95.1900878831], [43.1446303563, -95.1886576943], [43.1446303563, -95.1872275054], [43.1446303563, -95.1857973166], [43.1417843104, -95.1857973166], [43.1417843104, -95.1872275054], [43.1417843104, -95.1886576943], [43.1417843104, -95.1900878831], [43.1417843104, -95.1915180719], [43.1446303563, -95.1915180719]]}, {"id": "39", "tags": {"landuse": "farmland", "name": "Field 6"}, "coords": [[43.1416943104, -95.1955421631], [43.1416943104, -95.1931059515], [43.1416943104, -95.1906697399], [43.1416943104, -95.1882335282], [43.1416943104, -95.1857973166], [43.1375203492, -95.1857973166], [43.1375203492, -95.1882335282], [43.1375203492, -95.1906697399], [43.1375203492, -95.1931059515], [43.1375203492, -95.1955421631], [43.1416943104, -95.1955421631]]}, {"id": "40", "tags": {"landuse": "farmland", "name": "Field 7"}, "coords": [[43.1374303491, -95.1955421631], [43.1374303491, -95.1931059515], [43.1374303491, -95.1906697399], [43.1374303491, -95.1882335282], [43.1374303491, -95.1857973166], [43.130320342, -95.1857973166], [43.130320342, -95.1882335282], [43.130320342, -95.1906697399], [43.130320342, -95.1931059515], [43.130320342, -95.1955421631], [43.1374303491, -95.1955421631]]}, {"id": "41", "tags": {"landuse": "farmland", "name": "Field 8"}, "coords": [[43.1302303419, -95.1955421631], [43.1302303419, -95.1931059515], [43.1302303419, -95.1906697399], [43.1302303419, -95.1882335282], [43.1302303419, -95.1857973166], [43.1231203348, -95.1857973166], [43.1231203348, -95.1882335282], [43.1231203348, -95.1906697399], [43.1231203348, -95.1931059515], [43.1231203348, -95.1955421631], [43.1302303419, -95.1955421631]]}, {"id": "42", "tags": {"natural": "wood", "landuse": "farmyard", "leaf_type": "broadleave", "name": "Random Forest 2"}, "coords": [[43.1230303347, -95.1955421631], [43.1230303347, -95.1916414244], [43.1201842888, -95.1916414244], [43.1201842888, -95.1955421631], [43.1230303347, -95.1955421631]]}, {"id": "43", "tags": {"landuse": "farmland", "name": "Field 9"}, "coords": [[43.1230303347, -95.1915180719], [43.1230303347, -95.1900878831], [43.1230303347, -95.1886576943], [43.1230303347, -95.1872275054], [43.1230303347, -95.1857973166], [43.1201842888, -95.1857973166], [43.1201842888, -95.1872275054], [43.1201842888, -95.1886576943], [43.1201842888, -95.1900878831], [43.1201842888, -95.1915180719], [43.1230303347, -95.1915180719]]}, {"id": "44", "tags": {"landuse": "farmland", "name": "Field 10"}, "coords": [[43.1200942888, -95.1955421631], [43.1200942888, -95.1931059515], [43.1200942888, -95.1906697399], [43.1200942888, -95.1882335282], [43.1200942888, -95.1857973166], [43.1159203276, -95.1857973166], [43.1159203276, -95.1882335282], [43.1159203276, -95.1906697399], [43.1159203276, -95.1931059515], [43.1159203276, -95.1955421631], [43.1200942888, -95.1955421631]]}, {"id": "45", "tags": {"landuse": "farmland", "name": "Field 11"}, "coords": [[43.1158303275, -95.1955421631], [43.1158303275, -95.1931059515], [43.1158303275, -95.1906697399], [43.1158303275, -95.1882335282], [43.1158303275, -95.1857973166], [43.1137513254, -95.1857973166], [43.1137513254, -95.1882335282], [43.1137513254, -95.1906697399], [43.1137513254, -95.1931059515], [43.1137513254, -95.1955421631], [43.1158303275, -95.1955421631]]}, {"id": "46", "tags": {"landuse": "farmland", "name": "Field 12"}, "coords": [[43.1734303851, -95.1856739641], [43.1734303851, -95.1832377525], [43.1734303851, -95.1808015409], [43.1734303851, -95.1783653292], [43.1734303851, -95.1759291176], [43.166320378, -95.1759291176], [43.166320378, -95.1783653292], [43.166320378, -95.1808015409], [43.166320378, -95.1832377525], [43.166320378, -95.1856739641], [43.1734303851, -95.1856739641]]}, {"id": "47", "tags": {"landuse": "farmland", "name": "Field 13"}, "coords": [[43.1662303779, -95.1856739641], [43.1662303779, -95.1832377525], [43.1662303779, -95.1808015409], [43.1662303779, -95.1783653292], [43.1662303779, -95.1759291176], [43.1591203708, -95.1759291176], [43.1591203708, -95.1783653292], [43.1591203708, -95.1808015409], [43.1591203708, -95.1832377525], [43.1591203708, -95.1856739641], [43.1662303779, -95.1856739641]]}, {"id": "48", "tags": {"landuse": "farmland", "name": "Field 14"}, "coords": [[43.1590303707, -95.1856739641], [43.1590303707, -95.1832377525], [43.1590303707, -95.1808015409], [43.1590303707, -95.1783653292], [43.1590303707, -95.1759291176], [43.1519203636, -95.1759291176], [43.1519203636, -95.1783653292], [43.1519203636, -95.1808015409], [43.1519203636, -95.1832377525], [43.1519203636, -95.1856739641], [43.1590303707, -95.1856739641]]}, {"id": "49", "tags": {"landuse": "farmland", "name": "Field 15"}, "coords": [[43.1518303635, -95.1856739641], [43.1518303635, -95.1832377525], [43.1518303635, -95.1808015409], [43.1518303635, -95.1783653292], [43.1518303635, -95.1759291176], [43.1447203564, -95.1759291176], [43.1447203564, -95.1783653292], [43.1447203564, -95.1808015409], [43.1447203564, -95.1832377525], [43.1447203564, -95.1856739641], [43.1518303635, -95.1856739641]]}, {"id": "50", "tags": {"landuse": "farmland", "name": "Field 16"}, "coords": [[43.1446303563, -95.1856739641], [43.1446303563, -95.1832377525], [43.1446303563, -95.1808015409], [43.1446303563, -95.1783653292], [43.1446303563, -95.1759291176], [43.1375203492, -95.1759291176], [43.1375203492, -95.1783653292], [43.1375203492, -95.1808015409], [43.1375203492, -95.1832377525], [43.1375203492, -95.1856739641], [43.1446303563, -95.1856739641]]}, {"id": "51", "tags": {"landuse": "farmland", "name": "Field 17"}, "coords": [[43.1374303491, -95.1856739641], [43.1374303491, -95.1832377525], [43.1374303491, -95.1808015409], [43.1374303491, -95.1783653292], [43.1374303491, -95.1759291176], [43.130320342, -95.1759291176], [43.130320342, -95.1783653292], [43.130320342, -95.1808015409], [43.130320342, -95.1832377525], [43.130320342, -95.1856739641], [43.1374303491, -95.1856739641]]}, {"id": "52", "tags": {"landuse": "farmland", "name": "Field 18"}, "coords": [[43.1302303419, -95.1856739641], [43.1302303419, -95.1832377525], [43.1302303419, -95.1808015409], [43.1302303419, -95.1783653292], [43.1302303419, -95.1759291176], [43.1231203348, -95.1759291176], [43.1231203348, -95.1783653292], [43.1231203348, -95.1808015409], [43.1231203348, -95.1832377525], [43.1231203348, -95.1856739641], [43.1302303419, -95.1856739641]]}, {"id": "53", "tags": {"landuse": "farmland", "name": "Field 19"}, "coords": [[43.1230303347, -95.1856739641], [43.1230303347, -95.1832377525], [43.1230303347, -95.1808015409], [43.1230303347, -95.1783653292], [43.1230303347, -95.1759291176], [43.1159203276, -95.1759291176], [43.1159203276, -95.1783653292], [43.1159203276, -95.1808015409], [43.1159203276, -95.1832377525], [43.1159203276, -95.1856739641], [43.1230303347, -95.1856739641]]}, {"id": "54", "tags": {"landuse": "farmland", "name": "Field 20"}, "coords": [[43.1158303275, -95.1856739641], [43.1158303275, -95.1832377525], [43.1158303275, -95.1808015409], [43.1158303275, -95.1783653292], [43.1158303275, -95.1759291176], [43.1137513254, -95.1759291176], [43.1137513254, -95.1783653292], [43.1137513254, -95.1808015409], [43.1137513254, -95.1832377525], [43.1137513254, -95.1856739641], [43.1158303275, -95.1856739641]]}, {"id": "55", "tags": {"landuse": "farmland", "name": "Field 21"}, "coords": [[43.1734303851, -95.1758057651], [43.1734303851, -95.1733695535], [43.1734303851, -95.1709333418], [43.1734303851, -95.1684971302], [43.1734303851, -95.1660609186], [43.166320378, -95.1660609186], [43.166320378, -95.1684971302], [43.166320378, -95.1709333418], [43.166320378, -95.1733695535], [43.166320378, -95.1758057651], [43.1734303851, -95.1758057651]]}, {"id": "56", "tags": {"landuse": "farmland", "name": "Field 22"}, "coords": [[43.1662303779, -95.1758057651], [43.1662303779, -95.1733695535], [43.1662303779, -95.1709333418], [43.1662303779, -95.1684971302], [43.1662303779, -95.1660609186], [43.1591203708, -95.1660609186], [43.1591203708, -95.1684971302], [43.1591203708, -95.1709333418], [43.1591203708, -95.1733695535], [43.1591203708, -95.1758057651], [43.1662303779, -95.1758057651]]}, {"id": "57", "tags": {"natural": "wood", "landuse": "farmyard", "leaf_type": "broadleave", "name": "Random Forest 3"}, "coords": [[43.1590303707, -95.1758057651], [43.1590303707, -95.1719050264], [43.1561843248, -95.1719050264], [43.1561843248, -95.1758057651], [43.1590303707, -95.1758057651]]}, {"id": "58", "tags": {"landuse": "farmland", "name": "Field 23"}, "coords": [[43.1590303707, -95.1717816739], [43.1590303707, -95.1703514851], [43.1590303707, -95.1689212962], [43.1590303707, -95.1674911074], [43.1590303707, -95.1660609186], [43.1561843248, -95.1660609186], [43.1561843248, -95.1674911074], [43.1561843248, -95.1689212962], [43.1561843248, -95.1703514851], [43.1561843248, -95.1717816739], [43.1590303707, -95.1717816739]]}, {"id": "59", "tags": {"landuse": "farmland", "name": "Field 24"}, "coords": [[43.1560943248, -95.1758057651], [43.1560943248, -95.1733695535], [43.1560943248, -95.1709333418], [43.1560943248, -95.1684971302], [43.1560943248, -95.1660609186], [43.1519203636, -95.1660609186], [43.1519203636, -95.1684971302], [43.1519203636, -95.1709333418], [43.1519203636, -95.1733695535], [43.1519203636, -95.1758057651], [43.1560943248, -95.1758057651]]}, {"id": "60", "tags": {"landuse": "farmland", "name": "Field 25"}, "coords": [[43.1518303635, -95.1758057651], [43.1518303635, -95.1733695535], [43.1518303635, -95.1709333418], [43.1518303635, -95.1684971302], [43.1518303635, -95.1660609186], [43.1447203564, -95.1660609186], [43.1447203564, -95.1684971302], [43.1447203564, -95.1709333418], [43.1447203564, -95.1733695535], [43.1447203564, -95.1758057651], [43.1518303635, -95.1758057651]]}, {"id": "61", "tags": {"landuse": "farmland", "name": "Field 26"}, "coords": [[43.1446303563, -95.1758057651], [43.1446303563, -95.1733695535], [43.1446303563, -95.1709333418], [43.1446303563, -95.1684971302], [43.1446303563, -95.1660609186], [43.1375203492, -95.1660609186], [43.1375203492, -95.1684971302], [43.1375203492, -95.1709333418], [43.1375203492, -95.1733695535], [43.1375203492, -95.1758057651], [43.1446303563, -95.1758057651]]}, {"id": "62", "tags": {"landuse": "farmland", "name": "Field 27"}, "coords": [[43.1374303491, -95.1758057651], [43.1374303491, -95.1733695535], [43.1374303491, -95.1709333418], [43.1374303491, -95.1684971302], [43.1374303491, -95.1660609186], [43.130320342, -95.1660609186], [43.130320342, -95.1684971302], [43.130320342, -95.1709333418], [43.130320342, -95.1733695535], [43.130320342, -95.1758057651], [43.1374303491, -95.1758057651]]}, {"id": "63", "tags": {"natural": "wood", "landuse": "farmyard", "leaf_type": "broadleave", "name": "Random Forest 4"}, "coords": [[43.1302303419, -95.1758057651], [43.1302303419, -95.1719050264], [43.127384296, -95.1719050264], [43.127384296, -95.1758057651], [43.1302303419, -95.1758057651]]}, {"id": "64", "tags": {"landuse": "farmland", "name": "Field 28"}, "coords": [[43.1302303419, -95.1717816739], [43.1302303419, -95.1703514851], [43.1302303419, -95.1689212962], [43.1302303419, -95.1674911074], [43.1302303419, -95.1660609186], [43.127384296, -95.1660609186], [43.127384296, -95.1674911074], [43.127384296, -95.1689212962], [43.127384296, -95.1703514851], [43.127384296, -95.1717816739], [43.1302303419, -95.1717816739]]}, {"id": "65", "tags": {"landuse": "farmland", "name": "Field 29"}, "coords": [[43.127294296, -95.1758057651], [43.127294296, -95.1733695535], [43.127294296, -95.1709333418], [43.127294296, -95.1684971302], [43.127294296, -95.1660609186], [43.1231203348, -95.1660609186], [43.1231203348, -95.1684971302], [43.1231203348, -95.1709333418], [43.1231203348, -95.1733695535], [43.1231203348, -95.1758057651], [43.127294296, -95.1758057651]]}, {"id": "66", "tags": {"landuse": "farmland", "name": "Field 30"}, "coords": [[43.1230303347, -95.1758057651], [43.1230303347, -95.1733695535], [43.1230303347, -95.1709333418], [43.1230303347, -95.1684971302], [43.1230303347, -95.1660609186], [43.1159203276, -95.1660609186], [43.1159203276, -95.1684971302], [43.1159203276, -95.1709333418], [43.1159203276, -95.1733695535], [43.1159203276, -95.1758057651], [43.1230303347, -95.1758057651]]}, {"id": "67", "tags": {"natural": "wood", "landuse": "farmyard", "leaf_type": "needleleave", "name": "Cell Forest 1"}, "coords": [[43.1158303275, -95.1758057651], [43.1158303275, -95.1733695535], [43.1158303275, -95.1709333418], [43.1158303275, -95.1684971302], [43.1158303275, -95.1660609186], [43.1137513254, -95.1660609186], [43.1141203258, -95.1684971302], [43.1137513254, -95.1709333418], [43.1137513254, -95.1733695535], [43.1137513254, -95.1758057651], [43.1158303275, -95.1758057651]]}, {"id": "68", "tags": {"landuse": "farmland", "name": "Field 31"}, "coords": [[43.1734303851, -95.1659375661], [43.1734303851, -95.1635013545], [43.1734303851, -95.1610651428], [43.1734303851, -95.1586289312], [43.1734303851, -95.1561927196], [43.166320378, -95.1561927196], [43.166320378, -95.1586289312], [43.166320378, -95.1610651428], [43.166320378, -95.1635013545], [43.166320378, -95.1659375661], [43.1734303851, -95.1659375661]]}, {"id": "69", "tags": {"natural": "wood", "landuse": "farmyard", "leaf_type": "broadleave", "name": "Random Forest 5"}, "coords": [[43.1662303779, -95.1659375661], [43.1662303779, -95.1620368274], [43.163384332, -95.1620368274], [43.163384332, -95.1659375661], [43.1662303779, -95.1659375661]]}, {"id": "70", "tags": {"landuse": "farmland", "name": "Field 32"}, "coords": [[43.1662303779, -95.1619134749], [43.1662303779, -95.1604832861], [43.1662303779, -95.1590530972], [43.1662303779, -95.1576229084], [43.1662303779, -95.1561927196], [43.163384332, -95.1561927196], [43.163384332, -95.1576229084], [43.163384332, -95.1590530972], [43.163384332, -95.1604832861], [43.163384332, -95.1619134749], [43.1662303779, -95.1619134749]]}, {"id": "71", "tags": {"landuse": "farmland", "name": "Field 33"}, "coords": [[43.163294332, -95.1659375661], [43.163294332, -95.1635013545], [43.163294332, -95.1610651428], [43.163294332, -95.1586289312], [43.163294332, -95.1561927196], [43.1591203708, -95.1561927196], [43.1591203708, -95.1586289312], [43.1591203708, -95.1610651428], [43.1591203708, -95.1635013545], [43.1591203708, -95.1659375661], [43.163294332, -95.1659375661]]}, {"id": "72", "tags": {"landuse": "farmland", "name": "Field 34"}, "coords": [[43.1590303707, -95.1659375661], [43.1590303707, -95.1635013545], [43.1590303707, -95.1610651428], [43.1590303707, -95.1586289312], [43.1590303707, -95.1561927196], [43.1519203636, -95.1561927196], [43.1519203636, -95.1586289312], [43.1519203636, -95.1610651428], [43.1519203636, -95.1635013545], [43.1519203636, -95.1659375661], [43.1590303707, -95.1659375661]]}, {"id": "73", "tags": {"landuse": "farmland", "name": "Field 35"}, "coords": [[43.1518303635, -95.1659375661], [43.1518303635, -95.1635013545], [43.1518303635, -95.1610651428], [43.1518303635, -95.1586289312], [43.1518303635, -95.1561927196], [43.1447203564, -95.1561927196], [43.1447203564, -95.1586289312], [43.1447203564, -95.1610651428], [43.1447203564, -95.1635013545], [43.1447203564, -95.1659375661], [43.1518303635, -95.1659375661]]}, {"id": "74", "tags": {"landuse": "farmland", "name": "Field 36"}, "coords": [[43.1446303563, -95.1659375661], [43.1446303563, -95.1635013545], [43.1446303563, -95.1610651428], [43.1446303563, -95.1586289312], [43.1446303563, -95.1561927196], [43.1375203492, -95.1561927196], [43.1375203492, -95.1586289312], [43.1375203492, -95.1610651428], [43.1375203492, -95.1635013545], [43.1375203492, -95.1659375661], [43.1446303563, -95.1659375661]]}, {"id": "75", "tags": {"landuse": "farmland", "name": "Field 37"}, "coords": [[43.1374303491, -95.1659375661], [43.1374303491, -95.1635013545], [43.1374303491, -95.1610651428], [43.1374303491, -95.1586289312], [43.1374303491, -95.1561927196], [43.130320342, -95.1561927196], [43.130320342, -95.1586289312], [43.130320342, -95.1610651428], [43.130320342, -95.1635013545], [43.130320342, -95.1659375661], [43.1374303491, -95.1659375661]]}, {"id": "76", "tags": {"landuse": "farmland", "name": "Field 38"}, "coords": [[43.1302303419, -95.1659375661], [43.1302303419, -95.1635013545], [43.1302303419, -95.1610651428], [43.1302303419, -95.1586289312], [43.1302303419, -95.1561927196], [43.1231203348, -95.1561927196], [43.1231203348, -95.1586289312], [43.1231203348, -95.1610651428], [43.1231203348, -95.1635013545], [43.1231203348, -95.1659375661], [43.1302303419, -95.1659375661]]}, {"id": "77", "tags": {"landuse": "farmland", "name": "Field 39"}, "coords": [[43.1230303347, -95.1659375661], [43.1230303347, -95.1635013545], [43.1230303347, -95.1610651428], [43.1230303347, -95.1586289312], [43.1230303347, -95.1561927196], [43.1159203276, -95.1561927196], [43.1159203276, -95.1586289312], [43.1159203276, -95.1610651428], [43.1159203276, -95.1635013545], [43.1159203276, -95.1659375661], [43.1230303347, -95.1659375661]]}, {"id": "78", "tags": {"landuse": "farmland", "name": "Field 40"}, "coords": [[43.1158303275, -95.1659375661], [43.1158303275, -95.1635013545], [43.1158303275, -95.1610651428], [43.1158303275, -95.1586289312], [43.1158303275, -95.1561927196], [43.1137513254, -95.1561927196], [43.1137513254, -95.1586289312], [43.1137513254, -95.1610651428], [43.1137513254, -95.1635013545], [43.1137513254, -95.1659375661], [43.1158303275, -95.1659375661]]}, {"id": "79", "tags": {"landuse": "farmland", "name": "Field 41"}, "coords": [[43.1734303851, -95.1560693671], [43.1734303851, -95.1536331554], [43.1734303851, -95.1511969438], [43.1734303851, -95.1487607322], [43.1734303851, -95.1463245205], [43.166320378, -95.1463245205], [43.166320378, -95.1487607322], [43.166320378, -95.1511969438], [43.166320378, -95.1536331554], [43.166320378, -95.1560693671], [43.1734303851, -95.1560693671]]}, {"id": "80", "tags": {"natural": "wood", "landuse": "farmyard", "leaf_type": "broadleave", "name": "Random Forest 6"}, "coords": [[43.1662303779, -95.1560693671], [43.1662303779, -95.1521686284], [43.163384332, -95.1521686284], [43.163384332, -95.1560693671], [43.1662303779, -95.1560693671]]}, {"id": "81", "tags": {"landuse": "farmland", "name": "Field 42"}, "coords": [[43.1662303779, -95.1520452759], [43.1662303779, -95.150615087], [43.1662303779, -95.1491848982], [43.1662303779, -95.1477547094], [43.1662303779, -95.1463245205], [43.163384332, -95.1463245205], [43.163384332, -95.1477547094], [43.163384332, -95.1491848982], [43.163384332, -95.150615087], [43.163384332, -95.1520452759], [43.1662303779, -95.1520452759]]}, {"id": "82", "tags": {"landuse": "farmland", "name": "Field 43"}, "coords": [[43.163294332, -95.1560693671], [43.163294332, -95.1536331554], [43.163294332, -95.1511969438], [43.163294332, -95.1487607322], [43.163294332, -95.1463245205], [43.1591203708, -95.1463245205], [43.1591203708, -95.1487607322], [43.1591203708, -95.1511969438], [43.1591203708, -95.1536331554], [43.1591203708, -95.1560693671], [43.163294332, -95.1560693671]]}, {"id": "83", "tags": {"landuse": "farmland", "name": "Field 44"}, "coords": [[43.1590303707, -95.1560693671], [43.1590303707, -95.1536331554], [43.1590303707, -95.1511969438], [43.1590303707, -95.1487607322], [43.1590303707, -95.1463245205], [43.1519203636, -95.1463245205], [43.1519203636, -95.1487607322], [43.1519203636, -95.1511969438], [43.1519203636, -95.1536331554], [43.1519203636, -95.1560693671], [43.1590303707, -95.1560693671]]}, {"id": "84", "tags": {"landuse": "farmland", "name": "Field 45"}, "coords": [[43.1518303635, -95.1560693671], [43.1518303635, -95.1536331554], [43.1518303635, -95.1511969438], [43.1518303635, -95.1487607322], [43.1518303635, -95.1463245205], [43.1447203564, -95.1463245205], [43.1447203564, -95.1487607322], [43.1447203564, -95.1511969438], [43.1447203564, -95.1536331554], [43.1447203564, -95.1560693671], [43.1518303635, -95.1560693671]]}, {"id": "85", "tags": {"landuse": "farmland", "name": "Field 46"}, "coords": [[43.1446303563, -95.1560693671], [43.1446303563, -95.1536331554], [43.1446303563, -95.1511969438], [43.1446303563, -95.1487607322], [43.1446303563, -95.1463245205], [43.1375203492, -95.1463245205], [43.1375203492, -95.1487607322], [43.1375203492, -95.1511969438], [43.1375203492, -95.1536331554], [43.1375203492, -95.1560693671], [43.1446303563, -95.1560693671]]}, {"id": "86", "tags": {"landuse": "farmland", "name": "Field 47"}, "coords": [[43.1374303491, -95.1560693671], [43.1374303491, -95.1536331554], [43.1374303491, -95.1511969438], [43.1374303491, -95.1487607322], [43.1374303491, -95.1463245205], [43.130320342, -95.1463245205], [43.130320342, -95.1487607322], [43.130320342, -95.1511969438], [43.130320342, -95.1536331554], [43.130320342, -95.1560693671], [43.1374303491, -95.1560693671]]}, {"id": "87", "tags": {"landuse": "farmland", "name": "Field 48"}, "coords": [[43.1302303419, -95.1560693671], [43.1302303419, -95.1536331554], [43.1302303419, -95.1511969438], [43.1302303419, -95.1487607322], [43.1302303419, -95.1463245205], [43.1231203348, -95.1463245205], [43.1231203348, -95.1487607322], [43.1231203348, -95.1511969438], [43.1231203348, -95.1536331554], [43.1231203348, -95.1560693671], [43.1302303419, -95.1560693671]]}, {"id": "88", "tags": {"landuse": "farmland", "name": "Field 49"}, "coords": [[43.1230303347, -95.1560693671], [43.1230303347, -95.1536331554], [43.1230303347, -95.1511969438], [43.1230303347, -95.1487607322], [43.1230303347, -95.1463245205], [43.1159203276, -95.1463245205], [43.1159203276, -95.1487607322], [43.1159203276, -95.1511969438], [43.1159203276, -95.1536331554], [43.1159203276, -95.1560693671], [43.1230303347, -95.1560693671]]}, {"id": "89", "tags": {"landuse": "farmland", "name": "Field 50"}, "coords": [[43.1158303275, -95.1560693671], [43.1158303275, -95.1536331554], [43.1158303275, -95.1511969438], [43.1158303275, -95.1487607322], [43.1158303275, -95.1463245205], [43.1137513254, -95.1463245205], [43.1137513254, -95.1487607322], [43.1137513254, -95.1511969438], [43.1137513254, -95.1536331554], [43.1137513254, -95.1560693671], [43.1158303275, -95.1560693671]]}, {"id": "90", "tags": {"natural": "wood", "landuse": "farmyard", "leaf_type": "broadleave", "name": "Random Forest 7"}, "coords": [[43.1734303851, -95.1462011681], [43.1734303851, -95.1423004293], [43.1705843392, -95.1423004293], [43.1705843392, -95.1462011681], [43.1734303851, -95.1462011681]]}, {"id": "91", "tags": {"landuse": "farmland", "name": "Field 51"}, "coords": [[43.1734303851, -95.1421770769], [43.1734303851, -95.140746888], [43.1734303851, -95.1393166992], [43.1734303851, -95.1378865104], [43.1734303851, -95.1364563215], [43.1705843392, -95.1364563215], [43.1705843392, -95.1378865104], [43.1705843392, -95.1393166992], [43.1705843392, -95.140746888], [43.1705843392, -95.1421770769], [43.1734303851, -95.1421770769]]}, {"id": "92", "tags": {"landuse": "farmland", "name": "Field 52"}, "coords": [[43.1704943392, -95.1462011681], [43.1704943392, -95.1437649564], [43.1704943392, -95.1413287448], [43.1704943392, -95.1388925332], [43.1704943392, -95.1364563215], [43.166320378, -95.1364563215], [43.166320378, -95.1388925332], [43.166320378, -95.1413287448], [43.166320378, -95.1437649564], [43.166320378, -95.1462011681], [43.1704943392, -95.1462011681]]}, {"id": "93", "tags": {"landuse": "farmland", "name": "Field 53"}, "coords": [[43.1662303779, -95.1462011681], [43.1662303779, -95.1437649564], [43.1662303779, -95.1413287448], [43.1662303779, -95.1388925332], [43.1662303779, -95.1364563215], [43.1591203708, -95.1364563215], [43.1591203708, -95.1388925332], [43.1591203708, -95.1413287448], [43.1591203708, -95.1437649564], [43.1591203708, -95.1462011681], [43.1662303779, -95.1462011681]]}, {"id": "94", "tags": {"landuse": "farmland", "name": "Field 54"}, "coords": [[43.1590303707, -95.1462011681], [43.1590303707, -95.1437649564], [43.1590303707, -95.1413287448], [43.1590303707, -95.1388925332], [43.1590303707, -95.1364563215], [43.1519203636, -95.1364563215], [43.1519203636, -95.1388925332], [43.1519203636, -95.1413287448], [43.1519203636, -95.1437649564], [43.1519203636, -95.1462011681], [43.1590303707, -95.1462011681]]}, {"id": "95", "tags": {"landuse": "farmland", "name": "Field 55"}, "coords": [[43.1518303635, -95.1462011681], [43.1518303635, -95.1437649564], [43.1518303635, -95.1413287448], [43.1518303635, -95.1388925332], [43.1518303635, -95.1364563215], [43.1447203564, -95.1364563215], [43.1447203564, -95.1388925332], [43.1447203564, -95.1413287448], [43.1447203564, -95.1437649564], [43.1447203564, -95.1462011681], [43.1518303635, -95.1462011681]]}, {"id": "96", "tags": {"landuse": "farmland", "name": "Field 56"}, "coords": [[43.1446303563, -95.1462011681], [43.1446303563, -95.1437649564], [43.1446303563, -95.1413287448], [43.1446303563, -95.1388925332], [43.1446303563, -95.1364563215], [43.1375203492, -95.1364563215], [43.1375203492, -95.1388925332], [43.1375203492, -95.1413287448], [43.1375203492, -95.1437649564], [43.1375203492, -95.1462011681], [43.1446303563, -95.1462011681]]}, {"id": "97", "tags": {"landuse": "farmland", "name": "Field 57"}, "coords": [[43.1374303491, -95.1462011681], [43.1374303491, -95.1437649564], [43.1374303491, -95.1413287448], [43.1374303491, -95.1388925332], [43.1374303491, -95.1364563215], [43.130320342, -95.1364563215], [43.130320342, -95.1388925332], [43.130320342, -95.1413287448], [43.130320342, -95.1437649564], [43.130320342, -95.1462011681], [43.1374303491, -95.1462011681]]}, {"id": "98", "tags": {"natural": "wood", "landuse": "farmyard", "leaf_type": "broadleave", "name": "Random Forest 8"}, "coords": [[43.1302303419, -95.1462011681], [43.1302303419, -95.1423004293], [43.127384296, -95.1423004293], [43.127384296, -95.1462011681], [43.1302303419, -95.1462011681]]}, {"id": "99", "tags": {"landuse": "farmland", "name": "Field 58"}, "coords": [[43.1302303419, -95.1421770769], [43.1302303419, -95.140746888], [43.1302303419, -95.1393166992], [43.1302303419, -95.1378865104], [43.1302303419, -95.1364563215], [43.127384296, -95.1364563215], [43.127384296, -95.1378865104], [43.127384296, -95.1393166992], [43.127384296, -95.140746888], [43.127384296, -95.1421770769], [43.1302303419, -95.1421770769]]}, {"id": "100", "tags": {"landuse": "farmland", "name": "Field 59"}, "coords": [[43.127294296, -95.1462011681], [43.127294296, -95.1437649564], [43.127294296, -95.1413287448], [43.127294296, -95.1388925332], [43.127294296, -95.1364563215], [43.1231203348, -95.1364563215], [43.1231203348, -95.1388925332], [43.1231203348, -95.1413287448], [43.1231203348, -95.1437649564], [43.1231203348, -95.1462011681], [43.127294296, -95.1462011681]]}, {"id": "101", "tags": {"landuse": "farmland", "name": "Field 60"}, "coords": [[43.1230303347, -95.1462011681], [43.1230303347, -95.1437649564], [43.1230303347, -95.1413287448], [43.1230303347, -95.1388925332], [43.1230303347, -95.1364563215], [43.1159203276, -95.1364563215], [43.1159203276, -95.1388925332], [43.1159203276, -95.1413287448], [43.1159203276, -95.1437649564], [43.1159203276, -95.1462011681], [43.1230303347, -95.1462011681]]}, {"id": "102", "tags": {"landuse": "farmyard", "name": "Yard 61"}, "coords": [[43.1158303275, -95.1462011681], [43.1158303275, -95.1437649564], [43.1158303275, -95.1413287448], [43.1158303275, -95.1388925332], [43.1158303275, -95.1364563215], [43.1137513254, -95.1364563215], [43.1137513254, -95.1388925332], [43.1137513254, -95.1413287448], [43.1137513254, -95.1437649564], [43.1137513254, -95.1462011681], [43.1158303275, -95.1462011681]]}, {"id": "103", "tags": {"landuse": "farmland", "name": "Field 62"}, "coords": [[43.1734303851, -95.136332969], [43.1734303851, -95.1338967574], [43.1734303851, -95.1314605458], [43.1734303851, -95.1290243342], [43.1734303851, -95.1265881225], [43.166320378, -95.1265881225], [43.166320378, -95.1290243342], [43.166320378, -95.1314605458], [43.166320378, -95.1338967574], [43.166320378, -95.136332969], [43.1734303851, -95.136332969]]}, {"id": "104", "tags": {"landuse": "farmland", "name": "Field 63"}, "coords": [[43.1662303779, -95.136332969], [43.1662303779, -95.1338967574], [43.1662303779, -95.1314605458], [43.1662303779, -95.1290243342], [43.1662303779, -95.1265881225], [43.1591203708, -95.1265881225], [43.1591203708, -95.1290243342], [43.1591203708, -95.1314605458], [43.1591203708, -95.1338967574], [43.1591203708, -95.136332969], [43.1662303779, -95.136332969]]}, {"id": "105", "tags": {"landuse": "farmland", "name": "Field 64"}, "coords": [[43.1590303707, -95.136332969], [43.1590303707, -95.1338967574], [43.1590303707, -95.1314605458], [43.1590303707, -95.1290243342], [43.1590303707, -95.1265881225], [43.1519203636, -95.1265881225], [43.1519203636, -95.1290243342], [43.1519203636, -95.1314605458], [43.1519203636, -95.1338967574], [43.1519203636, -95.136332969], [43.1590303707, -95.136332969]]}, {"id": "106", "tags": {"landuse": "farmland", "name": "Field 65"}, "coords": [[43.1518303635, -95.136332969], [43.1518303635, -95.1338967574], [43.1518303635, -95.1314605458], [43.1518303635, -95.1290243342], [43.1518303635, -95.1265881225], [43.1447203564, -95.1265881225], [43.1447203564, -95.1290243342], [43.1447203564, -95.1314605458], [43.1447203564, -95.1338967574], [43.1447203564, -95.136332969], [43.1518303635, -95.136332969]]}, {"id": "107", "tags": {"natural": "wood", "landuse": "farmyard", "leaf_type": "broadleave", "name": "Random Forest 9"}, "coords": [[43.1446303563, -95.136332969], [43.1446303563, -95.1324322303], [43.1417843104, -95.1324322303], [43.1417843104, -95.136332969], [43.1446303563, -95.136332969]]}, {"id": "108", "tags": {"landuse": "farmland", "name": "Field 66"}, "coords": [[43.1446303563, -95.1323088778], [43.1446303563, -95.130878689], [43.1446303563, -95.1294485002], [43.1446303563, -95.1280183114], [43.1446303563, -95.1265881225], [43.1417843104, -95.1265881225], [43.1417843104, -95.1280183114], [43.1417843104, -95.1294485002], [43.1417843104, -95.130878689], [43.1417843104, -95.1323088778], [43.1446303563, -95.1323088778]]}, {"id": "109", "tags": {"landuse": "farmland", "name": "Field 67"}, "coords": [[43.1416943104, -95.136332969], [43.1416943104, -95.1338967574], [43.1416943104, -95.1314605458], [43.1416943104, -95.1290243342], [43.1416943104, -95.1265881225], [43.1375203492, -95.1265881225], [43.1375203492, -95.1290243342], [43.1375203492, -95.1314605458], [43.1375203492, -95.1338967574], [43.1375203492, -95.136332969], [43.1416943104, -95.136332969]]}, {"id": "110", "tags": {"landuse": "farmland", "name": "Field 68"}, "coords": [[43.1374303491, -95.136332969], [43.1374303491, -95.1338967574], [43.1374303491, -95.1314605458], [43.1374303491, -95.1290243342], [43.1374303491, -95.1265881225], [43.130320342, -95.1265881225], [43.130320342, -95.1290243342], [43.130320342, -95.1314605458], [43.130320342, -95.1338967574], [43.130320342, -95.136332969], [43.1374303491, -95.136332969]]}, {"id": "111", "tags": {"landuse": "farmland", "name": "Field 69"}, "coords": [[43.1302303419, -95.136332969], [43.1302303419, -95.1338967574], [43.1302303419, -95.1314605458], [43.1302303419, -95.1290243342], [43.1302303419, -95.1265881225], [43.1231203348, -95.1265881225], [43.1231203348, -95.1290243342], [43.1231203348, -95.1314605458], [43.1231203348, -95.1338967574], [43.1231203348, -95.136332969], [43.1302303419, -95.136332969]]}, {"id": "112", "tags": {"natural": "wood", "landuse": "farmyard", "leaf_type": "broadleave", "name": "Random Forest 10"}, "coords": [[43.1230303347, -95.136332969], [43.1230303347, -95.1324322303], [43.1201842888, -95.1324322303], [43.1201842888, -95.136332969], [43.1230303347, -95.136332969]]}, {"id": "113", "tags": {"landuse": "farmland", "name": "Field 70"}, "coords": [[43.1230303347, -95.1323088778], [43.1230303347, -95.130878689], [43.1230303347, -95.1294485002], [43.1230303347, -95.1280183114], [43.1230303347, -95.1265881225], [43.1201842888, -95.1265881225], [43.1201842888, -95.1280183114], [43.1201842888, -95.1294485002], [43.1201842888, -95.130878689], [43.1201842888, -95.1323088778], [43.1230303347, -95.1323088778]]}, {"id": "114", "tags": {"landuse": "farmland", "name": "Field 71"}, "coords": [[43.1734303851, -95.12646477], [43.1734303851, -95.1240285584], [43.1734303851, -95.1215923468], [43.1734303851, -95.1191561351], [43.1734303851, -95.1167199235], [43.166320378, -95.1167199235], [43.166320378, -95.1191561351], [43.166320378, -95.1215923468], [43.166320378, -95.1240285584], [43.166320378, -95.12646477], [43.1734303851, -95.12646477]]}, {"id": "115", "tags": {"landuse": "farmland", "name": "Field 72"}, "coords": [[43.1662303779, -95.12646477], [43.1662303779, -95.1240285584], [43.1662303779, -95.1215923468], [43.1662303779, -95.1191561351], [43.1662303779, -95.1167199235], [43.1591203708, -95.1167199235], [43.1591203708, -95.1191561351], [43.1591203708, -95.1215923468], [43.1591203708, -95.1240285584], [43.1591203708, -95.12646477], [43.1662303779, -95.12646477]]}, {"id": "116", "tags": {"landuse": "farmland", "name": "Field 73"}, "coords": [[43.1590303707, -95.12646477], [43.1590303707, -95.1240285584], [43.1590303707, -95.1215923468], [43.1590303707, -95.1191561351], [43.1590303707, -95.1167199235], [43.1519203636, -95.1167199235], [43.1519203636, -95.1191561351], [43.1519203636, -95.1215923468], [43.1519203636, -95.1240285584], [43.1519203636, -95.12646477], [43.1590303707, -95.12646477]]}, {"id": "117", "tags": {"landuse": "farmland", "name": "Field 74"}, "coords": [[43.1518303635, -95.12646477], [43.1518303635, -95.1240285584], [43.1518303635, -95.1215923468], [43.1518303635, -95.1191561351], [43.1518303635, -95.1167199235], [43.1447203564, -95.1167199235], [43.1447203564, -95.1191561351], [43.1447203564, -95.1215923468], [43.1447203564, -95.1240285584], [43.1447203564, -95.12646477], [43.1518303635, -95.12646477]]}, {"id": "118", "tags": {"landuse": "farmland", "name": "Field 75"}, "coords": [[43.1446303563, -95.12646477], [43.1446303563, -95.1240285584], [43.1446303563, -95.1215923468], [43.1446303563, -95.1191561351], [43.1446303563, -95.1167199235], [43.1375203492, -95.1167199235], [43.1375203492, -95.1191561351], [43.1375203492, -95.1215923468], [43.1375203492, -95.1240285584], [43.1375203492, -95.12646477], [43.1446303563, -95.12646477]]}, {"id": "119", "tags": {"landuse": "farmland", "name": "Field 76"}, "coords": [[43.1374303491, -95.12646477], [43.1374303491, -95.1240285584], [43.1374303491, -95.1215923468], [43.1374303491, -95.1191561351], [43.1374303491, -95.1167199235], [43.130320342, -95.1167199235], [43.130320342, -95.1191561351], [43.130320342, -95.1215923468], [43.130320342, -95.1240285584], [43.130320342, -95.12646477], [43.1374303491, -95.12646477]]}, {"id": "120", "tags": {"landuse": "farmland", "name": "Field 77"}, "coords": [[43.1302303419, -95.12646477], [43.1302303419, -95.1240285584], [43.1302303419, -95.1215923468], [43.1302303419, -95.1191561351], [43.1302303419, -95.1167199235], [43.1231203348, -95.1167199235], [43.1231203348, -95.1191561351], [43.1231203348, -95.1215923468], [43.1231203348, -95.1240285584], [43.1231203348, -95.12646477], [43.1302303419, -95.12646477]]}, {"id": "121", "tags": {"landuse": "farmland", "name": "Field 78"}, "coords": [[43.1734303851, -95.116596571], [43.1734303851, -95.1144594892], [43.1734303851, -95.1123224073], [43.1734303851, -95.1101853255], [43.1734303851, -95.1080482436], [43.166320378, -95.1080482436], [43.166320378, -95.1101853255], [43.166320378, -95.1123224073], [43.166320378, -95.1144594892], [43.166320378, -95.116596571], [43.1734303851, -95.116596571]]}, {"id": "122", "tags": {"landuse": "farmland", "name": "Field 79"}, "coords": [[43.1662303779, -95.116596571], [43.1662303779, -95.1144594892], [43.1662303779, -95.1123224073], [43.1662303779, -95.1101853255], [43.1662303779, -95.1080482436], [43.1591203708, -95.1080482436], [43.1591203708, -95.1101853255], [43.1591203708, -95.1123224073], [43.1591203708, -95.1144594892], [43.1591203708, -95.116596571], [43.1662303779, -95.116596571]]}, {"id": "123", "tags": {"landuse": "farmland", "name": "Field 80"}, "coords": [[43.1590303707, -95.116596571], [43.1590303707, -95.1144594892], [43.1590303707, -95.1123224073], [43.1590303707, -95.1101853255], [43.1590303707, -95.1080482436], [43.1519203636, -95.1080482436], [43.1519203636, -95.1101853255], [43.1519203636, -95.1123224073], [43.1519203636, -95.1144594892], [43.1519203636, -95.116596571], [43.1590303707, -95.116596571]]}, {"id": "124", "tags": {"landuse": "farmland", "name": "Field 81"}, "coords": [[43.1518303635, -95.116596571], [43.1518303635, -95.1144594892], [43.1518303635, -95.1123224073], [43.1518303635, -95.1101853255], [43.1518303635, -95.1080482436], [43.1447203564, -95.1080482436], [43.1447203564, -95.1101853255], [43.1447203564, -95.1123224073], [43.1447203564, -95.1144594892], [43.1447203564, -95.116596571], [43.1518303635, -95.116596571]]}, {"id": "125", "tags": {"landuse": "farmland", "name": "Field 82"}, "coords": [[43.1446303563, -95.116596571], [43.1446303563, -95.1144594892], [43.1446303563, -95.1123224073], [43.1446303563, -95.1101853255], [43.1446303563, -95.1080482436], [43.1375203492, -95.1080482436], [43.1375203492, -95.1101853255], [43.1375203492, -95.1123224073], [43.1375203492, -95.1144594892], [43.1375203492, -95.116596571], [43.1446303563, -95.116596571]]}, {"id": "126", "tags": {"landuse": "farmland", "name": "Field 83"}, "coords": [[43.1374303491, -95.116596571], [43.1374303491, -95.1144594892], [43.1374303491, -95.1123224073], [43.1374303491, -95.1101853255], [43.1374303491, -95.1080482436], [43.1313031419, -95.1080482436], [43.130320342, -95.1101853255], [43.130320342, -95.1123224073], [43.130320342, -95.1144594892], [43.130320342, -95.116596571], [43.1374303491, -95.116596571]]}, {"id": "127", "tags": {"highway": "tertiary"}, "coords": [[43.1824213941, -95.1954188106], [43.1824213941, -95.0947385102]]}, {"id": "128", "tags": {"highway": "tertiary"}, "coords": [[43.1807563924, -95.1956038394], [43.1807563924, -95.0945534815]]}, {"id": "129", "tags": {"highway": "tertiary"}, "coords": [[43.1790463907, -95.1956038394], [43.1790463907, -95.0945534815]]}, {"id": "130", "tags": {"highway": "tertiary"}, "coords": [[43.177336389, -95.1956038394], [43.177336389, -95.0945534815]]}, {"id": "131", "tags": {"highway": "tertiary"}, "coords": [[43.1756263873, -95.1956038394], [43.1756263873, -95.0945534815]]}, {"id": "132", "tags": {"highway": "tertiary"}, "coords": [[43.1824213941, -95.1954188106], [43.1734753851, -95.1954188106]]}, {"id": "133", "tags": {"highway": "tertiary"}, "coords": [[43.1824213941, -95.0947385102], [43.1734753851, -95.0947385102]]}, {"id": "134", "tags": {"landuse": "farmland", "name": "Field N1_1 (5.0 ha)"}, "coords": [[43.1824213941, -95.1954188106], [43.1824213941, -95.1919923527], [43.1808013925, -95.1919923527], [43.1808013925, -95.1954188106], [43.1824213941, -95.1954188106]]}, {"id": "135", "tags": {"landuse": "farmland", "name": "Field N1_2 (5.0 ha)"}, "coords": [[43.1824213941, -95.1918690002], [43.1824213941, -95.1884425422], [43.1808013925, -95.1884425422], [43.1808013925, -95.1918690002], [43.1824213941, -95.1918690002]]}, {"id": "136", "tags": {"landuse": "farmland", "name": "Field N1_3 (5.0 ha)"}, "coords": [[43.1824213941, -95.1883191897], [43.1824213941, -95.1848927317], [43.1808013925, -95.1848927317], [43.1808013925, -95.1883191897], [43.1824213941, -95.1883191897]]}, {"id": "137", "tags": {"landuse": "farmland", "name": "Field N1_4 (5.0 ha)"}, "coords": [[43.1824213941, -95.1847693792], [43.1824213941, -95.1813429212], [43.1808013925, -95.1813429212], [43.1808013925, -95.1847693792], [43.1824213941, -95.1847693792]]}, {"id": "138", "tags": {"landuse": "farmland", "name": "Field N1_5 (20.0 ha)"}, "coords": [[43.1824213941, -95.1812195687], [43.1824213941, -95.1675137368], [43.1808013925, -95.1675137368], [43.1808013925, -95.1812195687], [43.1824213941, -95.1812195687]]}, {"id": "139", "tags": {"landuse": "farmland", "name": "Field N1_6 (20.0 ha)"}, "coords": [[43.1824213941, -95.1673903843], [43.1824213941, -95.1536845523], [43.1808013925, -95.1536845523], [43.1808013925, -95.1673903843], [43.1824213941, -95.1673903843]]}, {"id": "140", "tags": {"landuse": "farmland", "name": "Field N1_7 (10.0 ha)"}, "coords": [[43.1824213941, -95.1535611998], [43.1824213941, -95.1467082838], [43.1808013925, -95.1467082838], [43.1808013925, -95.1535611998], [43.1824213941, -95.1535611998]]}, {"id": "141", "tags": {"landuse": "farmland", "name": "Field N1_8 (20.0 ha)"}, "coords": [[43.1824213941, -95.1465849314], [43.1824213941, -95.1328790994], [43.1808013925, -95.1328790994], [43.1808013925, -95.1465849314], [43.1824213941, -95.1465849314]]}, {"id": "142", "tags": {"landuse": "farmland", "name": "Field N1_9 (20.0 ha)"}, "coords": [[43.1824213941, -95.1327557469], [43.1824213941, -95.1190499149], [43.1808013925, -95.1190499149], [43.1808013925, -95.1327557469], [43.1824213941, -95.1327557469]]}, {"id": "143", "tags": {"landuse": "farmland", "name": "Field N1_10 (10.0 ha)"}, "coords": [[43.1824213941, -95.1189265625], [43.1824213941, -95.1120736465], [43.1808013925, -95.1120736465], [43.1808013925, -95.1189265625], [43.1824213941, -95.1189265625]]}, {"id": "144", "tags": {"landuse": "farmland", "name": "Field N1_11 (5.0 ha)"}, "coords": [[43.1824213941, -95.111950294], [43.1824213941, -95.108523836], [43.1808013925, -95.108523836], [43.1808013925, -95.111950294], [43.1824213941, -95.111950294]]}, {"id": "145", "tags": {"landuse": "farmland", "name": "Field N1_12 (10.0 ha)"}, "coords": [[43.1824213941, -95.1084004835], [43.1824213941, -95.1015475675], [43.1808013925, -95.1015475675], [43.1808013925, -95.1084004835], [43.1824213941, -95.1084004835]]}, {"id": "146", "tags": {"landuse": "farmland", "name": "Field N1_13 (9.8 ha)"}, "coords": [[43.1824213941, -95.101424215], [43.1824213941, -95.0947385102], [43.1808013925, -95.0947385102], [43.1808013925, -95.101424215], [43.1824213941, -95.101424215]]}, {"id": "147", "tags": {"highway": "tertiary"}, "coords": [[43.1824213941, -95.1919306764], [43.1807563924, -95.1919306764]]}, {"id": "148", "tags": {"highway": "tertiary"}, "coords": [[43.1824213941, -95.1883808659], [43.1807563924, -95.1883808659]]}, {"id": "149", "tags": {"highway": "tertiary"}, "coords": [[43.1824213941, -95.1848310555], [43.1807563924, -95.1848310555]]}, {"id": "150", "tags": {"highway": "tertiary"}, "coords": [[43.1824213941, -95.181281245], [43.1807563924, -95.181281245]]}, {"id": "151", "tags": {"highway": "tertiary"}, "coords": [[43.1824213941, -95.1674520605], [43.1807563924, -95.1674520605]]}, {"id": "152", "tags": {"highway": "tertiary"}, "coords": [[43.1824213941, -95.1536228761], [43.1807563924, -95.1536228761]]}, {"id": "153", "tags": {"highway": "tertiary"}, "coords": [[43.1824213941, -95.1466466076], [43.1807563924, -95.1466466076]]}, {"id": "154", "tags": {"highway": "tertiary"}, "coords": [[43.1824213941, -95.1328174231], [43.1807563924, -95.1328174231]]}, {"id": "155", "tags": {"highway": "tertiary"}, "coords": [[43.1824213941, -95.1189882387], [43.1807563924, -95.1189882387]]}, {"id": "156", "tags": {"highway": "tertiary"}, "coords": [[43.1824213941, -95.1120119702], [43.1807563924, -95.1120119702]]}, {"id": "157", "tags": {"highway": "tertiary"}, "coords": [[43.1824213941, -95.1084621597], [43.1807563924, -95.1084621597]]}, {"id": "158", "tags": {"highway": "tertiary"}, "coords": [[43.1824213941, -95.1014858913], [43.1807563924, -95.1014858913]]}, {"id": "159", "tags": {"landuse": "farmland", "name": "Field N2_1 (5.0 ha)"}, "coords": [[43.1807113924, -95.1954188106], [43.1807113924, -95.1919923527], [43.1790913908, -95.1919923527], [43.1790913908, -95.1954188106], [43.1807113924, -95.1954188106]]}, {"id": "160", "tags": {"landuse": "farmland", "name": "Field N2_2 (5.0 ha)"}, "coords": [[43.1807113924, -95.1918690002], [43.1807113924, -95.1884425422], [43.1790913908, -95.1884425422], [43.1790913908, -95.1918690002], [43.1807113924, -95.1918690002]]}, {"id": "161", "tags": {"landuse": "farmland", "name": "Field N2_3 (10.0 ha)"}, "coords": [[43.1807113924, -95.1883191897], [43.1807113924, -95.1814662737], [43.1790913908, -95.1814662737], [43.1790913908, -95.1883191897], [43.1807113924, -95.1883191897]]}, {"id": "162", "tags": {"landuse": "farmland", "name": "Field N2_4 (20.0 ha)"}, "coords": [[43.1807113924, -95.1813429212], [43.1807113924, -95.1676370893], [43.1790913908, -95.1676370893], [43.1790913908, -95.1813429212], [43.1807113924, -95.1813429212]]}, {"id": "163", "tags": {"landuse": "farmland", "name": "Field N2_5 (10.0 ha)"}, "coords": [[43.1807113924, -95.1675137368], [43.1807113924, -95.1606608208], [43.1790913908, -95.1606608208], [43.1790913908, -95.1675137368], [43.1807113924, -95.1675137368]]}, {"id": "164", "tags": {"landuse": "farmland", "name": "Field N2_6 (5.0 ha)"}, "coords": [[43.1807113924, -95.1605374683], [43.1807113924, -95.1571110103], [43.1790913908, -95.1571110103], [43.1790913908, -95.1605374683], [43.1807113924, -95.1605374683]]}, {"id": "165", "tags": {"landuse": "farmland", "name": "Field N2_7 (5.0 ha)"}, "coords": [[43.1807113924, -95.1569876578], [43.1807113924, -95.1535611998], [43.1790913908, -95.1535611998], [43.1790913908, -95.1569876578], [43.1807113924, -95.1569876578]]}, {"id": "166", "tags": {"landuse": "farmland", "name": "Field N2_8 (10.0 ha)"}, "coords": [[43.1807113924, -95.1534378473], [43.1807113924, -95.1465849314], [43.1790913908, -95.1465849314], [43.1790913908, -95.1534378473], [43.1807113924, -95.1534378473]]}, {"id": "167", "tags": {"landuse": "farmland", "name": "Field N2_9 (5.0 ha)"}, "coords": [[43.1807113924, -95.1464615789], [43.1807113924, -95.1430351209], [43.1790913908, -95.1430351209], [43.1790913908, -95.1464615789], [43.1807113924, -95.1464615789]]}, {"id": "168", "tags": {"landuse": "farmland", "name": "Field N2_10 (20.0 ha)"}, "coords": [[43.1807113924, -95.1429117684], [43.1807113924, -95.1292059364], [43.1790913908, -95.1292059364], [43.1790913908, -95.1429117684], [43.1807113924, -95.1429117684]]}, {"id": "169", "tags": {"landuse": "farmland", "name": "Field N2_11 (5.0 ha)"}, "coords": [[43.1807113924, -95.1290825839], [43.1807113924, -95.1256561259], [43.1790913908, -95.1256561259], [43.1790913908, -95.1290825839], [43.1807113924, -95.1290825839]]}, {"id": "170", "tags": {"landuse": "farmland", "name": "Field N2_12 (5.0 ha)"}, "coords": [[43.1807113924, -95.1255327735], [43.1807113924, -95.1221063155], [43.1790913908, -95.1221063155], [43.1790913908, -95.1255327735], [43.1807113924, -95.1255327735]]}, {"id": "171", "tags": {"landuse": "farmland", "name": "Field N2_13 (5.0 ha)"}, "coords": [[43.1807113924, -95.121982963], [43.1807113924, -95.118556505], [43.1790913908, -95.118556505], [43.1790913908, -95.121982963], [43.1807113924, -95.121982963]]}, {"id": "172", "tags": {"landuse": "farmland", "name": "Field N2_14 (10.0 ha)"}, "coords": [[43.1807113924, -95.1184331525], [43.1807113924, -95.1115802365], [43.1790913908, -95.1115802365], [43.1790913908, -95.1184331525], [43.1807113924, -95.1184331525]]}, {"id": "173", "tags": {"landuse": "farmland", "name": "Field N2_15 (10.0 ha)"}, "coords": [[43.1807113924, -95.111456884], [43.1807113924, -95.1046039681], [43.1790913908, -95.1046039681], [43.1790913908, -95.111456884], [43.1807113924, -95.111456884]]}, {"id": "174", "tags": {"landuse": "farmland", "name": "Field N2_16 (5.0 ha)"}, "coords": [[43.1807113924, -95.1044806156], [43.1807113924, -95.1010541576], [43.1790913908, -95.1010541576], [43.1790913908, -95.1044806156], [43.1807113924, -95.1044806156]]}, {"id": "175", "tags": {"landuse": "farmland", "name": "Field N2_17 (9.0 ha)"}, "coords": [[43.1807113924, -95.1009308051], [43.1807113924, -95.0947385102], [43.1790913908, -95.0947385102], [43.1790913908, -95.1009308051], [43.1807113924, -95.1009308051]]}, {"id": "176", "tags": {"highway": "tertiary"}, "coords": [[43.1807563924, -95.1919306764], [43.1790463907, -95.1919306764]]}, {"id": "177", "tags": {"highway": "tertiary"}, "coords": [[43.1807563924, -95.1883808659], [43.1790463907, -95.1883808659]]}, {"id": "178", "tags": {"highway": "tertiary"}, "coords": [[43.1807563924, -95.1814045975], [43.1790463907, -95.1814045975]]}, {"id": "179", "tags": {"highway": "tertiary"}, "coords": [[43.1807563924, -95.167575413], [43.1790463907, -95.167575413]]}, {"id": "180", "tags": {"highway": "tertiary"}, "coords": [[43.1807563924, -95.1605991445], [43.1790463907, -95.1605991445]]}, {"id": "181", "tags": {"highway": "tertiary"}, "coords": [[43.1807563924, -95.1570493341], [43.1790463907, -95.1570493341]]}, {"id": "182", "tags": {"highway": "tertiary"}, "coords": [[43.1807563924, -95.1534995236], [43.1790463907, -95.1534995236]]}, {"id": "183", "tags": {"highway": "tertiary"}, "coords": [[43.1807563924, -95.1465232551], [43.1790463907, -95.1465232551]]}, {"id": "184", "tags": {"highway": "tertiary"}, "coords": [[43.1807563924, -95.1429734446], [43.1790463907, -95.1429734446]]}, {"id": "185", "tags": {"highway": "tertiary"}, "coords": [[43.1807563924, -95.1291442602], [43.1790463907, -95.1291442602]]}, {"id": "186", "tags": {"highway": "tertiary"}, "coords": [[43.1807563924, -95.1255944497], [43.1790463907, -95.1255944497]]}, {"id": "187", "tags": {"highway": "tertiary"}, "coords": [[43.1807563924, -95.1220446392], [43.1790463907, -95.1220446392]]}, {"id": "188", "tags": {"highway": "tertiary"}, "coords": [[43.1807563924, -95.1184948287], [43.1790463907, -95.1184948287]]}, {"id": "189", "tags": {"highway": "tertiary"}, "coords": [[43.1807563924, -95.1115185603], [43.1790463907, -95.1115185603]]}, {"id": "190", "tags": {"highway": "tertiary"}, "coords": [[43.1807563924, -95.1045422918], [43.1790463907, -95.1045422918]]}, {"id": "191", "tags": {"highway": "tertiary"}, "coords": [[43.1807563924, -95.1009924813], [43.1790463907, -95.1009924813]]}, {"id": "192", "tags": {"landuse": "farmland", "name": "Field N3_1 (5.0 ha)"}, "coords": [[43.1790013907, -95.1954188106], [43.1790013907, -95.1919923527], [43.177381389, -95.1919923527], [43.177381389, -95.1954188106], [43.1790013907, -95.1954188106]]}, {"id": "193", "tags": {"landuse": "farmland", "name": "Field N3_2 (20.0 ha)"}, "coords": [[43.1790013907, -95.1918690002], [43.1790013907, -95.1781631682], [43.177381389, -95.1781631682], [43.177381389, -95.1918690002], [43.1790013907, -95.1918690002]]}, {"id": "194", "tags": {"landuse": "farmland", "name": "Field N3_3 (20.0 ha)"}, "coords": [[43.1790013907, -95.1780398157], [43.1790013907, -95.1643339838], [43.177381389, -95.1643339838], [43.177381389, -95.1780398157], [43.1790013907, -95.1780398157]]}, {"id": "195", "tags": {"landuse": "farmland", "name": "Field N3_4 (10.0 ha)"}, "coords": [[43.1790013907, -95.1642106313], [43.1790013907, -95.1573577153], [43.177381389, -95.1573577153], [43.177381389, -95.1642106313], [43.1790013907, -95.1642106313]]}, {"id": "196", "tags": {"landuse": "farmland", "name": "Field N3_5 (10.0 ha)"}, "coords": [[43.1790013907, -95.1572343628], [43.1790013907, -95.1503814468], [43.177381389, -95.1503814468], [43.177381389, -95.1572343628], [43.1790013907, -95.1572343628]]}, {"id": "197", "tags": {"landuse": "farmland", "name": "Field N3_6 (20.0 ha)"}, "coords": [[43.1790013907, -95.1502580943], [43.1790013907, -95.1365522624], [43.177381389, -95.1365522624], [43.177381389, -95.1502580943], [43.1790013907, -95.1502580943]]}, {"id": "198", "tags": {"landuse": "farmland", "name": "Field N3_7 (5.0 ha)"}, "coords": [[43.1790013907, -95.1364289099], [43.1790013907, -95.1330024519], [43.177381389, -95.1330024519], [43.177381389, -95.1364289099], [43.1790013907, -95.1364289099]]}, {"id": "199", "tags": {"landuse": "farmland", "name": "Field N3_8 (20.0 ha)"}, "coords": [[43.1790013907, -95.1328790994], [43.1790013907, -95.1191732674], [43.177381389, -95.1191732674], [43.177381389, -95.1328790994], [43.1790013907, -95.1328790994]]}, {"id": "200", "tags": {"landuse": "farmland", "name": "Field N3_9 (5.0 ha)"}, "coords": [[43.1790013907, -95.1190499149], [43.1790013907, -95.1156234569], [43.177381389, -95.1156234569], [43.177381389, -95.1190499149], [43.1790013907, -95.1190499149]]}, {"id": "201", "tags": {"landuse": "farmland", "name": "Field N3_10 (5.0 ha)"}, "coords": [[43.1790013907, -95.1155001045], [43.1790013907, -95.1120736465], [43.177381389, -95.1120736465], [43.177381389, -95.1155001045], [43.1790013907, -95.1155001045]]}, {"id": "202", "tags": {"landuse": "farmland", "name": "Field N3_11 (10.0 ha)"}, "coords": [[43.1790013907, -95.111950294], [43.1790013907, -95.105097378], [43.177381389, -95.105097378], [43.177381389, -95.111950294], [43.1790013907, -95.111950294]]}, {"id": "203", "tags": {"landuse": "farmland", "name": "Field N3_12 (14.9 ha)"}, "coords": [[43.1790013907, -95.1049740255], [43.1790013907, -95.0947385102], [43.177381389, -95.0947385102], [43.177381389, -95.1049740255], [43.1790013907, -95.1049740255]]}, {"id": "204", "tags": {"highway": "tertiary"}, "coords": [[43.1790463907, -95.1919306764], [43.177336389, -95.1919306764]]}, {"id": "205", "tags": {"highway": "tertiary"}, "coords": [[43.1790463907, -95.178101492], [43.177336389, -95.178101492]]}, {"id": "206", "tags": {"highway": "tertiary"}, "coords": [[43.1790463907, -95.1642723075], [43.177336389, -95.1642723075]]}, {"id": "207", "tags": {"highway": "tertiary"}, "coords": [[43.1790463907, -95.157296039], [43.177336389, -95.157296039]]}, {"id": "208", "tags": {"highway": "tertiary"}, "coords": [[43.1790463907, -95.1503197706], [43.177336389, -95.1503197706]]}, {"id": "209", "tags": {"highway": "tertiary"}, "coords": [[43.1790463907, -95.1364905861], [43.177336389, -95.1364905861]]}, {"id": "210", "tags": {"highway": "tertiary"}, "coords": [[43.1790463907, -95.1329407756], [43.177336389, -95.1329407756]]}, {"id": "211", "tags": {"highway": "tertiary"}, "coords": [[43.1790463907, -95.1191115912], [43.177336389, -95.1191115912]]}, {"id": "212", "tags": {"highway": "tertiary"}, "coords": [[43.1790463907, -95.1155617807], [43.177336389, -95.1155617807]]}, {"id": "213", "tags": {"highway": "tertiary"}, "coords": [[43.1790463907, -95.1120119702], [43.177336389, -95.1120119702]]}, {"id": "214", "tags": {"highway": "tertiary"}, "coords": [[43.1790463907, -95.1050357018], [43.177336389, -95.1050357018]]}, {"id": "215", "tags": {"landuse": "farmland", "name": "Field N4_1 (10.0 ha)"}, "coords": [[43.177291389, -95.1954188106], [43.177291389, -95.1885658947], [43.1756713873, -95.1885658947], [43.1756713873, -95.1954188106], [43.177291389, -95.1954188106]]}, {"id": "216", "tags": {"landuse": "farmland", "name": "Field N4_2 (20.0 ha)"}, "coords": [[43.177291389, -95.1884425422], [43.177291389, -95.1747367102], [43.1756713873, -95.1747367102], [43.1756713873, -95.1884425422], [43.177291389, -95.1884425422]]}, {"id": "217", "tags": {"landuse": "farmland", "name": "Field N4_3 (5.0 ha)"}, "coords": [[43.177291389, -95.1746133577], [43.177291389, -95.1711868997], [43.1756713873, -95.1711868997], [43.1756713873, -95.1746133577], [43.177291389, -95.1746133577]]}, {"id": "218", "tags": {"landuse": "farmland", "name": "Field N4_4 (10.0 ha)"}, "coords": [[43.177291389, -95.1710635472], [43.177291389, -95.1642106313], [43.1756713873, -95.1642106313], [43.1756713873, -95.1710635472], [43.177291389, -95.1710635472]]}, {"id": "219", "tags": {"landuse": "farmland", "name": "Field N4_5 (20.0 ha)"}, "coords": [[43.177291389, -95.1640872788], [43.177291389, -95.1503814468], [43.1756713873, -95.1503814468], [43.1756713873, -95.1640872788], [43.177291389, -95.1640872788]]}, {"id": "220", "tags": {"landuse": "farmland", "name": "Field N4_6 (5.0 ha)"}, "coords": [[43.177291389, -95.1502580943], [43.177291389, -95.1468316363], [43.1756713873, -95.1468316363], [43.1756713873, -95.1502580943], [43.177291389, -95.1502580943]]}, {"id": "221", "tags": {"landuse": "farmland", "name": "Field N4_7 (10.0 ha)"}, "coords": [[43.177291389, -95.1467082838], [43.177291389, -95.1398553679], [43.1756713873, -95.1398553679], [43.1756713873, -95.1467082838], [43.177291389, -95.1467082838]]}, {"id": "222", "tags": {"landuse": "farmland", "name": "Field N4_8 (10.0 ha)"}, "coords": [[43.177291389, -95.1397320154], [43.177291389, -95.1328790994], [43.1756713873, -95.1328790994], [43.1756713873, -95.1397320154], [43.177291389, -95.1397320154]]}, {"id": "223", "tags": {"landuse": "farmland", "name": "Field N4_9 (20.0 ha)"}, "coords": [[43.177291389, -95.1327557469], [43.177291389, -95.1190499149], [43.1756713873, -95.1190499149], [43.1756713873, -95.1327557469], [43.177291389, -95.1327557469]]}, {"id": "224", "tags": {"landuse": "farmland", "name": "Field N4_10 (5.0 ha)"}, "coords": [[43.177291389, -95.1189265625], [43.177291389, -95.1155001045], [43.1756713873, -95.1155001045], [43.1756713873, -95.1189265625], [43.177291389, -95.1189265625]]}, {"id": "225", "tags": {"landuse": "farmland", "name": "Field N4_11 (20.0 ha)"}, "coords": [[43.177291389, -95.115376752], [43.177291389, -95.10167092], [43.1756713873, -95.10167092], [43.1756713873, -95.115376752], [43.177291389, -95.115376752]]}, {"id": "226", "tags": {"landuse": "farmland", "name": "Field N4_12 (9.9 ha)"}, "coords": [[43.177291389, -95.1015475675], [43.177291389, -95.0947385102], [43.1756713873, -95.0947385102], [43.1756713873, -95.1015475675], [43.177291389, -95.1015475675]]}, {"id": "227", "tags": {"highway": "tertiary"}, "coords": [[43.177336389, -95.1885042184], [43.1756263873, -95.1885042184]]}, {"id": "228", "tags": {"highway": "tertiary"}, "coords": [[43.177336389, -95.174675034], [43.1756263873, -95.174675034]]}, {"id": "229", "tags": {"highway": "tertiary"}, "coords": [[43.177336389, -95.1711252235], [43.1756263873, -95.1711252235]]}, {"id": "230", "tags": {"highway": "tertiary"}, "coords": [[43.177336389, -95.164148955], [43.1756263873, -95.164148955]]}, {"id": "231", "tags": {"highway": "tertiary"}, "coords": [[43.177336389, -95.1503197706], [43.1756263873, -95.1503197706]]}, {"id": "232", "tags": {"highway": "tertiary"}, "coords": [[43.177336389, -95.1467699601], [43.1756263873, -95.1467699601]]}, {"id": "233", "tags": {"highway": "tertiary"}, "coords": [[43.177336389, -95.1397936916], [43.1756263873, -95.1397936916]]}, {"id": "234", "tags": {"highway": "tertiary"}, "coords": [[43.177336389, -95.1328174231], [43.1756263873, -95.1328174231]]}, {"id": "235", "tags": {"highway": "tertiary"}, "coords": [[43.177336389, -95.1189882387], [43.1756263873, -95.1189882387]]}, {"id": "236", "tags": {"highway": "tertiary"}, "coords": [[43.177336389, -95.1154384282], [43.1756263873, -95.1154384282]]}, {"id": "237", "tags": {"highway": "tertiary"}, "coords": [[43.177336389, -95.1016092438], [43.1756263873, -95.1016092438]]}, {"id": "238", "tags": {"landuse": "farmyard", "name": "Yard N5_1"}, "coords": [[43.1755813872, -95.1954188106], [43.1755813872, -95.1817129787], [43.1739613856, -95.1817129787], [43.1739613856, -95.1954188106], [43.1755813872, -95.1954188106]]}, {"id": "239", "tags": {"landuse": "farmland", "name": "Field N5_2 (10.0 ha)"}, "coords": [[43.1755813872, -95.1815896262], [43.1755813872, -95.1747367102], [43.1739613856, -95.1747367102], [43.1739613856, -95.1815896262], [43.1755813872, -95.1815896262]]}, {"id": "240", "tags": {"landuse": "farmland", "name": "Field N5_3 (10.0 ha)"}, "coords": [[43.1755813872, -95.1746133577], [43.1755813872, -95.1677604417], [43.1739613856, -95.1677604417], [43.1739613856, -95.1746133577], [43.1755813872, -95.1746133577]]}, {"id": "241", "tags": {"landuse": "farmland", "name": "Field N5_4 (20.0 ha)"}, "coords": [[43.1755813872, -95.1676370893], [43.1755813872, -95.1539312573], [43.1739613856, -95.1539312573], [43.1739613856, -95.1676370893], [43.1755813872, -95.1676370893]]}, {"id": "242", "tags": {"landuse": "farmland", "name": "Field N5_5 (10.0 ha)"}, "coords": [[43.1755813872, -95.1538079048], [43.1755813872, -95.1469549888], [43.1739613856, -95.1469549888], [43.1739613856, -95.1538079048], [43.1755813872, -95.1538079048]]}, {"id": "243", "tags": {"landuse": "farmland", "name": "Field N5_6 (10.0 ha)"}, "coords": [[43.1755813872, -95.1468316363], [43.1755813872, -95.1399787203], [43.1739613856, -95.1399787203], [43.1739613856, -95.1468316363], [43.1755813872, -95.1468316363]]}, {"id": "244", "tags": {"landuse": "farmland", "name": "Field N5_7 (10.0 ha)"}, "coords": [[43.1755813872, -95.1398553679], [43.1755813872, -95.1330024519], [43.1739613856, -95.1330024519], [43.1739613856, -95.1398553679], [43.1755813872, -95.1398553679]]}, {"id": "245", "tags": {"landuse": "farmland", "name": "Field N5_8 (5.0 ha)"}, "coords": [[43.1755813872, -95.1328790994], [43.1755813872, -95.1294526414], [43.1739613856, -95.1294526414], [43.1739613856, -95.1328790994], [43.1755813872, -95.1328790994]]}, {"id": "246", "tags": {"landuse": "farmland", "name": "Field N5_9 (10.0 ha)"}, "coords": [[43.1755813872, -95.1293292889], [43.1755813872, -95.1224763729], [43.1739613856, -95.1224763729], [43.1739613856, -95.1293292889], [43.1755813872, -95.1293292889]]}, {"id": "247", "tags": {"landuse": "farmland", "name": "Field N5_10 (5.0 ha)"}, "coords": [[43.1755813872, -95.1223530204], [43.1755813872, -95.1189265625], [43.1739613856, -95.1189265625], [43.1739613856, -95.1223530204], [43.1755813872, -95.1223530204]]}, {"id": "248", "tags": {"landuse": "farmland", "name": "Field N5_11 (20.0 ha)"}, "coords": [[43.1755813872, -95.11880321], [43.1755813872, -95.105097378], [43.1739613856, -95.105097378], [43.1739613856, -95.11880321], [43.1755813872, -95.11880321]]}, {"id": "249", "tags": {"landuse": "farmyard", "name": "Yard N5_12"}, "coords": [[43.1755813872, -95.1049740255], [43.1755813872, -95.0981211095], [43.1739613856, -95.0981211095], [43.1739613856, -95.1049740255], [43.1755813872, -95.1049740255]]}, {"id": "250", "tags": {"landuse": "farmland", "name": "Field N5_13 (4.8 ha)"}, "coords": [[43.1755813872, -95.097997757], [43.1755813872, -95.0947385102], [43.1739613856, -95.0947385102], [43.1739613856, -95.097997757], [43.1755813872, -95.097997757]]}, {"id": "251", "tags": {"highway": "tertiary"}, "coords": [[43.1756263873, -95.1816513024], [43.1736103853, -95.1816513024], [43.1734753851, -95.1816513024]]}, {"id": "252", "tags": {"highway": "tertiary"}, "coords": [[43.1756263873, -95.174675034], [43.1736103853, -95.174675034], [43.1734753851, -95.174675034]]}, {"id": "253", "tags": {"highway": "tertiary"}, "coords": [[43.1756263873, -95.1676987655], [43.1736103853, -95.1676987655], [43.1734753851, -95.1676987655]]}, {"id": "254", "tags": {"highway": "tertiary"}, "coords": [[43.1756263873, -95.153869581], [43.1736103853, -95.153869581], [43.1734753851, -95.153869581]]}, {"id": "255", "tags": {"highway": "tertiary"}, "coords": [[43.1756263873, -95.1468933126], [43.1736103853, -95.1468933126], [43.1734753851, -95.1468933126]]}, {"id": "256", "tags": {"highway": "tertiary"}, "coords": [[43.1756263873, -95.1399170441], [43.1736103853, -95.1399170441], [43.1734753851, -95.1399170441]]}, {"id": "257", "tags": {"highway": "tertiary"}, "coords": [[43.1756263873, -95.1329407756], [43.1736103853, -95.1329407756], [43.1734753851, -95.1329407756]]}, {"id": "258", "tags": {"highway": "tertiary"}, "coords": [[43.1756263873, -95.1293909652], [43.1736103853, -95.1293909652], [43.1734753851, -95.1293909652]]}, {"id": "259", "tags": {"highway": "tertiary"}, "coords": [[43.1756263873, -95.1224146967], [43.1736103853, -95.1224146967], [43.1734753851, -95.1224146967]]}, {"id": "260", "tags": {"highway": "tertiary"}, "coords": [[43.1756263873, -95.1188648862], [43.1736103853, -95.1188648862], [43.1734753851, -95.1188648862]]}, {"id": "261", "tags": {"highway": "tertiary"}, "coords": [[43.1756263873, -95.1050357018], [43.1736103853, -95.1050357018], [43.1734753851, -95.1050357018]]}, {"id": "262", "tags": {"highway": "tertiary"}, "coords": [[43.1756263873, -95.0980594333], [43.1736103853, -95.0980594333], [43.1734753851, -95.0980594333]]}, {"id": "263", "tags": {"landuse": "farmland", "name": "Field E1_1 (30.0 ha)"}, "coords": [[43.1685973803, -95.1078015386], [43.1685973803, -95.103529842], [43.1608006644, -95.103529842], [43.1608006644, -95.1078015386], [43.1685973803, -95.1078015386]]}, {"id": "264", "tags": {"highway": "tertiary"}, "coords": [[43.1607556644, -95.1079865674], [43.1607556644, -95.1034681658]]}, {"id": "265", "tags": {"landuse": "farmland", "name": "Field E1_2 (30.0 ha)"}, "coords": [[43.1607106643, -95.1078015386], [43.1607106643, -95.103529842], [43.1529139485, -95.103529842], [43.1529139485, -95.1078015386], [43.1607106643, -95.1078015386]]}, {"id": "266", "tags": {"highway": "tertiary"}, "coords": [[43.1528689484, -95.1079865674], [43.1528689484, -95.1034681658]]}, {"id": "267", "tags": {"landuse": "farmland", "name": "Field E1_3 (30.0 ha)"}, "coords": [[43.1528239484, -95.1078015386], [43.1528239484, -95.103529842], [43.1450272325, -95.103529842], [43.1450272325, -95.1078015386], [43.1528239484, -95.1078015386]]}, {"id": "268", "tags": {"highway": "tertiary"}, "coords": [[43.1449822325, -95.1079865674], [43.1449822325, -95.1034681658]]}, {"id": "269", "tags": {"landuse": "farmland", "name": "Field E1_4 (45.0 ha)"}, "coords": [[43.1449372324, -95.1078015386], [43.1449372324, -95.103529842], [43.1332421587, -95.103529842], [43.1332421587, -95.1078015386], [43.1449372324, -95.1078015386]]}, {"id": "270", "tags": {"highway": "tertiary"}, "coords": [[43.1331971586, -95.1079865674], [43.1331971586, -95.1034681658]]}, {"id": "271", "tags": {"landuse": "farmland", "name": "Field E2_1 (45.0 ha)"}, "coords": [[43.1685973803, -95.1034064895], [43.1685973803, -95.0991347929], [43.1569023065, -95.0991347929], [43.1569023065, -95.1034064895], [43.1685973803, -95.1034064895]]}, {"id": "272", "tags": {"highway": "tertiary"}, "coords": [[43.1568573064, -95.1034681658], [43.1568573064, -95.0990731166]]}, {"id": "273", "tags": {"landuse": "farmland", "name": "Field E2_2 (45.0 ha)"}, "coords": [[43.1568123064, -95.1034064895], [43.1568123064, -95.0991347929], [43.1451172326, -95.0991347929], [43.1451172326, -95.1034064895], [43.1568123064, -95.1034064895]]}, {"id": "274", "tags": {"highway": "tertiary"}, "coords": [[43.1450722326, -95.1034681658], [43.1450722326, -95.0990731166]]}, {"id": "275", "tags": {"landuse": "farmland", "name": "Field E2_3 (30.0 ha)"}, "coords": [[43.1450272325, -95.1034064895], [43.1450272325, -95.0991347929], [43.1372305167, -95.0991347929], [43.1372305167, -95.1034064895], [43.1450272325, -95.1034064895]]}, {"id": "276", "tags": {"highway": "tertiary"}, "coords": [[43.1371855166, -95.1034681658], [43.1371855166, -95.0990731166]]}, {"id": "277", "tags": {"landuse": "farmland", "name": "Field E3_1 (30.0 ha)"}, "coords": [[43.1685973803, -95.0990114404], [43.1685973803, -95.0947385102], [43.1608006644, -95.0947385102], [43.1608006644, -95.0990114404], [43.1685973803, -95.0990114404]]}, {"id": "278", "tags": {"highway": "tertiary"}, "coords": [[43.1607556644, -95.0990731166], [43.1607556644, -95.0947385102]]}, {"id": "279", "tags": {"landuse": "farmland", "name": "Field E3_2 (30.0 ha)"}, "coords": [[43.1607106643, -95.0990114404], [43.1607106643, -95.0947385102], [43.1529139485, -95.0947385102], [43.1529139485, -95.0990114404], [43.1607106643, -95.0990114404]]}, {"id": "280", "tags": {"highway": "tertiary"}, "coords": [[43.1528689484, -95.0990731166], [43.1528689484, -95.0947385102]]}, {"id": "281", "tags": {"landuse": "farmland", "name": "Field E3_3 (30.0 ha)"}, "coords": [[43.1528239484, -95.0990114404], [43.1528239484, -95.0947385102], [43.1450272325, -95.0947385102], [43.1450272325, -95.0990114404], [43.1528239484, -95.0990114404]]}, {"id": "282", "tags": {"highway": "tertiary"}, "coords": [[43.1449822325, -95.0990731166], [43.1449822325, -95.0947385102]]}, {"id": "283", "tags": {"landuse": "farmland", "name": "Field E3_4 (30.0 ha)"}, "coords": [[43.1449372324, -95.0990114404], [43.1449372324, -95.0947385102], [43.1371405166, -95.0947385102], [43.1371405166, -95.0990114404], [43.1449372324, -95.0990114404]]}, {"id": "284", "tags": {"highway": "tertiary"}, "coords": [[43.1370955165, -95.0990731166], [43.1370955165, -95.0947385102]]}, {"id": "285", "tags": {"highway": "tertiary"}, "coords": [[43.1687323804, -95.1034681658], [43.1331971586, -95.1034681658]]}, {"id": "286", "tags": {"highway": "tertiary"}, "coords": [[43.1687323804, -95.0990731166], [43.1370955165, -95.0990731166]]}, {"id": "287", "tags": {"highway": "tertiary"}, "coords": [[43.1687323804, -95.0947385102], [43.1370955165, -95.0947385102]]}, {"id": "288", "tags": {"highway": "tertiary"}, "coords": [[43.1112673229, -95.188942805], [43.1112673229, -95.1711578434]]}, {"id": "289", "tags": {"highway": "tertiary"}, "coords": [[43.1089633206, -95.188942805], [43.1089633206, -95.1711578434]]}, {"id": "290", "tags": {"highway": "tertiary"}, "coords": [[43.1137063254, -95.188942805], [43.1089633206, -95.188942805]]}, {"id": "291", "tags": {"highway": "tertiary"}, "coords": [[43.1137063254, -95.1711578434], [43.1089633206, -95.1711578434]]}, {"id": "292", "tags": {"landuse": "farmland", "name": "Field S_A1_1 (10.0 ha)"}, "coords": [[43.1135713252, -95.188942805], [43.1135713252, -95.1840284419], [43.111312323, -95.1840284419], [43.111312323, -95.188942805], [43.1135713252, -95.188942805]]}, {"id": "293", "tags": {"landuse": "farmland", "name": "Field S_A1_2 (10.0 ha)"}, "coords": [[43.1135713252, -95.1839050894], [43.1135713252, -95.1789907263], [43.111312323, -95.1789907263], [43.111312323, -95.1839050894], [43.1135713252, -95.1839050894]]}, {"id": "294", "tags": {"landuse": "farmland", "name": "Field S_A1_3 (10.0 ha)"}, "coords": [[43.1135713252, -95.1788673738], [43.1135713252, -95.1739530107], [43.111312323, -95.1739530107], [43.111312323, -95.1788673738], [43.1135713252, -95.1788673738]]}, {"id": "295", "tags": {"landuse": "farmland", "name": "Field S_A1_4 (5.4 ha)"}, "coords": [[43.1135713252, -95.1738296583], [43.1135713252, -95.1711578434], [43.111312323, -95.1711578434], [43.111312323, -95.1738296583], [43.1135713252, -95.1738296583]]}, {"id": "296", "tags": {"highway": "tertiary"}, "coords": [[43.1137063254, -95.1839667657], [43.1089633206, -95.1839667657]]}, {"id": "297", "tags": {"highway": "tertiary"}, "coords": [[43.1137063254, -95.1789290501], [43.1089633206, -95.1789290501]]}, {"id": "298", "tags": {"highway": "tertiary"}, "coords": [[43.1137063254, -95.1738913345], [43.1089633206, -95.1738913345]]}, {"id": "299", "tags": {"landuse": "farmland", "name": "Field S_A2_1 (10.0 ha)"}, "coords": [[43.1112223229, -95.188942805], [43.1112223229, -95.1840284419], [43.1089633206, -95.1840284419], [43.1089633206, -95.188942805], [43.1112223229, -95.188942805]]}, {"id": "300", "tags": {"landuse": "farmland", "name": "Field S_A2_2 (10.0 ha)"}, "coords": [[43.1112223229, -95.1839050894], [43.1112223229, -95.1789907263], [43.1089633206, -95.1789907263], [43.1089633206, -95.1839050894], [43.1112223229, -95.1839050894]]}, {"id": "301", "tags": {"landuse": "farmland", "name": "Field S_A2_3 (10.0 ha)"}, "coords": [[43.1112223229, -95.1788673738], [43.1112223229, -95.1739530107], [43.1089633206, -95.1739530107], [43.1089633206, -95.1788673738], [43.1112223229, -95.1788673738]]}, {"id": "302", "tags": {"landuse": "farmland", "name": "Field S_A2_4 (5.4 ha)"}, "coords": [[43.1112223229, -95.1738296583], [43.1112223229, -95.1711578434], [43.1089633206, -95.1711578434], [43.1089633206, -95.1738296583], [43.1112223229, -95.1738296583]]}, {"id": "303", "tags": {"highway": "tertiary"}, "coords": [[43.1112673229, -95.1626021148], [43.1112673229, -95.1332738274]]}, {"id": "304", "tags": {"highway": "tertiary"}, "coords": [[43.1089633206, -95.1626021148], [43.1089633206, -95.1332738274]]}, {"id": "305", "tags": {"highway": "tertiary"}, "coords": [[43.1137063254, -95.1626021148], [43.1089633206, -95.1626021148]]}, {"id": "306", "tags": {"highway": "tertiary"}, "coords": [[43.1137063254, -95.1332738274], [43.1089633206, -95.1332738274]]}, {"id": "307", "tags": {"landuse": "farmland", "name": "Field S_B1_1 (10.0 ha)"}, "coords": [[43.1135713252, -95.1626021148], [43.1135713252, -95.1576877517], [43.111312323, -95.1576877517], [43.111312323, -95.1626021148], [43.1135713252, -95.1626021148]]}, {"id": "308", "tags": {"landuse": "farmland", "name": "Field S_B1_2 (10.0 ha)"}, "coords": [[43.1135713252, -95.1575643992], [43.1135713252, -95.1526500361], [43.111312323, -95.1526500361], [43.111312323, -95.1575643992], [43.1135713252, -95.1575643992]]}, {"id": "309", "tags": {"landuse": "farmland", "name": "Field S_B1_3 (10.0 ha)"}, "coords": [[43.1135713252, -95.1525266836], [43.1135713252, -95.1476123205], [43.111312323, -95.1476123205], [43.111312323, -95.1525266836], [43.1135713252, -95.1525266836]]}, {"id": "310", "tags": {"landuse": "farmland", "name": "Field S_B1_4 (10.0 ha)"}, "coords": [[43.1135713252, -95.147488968], [43.1135713252, -95.1425746049], [43.111312323, -95.1425746049], [43.111312323, -95.147488968], [43.1135713252, -95.147488968]]}, {"id": "311", "tags": {"landuse": "farmland", "name": "Field S_B1_5 (10.0 ha)"}, "coords": [[43.1135713252, -95.1424512524], [43.1135713252, -95.1375368893], [43.111312323, -95.1375368893], [43.111312323, -95.1424512524], [43.1135713252, -95.1424512524]]}, {"id": "312", "tags": {"landuse": "farmland", "name": "Field S_B1_6 (8.4 ha)"}, "coords": [[43.1135713252, -95.1374135368], [43.1135713252, -95.1332738274], [43.111312323, -95.1332738274], [43.111312323, -95.1374135368], [43.1135713252, -95.1374135368]]}, {"id": "313", "tags": {"highway": "tertiary"}, "coords": [[43.1137063254, -95.1576260755], [43.1089633206, -95.1576260755]]}, {"id": "314", "tags": {"highway": "tertiary"}, "coords": [[43.1137063254, -95.1525883599], [43.1089633206, -95.1525883599]]}, {"id": "315", "tags": {"highway": "tertiary"}, "coords": [[43.1137063254, -95.1475506443], [43.1089633206, -95.1475506443]]}, {"id": "316", "tags": {"highway": "tertiary"}, "coords": [[43.1137063254, -95.1425129287], [43.1089633206, -95.1425129287]]}, {"id": "317", "tags": {"highway": "tertiary"}, "coords": [[43.1137063254, -95.1374752131], [43.1089633206, -95.1374752131]]}, {"id": "318", "tags": {"landuse": "farmland", "name": "Field S_B2_1 (10.0 ha)"}, "coords": [[43.1112223229, -95.1626021148], [43.1112223229, -95.1576877517], [43.1089633206, -95.1576877517], [43.1089633206, -95.1626021148], [43.1112223229, -95.1626021148]]}, {"id": "319", "tags": {"landuse": "farmland", "name": "Field S_B2_2 (10.0 ha)"}, "coords": [[43.1112223229, -95.1575643992], [43.1112223229, -95.1526500361], [43.1089633206, -95.1526500361], [43.1089633206, -95.1575643992], [43.1112223229, -95.1575643992]]}, {"id": "320", "tags": {"landuse": "farmland", "name": "Field S_B2_3 (10.0 ha)"}, "coords": [[43.1112223229, -95.1525266836], [43.1112223229, -95.1476123205], [43.1089633206, -95.1476123205], [43.1089633206, -95.1525266836], [43.1112223229, -95.1525266836]]}, {"id": "321", "tags": {"landuse": "farmland", "name": "Field S_B2_4 (10.0 ha)"}, "coords": [[43.1112223229, -95.147488968], [43.1112223229, -95.1425746049], [43.1089633206, -95.1425746049], [43.1089633206, -95.147488968], [43.1112223229, -95.147488968]]}, {"id": "322", "tags": {"landuse": "farmland", "name": "Field S_B2_5 (10.0 ha)"}, "coords": [[43.1112223229, -95.1424512524], [43.1112223229, -95.1375368893], [43.1089633206, -95.1375368893], [43.1089633206, -95.1424512524], [43.1112223229, -95.1424512524]]}, {"id": "323", "tags": {"landuse": "farmland", "name": "Field S_B2_6 (8.4 ha)"}, "coords": [[43.1112223229, -95.1374135368], [43.1112223229, -95.1332738274], [43.1089633206, -95.1332738274], [43.1089633206, -95.1374135368], [43.1112223229, -95.1374135368]]}, {"id": "324", "tags": {"natural": "wood", "landuse": "farmyard", "leaf_type": "needleleave"}, "coords": [[43.1088283205, -95.1701013172], [43.1091163208, -95.1701227398], [43.1094043211, -95.1701535923], [43.1096923214, -95.1702395775], [43.1099500058, -95.1703412499], [43.1099803216, -95.1703533954], [43.1102683219, -95.17046356], [43.1105563222, -95.1705683537], [43.1108443225, -95.1706675583], [43.1110783227, -95.1707359779], [43.1111323228, -95.1707509675], [43.1114203231, -95.1708274392], [43.1117083234, -95.1708929179], [43.1119963237, -95.1709477831], [43.1122843239, -95.1709728146], [43.1125723242, -95.1709600126], [43.1128603245, -95.1708891559], [43.1131483248, -95.1707688719], [43.1132203249, -95.1707359779], [43.1134363251, -95.1705950036], [43.1137243254, -95.1704070379], [43.1138814165, -95.1703412499], [43.1140123257, -95.1702425679], [43.114300326, -95.1701833587], [43.1145883263, -95.1702754619], [43.1147803264, -95.1703412499], [43.1148763265, -95.1703532114], [43.1149723266, -95.1703412499], [43.1151643268, -95.1702096739], [43.1152320916, -95.1699465219], [43.1151643268, -95.1698747532], [43.1148763265, -95.169699817], [43.1146603263, -95.169551794], [43.1145883263, -95.1695202157], [43.114300326, -95.1692177934], [43.1142789926, -95.169157066], [43.1141059258, -95.1687623381], [43.1140123257, -95.1685570795], [43.1139483256, -95.1683676101], [43.113783754, -95.1679728821], [43.1137243254, -95.1678588496], [43.1135756801, -95.1675781542], [43.1134363251, -95.167362848], [43.1133100092, -95.1671834262], [43.1131483248, -95.1669829295], [43.1129829913, -95.1667886983], [43.1128603245, -95.1666490253], [43.1126443243, -95.1663939703], [43.1125723242, -95.1663138806], [43.1123208954, -95.1659992423], [43.1122843239, -95.1659582316], [43.112000438, -95.1656045144], [43.1119963237, -95.1656000792], [43.1117083234, -95.1652627377], [43.1116677079, -95.1652097864], [43.1114203231, -95.1649342992], [43.1113208944, -95.1648150585], [43.1111323228, -95.1646082962], [43.1109648808, -95.1644203305], [43.1108443225, -95.1642887545], [43.1106003693, -95.1640256025], [43.1105563222, -95.1639776449], [43.1102683219, -95.1636855893], [43.1102081428, -95.1636308746], [43.1099803216, -95.1634129518], [43.1097630583, -95.1632361466], [43.1096923214, -95.1631726272], [43.1094043211, -95.1629823929], [43.1091163208, -95.1628510462], [43.1090683207, -95.1628414186], [43.1088283205, -95.1627865953], [43.1088283205, -95.1701013172]]}, {"id": "325", "tags": {"natural": "wood", "landuse": "farmyard", "leaf_type": "needleleave"}, "coords": [[43.1088283205, -95.1282283062], [43.1091163208, -95.1281714146], [43.1094043211, -95.1281454727], [43.1096923214, -95.1281508412], [43.1099803216, -95.1281793696], [43.1102683219, -95.1282190933], [43.1105563222, -95.1282578281], [43.1108443225, -95.128295797], [43.1111323228, -95.1283397278], [43.1114203231, -95.1283973487], [43.1117083234, -95.1284758811], [43.1117751806, -95.1285000861], [43.1119963237, -95.1285858098], [43.1122843239, -95.1287303441], [43.1125723242, -95.1288926918], [43.1125761642, -95.128894814], [43.1128603245, -95.1290607792], [43.1131483248, -95.1292069245], [43.113364325, -95.129289542], [43.1134363251, -95.1293182495], [43.1137243254, -95.1293783558], [43.1140123257, -95.1293735809], [43.114300326, -95.1293107354], [43.1143565211, -95.129289542], [43.1145883263, -95.1292027018], [43.1148763265, -95.1290693536], [43.1151643268, -95.1289337309], [43.1152603269, -95.128894814], [43.1154523271, -95.1288158684], [43.1157403274, -95.128721741], [43.1160283277, -95.128645157], [43.116316328, -95.1285852235], [43.1166043283, -95.1285488727], [43.1168923286, -95.1285400585], [43.1171803288, -95.1285369274], [43.1174683291, -95.1285308441], [43.1177563294, -95.1285276252], [43.1180443297, -95.1285124213], [43.1181677584, -95.1285000861], [43.11833233, -95.1284841375], [43.1186203303, -95.1284367807], [43.1189083306, -95.1283599023], [43.1191963309, -95.1282241597], [43.119350262, -95.1281053581], [43.1194843311, -95.1279704511], [43.1196545131, -95.1277106302], [43.1197723314, -95.1274319987], [43.1198098967, -95.1273159022], [43.1198875316, -95.1269211742], [43.1199304955, -95.1265264463], [43.1199549658, -95.1261317183], [43.119975348, -95.1257369904], [43.1200013153, -95.1253422624], [43.1200440736, -95.1249475344], [43.1200603317, -95.1248584023], [43.1201100584, -95.1245528065], [43.1201962192, -95.1241580785], [43.1202976277, -95.1237633506], [43.120348332, -95.1235735775], [43.1204001721, -95.1233686226], [43.1204933117, -95.1229738946], [43.1205743322, -95.1225791667], [43.1206322472, -95.1221844387], [43.1206363323, -95.1221428884], [43.1206728697, -95.1217897107], [43.1207077742, -95.1213949828], [43.1207469244, -95.1210002548], [43.120802944, -95.1206055269], [43.1208928704, -95.1202107989], [43.1209243326, -95.1201174996], [43.1210342963, -95.1198160709], [43.1212046869, -95.119421343], [43.1212123329, -95.1194039285], [43.1213779968, -95.119026615], [43.1215003332, -95.1186942125], [43.1215228723, -95.1186318871], [43.12163253, -95.1182371591], [43.1217021601, -95.1178424311], [43.1217425152, -95.1174477032], [43.1217688447, -95.1170529752], [43.1217883335, -95.1166582473], [43.1217883335, -95.1166582473], [43.1218113735, -95.1162635193], [43.1218472941, -95.1158687913], [43.1218977289, -95.1154740634], [43.1219702284, -95.1150793354], [43.1220616184, -95.1146846075], [43.1220763337, -95.1146352665], [43.1221848877, -95.1142898795], [43.1223256474, -95.1138951515], [43.122364334, -95.1137978214], [43.1224890586, -95.1135004236], [43.1226523343, -95.1131406715], [43.1226692755, -95.1131056956], [43.1228866396, -95.1127109677], [43.1229403346, -95.1126249873], [43.123161228, -95.1123162397], [43.1232283349, -95.1122308931], [43.1235163352, -95.1119249146], [43.1235202804, -95.1119215117], [43.1238043355, -95.1116923149], [43.1240539357, -95.1115267838], [43.1240923358, -95.1115017217], [43.124380336, -95.1113278657], [43.1246683363, -95.1111505587], [43.1246981295, -95.1111320558], [43.1249563366, -95.1109581079], [43.1252443369, -95.1107575703], [43.1252731369, -95.1107373279], [43.1255323372, -95.1105343249], [43.1257771374, -95.1103425999], [43.1258203375, -95.1103039852], [43.1261083378, -95.110038614], [43.1261894646, -95.1099478719], [43.1263963381, -95.1096561165], [43.1264503381, -95.109553144], [43.1266047954, -95.109158416], [43.1266843383, -95.1089095658], [43.1267208757, -95.1087636881], [43.1268241646, -95.1083689601], [43.1269454034, -95.1079742321], [43.1269723386, -95.1078964827], [43.1270695617, -95.1075795042], [43.1272008808, -95.1071847762], [43.1272603389, -95.1070117448], [43.1273289902, -95.1067900482], [43.1274426823, -95.1063953203], [43.1275414821, -95.1060005923], [43.1275483392, -95.1059662682], [43.1276137231, -95.1056058644], [43.1276744366, -95.1052111364], [43.1277346003, -95.1048164084], [43.1278005341, -95.1044216805], [43.1278363395, -95.1042436659], [43.1278764589, -95.1040269525], [43.1279644996, -95.1036322246], [43.128069067, -95.1032374966], [43.1281243398, -95.1030476275], [43.1281827953, -95.1028427686], [43.1283012334, -95.1024480407], [43.1284123401, -95.1020730491], [43.1284181583, -95.1020533127], [43.1285236804, -95.1016585848], [43.1286093929, -95.1012638568], [43.1286698641, -95.1008691288], [43.1287003404, -95.1005401889], [43.1287063093, -95.1004744009], [43.1287182471, -95.1000796729], [43.1287122782, -95.099684945], [43.1287003404, -95.0994593861], [43.1286910997, -95.099290217], [43.1286607799, -95.098895489], [43.128620892, -95.0985007611], [43.1285678249, -95.0981060331], [43.1285013928, -95.0977113052], [43.1284225529, -95.0973165772], [43.1284123401, -95.0972672362], [43.1283317, -95.0969218492], [43.1282390518, -95.0965271213], [43.1281603398, -95.0961323933], [43.1281243398, -95.0958812028], [43.1281032022, -95.0957376654], [43.1280758911, -95.0953429374], [43.1280794223, -95.0949482094], [43.1281243398, -95.0946286677], [43.1281345345, -95.0945534815], [43.1088283205, -95.0945534815], [43.1088283205, -95.1282283062]]}, {"id": "326", "tags": {"natural": "wood", "landuse": "farmyard", "leaf_type": "needleleave", "name": "Forest Infill 1"}, "coords": [[43.1370883488, -95.1030154621], [43.1370163487, -95.0948741979], [43.1368903486, -95.0946028225], [43.1282143399, -95.0946028225], [43.1280883398, -95.0948741979], [43.1280883398, -95.0956636539], [43.1285923403, -95.0980813626], [43.1287363404, -95.1004497304], [43.1285203402, -95.1017819372], [43.1279443396, -95.1036568951], [43.1274763391, -95.1063706498], [43.1263963381, -95.1096764965], [43.1258023375, -95.1103425999], [43.1235703352, -95.1118721707], [43.1225443342, -95.1133277301], [43.1220403337, -95.114709278], [43.1218243335, -95.1158934618], [43.1217523334, -95.1176697377], [43.1220583337, -95.1177930901], [43.1275663392, -95.1102932589], [43.1283943401, -95.10935578], [43.1294383411, -95.1085663241], [43.1301943419, -95.1082209371], [43.131310343, -95.1079248911], [43.1329663446, -95.1078755501], [43.1330923448, -95.1076041747], [43.1330923448, -95.1034595311], [43.1331823448, -95.1033361786], [43.1368543485, -95.1033361786], [43.1370883488, -95.1030154621]]}, {"id": "327", "tags": {"natural": "wood", "landuse": "farmyard", "leaf_type": "needleleave", "name": "Forest Infill 2"}, "coords": [[43.1229763346, -95.1260577068], [43.1229763346, -95.1175217147], [43.1227423344, -95.1172009982], [43.1213923331, -95.1189526035], [43.1209243326, -95.1200874464], [43.1205283322, -95.1229492241], [43.1200603317, -95.1247255], [43.1199883317, -95.1260577068], [43.1202223319, -95.1263784233], [43.1227423344, -95.1263784233], [43.1229763346, -95.1260577068]]}, {"id": "328", "tags": {"natural": "wood", "landuse": "farmyard", "leaf_type": "needleleave", "name": "Forest Infill 3"}, "coords": [[43.1202043319, -95.1323733542], [43.1201683318, -95.1276366187], [43.1200423317, -95.1273652432], [43.1198263315, -95.1273652432], [43.1194303311, -95.1280560171], [43.1189263306, -95.1284014041], [43.1160463277, -95.1286481091], [43.1159203276, -95.1289194845], [43.1159563276, -95.1360739288], [43.1161543278, -95.1362466223], [43.1200423317, -95.1361972813], [43.1201683318, -95.1359259058], [43.1202043319, -95.1323733542]]}, {"id": "329", "tags": {"natural": "wood", "landuse": "farmyard", "leaf_type": "needleleave", "name": "Forest Infill 4"}, "coords": [[43.1157763274, -95.1359259058], [43.1157763274, -95.1291168485], [43.1155063272, -95.1287961321], [43.1143903261, -95.129289542], [43.1141563258, -95.1298569634], [43.1137603254, -95.1323240132], [43.1137603254, -95.1359259058], [43.1139943257, -95.1362466223], [43.1155423272, -95.1362466223], [43.1157763274, -95.1359259058]]}, {"id": "330", "tags": {"natural": "wood", "landuse": "farmyard", "leaf_type": "needleleave", "name": "Forest Infill 5"}, "coords": [[43.1140843257, -95.1297089405], [43.1139583256, -95.129437565], [43.1130943248, -95.129240201], [43.1114743231, -95.1284014041], [43.1098183215, -95.1281546991], [43.1089543206, -95.1282533811], [43.1088283205, -95.1285247566], [43.1088643205, -95.1329654461], [43.1090623207, -95.1331381396], [43.1135263252, -95.1330887986], [43.1136523253, -95.1328174231], [43.1137243254, -95.1314852163], [43.1140843257, -95.1297089405]]}, {"id": "331", "tags": {"natural": "wood", "landuse": "farmyard", "leaf_type": "needleleave", "name": "Forest Infill 6"}, "coords": [[43.1136163253, -95.1668133688], [43.1136163253, -95.1630141121], [43.1134903252, -95.1627427367], [43.1099623216, -95.1626933957], [43.1097643214, -95.1628660891], [43.1097643214, -95.1631621351], [43.1098903216, -95.1633348286], [43.111294323, -95.1647163765], [43.1132023249, -95.1670354032], [43.1134903252, -95.1670847442], [43.1136163253, -95.1668133688]]}, {"id": "332", "tags": {"natural": "wood", "landuse": "farmyard", "leaf_type": "needleleave", "name": "Forest Infill 7"}, "coords": [[43.1102683219, -95.1707113074], [43.1101423218, -95.1704399319], [43.1095303212, -95.1701932269], [43.1090623207, -95.1701438859], [43.1088283205, -95.1704646024], [43.1088643205, -95.1708593303], [43.1090623207, -95.1710320238], [43.1100343217, -95.1710320238], [43.1102683219, -95.1707113074]]}, {"id": "333", "tags": {"landuse": "farmyard", "name": "Open Ground 1"}, "coords": [[43.1310403427, -95.1085416536], [43.1308063425, -95.1082209371], [43.1304463421, -95.1083689601], [43.130320342, -95.1086403356], [43.130356342, -95.1092324275], [43.1306623423, -95.10935578], [43.1310403427, -95.1085416536]]}, {"id": "334", "tags": {"landuse": "farmyard", "name": "Open Ground 2"}, "coords": [[43.1301763418, -95.1161895078], [43.1301763418, -95.1088870405], [43.1299423416, -95.1085663241], [43.1288983406, -95.109158416], [43.1276743393, -95.1103919409], [43.1234803351, -95.1161895078], [43.1237143354, -95.1165102243], [43.1299423416, -95.1165102243], [43.1301763418, -95.1161895078]]}, {"id": "335", "tags": {"highway": "tertiary", "name": "Forest Haul Road"}, "coords": [[43.120334166, -95.1203042261], [43.1176465232, -95.1173805105], [43.1142836337, -95.1138949268], [43.1132218101, -95.1123059373], [43.1130359447, -95.1119276761], [43.1125452795, -95.1107073424], [43.1117293498, -95.1075110155], [43.1112712763, -95.1042369568], [43.1110211666, -95.102361869], [43.1111450385, -95.100527993], [43.1117655574, -95.0982142138], [43.1119287677, -95.0970042897], [43.1118539296, -95.0960911577], [43.1113381057, -95.0950922604]]}, {"id": "336", "tags": {"highway": "tertiary", "name": "Forest Track 390m"}, "coords": [[43.1088643205, -95.1253549575], [43.1119243236, -95.1249439562], [43.1131843248, -95.1244672975], [43.1155963273, -95.1221681713], [43.1168396357, -95.1204081629], [43.1174167492, -95.1186812281], [43.1176465232, -95.1173805105], [43.1178790763, -95.1154740634], [43.1182349012, -95.1142898795], [43.1201190525, -95.1101945769], [43.1220047618, -95.1068393892], [43.1231852835, -95.1043723395], [43.1245160739, -95.1021519947], [43.1249254804, -95.1011651748], [43.1250384509, -95.1002770369], [43.1249110594, -95.099142194], [43.1238892326, -95.0961817343], [43.1236457682, -95.0946028225]]}, {"id": "337", "tags": {"highway": "tertiary", "name": "Forest Track 415m"}, "coords": [[43.1088643205, -95.1192279061], [43.110340322, -95.1188789772], [43.1114203231, -95.1178339435], [43.1123373254, -95.1161154963], [43.1125023884, -95.1132537186], [43.1129787536, -95.1120201937], [43.1130359447, -95.1119276761], [43.1151415954, -95.109207757], [43.1176483293, -95.1073180181], [43.1193182998, -95.1045697035], [43.1197420634, -95.1029414506], [43.1198952134, -95.099684945], [43.1203395943, -95.0965764623], [43.1202772477, -95.0946028225]]}, {"id": "338", "tags": {"highway": "tertiary", "name": "Forest Track 440m"}, "coords": [[43.1088643205, -95.1039493969], [43.1094763211, -95.1045002102], [43.1101603218, -95.1046015456], [43.1112712763, -95.1042369568], [43.1122843239, -95.1038010586], [43.1145523262, -95.1039434726], [43.1155243272, -95.1034442195], [43.116001645, -95.1023986997], [43.116316328, -95.1006128113], [43.1164283101, -95.098895489], [43.1163221544, -95.0964284393], [43.1165042865, -95.0946028225]]}];
+
+        let container, scene, camera, renderer, controls;
+        let terrainGeom, terrainMesh, terrainMaterial;
+        let heightData = null; // Float32Array storing raw elevations in meters
+        let heightWidth = 0, heightHeight = 0;
+        
+        let currentRes = 512;
+        let renderMode = 'texture'; // 'texture', 'elevation', 'wireframe'
+        let verticalExaggeration = 1.5;
+        
+        // Scene objects
+        let sunLight, ambientLight;
+        let playableBox;
+        let skyDome;
+        let zonePolygons = []; // World-space polygons used to name the zone under the cursor
+        let raycaster, mouse;
+
+        // Soil layer (Precision Farming)
+        const SOIL_AVAILABLE = true;
+        const SOIL_TYPES = [{"name": "Arena Limosa", "nameEn": "Loamy Sand", "yield": "75%", "color": "#DCB950"}, {"name": "Franco Arenoso", "nameEn": "Sandy Loam", "yield": "100%", "color": "#B4823C"}, {"name": "Franco", "nameEn": "Loam", "yield": "125%", "color": "#469632"}, {"name": "Arcilla Limosa", "nameEn": "Silty Clay", "yield": "80%", "color": "#7846A0"}];
+        const SOIL_NONE = 255;
+        let soilTexture = null;
+        let soilData = null;      // Uint8Array of soil indices, one per texture pixel
+        let soilWidth = 0, soilHeight = 0;
+        let soilLayerOn = false;
+
+        // First person (POV) mode
+        let povMode = false;
+        let povYaw = 0, povPitch = 0;
+        let povEyeHeight = 1.8;   // metres above the ground
+        // Deliberately far above human speed: the map is 12km wide and waiting is worse
+        // than losing realism.
+        const POV_WALK_SPEED = 25.0;   // m/s (~90 km/h)
+        const POV_RUN_SPEED = 120.0;   // m/s, crosses the playable area in ~70s
+        const povKeys = {};
+        let povSavedState = null;
+        let lastFrameTime = 0;
+
+        // Feature types used to name what is under the cursor (read from the source .osm).
+        // Forests carry both natural=wood and landuse=farmyard, so wood is matched first.
+        const ZONE_TYPES = [
+            { key: 'natural',  val: 'water',     color: '#60A5FA', label: 'Agua' },
+            { key: 'water',    val: null,        color: '#60A5FA', label: 'Agua' },
+            { key: 'natural',  val: 'wood',      color: '#22C55E', label: 'Bosque' },
+            { key: 'landuse',  val: 'forest',    color: '#22C55E', label: 'Bosque' },
+            { key: 'landuse',  val: 'farmyard',  color: '#EC4899', label: 'Farmyard' },
+            { key: 'landuse',  val: 'farmland',  color: '#86EFAC', label: 'Farmland' }
+        ];
+
+        function matchZoneType(tags) {
+            for (const rule of ZONE_TYPES) {
+                if (rule.key in tags && (rule.val === null || tags[rule.key] === rule.val)) {
+                    return rule;
+                }
+            }
+            return null;
+        }
+
+        // OSM lat/lon -> world metres. The OSM area covers only the central playable band.
+        function osmToWorld(lat, lon) {
+            const u = (lon - MIN_LON) / (MAX_LON - MIN_LON);
+            const v = (MAX_LAT - lat) / (MAX_LAT - MIN_LAT);
+            return [(u - 0.5) * PLAYABLE_SIZE, (v - 0.5) * PLAYABLE_SIZE];
+        }
+
+        // World metres -> elevation in metres (unexaggerated)
+        function heightAtWorld(x, z) {
+            const u = (x + MAP_SIZE / 2) / MAP_SIZE;
+            const v = (z + MAP_SIZE / 2) / MAP_SIZE;
+            if (u < 0 || u > 1 || v < 0 || v > 1) return 0;
+            return getInterpolatedHeight(u, v);
+        }
+        
+        // Textures
+        let colorTexture, heightmapImage;
+
+        // Initialize App
+        window.onload = function() {
+            init();
+        };
+
+        function init() {
+            container = document.getElementById('canvas-container');
+            
+            // Set up Scene, Camera, Renderer
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x0d0e12);
+            scene.fog = new THREE.FogExp2(0x0d0e12, 0.0001);
+
+            camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 10, 30000);
+            
+            // Logarithmic depth keeps the 0.3m near plane of the POV camera usable
+            // together with the 30km far plane needed for the full canvas.
+            renderer = new THREE.WebGLRenderer({
+                antialias: true,
+                alpha: false,
+                logarithmicDepthBuffer: true
+            });
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            container.appendChild(renderer.domElement);
+
+            // Orbit Controls
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+            controls.screenSpacePanning = false;
+            controls.maxPolarAngle = Math.PI / 2 - 0.05; // Don't go below ground
+            controls.minDistance = 50;
+            controls.maxDistance = 25000;
+            
+            // Default camera view
+            resetCamera();
+
+            // Lighting
+            ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+            scene.add(ambientLight);
+
+            sunLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            sunLight.castShadow = true;
+            sunLight.shadow.mapSize.width = 2048;
+            sunLight.shadow.mapSize.height = 2048;
+            sunLight.shadow.camera.near = 100;
+            sunLight.shadow.camera.far = 20000;
+            const d = 7000;
+            sunLight.shadow.camera.left = -d;
+            sunLight.shadow.camera.right = d;
+            sunLight.shadow.camera.top = d;
+            sunLight.shadow.camera.bottom = -d;
+            scene.add(sunLight);
+            
+            updateSunPosition(135, 45);
+
+            // Setup Raycasting
+            raycaster = new THREE.Raycaster();
+            mouse = new THREE.Vector2();
+
+            // Sky used by the first person view
+            buildSky();
+
+            // Name lookup for the areas of the map
+            buildZoneIndex();
+
+            if (!SOIL_AVAILABLE) {
+                document.getElementById('probe-soil-row').style.display = 'none';
+            }
+
+            // Load assets
+            loadAssets();
+
+            // Resize handler
+            window.addEventListener('resize', onWindowResize, false);
+
+            // Mouse move for terrain inspection
+            window.addEventListener('mousemove', onMouseMove, false);
+
+            // First person input
+            window.addEventListener('keydown', onKeyDown, false);
+            window.addEventListener('keyup', onKeyUp, false);
+            renderer.domElement.addEventListener('click', function() {
+                if (povMode && document.pointerLockElement !== renderer.domElement) {
+                    renderer.domElement.requestPointerLock();
+                }
+            }, false);
+
+            // Start Loop
+            lastFrameTime = performance.now();
+            animate();
+        }
+
+        function resetCamera() {
+            // Framed for the full 12.29km canvas
+            camera.position.set(0, 6500, 9500);
+            controls.target.set(0, 100, 0);
+            controls.update();
+        }
+
+        function updateSunPosition(angleDeg, altitudeDeg) {
+            const angleRad = (angleDeg * Math.PI) / 180;
+            const altRad = (altitudeDeg * Math.PI) / 180;
+            
+            const r = 8000;
+            const y = r * Math.sin(altRad);
+            const x = r * Math.cos(altRad) * Math.cos(angleRad);
+            const z = r * Math.cos(altRad) * Math.sin(angleRad);
+            
+            sunLight.position.set(x, y, z);
+        }
+
+        function loadAssets() {
+            const loadingProgress = document.getElementById('loading-progress');
+            
+            // Load visual texture & RGB Heightmap
+            const textureLoader = new THREE.TextureLoader();
+            
+            loadingProgress.innerText = "Cargando Textura del Mapa...";
+            
+            // Cache-busting query parameter to force reloading the images from disk
+            const cb = '?t=' + Date.now();
+            
+            loadSoilLayer();
+
+            textureLoader.load('dem_1024_texture.png' + cb, function(tex) {
+                colorTexture = tex;
+                colorTexture.wrapS = THREE.ClampToEdgeWrapping;
+                colorTexture.wrapT = THREE.ClampToEdgeWrapping;
+                colorTexture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+
+                loadingProgress.innerText = "Cargando Datos de Elevación (16-bit)...";
+                
+                const img = new Image();
+                img.src = 'dem_1024_rgb16.png' + cb;
+                img.onload = function() {
+                    heightmapImage = img;
+                    
+                    // Parse RGB image to heights
+                    parseHeightmap(img);
+                    
+                    // Build terrain mesh
+                    buildTerrainMesh(currentRes);
+                    
+                    // Build auxiliary lines/guides
+                    buildGuides();
+
+                    // Remove loading overlay
+                    const loader = document.getElementById('loading-overlay');
+                    loader.style.opacity = 0;
+                    setTimeout(() => loader.style.display = 'none', 500);
+                };
+            }, undefined, function(err) {
+                console.error("Error loading terrain texture", err);
+                loadingProgress.innerText = "Error al cargar texturas. Iniciando con colores planos...";
+                // Fallback heightmap parse
+                const img = new Image();
+                img.src = 'dem_1024_rgb16.png' + cb;
+                img.onload = function() {
+                    heightmapImage = img;
+                    parseHeightmap(img);
+                    buildTerrainMesh(currentRes);
+                    buildGuides();
+                    document.getElementById('loading-overlay').style.display = 'none';
+                };
+            });
+        }
+
+        function parseHeightmap(img) {
+            const canvas = document.createElement('canvas');
+            canvas.width = img.width;
+            canvas.height = img.height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0);
+            
+            const imgData = ctx.getImageData(0, 0, img.width, img.height);
+            const data = imgData.data;
+            
+            heightWidth = img.width;
+            heightHeight = img.height;
+            heightData = new Float32Array(heightWidth * heightHeight);
+            
+            for (let i = 0; i < heightData.length; i++) {
+                const r = data[i * 4];
+                const g = data[i * 4 + 1];
+                // Decode 16-bit value (in cm) and convert to meters
+                const rawHeight = r + g * 256;
+                heightData[i] = rawHeight / 100.0;
+            }
+        }
+
+        function getInterpolatedHeight(u, v) {
+            if (!heightData) return 0;
+            
+            // Map u, v (0 to 1) to image pixel coords
+            const px = u * (heightWidth - 1);
+            const py = v * (heightHeight - 1);
+            
+            const x0 = Math.floor(px);
+            const y0 = Math.floor(py);
+            const x1 = Math.min(x0 + 1, heightWidth - 1);
+            const y1 = Math.min(y0 + 1, heightHeight - 1);
+            
+            const tx = px - x0;
+            const ty = py - y0;
+            
+            const h00 = heightData[y0 * heightWidth + x0];
+            const h10 = heightData[y0 * heightWidth + x1];
+            const h01 = heightData[y1 * heightWidth + x0];
+            const h11 = heightData[y1 * heightWidth + x1];
+            
+            // Bilinear interpolation
+            const h0 = h00 * (1 - tx) + h10 * tx;
+            const h1 = h01 * (1 - tx) + h11 * tx;
+            return h0 * (1 - ty) + h1 * ty;
+        }
+
+        function buildTerrainMesh(res) {
+            if (terrainMesh) {
+                scene.remove(terrainMesh);
+                terrainGeom.dispose();
+            }
+            
+            document.getElementById('mesh-vertices').innerText = (res * res).toLocaleString();
+            
+            // Geometry dimensions matching real map scale (8192m x 8192m)
+            terrainGeom = new THREE.PlaneGeometry(MAP_SIZE, MAP_SIZE, res - 1, res - 1);
+            
+            // Displace plane vertices along Y (originally Z before rotation)
+            const posAttr = terrainGeom.attributes.position;
+            const count = posAttr.count;
+            
+            for (let i = 0; i < count; i++) {
+                // PlaneCoordinates are from -MAP_SIZE/2 to MAP_SIZE/2
+                const x = posAttr.getX(i);
+                const z = posAttr.getY(i);
+                
+                // Map x,z (-4096 to 4096) to u,v (0 to 1)
+                const u = (x + MAP_SIZE / 2) / MAP_SIZE;
+                const v = 1 - (z + MAP_SIZE / 2) / MAP_SIZE;
+                
+                const height = getInterpolatedHeight(u, v);
+                posAttr.setZ(i, height * verticalExaggeration);
+            }
+            
+            // Rotate the plane to sit flat horizontally
+            terrainGeom.rotateX(-Math.PI / 2);
+            terrainGeom.computeVertexNormals();
+            
+            // Materials
+            if (renderMode === 'texture') {
+                terrainMaterial = new THREE.MeshStandardMaterial({
+                    map: (soilLayerOn && soilTexture) ? soilTexture : colorTexture,
+                    roughness: 0.85,
+                    metalness: 0.1,
+                    flatShading: false
+                });
+            } else if (renderMode === 'elevation') {
+                buildVertexColors(res);
+                terrainMaterial = new THREE.MeshStandardMaterial({
+                    vertexColors: true,
+                    roughness: 0.8,
+                    metalness: 0.1
+                });
+            } else {
+                // Wireframe
+                terrainMaterial = new THREE.MeshBasicMaterial({
+                    color: 0x6366f1,
+                    wireframe: true
+                });
+            }
+            
+            terrainMesh = new THREE.Mesh(terrainGeom, terrainMaterial);
+            terrainMesh.receiveShadow = true;
+            terrainMesh.castShadow = true;
+            scene.add(terrainMesh);
+        }
+
+        function buildVertexColors(res) {
+            const count = terrainGeom.attributes.position.count;
+            const colors = [];
+            
+            // Color palettes representing elevations
+            // Gradient from Green (lowlands) -> Yellow -> Brown -> White (peaks)
+            const colorRamp = [
+                { h: MIN_HEIGHT, c: new THREE.Color(0x1e4620) },
+                { h: MIN_HEIGHT + (MAX_HEIGHT - MIN_HEIGHT) * 0.05, c: new THREE.Color(0x2d6a2e) },
+                { h: MIN_HEIGHT + (MAX_HEIGHT - MIN_HEIGHT) * 0.15, c: new THREE.Color(0x658c43) },
+                { h: MIN_HEIGHT + (MAX_HEIGHT - MIN_HEIGHT) * 0.40, c: new THREE.Color(0xb8a174) },
+                { h: MIN_HEIGHT + (MAX_HEIGHT - MIN_HEIGHT) * 0.60, c: new THREE.Color(0x8e7355) },
+                { h: MIN_HEIGHT + (MAX_HEIGHT - MIN_HEIGHT) * 0.80, c: new THREE.Color(0x5c5247) },
+                { h: MAX_HEIGHT, c: new THREE.Color(0xffffff) }
+            ];
+            
+            const posAttr = terrainGeom.attributes.position;
+            for (let i = 0; i < count; i++) {
+                const yVal = posAttr.getY(i) / verticalExaggeration;
+                
+                let col = new THREE.Color(0xffffff);
+                if (yVal <= colorRamp[0].h) {
+                    col.copy(colorRamp[0].c);
+                } else if (yVal >= colorRamp[colorRamp.length - 1].h) {
+                    col.copy(colorRamp[colorRamp.length - 1].c);
+                } else {
+                    for (let j = 0; j < colorRamp.length - 1; j++) {
+                        const lower = colorRamp[j];
+                        const upper = colorRamp[j+1];
+                        if (yVal >= lower.h && yVal <= upper.h) {
+                            const t = (yVal - lower.h) / (upper.h - lower.h);
+                            col.copy(lower.c).lerp(upper.c, t);
+                            break;
+                        }
+                    }
+                }
+                colors.push(col.r, col.g, col.b);
+            }
+            
+            terrainGeom.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+        }
+
+        function buildGuides() {
+            // 1. Playable Area outline box (4km x 4km centered, height matches elevation bounds)
+            const playMin = -PLAYABLE_SIZE / 2;
+            const playMax = PLAYABLE_SIZE / 2;
+            
+            const boxGeom = new THREE.BufferGeometry();
+            const yMin = MIN_HEIGHT * verticalExaggeration;
+            const yMax = MAX_HEIGHT * verticalExaggeration;
+            
+            const vertices = [
+                // Floor
+                playMin, yMin, playMin,  playMax, yMin, playMin,
+                playMax, yMin, playMin,  playMax, yMin, playMax,
+                playMax, yMin, playMax,  playMin, yMin, playMax,
+                playMin, yMin, playMax,  playMin, yMin, playMin,
+                // Ceiling
+                playMin, yMax, playMin,  playMax, yMax, playMin,
+                playMax, yMax, playMin,  playMax, yMax, playMax,
+                playMax, yMax, playMax,  playMin, yMax, playMax,
+                playMin, yMax, playMax,  playMin, yMax, playMin,
+                // Pillars
+                playMin, yMin, playMin,  playMin, yMax, playMin,
+                playMax, yMin, playMin,  playMax, yMax, playMin,
+                playMax, yMin, playMax,  playMax, yMax, playMax,
+                playMin, yMin, playMax,  playMin, yMax, playMax,
+            ];
+            boxGeom.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+            
+            const boxMat = new THREE.LineBasicMaterial({ 
+                color: 0x4f46e5, 
+                linewidth: 2, 
+                transparent: true,
+                opacity: 0.8
+            });
+            playableBox = new THREE.LineSegments(boxGeom, boxMat);
+            playableBox.visible = !povMode && document.getElementById('toggle-playable').checked;
+            scene.add(playableBox);
+        }
+
+        // Builds the lookup used to name the area under the cursor. No 3D objects involved.
+        function buildZoneIndex() {
+            zonePolygons = [];
+
+            for (const way of OSM_DATA) {
+                const tags = way.tags || {};
+                const coords = way.coords || [];
+                if (coords.length < 3) continue;
+
+                const isClosed =
+                    coords[0][0] === coords[coords.length - 1][0] &&
+                    coords[0][1] === coords[coords.length - 1][1];
+                if (!isClosed) continue;
+
+                const type = matchZoneType(tags);
+                if (!type) continue;
+
+                const flat = coords.map(([lat, lon]) => osmToWorld(lat, lon));
+                zonePolygons.push({
+                    points: flat,
+                    label: tags.name ? `${type.label} · ${tags.name}` : type.label,
+                    color: type.color,
+                    area: polygonArea(flat)
+                });
+            }
+
+            // Smallest area first, so an inner feature wins over the field enclosing it.
+            zonePolygons.sort((a, b) => a.area - b.area);
+        }
+
+        function polygonArea(pts) {
+            let sum = 0;
+            for (let i = 0; i < pts.length; i++) {
+                const [x0, z0] = pts[i];
+                const [x1, z1] = pts[(i + 1) % pts.length];
+                sum += x0 * z1 - x1 * z0;
+            }
+            return Math.abs(sum) / 2;
+        }
+
+        function pointInPolygon(x, z, pts) {
+            let inside = false;
+            for (let i = 0, j = pts.length - 1; i < pts.length; j = i++) {
+                const [xi, zi] = pts[i];
+                const [xj, zj] = pts[j];
+                if ((zi > z) !== (zj > z) &&
+                    x < (xj - xi) * (z - zi) / (zj - zi) + xi) {
+                    inside = !inside;
+                }
+            }
+            return inside;
+        }
+
+        function findZone(x, z) {
+            for (const poly of zonePolygons) {
+                if (pointInPolygon(x, z, poly.points)) return poly;
+            }
+            return null;
+        }
+
+        // --- Soil layer (Precision Farming) -------------------------------------
+
+        function soilAt(x, z) {
+            if (!soilData) return null;
+
+            const u = (x + MAP_SIZE / 2) / MAP_SIZE;
+            const v = (z + MAP_SIZE / 2) / MAP_SIZE;
+            if (u < 0 || u > 1 || v < 0 || v > 1) return null;
+
+            const px = Math.min(soilWidth - 1, Math.floor(u * soilWidth));
+            const py = Math.min(soilHeight - 1, Math.floor(v * soilHeight));
+            const idx = soilData[py * soilWidth + px];
+
+            return (idx === SOIL_NONE || idx >= SOIL_TYPES.length) ? null : SOIL_TYPES[idx];
+        }
+
+        function loadSoilLayer() {
+            if (!SOIL_AVAILABLE) return;
+
+            const cb = '?t=' + Date.now();
+
+            new THREE.TextureLoader().load('soil_1024_texture.png' + cb, function(tex) {
+                soilTexture = tex;
+                soilTexture.wrapS = THREE.ClampToEdgeWrapping;
+                soilTexture.wrapT = THREE.ClampToEdgeWrapping;
+                soilTexture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+                if (soilLayerOn) applySurfaceTexture();
+            });
+
+            // Index image: soil type per pixel is stored in the red channel
+            const img = new Image();
+            img.src = 'soil_1024_index.png' + cb;
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                canvas.width = img.width;
+                canvas.height = img.height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0);
+
+                const data = ctx.getImageData(0, 0, img.width, img.height).data;
+                soilWidth = img.width;
+                soilHeight = img.height;
+                soilData = new Uint8Array(soilWidth * soilHeight);
+                for (let i = 0; i < soilData.length; i++) {
+                    soilData[i] = data[i * 4];
+                }
+            };
+        }
+
+        function applySurfaceTexture() {
+            if (!terrainMaterial || renderMode !== 'texture') return;
+            const tex = (soilLayerOn && soilTexture) ? soilTexture : colorTexture;
+            if (tex) {
+                terrainMaterial.map = tex;
+                terrainMaterial.needsUpdate = true;
+            }
+        }
+
+        function toggleSoilLayer(on) {
+            soilLayerOn = on;
+            document.getElementById('soil-legend').style.display = on ? 'grid' : 'none';
+
+            // The soil map only makes sense on the textured surface
+            if (on && renderMode !== 'texture') setRenderMode('texture');
+            applySurfaceTexture();
+        }
+
+        // --- First person view (player eye height) -------------------------------
+
+        function buildSky() {
+            // Vertical gradient painted on a canvas and wrapped on a large inverted sphere,
+            // so the POV camera has a horizon to look at instead of the void.
+            const c = document.createElement('canvas');
+            c.width = 4;
+            c.height = 256;
+            const ctx = c.getContext('2d');
+            const grad = ctx.createLinearGradient(0, 0, 0, 256);
+            grad.addColorStop(0.00, '#1e3f73');
+            grad.addColorStop(0.45, '#6f9bc9');
+            grad.addColorStop(0.82, '#c4d2e0');
+            grad.addColorStop(1.00, '#e8d9bb');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, 4, 256);
+
+            const geom = new THREE.SphereGeometry(20000, 32, 20);
+            const mat = new THREE.MeshBasicMaterial({
+                map: new THREE.CanvasTexture(c),
+                side: THREE.BackSide,
+                fog: false,
+                depthWrite: false
+            });
+
+            skyDome = new THREE.Mesh(geom, mat);
+            skyDome.visible = false;
+            scene.add(skyDome);
+        }
+
+        function togglePov(enable) {
+            if (enable === povMode) return;
+            if (enable && !heightData) return; // terrain not loaded yet
+
+            povMode = enable;
+
+            const povPanel = document.getElementById('pov-panel');
+            const crosshair = document.getElementById('crosshair');
+            const btn = document.getElementById('pov-btn');
+
+            if (enable) {
+                povSavedState = {
+                    position: camera.position.clone(),
+                    target: controls.target.clone(),
+                    exaggeration: verticalExaggeration,
+                    near: camera.near,
+                    fov: camera.fov,
+                    fogColor: scene.fog.color.getHex()
+                };
+
+                // At eye level only the real, unexaggerated elevations make sense
+                if (verticalExaggeration !== 1.0) {
+                    document.getElementById('exaggeration-slider').value = 1.0;
+                    updateExaggeration(1.0);
+                }
+
+                controls.enabled = false;
+                camera.near = 0.3;
+                camera.fov = 70;
+                camera.updateProjectionMatrix();
+                camera.rotation.order = 'YXZ';
+
+                // Drop the player where the orbit camera was looking, facing the same way
+                const dir = new THREE.Vector3().subVectors(povSavedState.target, povSavedState.position);
+                povYaw = Math.atan2(-dir.x, -dir.z);
+                povPitch = 0;
+
+                const limit = MAP_SIZE / 2 - 10;
+                const x = Math.max(-limit, Math.min(limit, povSavedState.target.x));
+                const z = Math.max(-limit, Math.min(limit, povSavedState.target.z));
+                camera.position.set(x, heightAtWorld(x, z) + povEyeHeight, z);
+
+                scene.fog.color.setHex(0xbfc9d4); // daytime haze instead of the dark void
+                skyDome.visible = true;
+                // The guide box would hang across the sky at eye level
+                if (playableBox) playableBox.visible = false;
+
+                povPanel.style.display = 'block';
+                crosshair.style.display = 'block';
+                btn.innerText = 'Salir del Modo POV';
+                btn.blur(); // keep the keyboard on the camera, not on the button
+                renderer.domElement.requestPointerLock();
+            } else {
+                if (document.pointerLockElement) document.exitPointerLock();
+
+                controls.enabled = true;
+                camera.near = povSavedState.near;
+                camera.fov = povSavedState.fov;
+                camera.updateProjectionMatrix();
+                camera.rotation.set(0, 0, 0);
+                camera.position.copy(povSavedState.position);
+                controls.target.copy(povSavedState.target);
+                controls.update();
+
+                scene.fog.color.setHex(povSavedState.fogColor);
+                skyDome.visible = false;
+                if (playableBox) {
+                    playableBox.visible = document.getElementById('toggle-playable').checked;
+                }
+
+                povPanel.style.display = 'none';
+                crosshair.style.display = 'none';
+                btn.innerText = 'Entrar en Modo POV';
+
+                if (povSavedState.exaggeration !== verticalExaggeration) {
+                    document.getElementById('exaggeration-slider').value = povSavedState.exaggeration;
+                    updateExaggeration(povSavedState.exaggeration);
+                }
+
+                for (const k in povKeys) povKeys[k] = false;
+            }
+        }
+
+        function updatePov(dt) {
+            camera.rotation.y = povYaw;
+            camera.rotation.x = povPitch;
+            camera.rotation.z = 0;
+
+            const running = povKeys['ShiftLeft'] || povKeys['ShiftRight'];
+            const speed = running ? POV_RUN_SPEED : POV_WALK_SPEED;
+
+            let fwd = 0, side = 0;
+            if (povKeys['KeyW'] || povKeys['ArrowUp']) fwd += 1;
+            if (povKeys['KeyS'] || povKeys['ArrowDown']) fwd -= 1;
+            if (povKeys['KeyD'] || povKeys['ArrowRight']) side += 1;
+            if (povKeys['KeyA'] || povKeys['ArrowLeft']) side -= 1;
+
+            if (fwd !== 0 || side !== 0) {
+                const len = Math.hypot(fwd, side);
+                fwd /= len;
+                side /= len;
+
+                const sinY = Math.sin(povYaw), cosY = Math.cos(povYaw);
+                const dx = (-sinY * fwd + cosY * side) * speed * dt;
+                const dz = (-cosY * fwd - sinY * side) * speed * dt;
+
+                const limit = MAP_SIZE / 2 - 10;
+                camera.position.x = Math.max(-limit, Math.min(limit, camera.position.x + dx));
+                camera.position.z = Math.max(-limit, Math.min(limit, camera.position.z + dz));
+            }
+
+            // Stick to the ground
+            const ground = heightAtWorld(camera.position.x, camera.position.z) * verticalExaggeration;
+            camera.position.y = ground + povEyeHeight;
+            skyDome.position.set(camera.position.x, 0, camera.position.z);
+        }
+
+        function onKeyDown(e) {
+            if (e.code === 'Escape' && povMode) {
+                togglePov(false);
+                return;
+            }
+            if (e.code === 'KeyP' && !e.repeat) {
+                togglePov(!povMode);
+                return;
+            }
+            if (!povMode) return;
+
+            povKeys[e.code] = true;
+
+            if (e.code === 'KeyQ' || e.code === 'KeyE') {
+                povEyeHeight = Math.max(0.4, Math.min(8.0,
+                    povEyeHeight + (e.code === 'KeyE' ? 0.2 : -0.2)));
+                document.getElementById('pov-eye').innerText = povEyeHeight.toFixed(2);
+            }
+
+            if (['KeyW', 'KeyA', 'KeyS', 'KeyD', 'Space',
+                 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].indexOf(e.code) !== -1) {
+                e.preventDefault();
+            }
+        }
+
+        function onKeyUp(e) {
+            povKeys[e.code] = false;
+        }
+
+        function updateExaggeration(val) {
+            verticalExaggeration = parseFloat(val);
+            document.getElementById('exaggeration-val').innerText = val + 'x';
+            
+            if (heightData) {
+                buildTerrainMesh(currentRes);
+
+                // Get the current visible state of playableBox before recreating it
+                const wasPlayableVisible = playableBox ? playableBox.visible : false;
+
+                if (playableBox) {
+                    scene.remove(playableBox);
+                }
+
+                buildGuides();
+
+                // Restore the visibility state
+                if (playableBox) {
+                    playableBox.visible = wasPlayableVisible;
+                }
+            }
+        }
+
+        function setRenderMode(mode) {
+            renderMode = mode;
+            
+            const buttons = document.querySelectorAll('#mode-buttons .btn-toggle');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            if (mode === 'texture') buttons[0].classList.add('active');
+            if (mode === 'elevation') buttons[1].classList.add('active');
+            if (mode === 'wireframe') buttons[2].classList.add('active');
+            
+            if (heightData) {
+                buildTerrainMesh(currentRes);
+            }
+        }
+
+        function changeMeshResolution(res) {
+            currentRes = res;
+            
+            const buttons = document.querySelectorAll('#res-buttons .btn-toggle');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            if (res === 256) buttons[0].classList.add('active');
+            if (res === 512) buttons[1].classList.add('active');
+            if (res === 1024) buttons[2].classList.add('active');
+            
+            if (heightData) {
+                const overlay = document.getElementById('loading-overlay');
+                const pText = document.getElementById('loading-progress');
+                document.getElementById('loading-text').innerText = "RECONSTRUYENDO MALLA 3D...";
+                pText.innerText = "Calculando vértices a " + res + "²...";
+                overlay.style.display = 'flex';
+                overlay.style.opacity = 1;
+                
+                setTimeout(() => {
+                    buildTerrainMesh(res);
+                    overlay.style.opacity = 0;
+                    setTimeout(() => overlay.style.display = 'none', 300);
+                }, 50);
+            }
+        }
+
+        function togglePlayableBox(visible) {
+            if (playableBox) playableBox.visible = visible;
+        }
+
+
+
+        function updateSunAngle(angle) {
+            document.getElementById('sun-angle-val').innerText = angle + '°';
+            const alt = document.getElementById('sun-alt').value;
+            updateSunPosition(parseInt(angle), parseInt(alt));
+        }
+
+        function updateSunAltitude(alt) {
+            document.getElementById('sun-alt-val').innerText = alt + '°';
+            const angle = document.getElementById('sun-angle').value;
+            updateSunPosition(parseInt(angle), parseInt(alt));
+        }
+
+        function toggleHelp(show) {
+            const modal = document.getElementById('help-modal');
+            if (show) {
+                modal.classList.add('active');
+            } else {
+                modal.classList.remove('active');
+            }
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function onMouseMove(event) {
+            if (povMode) {
+                if (document.pointerLockElement === renderer.domElement) {
+                    povYaw -= (event.movementX || 0) * 0.0022;
+                    povPitch -= (event.movementY || 0) * 0.0022;
+                    const maxPitch = Math.PI / 2 - 0.05;
+                    povPitch = Math.max(-maxPitch, Math.min(maxPitch, povPitch));
+                }
+                // The probe reads whatever the crosshair is pointing at
+                mouse.set(0, 0);
+                return;
+            }
+
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+        }
+
+        function checkTerrainIntersection() {
+            if (!terrainMesh || !heightData) return;
+            
+            raycaster.setFromCamera(mouse, camera);
+            const intersects = raycaster.intersectObject(terrainMesh);
+            
+            const probePanel = document.getElementById('probe-panel');
+            
+            if (intersects.length > 0) {
+                const point = intersects[0].point;
+                const x = point.x;
+                const z = point.z;
+                
+                if (Math.abs(x) <= MAP_SIZE/2 && Math.abs(z) <= MAP_SIZE/2) {
+                    probePanel.style.display = 'block';
+                    const realY = point.y / verticalExaggeration;
+                    
+                    // Local coordinates inside the playable area (0..8192, origin NW), which is
+                    // the coordinate system used by the OSM and DEM generators.
+                    const localX = x + PLAYABLE_SIZE / 2;
+                    const localY = z + PLAYABLE_SIZE / 2;
+
+                    const inPlayable = Math.abs(x) <= PLAYABLE_SIZE/2 && Math.abs(z) <= PLAYABLE_SIZE/2;
+
+                    document.getElementById('probe-coords').innerText = inPlayable
+                        ? `X: ${Math.round(localX)}m | Y: ${Math.round(localY)}m`
+                        : `X: ${Math.round(x)}m | Z: ${Math.round(z)}m (global)`;
+                    document.getElementById('probe-height').innerText = `${realY.toFixed(2)}m`;
+
+                    const zoneLabel = document.getElementById('probe-zone');
+
+                    if (inPlayable) {
+                        const zone = findZone(x, z);
+                        if (zone) {
+                            zoneLabel.innerText = zone.label;
+                            zoneLabel.style.color = zone.color;
+                        } else {
+                            zoneLabel.innerText = "Área Jugable";
+                            zoneLabel.style.color = "#10b981";
+                        }
+                    } else {
+                        zoneLabel.innerText = "Fondo No Jugable";
+                        zoneLabel.style.color = "#f43f5e";
+                    }
+
+                    const soilLabel = document.getElementById('probe-soil');
+                    const soil = soilAt(x, z);
+                    if (soil) {
+                        soilLabel.innerText = `${soil.name} (${soil.yield})`;
+                        soilLabel.style.color = soil.color;
+                    } else {
+                        soilLabel.innerText = "—";
+                        soilLabel.style.color = "var(--text-muted)";
+                    }
+                } else {
+                    probePanel.style.display = 'none';
+                }
+            } else {
+                probePanel.style.display = 'none';
+            }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            const now = performance.now();
+            const dt = Math.min(0.1, (now - lastFrameTime) / 1000);
+            lastFrameTime = now;
+
+            if (povMode) {
+                updatePov(dt);
+            } else {
+                controls.update();
+            }
+
+            checkTerrainIntersection();
+            renderer.render(scene, camera);
+        }
+    </script>
+</body>
+</html>
