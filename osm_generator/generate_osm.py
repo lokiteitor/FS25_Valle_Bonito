@@ -1192,6 +1192,51 @@ def main():
     ROAD_CUT_MIN_HA = 1.0        # pieces smaller than this are dropped
     ROAD_CUT_MIN_WIDTH_M = 35.0  # ...as are pieces with a mean width below this
 
+    # Shared raster subtraction: rasterise poly at s metres per pixel, remove the
+    # blocked mask, and return the surviving pieces as (outline, hectares), or
+    # None when the mask never touches the polygon. Slivers - tiny or
+    # long-and-thin leftovers - are dropped. Used by the Mountain Pass Road cut
+    # (10c) and the mountain-forest safety margin (11c).
+    def raster_cut_pieces(poly, blocked, s, min_ha, min_width_m):
+        gn = blocked.shape[0]
+        pimg = Image.new('L', (gn, gn), 0)
+        ImageDraw.Draw(pimg).polygon([(x / s, y / s) for x, y in poly],
+                                     fill=255, outline=255)
+        pmask = np.array(pimg) > 0
+        if not (pmask & blocked).any():
+            return None
+        lab, k = ndimage.label(pmask & ~blocked)
+        out = []
+        for lid in range(1, k + 1):
+            comp = lab == lid
+            area_ha = comp.sum() * s * s / 10000.0
+            if area_ha < min_ha:
+                continue
+            padded = np.zeros((gn + 2, gn + 2), dtype=np.float32)
+            padded[1:-1, 1:-1] = comp
+            axis = (np.arange(gn + 2) - 0.5) * s
+            gx, gy = np.meshgrid(axis, axis)
+            fig, ax = plt.subplots()
+            cs = ax.contour(gx, gy, padded, levels=[0.5])
+            plt.close(fig)
+            if not cs.allsegs[0]:
+                continue
+            seg = max(cs.allsegs[0], key=len)
+            pts = [(min(max(px, 0.0), 8192.0), min(max(py, 0.0), 8192.0))
+                   for px, py in seg]
+            if pts[0] != pts[-1]:
+                pts.append(pts[0])
+            pts = simplify(pts, 8.0)
+            if len(pts) < 4:
+                continue
+            if pts[0] != pts[-1]:
+                pts.append(pts[0])
+            perim = sum(math.dist(pts[q], pts[q+1]) for q in range(len(pts) - 1))
+            if perim > 0 and (2.0 * area_ha * 10000.0 / perim) < min_width_m:
+                continue
+            out.append((pts, area_ha))
+        return out
+
     def cut_fields_along_mountain_pass():
         s = 4.0
         gn = int(round(8192.0 / s))
@@ -1202,45 +1247,8 @@ def main():
         corridor = np.array(corr_img) > 0
 
         def pieces_of(poly):
-            # None = the corridor never touches this polygon; otherwise the list
-            # of surviving pieces as (outline, hectares).
-            pimg = Image.new('L', (gn, gn), 0)
-            ImageDraw.Draw(pimg).polygon([(x / s, y / s) for x, y in poly],
-                                         fill=255, outline=255)
-            pmask = np.array(pimg) > 0
-            if not (pmask & corridor).any():
-                return None
-            lab, k = ndimage.label(pmask & ~corridor)
-            out = []
-            for lid in range(1, k + 1):
-                comp = lab == lid
-                area_ha = comp.sum() * s * s / 10000.0
-                if area_ha < ROAD_CUT_MIN_HA:
-                    continue
-                padded = np.zeros((gn + 2, gn + 2), dtype=np.float32)
-                padded[1:-1, 1:-1] = comp
-                axis = (np.arange(gn + 2) - 0.5) * s
-                gx, gy = np.meshgrid(axis, axis)
-                fig, ax = plt.subplots()
-                cs = ax.contour(gx, gy, padded, levels=[0.5])
-                plt.close(fig)
-                if not cs.allsegs[0]:
-                    continue
-                seg = max(cs.allsegs[0], key=len)
-                pts = [(min(max(px, 0.0), 8192.0), min(max(py, 0.0), 8192.0))
-                       for px, py in seg]
-                if pts[0] != pts[-1]:
-                    pts.append(pts[0])
-                pts = simplify(pts, 8.0)
-                if len(pts) < 4:
-                    continue
-                if pts[0] != pts[-1]:
-                    pts.append(pts[0])
-                perim = sum(math.dist(pts[q], pts[q+1]) for q in range(len(pts) - 1))
-                if perim > 0 and (2.0 * area_ha * 10000.0 / perim) < ROAD_CUT_MIN_WIDTH_M:
-                    continue
-                out.append((pts, area_ha))
-            return out
+            return raster_cut_pieces(poly, corridor, s,
+                                     ROAD_CUT_MIN_HA, ROAD_CUT_MIN_WIDTH_M)
 
         kept = []
         pieces_to_add = []
@@ -1542,7 +1550,7 @@ def main():
     # leftovers not worth working. Matched by their base field token, with or
     # without the trailing hectare suffix.
     RETIRED_FIELDS = {
-        'I3', 'I5', 'I8', 'I11', 'I15', 'I19', 'I22', 'I25', 'I28',
+        'I2', 'I3', 'I4', 'I5', 'I8', 'I11', 'I15', 'I19', 'I22', 'I25', 'I28',
         'I31', 'I33', 'I34', 'I36', 'I44', '51b', '33a', '26a',
     }
 
@@ -1563,6 +1571,97 @@ def main():
               + (" WARNING: some retired field names were not found." if missing else ""))
 
     retire_fields()
+
+    # 11c. Safety margin around the mountain forests. The generation passes keep
+    # only 5-15 m of clearance to the DEM woods (and the infill parcels grow
+    # right up to them), so here every farmland/farmyard parcel is cut back to
+    # FOREST_MARGIN_M from the mountain forests: the margin band is rasterised
+    # off each parcel and the surviving pieces re-emitted, with the same sliver
+    # rules as the road cut. Only the DEM forests (the unnamed woods) cast a
+    # margin; the procedural Random/Cell Forest boxes were placed with their own
+    # clearances and stay as they are.
+    FOREST_MARGIN_M = 50.0
+    # The cut outlines come back through a 4 m raster and an 8 m Douglas-Peucker
+    # pass, either of which can pull an edge a few metres back towards the wood;
+    # the mask is grown by this much extra so the emitted parcels still honour
+    # the full margin.
+    FOREST_MARGIN_SLACK_M = 12.0
+    FOREST_MARGIN_MIN_HA = 1.0
+    FOREST_MARGIN_MIN_WIDTH_M = 35.0
+
+    def cut_forest_margin():
+        s = 4.0
+        gn = int(round(8192.0 / s))
+        wimg = Image.new('L', (gn, gn), 0)
+        wdraw = ImageDraw.Draw(wimg)
+        for w in ways:
+            if w['tags'].get('natural') == 'wood' and 'name' not in w['tags']:
+                pts = [(x / s, y / s) for x, y in w['coords']]
+                if len(pts) >= 3:
+                    wdraw.polygon(pts, fill=255, outline=255)
+        wood = np.array(wimg) > 0
+        if not wood.any():
+            print("   WARNING: no mountain forests found; margin pass skipped.")
+            return
+        margin = (ndimage.distance_transform_edt(~wood) * s
+                  <= FOREST_MARGIN_M + FOREST_MARGIN_SLACK_M)
+
+        # Bounding box of the margin zone, to skip the parcels that cannot touch it.
+        rows = np.any(margin, axis=1)
+        cols = np.any(margin, axis=0)
+        x_lo = np.where(cols)[0][0] * s
+        x_hi = np.where(cols)[0][-1] * s
+        y_lo = np.where(rows)[0][0] * s
+        y_hi = np.where(rows)[0][-1] * s
+
+        kept = []
+        pieces_to_add = []
+        n_cut = n_gone = 0
+        ha_lost = 0.0
+        for w in ways:
+            tags = w['tags']
+            cuttable = (tags.get('landuse') in ('farmland', 'farmyard')
+                        and tags.get('natural') != 'wood')
+            if not cuttable:
+                kept.append(w)
+                continue
+            xs = [p[0] for p in w['coords']]
+            ys = [p[1] for p in w['coords']]
+            if max(xs) < x_lo or min(xs) > x_hi or max(ys) < y_lo or min(ys) > y_hi:
+                kept.append(w)
+                continue
+            res = raster_cut_pieces(w['coords'], margin, s,
+                                    FOREST_MARGIN_MIN_HA, FOREST_MARGIN_MIN_WIDTH_M)
+            if res is None:
+                kept.append(w)
+                continue
+            n_cut += 1
+            old_ha = abs(sum(w['coords'][k][0] * w['coords'][k+1][1]
+                             - w['coords'][k+1][0] * w['coords'][k][1]
+                             for k in range(len(w['coords']) - 1))) / 2.0 / 10000.0
+            ha_lost += old_ha - sum(a for _, a in res)
+            base = tags.get('name', '')
+            had_ha = re.search(r' \(\d+(?:\.\d+)? ha\)$', base)
+            if had_ha:
+                base = base[:had_ha.start()]
+            if not res:
+                n_gone += 1
+            for p_idx, (pts, area_ha) in enumerate(res):
+                new_tags = dict(tags)
+                if base:
+                    name = base if len(res) == 1 else f"{base}{chr(ord('a') + p_idx)}"
+                    if had_ha:
+                        name += f" ({area_ha:.1f} ha)"
+                    new_tags['name'] = name
+                pieces_to_add.append((pts, new_tags))
+        ways[:] = kept
+        for pts, tags in pieces_to_add:
+            add_way(pts, tags)
+        print(f"   Forest margin ({FOREST_MARGIN_M:.0f} m): trimmed {n_cut} parcels "
+              f"into {len(pieces_to_add)} pieces ({n_gone} vanished entirely, "
+              f"{ha_lost:.1f} ha returned to the margin).")
+
+    cut_forest_margin()
 
     # 12. Forestry tracks in the south-eastern forest.
     # Three dirt tracks run along contour lines, so machinery works on the level and
