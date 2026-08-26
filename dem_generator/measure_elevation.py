@@ -1,8 +1,11 @@
+import os
 import numpy as np
 from PIL import Image
+Image.MAX_IMAGE_PIXELS = None
 
 def main():
-    img_path = "dem_new_12k.png"
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    img_path = os.path.join(script_dir, "dem_new_12k.png")
     img = Image.open(img_path)
     data = np.array(img, dtype=np.float32)
     

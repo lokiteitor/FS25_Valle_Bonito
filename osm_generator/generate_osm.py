@@ -179,27 +179,16 @@ def main():
     minlat, minlon = local_to_global(0, 8192) # South-West
     maxlat, maxlon = local_to_global(8192, 0) # North-East
 
-    # 2. Yard 7 (SE Farmyard in DEM)
-    # X: 15 to 1015, Y: 7677 to 8177
+    # 2. Yard 7 (Farmyard below Southern Primary Road: 100 ha = 2000m x 500m)
+    # X: 6177 to 8177, Y: 7677 to 8177 (Road is at Y=7650)
     yard7_coords = [
-        (15.0, 7677.0),
-        (1015.0, 7677.0),
-        (1015.0, 8177.0),
-        (15.0, 8177.0),
-        (15.0, 7677.0) # Closed
+        (6177.0, 7677.0),
+        (8177.0, 7677.0),
+        (8177.0, 8177.0),
+        (6177.0, 8177.0),
+        (6177.0, 7677.0) # Closed
     ]
     add_way(yard7_coords, {'landuse': 'farmyard', 'name': 'Yard 7'})
-
-    # 3. Yard Town (Town Farmyard)
-    # X: 7457 to 7557, Y: 1000 to 1500
-    yard_town_coords = [
-        (7457.0, 1000.0),
-        (7557.0, 1000.0),
-        (7557.0, 1500.0),
-        (7457.0, 1500.0),
-        (7457.0, 1000.0) # Closed
-    ]
-    add_way(yard_town_coords, {'landuse': 'farmyard', 'name': 'Town Farmyard'})
 
     # 4. Town Reservoir / East Lake
     # X: 7577 to 8177, Y: 1000 to 2200
@@ -216,12 +205,11 @@ def main():
     # Removed in the new DEM (subsumed by the lake)
 
     # 6. Town
-    # X: 7037 to 7437, Y: 1000 to 2200 - extended south level with the Town
-    # Reservoir, whose southern shore sits at y=2200.
+    # X: 7037 to 7577, Y: 1000 to 2200 (extends to the lake shore)
     town_coords = [
         (7037.0, 1000.0),
-        (7437.0, 1000.0),
-        (7437.0, 2200.0),
+        (7577.0, 1000.0),
+        (7577.0, 2200.0),
         (7037.0, 2200.0),
         (7037.0, 1000.0) # Closed
     ]
@@ -230,7 +218,8 @@ def main():
     # 7. Primary Road (East-West)
     # Passing 15m north of Town (Y: 1000 - 15 = 985)
     # Spans from X: 0 to X: 8192.
-    xs_sec = [7037.0, 7237.0, 7437.0, 7457.0, 7557.0]
+    # Town vertical streets (4 blocks of 100m width in East-West):
+    xs_sec = [7037.0, 7137.0, 7237.0, 7337.0, 7437.0]
     xs_ter_v = [800.0, 1600.0, 2400.0, 3200.0, 4000.0, 4800.0, 5600.0, 6400.0]
     # 7022 is where the Mountain Pass Road (7c) leaves southwards; putting it in
     # the list gives both primaries a shared junction node.
@@ -354,30 +343,19 @@ def main():
     # rail_coords = [(0.0, 970.0), (8192.0, 970.0)]
     # add_way(rail_coords, {'railway': 'rail', 'name': 'Railway'})
 
-    # 9. Secondary Roads (Grid in Town)
-    # The town proper (x 7037-7437) runs down to y=2200 since its extension to
-    # the lake's southern shore; the Town Farmyard streets (x 7457/7557) still
-    # stop at 1500.
-    ys_sec_v = [985.0, 1000.0, 1250.0, 1500.0]
-    ys_sec_v_town = ys_sec_v + [1750.0, 2000.0, 2200.0]
+    # 9. Secondary Roads (Grid in Town - 100m wide x 200m long North-South blocks)
+    # The town proper (X: 7037 to 7577) runs from Y=985 (Primary Road) down to Y=2200.
+    # X spacing: 100m width (streets at xs_sec)
+    # Y spacing: 200m length in North-South direction (streets at Y=1000, 1200, 1400, 1600, 1800, 2000, 2200)
+    ys_sec_h_all = [1000.0 + 200.0 * k for k in range(7)]
+    ys_sec_v_all = [985.0] + ys_sec_h_all
+
     for x in xs_sec:
-        v_coords = [(x, y) for y in (ys_sec_v_town if x <= 7437.0 else ys_sec_v)]
+        v_coords = [(x, y) for y in ys_sec_v_all]
         add_way(v_coords, {'highway': 'secondary'})
 
-    # The horizontal streets reach x=7022 again: the Mountain Pass Road (7c)
-    # runs straight down that line as far as y~1860, which gives the grid its
-    # junctions with the primary network back (section 13 splices the shared
-    # nodes). The streets south of where the road curves away start at the town
-    # itself, and the Town Farmyard rows keep their old x extent.
-    xs_sec_h = xs_sec
-    ys_sec_h = [1000.0, 1250.0, 1500.0]
-    for y in ys_sec_h:
-        h_coords = [(7022.0, y)] + [(x, y) for x in xs_sec_h]
-        add_way(h_coords, {'highway': 'secondary'})
-    xs_sec_town = [7037.0, 7237.0, 7437.0]
-    for y in [1750.0, 2000.0, 2200.0]:
-        h_coords = ([(7022.0, y)] if y < 1860.0 else []) \
-            + [(x, y) for x in xs_sec_town]
+    for y in ys_sec_h_all:
+        h_coords = ([(7022.0, y)] if y < 1860.0 else []) + [(x, y) for x in xs_sec]
         add_way(h_coords, {'highway': 'secondary'})
 
     # The PLSS grid. Defined here rather than in section 9c, where the cells are filled,
@@ -798,12 +776,9 @@ def main():
 
     print("   Generating Northern Farmlands (Horizontal standard, 15m borders)...")
 
-    # Northern parcels kept as yard, not farmland, given as (strip number, X from, X to):
-    # every column of that strip the span touches joins the yard, so widening a yard is
-    # a matter of widening its span. Spans rather than column indices, because the
-    # indices shift whenever the packing changes. (5, 15, 20) is the western corner;
-    # (5, 7400, 7700) faces the town and covers two of the 5 ha columns.
-    north_yards = {(5, 15.0, 20.0), (5, 7400.0, 7700.0)}
+    # Northern parcels kept as yard, not farmland:
+    # (5, 15, 20) is the western corner.
+    north_yards = {(5, 15.0, 20.0)}
 
     # Define 5 strips of height 180m
     strips = [
@@ -821,12 +796,24 @@ def main():
     add_way([(0.0, 200.0), (8192.0, 200.0)], {'highway': 'tertiary'})
     add_way([(0.0, 390.0), (8192.0, 390.0)], {'highway': 'tertiary'})
     add_way([(0.0, 580.0), (8192.0, 580.0)], {'highway': 'tertiary'})
-    add_way([(0.0, 770.0), (8192.0, 770.0)], {'highway': 'tertiary'})
+    # Gap 4 road (Y=770) splits around the merged farmyard (X: 5904.8 to 7025.9)
+    add_way([(0.0, 770.0), (5904.8, 770.0)], {'highway': 'tertiary'})
+    add_way([(7025.9, 770.0), (8192.0, 770.0)], {'highway': 'tertiary'})
     
     # Boundary West (15m offset)
     add_way([(15.0, 15.0), (15.0, 985.0)], {'highway': 'tertiary'})
     # Boundary East (15m offset, which is 8177.0)
     add_way([(8177.0, 15.0), (8177.0, 985.0)], {'highway': 'tertiary'})
+
+    # Fused farmyard N4_4, N4_5, N5_4, N5_5 (X: 5904.8 to 7025.9, Y: 585.0 to 955.0)
+    merged_north_yard_coords = [
+        (5904.8, 585.0),
+        (7025.9, 585.0),
+        (7025.9, 955.0),
+        (5904.8, 955.0),
+        (5904.8, 585.0)
+    ]
+    add_way(merged_north_yard_coords, {'landuse': 'farmyard', 'name': 'Yard N4_N5 (41.5 ha)'})
 
     # Generate fields & vertical roads for each strip
     for s_idx, (y_s, y_e) in enumerate(strips):
@@ -834,8 +821,11 @@ def main():
         parcels = merge_strip_fields(pack_strip_horiz(y_s, y_e, seed=(303 + s_idx)),
                                      field_h, s_idx)
 
-        # Add fields
+        # Add fields (skipping parcels covered by merged_north_yard_coords in strips 4 and 5)
         for p_idx, (x_start, x_end, kind) in enumerate(parcels, 1):
+            label = f'N{s_idx+1}_{p_idx}'
+            if label in ('N4_4', 'N4_5', 'N5_4', 'N5_5'):
+                continue
             coords = [
                 (x_start, y_s),
                 (x_end, y_s),
@@ -843,7 +833,6 @@ def main():
                 (x_start, y_e),
                 (x_start, y_s)
             ]
-            label = f'N{s_idx+1}_{p_idx}'
             if kind == 'Y':
                 add_way(coords, {'landuse': 'farmyard', 'name': f'Yard {label}'})
             else:
@@ -856,6 +845,9 @@ def main():
 
         # Add vertical roads in gaps connecting adjacent horizontal roads
         for rx in roads:
+            # Skip road if it falls inside the merged farmyard (5904.8 to 7025.9) in strips 4 and 5
+            if s_idx in (3, 4) and 5905.0 < rx < 7025.0:
+                continue
             if s_idx == 0:
                 # North border to Gap 1
                 add_way([(rx, 15.0), (rx, 200.0)], {'highway': 'tertiary'})
@@ -1173,7 +1165,7 @@ def main():
             if seg_len < 1e-9:
                 d = np.hypot(chunk[:, 0] - a[0], chunk[:, 1] - a[1])
             else:
-                d = np.abs(np.cross(seg, chunk - a)) / seg_len
+                d = np.abs(seg[0] * (chunk[:, 1] - a[1]) - seg[1] * (chunk[:, 0] - a[0])) / seg_len
             k = int(np.argmax(d))
             if d[k] > tol:
                 k += i0 + 1
@@ -1536,25 +1528,28 @@ def main():
           f"({split_count} split up), dropped {dropped} under 1 ha "
           f"(was {wood_ha:.1f} ha of forest infill).")
 
-    # Pockets too far from any wood to be absorbed by it stay open ground: they are
-    # tagged farmyard only, so they read as yard rather than as forest or field.
+    # Y-polygons: Y1 is farmyard, Y2 and Y3 are forests (wood)
     for i, poly in enumerate(yard_polys):
-        add_way(poly, {
-            'landuse': 'farmyard',
-            'name': f'Open Ground {i+1}'
-        })
-    print(f"   Added {len(yard_polys)} leftover farmyard areas covering {yard_ha:.1f} ha.")
+        p_ha = ring_area_ha(poly)
+        if i == 0:
+            add_way(poly, {
+                'landuse': 'farmyard',
+                'name': f'Yard Y1 ({p_ha:.1f} ha)'
+            })
+        else:
+            add_way(poly, {
+                'natural': 'wood',
+                'landuse': 'farmyard',
+                'name': f'Forest Y{i+1} ({p_ha:.1f} ha)'
+            })
+    print(f"   Converted leftover pockets: Yard Y1 (farmyard), Forest Y2 & Forest Y3 (woods).")
 
-    # 11b. Fields retired from farming. These parcels stay in the map as open
-    # ground (farmyard) instead of farmland: mostly infill slivers and road-cut
-    # leftovers not worth working. Matched by their base field token, with or
-    # without the trailing hectare suffix.
-    RETIRED_FIELDS = {
-        'I2', 'I3', 'I4', 'I5', 'I8', 'I11', 'I15', 'I19', 'I22', 'I25', 'I28',
-        'I31', 'I33', 'I34', 'I36', 'I44', '51b', '33a', '26a',
-    }
+    # 11b. Fields retired from farming (disabled - all fields kept as active farmland)
+    RETIRED_FIELDS = set()
 
     def retire_fields():
+        if not RETIRED_FIELDS:
+            return
         pat = re.compile(r'^Field (\S+)( \(\d+(?:\.\d+)? ha\))?$')
         n_retired = 0
         for w in ways:
