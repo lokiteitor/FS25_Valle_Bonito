@@ -6,8 +6,11 @@ import xml.etree.ElementTree as ET
 import numpy as np
 from PIL import Image, ImageDraw
 
-# The 12288x12288 DEM is far above Pillow's default decompression-bomb limit.
+# The DEM canvas is far above Pillow's default decompression-bomb limit.
 Image.MAX_IMAGE_PIXELS = None
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import map_source as ms
 
 def main():
     print("=== DEM 3D Viewer Asset Generator ===")
@@ -25,13 +28,22 @@ def main():
     output_texture_path = os.path.join(current_dir, "dem_1024_texture.png")
     output_html_path = os.path.join(current_dir, "dem_viewer_3d.html")
     
-    # Target size for the web assets (1024x1024 is highly detailed but lightweight enough)
+    # Target size for the web assets. The heightmap stays at 1024 (the mesh never asks
+    # for more than 1024 vertices a side), but the colour texture is painted at twice
+    # that: the hedgerows between fields are only ~8 m wide, which is barely one pixel
+    # at 1024 over a 6 km canvas, and the field pattern washes out into one green blob.
     target_size = 1024
 
-    # Real-world dimensions of the generated terrain (see dem_generator/generate_new_dem_12k.py):
-    # a 12288x12288m canvas at 1px = 1m, with the 8192x8192m playable area centered in it.
-    dem_size_m = 12288
-    playable_size_m = 8192
+    # Real-world dimensions of the generated terrain. Taken from map_source so the
+    # viewer cannot drift out of step with the DEM and OSM generators.
+    dem_size_m = int(ms.CANVAS_M)
+    playable_size_m = int(ms.PLAYABLE_M)
+
+    # Colour texture resolution: aim for ~3 m per pixel so an 8 m hedgerow is still a
+    # couple of pixels wide, capped at 4096 to keep the web asset a sane size.
+    texture_size = 1 << max(11, min(12, int(round(np.log2(dem_size_m / 3.0)))))
+    print(f"Texture resolution: {texture_size}x{texture_size} "
+          f"({dem_size_m/texture_size:.1f} m per pixel)")
     
     # 1. Load and process heightmap
     print(f"Loading heightmap {input_path}...")
@@ -42,6 +54,8 @@ def main():
     print(f"Downsampling to {target_size}x{target_size}...")
     img_resized = img.resize((target_size, target_size), Image.Resampling.BILINEAR)
     data_resized = np.array(img_resized, dtype=np.float32)
+    data_texture = np.array(img.resize((texture_size, texture_size),
+                                       Image.Resampling.BILINEAR), dtype=np.float32)
     
     # Min/Max in raw values and meters
     h_min_raw = data_resized.min()
@@ -134,7 +148,7 @@ def main():
     # Generate the base color image (1024x1024)
     # Default background is a clean light gray
     bg_color = (204, 204, 204) # #CCCCCC
-    base_color_img = Image.new("RGB", (target_size, target_size), bg_color)
+    base_color_img = Image.new("RGB", (texture_size, texture_size), bg_color)
     draw = ImageDraw.Draw(base_color_img)
     
     # Style rules matched against the way tags, in priority order.
@@ -142,17 +156,17 @@ def main():
     # natural=wood is checked before landuse: forests are tagged with both
     # natural=wood and landuse=farmyard, and the forest reading is the meaningful one.
     style_rules = [
-        ("natural", "water", "#2563EB", 3),       # Water blue
-        ("water", None, "#2563EB", 3),
-        ("natural", "wood", "#166534", 3),        # Forest green
-        ("landuse", "forest", "#166534", 3),
-        ("landuse", "farmyard", "#EC4899", 3),    # Pink for farmyard
-        ("landuse", "farmland", "#86EFAC", 2),    # Light green for farmland
-        ("railway", None, "#F59E0B", 3),          # Amber railway
-        ("highway", "primary", "#111827", 5),     # Road hierarchy, darkest = biggest
-        ("highway", "secondary", "#374151", 4),
-        ("highway", "tertiary", "#6B7280", 2),
-        ("highway", None, "#9CA3AF", 2),
+        ("natural", "water", "#2563EB", 4),       # Water blue
+        ("water", None, "#2563EB", 4),
+        ("natural", "wood", "#166534", 4),        # Forest green
+        ("landuse", "forest", "#166534", 4),
+        ("landuse", "farmyard", "#EC4899", 4),    # Pink for farmyard
+        ("landuse", "farmland", "#86EFAC", 3),    # Light green for farmland
+        ("railway", None, "#F59E0B", 5),          # Amber railway
+        ("highway", "primary", "#111827", 8),     # Road hierarchy, darkest = biggest
+        ("highway", "secondary", "#374151", 5),
+        ("highway", "tertiary", "#78716C", 3),
+        ("highway", None, "#9CA3AF", 3),
     ]
 
     def hex_to_rgb(hex_str):
@@ -165,11 +179,11 @@ def main():
                 return hex_to_rgb(hex_color), width
         return None, None
 
-    # Convert lat/lon to pixel coordinates on the 1024x1024 texture.
-    # The DEM covers 12288m but only the central 8192m correspond to the OSM area:
-    #   osm_px = 1024 * (8192/12288) = 682.67px, offset = (1024 - 682.67) / 2 = 170.67px
-    osm_band = target_size * (playable_size_m / dem_size_m)
-    osm_offset = (target_size - osm_band) / 2
+    # Convert lat/lon to pixel coordinates on the texture. The DEM canvas is wider than
+    # the playable area, and only the playable band corresponds to the OSM data:
+    #   band = texture_size * playable/canvas, centred, so the margins stay bare terrain.
+    osm_band = texture_size * (playable_size_m / dem_size_m)
+    osm_offset = (texture_size - osm_band) / 2
 
     def to_pixels(coords):
         pts = []
@@ -209,7 +223,7 @@ def main():
 
         print(f"Painted {len(polygons)} areas and {len(lines)} linear features onto the texture.")
 
-    # Dashed outline of the playable 8192m area, so the border is readable in the texture.
+    # Dashed outline of the playable area, so the border is readable in the texture.
     border_color = (255, 255, 255)
     b0, b1 = osm_offset, osm_offset + osm_band
     for start in range(int(b0), int(b1), 16):
@@ -230,10 +244,10 @@ def main():
 
             ls = LightSource(azdeg=315, altdeg=45)
             rgb_input = np.array(color_img, dtype=np.float32) / 255.0
-            # dx/dy = metres per texture pixel (12288m / 1024px = 12m)
-            px_m = dem_size_m / target_size
-            shaded = ls.shade_rgb(rgb_input, elevation=data_resized / 100.0, blend_mode='overlay',
-                                  vert_exag=1.5, dx=px_m, dy=px_m)
+            # The elevation grid has to match the image being shaded pixel for pixel.
+            px_m = dem_size_m / texture_size
+            shaded = ls.shade_rgb(rgb_input, elevation=data_texture / 100.0,
+                                  blend_mode='overlay', vert_exag=1.5, dx=px_m, dy=px_m)
             Image.fromarray((shaded * 255).astype(np.uint8)).save(path)
             print(f"Saved shaded {label} to: {path}")
         except Exception as e:
@@ -285,7 +299,7 @@ def main():
         soil_band = np.array(Image.fromarray(soil_idx_full, mode="L").resize(
             (band_px, band_px), Image.Resampling.NEAREST))
 
-        soil_index_map = np.full((target_size, target_size), SOIL_NONE, dtype=np.uint8)
+        soil_index_map = np.full((texture_size, texture_size), SOIL_NONE, dtype=np.uint8)
         soil_index_map[offset_px:offset_px + band_px, offset_px:offset_px + band_px] = soil_band
 
         # Lookup image for the viewer: the soil index lives in the red channel.
@@ -295,7 +309,7 @@ def main():
         Image.fromarray(index_rgb, mode="RGB").save(output_soil_index_path)
         print(f"Saved soil index lookup to: {output_soil_index_path}")
 
-        soil_color_img = np.full((target_size, target_size, 3), bg_color, dtype=np.uint8)
+        soil_color_img = np.full((texture_size, texture_size, 3), bg_color, dtype=np.uint8)
         for i, meta in enumerate(soil_types):
             soil_color_img[soil_index_map == i] = meta["color"]
 
@@ -1367,7 +1381,7 @@ def main():
             
             document.getElementById('mesh-vertices').innerText = (res * res).toLocaleString();
             
-            // Geometry dimensions matching real map scale (8192m x 8192m)
+            // Geometry spans the whole DEM canvas; the playable area is the centre of it
             terrainGeom = new THREE.PlaneGeometry(MAP_SIZE, MAP_SIZE, res - 1, res - 1);
             
             // Displace plane vertices along Y (originally Z before rotation)
@@ -1935,7 +1949,7 @@ def main():
                     probePanel.style.display = 'block';
                     const realY = point.y / verticalExaggeration;
                     
-                    // Local coordinates inside the playable area (0..8192, origin NW), which is
+                    // Local coordinates inside the playable area (0..PLAYABLE_SIZE, origin NW),
                     // the coordinate system used by the OSM and DEM generators.
                     const localX = x + PLAYABLE_SIZE / 2;
                     const localY = z + PLAYABLE_SIZE / 2;

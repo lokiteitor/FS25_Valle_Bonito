@@ -1,58 +1,75 @@
+#!/usr/bin/env python3
+"""Elevation report for the generated heightmap.
+
+Checks the things that are easy to break and hard to see in the image itself: that the
+canvas is the size and encoding the rest of the project expects, and that the ground is
+as level as it is meant to be.
+"""
 import os
+
 import numpy as np
 from PIL import Image
 Image.MAX_IMAGE_PIXELS = None
 
+from generate_new_dem_12k import CANVAS_M, PLAYABLE_M, OFFSET_M, BASE_Z_M
+
+FLAT_TOL_M = 0.01        # a clean canvas should be level to within this
+
+
 def main():
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    img_path = os.path.join(script_dir, "dem_new_12k.png")
-    img = Image.open(img_path)
-    data = np.array(img, dtype=np.float32)
-    
-    offset_m = 2048.0
-    
-    # 1. Reservoir area
-    rx0 = int(7758.0 + offset_m)
-    rx1 = int(8118.0 + offset_m)
-    ry0 = int(1176.0 + offset_m)
-    ry1 = int(1536.0 + offset_m)
-    
-    res_sub = data[ry0:ry1+1, rx0:rx1+1]
-    res_min_raw = res_sub.min()
-    res_min_m = res_min_raw / 100.0
-    
-    # 2. Playable area SE quadrant (or full playable area)
-    # Playable area bounds are x, y in [2048, 10240]
-    px0 = int(2048)
-    px1 = int(10240)
-    py0 = int(2048)
-    py1 = int(10240)
-    
-    playable_sub = data[py0:py1+1, px0:px1+1]
-    max_idx = np.unravel_index(np.argmax(playable_sub), playable_sub.shape)
-    
-    max_y_rel = max_idx[0]
-    max_x_rel = max_idx[1]
-    max_y_abs = py0 + max_y_rel
-    max_x_abs = px0 + max_x_rel
-    
-    max_raw = playable_sub[max_idx]
-    max_m = max_raw / 100.0
-    
-    diff_raw = max_raw - res_min_raw
-    diff_m = diff_raw / 100.0
-    
-    print(f"Reservoir Bottom Minimum Height:")
-    print(f"  Raw value: {res_min_raw:.2f}")
-    print(f"  In meters: {res_min_m:.2f} m")
-    print(f"Playable Area Maximum Height (Peak):")
-    print(f"  Raw value: {max_raw:.2f}")
-    print(f"  In meters: {max_m:.2f} m")
-    print(f"  Location (X, Y) relative to playable: ({max_x_abs - offset_m:.1f}, {max_y_abs - offset_m:.1f})")
-    print(f"  Location (X, Y) absolute: ({max_x_abs:.1f}, {max_y_abs:.1f})")
-    print(f"Height Difference:")
-    print(f"  Raw units difference: {diff_raw:.2f}")
-    print(f"  In meters: {diff_m:.2f} m")
+    dem_path = os.path.join(script_dir, "dem_new_12k.png")
+    if not os.path.exists(dem_path):
+        print(f"Error: {dem_path} not found. Run generate_new_dem_12k.py first.")
+        return
+
+    img = Image.open(dem_path)
+    raw = np.array(img, dtype=np.float32) / 100.0
+    play = raw[OFFSET_M:OFFSET_M + PLAYABLE_M, OFFSET_M:OFFSET_M + PLAYABLE_M]
+
+    print(f"=== Elevation report: {dem_path} ===")
+    print(f"canvas   {raw.shape[1]}x{raw.shape[0]} px   "
+          f"{raw.min():7.2f} .. {raw.max():7.2f} m")
+    print(f"playable {play.shape[1]}x{play.shape[0]} m      "
+          f"{play.min():7.2f} .. {play.max():7.2f} m   "
+          f"(relief {play.max() - play.min():.2f} m)")
+
+    # --- geometry and encoding
+    print("\ngeometry:")
+    ok_size = raw.shape == (CANVAS_M, CANVAS_M)
+    print(f"   canvas {CANVAS_M}x{CANVAS_M} px      "
+          + ("ok" if ok_size else f"   <-- got {raw.shape[1]}x{raw.shape[0]}"))
+    print(f"   playable {PLAYABLE_M} m at offset {OFFSET_M} m   "
+          + ("ok" if OFFSET_M * 2 + PLAYABLE_M == CANVAS_M
+             else "   <-- playable area is not centred"))
+    # Giants reads the PNG as 16-bit centimetres; a mode that is not integral, or a value
+    # past 65535 cm, will not survive the import.
+    print(f"   PIL mode {img.mode!r}                "
+          + ("ok" if img.mode in ("I", "I;16") else "   <-- not a 16-bit integer image"))
+    top = float(np.max(raw)) * 100.0
+    print(f"   peak {top:.0f} cm                    "
+          + ("ok" if top <= 65535.0 else "   <-- past the 16-bit ceiling"))
+
+    # --- flatness
+    spread = float(play.max() - play.min())
+    off = float(np.abs(np.median(play) - BASE_Z_M))
+    print("\nflatness (playable area):")
+    print(f"   median {np.median(play):.2f} m, expected {BASE_Z_M:.2f} m"
+          + ("" if off <= FLAT_TOL_M else "   <-- off the datum"))
+    print(f"   spread {spread:.4f} m"
+          + ("" if spread <= FLAT_TOL_M else "   <-- not level"))
+    if spread > FLAT_TOL_M:
+        peak = np.unravel_index(int(np.argmax(play)), play.shape)
+        pit = np.unravel_index(int(np.argmin(play)), play.shape)
+        print(f"   highest {play[peak]:.2f} m at X={peak[1]} Y={peak[0]}")
+        print(f"   lowest  {play[pit]:.2f} m at X={pit[1]} Y={pit[0]}")
+
+    # --- slope
+    gy, gx = np.gradient(play)      # 1 px = 1 m, so the gradient is already a slope
+    slope = np.degrees(np.arctan(np.hypot(gx, gy)))
+    print(f"\nslope deg  median {np.median(slope):.2f}   "
+          f"p99 {np.percentile(slope, 99):.2f}   max {slope.max():.2f}")
+
 
 if __name__ == "__main__":
     main()
