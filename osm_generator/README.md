@@ -1,76 +1,100 @@
 # osm_generator
 
-`generate_osm.py` writes `map.osm` for the 8192 x 8192 m playable area.
+`generate_osm.py` writes `map.osm` for the 8192 x 8192 m playable area: northwest Iowa
+farm country, laid out from `map_layout.py` at the root of the tree.
 
-- `map_extent.py`         centre, size and projection - the one source of truth
-- `generate_osm.py`       write map.osm: the extent, and nothing else
+- `map_extent.py`         re-exports the projection from `map_layout.py`
+- `generate_osm.py`       write map.osm from the shared layout
 - `visualize_osm.py`      render map.osm to map_osm_visual.png
-- `check_forest_nodes.py` feature inventory (counts, areas, road network)
+- `check_forest_nodes.py` inventory and invariants; exits 1 if one is broken
 
-Standard library plus matplotlib for the render; no numpy, scipy or Pillow, and no
-dependency on `map_source.py` (shared with the DEM generator, currently missing from
-the tree).
+Standard library plus matplotlib for the render. The DEM has to run first: the parcelling
+reads `dem_generator/terrain_stats.json` to make smaller fields on broken ground.
 
-    python3 generate_osm.py        # -> map.osm, 0 nodes, 0 ways
-    python3 check_forest_nodes.py  # -> every feature class reports "none"
-    python3 visualize_osm.py       # -> map_osm_visual.png, the empty frame
+    python3 ../dem_generator/generate_new_dem_12k.py
+    python3 generate_osm.py         # -> map.osm
+    python3 check_forest_nodes.py   # -> inventory + invariants
+    python3 visualize_osm.py        # -> map_osm_visual.png
 
 ## Map centre
 
-    LAT_CENTER = 49.1000
-    LON_CENTER = 31.3000
+    LAT_CENTER =  43.0600
+    LON_CENTER = -95.2800
 
-These live in `map_extent.py`, and everything else on the map is derived from them: to
-move the map, change those two numbers and re-run `generate_osm.py`. If `map_source.py`
-is ever restored, its LAT_CENTER / LON_CENTER must be set to match, or the DEM and the
-vectors will be built for different places.
-
-### Why this centre
-
-Cherkasy oblast forest-steppe: deep chernozem, the highest-yielding arable belt in
-Ukraine. Round coordinates, and the 8 x 8 km square lands entirely on farmland - clear
-of the city and well west of the Dnipro reservoir, which sits at roughly 32.3 E at this
-latitude.
+They live in `map_layout.py`, and everything else is derived from them. Royal, Clay
+County, Iowa: the western edge of the Des Moines Lobe, deep prairie soils, and the flat
+open country the map is modelled on. Moving the map means changing those two numbers and
+re-running both generators.
 
 ## Extent
 
-The playable area is 8192 x 8192 m. Local coordinates are playable metres, x east,
-y south from the north edge, so the centre of the map sits at (4096, 4096).
+The playable area is 8192 x 8192 m. Local coordinates are playable metres, x east, y
+south from the north edge, so the centre of the map sits at (4096, 4096).
 
 Projection: equirectangular about the centre, 111111.0 m per degree of latitude and
-111111.0 * cos(LAT_CENTER) m per degree of longitude.
+111111.0 * cos(LAT_CENTER) m per degree of longitude, which puts the corners at
 
-    lat = LAT_CENTER - (y - 4096) / 111111.0
-    lon = LON_CENTER + (x - 4096) / (111111.0 * cos(radians(LAT_CENTER)))
+    minlat  43.0231359631      south edge, y = 8192
+    maxlat  43.0968640369      north edge, y = 0
+    minlon -95.3304546325      west edge,  x = 0
+    maxlon -95.2295453675      east edge,  x = 8192
 
-Which puts the corners of the playable area at:
+These are the four values in the `<bounds>` element of `map.osm`. The 3D viewer stretches
+that box to fill the playable square whatever it says, so it has to stay right.
 
-    minlat  49.0631359631      south edge, y = 8192
-    maxlat  49.1368640369      north edge, y = 0
-    minlon  31.2436967483      west edge,  x = 0
-    maxlon  31.3563032517      east edge,  x = 8192
+## What is on the map
 
-These are the four values in the `<bounds>` element of `map.osm`.
+| Feature | Tags |
+|---|---|
+| 420th Street, straight east-west through the middle | `highway=primary`, `ref=B40` |
+| The Public Land Survey grid, one mile apart | `highway=secondary` |
+| Farm lanes and village streets | `highway=tertiary` |
+| The branch line, straight north-south, crossing the primary at the centre | `railway=rail` |
+| Three river bridges and three creek culverts | the way's own tag plus `bridge=yes`, `layer=1` |
+| 200 fields, 3 to 84 ha, 72% of the playable area | `landuse=farmland` |
+| Three villages, seven farmsteads, the co-op elevator | `landuse=farmyard` |
+| River timber, farmstead groves, snow fences and field hedgerows | `natural=wood` + `landuse=farmyard` + `leaf_type` |
+| The river, the tributary feeding the lake, and the lake itself | `natural=water` (+ `water=river` / `water=lake`) |
 
-## State
+The vocabulary is closed on purpose: it is exactly what `visualize_osm.py` and
+`visualizer/create_3d_viewer.py` know how to draw, and both drop anything else without a
+word. That is why the floodplain pasture carries no tag of its own - it is simply ground
+the parcelling leaves out of cultivation, which is what wet bottom land amounts to
+anyway. `check_forest_nodes.py` verifies that no way was emitted that neither renderer
+can see.
 
-`map.osm` carries the extent only - no nodes, no ways. Every feature the English layout
-had (fields, woods, farmyards, roads, river and lake) is gone, and `generate_osm.py`
-now writes that empty file rather than rebuilding them, so the result stays clean.
+## Invariants
 
-The tag vocabulary is unchanged and both reader scripts still understand it, so
-features can be laid back on top without touching either:
+`check_forest_nodes.py` fails the build if any of these break:
 
-    landuse=farmland                              fields
-    landuse=farmyard                              village, industry pads, yards
-    natural=wood + landuse=farmyard + leaf_type   woodland
-    natural=water                                 the river
-    highway=primary / secondary / tertiary        road hierarchy
+- at most 200 fields, none over 100 ha, none under 3 ha
+- no field inside the river basin: 348 m clear of the river centreline (the edge of the
+  floodplain the DEM cuts), 125 m clear of the creek, and outside the lake margin
+- no timber standing in the water
+- every node inside the playable area
+- every area closed on its own first node - the 3D viewer decides polygon versus line by
+  comparing the first and last coordinate exactly
+- every way carrying a tag both renderers draw
 
-Two files still hold the old English layout centred on 52.0620, -1.3400:
+## Windbreaks
 
-- `generate_osm_bocage.py` - the previous generator, kept because it is the only copy
-  and nothing here is in git history. Not part of the build: it needs the missing
-  `map_source.py`, and it writes to `map.osm`, so running it would overwrite the clean
-  file.
-- `custom_osm.osm` - a JOSM re-save of an earlier version of the map.
+Three jobs, and the job decides the placement:
+
+- **Farmstead groves** around the buildings, one way per side with the lane side left
+  open, for the heating and cooling bill.
+- **Living snow fences** upwind of a road so the drift piles up in the trees. The winter
+  wind is out of the northwest, so they stand on the **north** side of an east-west road
+  and the **west** side of a north-south one - which is the south and east edge of a
+  block. On the wrong side it is just a hedge.
+- **Field hedgerows** across the inside of a block. They are laid before the parcelling,
+  so the fields form either side of the trees rather than being cut up afterwards.
+
+River timber is two strips, one per bank, starting outside the water's edge and
+alternating sides along the reach. Buffering the centreline instead would put the inner
+22 m of every wood in the river.
+
+## The bocage generator
+
+`generate_osm_bocage.py` is the previous English layout, centred on 52.0620, -1.3400.
+Reference only: it needs a `map_source` API that no longer exists, and it writes to
+`map.osm`, so running it would overwrite the real file.
