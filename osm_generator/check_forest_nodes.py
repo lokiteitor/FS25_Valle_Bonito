@@ -223,6 +223,23 @@ def main():
     check("no tree row laid over a yard", over_yard == 0,
           f"{over_yard} of {len(rings['wood'])}")
 
+    # Nothing the parcelling or the planting places may stand in the clean strip along
+    # the boundary: a field cut off square by the map edge reads as half a field, and
+    # that strip is the ground the rim mountains rise out of.
+    in_strip = []
+    closest = -1e9
+    for r in rings['farmland'] + rings['wood'] + yards:
+        d = max(ml.playable_sdf(x, y) for x, y in r)
+        closest = max(closest, d)
+        # half a metre of slack, the same the boundary check allows: the coordinates
+        # made the round trip through lat/lon and come back a hair off
+        if d > -ml.EDGE_CLEAR_M + 0.5:
+            in_strip.append(d)
+    check(f"nothing inside the {ml.EDGE_CLEAR_M:.0f} m strip along the boundary",
+          not in_strip,
+          f"{len(in_strip)} way(s) in it" if in_strip
+          else f"closest way is {-closest:.0f} m in from the boundary")
+
     # The parcelling cuts its blocks on the corridor alignments, but 270th Avenue sits
     # off the section line by the width of the railway's right of way. While the blocks
     # were cut on the grid instead, the road ran 26 m inside the field beside it.

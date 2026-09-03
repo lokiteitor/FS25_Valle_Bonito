@@ -133,13 +133,25 @@ def _edge_point(inside_pt, outside_pt, lo, hi):
 def clamp_ring(ring):
     """Pull a ring back inside the playable square.
 
-    The river and timber polygons are the centreline buffered outwards, so where the
-    river leaves the map the buffer overhangs the edge by up to its own width. Clamping
-    is what a map boundary does anyway; the alternative is nodes outside the declared
-    bounds, which the 3D viewer would stretch the whole map to fit.
+    The river polygons are the centreline buffered outwards, so where the river leaves
+    the map the buffer overhangs the edge by up to its own width. Clamping is what a map
+    boundary does anyway; the alternative is nodes outside the declared bounds, which the
+    3D viewer would stretch the whole map to fit. Water is the only thing clamped: it has
+    to leave the map, and folding the overhang onto the boundary costs it nothing.
     """
     return [(min(max(x, 0.0), ml.PLAYABLE_M), min(max(y, 0.0), ml.PLAYABLE_M))
             for x, y in ring]
+
+
+def strip_ring(ring):
+    """Cut a planted ring back to the clean strip.
+
+    Clipped, not clamped: clamping folded the part of a timber strip that hangs over the
+    boundary onto the boundary itself, and put a run of nodes straight across the river
+    channel. What comes back has the same straight edge 100 m in that the fields have.
+    """
+    m = ml.EDGE_CLEAR_M
+    return ml.clip_ring_to_rect(ring, m, m, ml.PLAYABLE_M - m, ml.PLAYABLE_M - m)
 
 
 # ==================================================================================
@@ -171,10 +183,13 @@ def emit_woods(osm):
     n = 0
     tags = {'natural': 'wood', 'landuse': 'farmyard', 'leaf_type': 'broadleaved'}
     for ring in ml.river_woods():
-        osm.area(clamp_ring(ring), dict(tags, name='River timber'))
+        ring = strip_ring(ring)
+        if ml.ring_area_ha(ring) < 0.15:
+            continue
+        osm.area(ring, dict(tags, name='River timber'))
         n += 1
     for wb in ml.windbreaks():
-        ring = clamp_ring(wb['ring'])
+        ring = strip_ring(wb['ring'])
         if ml.ring_area_ha(ring) < 0.15:
             continue
         osm.area(ring, dict(tags, name=wb['name']))
@@ -190,7 +205,7 @@ def emit_pads(osm):
     # The grain elevator by the tracks is what put the town there in the first place.
     # Its rectangle lives in map_layout with every other pad, so the parcelling keeps
     # fields off it and the DEM flattens the ground under it.
-    for p in ml.industry_pads():
+    for p in ml.industry_pads() + ml.lot_pads():
         osm.area(p['ring'], {'landuse': 'farmyard', 'building': 'industrial',
                              'name': p['name']})
     return len(ml.pads())

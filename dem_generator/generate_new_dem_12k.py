@@ -72,7 +72,8 @@ STREAMS = {'warp_x1': 0, 'warp_y1': 1, 'warp_x2': 2, 'warp_y2': 3,
            'fbm_2600': 10, 'fbm_1450': 11, 'fbm_900': 12, 'fbm_560': 13,
            'fbm_340': 14, 'fbm_210': 15, 'fbm_130': 16,
            'rough_90': 21, 'rough_55': 22, 'lakebed': 30,
-           'micro': 40, 'dither': 41}
+           'micro': 40, 'dither': 41,
+           'rim_ridge': 50, 'rim_spur': 51, 'rim_detail': 52}
 
 # 0.45 m/km. Any more and the regional tilt alone eats a third of the relief budget
 # while contributing 0.06 degrees of slope - it buys height difference the map cannot
@@ -108,6 +109,27 @@ PLATFORM_FEATHER_ANGLE = math.radians(4.0)
 PIN_BLEND_M = 400.0                   # how far a level-crossing correction is spread
 
 STATS_GRID = 128                      # terrain_stats.json resolution
+
+# --- the non-playable rim --------------------------------------------------------------
+# Iowa has no mountains. These are not Iowa: they are the wall that closes the horizon
+# off past the boundary, so the player sees hills rather than the flat plate the canvas
+# would otherwise end on. Everything about them is measured outwards from the playable
+# boundary, and the apron in front of them is left exactly as the landscape made it -
+# the ground must not change character at the edge of play.
+RIM_APRON_M = ml.RIM_APRON_M          # 500 m of untouched ground first
+RIM_HEIGHT_M = ml.RIM_HEIGHT_M        # the highest summits, above the ground they stand on
+RIM_RISE_M = 900.0                    # run from the apron to full height: ~12 deg flanks
+RIM_RIDGE_LAM_M = 1500.0              # summits and saddles along the rim
+RIM_SPUR_LAM_M = 430.0                # spurs and gullies down the flanks
+RIM_DETAIL_LAM_M = 170.0
+RIM_DETAIL_M = 9.0
+RIM_LOW = 0.34                        # a saddle is this fraction of a summit
+# The river leaves the map twice, and the rim is not allowed to dam it. The lift is held
+# off the valley the river has already cut - `wall_w` out from the centreline, the same
+# width the valley wall uses inside the map - and comes back over RIM_GORGE_FEATHER_M,
+# so the water runs out through a gorge in the mountains instead of into their flank.
+RIM_GORGE_HALF_W_M = ml.RIVER['wall_w']
+RIM_GORGE_FEATHER_M = 700.0
 
 
 def rng_for(name):
@@ -490,6 +512,53 @@ def apply_pads(z, X, Y):
 # ==================================================================================
 # output
 # ==================================================================================
+def apply_rim_mountains(z, X, Y):
+    """Raise the non-playable border into mountains.
+
+    Added last, on top of the finished terrain, and by addition rather than by blending:
+    everything already built in the border - the roads leaving the map, the river valley
+    running out of it - keeps its own shape and is carried up the flank with the ground,
+    instead of being smeared out by a second surface fighting the first.
+
+    The lift is driven by the distance outside the playable square, so the band has the
+    same width along every side. It is exactly zero inside, which is what keeps the
+    playable area and the first RIM_APRON_M the player can see past its edge untouched.
+
+    The distance is a 4-norm rather than a plain maximum: the maximum is what a square
+    ring is, but its gradient turns a corner along the diagonal and the ramp creases
+    there - four straight seams running out of the corners of the map, plain to see
+    under a hillshade. The 4-norm rounds the corner and is the perpendicular distance
+    everywhere along a side, which is the only place it has to be exact.
+    """
+    dx = np.maximum(np.maximum(-X, X - PLAYABLE_M), 0.0)
+    dy = np.maximum(np.maximum(-Y, Y - PLAYABLE_M), 0.0)
+    d = (dx ** 4 + dy ** 4) ** 0.25
+    t = ops.smoothstep((d - RIM_APRON_M) / RIM_RISE_M)
+    if not np.any(t > 0.0):
+        return z
+
+    Xc, Yc = X + OFFSET_M, Y + OFFSET_M
+    ridge = ops.value_noise(Xc, Yc, RIM_RIDGE_LAM_M, rng_for('rim_ridge'), CANVAS_M)
+    spur = ops.value_noise(Xc, Yc, RIM_SPUR_LAM_M, rng_for('rim_spur'), CANVAS_M)
+    detail = ops.value_noise(Xc, Yc, RIM_DETAIL_LAM_M, rng_for('rim_detail'), CANVAS_M)
+
+    # Summits and saddles along the rim, spurs across it, texture on the flanks. Every
+    # term goes into the shape factor before it is clipped at 1, so RIM_HEIGHT_M is a
+    # ceiling the tallest summit reaches rather than a number the noise overshoots by
+    # however much the last octave happened to add.
+    shape = RIM_LOW + (1.0 - RIM_LOW) * ops.smoothstep(0.5 + 0.42 * ridge) \
+        + 0.11 * spur + (RIM_DETAIL_M / RIM_HEIGHT_M) * detail
+    h = RIM_HEIGHT_M * t * np.clip(shape, 0.10, 1.0)
+
+    # The river cuts the rim rather than climbing it. Held off its own valley and
+    # feathered back up, what the lift leaves behind is the valley itself, with 200 m of
+    # mountain either side of it: the gorge the water runs out through.
+    d_river, _ = ops.polyline_field(
+        X, Y, ml.river_axis(), RIM_GORGE_HALF_W_M + RIM_GORGE_FEATHER_M + 100.0)
+    h *= ops.smoothstep((d_river - RIM_GORGE_HALF_W_M) / RIM_GORGE_FEATHER_M)
+    return z + h
+
+
 def write_stats(z, X, Y, path):
     """A coarse height and roughness grid for the OSM generator.
 
@@ -748,17 +817,26 @@ def main():
     land = play[r_play > 1.02]
     z = z + (DATUM_P01_M - float(np.percentile(land, 0.1)))
 
+    # The stats grid covers the playable area only, so the rim cannot reach it either
+    # way; writing it first keeps that obvious.
     write_stats(z, X, Y, out_stats)
     print(f"   {os.path.basename(out_stats)}")
 
-    print(f"8. Writing '{os.path.basename(out_dem)}'...")
+    print(f"8. Rim mountains: {RIM_APRON_M:.0f} m of apron, then up to "
+          f"{RIM_HEIGHT_M:.0f} m...")
+    z = apply_rim_mountains(z, X, Y)
+    p_apron = int((OFFSET_M - RIM_APRON_M) / WORK_DX)
+    print(f"   rim peaks at {float(z.max()):.1f} m, apron at most "
+          f"{float(z[p_apron:-p_apron, p_apron:-p_apron].max()):.1f} m")
+
+    print(f"9. Writing '{os.path.basename(out_dem)}'...")
     raw = write_dem(z, built, out_dem)
     play_cm = raw[OFFSET_M:OFFSET_M + PLAYABLE_M, OFFSET_M:OFFSET_M + PLAYABLE_M]
     print(f"   canvas   {raw.min() / 100:.2f} .. {raw.max() / 100:.2f} m")
     print(f"   playable {play_cm.min() / 100:.2f} .. {play_cm.max() / 100:.2f} m "
           f"(relief {(int(play_cm.max()) - int(play_cm.min())) / 100:.1f} m)")
 
-    print("9. Visualisations...")
+    print("10. Visualisations...")
     draw_figures(raw, out_vis, out_detail)
     print(f"   {out_vis}\n   {out_detail}")
 

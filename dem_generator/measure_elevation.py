@@ -21,6 +21,8 @@ import math
 import os
 import sys
 
+from collections import defaultdict
+
 import numpy as np
 from PIL import Image
 Image.MAX_IMAGE_PIXELS = None
@@ -81,6 +83,48 @@ def main():
     check("under the 16-bit ceiling", float(raw.max()) <= min(65535.0, Z_MAX_CM),
           f"peak {float(raw.max()):.0f} cm")
     check("no ground at zero", float(raw.min()) > 0.0, f"floor {float(raw.min()):.0f} cm")
+
+    # ---------------------------------------------------------------- the rim
+    # The border is decoration, but it has two jobs it can fail at: it must close the
+    # horizon off, and it must not creep into the ground the player can see past the
+    # boundary. The apron is checked by its slope rather than by its height - the
+    # landscape out there is a couple of metres higher than the playable ground anyway,
+    # so a height comparison would pass with a mountain leaning over the fence, while
+    # 12 degree flanks show up in the gradient at once.
+    print("\nthe non-playable rim:")
+    a = int(ml.RIM_APRON_M)
+    apron = np.concatenate([z[o - a:o, o - a:o + PLAYABLE_M + a].ravel(),
+                            z[o + PLAYABLE_M:o + PLAYABLE_M + a,
+                              o - a:o + PLAYABLE_M + a].ravel(),
+                            z[o:o + PLAYABLE_M, o - a:o].ravel(),
+                            z[o:o + PLAYABLE_M, o + PLAYABLE_M:o + PLAYABLE_M + a].ravel()])
+    apron_med = float(np.median(apron))
+    north = ops.slope_deg(z[o - a:o, o - a:o + PLAYABLE_M + a], 1.0, baseline_m=5.0)
+    west = ops.slope_deg(z[o:o + PLAYABLE_M, o - a:o], 1.0, baseline_m=5.0)
+    apron_slope = float(max(np.percentile(north, 99.99), np.percentile(west, 99.99)))
+    check(f"the {a} m apron is left as the landscape made it", apron_slope <= 10.0,
+          f"steepest {apron_slope:.2f} deg over 5 m")
+    rise = float(z.max()) - apron_med
+    check("the rim closes the horizon off",
+          0.8 * ml.RIM_HEIGHT_M <= rise <= ml.RIM_HEIGHT_M + 30.0,
+          f"summit {rise:.1f} m over the apron (ceiling {ml.RIM_HEIGHT_M:.0f} m)")
+
+    # The river leaves the map twice and the rim must not dam it. Measured on the two
+    # runs of channel outside the playable square only - inside there is the lake, where
+    # the bed legitimately dives forty metres and climbs back out the far side.
+    bed = [(ml.playable_sdf(x, y), float(z[int(y) + o, int(x) + o]))
+           for x, y in ml.densify(ml.river_axis(), 20.0)
+           if 0 <= int(x) + o < z.shape[1] and 0 <= int(y) + o < z.shape[0]]
+    climb = 0.0
+    run_min = None
+    for sdf, zz in bed:
+        if sdf <= 0.0:
+            run_min = None                  # inside: start again on the way out
+            continue
+        run_min = zz if run_min is None else min(run_min, zz)
+        climb = max(climb, zz - run_min)
+    check("the river cuts through the rim rather than climbing it", climb <= 1.5,
+          f"the bed rises {climb:.2f} m at worst on its way out")
 
     # ---------------------------------------------------------------- masks
     xs = np.arange(PLAYABLE_M, dtype=np.float32) + 0.5
@@ -329,7 +373,7 @@ def main():
 
     # ---------------------------------------------------------------- pads
     print("\nyards and villages:")
-    areas = {'village': [], 'farm': [], 'industry': []}
+    areas = defaultdict(list)
     # A village has a highway through the middle of it. That strip belongs to the road,
     # is built after the pad and is crowned to its own profile, so measuring the yard's
     # flatness through it measures the road instead.

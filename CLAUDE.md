@@ -14,9 +14,9 @@ the verification is two acceptance scripts that exit non-zero.
 The order matters: the parcelling reads terrain the DEM publishes.
 
     python3 dem_generator/generate_new_dem_12k.py     # ~2 min -> dem_new_12k.png + terrain_stats.json
-    python3 dem_generator/measure_elevation.py        # 43 checks, exit 1 on any failure
+    python3 dem_generator/measure_elevation.py        # 52 checks, exit 1 on any failure
     python3 osm_generator/generate_osm.py             # -> map.osm
-    python3 osm_generator/check_forest_nodes.py       # inventory + 11 invariants, exit 1 on failure
+    python3 osm_generator/check_forest_nodes.py       # inventory + 13 invariants, exit 1 on failure
     python3 osm_generator/visualize_osm.py            # -> map_osm_visual.png
     python3 visualizer/create_3d_viewer.py            # -> dem_viewer_3d.html
 
@@ -33,7 +33,9 @@ DEM rerun - only changes to the river, creek, lake, corridors or pads do.
 
 `map_layout.py` (repo root, standard library only) is the single source of the world's
 geometry: projection, the PLSS section grid, road and rail alignments, the river, the
-creek, the lake, village and farm pads, potholes, windbreaks and the field parcelling. The
+creek, the lake, village, farm, elevator and industrial-lot pads, potholes, windbreaks,
+the field
+parcelling, the clean strip along the boundary and how far out the rim mountains start. The
 DEM sculpts terrain around it; the OSM writes it out as vectors. **Neither half may
 define geometry of its own.** A river carved where none is drawn, or a yard flattened
 where no farmyard exists, is invisible in either output on its own.
@@ -82,6 +84,26 @@ the reason the code is shaped the way it is.
   embankment ruins it), and a higher-class corridor keeps its platform where two cross.
 - **Level-crossing pins must be applied as a wide smooth offset**, not by overwriting one
   sample - `limit_grade` halves any spike, so a hard pin lands about half the error out.
+- **The blocks are cut on the alignments, not on the section grid.** 270th Avenue is
+  offset off its section line by the width of the railway's right of way, and while
+  `field_blocks` cut on `GRID` the road ran 26 m inside the field next to it and sliced
+  it in two. `ROW_CLEAR` is per class for the same reason: 14 m to the centreline leaves
+  three metres of verge against an 11 m primary.
+- **Both halves of the pipeline define geometry or neither does.** The co-op elevator was
+  a rectangle `generate_osm.py` worked out from the Royal village pad. The parcelling
+  could not see it and laid fields over it, and the DEM never flattened the ground under
+  it. It is `INDUSTRY_SPEC` in `map_layout` now, and in `pads()`.
+- **Clip a ring, do not clamp it.** Clamping the coordinates of a gallery-timber strip
+  back to the clean strip folds the part that hangs over the boundary onto the boundary
+  itself, and put a run of nodes straight across the river channel. `clip_ring_to_rect`
+  only ever puts a vertex on the ring's own boundary.
+- **The rim is added last and by addition.** Mountains built before the slope limiter get
+  flattened by it; built as a second surface blended in, they smear out the roads and the
+  valley already in the border. `z + h` carries everything there up the flank intact. The
+  ramp uses a 4-norm of the distance outside the playable square - a plain maximum creases
+  along the diagonals and puts four seams out of the corners of the map. The lift is held
+  off the river's own valley (`RIM_GORGE_*`), or the rim dams the channel and the water
+  runs 200 m uphill on its way out of the map.
 - **Surface texture stays off running surfaces and channels.** The 4 cm micro-relief is 8 cm
   over the 25 m the ruling grade is measured across, a quarter of the railway's budget.
 
@@ -125,7 +147,8 @@ change the whole terrain. Both seeds are `20250902`.
 
 Almost everything worth changing is a constant near the top of `map_layout.py`: `RIVER` and
 `CREEK` cross-sections, `LAKE`/`LAKE_AT_S`, `FIELD_MAX_COUNT`/`FIELD_MAX_HA`,
-`WINDBREAK_*`, `PAD_ROAD_CLEAR_M`, `PAD_RIVER_CLEAR_M`. The field count cap is held by
+`WINDBREAK_*`, `PAD_ROAD_CLEAR_M`, `PAD_RIVER_CLEAR_M`, `EDGE_CLEAR_M`, `RIM_APRON_M`,
+`RIM_HEIGHT_M`, `LOT_SPEC`/`LOT_HA`. The field count cap is held by
 coarsening the whole grain field until it fits, never by deleting the overflow - dropping
 fields eats the small parcels near the towns, which is exactly what the size mix needs.
 

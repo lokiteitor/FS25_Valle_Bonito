@@ -46,6 +46,20 @@ EXTEND_M = 300.0
 EDGE_MIN = -OFFSET_M - EXTEND_M               # -2348
 EDGE_MAX = PLAYABLE_M + OFFSET_M + EXTEND_M   # 10540
 
+# A clean strip inside the playable boundary. Nothing the parcelling or the planting
+# places may stand in it: no parcel, no shelterbelt, no yard and no pothole. Only the
+# things that have to leave the map cross it - the roads, the railway and the water.
+# Without it a field is cut off square by the boundary and reads as half a field, and
+# the ground the player sees at the edge is the ground the rim mountains rise out of.
+EDGE_CLEAR_M = 100.0
+
+# --- the non-playable rim ----------------------------------------------------------
+# What the player sees past the boundary. The apron is left as the landscape made it,
+# so the ground does not change character at the edge of play; the mountains start
+# beyond it and close the horizon off.
+RIM_APRON_M = 500.0           # flat apron between the boundary and the first slope
+RIM_HEIGHT_M = 200.0          # highest summit, above the ground at the boundary
+
 # --- how the two relate -----------------------------------------------------------
 # Equirectangular about the centre. 111111.0 m per degree is the constant the rest of the
 # pipeline was built with (1e7 m from the equator to the pole, over 90 degrees).
@@ -197,9 +211,28 @@ FARM_SPEC = [
 INDUSTRY_SPEC = [
     ('Royal Farmers Co-op Elevator', 3851.0, 3716.0, 190.0, 140.0),
 ]
+# Five industrial lots on the section roads: a contractor's yard, a seed dealer, a
+# machine shop - the sheds that stand on their own square of gravel between two farms.
+# Square and 5 ha each, set back off the centreline so the road's own graded transition
+# does not tilt the platform. LOT_ROAD_SET_M is measured edge to centreline, and the
+# widest running surface out here reaches 52 m (a section road: 7 m of surface and 45 m
+# of feather).
+LOT_HA = 5.0
+LOT_SIDE_M = math.sqrt(LOT_HA * 1e4)      # 223.6 m
+LOT_ROAD_SET_M = 60.0
+LOT_ROAD_NEAR_M = 260.0       # centre to centreline: further out it fronts nothing
+LOT_SPEC = [
+    ('Clay County Ag Supply',    1049.1, 1600.0),
+    ('Peterson Grain Dryers',    6480.0, 1049.1),
+    ('Ocheyedan Fertiliser',     1049.1, 6600.0),
+    ('Ashgrove Truck & Trailer', 6600.0, 7142.9),
+    ('Royal Implement Dealer',   4307.8, 2200.0),
+]
+
 VILLAGE_FEATHER_M = 60.0
 FARM_FEATHER_M = 90.0
 INDUSTRY_FEATHER_M = 55.0
+LOT_FEATHER_M = 55.0
 # An elevator is rail-served, so it stands beside the track - but not inside the
 # embankment's graded transition. The rail platform is built after the yards and would
 # otherwise tilt the apron it overlaps, which is worth about 0.25 m of residual on a pad
@@ -305,6 +338,46 @@ def close_ring(ring):
 def rect_ring(x0, y0, x1, y1):
     """Axis-aligned rectangle as a closed ring, counter-clockwise in screen terms."""
     return [(x0, y0), (x1, y0), (x1, y1), (x0, y1), (x0, y0)]
+
+
+def clip_ring_to_rect(ring, x0, y0, x1, y1):
+    """Sutherland-Hodgman against an axis-aligned rectangle.
+
+    Clamping a ring's coordinates instead folds whatever hangs over the edge onto the
+    edge itself, which is how a strip of gallery timber ended up with a run of nodes
+    lying across the river channel. Clipping only ever puts a new vertex on the ring's
+    own boundary, and cuts a straight edge where the ring leaves the rectangle.
+
+    Returns a closed ring, or [] if nothing of it is left inside.
+    """
+    poly = ring[:-1] if len(ring) > 1 and ring[0] == ring[-1] else list(ring)
+    for keep, cut in ((lambda p: p[0] >= x0, lambda a, b: _cut_x(a, b, x0)),
+                      (lambda p: p[0] <= x1, lambda a, b: _cut_x(a, b, x1)),
+                      (lambda p: p[1] >= y0, lambda a, b: _cut_y(a, b, y0)),
+                      (lambda p: p[1] <= y1, lambda a, b: _cut_y(a, b, y1))):
+        out = []
+        for i, b in enumerate(poly):
+            a = poly[i - 1]
+            if keep(b):
+                if not keep(a):
+                    out.append(cut(a, b))
+                out.append(b)
+            elif keep(a):
+                out.append(cut(a, b))
+        poly = out
+        if not poly:
+            return []
+    return poly + [poly[0]]
+
+
+def _cut_x(a, b, x):
+    t = (x - a[0]) / (b[0] - a[0])
+    return (x, a[1] + t * (b[1] - a[1]))
+
+
+def _cut_y(a, b, y):
+    t = (y - a[1]) / (b[1] - a[1])
+    return (a[0] + t * (b[0] - a[0]), y)
 
 
 def ellipse_ring(cx, cy, a, b, rot_deg=0.0, n=48):
@@ -926,8 +999,22 @@ def industry_pads():
     return out
 
 
+def lot_pads():
+    """The industrial lots. A platform and nothing else: no grove, no street grid and no
+    lane of their own - they sit on the road they front."""
+    out = []
+    s = LOT_SIDE_M
+    for i, (name, cx, cy) in enumerate(LOT_SPEC):
+        out.append(dict(id=f"lot{i}", kind='lot', name=name,
+                        centre=(cx, cy), size=(s, s),
+                        ring=rect_ring(cx - s / 2, cy - s / 2, cx + s / 2, cy + s / 2),
+                        feather_m=LOT_FEATHER_M, drain_grade=PAD_DRAIN_GRADE,
+                        max_drop_m=0.8))
+    return out
+
+
 def pads():
-    return village_pads() + farm_pads() + industry_pads()
+    return village_pads() + farm_pads() + industry_pads() + lot_pads()
 
 
 # ==================================================================================
@@ -973,10 +1060,25 @@ def potholes():
         if any(math.hypot(x - p['centre'][0], y - p['centre'][1]) < POTHOLE_MIN_GAP_M
                for p in out):
             continue
+        # Out in the border or well inside the field of play, never straddling the
+        # clean strip: a depression cut by the boundary is the one thing on the map
+        # the player can see is unfinished.
+        if -EDGE_CLEAR_M - r < playable_sdf(x, y) < r:
+            continue
         depth = 0.45 + 0.0105 * (r - POTHOLE_R[0])
         out.append(dict(centre=(x, y), radius=r, depth=depth))
     _pothole_cache = out
     return out
+
+
+def playable_sdf(x, y):
+    """Signed distance to the playable boundary: negative inside, positive out in the
+    border. The clean strip is everything between -EDGE_CLEAR_M and 0."""
+    dx = max(-x, x - PLAYABLE_M)
+    dy = max(-y, y - PLAYABLE_M)
+    if dx <= 0.0 and dy <= 0.0:
+        return max(dx, dy)
+    return math.hypot(max(dx, 0.0), max(dy, 0.0))
 
 
 def lake_margin(n=72):
@@ -1528,7 +1630,7 @@ def _block_cuts(vertical):
     field edge to the centreline, so it has to cover the running surface as well as the
     verge - a primary is wider than a section road, and nobody farms up to a railway.
     """
-    out = [(0.0, 0.0), (PLAYABLE_M, 0.0)]
+    out = [(0.0, EDGE_CLEAR_M), (PLAYABLE_M, EDGE_CLEAR_M)]
     seen = set()
     for c in corridors():
         if c['kind'] not in ROW_CLEAR:
@@ -1683,8 +1785,10 @@ def validate():
         x1 = p['centre'][0] + p['size'][0] / 2
         y0 = p['centre'][1] - p['size'][1] / 2
         y1 = p['centre'][1] + p['size'][1] / 2
-        if x0 < 60 or y0 < 60 or x1 > PLAYABLE_M - 60 or y1 > PLAYABLE_M - 60:
-            bad.append(f"{p['id']}: too close to the map edge")
+        m = EDGE_CLEAR_M
+        if x0 < m or y0 < m or x1 > PLAYABLE_M - m or y1 > PLAYABLE_M - m:
+            bad.append(f"{p['id']}: stands in the {m:.0f} m clean strip along the "
+                       "boundary")
 
     for p in farm_pads():
         cx, cy = p['centre']
@@ -1732,6 +1836,35 @@ def validate():
                 continue
             break
 
+    for p in lot_pads():
+        cx, cy = p['centre']
+        w, h = p['size']
+        roads = [c for c in corridors() if c['kind'] in ('section', 'primary')]
+        near = min(((dist_to_polyline(p['centre'], c['axis']), c) for c in roads),
+                   key=lambda t: t[0], default=None)
+        if near is None or near[0] > LOT_ROAD_NEAR_M:
+            bad.append(f"{p['id']} ({p['name']}): no road within "
+                       f"{LOT_ROAD_NEAR_M:.0f} m - the lot fronts nothing")
+        else:
+            d, c = near
+            gap = d - max(w, h) / 2 - c['half_width_m'] - c['feather_m']
+            if gap < 0.0:
+                bad.append(f"{p['id']} ({p['name']}): the {c['name']} embankment reaches "
+                           f"{-gap:.0f} m into the lot - the road is graded after the "
+                           "yards and would tilt it")
+        for c in corridors():
+            for (ax, ay) in c['axis']:
+                if abs(ax - cx) <= w / 2 and abs(ay - cy) <= h / 2:
+                    bad.append(f"{p['id']} ({p['name']}): {c['name']} runs through the "
+                               "lot")
+                    break
+            else:
+                continue
+            break
+        if abs(ring_area_ha(p['ring']) - LOT_HA) > 0.01:
+            bad.append(f"{p['id']} ({p['name']}): {ring_area_ha(p['ring']):.2f} ha, "
+                       f"not the {LOT_HA:.0f} ha the lots are")
+
     vmax = max(ring_area_ha(p['ring']) for p in village_pads())
     fmin = min(ring_area_ha(p['ring']) for p in farm_pads())
     if fmin <= vmax:
@@ -1757,7 +1890,7 @@ def summary():
     """One-line description of the layout, for the generators to print."""
     return (f"{PLAYABLE_M:.0f} m playable, {len(corridors())} corridors, "
             f"{len(village_pads())} villages, {len(farm_pads())} farms, "
-            f"{len(industry_pads())} elevator, "
+            f"{len(industry_pads())} elevator, {len(lot_pads())} lots, "
             f"{len(potholes())} potholes")
 
 
