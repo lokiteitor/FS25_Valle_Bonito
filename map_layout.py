@@ -269,7 +269,7 @@ ROW_CLEAR_M = 14.0            # field edge to road centreline
 # do not break a block; the occupancy raster clips the parcels around them instead.
 ROW_CLEAR = {'section': ROW_CLEAR_M, 'primary': 18.0, 'rail': 26.0}
 FIELD_MAX_HA = 100.0          # hard cap, never exceeded
-FIELD_MAX_COUNT = 200         # hard cap on how many parcels the map carries
+FIELD_MAX_COUNT = 118         # hard cap on how many parcels the map carries
 FIELD_MIN_HA = 3.0
 FIELD_MIN_WIDTH_M = 70.0      # narrowest a parcel may get
 FIELD_MARGIN_M = 2.0          # inset, so neighbours show a 4 m boundary

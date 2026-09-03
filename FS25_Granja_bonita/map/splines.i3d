@@ -1,0 +1,2715 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<i3D xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="spline01" version="1.6" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+  <Shapes>
+    <NurbsCurve name="spline_1_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5000" degree="3" form="open">
+      <cv c="-4096.0, 54.27626459143969, -3222.0" />
+      <cv c="-3805, 52.84824902723736, -3222" />
+      <cv c="-3514, 51.85214007782101, -3222" />
+      <cv c="-3222.0, 52.09338521400778, -3222.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_1_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5001" degree="3" form="open">
+      <cv c="-3222.0, 52.09338521400778, -3222.0" />
+      <cv c="-3514, 51.85214007782101, -3222" />
+      <cv c="-3805, 52.84824902723736, -3222" />
+      <cv c="-4096.0, 54.27626459143969, -3222.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_2_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5002" degree="3" form="open">
+      <cv c="-3222.0, 52.09338521400778, -3222.0" />
+      <cv c="-2961, 52.31906614785992, -3222" />
+      <cv c="-2700, 52.902723735408564, -3222" />
+      <cv c="-2438.0, 52.78988326848249, -3222.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_2_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5003" degree="3" form="open">
+      <cv c="-2438.0, 52.78988326848249, -3222.0" />
+      <cv c="-2700, 52.902723735408564, -3222" />
+      <cv c="-2961, 52.31906614785992, -3222" />
+      <cv c="-3222.0, 52.09338521400778, -3222.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_3_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5004" degree="3" form="open">
+      <cv c="-2438.0, 52.78988326848249, -3222.0" />
+      <cv c="-2163, 51.933852140077825, -3222" />
+      <cv c="-1887, 51.82879377431907, -3222" />
+      <cv c="-1611.0, 52.9727626459144, -3222.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_3_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5005" degree="3" form="open">
+      <cv c="-1611.0, 52.9727626459144, -3222.0" />
+      <cv c="-1887, 51.82879377431907, -3222" />
+      <cv c="-2163, 51.933852140077825, -3222" />
+      <cv c="-2438.0, 52.78988326848249, -3222.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_4_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5006" degree="3" form="open">
+      <cv c="-1611.0, 52.9727626459144, -3222.0" />
+      <cv c="-1074, 52.494163424124515, -3222" />
+      <cv c="-537, 53.43968871595331, -3222" />
+      <cv c="0.0, 52.9727626459144, -3222.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_4_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5007" degree="3" form="open">
+      <cv c="0.0, 52.9727626459144, -3222.0" />
+      <cv c="-537, 53.43968871595331, -3222" />
+      <cv c="-1074, 52.494163424124515, -3222" />
+      <cv c="-1611.0, 52.9727626459144, -3222.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_5_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5008" degree="3" form="open">
+      <cv c="0.0, 52.9727626459144, -3222.0" />
+      <cv c="13, 52.98832684824903, -3222" />
+      <cv c="26, 53.038910505836576, -3222" />
+      <cv c="40.0, 53.1284046692607, -3222.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_5_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5009" degree="3" form="open">
+      <cv c="40.0, 53.1284046692607, -3222.0" />
+      <cv c="26, 53.038910505836576, -3222" />
+      <cv c="13, 52.98832684824903, -3222" />
+      <cv c="0.0, 52.9727626459144, -3222.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_6_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5010" degree="3" form="open">
+      <cv c="40.0, 53.1284046692607, -3222.0" />
+      <cv c="563, 54.50194552529183, -3222" />
+      <cv c="1086, 52.7704280155642, -3222" />
+      <cv c="1610.0, 52.69649805447471, -3222.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_6_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5011" degree="3" form="open">
+      <cv c="1610.0, 52.69649805447471, -3222.0" />
+      <cv c="1086, 52.7704280155642, -3222" />
+      <cv c="563, 54.50194552529183, -3222" />
+      <cv c="40.0, 53.1284046692607, -3222.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_7_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5012" degree="3" form="open">
+      <cv c="1610.0, 52.69649805447471, -3222.0" />
+      <cv c="2147, 53.39299610894942, -3222" />
+      <cv c="2684, 52.24513618677043, -3222" />
+      <cv c="3221.0, 52.902723735408564, -3222.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_7_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5013" degree="3" form="open">
+      <cv c="3221.0, 52.902723735408564, -3222.0" />
+      <cv c="2684, 52.24513618677043, -3222" />
+      <cv c="2147, 53.39299610894942, -3222" />
+      <cv c="1610.0, 52.69649805447471, -3222.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_8_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5014" degree="3" form="open">
+      <cv c="3221.0, 52.902723735408564, -3222.0" />
+      <cv c="3512, 53.478599221789885, -3222" />
+      <cv c="3804, 53.01945525291829, -3222" />
+      <cv c="4096.0, 52.945525291828794, -3222.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_8_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5015" degree="3" form="open">
+      <cv c="4096.0, 52.945525291828794, -3222.0" />
+      <cv c="3804, 53.01945525291829, -3222" />
+      <cv c="3512, 53.478599221789885, -3222" />
+      <cv c="3221.0, 52.902723735408564, -3222.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_9_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5016" degree="3" form="open">
+      <cv c="-4096.0, 55.143968871595334, -1611.0" />
+      <cv c="-3805, 55.13229571984436, -1611" />
+      <cv c="-3514, 54.525291828793776, -1611" />
+      <cv c="-3222.0, 54.61089494163424, -1611.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_9_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5017" degree="3" form="open">
+      <cv c="-3222.0, 54.61089494163424, -1611.0" />
+      <cv c="-3514, 54.525291828793776, -1611" />
+      <cv c="-3805, 55.13229571984436, -1611" />
+      <cv c="-4096.0, 55.143968871595334, -1611.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_10_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5018" degree="3" form="open">
+      <cv c="-3222.0, 54.61089494163424, -1611.0" />
+      <cv c="-2685, 52.40856031128405, -1611" />
+      <cv c="-2148, 52.7704280155642, -1611" />
+      <cv c="-1611.0, 52.474708171206224, -1611.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_10_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5019" degree="3" form="open">
+      <cv c="-1611.0, 52.474708171206224, -1611.0" />
+      <cv c="-2148, 52.7704280155642, -1611" />
+      <cv c="-2685, 52.40856031128405, -1611" />
+      <cv c="-3222.0, 54.61089494163424, -1611.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_11_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5020" degree="3" form="open">
+      <cv c="-1611.0, 52.474708171206224, -1611.0" />
+      <cv c="-1450, 51.87548638132296, -1611" />
+      <cv c="-1288, 51.268482490272376, -1611" />
+      <cv c="-1126.0, 50.766536964980546, -1611.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_11_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5021" degree="3" form="open">
+      <cv c="-1126.0, 50.766536964980546, -1611.0" />
+      <cv c="-1288, 51.268482490272376, -1611" />
+      <cv c="-1450, 51.87548638132296, -1611" />
+      <cv c="-1611.0, 52.474708171206224, -1611.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_12_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5022" degree="3" form="open">
+      <cv c="-1126.0, 50.766536964980546, -1611.0" />
+      <cv c="-1104, 50.49805447470817, -1611" />
+      <cv c="-1081, 50.44357976653696, -1611" />
+      <cv c="-1058.0, 50.78988326848249, -1611.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_12_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5023" degree="3" form="open">
+      <cv c="-1058.0, 50.78988326848249, -1611.0" />
+      <cv c="-1081, 50.44357976653696, -1611" />
+      <cv c="-1104, 50.49805447470817, -1611" />
+      <cv c="-1126.0, 50.766536964980546, -1611.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_13_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5024" degree="3" form="open">
+      <cv c="-1058.0, 50.78988326848249, -1611.0" />
+      <cv c="-931, 51.54863813229572, -1611" />
+      <cv c="-804, 52.5136186770428, -1611" />
+      <cv c="-677.0, 52.80155642023347, -1611.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_13_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5025" degree="3" form="open">
+      <cv c="-677.0, 52.80155642023347, -1611.0" />
+      <cv c="-804, 52.5136186770428, -1611" />
+      <cv c="-931, 51.54863813229572, -1611" />
+      <cv c="-1058.0, 50.78988326848249, -1611.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_14_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5026" degree="3" form="open">
+      <cv c="-677.0, 52.80155642023347, -1611.0" />
+      <cv c="-452, 52.494163424124515, -1611" />
+      <cv c="-226, 52.568093385214006, -1611" />
+      <cv c="0.0, 52.474708171206224, -1611.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_14_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5027" degree="3" form="open">
+      <cv c="0.0, 52.474708171206224, -1611.0" />
+      <cv c="-226, 52.568093385214006, -1611" />
+      <cv c="-452, 52.494163424124515, -1611" />
+      <cv c="-677.0, 52.80155642023347, -1611.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_15_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5028" degree="3" form="open">
+      <cv c="0.0, 52.474708171206224, -1611.0" />
+      <cv c="13, 52.478599221789885, -1611" />
+      <cv c="26, 52.50194552529183, -1611" />
+      <cv c="40.0, 52.53307392996109, -1611.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_15_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5029" degree="3" form="open">
+      <cv c="40.0, 52.53307392996109, -1611.0" />
+      <cv c="26, 52.50194552529183, -1611" />
+      <cv c="13, 52.478599221789885, -1611" />
+      <cv c="0.0, 52.474708171206224, -1611.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_16_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5030" degree="3" form="open">
+      <cv c="40.0, 52.53307392996109, -1611.0" />
+      <cv c="563, 52.26070038910506, -1611" />
+      <cv c="1086, 50.56420233463035, -1611" />
+      <cv c="1610.0, 51.416342412451364, -1611.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_16_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5031" degree="3" form="open">
+      <cv c="1610.0, 51.416342412451364, -1611.0" />
+      <cv c="1086, 50.56420233463035, -1611" />
+      <cv c="563, 52.26070038910506, -1611" />
+      <cv c="40.0, 52.53307392996109, -1611.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_17_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5032" degree="3" form="open">
+      <cv c="1610.0, 51.416342412451364, -1611.0" />
+      <cv c="1875, 51.6420233463035, -1611" />
+      <cv c="2140, 51.459143968871594, -1611" />
+      <cv c="2405.0, 52.09727626459144, -1611.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_17_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5033" degree="3" form="open">
+      <cv c="2405.0, 52.09727626459144, -1611.0" />
+      <cv c="2140, 51.459143968871594, -1611" />
+      <cv c="1875, 51.6420233463035, -1611" />
+      <cv c="1610.0, 51.416342412451364, -1611.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_18_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5034" degree="3" form="open">
+      <cv c="2405.0, 52.09727626459144, -1611.0" />
+      <cv c="2677, 52.7704280155642, -1611" />
+      <cv c="2949, 52.64591439688716, -1611" />
+      <cv c="3221.0, 52.459143968871594, -1611.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_18_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5035" degree="3" form="open">
+      <cv c="3221.0, 52.459143968871594, -1611.0" />
+      <cv c="2949, 52.64591439688716, -1611" />
+      <cv c="2677, 52.7704280155642, -1611" />
+      <cv c="2405.0, 52.09727626459144, -1611.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_19_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5036" degree="3" form="open">
+      <cv c="3221.0, 52.459143968871594, -1611.0" />
+      <cv c="3512, 51.887159533073934, -1611" />
+      <cv c="3804, 51.933852140077825, -1611" />
+      <cv c="4096.0, 51.918287937743195, -1611.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_19_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5037" degree="3" form="open">
+      <cv c="4096.0, 51.918287937743195, -1611.0" />
+      <cv c="3804, 51.933852140077825, -1611" />
+      <cv c="3512, 51.887159533073934, -1611" />
+      <cv c="3221.0, 52.459143968871594, -1611.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_20_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5038" degree="3" form="open">
+      <cv c="0.0, 49.4863813229572, 1610.0" />
+      <cv c="13, 49.50194552529183, 1610" />
+      <cv c="26, 49.54863813229572, 1610" />
+      <cv c="40.0, 49.62645914396887, 1610.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_20_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5039" degree="3" form="open">
+      <cv c="40.0, 49.62645914396887, 1610.0" />
+      <cv c="26, 49.54863813229572, 1610" />
+      <cv c="13, 49.50194552529183, 1610" />
+      <cv c="0.0, 49.4863813229572, 1610.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_21_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5040" degree="3" form="open">
+      <cv c="40.0, 49.62645914396887, 1610.0" />
+      <cv c="334, 51.3307392996109, 1610" />
+      <cv c="629, 52.92607003891051, 1610" />
+      <cv c="924.0, 53.42412451361868, 1610.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_21_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5041" degree="3" form="open">
+      <cv c="924.0, 53.42412451361868, 1610.0" />
+      <cv c="629, 52.92607003891051, 1610" />
+      <cv c="334, 51.3307392996109, 1610" />
+      <cv c="40.0, 49.62645914396887, 1610.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_22_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5042" degree="3" form="open">
+      <cv c="924.0, 53.42412451361868, 1610.0" />
+      <cv c="1152, 53.75486381322957, 1610" />
+      <cv c="1381, 53.68482490272373, 1610" />
+      <cv c="1610.0, 52.77431906614786, 1610.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_22_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5043" degree="3" form="open">
+      <cv c="1610.0, 52.77431906614786, 1610.0" />
+      <cv c="1381, 53.68482490272373, 1610" />
+      <cv c="1152, 53.75486381322957, 1610" />
+      <cv c="924.0, 53.42412451361868, 1610.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_23_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5044" degree="3" form="open">
+      <cv c="1610.0, 52.77431906614786, 1610.0" />
+      <cv c="1982, 52.35019455252918, 1610" />
+      <cv c="2354, 52.62645914396887, 1610" />
+      <cv c="2726.0, 53.09727626459144, 1610.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_23_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5045" degree="3" form="open">
+      <cv c="2726.0, 53.09727626459144, 1610.0" />
+      <cv c="2354, 52.62645914396887, 1610" />
+      <cv c="1982, 52.35019455252918, 1610" />
+      <cv c="1610.0, 52.77431906614786, 1610.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_24_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5046" degree="3" form="open">
+      <cv c="2726.0, 53.09727626459144, 1610.0" />
+      <cv c="2891, 51.96887159533074, 1610" />
+      <cv c="3056, 51.95719844357977, 1610" />
+      <cv c="3221.0, 51.688715953307394, 1610.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_24_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5047" degree="3" form="open">
+      <cv c="3221.0, 51.688715953307394, 1610.0" />
+      <cv c="3056, 51.95719844357977, 1610" />
+      <cv c="2891, 51.96887159533074, 1610" />
+      <cv c="2726.0, 53.09727626459144, 1610.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_25_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5048" degree="3" form="open">
+      <cv c="3221.0, 51.688715953307394, 1610.0" />
+      <cv c="3512, 51.30350194552529, 1610" />
+      <cv c="3804, 51.10505836575876, 1610" />
+      <cv c="4096.0, 50.762645914396884, 1610.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_25_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5049" degree="3" form="open">
+      <cv c="4096.0, 50.762645914396884, 1610.0" />
+      <cv c="3804, 51.10505836575876, 1610" />
+      <cv c="3512, 51.30350194552529, 1610" />
+      <cv c="3221.0, 51.688715953307394, 1610.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_26_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5050" degree="3" form="open">
+      <cv c="-4096.0, 51.902723735408564, 3221.0" />
+      <cv c="-3805, 52.83268482490273, 3221" />
+      <cv c="-3514, 53.12451361867704, 3221" />
+      <cv c="-3222.0, 51.91439688715953, 3221.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_26_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5051" degree="3" form="open">
+      <cv c="-3222.0, 51.91439688715953, 3221.0" />
+      <cv c="-3514, 53.12451361867704, 3221" />
+      <cv c="-3805, 52.83268482490273, 3221" />
+      <cv c="-4096.0, 51.902723735408564, 3221.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_27_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5052" degree="3" form="open">
+      <cv c="-3222.0, 51.91439688715953, 3221.0" />
+      <cv c="-2685, 52.08171206225681, 3221" />
+      <cv c="-2148, 51.023346303501945, 3221" />
+      <cv c="-1611.0, 50.750972762645915, 3221.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_27_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5053" degree="3" form="open">
+      <cv c="-1611.0, 50.750972762645915, 3221.0" />
+      <cv c="-2148, 51.023346303501945, 3221" />
+      <cv c="-2685, 52.08171206225681, 3221" />
+      <cv c="-3222.0, 51.91439688715953, 3221.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_28_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5054" degree="3" form="open">
+      <cv c="-1611.0, 50.750972762645915, 3221.0" />
+      <cv c="-1074, 52.311284046692606, 3221" />
+      <cv c="-537, 51.459143968871594, 3221" />
+      <cv c="0.0, 48.57587548638132, 3221.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_28_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5055" degree="3" form="open">
+      <cv c="0.0, 48.57587548638132, 3221.0" />
+      <cv c="-537, 51.459143968871594, 3221" />
+      <cv c="-1074, 52.311284046692606, 3221" />
+      <cv c="-1611.0, 50.750972762645915, 3221.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_29_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5056" degree="3" form="open">
+      <cv c="0.0, 48.57587548638132, 3221.0" />
+      <cv c="13, 48.56031128404669, 3221" />
+      <cv c="26, 48.505836575875485, 3221" />
+      <cv c="40.0, 48.40466926070039, 3221.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_29_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5057" degree="3" form="open">
+      <cv c="40.0, 48.40466926070039, 3221.0" />
+      <cv c="26, 48.505836575875485, 3221" />
+      <cv c="13, 48.56031128404669, 3221" />
+      <cv c="0.0, 48.57587548638132, 3221.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_30_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5058" degree="3" form="open">
+      <cv c="40.0, 48.40466926070039, 3221.0" />
+      <cv c="263, 47.60700389105058, 3221" />
+      <cv c="486, 46.90661478599222, 3221" />
+      <cv c="710.0, 46.42412451361868, 3221.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_30_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5059" degree="3" form="open">
+      <cv c="710.0, 46.42412451361868, 3221.0" />
+      <cv c="486, 46.90661478599222, 3221" />
+      <cv c="263, 47.60700389105058, 3221" />
+      <cv c="40.0, 48.40466926070039, 3221.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_31_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5060" degree="3" form="open">
+      <cv c="710.0, 46.42412451361868, 3221.0" />
+      <cv c="754, 45.0739299610895, 3221" />
+      <cv c="799, 45.1011673151751, 3221" />
+      <cv c="844.0, 46.37743190661479, 3221.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_31_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5061" degree="3" form="open">
+      <cv c="844.0, 46.37743190661479, 3221.0" />
+      <cv c="799, 45.1011673151751, 3221" />
+      <cv c="754, 45.0739299610895, 3221" />
+      <cv c="710.0, 46.42412451361868, 3221.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_32_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5062" degree="3" form="open">
+      <cv c="844.0, 46.37743190661479, 3221.0" />
+      <cv c="1099, 45.69649805447471, 3221" />
+      <cv c="1354, 46.45136186770428, 3221" />
+      <cv c="1610.0, 46.56031128404669, 3221.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_32_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5063" degree="3" form="open">
+      <cv c="1610.0, 46.56031128404669, 3221.0" />
+      <cv c="1354, 46.45136186770428, 3221" />
+      <cv c="1099, 45.69649805447471, 3221" />
+      <cv c="844.0, 46.37743190661479, 3221.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_33_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5064" degree="3" form="open">
+      <cv c="1610.0, 46.56031128404669, 3221.0" />
+      <cv c="2147, 50.19455252918288, 3221" />
+      <cv c="2684, 51.95330739299611, 3221" />
+      <cv c="3221.0, 52.05836575875487, 3221.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_33_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5065" degree="3" form="open">
+      <cv c="3221.0, 52.05836575875487, 3221.0" />
+      <cv c="2684, 51.95330739299611, 3221" />
+      <cv c="2147, 50.19455252918288, 3221" />
+      <cv c="1610.0, 46.56031128404669, 3221.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_34_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5066" degree="3" form="open">
+      <cv c="3221.0, 52.05836575875487, 3221.0" />
+      <cv c="3512, 52.447470817120625, 3221" />
+      <cv c="3804, 51.71206225680934, 3221" />
+      <cv c="4096.0, 51.05058365758755, 3221.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_34_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5067" degree="3" form="open">
+      <cv c="4096.0, 51.05058365758755, 3221.0" />
+      <cv c="3804, 51.71206225680934, 3221" />
+      <cv c="3512, 52.447470817120625, 3221" />
+      <cv c="3221.0, 52.05836575875487, 3221.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_35_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5068" degree="3" form="open">
+      <cv c="-3222.0, 53.32295719844358, -4096.0" />
+      <cv c="-3222, 53.6147859922179, -3805" />
+      <cv c="-3222, 52.82879377431907, -3514" />
+      <cv c="-3222.0, 52.09338521400778, -3222.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_35_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5069" degree="3" form="open">
+      <cv c="-3222.0, 52.09338521400778, -3222.0" />
+      <cv c="-3222, 52.82879377431907, -3514" />
+      <cv c="-3222, 53.6147859922179, -3805" />
+      <cv c="-3222.0, 53.32295719844358, -4096.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_36_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5070" degree="3" form="open">
+      <cv c="-3222.0, 52.09338521400778, -3222.0" />
+      <cv c="-3222, 52.505836575875485, -2685" />
+      <cv c="-3222, 52.19844357976654, -2148" />
+      <cv c="-3222.0, 54.61089494163424, -1611.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_36_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5071" degree="3" form="open">
+      <cv c="-3222.0, 54.61089494163424, -1611.0" />
+      <cv c="-3222, 52.19844357976654, -2148" />
+      <cv c="-3222, 52.505836575875485, -2685" />
+      <cv c="-3222.0, 52.09338521400778, -3222.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_37_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5072" degree="3" form="open">
+      <cv c="-3222.0, 54.61089494163424, -1611.0" />
+      <cv c="-3222, 52.56031128404669, -1074" />
+      <cv c="-3222, 51.3852140077821, -537" />
+      <cv c="-3222.0, 51.57198443579767, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_37_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5073" degree="3" form="open">
+      <cv c="-3222.0, 51.57198443579767, 0.0" />
+      <cv c="-3222, 51.3852140077821, -537" />
+      <cv c="-3222, 52.56031128404669, -1074" />
+      <cv c="-3222.0, 54.61089494163424, -1611.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_38_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5074" degree="3" form="open">
+      <cv c="-3222.0, 51.57198443579767, 0.0" />
+      <cv c="-3222, 51.57198443579767, 30" />
+      <cv c="-3222, 51.56420233463035, 60" />
+      <cv c="-3222.0, 51.54863813229572, 90.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_38_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5075" degree="3" form="open">
+      <cv c="-3222.0, 51.54863813229572, 90.0" />
+      <cv c="-3222, 51.56420233463035, 60" />
+      <cv c="-3222, 51.57198443579767, 30" />
+      <cv c="-3222.0, 51.57198443579767, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_39_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5076" degree="3" form="open">
+      <cv c="-3222.0, 51.54863813229572, 90.0" />
+      <cv c="-3222, 51.35408560311284, 535" />
+      <cv c="-3222, 48.809338521400775, 980" />
+      <cv c="-3222.0, 46.793774319066145, 1426.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_39_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5077" degree="3" form="open">
+      <cv c="-3222.0, 46.793774319066145, 1426.0" />
+      <cv c="-3222, 48.809338521400775, 980" />
+      <cv c="-3222, 51.35408560311284, 535" />
+      <cv c="-3222.0, 51.54863813229572, 90.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_40_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5078" degree="3" form="open">
+      <cv c="-3222.0, 46.793774319066145, 1426.0" />
+      <cv c="-3222, 45.70038910505836, 1470" />
+      <cv c="-3222, 45.29182879377432, 1515" />
+      <cv c="-3222.0, 46.6692607003891, 1560.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_40_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5079" degree="3" form="open">
+      <cv c="-3222.0, 46.6692607003891, 1560.0" />
+      <cv c="-3222, 45.29182879377432, 1515" />
+      <cv c="-3222, 45.70038910505836, 1470" />
+      <cv c="-3222.0, 46.793774319066145, 1426.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_41_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5080" degree="3" form="open">
+      <cv c="-3222.0, 46.6692607003891, 1560.0" />
+      <cv c="-3222, 46.84824902723736, 2113" />
+      <cv c="-3222, 50.22568093385214, 2667" />
+      <cv c="-3222.0, 51.91439688715953, 3221.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_41_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5081" degree="3" form="open">
+      <cv c="-3222.0, 51.91439688715953, 3221.0" />
+      <cv c="-3222, 50.22568093385214, 2667" />
+      <cv c="-3222, 46.84824902723736, 2113" />
+      <cv c="-3222.0, 46.6692607003891, 1560.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_42_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5082" degree="3" form="open">
+      <cv c="-3222.0, 51.91439688715953, 3221.0" />
+      <cv c="-3222, 51.0, 3512" />
+      <cv c="-3222, 50.509727626459146, 3804" />
+      <cv c="-3222.0, 51.9727626459144, 4096.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_42_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5083" degree="3" form="open">
+      <cv c="-3222.0, 51.9727626459144, 4096.0" />
+      <cv c="-3222, 50.509727626459146, 3804" />
+      <cv c="-3222, 51.0, 3512" />
+      <cv c="-3222.0, 51.91439688715953, 3221.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_43_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5084" degree="3" form="open">
+      <cv c="-1611.0, 52.08171206225681, -4096.0" />
+      <cv c="-1611, 52.8443579766537, -3805" />
+      <cv c="-1611, 53.996108949416346, -3514" />
+      <cv c="-1611.0, 52.9727626459144, -3222.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_43_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5085" degree="3" form="open">
+      <cv c="-1611.0, 52.9727626459144, -3222.0" />
+      <cv c="-1611, 53.996108949416346, -3514" />
+      <cv c="-1611, 52.8443579766537, -3805" />
+      <cv c="-1611.0, 52.08171206225681, -4096.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_44_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5086" degree="3" form="open">
+      <cv c="-1611.0, 52.9727626459144, -3222.0" />
+      <cv c="-1611, 53.03501945525292, -2685" />
+      <cv c="-1611, 53.69649805447471, -2148" />
+      <cv c="-1611.0, 52.474708171206224, -1611.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_44_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5087" degree="3" form="open">
+      <cv c="-1611.0, 52.474708171206224, -1611.0" />
+      <cv c="-1611, 53.69649805447471, -2148" />
+      <cv c="-1611, 53.03501945525292, -2685" />
+      <cv c="-1611.0, 52.9727626459144, -3222.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_45_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5088" degree="3" form="open">
+      <cv c="-1611.0, 52.474708171206224, -1611.0" />
+      <cv c="-1611, 52.82879377431907, -1186" />
+      <cv c="-1611, 51.63424124513619, -761" />
+      <cv c="-1611.0, 49.929961089494164, -335.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_45_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5089" degree="3" form="open">
+      <cv c="-1611.0, 49.929961089494164, -335.0" />
+      <cv c="-1611, 51.63424124513619, -761" />
+      <cv c="-1611, 52.82879377431907, -1186" />
+      <cv c="-1611.0, 52.474708171206224, -1611.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_46_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5090" degree="3" form="open">
+      <cv c="-1611.0, 49.929961089494164, -335.0" />
+      <cv c="-1611, 49.55642023346304, -313" />
+      <cv c="-1611, 49.50194552529183, -290" />
+      <cv c="-1611.0, 49.85992217898833, -267.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_46_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5091" degree="3" form="open">
+      <cv c="-1611.0, 49.85992217898833, -267.0" />
+      <cv c="-1611, 49.50194552529183, -290" />
+      <cv c="-1611, 49.55642023346304, -313" />
+      <cv c="-1611.0, 49.929961089494164, -335.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_47_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5092" degree="3" form="open">
+      <cv c="-1611.0, 49.85992217898833, -267.0" />
+      <cv c="-1611, 49.88326848249027, -178" />
+      <cv c="-1611, 49.964980544747085, -89" />
+      <cv c="-1611.0, 50.1284046692607, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_47_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5093" degree="3" form="open">
+      <cv c="-1611.0, 50.1284046692607, 0.0" />
+      <cv c="-1611, 49.964980544747085, -89" />
+      <cv c="-1611, 49.88326848249027, -178" />
+      <cv c="-1611.0, 49.85992217898833, -267.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_48_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5094" degree="3" form="open">
+      <cv c="-1611.0, 50.750972762645915, 3221.0" />
+      <cv c="-1611, 51.80544747081712, 3512" />
+      <cv c="-1611, 51.673151750972764, 3804" />
+      <cv c="-1611.0, 51.8171206225681, 4096.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_48_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5095" degree="3" form="open">
+      <cv c="-1611.0, 51.8171206225681, 4096.0" />
+      <cv c="-1611, 51.673151750972764, 3804" />
+      <cv c="-1611, 51.80544747081712, 3512" />
+      <cv c="-1611.0, 50.750972762645915, 3221.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_49_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5096" degree="3" form="open">
+      <cv c="40.0, 53.22568093385214, -4096.0" />
+      <cv c="40, 52.87937743190662, -3805" />
+      <cv c="40, 52.68482490272373, -3514" />
+      <cv c="40.0, 53.1284046692607, -3222.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_49_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5097" degree="3" form="open">
+      <cv c="40.0, 53.1284046692607, -3222.0" />
+      <cv c="40, 52.68482490272373, -3514" />
+      <cv c="40, 52.87937743190662, -3805" />
+      <cv c="40.0, 53.22568093385214, -4096.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_50_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5098" degree="3" form="open">
+      <cv c="40.0, 53.1284046692607, -3222.0" />
+      <cv c="40, 52.766536964980546, -2685" />
+      <cv c="40, 51.980544747081716, -2148" />
+      <cv c="40.0, 52.53307392996109, -1611.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_50_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5099" degree="3" form="open">
+      <cv c="40.0, 52.53307392996109, -1611.0" />
+      <cv c="40, 51.980544747081716, -2148" />
+      <cv c="40, 52.766536964980546, -2685" />
+      <cv c="40.0, 53.1284046692607, -3222.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_51_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5100" degree="3" form="open">
+      <cv c="40.0, 52.53307392996109, -1611.0" />
+      <cv c="40, 52.24124513618677, -1074" />
+      <cv c="40, 51.13618677042802, -537" />
+      <cv c="40.0, 52.159533073929964, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_51_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5101" degree="3" form="open">
+      <cv c="40.0, 52.159533073929964, 0.0" />
+      <cv c="40, 51.13618677042802, -537" />
+      <cv c="40, 52.24124513618677, -1074" />
+      <cv c="40.0, 52.53307392996109, -1611.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_52_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5102" degree="3" form="open">
+      <cv c="40.0, 52.159533073929964, 0.0" />
+      <cv c="40, 52.19455252918288, 34" />
+      <cv c="40, 52.24124513618677, 68" />
+      <cv c="40.0, 52.280155642023345, 102.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_52_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5103" degree="3" form="open">
+      <cv c="40.0, 52.280155642023345, 102.0" />
+      <cv c="40, 52.24124513618677, 68" />
+      <cv c="40, 52.19455252918288, 34" />
+      <cv c="40.0, 52.159533073929964, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_53_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5104" degree="3" form="open">
+      <cv c="40.0, 52.280155642023345, 102.0" />
+      <cv c="40, 52.766536964980546, 604" />
+      <cv c="40, 51.918287937743195, 1107" />
+      <cv c="40.0, 49.62645914396887, 1610.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_53_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5105" degree="3" form="open">
+      <cv c="40.0, 49.62645914396887, 1610.0" />
+      <cv c="40, 51.918287937743195, 1107" />
+      <cv c="40, 52.766536964980546, 604" />
+      <cv c="40.0, 52.280155642023345, 102.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_54_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5106" degree="3" form="open">
+      <cv c="40.0, 49.62645914396887, 1610.0" />
+      <cv c="40, 48.27626459143969, 1783" />
+      <cv c="40, 47.5136186770428, 1957" />
+      <cv c="40.0, 47.06614785992218, 2131.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_54_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5107" degree="3" form="open">
+      <cv c="40.0, 47.06614785992218, 2131.0" />
+      <cv c="40, 47.5136186770428, 1957" />
+      <cv c="40, 48.27626459143969, 1783" />
+      <cv c="40.0, 49.62645914396887, 1610.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_55_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5108" degree="3" form="open">
+      <cv c="40.0, 46.66536964980545, 2632.0" />
+      <cv c="40, 46.8171206225681, 2828" />
+      <cv c="40, 47.40856031128405, 3024" />
+      <cv c="40.0, 48.40466926070039, 3221.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_55_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5109" degree="3" form="open">
+      <cv c="40.0, 48.40466926070039, 3221.0" />
+      <cv c="40, 47.40856031128405, 3024" />
+      <cv c="40, 46.8171206225681, 2828" />
+      <cv c="40.0, 46.66536964980545, 2632.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_56_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5110" degree="3" form="open">
+      <cv c="40.0, 48.40466926070039, 3221.0" />
+      <cv c="40, 50.24124513618677, 3512" />
+      <cv c="40, 51.237354085603116, 3804" />
+      <cv c="40.0, 51.75875486381323, 4096.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_56_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5111" degree="3" form="open">
+      <cv c="40.0, 51.75875486381323, 4096.0" />
+      <cv c="40, 51.237354085603116, 3804" />
+      <cv c="40, 50.24124513618677, 3512" />
+      <cv c="40.0, 48.40466926070039, 3221.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_57_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5112" degree="3" form="open">
+      <cv c="1610.0, 54.252918287937746, -4096.0" />
+      <cv c="1610, 54.221789883268485, -3805" />
+      <cv c="1610, 53.36964980544747, -3514" />
+      <cv c="1610.0, 52.69649805447471, -3222.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_57_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5113" degree="3" form="open">
+      <cv c="1610.0, 52.69649805447471, -3222.0" />
+      <cv c="1610, 53.36964980544747, -3514" />
+      <cv c="1610, 54.221789883268485, -3805" />
+      <cv c="1610.0, 54.252918287937746, -4096.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_58_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5114" degree="3" form="open">
+      <cv c="1610.0, 52.69649805447471, -3222.0" />
+      <cv c="1610, 52.05836575875487, -3008" />
+      <cv c="1610, 52.70038910505836, -2793" />
+      <cv c="1610.0, 53.01556420233463, -2578.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_58_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5115" degree="3" form="open">
+      <cv c="1610.0, 53.01556420233463, -2578.0" />
+      <cv c="1610, 52.70038910505836, -2793" />
+      <cv c="1610, 52.05836575875487, -3008" />
+      <cv c="1610.0, 52.69649805447471, -3222.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_59_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5116" degree="3" form="open">
+      <cv c="1610.0, 53.01556420233463, -2578.0" />
+      <cv c="1610, 52.48249027237354, -2256" />
+      <cv c="1610, 52.459143968871594, -1934" />
+      <cv c="1610.0, 51.416342412451364, -1611.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_59_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5117" degree="3" form="open">
+      <cv c="1610.0, 51.416342412451364, -1611.0" />
+      <cv c="1610, 52.459143968871594, -1934" />
+      <cv c="1610, 52.48249027237354, -2256" />
+      <cv c="1610.0, 53.01556420233463, -2578.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_60_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5118" degree="3" form="open">
+      <cv c="1610.0, 51.416342412451364, -1611.0" />
+      <cv c="1610, 50.00389105058366, -1074" />
+      <cv c="1610, 51.48249027237354, -537" />
+      <cv c="1610.0, 52.66536964980545, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_60_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5119" degree="3" form="open">
+      <cv c="1610.0, 52.66536964980545, 0.0" />
+      <cv c="1610, 51.48249027237354, -537" />
+      <cv c="1610, 50.00389105058366, -1074" />
+      <cv c="1610.0, 51.416342412451364, -1611.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_61_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5120" degree="3" form="open">
+      <cv c="1610.0, 52.66536964980545, 0.0" />
+      <cv c="1610, 53.038910505836576, 536" />
+      <cv c="1610, 52.77431906614786, 1073" />
+      <cv c="1610.0, 52.77431906614786, 1610.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_61_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5121" degree="3" form="open">
+      <cv c="1610.0, 52.77431906614786, 1610.0" />
+      <cv c="1610, 52.77431906614786, 1073" />
+      <cv c="1610, 53.038910505836576, 536" />
+      <cv c="1610.0, 52.66536964980545, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_62_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5122" degree="3" form="open">
+      <cv c="1610.0, 52.77431906614786, 1610.0" />
+      <cv c="1610, 52.782101167315176, 2147" />
+      <cv c="1610, 50.902723735408564, 2684" />
+      <cv c="1610.0, 46.56031128404669, 3221.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_62_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5123" degree="3" form="open">
+      <cv c="1610.0, 46.56031128404669, 3221.0" />
+      <cv c="1610, 50.902723735408564, 2684" />
+      <cv c="1610, 52.782101167315176, 2147" />
+      <cv c="1610.0, 52.77431906614786, 1610.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_63_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5124" degree="3" form="open">
+      <cv c="3221.0, 52.03112840466926, -4096.0" />
+      <cv c="3221, 51.599221789883266, -3805" />
+      <cv c="3221, 52.48249027237354, -3514" />
+      <cv c="3221.0, 52.902723735408564, -3222.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_63_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5125" degree="3" form="open">
+      <cv c="3221.0, 52.902723735408564, -3222.0" />
+      <cv c="3221, 52.48249027237354, -3514" />
+      <cv c="3221, 51.599221789883266, -3805" />
+      <cv c="3221.0, 52.03112840466926, -4096.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_64_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5126" degree="3" form="open">
+      <cv c="3221.0, 52.902723735408564, -3222.0" />
+      <cv c="3221, 51.39688715953307, -2685" />
+      <cv c="3221, 53.268482490272376, -2148" />
+      <cv c="3221.0, 52.459143968871594, -1611.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_64_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5127" degree="3" form="open">
+      <cv c="3221.0, 52.459143968871594, -1611.0" />
+      <cv c="3221, 53.268482490272376, -2148" />
+      <cv c="3221, 51.39688715953307, -2685" />
+      <cv c="3221.0, 52.902723735408564, -3222.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_65_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5128" degree="3" form="open">
+      <cv c="3221.0, 52.459143968871594, -1611.0" />
+      <cv c="3221, 52.918287937743195, -1074" />
+      <cv c="3221, 51.72373540856031, -537" />
+      <cv c="3221.0, 52.447470817120625, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_65_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5129" degree="3" form="open">
+      <cv c="3221.0, 52.447470817120625, 0.0" />
+      <cv c="3221, 51.72373540856031, -537" />
+      <cv c="3221, 52.918287937743195, -1074" />
+      <cv c="3221.0, 52.459143968871594, -1611.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_66_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5130" degree="3" form="open">
+      <cv c="3221.0, 52.447470817120625, 0.0" />
+      <cv c="3221, 52.447470817120625, 29" />
+      <cv c="3221, 52.43579766536965, 58" />
+      <cv c="3221.0, 52.4124513618677, 87.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_66_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5131" degree="3" form="open">
+      <cv c="3221.0, 52.4124513618677, 87.0" />
+      <cv c="3221, 52.43579766536965, 58" />
+      <cv c="3221, 52.447470817120625, 29" />
+      <cv c="3221.0, 52.447470817120625, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_67_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5132" degree="3" form="open">
+      <cv c="3221.0, 52.4124513618677, 87.0" />
+      <cv c="3221, 52.52918287937743, 594" />
+      <cv c="3221, 51.583657587548636, 1102" />
+      <cv c="3221.0, 51.688715953307394, 1610.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_67_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5133" degree="3" form="open">
+      <cv c="3221.0, 51.688715953307394, 1610.0" />
+      <cv c="3221, 51.583657587548636, 1102" />
+      <cv c="3221, 52.52918287937743, 594" />
+      <cv c="3221.0, 52.4124513618677, 87.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_68_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5134" degree="3" form="open">
+      <cv c="3221.0, 51.688715953307394, 1610.0" />
+      <cv c="3221, 52.14785992217899, 2147" />
+      <cv c="3221, 50.24124513618677, 2684" />
+      <cv c="3221.0, 52.05836575875487, 3221.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_68_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5135" degree="3" form="open">
+      <cv c="3221.0, 52.05836575875487, 3221.0" />
+      <cv c="3221, 50.24124513618677, 2684" />
+      <cv c="3221, 52.14785992217899, 2147" />
+      <cv c="3221.0, 51.688715953307394, 1610.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_69_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5136" degree="3" form="open">
+      <cv c="3221.0, 52.05836575875487, 3221.0" />
+      <cv c="3221, 51.96887159533074, 3512" />
+      <cv c="3221, 50.09338521400778, 3804" />
+      <cv c="3221.0, 49.933852140077825, 4096.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_69_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5137" degree="3" form="open">
+      <cv c="3221.0, 49.933852140077825, 4096.0" />
+      <cv c="3221, 50.09338521400778, 3804" />
+      <cv c="3221, 51.96887159533074, 3512" />
+      <cv c="3221.0, 52.05836575875487, 3221.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_70_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5138" degree="3" form="open">
+      <cv c="-677.0, 52.92217898832685, -1923.0" />
+      <cv c="-677, 52.961089494163424, -1819" />
+      <cv c="-677, 52.94163424124514, -1715" />
+      <cv c="-677.0, 52.80155642023347, -1611.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_70_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5139" degree="3" form="open">
+      <cv c="-677.0, 52.80155642023347, -1611.0" />
+      <cv c="-677, 52.94163424124514, -1715" />
+      <cv c="-677, 52.961089494163424, -1819" />
+      <cv c="-677.0, 52.92217898832685, -1923.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_71_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5140" degree="3" form="open">
+      <cv c="1610.0, 53.01556420233463, -2578.0" />
+      <cv c="1721, 52.568093385214006, -2578" />
+      <cv c="1833, 52.04669260700389, -2578" />
+      <cv c="1945.0, 52.04280155642024, -2578.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_71_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5141" degree="3" form="open">
+      <cv c="1945.0, 52.04280155642024, -2578.0" />
+      <cv c="1833, 52.04669260700389, -2578" />
+      <cv c="1721, 52.568093385214006, -2578" />
+      <cv c="1610.0, 53.01556420233463, -2578.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_72_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5142" degree="3" form="open">
+      <cv c="-2438.0, 52.78988326848249, -3222.0" />
+      <cv c="-2438, 52.86770428015564, -3031" />
+      <cv c="-2438, 53.02723735408561, -2840" />
+      <cv c="-2438.0, 52.8443579766537, -2649.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_72_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5143" degree="3" form="open">
+      <cv c="-2438.0, 52.8443579766537, -2649.0" />
+      <cv c="-2438, 53.02723735408561, -2840" />
+      <cv c="-2438, 52.86770428015564, -3031" />
+      <cv c="-2438.0, 52.78988326848249, -3222.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_73_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5144" degree="3" form="open">
+      <cv c="2405.0, 52.09727626459144, -1611.0" />
+      <cv c="2405, 53.11673151750973, -1417" />
+      <cv c="2405, 53.72373540856031, -1222" />
+      <cv c="2405.0, 52.40466926070039, -1027.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_73_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5145" degree="3" form="open">
+      <cv c="2405.0, 52.40466926070039, -1027.0" />
+      <cv c="2405, 53.72373540856031, -1222" />
+      <cv c="2405, 53.11673151750973, -1417" />
+      <cv c="2405.0, 52.09727626459144, -1611.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_74_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5146" degree="3" form="open">
+      <cv c="-2378.0, 54.011673151750976, 0.0" />
+      <cv c="-2378, 54.04669260700389, 178" />
+      <cv c="-2378, 52.82879377431907, 356" />
+      <cv c="-2378.0, 49.73929961089494, 534.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_74_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5147" degree="3" form="open">
+      <cv c="-2378.0, 49.73929961089494, 534.0" />
+      <cv c="-2378, 52.82879377431907, 356" />
+      <cv c="-2378, 54.04669260700389, 178" />
+      <cv c="-2378.0, 54.011673151750976, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_75_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5148" degree="3" form="open">
+      <cv c="924.0, 53.202334630350194, 1420.0" />
+      <cv c="924, 53.50194552529183, 1483" />
+      <cv c="924, 53.536964980544745, 1546" />
+      <cv c="924.0, 53.42412451361868, 1610.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_75_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5149" degree="3" form="open">
+      <cv c="924.0, 53.42412451361868, 1610.0" />
+      <cv c="924, 53.536964980544745, 1546" />
+      <cv c="924, 53.50194552529183, 1483" />
+      <cv c="924.0, 53.202334630350194, 1420.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_76_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5150" degree="3" form="open">
+      <cv c="2726.0, 53.09727626459144, 1610.0" />
+      <cv c="2726, 52.918287937743195, 1650" />
+      <cv c="2726, 52.536964980544745, 1690" />
+      <cv c="2726.0, 52.13229571984436, 1730.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_76_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5151" degree="3" form="open">
+      <cv c="2726.0, 52.13229571984436, 1730.0" />
+      <cv c="2726, 52.536964980544745, 1690" />
+      <cv c="2726, 52.918287937743195, 1650" />
+      <cv c="2726.0, 53.09727626459144, 1610.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_77_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5152" degree="3" form="open">
+      <cv c="-3339.0, 51.50194552529183, -127.0" />
+      <cv c="-3339, 51.55642023346304, -85" />
+      <cv c="-3339, 51.56420233463035, -43" />
+      <cv c="-3339.0, 51.59143968871595, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_77_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5153" degree="3" form="open">
+      <cv c="-3339.0, 51.59143968871595, 0.0" />
+      <cv c="-3339, 51.56420233463035, -43" />
+      <cv c="-3339, 51.55642023346304, -85" />
+      <cv c="-3339.0, 51.50194552529183, -127.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_78_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5154" degree="3" form="open">
+      <cv c="-3339.0, 51.59143968871595, 0.0" />
+      <cv c="-3339, 51.57198443579767, 30" />
+      <cv c="-3339, 51.552529182879375, 60" />
+      <cv c="-3339.0, 51.54863813229572, 90.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_78_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5155" degree="3" form="open">
+      <cv c="-3339.0, 51.54863813229572, 90.0" />
+      <cv c="-3339, 51.552529182879375, 60" />
+      <cv c="-3339, 51.57198443579767, 30" />
+      <cv c="-3339.0, 51.59143968871595, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_79_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5156" degree="3" form="open">
+      <cv c="-3339.0, 51.54863813229572, 90.0" />
+      <cv c="-3339, 51.536964980544745, 102" />
+      <cv c="-3339, 51.5136186770428, 114" />
+      <cv c="-3339.0, 51.494163424124515, 126.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_79_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5157" degree="3" form="open">
+      <cv c="-3339.0, 51.494163424124515, 126.0" />
+      <cv c="-3339, 51.5136186770428, 114" />
+      <cv c="-3339, 51.536964980544745, 102" />
+      <cv c="-3339.0, 51.54863813229572, 90.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_80_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5158" degree="3" form="open">
+      <cv c="-3104.0, 51.65758754863813, -127.0" />
+      <cv c="-3104, 51.62256809338521, -85" />
+      <cv c="-3104, 51.63424124513619, -43" />
+      <cv c="-3104.0, 51.62645914396887, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_80_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5159" degree="3" form="open">
+      <cv c="-3104.0, 51.62645914396887, 0.0" />
+      <cv c="-3104, 51.63424124513619, -43" />
+      <cv c="-3104, 51.62256809338521, -85" />
+      <cv c="-3104.0, 51.65758754863813, -127.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_81_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5160" degree="3" form="open">
+      <cv c="-3104.0, 51.62645914396887, 0.0" />
+      <cv c="-3104, 51.63424124513619, 30" />
+      <cv c="-3104, 51.63424124513619, 60" />
+      <cv c="-3104.0, 51.62645914396887, 90.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_81_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5161" degree="3" form="open">
+      <cv c="-3104.0, 51.62645914396887, 90.0" />
+      <cv c="-3104, 51.63424124513619, 60" />
+      <cv c="-3104, 51.63424124513619, 30" />
+      <cv c="-3104.0, 51.62645914396887, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_82_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5162" degree="3" form="open">
+      <cv c="-3104.0, 51.62645914396887, 90.0" />
+      <cv c="-3104, 51.63035019455253, 102" />
+      <cv c="-3104, 51.63813229571984, 114" />
+      <cv c="-3104.0, 51.6420233463035, 126.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_82_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5163" degree="3" form="open">
+      <cv c="-3104.0, 51.6420233463035, 126.0" />
+      <cv c="-3104, 51.63813229571984, 114" />
+      <cv c="-3104, 51.63035019455253, 102" />
+      <cv c="-3104.0, 51.62645914396887, 90.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_83_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5164" degree="3" form="open">
+      <cv c="-3390.0, 51.45525291828794, 90.0" />
+      <cv c="-3373, 51.48249027237354, 90" />
+      <cv c="-3356, 51.525291828793776, 90" />
+      <cv c="-3339.0, 51.54863813229572, 90.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_83_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5165" degree="3" form="open">
+      <cv c="-3339.0, 51.54863813229572, 90.0" />
+      <cv c="-3356, 51.525291828793776, 90" />
+      <cv c="-3373, 51.48249027237354, 90" />
+      <cv c="-3390.0, 51.45525291828794, 90.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_84_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5166" degree="3" form="open">
+      <cv c="-3339.0, 51.54863813229572, 90.0" />
+      <cv c="-3300, 51.55642023346304, 90" />
+      <cv c="-3261, 51.552529182879375, 90" />
+      <cv c="-3222.0, 51.54863813229572, 90.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_84_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5167" degree="3" form="open">
+      <cv c="-3222.0, 51.54863813229572, 90.0" />
+      <cv c="-3261, 51.552529182879375, 90" />
+      <cv c="-3300, 51.55642023346304, 90" />
+      <cv c="-3339.0, 51.54863813229572, 90.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_85_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5168" degree="3" form="open">
+      <cv c="-3222.0, 51.54863813229572, 90.0" />
+      <cv c="-3183, 51.57587548638132, 90" />
+      <cv c="-3144, 51.60311284046693, 90" />
+      <cv c="-3104.0, 51.62645914396887, 90.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_85_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5169" degree="3" form="open">
+      <cv c="-3104.0, 51.62645914396887, 90.0" />
+      <cv c="-3144, 51.60311284046693, 90" />
+      <cv c="-3183, 51.57587548638132, 90" />
+      <cv c="-3222.0, 51.54863813229572, 90.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_86_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5170" degree="3" form="open">
+      <cv c="-3104.0, 51.62645914396887, 90.0" />
+      <cv c="-3087, 51.6420233463035, 90" />
+      <cv c="-3070, 51.65758754863813, 90" />
+      <cv c="-3053.0, 51.68093385214008, 90.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_86_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5171" degree="3" form="open">
+      <cv c="-3053.0, 51.68093385214008, 90.0" />
+      <cv c="-3070, 51.65758754863813, 90" />
+      <cv c="-3087, 51.6420233463035, 90" />
+      <cv c="-3104.0, 51.62645914396887, 90.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_87_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5172" degree="3" form="open">
+      <cv c="-146.0, 52.295719844357976, -143.0" />
+      <cv c="-146, 52.206225680933855, -96" />
+      <cv c="-146, 52.202334630350194, -48" />
+      <cv c="-146.0, 52.16342412451362, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_87_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5173" degree="3" form="open">
+      <cv c="-146.0, 52.16342412451362, 0.0" />
+      <cv c="-146, 52.202334630350194, -48" />
+      <cv c="-146, 52.206225680933855, -96" />
+      <cv c="-146.0, 52.295719844357976, -143.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_88_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5174" degree="3" form="open">
+      <cv c="-146.0, 52.16342412451362, 0.0" />
+      <cv c="-146, 52.18287937743191, 34" />
+      <cv c="-146, 52.206225680933855, 68" />
+      <cv c="-146.0, 52.221789883268485, 102.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_88_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5175" degree="3" form="open">
+      <cv c="-146.0, 52.221789883268485, 102.0" />
+      <cv c="-146, 52.206225680933855, 68" />
+      <cv c="-146, 52.18287937743191, 34" />
+      <cv c="-146.0, 52.16342412451362, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_89_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5176" degree="3" form="open">
+      <cv c="-146.0, 52.221789883268485, 102.0" />
+      <cv c="-146, 52.217898832684824, 115" />
+      <cv c="-146, 52.21011673151751, 128" />
+      <cv c="-146.0, 52.19844357976654, 142.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_89_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5177" degree="3" form="open">
+      <cv c="-146.0, 52.19844357976654, 142.0" />
+      <cv c="-146, 52.21011673151751, 128" />
+      <cv c="-146, 52.217898832684824, 115" />
+      <cv c="-146.0, 52.221789883268485, 102.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_90_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5178" degree="3" form="open">
+      <cv c="145.0, 52.202334630350194, -143.0" />
+      <cv c="145, 52.190661478599225, -96" />
+      <cv c="145, 52.17898832684825, -48" />
+      <cv c="145.0, 52.17120622568093, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_90_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5179" degree="3" form="open">
+      <cv c="145.0, 52.17120622568093, 0.0" />
+      <cv c="145, 52.17898832684825, -48" />
+      <cv c="145, 52.190661478599225, -96" />
+      <cv c="145.0, 52.202334630350194, -143.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_91_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5180" degree="3" form="open">
+      <cv c="145.0, 52.17120622568093, 0.0" />
+      <cv c="145, 52.175097276264594, 34" />
+      <cv c="145, 52.17120622568093, 68" />
+      <cv c="145.0, 52.18287937743191, 102.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_91_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5181" degree="3" form="open">
+      <cv c="145.0, 52.18287937743191, 102.0" />
+      <cv c="145, 52.17120622568093, 68" />
+      <cv c="145, 52.175097276264594, 34" />
+      <cv c="145.0, 52.17120622568093, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_92_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5182" degree="3" form="open">
+      <cv c="145.0, 52.18287937743191, 102.0" />
+      <cv c="145, 52.16342412451362, 115" />
+      <cv c="145, 52.1284046692607, 128" />
+      <cv c="145.0, 52.09727626459144, 142.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_92_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5183" degree="3" form="open">
+      <cv c="145.0, 52.09727626459144, 142.0" />
+      <cv c="145, 52.1284046692607, 128" />
+      <cv c="145, 52.16342412451362, 115" />
+      <cv c="145.0, 52.18287937743191, 102.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_93_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5184" degree="3" form="open">
+      <cv c="-209.0, 52.2295719844358, 102.0" />
+      <cv c="-188, 52.221789883268485, 102" />
+      <cv c="-167, 52.221789883268485, 102" />
+      <cv c="-146.0, 52.221789883268485, 102.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_93_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5185" degree="3" form="open">
+      <cv c="-146.0, 52.221789883268485, 102.0" />
+      <cv c="-167, 52.221789883268485, 102" />
+      <cv c="-188, 52.221789883268485, 102" />
+      <cv c="-209.0, 52.2295719844358, 102.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_94_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5186" degree="3" form="open">
+      <cv c="-146.0, 52.221789883268485, 102.0" />
+      <cv c="-98, 52.24124513618677, 102" />
+      <cv c="-49, 52.27237354085603, 102" />
+      <cv c="0.0, 52.33852140077821, 102.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_94_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5187" degree="3" form="open">
+      <cv c="0.0, 52.33852140077821, 102.0" />
+      <cv c="-49, 52.27237354085603, 102" />
+      <cv c="-98, 52.24124513618677, 102" />
+      <cv c="-146.0, 52.221789883268485, 102.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_95_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5188" degree="3" form="open">
+      <cv c="0.0, 52.33852140077821, 102.0" />
+      <cv c="13, 52.3307392996109, 102" />
+      <cv c="26, 52.311284046692606, 102" />
+      <cv c="40.0, 52.280155642023345, 102.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_95_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5189" degree="3" form="open">
+      <cv c="40.0, 52.280155642023345, 102.0" />
+      <cv c="26, 52.311284046692606, 102" />
+      <cv c="13, 52.3307392996109, 102" />
+      <cv c="0.0, 52.33852140077821, 102.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_96_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5190" degree="3" form="open">
+      <cv c="40.0, 52.280155642023345, 102.0" />
+      <cv c="75, 52.22568093385214, 102" />
+      <cv c="110, 52.202334630350194, 102" />
+      <cv c="145.0, 52.18287937743191, 102.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_96_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5191" degree="3" form="open">
+      <cv c="145.0, 52.18287937743191, 102.0" />
+      <cv c="110, 52.202334630350194, 102" />
+      <cv c="75, 52.22568093385214, 102" />
+      <cv c="40.0, 52.280155642023345, 102.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_97_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5192" degree="3" form="open">
+      <cv c="145.0, 52.18287937743191, 102.0" />
+      <cv c="166, 52.16342412451362, 102" />
+      <cv c="187, 52.12451361867704, 102" />
+      <cv c="208.0, 52.08949416342413, 102.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_97_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5193" degree="3" form="open">
+      <cv c="208.0, 52.08949416342413, 102.0" />
+      <cv c="187, 52.12451361867704, 102" />
+      <cv c="166, 52.16342412451362, 102" />
+      <cv c="145.0, 52.18287937743191, 102.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_98_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5194" degree="3" form="open">
+      <cv c="3109.0, 52.39688715953307, -122.0" />
+      <cv c="3109, 52.38132295719844, -82" />
+      <cv c="3109, 52.37743190661479, -41" />
+      <cv c="3109.0, 52.37354085603113, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_98_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5195" degree="3" form="open">
+      <cv c="3109.0, 52.37354085603113, 0.0" />
+      <cv c="3109, 52.37743190661479, -41" />
+      <cv c="3109, 52.38132295719844, -82" />
+      <cv c="3109.0, 52.39688715953307, -122.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_99_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5196" degree="3" form="open">
+      <cv c="3109.0, 52.37354085603113, 0.0" />
+      <cv c="3109, 52.36964980544747, 29" />
+      <cv c="3109, 52.36186770428016, 58" />
+      <cv c="3109.0, 52.3579766536965, 87.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_99_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5197" degree="3" form="open">
+      <cv c="3109.0, 52.3579766536965, 87.0" />
+      <cv c="3109, 52.36186770428016, 58" />
+      <cv c="3109, 52.36964980544747, 29" />
+      <cv c="3109.0, 52.37354085603113, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_100_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5198" degree="3" form="open">
+      <cv c="3109.0, 52.3579766536965, 87.0" />
+      <cv c="3109, 52.3579766536965, 98" />
+      <cv c="3109, 52.36186770428016, 109" />
+      <cv c="3109.0, 52.36575875486381, 121.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_100_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5199" degree="3" form="open">
+      <cv c="3109.0, 52.36575875486381, 121.0" />
+      <cv c="3109, 52.36186770428016, 109" />
+      <cv c="3109, 52.3579766536965, 98" />
+      <cv c="3109.0, 52.3579766536965, 87.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_101_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5200" degree="3" form="open">
+      <cv c="3333.0, 52.54474708171206, -122.0" />
+      <cv c="3333, 52.46692607003891, -82" />
+      <cv c="3333, 52.44357976653696, -41" />
+      <cv c="3333.0, 52.4124513618677, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_101_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5201" degree="3" form="open">
+      <cv c="3333.0, 52.4124513618677, 0.0" />
+      <cv c="3333, 52.44357976653696, -41" />
+      <cv c="3333, 52.46692607003891, -82" />
+      <cv c="3333.0, 52.54474708171206, -122.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_102_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5202" degree="3" form="open">
+      <cv c="3333.0, 52.4124513618677, 0.0" />
+      <cv c="3333, 52.431906614785994, 29" />
+      <cv c="3333, 52.463035019455255, 58" />
+      <cv c="3333.0, 52.47081712062257, 87.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_102_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5203" degree="3" form="open">
+      <cv c="3333.0, 52.47081712062257, 87.0" />
+      <cv c="3333, 52.463035019455255, 58" />
+      <cv c="3333, 52.431906614785994, 29" />
+      <cv c="3333.0, 52.4124513618677, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_103_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5204" degree="3" form="open">
+      <cv c="3333.0, 52.47081712062257, 87.0" />
+      <cv c="3333, 52.478599221789885, 98" />
+      <cv c="3333, 52.49805447470817, 109" />
+      <cv c="3333.0, 52.509727626459146, 121.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_103_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5205" degree="3" form="open">
+      <cv c="3333.0, 52.509727626459146, 121.0" />
+      <cv c="3333, 52.49805447470817, 109" />
+      <cv c="3333, 52.478599221789885, 98" />
+      <cv c="3333.0, 52.47081712062257, 87.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_104_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5206" degree="3" form="open">
+      <cv c="3061.0, 52.33463035019455, 87.0" />
+      <cv c="3077, 52.34241245136187, 87" />
+      <cv c="3093, 52.35019455252918, 87" />
+      <cv c="3109.0, 52.3579766536965, 87.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_104_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5207" degree="3" form="open">
+      <cv c="3109.0, 52.3579766536965, 87.0" />
+      <cv c="3093, 52.35019455252918, 87" />
+      <cv c="3077, 52.34241245136187, 87" />
+      <cv c="3061.0, 52.33463035019455, 87.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_105_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5208" degree="3" form="open">
+      <cv c="3109.0, 52.3579766536965, 87.0" />
+      <cv c="3146, 52.37743190661479, 87" />
+      <cv c="3183, 52.40466926070039, 87" />
+      <cv c="3221.0, 52.4124513618677, 87.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_105_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5209" degree="3" form="open">
+      <cv c="3221.0, 52.4124513618677, 87.0" />
+      <cv c="3183, 52.40466926070039, 87" />
+      <cv c="3146, 52.37743190661479, 87" />
+      <cv c="3109.0, 52.3579766536965, 87.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_106_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5210" degree="3" form="open">
+      <cv c="3221.0, 52.4124513618677, 87.0" />
+      <cv c="3258, 52.43968871595331, 87" />
+      <cv c="3295, 52.45136186770428, 87" />
+      <cv c="3333.0, 52.47081712062257, 87.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_106_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5211" degree="3" form="open">
+      <cv c="3333.0, 52.47081712062257, 87.0" />
+      <cv c="3295, 52.45136186770428, 87" />
+      <cv c="3258, 52.43968871595331, 87" />
+      <cv c="3221.0, 52.4124513618677, 87.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_107_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5212" degree="3" form="open">
+      <cv c="3333.0, 52.47081712062257, 87.0" />
+      <cv c="3349, 52.494163424124515, 87" />
+      <cv c="3365, 52.52918287937743, 87" />
+      <cv c="3381.0, 52.54863813229572, 87.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_107_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" shapeId="5213" degree="3" form="open">
+      <cv c="3381.0, 52.54863813229572, 87.0" />
+      <cv c="3365, 52.52918287937743, 87" />
+      <cv c="3349, 52.494163424124515, 87" />
+      <cv c="3333.0, 52.47081712062257, 87.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_108_original_{'highway': ['motorway', 'trunk', 'primary']}" shapeId="5214" degree="3" form="open">
+      <cv c="-4096.0, 53.964980544747085, 0.0" />
+      <cv c="-3844, 53.06614785992218, 0" />
+      <cv c="-3592, 52.37743190661479, 0" />
+      <cv c="-3339.0, 51.59143968871595, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_108_reversed_{'highway': ['motorway', 'trunk', 'primary']}" shapeId="5215" degree="3" form="open">
+      <cv c="-3339.0, 51.59143968871595, 0.0" />
+      <cv c="-3592, 52.37743190661479, 0" />
+      <cv c="-3844, 53.06614785992218, 0" />
+      <cv c="-4096.0, 53.964980544747085, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_109_original_{'highway': ['motorway', 'trunk', 'primary']}" shapeId="5216" degree="3" form="open">
+      <cv c="-3339.0, 51.59143968871595, 0.0" />
+      <cv c="-3300, 51.56031128404669, 0" />
+      <cv c="-3261, 51.56031128404669, 0" />
+      <cv c="-3222.0, 51.57198443579767, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_109_reversed_{'highway': ['motorway', 'trunk', 'primary']}" shapeId="5217" degree="3" form="open">
+      <cv c="-3222.0, 51.57198443579767, 0.0" />
+      <cv c="-3261, 51.56031128404669, 0" />
+      <cv c="-3300, 51.56031128404669, 0" />
+      <cv c="-3339.0, 51.59143968871595, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_110_original_{'highway': ['motorway', 'trunk', 'primary']}" shapeId="5218" degree="3" form="open">
+      <cv c="-3222.0, 51.57198443579767, 0.0" />
+      <cv c="-3183, 51.599221789883266, 0" />
+      <cv c="-3144, 51.6147859922179, 0" />
+      <cv c="-3104.0, 51.62645914396887, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_110_reversed_{'highway': ['motorway', 'trunk', 'primary']}" shapeId="5219" degree="3" form="open">
+      <cv c="-3104.0, 51.62645914396887, 0.0" />
+      <cv c="-3144, 51.6147859922179, 0" />
+      <cv c="-3183, 51.599221789883266, 0" />
+      <cv c="-3222.0, 51.57198443579767, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_111_original_{'highway': ['motorway', 'trunk', 'primary']}" shapeId="5220" degree="3" form="open">
+      <cv c="-3104.0, 51.62645914396887, 0.0" />
+      <cv c="-2862, 51.996108949416346, 0" />
+      <cv c="-2620, 53.13618677042802, 0" />
+      <cv c="-2378.0, 54.011673151750976, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_111_reversed_{'highway': ['motorway', 'trunk', 'primary']}" shapeId="5221" degree="3" form="open">
+      <cv c="-2378.0, 54.011673151750976, 0.0" />
+      <cv c="-2620, 53.13618677042802, 0" />
+      <cv c="-2862, 51.996108949416346, 0" />
+      <cv c="-3104.0, 51.62645914396887, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_112_original_{'highway': ['motorway', 'trunk', 'primary']}" shapeId="5222" degree="3" form="open">
+      <cv c="-2378.0, 54.011673151750976, 0.0" />
+      <cv c="-2166, 52.80155642023347, 0" />
+      <cv c="-1954, 51.326848249027236, 0" />
+      <cv c="-1742.0, 49.85214007782101, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_112_reversed_{'highway': ['motorway', 'trunk', 'primary']}" shapeId="5223" degree="3" form="open">
+      <cv c="-1742.0, 49.85214007782101, 0.0" />
+      <cv c="-1954, 51.326848249027236, 0" />
+      <cv c="-2166, 52.80155642023347, 0" />
+      <cv c="-2378.0, 54.011673151750976, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_113_original_{'highway': ['motorway', 'trunk', 'primary']}" shapeId="5224" degree="3" form="open">
+      <cv c="-1742.0, 49.85214007782101, 0.0" />
+      <cv c="-1720, 49.5875486381323, 0" />
+      <cv c="-1697, 49.494163424124515, 0" />
+      <cv c="-1674.0, 49.84824902723736, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_113_reversed_{'highway': ['motorway', 'trunk', 'primary']}" shapeId="5225" degree="3" form="open">
+      <cv c="-1674.0, 49.84824902723736, 0.0" />
+      <cv c="-1697, 49.494163424124515, 0" />
+      <cv c="-1720, 49.5875486381323, 0" />
+      <cv c="-1742.0, 49.85214007782101, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_114_original_{'highway': ['motorway', 'trunk', 'primary']}" shapeId="5226" degree="3" form="open">
+      <cv c="-1674.0, 49.84824902723736, 0.0" />
+      <cv c="-1653, 49.92607003891051, 0" />
+      <cv c="-1632, 50.038910505836576, 0" />
+      <cv c="-1611.0, 50.1284046692607, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_114_reversed_{'highway': ['motorway', 'trunk', 'primary']}" shapeId="5227" degree="3" form="open">
+      <cv c="-1611.0, 50.1284046692607, 0.0" />
+      <cv c="-1632, 50.038910505836576, 0" />
+      <cv c="-1653, 49.92607003891051, 0" />
+      <cv c="-1674.0, 49.84824902723736, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_115_original_{'highway': ['motorway', 'trunk', 'primary']}" shapeId="5228" degree="3" form="open">
+      <cv c="-1611.0, 50.1284046692607, 0.0" />
+      <cv c="-1123, 52.762645914396884, 0" />
+      <cv c="-635, 51.96887159533074, 0" />
+      <cv c="-146.0, 52.16342412451362, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_115_reversed_{'highway': ['motorway', 'trunk', 'primary']}" shapeId="5229" degree="3" form="open">
+      <cv c="-146.0, 52.16342412451362, 0.0" />
+      <cv c="-635, 51.96887159533074, 0" />
+      <cv c="-1123, 52.762645914396884, 0" />
+      <cv c="-1611.0, 50.1284046692607, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_116_original_{'highway': ['motorway', 'trunk', 'primary']}" shapeId="5230" degree="3" form="open">
+      <cv c="-146.0, 52.16342412451362, 0.0" />
+      <cv c="-98, 52.17898832684825, 0" />
+      <cv c="-49, 52.17120622568093, 0" />
+      <cv c="0.0, 52.159533073929964, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_116_reversed_{'highway': ['motorway', 'trunk', 'primary']}" shapeId="5231" degree="3" form="open">
+      <cv c="0.0, 52.159533073929964, 0.0" />
+      <cv c="-49, 52.17120622568093, 0" />
+      <cv c="-98, 52.17898832684825, 0" />
+      <cv c="-146.0, 52.16342412451362, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_117_original_{'highway': ['motorway', 'trunk', 'primary']}" shapeId="5232" degree="3" form="open">
+      <cv c="0.0, 52.159533073929964, 0.0" />
+      <cv c="13, 52.159533073929964, 0" />
+      <cv c="26, 52.159533073929964, 0" />
+      <cv c="40.0, 52.159533073929964, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_117_reversed_{'highway': ['motorway', 'trunk', 'primary']}" shapeId="5233" degree="3" form="open">
+      <cv c="40.0, 52.159533073929964, 0.0" />
+      <cv c="26, 52.159533073929964, 0" />
+      <cv c="13, 52.159533073929964, 0" />
+      <cv c="0.0, 52.159533073929964, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_118_original_{'highway': ['motorway', 'trunk', 'primary']}" shapeId="5234" degree="3" form="open">
+      <cv c="40.0, 52.159533073929964, 0.0" />
+      <cv c="75, 52.14007782101167, 0" />
+      <cv c="110, 52.14785992217899, 0" />
+      <cv c="145.0, 52.17120622568093, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_118_reversed_{'highway': ['motorway', 'trunk', 'primary']}" shapeId="5235" degree="3" form="open">
+      <cv c="145.0, 52.17120622568093, 0.0" />
+      <cv c="110, 52.14785992217899, 0" />
+      <cv c="75, 52.14007782101167, 0" />
+      <cv c="40.0, 52.159533073929964, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_119_original_{'highway': ['motorway', 'trunk', 'primary']}" shapeId="5236" degree="3" form="open">
+      <cv c="145.0, 52.17120622568093, 0.0" />
+      <cv c="633, 54.43579766536965, 0" />
+      <cv c="1121, 53.782101167315176, 0" />
+      <cv c="1610.0, 52.66536964980545, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_119_reversed_{'highway': ['motorway', 'trunk', 'primary']}" shapeId="5237" degree="3" form="open">
+      <cv c="1610.0, 52.66536964980545, 0.0" />
+      <cv c="1121, 53.782101167315176, 0" />
+      <cv c="633, 54.43579766536965, 0" />
+      <cv c="145.0, 52.17120622568093, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_120_original_{'highway': ['motorway', 'trunk', 'primary']}" shapeId="5238" degree="3" form="open">
+      <cv c="1610.0, 52.66536964980545, 0.0" />
+      <cv c="2109, 53.27237354085603, 0" />
+      <cv c="2609, 51.7431906614786, 0" />
+      <cv c="3109.0, 52.37354085603113, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_120_reversed_{'highway': ['motorway', 'trunk', 'primary']}" shapeId="5239" degree="3" form="open">
+      <cv c="3109.0, 52.37354085603113, 0.0" />
+      <cv c="2609, 51.7431906614786, 0" />
+      <cv c="2109, 53.27237354085603, 0" />
+      <cv c="1610.0, 52.66536964980545, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_121_original_{'highway': ['motorway', 'trunk', 'primary']}" shapeId="5240" degree="3" form="open">
+      <cv c="3109.0, 52.37354085603113, 0.0" />
+      <cv c="3146, 52.400778210116734, 0" />
+      <cv c="3183, 52.42801556420233, 0" />
+      <cv c="3221.0, 52.447470817120625, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_121_reversed_{'highway': ['motorway', 'trunk', 'primary']}" shapeId="5241" degree="3" form="open">
+      <cv c="3221.0, 52.447470817120625, 0.0" />
+      <cv c="3183, 52.42801556420233, 0" />
+      <cv c="3146, 52.400778210116734, 0" />
+      <cv c="3109.0, 52.37354085603113, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_122_original_{'highway': ['motorway', 'trunk', 'primary']}" shapeId="5242" degree="3" form="open">
+      <cv c="3221.0, 52.447470817120625, 0.0" />
+      <cv c="3258, 52.463035019455255, 0" />
+      <cv c="3295, 52.45136186770428, 0" />
+      <cv c="3333.0, 52.4124513618677, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_122_reversed_{'highway': ['motorway', 'trunk', 'primary']}" shapeId="5243" degree="3" form="open">
+      <cv c="3333.0, 52.4124513618677, 0.0" />
+      <cv c="3295, 52.45136186770428, 0" />
+      <cv c="3258, 52.463035019455255, 0" />
+      <cv c="3221.0, 52.447470817120625, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_123_original_{'highway': ['motorway', 'trunk', 'primary']}" shapeId="5244" degree="3" form="open">
+      <cv c="3333.0, 52.4124513618677, 0.0" />
+      <cv c="3587, 51.249027237354085, 0" />
+      <cv c="3841, 51.19844357976654, 0" />
+      <cv c="4096.0, 51.766536964980546, 0.0" />
+    </NurbsCurve>
+    <NurbsCurve name="spline_123_reversed_{'highway': ['motorway', 'trunk', 'primary']}" shapeId="5245" degree="3" form="open">
+      <cv c="4096.0, 51.766536964980546, 0.0" />
+      <cv c="3841, 51.19844357976654, 0" />
+      <cv c="3587, 51.249027237354085, 0" />
+      <cv c="3333.0, 52.4124513618677, 0.0" />
+    </NurbsCurve>
+  </Shapes>
+  <Scene>
+    <Shape name="spline_1_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5000" shapeId="5000" />
+    <Shape name="spline_1_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5001" shapeId="5001" />
+    <Shape name="spline_2_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5002" shapeId="5002" />
+    <Shape name="spline_2_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5003" shapeId="5003" />
+    <Shape name="spline_3_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5004" shapeId="5004" />
+    <Shape name="spline_3_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5005" shapeId="5005" />
+    <Shape name="spline_4_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5006" shapeId="5006" />
+    <Shape name="spline_4_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5007" shapeId="5007" />
+    <Shape name="spline_5_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5008" shapeId="5008" />
+    <Shape name="spline_5_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5009" shapeId="5009" />
+    <Shape name="spline_6_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5010" shapeId="5010" />
+    <Shape name="spline_6_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5011" shapeId="5011" />
+    <Shape name="spline_7_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5012" shapeId="5012" />
+    <Shape name="spline_7_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5013" shapeId="5013" />
+    <Shape name="spline_8_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5014" shapeId="5014" />
+    <Shape name="spline_8_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5015" shapeId="5015" />
+    <Shape name="spline_9_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5016" shapeId="5016" />
+    <Shape name="spline_9_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5017" shapeId="5017" />
+    <Shape name="spline_10_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5018" shapeId="5018" />
+    <Shape name="spline_10_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5019" shapeId="5019" />
+    <Shape name="spline_11_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5020" shapeId="5020" />
+    <Shape name="spline_11_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5021" shapeId="5021" />
+    <Shape name="spline_12_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5022" shapeId="5022" />
+    <Shape name="spline_12_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5023" shapeId="5023" />
+    <Shape name="spline_13_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5024" shapeId="5024" />
+    <Shape name="spline_13_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5025" shapeId="5025" />
+    <Shape name="spline_14_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5026" shapeId="5026" />
+    <Shape name="spline_14_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5027" shapeId="5027" />
+    <Shape name="spline_15_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5028" shapeId="5028" />
+    <Shape name="spline_15_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5029" shapeId="5029" />
+    <Shape name="spline_16_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5030" shapeId="5030" />
+    <Shape name="spline_16_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5031" shapeId="5031" />
+    <Shape name="spline_17_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5032" shapeId="5032" />
+    <Shape name="spline_17_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5033" shapeId="5033" />
+    <Shape name="spline_18_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5034" shapeId="5034" />
+    <Shape name="spline_18_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5035" shapeId="5035" />
+    <Shape name="spline_19_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5036" shapeId="5036" />
+    <Shape name="spline_19_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5037" shapeId="5037" />
+    <Shape name="spline_20_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5038" shapeId="5038" />
+    <Shape name="spline_20_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5039" shapeId="5039" />
+    <Shape name="spline_21_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5040" shapeId="5040" />
+    <Shape name="spline_21_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5041" shapeId="5041" />
+    <Shape name="spline_22_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5042" shapeId="5042" />
+    <Shape name="spline_22_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5043" shapeId="5043" />
+    <Shape name="spline_23_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5044" shapeId="5044" />
+    <Shape name="spline_23_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5045" shapeId="5045" />
+    <Shape name="spline_24_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5046" shapeId="5046" />
+    <Shape name="spline_24_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5047" shapeId="5047" />
+    <Shape name="spline_25_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5048" shapeId="5048" />
+    <Shape name="spline_25_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5049" shapeId="5049" />
+    <Shape name="spline_26_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5050" shapeId="5050" />
+    <Shape name="spline_26_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5051" shapeId="5051" />
+    <Shape name="spline_27_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5052" shapeId="5052" />
+    <Shape name="spline_27_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5053" shapeId="5053" />
+    <Shape name="spline_28_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5054" shapeId="5054" />
+    <Shape name="spline_28_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5055" shapeId="5055" />
+    <Shape name="spline_29_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5056" shapeId="5056" />
+    <Shape name="spline_29_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5057" shapeId="5057" />
+    <Shape name="spline_30_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5058" shapeId="5058" />
+    <Shape name="spline_30_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5059" shapeId="5059" />
+    <Shape name="spline_31_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5060" shapeId="5060" />
+    <Shape name="spline_31_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5061" shapeId="5061" />
+    <Shape name="spline_32_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5062" shapeId="5062" />
+    <Shape name="spline_32_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5063" shapeId="5063" />
+    <Shape name="spline_33_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5064" shapeId="5064" />
+    <Shape name="spline_33_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5065" shapeId="5065" />
+    <Shape name="spline_34_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5066" shapeId="5066" />
+    <Shape name="spline_34_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5067" shapeId="5067" />
+    <Shape name="spline_35_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5068" shapeId="5068" />
+    <Shape name="spline_35_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5069" shapeId="5069" />
+    <Shape name="spline_36_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5070" shapeId="5070" />
+    <Shape name="spline_36_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5071" shapeId="5071" />
+    <Shape name="spline_37_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5072" shapeId="5072" />
+    <Shape name="spline_37_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5073" shapeId="5073" />
+    <Shape name="spline_38_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5074" shapeId="5074" />
+    <Shape name="spline_38_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5075" shapeId="5075" />
+    <Shape name="spline_39_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5076" shapeId="5076" />
+    <Shape name="spline_39_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5077" shapeId="5077" />
+    <Shape name="spline_40_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5078" shapeId="5078" />
+    <Shape name="spline_40_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5079" shapeId="5079" />
+    <Shape name="spline_41_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5080" shapeId="5080" />
+    <Shape name="spline_41_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5081" shapeId="5081" />
+    <Shape name="spline_42_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5082" shapeId="5082" />
+    <Shape name="spline_42_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5083" shapeId="5083" />
+    <Shape name="spline_43_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5084" shapeId="5084" />
+    <Shape name="spline_43_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5085" shapeId="5085" />
+    <Shape name="spline_44_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5086" shapeId="5086" />
+    <Shape name="spline_44_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5087" shapeId="5087" />
+    <Shape name="spline_45_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5088" shapeId="5088" />
+    <Shape name="spline_45_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5089" shapeId="5089" />
+    <Shape name="spline_46_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5090" shapeId="5090" />
+    <Shape name="spline_46_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5091" shapeId="5091" />
+    <Shape name="spline_47_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5092" shapeId="5092" />
+    <Shape name="spline_47_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5093" shapeId="5093" />
+    <Shape name="spline_48_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5094" shapeId="5094" />
+    <Shape name="spline_48_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5095" shapeId="5095" />
+    <Shape name="spline_49_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5096" shapeId="5096" />
+    <Shape name="spline_49_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5097" shapeId="5097" />
+    <Shape name="spline_50_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5098" shapeId="5098" />
+    <Shape name="spline_50_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5099" shapeId="5099" />
+    <Shape name="spline_51_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5100" shapeId="5100" />
+    <Shape name="spline_51_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5101" shapeId="5101" />
+    <Shape name="spline_52_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5102" shapeId="5102" />
+    <Shape name="spline_52_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5103" shapeId="5103" />
+    <Shape name="spline_53_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5104" shapeId="5104" />
+    <Shape name="spline_53_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5105" shapeId="5105" />
+    <Shape name="spline_54_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5106" shapeId="5106" />
+    <Shape name="spline_54_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5107" shapeId="5107" />
+    <Shape name="spline_55_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5108" shapeId="5108" />
+    <Shape name="spline_55_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5109" shapeId="5109" />
+    <Shape name="spline_56_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5110" shapeId="5110" />
+    <Shape name="spline_56_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5111" shapeId="5111" />
+    <Shape name="spline_57_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5112" shapeId="5112" />
+    <Shape name="spline_57_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5113" shapeId="5113" />
+    <Shape name="spline_58_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5114" shapeId="5114" />
+    <Shape name="spline_58_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5115" shapeId="5115" />
+    <Shape name="spline_59_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5116" shapeId="5116" />
+    <Shape name="spline_59_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5117" shapeId="5117" />
+    <Shape name="spline_60_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5118" shapeId="5118" />
+    <Shape name="spline_60_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5119" shapeId="5119" />
+    <Shape name="spline_61_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5120" shapeId="5120" />
+    <Shape name="spline_61_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5121" shapeId="5121" />
+    <Shape name="spline_62_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5122" shapeId="5122" />
+    <Shape name="spline_62_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5123" shapeId="5123" />
+    <Shape name="spline_63_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5124" shapeId="5124" />
+    <Shape name="spline_63_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5125" shapeId="5125" />
+    <Shape name="spline_64_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5126" shapeId="5126" />
+    <Shape name="spline_64_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5127" shapeId="5127" />
+    <Shape name="spline_65_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5128" shapeId="5128" />
+    <Shape name="spline_65_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5129" shapeId="5129" />
+    <Shape name="spline_66_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5130" shapeId="5130" />
+    <Shape name="spline_66_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5131" shapeId="5131" />
+    <Shape name="spline_67_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5132" shapeId="5132" />
+    <Shape name="spline_67_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5133" shapeId="5133" />
+    <Shape name="spline_68_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5134" shapeId="5134" />
+    <Shape name="spline_68_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5135" shapeId="5135" />
+    <Shape name="spline_69_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5136" shapeId="5136" />
+    <Shape name="spline_69_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5137" shapeId="5137" />
+    <Shape name="spline_70_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5138" shapeId="5138" />
+    <Shape name="spline_70_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5139" shapeId="5139" />
+    <Shape name="spline_71_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5140" shapeId="5140" />
+    <Shape name="spline_71_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5141" shapeId="5141" />
+    <Shape name="spline_72_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5142" shapeId="5142" />
+    <Shape name="spline_72_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5143" shapeId="5143" />
+    <Shape name="spline_73_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5144" shapeId="5144" />
+    <Shape name="spline_73_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5145" shapeId="5145" />
+    <Shape name="spline_74_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5146" shapeId="5146" />
+    <Shape name="spline_74_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5147" shapeId="5147" />
+    <Shape name="spline_75_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5148" shapeId="5148" />
+    <Shape name="spline_75_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5149" shapeId="5149" />
+    <Shape name="spline_76_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5150" shapeId="5150" />
+    <Shape name="spline_76_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5151" shapeId="5151" />
+    <Shape name="spline_77_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5152" shapeId="5152" />
+    <Shape name="spline_77_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5153" shapeId="5153" />
+    <Shape name="spline_78_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5154" shapeId="5154" />
+    <Shape name="spline_78_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5155" shapeId="5155" />
+    <Shape name="spline_79_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5156" shapeId="5156" />
+    <Shape name="spline_79_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5157" shapeId="5157" />
+    <Shape name="spline_80_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5158" shapeId="5158" />
+    <Shape name="spline_80_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5159" shapeId="5159" />
+    <Shape name="spline_81_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5160" shapeId="5160" />
+    <Shape name="spline_81_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5161" shapeId="5161" />
+    <Shape name="spline_82_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5162" shapeId="5162" />
+    <Shape name="spline_82_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5163" shapeId="5163" />
+    <Shape name="spline_83_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5164" shapeId="5164" />
+    <Shape name="spline_83_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5165" shapeId="5165" />
+    <Shape name="spline_84_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5166" shapeId="5166" />
+    <Shape name="spline_84_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5167" shapeId="5167" />
+    <Shape name="spline_85_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5168" shapeId="5168" />
+    <Shape name="spline_85_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5169" shapeId="5169" />
+    <Shape name="spline_86_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5170" shapeId="5170" />
+    <Shape name="spline_86_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5171" shapeId="5171" />
+    <Shape name="spline_87_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5172" shapeId="5172" />
+    <Shape name="spline_87_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5173" shapeId="5173" />
+    <Shape name="spline_88_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5174" shapeId="5174" />
+    <Shape name="spline_88_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5175" shapeId="5175" />
+    <Shape name="spline_89_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5176" shapeId="5176" />
+    <Shape name="spline_89_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5177" shapeId="5177" />
+    <Shape name="spline_90_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5178" shapeId="5178" />
+    <Shape name="spline_90_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5179" shapeId="5179" />
+    <Shape name="spline_91_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5180" shapeId="5180" />
+    <Shape name="spline_91_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5181" shapeId="5181" />
+    <Shape name="spline_92_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5182" shapeId="5182" />
+    <Shape name="spline_92_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5183" shapeId="5183" />
+    <Shape name="spline_93_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5184" shapeId="5184" />
+    <Shape name="spline_93_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5185" shapeId="5185" />
+    <Shape name="spline_94_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5186" shapeId="5186" />
+    <Shape name="spline_94_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5187" shapeId="5187" />
+    <Shape name="spline_95_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5188" shapeId="5188" />
+    <Shape name="spline_95_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5189" shapeId="5189" />
+    <Shape name="spline_96_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5190" shapeId="5190" />
+    <Shape name="spline_96_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5191" shapeId="5191" />
+    <Shape name="spline_97_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5192" shapeId="5192" />
+    <Shape name="spline_97_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5193" shapeId="5193" />
+    <Shape name="spline_98_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5194" shapeId="5194" />
+    <Shape name="spline_98_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5195" shapeId="5195" />
+    <Shape name="spline_99_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5196" shapeId="5196" />
+    <Shape name="spline_99_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5197" shapeId="5197" />
+    <Shape name="spline_100_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5198" shapeId="5198" />
+    <Shape name="spline_100_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5199" shapeId="5199" />
+    <Shape name="spline_101_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5200" shapeId="5200" />
+    <Shape name="spline_101_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5201" shapeId="5201" />
+    <Shape name="spline_102_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5202" shapeId="5202" />
+    <Shape name="spline_102_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5203" shapeId="5203" />
+    <Shape name="spline_103_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5204" shapeId="5204" />
+    <Shape name="spline_103_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5205" shapeId="5205" />
+    <Shape name="spline_104_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5206" shapeId="5206" />
+    <Shape name="spline_104_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5207" shapeId="5207" />
+    <Shape name="spline_105_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5208" shapeId="5208" />
+    <Shape name="spline_105_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5209" shapeId="5209" />
+    <Shape name="spline_106_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5210" shapeId="5210" />
+    <Shape name="spline_106_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5211" shapeId="5211" />
+    <Shape name="spline_107_original_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5212" shapeId="5212" />
+    <Shape name="spline_107_reversed_{'highway': ['secondary', 'tertiary', 'road', 'service']}" translation="0 0 0" nodeId="5213" shapeId="5213" />
+    <Shape name="spline_108_original_{'highway': ['motorway', 'trunk', 'primary']}" translation="0 0 0" nodeId="5214" shapeId="5214" />
+    <Shape name="spline_108_reversed_{'highway': ['motorway', 'trunk', 'primary']}" translation="0 0 0" nodeId="5215" shapeId="5215" />
+    <Shape name="spline_109_original_{'highway': ['motorway', 'trunk', 'primary']}" translation="0 0 0" nodeId="5216" shapeId="5216" />
+    <Shape name="spline_109_reversed_{'highway': ['motorway', 'trunk', 'primary']}" translation="0 0 0" nodeId="5217" shapeId="5217" />
+    <Shape name="spline_110_original_{'highway': ['motorway', 'trunk', 'primary']}" translation="0 0 0" nodeId="5218" shapeId="5218" />
+    <Shape name="spline_110_reversed_{'highway': ['motorway', 'trunk', 'primary']}" translation="0 0 0" nodeId="5219" shapeId="5219" />
+    <Shape name="spline_111_original_{'highway': ['motorway', 'trunk', 'primary']}" translation="0 0 0" nodeId="5220" shapeId="5220" />
+    <Shape name="spline_111_reversed_{'highway': ['motorway', 'trunk', 'primary']}" translation="0 0 0" nodeId="5221" shapeId="5221" />
+    <Shape name="spline_112_original_{'highway': ['motorway', 'trunk', 'primary']}" translation="0 0 0" nodeId="5222" shapeId="5222" />
+    <Shape name="spline_112_reversed_{'highway': ['motorway', 'trunk', 'primary']}" translation="0 0 0" nodeId="5223" shapeId="5223" />
+    <Shape name="spline_113_original_{'highway': ['motorway', 'trunk', 'primary']}" translation="0 0 0" nodeId="5224" shapeId="5224" />
+    <Shape name="spline_113_reversed_{'highway': ['motorway', 'trunk', 'primary']}" translation="0 0 0" nodeId="5225" shapeId="5225" />
+    <Shape name="spline_114_original_{'highway': ['motorway', 'trunk', 'primary']}" translation="0 0 0" nodeId="5226" shapeId="5226" />
+    <Shape name="spline_114_reversed_{'highway': ['motorway', 'trunk', 'primary']}" translation="0 0 0" nodeId="5227" shapeId="5227" />
+    <Shape name="spline_115_original_{'highway': ['motorway', 'trunk', 'primary']}" translation="0 0 0" nodeId="5228" shapeId="5228" />
+    <Shape name="spline_115_reversed_{'highway': ['motorway', 'trunk', 'primary']}" translation="0 0 0" nodeId="5229" shapeId="5229" />
+    <Shape name="spline_116_original_{'highway': ['motorway', 'trunk', 'primary']}" translation="0 0 0" nodeId="5230" shapeId="5230" />
+    <Shape name="spline_116_reversed_{'highway': ['motorway', 'trunk', 'primary']}" translation="0 0 0" nodeId="5231" shapeId="5231" />
+    <Shape name="spline_117_original_{'highway': ['motorway', 'trunk', 'primary']}" translation="0 0 0" nodeId="5232" shapeId="5232" />
+    <Shape name="spline_117_reversed_{'highway': ['motorway', 'trunk', 'primary']}" translation="0 0 0" nodeId="5233" shapeId="5233" />
+    <Shape name="spline_118_original_{'highway': ['motorway', 'trunk', 'primary']}" translation="0 0 0" nodeId="5234" shapeId="5234" />
+    <Shape name="spline_118_reversed_{'highway': ['motorway', 'trunk', 'primary']}" translation="0 0 0" nodeId="5235" shapeId="5235" />
+    <Shape name="spline_119_original_{'highway': ['motorway', 'trunk', 'primary']}" translation="0 0 0" nodeId="5236" shapeId="5236" />
+    <Shape name="spline_119_reversed_{'highway': ['motorway', 'trunk', 'primary']}" translation="0 0 0" nodeId="5237" shapeId="5237" />
+    <Shape name="spline_120_original_{'highway': ['motorway', 'trunk', 'primary']}" translation="0 0 0" nodeId="5238" shapeId="5238" />
+    <Shape name="spline_120_reversed_{'highway': ['motorway', 'trunk', 'primary']}" translation="0 0 0" nodeId="5239" shapeId="5239" />
+    <Shape name="spline_121_original_{'highway': ['motorway', 'trunk', 'primary']}" translation="0 0 0" nodeId="5240" shapeId="5240" />
+    <Shape name="spline_121_reversed_{'highway': ['motorway', 'trunk', 'primary']}" translation="0 0 0" nodeId="5241" shapeId="5241" />
+    <Shape name="spline_122_original_{'highway': ['motorway', 'trunk', 'primary']}" translation="0 0 0" nodeId="5242" shapeId="5242" />
+    <Shape name="spline_122_reversed_{'highway': ['motorway', 'trunk', 'primary']}" translation="0 0 0" nodeId="5243" shapeId="5243" />
+    <Shape name="spline_123_original_{'highway': ['motorway', 'trunk', 'primary']}" translation="0 0 0" nodeId="5244" shapeId="5244" />
+    <Shape name="spline_123_reversed_{'highway': ['motorway', 'trunk', 'primary']}" translation="0 0 0" nodeId="5245" shapeId="5245" />
+  </Scene>
+  <UserAttributes>
+    <UserAttribute nodeId="5000">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5001">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5002">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5003">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5004">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5005">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5006">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5007">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5008">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5009">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5010">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5011">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5012">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5013">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5014">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5015">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5016">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5017">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5018">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5019">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5020">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5021">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5022">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5023">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5024">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5025">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5026">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5027">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5028">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5029">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5030">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5031">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5032">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5033">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5034">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5035">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5036">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5037">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5038">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5039">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5040">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5041">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5042">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5043">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5044">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5045">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5046">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5047">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5048">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5049">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5050">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5051">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5052">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5053">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5054">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5055">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5056">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5057">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5058">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5059">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5060">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5061">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5062">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5063">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5064">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5065">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5066">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5067">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5068">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5069">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5070">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5071">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5072">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5073">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5074">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5075">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5076">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5077">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5078">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5079">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5080">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5081">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5082">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5083">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5084">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5085">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5086">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5087">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5088">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5089">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5090">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5091">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5092">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5093">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5094">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5095">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5096">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5097">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5098">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5099">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5100">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5101">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5102">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5103">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5104">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5105">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5106">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5107">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5108">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5109">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5110">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5111">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5112">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5113">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5114">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5115">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5116">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5117">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5118">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5119">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5120">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5121">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5122">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5123">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5124">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5125">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5126">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5127">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5128">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5129">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5130">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5131">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5132">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5133">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5134">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5135">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5136">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5137">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5138">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5139">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5140">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5141">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5142">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5143">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5144">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5145">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5146">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5147">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5148">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5149">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5150">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5151">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5152">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5153">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5154">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5155">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5156">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5157">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5158">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5159">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5160">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5161">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5162">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5163">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5164">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5165">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5166">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5167">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5168">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5169">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5170">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5171">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5172">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5173">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5174">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5175">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5176">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5177">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5178">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5179">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5180">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5181">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5182">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5183">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5184">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5185">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5186">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5187">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5188">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5189">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5190">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5191">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5192">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5193">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5194">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5195">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5196">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5197">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5198">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5199">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5200">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5201">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5202">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5203">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5204">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5205">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5206">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5207">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5208">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5209">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5210">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5211">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5212">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5213">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5214">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5215">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5216">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5217">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5218">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5219">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5220">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5221">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5222">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5223">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5224">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5225">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5226">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5227">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5228">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5229">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5230">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5231">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5232">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5233">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5234">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5235">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5236">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5237">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5238">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5239">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5240">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5241">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5242">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5243">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5244">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+    <UserAttribute nodeId="5245">
+      <Attribute name="maxSpeedScale" type="integer" value="1" />
+      <Attribute name="speedLimit" type="integer" value="100" />
+    </UserAttribute>
+  </UserAttributes>
+</i3D>

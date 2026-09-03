@@ -2,9 +2,10 @@
 """Inventory of what is actually in map.osm, by feature type.
 
 A sanity pass over the generated file: counts, areas and the biggest features of each
-kind, the road network by class, and the invariants the brief sets - at most 200 fields,
-none of them over 100 ha, nothing outside the playable area, every ring closed and every
-way carrying a tag the renderers actually draw.
+kind, the road network by class, and the invariants the brief sets - at most
+`map_layout.FIELD_MAX_COUNT` fields, none of them over 100 ha, nothing outside the
+playable area, every ring closed and every way carrying a tag the renderers actually
+draw.
 
 Exits non-zero if an invariant is broken, so it can gate the pipeline.
 """
@@ -21,7 +22,7 @@ if _ROOT not in sys.path:
     sys.path.insert(0, _ROOT)
 import map_layout as ml                                             # noqa: E402
 
-MAX_FIELDS = 200
+MAX_FIELDS = ml.FIELD_MAX_COUNT   # the parcelling coarsens until it fits; stay in step
 MAX_FIELD_HA = 100.0
 MIN_FIELD_HA = 3.0
 
