@@ -14,7 +14,7 @@ the verification is two acceptance scripts that exit non-zero.
 The order matters: the parcelling reads terrain the DEM publishes.
 
     python3 dem_generator/generate_new_dem_12k.py     # ~2 min -> dem_new_12k.png + terrain_stats.json
-    python3 dem_generator/measure_elevation.py        # 52 checks, exit 1 on any failure
+    python3 dem_generator/measure_elevation.py        # 54 checks, exit 1 on any failure
     python3 osm_generator/generate_osm.py             # -> map.osm
     python3 osm_generator/check_forest_nodes.py       # inventory + 13 invariants, exit 1 on failure
     python3 osm_generator/visualize_osm.py            # -> map_osm_visual.png
@@ -106,6 +106,23 @@ the reason the code is shaped the way it is.
   runs 200 m uphill on its way out of the map.
 - **Surface texture stays off running surfaces and channels.** The 4 cm micro-relief is 8 cm
   over the 25 m the ruling grade is measured across, a quarter of the railway's budget.
+- **The river holds water, so its bed is under its own waterline.** The profile the DEM
+  carries along the channel is the water surface; `RIVER['water_depth_m']` cuts the bed
+  5 m below it, on a 28 degree submerged bank. That angle is only allowed because every
+  metre of it is under water - the argument the lake's drop already stood on - and it is
+  only *survivable* if the rest of the pipeline agrees where the waterline is. `main`
+  builds that agreement once, as `wet`: the slope limiter takes it as `exempt` (twelve
+  passes of a 24 m diffusion kernel fill a 44 m trough in - one pass alone puts 1.5 m
+  back), no platform grades it, the texture stays off it, and the datum's 0.1st
+  percentile is taken on the land without it. Four private opinions about where the water
+  is, and the river comes out half filled in on a map that still measures as if it were
+  not.
+- **A platform's feather is measured against the land, not the water.**
+  `feather = 1.5*|dz|/tan(4 deg)` grows with the cut, and against a bed five metres under
+  the floodplain it reached 170 m instead of 45. Six roads running 50 to 130 m off the
+  bank filled the channel to within a metre of its lip; what showed it was not the image
+  but the thalweg no longer falling. `apply_corridor` takes the water out of `dz` and
+  then keeps the weight off it as well.
 
 ## Measurement discipline
 
@@ -120,6 +137,11 @@ every slope on the map. When a check fails, suspect the measurement frame first 
 "failures" here were the measurer comparing arc lengths of two different polylines, reading
 the riverbank under a bridge as a ruling grade, or checking a creek culvert against the
 river's bed.
+
+That baseline is also why **dry land starts one baseline back from the water's edge**: a
+5 m window straddling the lip reads the submerged bank off a pixel that is itself dry, and
+reported the inside of the channel as a 15 degree field, the beach beside it as a 17 degree
+shore, and the apron the river leaves the map through as 20 degrees.
 
 ## OSM tag vocabulary is closed
 
@@ -146,7 +168,8 @@ change the whole terrain. Both seeds are `20250902`.
 ## Tuning
 
 Almost everything worth changing is a constant near the top of `map_layout.py`: `RIVER` and
-`CREEK` cross-sections, `LAKE`/`LAKE_AT_S`, `FIELD_MAX_COUNT`/`FIELD_MAX_HA`,
+`CREEK` cross-sections (`water_depth_m`/`bed_half_w`/`wet_bank_w` are the channel itself,
+and `water_half_w` must stay equal to the sum of the last two - `validate()` says so), `LAKE`/`LAKE_AT_S`, `FIELD_MAX_COUNT`/`FIELD_MAX_HA`,
 `WINDBREAK_*`, `PAD_ROAD_CLEAR_M`, `PAD_RIVER_CLEAR_M`, `EDGE_CLEAR_M`, `RIM_APRON_M`,
 `RIM_HEIGHT_M`, `LOT_SPEC`/`LOT_HA`. The field count cap is held by
 coarsening the whole grain field until it fits, never by deleting the overflow - dropping

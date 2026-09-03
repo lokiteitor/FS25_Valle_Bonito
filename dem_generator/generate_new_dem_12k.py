@@ -215,31 +215,39 @@ def river_profile(z, X, Y, axis, ds=25.0):
 
 
 def valley_surface(d, z_thal, spec):
-    """The cross-section, as a height above the thalweg.
+    """The cross-section, as a height above the water surface.
 
-    bed -> inner bank -> floodplain -> valley wall -> linear continuation. Every step is
-    a smoothstep, so the whole profile is C1 and there is no vertical cut anywhere. The
-    bank width follows from the 8 degree ceiling: a smoothstep's steepest gradient is
-    1.5*rise/run, so 2.2 m needs at least 27 m of bank.
+    bed -> submerged bank -> waterline -> inner bank -> floodplain -> valley wall ->
+    linear continuation. Every step is a smoothstep, so the whole profile is C1 and there
+    is no vertical cut anywhere. The bank width follows from the 8 degree ceiling: a
+    smoothstep's steepest gradient is 1.5*rise/run, so 2.2 m needs at least 27 m of bank.
+
+    The trough is the one part that ceiling does not apply to, because `water_depth_m`
+    of it is under water from end to end - the same ground the lake's drop stands on.
+    A watercourse without a depth (the creek) gets no trough and the profile is what it
+    always was, measured from a bed that is also the waterline.
     """
     w_bed = spec['bed_half_w']
+    w_wet = spec.get('wet_bank_w', 0.0)
+    depth = spec.get('water_depth_m', 0.0)
+    w_edge = ml.waterline_half_w(spec)      # bed plus submerged bank: the water's edge
     w_bank = spec['bank_w']
     w_fp = spec['floodplain_w']
     w_wall = spec['wall_w']
-    bank = spec['bank_h'] * ops.smoothstep((d - w_bed) / w_bank)
-    fp = spec['floodplain_cross'] * np.minimum(d, w_bed + w_bank + w_fp) \
+    trough = -depth * (1.0 - ops.smoothstep((d - w_bed) / w_wet)) if w_wet > 0 else 0.0
+    bank = spec['bank_h'] * ops.smoothstep((d - w_edge) / w_bank)
+    fp = spec['floodplain_cross'] * np.minimum(d, w_edge + w_bank + w_fp) \
         if 'floodplain_cross' in spec else 0.0
-    wall = spec['wall_h'] * ops.smoothstep((d - (w_bed + w_bank + w_fp)) / w_wall)
+    wall = spec['wall_h'] * ops.smoothstep((d - (w_edge + w_bank + w_fp)) / w_wall)
     ext = spec.get('ext_grade', 0.02) * np.maximum(
-        0.0, d - (w_bed + w_bank + w_fp + w_wall))
-    return z_thal + bank + fp + wall + ext
+        0.0, d - (w_edge + w_bank + w_fp + w_wall))
+    return z_thal + trough + bank + fp + wall + ext
 
 
 def carve_river(z, X, Y):
     axis = ml.river_axis()
     pts, s_prof, z_prof = river_profile(z, X, Y, axis)
-    reach = (ml.RIVER['bed_half_w'] + ml.RIVER['bank_w'] + ml.RIVER['floodplain_w']
-             + ml.RIVER['wall_w'] + 400.0)
+    reach = ml.valley_half_w(ml.RIVER) + 400.0
     d, s = ops.polyline_field(X, Y, pts, reach)
     z_thal = np.interp(np.clip(s, s_prof[0], s_prof[-1]), s_prof, z_prof)
     # The nearest point jumps from one limb to another on the inside of a tight meander,
@@ -303,8 +311,7 @@ def carve_creek(z, X, Y):
     z_ref = ops.smooth_1d(z_ref, (900.0 / 25.0) / 2.5)
     prof = ops.monotone_descent(z_ref - ml.CREEK['incision_m'], 25.0,
                                 ml.CREEK['grade_min'], ml.CREEK['grade_max'])
-    reach = (ml.CREEK['bed_half_w'] + ml.CREEK['bank_w'] + ml.CREEK['floodplain_w']
-             + ml.CREEK['wall_w'] + 200.0)
+    reach = ml.valley_half_w(ml.CREEK) + 200.0
     d, s = ops.polyline_field(X, Y, pts, reach)
     s_prof = ops.polyline_arclen(pts)
     z_thal = np.interp(np.clip(s, s_prof[0], s_prof[-1]), s_prof, prof)
@@ -372,13 +379,20 @@ def corridor_profile(z, X, Y, c, pins, ds=10.0):
     return axis, s, prof
 
 
-def apply_corridor(z, X, Y, c, s_prof, z_prof, claimed=None):
+def apply_corridor(z, X, Y, c, s_prof, z_prof, claimed=None, wet=None):
     """Blend the profile in, with a feather that widens with the depth of the cut.
 
     `feather = max(nominal, 1.5*|dz| / tan(4 deg))` is what keeps the priority the brief
     asks for - natural ground, smooth transition, working platform - instead of hill,
     abrupt cut, perfectly flat surface. A constant feather would carve a step wherever
     the platform happens to sit deep.
+
+    A channel is not a cut to feather out of, though. Measured against the bed of the
+    river the drop is five metres deeper than the ground it stands in, and the feather
+    that follows from that reaches 170 m instead of 45 - which is how six roads running
+    50 to 130 m off the bank came to fill the river in to within a metre of its lip. The
+    depth of the cut is measured against the land, and the platform is kept off the
+    water outright.
     """
     orient, fixed, a, b = _axis_span(c['axis'])
     lo, hi = min(a, b), max(a, b)
@@ -412,9 +426,14 @@ def apply_corridor(z, X, Y, c, s_prof, z_prof, claimed=None):
     taper = ops.smoothstep(s / 60.0) * ops.smoothstep((total - s) / 60.0)
 
     cur = z[sl]
+    dz = np.abs(z_tgt - cur)
+    if wet is not None:
+        dz = dz * (1.0 - wet[sl])
     feather = np.maximum(c['feather_m'],
-                         1.5 * np.abs(z_tgt - cur) / math.tan(PLATFORM_FEATHER_ANGLE))
+                         1.5 * dz / math.tan(PLATFORM_FEATHER_ANGLE))
     w = (1.0 - ops.smoothstep((d - c['half_width_m']) / feather)) * taper
+    if wet is not None:
+        w = w * (1.0 - wet[sl])
 
     for (b0, b1) in c['bridge_spans']:
         # the deck floats over the valley: leave the ground alone under it
@@ -758,8 +777,11 @@ def main():
     print("3. River valley...")
     z, (river_pts, s_prof, z_prof), river_d = carve_river(z, X, Y)
     fall = float(z_prof[0] - z_prof[-1])
-    print(f"   thalweg falls {fall:.1f} m over {s_prof[-1] / 1000:.1f} km "
+    print(f"   water surface falls {fall:.1f} m over {s_prof[-1] / 1000:.1f} km "
           f"({fall / (s_prof[-1] / 1000):.2f} m/km)")
+    print(f"   channel {2 * ml.RIVER['water_half_w']:.0f} m wide and "
+          f"{ml.RIVER['water_depth_m']:.0f} m deep, on a "
+          f"{2 * ml.RIVER['bed_half_w']:.0f} m bed")
 
     print("4. Tributary and lake...")
     z = carve_creek(z, X, Y)
@@ -767,8 +789,25 @@ def main():
     print(f"   lake surface {z_lake:.2f} m, {ml.ring_area_ha(ml.lake_ring()):.1f} ha, "
           f"{ml.LAKE['max_depth']:.0f} m deep, on the main stem")
 
+    # Ground under the waterline, as one field: the channel and the lake basin. Four
+    # things downstream have to agree about where it is - the slope limiter skips it, no
+    # platform grades it, the surface texture stays off it, and the datum is not anchored
+    # on it - and four separate definitions of "under water" is how the river ends up
+    # half filled in on a map that still measures as if it were not.
+    r_lake_w = ops.ellipse_r(X, Y, ml.lake_centre()[0], ml.lake_centre()[1],
+                             ml.LAKE['semi_a'], ml.LAKE['semi_b'], ml.lake_rot_deg(),
+                             ml.LAKE_SHORE)
+    wet = np.maximum(
+        1.0 - ops.smoothstep((river_d - ml.RIVER['water_half_w']) / 30.0),
+        1.0 - ops.smoothstep((r_lake_w - 1.0) / 0.05)).astype(np.float32)
+
     print("5. Slope limiting...")
-    z = ops.limit_slope(z, WORK_DX, SLOPE_LIMIT_DEG)
+    # The channel is exempt. Its banks are under water from end to end, and a 44 m
+    # trough does not survive twelve passes of a diffusion with a 24 m kernel: one pass
+    # alone puts a metre and a half back into the bed, and the river would come out of
+    # the limiter as a dimple. The exemption is feathered well past the waterline so the
+    # blurred over-limit mask has faded before it applies again.
+    z = ops.limit_slope(z, WORK_DX, SLOPE_LIMIT_DEG, exempt=wet)
 
     print("6. Crossing plateaus, corridors, yards...")
     z = apply_crossing_plateaus(z, X, Y)
@@ -784,7 +823,7 @@ def main():
     for c in sorted(ml.corridors(), key=lambda c: order[c['kind']]):
         my_pins = pins.get(c['id'], [])
         axis, s, prof = corridor_profile(z, X, Y, c, my_pins)
-        z = apply_corridor(z, X, Y, c, s, prof, claimed)
+        z = apply_corridor(z, X, Y, c, s, prof, claimed, wet)
         if c['kind'] == 'rail':
             for k in ml.crossings():
                 if k['corridor_ids'][1] != c['id']:
@@ -800,21 +839,21 @@ def main():
     # The channel is smoothed the same way a platform is: at 25 m sampling the surface
     # texture is four times the fall between samples, which is enough to make the bed
     # read as rising in places even though the profile only ever descends.
-    r_lake_w = ops.ellipse_r(X, Y, ml.lake_centre()[0], ml.lake_centre()[1],
-                             ml.LAKE['semi_a'], ml.LAKE['semi_b'], ml.lake_rot_deg(),
-                             ml.LAKE_SHORE)
     built = np.maximum(built, 1.0 - ops.smoothstep(
-        (river_d - ml.RIVER['bed_half_w']) / 45.0))
+        (river_d - ml.RIVER['water_half_w']) / 45.0))
     built = np.maximum(built, 1.0 - ops.smoothstep((r_lake_w - 0.98) / 0.12))
 
     print("7. Finishing...")
     z = ndimage.gaussian_filter(z, FINAL_SMOOTH_PX)
     # The datum is anchored on the land. With a 40 m basin in the map the lowest tenth
     # of a percent of the playable area is all lake bottom, and anchoring on that would
-    # push the whole landscape 40 m into the air.
+    # push the whole landscape 40 m into the air. The channel is excluded on the same
+    # grounds and for the same reason: 44 m of trough over ten kilometres is 0.6% of the
+    # playable area, five metres under the land, and it would take the datum with it.
     play = z[p0:p1, p0:p1]
     r_play = r_lake_w[p0:p1, p0:p1]
-    land = play[r_play > 1.02]
+    land = play[(r_play > 1.02)
+                & (river_d[p0:p1, p0:p1] > ml.RIVER['water_half_w'])]
     z = z + (DATUM_P01_M - float(np.percentile(land, 0.1)))
 
     # The stats grid covers the playable area only, so the rim cannot reach it either

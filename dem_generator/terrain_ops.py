@@ -233,13 +233,18 @@ def slope_deg(z, dx, baseline_m=5.0):
     return np.degrees(np.arctan(np.hypot(gx, gy)))
 
 
-def limit_slope(z, dx, max_deg, iters=12, relax=0.60, blur_px=6.0):
+def limit_slope(z, dx, max_deg, iters=12, relax=0.60, blur_px=6.0, exempt=None):
     """Diffuse the ground wherever it is steeper than `max_deg`.
 
     The mask is a smoothstep of how far over the limit each pixel is, and is itself
     blurred, so there is no contour where the correction jumps from off to on. The update
     is `z += a*m*(blur(z) - z)`, which is diffusion: it can only reduce curvature, so it
     cannot introduce the step a hard threshold would.
+
+    `exempt` is ground the ceiling does not apply to, as a 0..1 field - the submerged
+    channel, whose banks no machine ever drives. It has to be feathered out at least as
+    far as the mask blur reaches, or the ring around it is diffused with a kernel that
+    still has the exempt ground inside it and the edge gets dragged down.
     """
     lim = math.tan(math.radians(max_deg))
     out = z
@@ -250,5 +255,7 @@ def limit_slope(z, dx, max_deg, iters=12, relax=0.60, blur_px=6.0):
             break
         m = smoothstep(excess / (0.30 * lim))
         m = ndimage.gaussian_filter(m.astype(np.float32), 3.0)
+        if exempt is not None:
+            m = m * (1.0 - exempt)
         out = out + relax * m * (ndimage.gaussian_filter(out, blur_px) - out)
     return out

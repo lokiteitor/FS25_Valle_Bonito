@@ -99,9 +99,25 @@ def main():
                             z[o:o + PLAYABLE_M, o - a:o].ravel(),
                             z[o:o + PLAYABLE_M, o + PLAYABLE_M:o + PLAYABLE_M + a].ravel()])
     apron_med = float(np.median(apron))
-    north = ops.slope_deg(z[o - a:o, o - a:o + PLAYABLE_M + a], 1.0, baseline_m=5.0)
-    west = ops.slope_deg(z[o:o + PLAYABLE_M, o - a:o], 1.0, baseline_m=5.0)
-    apron_slope = float(max(np.percentile(north, 99.99), np.percentile(west, 99.99)))
+
+    def apron_slope_p9999(block, x0, y0):
+        """p99.99 of the slope over a band of apron, off the water.
+
+        The river leaves the map through the apron, and it takes its channel with it -
+        five metres deep with a submerged bank no gentler out here than it is inside.
+        Left in, one river crossing the band decides the whole percentile.
+        """
+        s = ops.slope_deg(block, 1.0, baseline_m=5.0)
+        xs = np.arange(block.shape[1], dtype=np.float32) + 0.5 + x0
+        ys = np.arange(block.shape[0], dtype=np.float32) + 0.5 + y0
+        d, _ = ops.polyline_field(*np.meshgrid(xs, ys),
+                                  ml.densify(ml.river_axis(), 25.0), 300.0)
+        off = d > ml.RIVER['water_half_w'] + SLOPE_BASELINE_M
+        return float(np.percentile(s[off], 99.99))
+
+    apron_slope = max(
+        apron_slope_p9999(z[o - a:o, o - a:o + PLAYABLE_M + a], -a, -a),
+        apron_slope_p9999(z[o:o + PLAYABLE_M, o - a:o], -a, 0))
     check(f"the {a} m apron is left as the landscape made it", apron_slope <= 10.0,
           f"steepest {apron_slope:.2f} deg over 5 m")
     rise = float(z.max()) - apron_med
@@ -136,12 +152,13 @@ def main():
                            ml.LAKE_SHORE)
     d_creek, _ = ops.polyline_field(X, Y, ml.creek_axis(), 400.0)
 
-    water = (d_river <= ml.RIVER['bed_half_w']) | (r_lake <= 1.0) \
+    water = (d_river <= ml.RIVER['water_half_w']) | (r_lake <= 1.0) \
         | (d_creek <= ml.CREEK['bed_half_w'])
-    # Everything under the waterline is measured separately: a 40 m basin has banks no
-    # machine will ever drive, and averaging them into the farmland statistics would say
-    # nothing about either.
-    submerged = r_lake <= 0.99
+    # Everything under the waterline is measured separately: a 40 m basin and a 5 m
+    # channel both have banks no machine will ever drive, and averaging them into the
+    # farmland statistics would say nothing about either. The river is taken to its
+    # water's edge, which is where the trough reaches the surface.
+    submerged = (r_lake <= 0.99) | (d_river <= ml.RIVER['water_half_w'])
     valley = ((d_river <= 730.0) | (d_creek <= 220.0)
               | (r_lake <= ml.LAKE['apron_r'])) & ~water
 
@@ -175,8 +192,16 @@ def main():
     # ---------------------------------------------------------------- slope
     print(f"\nslope (degrees, {SLOPE_BASELINE_M:.0f} m baseline):")
     slope = ops.slope_deg(play, 1.0, SLOPE_BASELINE_M)
-    dry = ~submerged
-    for label, m in (("farmland", fields), ("valley", valley), ("platforms", builtup)):
+    # A 5 m baseline that straddles the water's edge reads the submerged bank off a pixel
+    # that is itself dry, and reports the inside of the channel as a 15 degree field. Dry
+    # land, for the purpose of a slope, starts one baseline back from the edge.
+    dry = ~((r_lake <= 0.99)
+            | (d_river <= ml.RIVER['water_half_w'] + SLOPE_BASELINE_M))
+    # ...and the same goes for the table: the valley class runs right to the water's edge
+    # and the platform class covers six bridge decks, so taken wet both of them report
+    # the inside of the channel as the steepest ground of their kind.
+    for label, m in (("farmland", fields & dry), ("valley", valley & dry),
+                     ("platforms", builtup & dry)):
         s = slope[m]
         if s.size:
             info(f"{label:<10}", f"median {np.median(s):5.2f}   p99 {np.percentile(s, 99):5.2f}"
@@ -187,7 +212,7 @@ def main():
     check("nowhere on dry land steeper than 10 deg", float(slope[dry].max()) <= 10.0,
           f"max {float(slope[dry].max()):.2f} deg")
     info("under the waterline", f"max {float(slope[submerged].max()):.2f} deg "
-                                "(lake bed, no machine goes there)")
+                                "(lake bed and channel, no machine goes there)")
     frac = float((slope[dry] < 3.0).mean())
     check("at least 85% of the playable area under 3 deg", frac >= 0.85,
           f"{100 * frac:.1f}%")
@@ -231,7 +256,9 @@ def main():
     band("thalweg gradient", fall / max(length_km, 0.1), 0.25, 3.0, " m/km")
     info("fall inside the playable area", f"{fall:.2f} m over {length_km:.2f} km")
 
+    wl = ml.RIVER['water_half_w']
     depth = []
+    wet = []
     banks = []
     for p in inside[::12]:
         if ml._in_lake(p, 1.30):
@@ -241,17 +268,37 @@ def main():
         nx, ny = -(b[1] - a[1]), (b[0] - a[0])
         n = math.hypot(nx, ny) or 1.0
         nx, ny = nx / n, ny / n
+
+        def across(step, reach):
+            o = np.arange(-reach, reach + 0.5 * step, step)
+            px = np.clip(p[0] + o * nx, 0.5, PLAYABLE_M - 0.5)
+            py = np.clip(p[1] + o * ny, 0.5, PLAYABLE_M - 0.5)
+            return o, ops.sample_bilinear(play, 0.5, 0.5, 1.0, 1.0, px, py)
+
         # the valley is 1.46 km across, so a window narrower than that measures the
         # floodplain rather than the depth from the rim
-        offs = np.arange(-1200.0, 1201.0, 10.0)
-        px = np.clip(p[0] + offs * nx, 0.5, PLAYABLE_M - 0.5)
-        py = np.clip(p[1] + offs * ny, 0.5, PLAYABLE_M - 0.5)
-        prof = ops.sample_bilinear(play, 0.5, 0.5, 1.0, 1.0, px, py)
-        depth.append(float(np.percentile(prof, 95) - prof.min()))
-        near = np.abs(offs) <= 120.0
+        offs, prof = across(10.0, 1200.0)
+        # ...and the channel is 44 m across, so it needs its own sampling: at 10 m the
+        # trough is four samples wide and the water's edge falls between two of them.
+        c_offs, c_prof = across(2.0, 60.0)
+        # the water surface is the ground at the lip, where the trough comes back up
+        edge = (np.abs(c_offs) >= wl) & (np.abs(c_offs) <= wl + 8.0)
+        lip = float(c_prof[edge].min())
+        depth.append(float(np.percentile(prof, 95)) - lip)
+        wet.append(lip - float(c_prof.min()))
+        # A bank is ground you could drive down. The submerged one is not: it is the
+        # inside of the channel, under water for its whole height.
+        inner = np.minimum(np.abs(offs[:-1]), np.abs(offs[1:]))
+        outer = np.maximum(np.abs(offs[:-1]), np.abs(offs[1:]))
+        near = (inner >= wl) & (outer <= 120.0)
         banks.append(float(np.degrees(np.arctan(
-            np.abs(np.diff(prof[near])).max() / 10.0))))
+            np.abs(np.diff(prof))[near].max() / 10.0))))
     band("valley depth (mean)", float(np.mean(depth)), 9.0, 18.0, " m")
+    band("water in the channel (mean)", float(np.mean(wet)),
+         ml.RIVER['water_depth_m'] - 1.0, ml.RIVER['water_depth_m'] + 0.5, " m")
+    check("the channel holds water the whole way",
+          float(np.min(wet)) >= 0.6 * ml.RIVER['water_depth_m'],
+          f"shallowest section {float(np.min(wet)):.2f} m")
     check("bank slope stays under 8.5 deg", max(banks) <= 8.5,
           f"steepest {max(banks):.2f} deg")
 
@@ -266,19 +313,25 @@ def main():
          ml.LAKE['max_depth'] + 1.5, " m")
     check("the bed is not a plane", 0.05 <= float(play[r_lake <= 0.3].std()) <= 1.60,
           f"std {float(play[r_lake <= 0.3].std()):.3f} m")
-    shore = (r_lake > 0.93) & (r_lake < 1.15)
+    # The channel cuts the beach at the head and at the foot - which is the river coming
+    # in and going out, not a shore the player is meant to walk down.
+    shore = (r_lake > 0.93) & (r_lake < 1.15) \
+        & (d_river > ml.RIVER['water_half_w'] + SLOPE_BASELINE_M)
     check("the shore you can walk in on is gentle",
           float(np.percentile(slope[shore], 99)) <= 6.0,
           f"p99 {float(np.percentile(slope[shore], 99)):.2f} deg")
 
-    # the point of moving the lake onto the river: the bed runs in above the waterline
-    # and out below it, so the lake is part of the drainage rather than beside it
+    # the point of moving the lake onto the river: the water runs in above the lake's
+    # surface and out below it, so the lake is part of the drainage rather than beside
+    # it. The comparison is between water surfaces - the channel bed is five metres
+    # under its own, and under the lake's at either end.
     in_lake = [k for k, p in enumerate(inside) if ml._in_lake(p)]
     check("the river runs through the lake", len(in_lake) > 8,
           f"{len(in_lake)} thalweg samples inside the shore")
     if in_lake:
-        up = float(bed_s[max(0, in_lake[0] - 12)])
-        dn = float(bed_s[min(len(bed_s) - 1, in_lake[-1] + 12)])
+        wd = ml.RIVER['water_depth_m']
+        up = float(bed_s[max(0, in_lake[0] - 12)]) + wd
+        dn = float(bed_s[min(len(bed_s) - 1, in_lake[-1] + 12)]) + wd
         check("it enters above the waterline and leaves below it",
               up > z_surf - 0.5 > dn or up > dn,
               f"bed {up:.2f} m in, surface {z_surf:.2f} m, {dn:.2f} m out")

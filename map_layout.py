@@ -95,20 +95,29 @@ AVENUE_NAMES = ("250th Avenue", "260th Avenue", "270th Avenue",
 # smoothstep, whose maximum gradient is 1.5 * rise / run - which is what sets the bank
 # width: 2.20 m over 30 m is 11%, or 6.3 degrees, inside the 8 degree ceiling. A 18 m
 # bank would be 11.7 degrees and out of spec.
+#
+# The channel holds water the way the lake basin does: the longitudinal profile the DEM
+# carries is the **water surface**, and the bed is cut `water_depth_m` under it. The
+# submerged bank that gets it down there is steep - 5 m over 14 m - and that is allowed
+# for the same reason the lake's drop is: every metre of it is under the waterline, where
+# no machine goes. Nothing above water changed; the inner bank, floodplain and valley
+# wall are simply measured from the waterline now instead of from the bed.
 RIVER = dict(
-    bed_half_w=18.0,          # flat bed, water sits here
-    bank_w=30.0, bank_h=2.20,  # inner bank up to the floodplain
+    bed_half_w=8.0,           # flat bed, water_depth_m under the surface
+    wet_bank_w=14.0,          # submerged bank, bed up to the waterline
+    water_depth_m=5.0,        # water surface to bed
+    bank_w=30.0, bank_h=2.20,  # inner bank, waterline up to the floodplain
     floodplain_w=260.0, floodplain_cross=0.0040,
     wall_w=420.0, wall_h=11.0,  # the valley side proper
     ext_grade=0.020,          # linear continuation, so the carve always closes
-    incision_m=14.4,          # total, thalweg to valley rim
+    incision_m=14.4,          # water surface to valley rim; the bed is 5 m under that
     grade_nom=0.75e-3, grade_min=0.30e-3, grade_max=2.50e-3,
     softmin_k=3.0,
-    water_half_w=22.0,        # what gets drawn as water in the OSM
+    water_half_w=22.0,        # = bed_half_w + wet_bank_w, and what the OSM draws
     wood_half_w=95.0,         # gallery timber along the banks
-    # Out to the edge of the floodplain (18 + 30 + 260) plus 40 m of headland: no field
+    # Out to the edge of the floodplain (22 + 30 + 260) plus 40 m of headland: no field
     # may be laid inside the basin the terrain cuts for the river.
-    riparian_half_w=348.0,
+    riparian_half_w=352.0,
 )
 
 # Control points of the river's general course, west edge to south edge, keeping to the
@@ -629,6 +638,22 @@ def creek_axis():
 def water_axes():
     """Every watercourse a corridor might have to get across."""
     return ((river_axis(), 'river'), (creek_axis(), 'creek'))
+
+
+def waterline_half_w(spec):
+    """Where the water's edge sits in a RIVER/CREEK cross-section.
+
+    The bed of a channel that holds water is narrower than the water on top of it, so
+    everything above the waterline - inner bank, floodplain, valley wall - is measured
+    from here and not from the bed.
+    """
+    return spec['bed_half_w'] + spec.get('wet_bank_w', 0.0)
+
+
+def valley_half_w(spec):
+    """Centreline to the outer foot of the valley wall, for either watercourse."""
+    return (waterline_half_w(spec) + spec['bank_w'] + spec['floodplain_w']
+            + spec['wall_w'])
 
 
 def _lake_radius_towards(ux, uy):
@@ -1754,6 +1779,21 @@ def validate():
     Returns a list of complaints; empty means the layout is sound."""
     bad = []
     river = river_axis()
+
+    # A channel cut for water has to be drawn where it was cut. The DEM puts the
+    # waterline at bed_half_w + wet_bank_w and the OSM draws water out to water_half_w;
+    # if those two disagree the map paints a river over dry bank, or leaves a strip of
+    # open trough with no water in it, and neither is visible in either output alone.
+    for spec, name in ((RIVER, 'river'), (CREEK, 'creek')):
+        if not spec.get('water_depth_m'):
+            continue
+        edge = waterline_half_w(spec)
+        if abs(edge - spec['water_half_w']) > 1e-6:
+            bad.append(f"{name}: the trough reaches the surface {edge:.1f} m out but the "
+                       f"water is drawn to {spec['water_half_w']:.1f} m")
+        if spec['riparian_half_w'] < edge + spec['bank_w'] + spec['floodplain_w']:
+            bad.append(f"{name}: the riparian reserve stops inside the floodplain - "
+                       "fields would be laid in the basin the terrain cuts")
 
     inside = [p for p in river if 0 <= p[0] <= PLAYABLE_M and 0 <= p[1] <= PLAYABLE_M]
     if not inside:
