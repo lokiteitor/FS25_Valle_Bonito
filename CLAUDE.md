@@ -1,0 +1,141 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## What this is
+
+A generator for a Farming Simulator 25 map of northwest Iowa farmland (Clay County, around
+Royal). It produces two artefacts that a human then imports into Giants Editor: a 16-bit
+heightmap PNG and an OSM vector file. There is no application to run and no test suite -
+the verification is two acceptance scripts that exit non-zero.
+
+## Commands
+
+The order matters: the parcelling reads terrain the DEM publishes.
+
+    python3 dem_generator/generate_new_dem_12k.py     # ~2 min -> dem_new_12k.png + terrain_stats.json
+    python3 dem_generator/measure_elevation.py        # 43 checks, exit 1 on any failure
+    python3 osm_generator/generate_osm.py             # -> map.osm
+    python3 osm_generator/check_forest_nodes.py       # inventory + 11 invariants, exit 1 on failure
+    python3 osm_generator/visualize_osm.py            # -> map_osm_visual.png
+    python3 visualizer/create_3d_viewer.py            # -> dem_viewer_3d.html
+
+    python3 map_layout.py                             # layout self-check, seconds, no output files
+
+Scripts work from the repo root or from their own directory; each inserts what it needs on
+`sys.path`. Either interpreter works - the system `python3` and `.venv/bin/python3` (3.14)
+both carry numpy, scipy, Pillow and matplotlib.
+
+Iterating on the layout alone (field sizes, windbreaks, pad positions) does **not** need a
+DEM rerun - only changes to the river, creek, lake, corridors or pads do.
+
+## The one rule
+
+`map_layout.py` (repo root, standard library only) is the single source of the world's
+geometry: projection, the PLSS section grid, road and rail alignments, the river, the
+creek, the lake, village and farm pads, potholes, windbreaks and the field parcelling. The
+DEM sculpts terrain around it; the OSM writes it out as vectors. **Neither half may
+define geometry of its own.** A river carved where none is drawn, or a yard flattened
+where no farmyard exists, is invisible in either output on its own.
+
+Where the OSM side needs to know about the ground (smaller fields on broken ground), the
+DEM publishes `dem_generator/terrain_stats.json` - a 128x128 height and roughness grid -
+and `map_layout.load_roughness()` reads it with the standard library. Do not import numpy
+into `osm_generator/`, and do not re-derive the terrain there.
+
+## Coordinates
+
+Playable metres: **x east, y south from the north edge**, centre `(4096, 4096)`. The DEM
+canvas is larger, so canvas coordinates run `-2048 .. 10240` in the same frame.
+
+The DEM synthesises at **3072x3072 (4 m/px)** and resamples once to 12288x12288 (1 m/px).
+The canvas metre of working pixel `j` is `4j + 2`; the centre of output pixel `i` is
+`i + 0.5`. Getting that wrong shifts the terrain against the vectors by metres and is
+invisible in the image. Full resolution is not an option: one blur there costs 7 s and one
+distance transform 5.6 GB, and the pipeline needs about twenty of them.
+
+## Things that have already gone wrong here
+
+Each of these was a real bug found by measurement, not by looking at the output. They are
+the reason the code is shaped the way it is.
+
+- **Offsetting a polyline** by more than its radius of curvature folds the ring through
+  itself, and an even-odd fill then punches holes in the tightest meanders. Reserves along
+  water are stamped by distance to the centreline (`_Occupancy._fill_corridor`), never as
+  offset polygons.
+- **The occupancy raster is 32 m and judges a cell by its centre**, so anything narrower -
+  a 24 m shelterbelt - can fall between two centres and mark nothing at all. Thin shapes go
+  through `_fill_ring_strict`, which also walks the boundary. Reserve radii are grown by
+  half a cell diagonal so "no field within R of the water" is true rather than nearly true.
+- **Carve water with `soft_min`, not a weighted blend.** Blending leaves a band of
+  half-attenuated noise and a valley of constant width; the smooth minimum leaves the
+  ground outside exactly as it was and puts the rim where the two surfaces cross.
+- **Platform feathers must widen with the cut**: `max(nominal, 1.5*|dz|/tan(4 deg))`. In a
+  smoothstep the steepest gradient is `1.5*rise/run`, so a constant feather cuts a step
+  wherever the platform sits deep. The same identity sets every bank and shore width in
+  `map_layout`.
+- **Corridor grades come from the mean of the two Lipschitz envelopes**
+  (`terrain_ops.limit_grade`), which is exact in two passes and balances cut against fill.
+  Clipping the slope forward then backward is not idempotent and drags the profile downhill.
+- **Build order is load-bearing**: yards before roads (otherwise the pad overwrites the road
+  platform and leaves a step at its edge), slope limiting before platforms (diffusing a new
+  embankment ruins it), and a higher-class corridor keeps its platform where two cross.
+- **Level-crossing pins must be applied as a wide smooth offset**, not by overwriting one
+  sample - `limit_grade` halves any spike, so a hard pin lands about half the error out.
+- **Surface texture stays off running surfaces and channels.** The 4 cm micro-relief is 8 cm
+  over the 25 m the ruling grade is measured across, a quarter of the railway's budget.
+
+## Measurement discipline
+
+`measure_elevation.py` rebuilds its zone masks from `map_layout` through the same
+`terrain_ops` primitives the generator used. A second implementation of "where is the
+valley" is the shortest route to a report that passes a heightmap which does not meet the
+brief.
+
+Slope is measured over a **5 m baseline**: a DEM quantised to the centimetre at 1 m/px has
+a ~0.3 degree noise floor in its per-pixel gradient, so measuring pixel to pixel overstates
+every slope on the map. When a check fails, suspect the measurement frame first - several
+"failures" here were the measurer comparing arc lengths of two different polylines, reading
+the riverbank under a bridge as a ruling grade, or checking a creek culvert against the
+river's bed.
+
+## OSM tag vocabulary is closed
+
+Emit only what `osm_generator/visualize_osm.py` and `visualizer/create_3d_viewer.py`
+(`style_rules`, around line 158) already draw: `landuse=farmland`, `landuse=farmyard`,
+`natural=wood`, `natural=water` (+ `water=*`), `highway=primary|secondary|tertiary`,
+`railway=*`, plus `bridge=yes`/`layer`. **Both renderers drop anything else without a
+word.** That is why floodplain pasture carries no tag - it is simply ground the parcelling
+leaves out of cultivation. `check_forest_nodes.py` fails the build if a way was emitted
+that neither renderer can see.
+
+An area is a polygon to the 3D viewer only if its first and last coordinates are *exactly*
+equal, so rings must close on the same node id.
+
+## Determinism
+
+`map_layout` has no floating-point randomness in the alignments - river and creek meanders
+are closed-form sine sums - so both halves of the pipeline get identical polylines. Where it
+does use `random.Random(SEED)` (potholes, parcel jitter) the jitter is keyed to position,
+not to iteration order. The DEM uses named RNG streams with fixed, spaced indices
+(`STREAMS` in the generator) so adding an octave does not shift the existing ones and
+change the whole terrain. Both seeds are `20250902`.
+
+## Tuning
+
+Almost everything worth changing is a constant near the top of `map_layout.py`: `RIVER` and
+`CREEK` cross-sections, `LAKE`/`LAKE_AT_S`, `FIELD_MAX_COUNT`/`FIELD_MAX_HA`,
+`WINDBREAK_*`, `PAD_ROAD_CLEAR_M`, `PAD_RIVER_CLEAR_M`. The field count cap is held by
+coarsening the whole grain field until it fits, never by deleting the overflow - dropping
+fields eats the small parcels near the towns, which is exactly what the size mix needs.
+
+`map_layout.validate()` is the gate: it returns complaints and both generators refuse to
+run when it does. Add a rule there when you find a placement mistake, rather than only
+fixing the coordinates - three of the seven farms turned out to be misplaced once the
+road-clearance rule existed, and only one of them was visible.
+
+## Out of scope
+
+`pf_generator/generate_soil.py` is pure seeded noise with no connection to the terrain.
+`osm_generator/generate_osm_bocage.py` is the previous English layout, kept for reference;
+it needs a `map_source` API that no longer exists and would overwrite `map.osm` if run.
