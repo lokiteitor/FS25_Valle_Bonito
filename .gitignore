@@ -178,3 +178,4 @@ pyrightconfig.json
 
 map.i3d.terrain.lod.type.cache
 map.i3d.terrain.nmap.cache
+*.cache
