@@ -190,8 +190,22 @@ FARM_SPEC = [
     ('Sundance Stables (horses)', 5020.0, 5320.0, 540.0, 390.0),
     ('Ockenga Farms (mixed)',   6820.0, 6030.0, 580.0, 410.0),
 ]
+# The co-op elevator on the branch line at the north edge of Royal - the reason the
+# town is there at all. It is a platform like any other yard, so it belongs here: while
+# it was a rectangle the OSM generator drew for itself, the parcelling could not see it
+# and laid fields straight across it, and the DEM never flattened the ground under it.
+INDUSTRY_SPEC = [
+    ('Royal Farmers Co-op Elevator', 3851.0, 3716.0, 190.0, 140.0),
+]
 VILLAGE_FEATHER_M = 60.0
 FARM_FEATHER_M = 90.0
+INDUSTRY_FEATHER_M = 55.0
+# An elevator is rail-served, so it stands beside the track - but not inside the
+# embankment's graded transition. The rail platform is built after the yards and would
+# otherwise tilt the apron it overlaps, which is worth about 0.25 m of residual on a pad
+# this small. Measured edge to edge, past the corridor's own reach.
+INDUSTRY_RAIL_NEAR_M = 400.0   # centre to centreline: any further and it serves nothing
+INDUSTRY_RAIL_CLEAR_M = 40.0   # apron edge to the far side of the rail's feather
 PAD_DRAIN_GRADE = 0.005       # residual fall, so a yard drains and does not terrace
 PAD_RIVER_CLEAR_M = 380.0     # no pad may sit inside the floodplain
 # No section road, primary or railway may run through a farmyard. A village straddles the
@@ -207,6 +221,11 @@ POTHOLE_CLEAR_M = 120.0       # clearance from corridors and pads
 
 # --- field parcelling -------------------------------------------------------------
 ROW_CLEAR_M = 14.0            # field edge to road centreline
+# Per class, since the running surface is not the same width: a section road is 7 m
+# either side of the centreline, the primary 11 and the railway 9 on an embankment
+# nobody farms up to. Corridors missing from this table - farm lanes, village streets -
+# do not break a block; the occupancy raster clips the parcels around them instead.
+ROW_CLEAR = {'section': ROW_CLEAR_M, 'primary': 18.0, 'rail': 26.0}
 FIELD_MAX_HA = 100.0          # hard cap, never exceeded
 FIELD_MAX_COUNT = 200         # hard cap on how many parcels the map carries
 FIELD_MIN_HA = 3.0
@@ -894,8 +913,21 @@ def farm_pads():
     return out
 
 
+def industry_pads():
+    """The grain elevator. Its own kind, because it takes neither the farmstead's grove
+    and lane nor the village's street grid - just a flat apron against the railway."""
+    out = []
+    for i, (name, cx, cy, w, h) in enumerate(INDUSTRY_SPEC):
+        out.append(dict(id=f"industry{i}", kind='industry', name=name,
+                        centre=(cx, cy), size=(w, h),
+                        ring=rect_ring(cx - w / 2, cy - h / 2, cx + w / 2, cy + h / 2),
+                        feather_m=INDUSTRY_FEATHER_M, drain_grade=PAD_DRAIN_GRADE,
+                        max_drop_m=0.8))
+    return out
+
+
 def pads():
-    return village_pads() + farm_pads()
+    return village_pads() + farm_pads() + industry_pads()
 
 
 # ==================================================================================
@@ -1483,45 +1515,47 @@ def _trim_to_free(rect, occ):
     return None
 
 
-def _jog_ring(rect, rng):
-    """Push the middle third of one side in or out, so the parcels stop looking stamped
-    out. Still rectilinear - this is mechanised farmland, not a bocage."""
-    x0, y0, x1, y1 = rect
-    w, h = x1 - x0, y1 - y0
-    d = rng.choice((-1.0, 1.0)) * rng.uniform(32.0, 96.0)
-    side = rng.choice(('n', 's', 'w', 'e'))
-    if side in ('n', 's') and w > 340.0 and abs(d) < h * 0.35:
-        a, b = x0 + w / 3.0, x1 - w / 3.0
-        if side == 'n':
-            yy = y0 + d
-            return [(x0, y0), (a, y0), (a, yy), (b, yy), (b, y0), (x1, y0),
-                    (x1, y1), (x0, y1), (x0, y0)]
-        yy = y1 + d
-        return [(x0, y0), (x1, y0), (x1, y1), (b, y1), (b, yy), (a, yy),
-                (a, y1), (x0, y1), (x0, y0)]
-    if side in ('w', 'e') and h > 340.0 and abs(d) < w * 0.35:
-        a, b = y0 + h / 3.0, y1 - h / 3.0
-        if side == 'w':
-            xx = x0 + d
-            return [(x0, y0), (x1, y0), (x1, y1), (x0, y1), (x0, b), (xx, b),
-                    (xx, a), (x0, a), (x0, y0)]
-        xx = x1 + d
-        return [(x0, y0), (x1, y0), (x1, a), (xx, a), (xx, b), (x1, b),
-                (x1, y1), (x0, y1), (x0, y0)]
-    return rect_ring(x0, y0, x1, y1)
+def _block_cuts(vertical):
+    """The lines the parcelling breaks on, along one axis: the map edges plus every
+    rail, primary and section alignment, at where the road actually runs rather than
+    where the section grid says it should.
+
+    That distinction is the whole point. 270th Avenue is offset off the section line by
+    the width of the railway's right of way, and while the blocks were cut on the grid
+    the road ran 26 m inside the field beside it and sliced it in two.
+
+    Returns (coordinate, clearance) pairs sorted along the axis. The clearance is the
+    field edge to the centreline, so it has to cover the running surface as well as the
+    verge - a primary is wider than a section road, and nobody farms up to a railway.
+    """
+    out = [(0.0, 0.0), (PLAYABLE_M, 0.0)]
+    seen = set()
+    for c in corridors():
+        if c['kind'] not in ROW_CLEAR:
+            continue                    # a farm lane or a village street is not a block
+        ax = c['axis']
+        if (abs(ax[0][0] - ax[-1][0]) < abs(ax[0][1] - ax[-1][1])) != vertical:
+            continue
+        fixed = ax[0][0] if vertical else ax[0][1]
+        # the same alignment comes back once per segment where the river breaks it
+        key = round(fixed, 3)
+        if key in seen or not 0.0 < fixed < PLAYABLE_M:
+            continue
+        seen.add(key)
+        out.append((fixed, ROW_CLEAR[c['kind']]))
+    return sorted(out)
 
 
 def field_blocks():
-    """The section blocks, inset off the road right of way."""
-    xs = [0.0] + [x for x in GRID] + [PLAYABLE_M]
-    ys = [0.0] + [y for y in GRID] + [PLAYABLE_M]
+    """The blocks the parcelling works in: the ground between two alignments, inset off
+    each one's right of way."""
+    xs = _block_cuts(True)
+    ys = _block_cuts(False)
     out = []
     for i in range(len(xs) - 1):
+        x0, x1 = xs[i][0] + xs[i][1], xs[i + 1][0] - xs[i + 1][1]
         for j in range(len(ys) - 1):
-            x0 = xs[i] + (ROW_CLEAR_M if i else 0.0)
-            x1 = xs[i + 1] - (ROW_CLEAR_M if i + 1 < len(xs) - 1 else 0.0)
-            y0 = ys[j] + (ROW_CLEAR_M if j else 0.0)
-            y1 = ys[j + 1] - (ROW_CLEAR_M if j + 1 < len(ys) - 1 else 0.0)
+            y0, y1 = ys[j][0] + ys[j][1], ys[j + 1][0] - ys[j + 1][1]
             if x1 - x0 > FIELD_MIN_WIDTH_M and y1 - y0 > FIELD_MIN_WIDTH_M:
                 out.append((x0, y0, x1, y1))
     return out
@@ -1575,18 +1609,10 @@ def _fields_once(occ, rough, scale):
                 continue
             if w * h / 1e4 < FIELD_MIN_HA:
                 continue
+            # Plain rectangles, always: a parcel is a rectangle of the free space it
+            # was cut from. Anything that reaches outside that rectangle - the old
+            # middle-third jog - reads in-game as a tab hanging off the field edge.
             ring = rect_ring(x0, y0, x1, y1)
-            if rng.random() < 0.12:
-                cand = _jog_ring((x0, y0, x1, y1), rng)
-                xs = [p[0] for p in cand]
-                ys = [p[1] for p in cand]
-                # the jog is the one place a parcel reaches outside its free rectangle,
-                # so this is the one place the occupancy still has to be consulted
-                if (min(xs) >= 0.0 and max(xs) <= PLAYABLE_M and min(ys) >= 0.0
-                        and max(ys) <= PLAYABLE_M
-                        and occ.blocked_fraction(min(xs), min(ys),
-                                                 max(xs), max(ys)) <= 0.0):
-                    ring = cand
             ha = ring_area_ha(ring)
             if ha > FIELD_MAX_HA or ha < FIELD_MIN_HA:
                 continue
@@ -1676,6 +1702,36 @@ def validate():
                 continue
             break
 
+    for p in industry_pads():
+        cx, cy = p['centre']
+        w, h = p['size']
+        rail = [c for c in corridors() if c['kind'] == 'rail']
+        near = min((dist_to_polyline(p['centre'], c['axis']), c) for c in rail) \
+            if rail else None
+        if near is None or near[0] > INDUSTRY_RAIL_NEAR_M:
+            bad.append(f"{p['id']} ({p['name']}): no railway within "
+                       f"{INDUSTRY_RAIL_NEAR_M:.0f} m - an elevator off the line is a "
+                       "shed")
+        else:
+            d, c = near
+            gap = d - max(w, h) / 2 - c['half_width_m'] - c['feather_m']
+            if gap < INDUSTRY_RAIL_CLEAR_M:
+                bad.append(f"{p['id']} ({p['name']}): only {gap:.0f} m between the apron "
+                           f"and the {c['name']} embankment (wanted "
+                           f"{INDUSTRY_RAIL_CLEAR_M:.0f}+) - the rail platform is graded "
+                           "after the yards and would tilt it")
+        for c in corridors():
+            if c['kind'] in ('track', 'street'):
+                continue
+            for (ax, ay) in c['axis']:
+                if abs(ax - cx) <= w / 2 and abs(ay - cy) <= h / 2:
+                    bad.append(f"{p['id']} ({p['name']}): {c['name']} runs through the "
+                               "apron")
+                    break
+            else:
+                continue
+            break
+
     vmax = max(ring_area_ha(p['ring']) for p in village_pads())
     fmin = min(ring_area_ha(p['ring']) for p in farm_pads())
     if fmin <= vmax:
@@ -1701,6 +1757,7 @@ def summary():
     """One-line description of the layout, for the generators to print."""
     return (f"{PLAYABLE_M:.0f} m playable, {len(corridors())} corridors, "
             f"{len(village_pads())} villages, {len(farm_pads())} farms, "
+            f"{len(industry_pads())} elevator, "
             f"{len(potholes())} potholes")
 
 

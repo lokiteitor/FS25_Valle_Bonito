@@ -188,14 +188,12 @@ def emit_pads(osm):
     for p in ml.farm_pads():
         osm.area(p['ring'], {'landuse': 'farmyard', 'name': p['name']})
     # The grain elevator by the tracks is what put the town there in the first place.
-    v = ml.village_pads()[1]
-    cx, cy = v['centre']
-    w, h = v['size']
-    x0 = cx + w / 2 + 40.0
-    osm.area(ml.rect_ring(x0, cy - 70.0, x0 + 190.0, cy + 70.0),
-             {'landuse': 'farmyard', 'building': 'industrial',
-              'name': 'Royal Farmers Co-op Elevator'})
-    return len(ml.pads()) + 1
+    # Its rectangle lives in map_layout with every other pad, so the parcelling keeps
+    # fields off it and the DEM flattens the ground under it.
+    for p in ml.industry_pads():
+        osm.area(p['ring'], {'landuse': 'farmyard', 'building': 'industrial',
+                             'name': p['name']})
+    return len(ml.pads())
 
 
 def emit_fields(osm, rough):

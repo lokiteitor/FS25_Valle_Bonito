@@ -329,7 +329,7 @@ def main():
 
     # ---------------------------------------------------------------- pads
     print("\nyards and villages:")
-    areas = {'village': [], 'farm': []}
+    areas = {'village': [], 'farm': [], 'industry': []}
     # A village has a highway through the middle of it. That strip belongs to the road,
     # is built after the pad and is crowned to its own profile, so measuring the yard's
     # flatness through it measures the road instead.

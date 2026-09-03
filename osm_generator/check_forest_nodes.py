@@ -223,6 +223,29 @@ def main():
     check("no tree row laid over a yard", over_yard == 0,
           f"{over_yard} of {len(rings['wood'])}")
 
+    # The parcelling cuts its blocks on the corridor alignments, but 270th Avenue sits
+    # off the section line by the width of the railway's right of way. While the blocks
+    # were cut on the grid instead, the road ran 26 m inside the field beside it.
+    over_road = 0
+    for c in ml.corridors():
+        ax = c['axis']
+        vertical = abs(ax[0][0] - ax[-1][0]) < abs(ax[0][1] - ax[-1][1])
+        fixed = ax[0][0] if vertical else ax[0][1]
+        lo = min(p[1] for p in ax) if vertical else min(p[0] for p in ax)
+        hi = max(p[1] for p in ax) if vertical else max(p[0] for p in ax)
+        hw = c['half_width_m']
+        a0, a1 = (fixed - hw, fixed + hw)
+        for r in rings['farmland']:
+            fx0, fy0, fx1, fy1 = bbox(r)
+            if vertical:
+                hit = min(fx1, a1) > max(fx0, a0) and min(fy1, hi) > max(fy0, lo)
+            else:
+                hit = min(fx1, hi) > max(fx0, lo) and min(fy1, a1) > max(fy0, a0)
+            if hit:
+                over_road += 1
+    check("no road laid across a field", over_road == 0,
+          f"{over_road} field/roadway overlaps")
+
     print(f"\n{len(_failures)} invariant(s) broken" if _failures
           else "\nall invariants hold")
     return 1 if _failures else 0
