@@ -6,10 +6,10 @@
   </Asset>
 
   <Files>
-    <File fileId="646" filename="../assets/background/background_terrain_part_01.i3d"/>
-    <File fileId="647" filename="../assets/background/background_terrain_part_02.i3d"/>
-    <File fileId="648" filename="../assets/background/background_terrain_part_03.i3d"/>
-    <File fileId="649" filename="../assets/background/background_terrain_part_04.i3d"/>
+    <File fileId="652" filename="../assets/background/background_terrain_part_01.i3d"/>
+    <File fileId="653" filename="../assets/background/background_terrain_part_02.i3d"/>
+    <File fileId="654" filename="../assets/background/background_terrain_part_03.i3d"/>
+    <File fileId="655" filename="../assets/background/background_terrain_part_04.i3d"/>
     <File fileId="4" filename="data/asphalt01_weight.png"/>
     <File fileId="9" filename="data/asphalt02_weight.png"/>
     <File fileId="34" filename="data/asphaltCracks01_weight.png"/>
@@ -82,19 +82,19 @@
     <File fileId="579" filename="data/infoLayer_placementCollisionGenerated.png"/>
     <File fileId="576" filename="data/infoLayer_tipCollision.png"/>
     <File fileId="577" filename="data/infoLayer_tipCollisionGenerated.png"/>
-    <File fileId="740" filename="data/masks/BLOCKMASK.png"/>
-    <File fileId="650" filename="data/masks/PG_acres.png"/>
-    <File fileId="657" filename="data/masks/PG_buildings.png"/>
-    <File fileId="656" filename="data/masks/PG_dirtpaths.png"/>
-    <File fileId="660" filename="data/masks/PG_drains.png"/>
-    <File fileId="658" filename="data/masks/PG_farmyards.png"/>
-    <File fileId="653" filename="data/masks/PG_forests.png"/>
-    <File fileId="651" filename="data/masks/PG_grasslands.png"/>
-    <File fileId="652" filename="data/masks/PG_meadows.png"/>
-    <File fileId="661" filename="data/masks/PG_railways.png"/>
-    <File fileId="654" filename="data/masks/PG_roads.png"/>
-    <File fileId="655" filename="data/masks/PG_sideroads.png"/>
-    <File fileId="659" filename="data/masks/PG_water.png"/>
+    <File fileId="746" filename="data/masks/BLOCKMASK.png"/>
+    <File fileId="656" filename="data/masks/PG_acres.png"/>
+    <File fileId="663" filename="data/masks/PG_buildings.png"/>
+    <File fileId="662" filename="data/masks/PG_dirtpaths.png"/>
+    <File fileId="666" filename="data/masks/PG_drains.png"/>
+    <File fileId="664" filename="data/masks/PG_farmyards.png"/>
+    <File fileId="659" filename="data/masks/PG_forests.png"/>
+    <File fileId="657" filename="data/masks/PG_grasslands.png"/>
+    <File fileId="658" filename="data/masks/PG_meadows.png"/>
+    <File fileId="667" filename="data/masks/PG_railways.png"/>
+    <File fileId="660" filename="data/masks/PG_roads.png"/>
+    <File fileId="661" filename="data/masks/PG_sideroads.png"/>
+    <File fileId="665" filename="data/masks/PG_water.png"/>
     <File fileId="284" filename="data/mudDark01_weight.png"/>
     <File fileId="289" filename="data/mudDark02_weight.png"/>
     <File fileId="334" filename="data/mudDarkGrassPatchy01_weight.png"/>
@@ -500,6 +500,7 @@
     <File fileId="221" filename="$data/maps/mapUS/textures/terrain/rockyForestGround02_normal.png"/>
     <File fileId="423" filename="$data/maps/mapUS/textures/terrain/sand01_diffuse.png"/>
     <File fileId="428" filename="$data/maps/mapUS/textures/terrain/sand02_diffuse.png"/>
+    <File fileId="646" filename="$data/maps/textures/shared/water_normal.png"/>
     <File fileId="616" filename="$data/maps/textures/terrain/ground/distance/cultivated_distance_diffuse.png"/>
     <File fileId="630" filename="$data/maps/textures/terrain/ground/distance/directSownFertilized_distance_diffuse.png"/>
     <File fileId="618" filename="$data/maps/textures/terrain/ground/distance/directSown_distance_diffuse.png"/>
@@ -660,85 +661,86 @@
     <File fileId="567" filename="$data/maps/textures/terrain/ground/spray_straw_displacement.png"/>
     <File fileId="566" filename="$data/maps/textures/terrain/ground/spray_straw_height.png"/>
     <File fileId="565" filename="$data/maps/textures/terrain/ground/spray_straw_normal.png"/>
-    <File fileId="662" filename="$data/maps/trees/americanElm/americanElm_stage01.i3d"/>
-    <File fileId="663" filename="$data/maps/trees/americanElm/americanElm_stage02.i3d"/>
-    <File fileId="664" filename="$data/maps/trees/americanElm/americanElm_stage03.i3d"/>
-    <File fileId="665" filename="$data/maps/trees/americanElm/americanElm_stage04.i3d"/>
-    <File fileId="666" filename="$data/maps/trees/americanElm/americanElm_stage05.i3d"/>
-    <File fileId="667" filename="$data/maps/trees/apple/apple_stage03.i3d"/>
-    <File fileId="668" filename="$data/maps/trees/aspen/aspen_stage01.i3d"/>
-    <File fileId="669" filename="$data/maps/trees/aspen/aspen_stage02.i3d"/>
-    <File fileId="670" filename="$data/maps/trees/aspen/aspen_stage03.i3d"/>
-    <File fileId="671" filename="$data/maps/trees/aspen/aspen_stage04.i3d"/>
-    <File fileId="672" filename="$data/maps/trees/aspen/aspen_stage05.i3d"/>
-    <File fileId="673" filename="$data/maps/trees/aspen/aspen_stage06_var01.i3d"/>
-    <File fileId="674" filename="$data/maps/trees/aspen/aspen_stage06_var02.i3d"/>
-    <File fileId="675" filename="$data/maps/trees/beech/beech_stage01.i3d"/>
-    <File fileId="676" filename="$data/maps/trees/beech/beech_stage02.i3d"/>
-    <File fileId="677" filename="$data/maps/trees/beech/beech_stage02_var02.i3d"/>
-    <File fileId="678" filename="$data/maps/trees/beech/beech_stage02_var03.i3d"/>
-    <File fileId="679" filename="$data/maps/trees/beech/beech_stage03.i3d"/>
-    <File fileId="680" filename="$data/maps/trees/beech/beech_stage04.i3d"/>
-    <File fileId="681" filename="$data/maps/trees/beech/beech_stage05.i3d"/>
-    <File fileId="682" filename="$data/maps/trees/beech/beech_stage06_var01.i3d"/>
-    <File fileId="683" filename="$data/maps/trees/beech/beech_stage06_var02.i3d"/>
-    <File fileId="684" filename="$data/maps/trees/betulaErmanii/betulaErmanii_stage01.i3d"/>
-    <File fileId="685" filename="$data/maps/trees/betulaErmanii/betulaErmanii_stage02.i3d"/>
-    <File fileId="686" filename="$data/maps/trees/betulaErmanii/betulaErmanii_stage03.i3d"/>
-    <File fileId="687" filename="$data/maps/trees/betulaErmanii/betulaErmanii_stage04.i3d"/>
-    <File fileId="688" filename="$data/maps/trees/boxelder/boxelder_stage01.i3d"/>
-    <File fileId="689" filename="$data/maps/trees/boxelder/boxelder_stage02.i3d"/>
-    <File fileId="690" filename="$data/maps/trees/boxelder/boxelder_stage03.i3d"/>
-    <File fileId="691" filename="$data/maps/trees/cherry/cherry_stage01.i3d"/>
-    <File fileId="692" filename="$data/maps/trees/cherry/cherry_stage02.i3d"/>
-    <File fileId="693" filename="$data/maps/trees/cherry/cherry_stage03.i3d"/>
-    <File fileId="694" filename="$data/maps/trees/cherry/cherry_stage04.i3d"/>
-    <File fileId="695" filename="$data/maps/trees/chineseElm/chineseElm_stage01.i3d"/>
-    <File fileId="696" filename="$data/maps/trees/chineseElm/chineseElm_stage02.i3d"/>
-    <File fileId="697" filename="$data/maps/trees/chineseElm/chineseElm_stage03.i3d"/>
-    <File fileId="698" filename="$data/maps/trees/chineseElm/chineseElm_stage04.i3d"/>
-    <File fileId="699" filename="$data/maps/trees/downyServiceBerry/downyServiceBerry_stage01.i3d"/>
-    <File fileId="700" filename="$data/maps/trees/downyServiceBerry/downyServiceBerry_stage02.i3d"/>
-    <File fileId="701" filename="$data/maps/trees/downyServiceBerry/downyServiceBerry_stage03.i3d"/>
-    <File fileId="702" filename="$data/maps/trees/goldenRain/goldenRain_stage01.i3d"/>
-    <File fileId="703" filename="$data/maps/trees/goldenRain/goldenRain_stage02.i3d"/>
-    <File fileId="704" filename="$data/maps/trees/goldenRain/goldenRain_stage03.i3d"/>
-    <File fileId="705" filename="$data/maps/trees/goldenRain/goldenRain_stage04.i3d"/>
-    <File fileId="706" filename="$data/maps/trees/japaneseZelkova/japaneseZelkova_stage01.i3d"/>
-    <File fileId="707" filename="$data/maps/trees/japaneseZelkova/japaneseZelkova_stage02.i3d"/>
-    <File fileId="708" filename="$data/maps/trees/japaneseZelkova/japaneseZelkova_stage03.i3d"/>
-    <File fileId="709" filename="$data/maps/trees/japaneseZelkova/japaneseZelkova_stage04.i3d"/>
-    <File fileId="710" filename="$data/maps/trees/lodgepolePine/lodgepolePine_stage01.i3d"/>
-    <File fileId="711" filename="$data/maps/trees/lodgepolePine/lodgepolePine_stage02.i3d"/>
-    <File fileId="712" filename="$data/maps/trees/lodgepolePine/lodgepolePine_stage03.i3d"/>
-    <File fileId="713" filename="$data/maps/trees/northernCatalpa/northernCatalpa_stage01.i3d"/>
-    <File fileId="714" filename="$data/maps/trees/northernCatalpa/northernCatalpa_stage02.i3d"/>
-    <File fileId="715" filename="$data/maps/trees/northernCatalpa/northernCatalpa_stage03.i3d"/>
-    <File fileId="716" filename="$data/maps/trees/northernCatalpa/northernCatalpa_stage04.i3d"/>
-    <File fileId="717" filename="$data/maps/trees/oak/oak_stage01.i3d"/>
-    <File fileId="718" filename="$data/maps/trees/oak/oak_stage02.i3d"/>
-    <File fileId="719" filename="$data/maps/trees/oak/oak_stage03.i3d"/>
-    <File fileId="720" filename="$data/maps/trees/oak/oak_stage04.i3d"/>
-    <File fileId="721" filename="$data/maps/trees/oak/oak_stage05.i3d"/>
-    <File fileId="722" filename="$data/maps/trees/pinusSylvestris/pinusSylvestris_stage01.i3d"/>
-    <File fileId="723" filename="$data/maps/trees/pinusSylvestris/pinusSylvestris_stage02.i3d"/>
-    <File fileId="724" filename="$data/maps/trees/pinusSylvestris/pinusSylvestris_stage03.i3d"/>
-    <File fileId="725" filename="$data/maps/trees/pinusSylvestris/pinusSylvestris_stage04.i3d"/>
-    <File fileId="726" filename="$data/maps/trees/pinusSylvestris/pinusSylvestris_stage05.i3d"/>
-    <File fileId="727" filename="$data/maps/trees/pinusTabuliformis/pinusTabuliformis_stage01.i3d"/>
-    <File fileId="728" filename="$data/maps/trees/pinusTabuliformis/pinusTabuliformis_stage02.i3d"/>
-    <File fileId="729" filename="$data/maps/trees/pinusTabuliformis/pinusTabuliformis_stage03.i3d"/>
-    <File fileId="730" filename="$data/maps/trees/pinusTabuliformis/pinusTabuliformis_stage04.i3d"/>
-    <File fileId="731" filename="$data/maps/trees/pinusTabuliformis/pinusTabuliformis_stage05.i3d"/>
-    <File fileId="732" filename="$data/maps/trees/shagbarkHickory/shagbarkHickory_stage01.i3d"/>
-    <File fileId="733" filename="$data/maps/trees/shagbarkHickory/shagbarkHickory_stage02.i3d"/>
-    <File fileId="734" filename="$data/maps/trees/shagbarkHickory/shagbarkHickory_stage03.i3d"/>
-    <File fileId="735" filename="$data/maps/trees/shagbarkHickory/shagbarkHickory_stage04.i3d"/>
-    <File fileId="736" filename="$data/maps/trees/tiliaAmurensis/tiliaAmurensis_stage01.i3d"/>
-    <File fileId="737" filename="$data/maps/trees/tiliaAmurensis/tiliaAmurensis_stage02.i3d"/>
-    <File fileId="738" filename="$data/maps/trees/tiliaAmurensis/tiliaAmurensis_stage03.i3d"/>
-    <File fileId="739" filename="$data/maps/trees/tiliaAmurensis/tiliaAmurensis_stage04.i3d"/>
+    <File fileId="668" filename="$data/maps/trees/americanElm/americanElm_stage01.i3d"/>
+    <File fileId="669" filename="$data/maps/trees/americanElm/americanElm_stage02.i3d"/>
+    <File fileId="670" filename="$data/maps/trees/americanElm/americanElm_stage03.i3d"/>
+    <File fileId="671" filename="$data/maps/trees/americanElm/americanElm_stage04.i3d"/>
+    <File fileId="672" filename="$data/maps/trees/americanElm/americanElm_stage05.i3d"/>
+    <File fileId="673" filename="$data/maps/trees/apple/apple_stage03.i3d"/>
+    <File fileId="674" filename="$data/maps/trees/aspen/aspen_stage01.i3d"/>
+    <File fileId="675" filename="$data/maps/trees/aspen/aspen_stage02.i3d"/>
+    <File fileId="676" filename="$data/maps/trees/aspen/aspen_stage03.i3d"/>
+    <File fileId="677" filename="$data/maps/trees/aspen/aspen_stage04.i3d"/>
+    <File fileId="678" filename="$data/maps/trees/aspen/aspen_stage05.i3d"/>
+    <File fileId="679" filename="$data/maps/trees/aspen/aspen_stage06_var01.i3d"/>
+    <File fileId="680" filename="$data/maps/trees/aspen/aspen_stage06_var02.i3d"/>
+    <File fileId="681" filename="$data/maps/trees/beech/beech_stage01.i3d"/>
+    <File fileId="682" filename="$data/maps/trees/beech/beech_stage02.i3d"/>
+    <File fileId="683" filename="$data/maps/trees/beech/beech_stage02_var02.i3d"/>
+    <File fileId="684" filename="$data/maps/trees/beech/beech_stage02_var03.i3d"/>
+    <File fileId="685" filename="$data/maps/trees/beech/beech_stage03.i3d"/>
+    <File fileId="686" filename="$data/maps/trees/beech/beech_stage04.i3d"/>
+    <File fileId="687" filename="$data/maps/trees/beech/beech_stage05.i3d"/>
+    <File fileId="688" filename="$data/maps/trees/beech/beech_stage06_var01.i3d"/>
+    <File fileId="689" filename="$data/maps/trees/beech/beech_stage06_var02.i3d"/>
+    <File fileId="690" filename="$data/maps/trees/betulaErmanii/betulaErmanii_stage01.i3d"/>
+    <File fileId="691" filename="$data/maps/trees/betulaErmanii/betulaErmanii_stage02.i3d"/>
+    <File fileId="692" filename="$data/maps/trees/betulaErmanii/betulaErmanii_stage03.i3d"/>
+    <File fileId="693" filename="$data/maps/trees/betulaErmanii/betulaErmanii_stage04.i3d"/>
+    <File fileId="694" filename="$data/maps/trees/boxelder/boxelder_stage01.i3d"/>
+    <File fileId="695" filename="$data/maps/trees/boxelder/boxelder_stage02.i3d"/>
+    <File fileId="696" filename="$data/maps/trees/boxelder/boxelder_stage03.i3d"/>
+    <File fileId="697" filename="$data/maps/trees/cherry/cherry_stage01.i3d"/>
+    <File fileId="698" filename="$data/maps/trees/cherry/cherry_stage02.i3d"/>
+    <File fileId="699" filename="$data/maps/trees/cherry/cherry_stage03.i3d"/>
+    <File fileId="700" filename="$data/maps/trees/cherry/cherry_stage04.i3d"/>
+    <File fileId="701" filename="$data/maps/trees/chineseElm/chineseElm_stage01.i3d"/>
+    <File fileId="702" filename="$data/maps/trees/chineseElm/chineseElm_stage02.i3d"/>
+    <File fileId="703" filename="$data/maps/trees/chineseElm/chineseElm_stage03.i3d"/>
+    <File fileId="704" filename="$data/maps/trees/chineseElm/chineseElm_stage04.i3d"/>
+    <File fileId="705" filename="$data/maps/trees/downyServiceBerry/downyServiceBerry_stage01.i3d"/>
+    <File fileId="706" filename="$data/maps/trees/downyServiceBerry/downyServiceBerry_stage02.i3d"/>
+    <File fileId="707" filename="$data/maps/trees/downyServiceBerry/downyServiceBerry_stage03.i3d"/>
+    <File fileId="708" filename="$data/maps/trees/goldenRain/goldenRain_stage01.i3d"/>
+    <File fileId="709" filename="$data/maps/trees/goldenRain/goldenRain_stage02.i3d"/>
+    <File fileId="710" filename="$data/maps/trees/goldenRain/goldenRain_stage03.i3d"/>
+    <File fileId="711" filename="$data/maps/trees/goldenRain/goldenRain_stage04.i3d"/>
+    <File fileId="712" filename="$data/maps/trees/japaneseZelkova/japaneseZelkova_stage01.i3d"/>
+    <File fileId="713" filename="$data/maps/trees/japaneseZelkova/japaneseZelkova_stage02.i3d"/>
+    <File fileId="714" filename="$data/maps/trees/japaneseZelkova/japaneseZelkova_stage03.i3d"/>
+    <File fileId="715" filename="$data/maps/trees/japaneseZelkova/japaneseZelkova_stage04.i3d"/>
+    <File fileId="716" filename="$data/maps/trees/lodgepolePine/lodgepolePine_stage01.i3d"/>
+    <File fileId="717" filename="$data/maps/trees/lodgepolePine/lodgepolePine_stage02.i3d"/>
+    <File fileId="718" filename="$data/maps/trees/lodgepolePine/lodgepolePine_stage03.i3d"/>
+    <File fileId="719" filename="$data/maps/trees/northernCatalpa/northernCatalpa_stage01.i3d"/>
+    <File fileId="720" filename="$data/maps/trees/northernCatalpa/northernCatalpa_stage02.i3d"/>
+    <File fileId="721" filename="$data/maps/trees/northernCatalpa/northernCatalpa_stage03.i3d"/>
+    <File fileId="722" filename="$data/maps/trees/northernCatalpa/northernCatalpa_stage04.i3d"/>
+    <File fileId="723" filename="$data/maps/trees/oak/oak_stage01.i3d"/>
+    <File fileId="724" filename="$data/maps/trees/oak/oak_stage02.i3d"/>
+    <File fileId="725" filename="$data/maps/trees/oak/oak_stage03.i3d"/>
+    <File fileId="726" filename="$data/maps/trees/oak/oak_stage04.i3d"/>
+    <File fileId="727" filename="$data/maps/trees/oak/oak_stage05.i3d"/>
+    <File fileId="728" filename="$data/maps/trees/pinusSylvestris/pinusSylvestris_stage01.i3d"/>
+    <File fileId="729" filename="$data/maps/trees/pinusSylvestris/pinusSylvestris_stage02.i3d"/>
+    <File fileId="730" filename="$data/maps/trees/pinusSylvestris/pinusSylvestris_stage03.i3d"/>
+    <File fileId="731" filename="$data/maps/trees/pinusSylvestris/pinusSylvestris_stage04.i3d"/>
+    <File fileId="732" filename="$data/maps/trees/pinusSylvestris/pinusSylvestris_stage05.i3d"/>
+    <File fileId="733" filename="$data/maps/trees/pinusTabuliformis/pinusTabuliformis_stage01.i3d"/>
+    <File fileId="734" filename="$data/maps/trees/pinusTabuliformis/pinusTabuliformis_stage02.i3d"/>
+    <File fileId="735" filename="$data/maps/trees/pinusTabuliformis/pinusTabuliformis_stage03.i3d"/>
+    <File fileId="736" filename="$data/maps/trees/pinusTabuliformis/pinusTabuliformis_stage04.i3d"/>
+    <File fileId="737" filename="$data/maps/trees/pinusTabuliformis/pinusTabuliformis_stage05.i3d"/>
+    <File fileId="738" filename="$data/maps/trees/shagbarkHickory/shagbarkHickory_stage01.i3d"/>
+    <File fileId="739" filename="$data/maps/trees/shagbarkHickory/shagbarkHickory_stage02.i3d"/>
+    <File fileId="740" filename="$data/maps/trees/shagbarkHickory/shagbarkHickory_stage03.i3d"/>
+    <File fileId="741" filename="$data/maps/trees/shagbarkHickory/shagbarkHickory_stage04.i3d"/>
+    <File fileId="742" filename="$data/maps/trees/tiliaAmurensis/tiliaAmurensis_stage01.i3d"/>
+    <File fileId="743" filename="$data/maps/trees/tiliaAmurensis/tiliaAmurensis_stage02.i3d"/>
+    <File fileId="744" filename="$data/maps/trees/tiliaAmurensis/tiliaAmurensis_stage03.i3d"/>
+    <File fileId="745" filename="$data/maps/trees/tiliaAmurensis/tiliaAmurensis_stage04.i3d"/>
     <File fileId="637" filename="$data/shaders/groundHeightShader.xml"/>
+    <File fileId="647" filename="$data/shaders/oceanShader.xml"/>
     <File fileId="2" filename="$data/shaders/terrainShader.xml"/>
     <File fileId="645" filename="$data/shared/assets/marker/markerIconShopping.i3d"/>
     <File fileId="638" filename="$data/shared/groundHeightNoise.dds"/>
@@ -750,6 +752,19 @@
       <Custommap name="heightNoiseMap" fileId="638"/>
     </Material>
     <Material name="lambert1" materialId="6" diffuseColor="0.494118 0.494118 0.494118 1">
+    </Material>
+    <Material name="spline_waterMirror_mat" materialId="9235" diffuseColor="1 1 1 1" specularColor="1 1 1" customShaderId="647" customShaderVariation="simple">
+      <Normalmap fileId="646"/>
+      <CustomParameter name="underwaterFogColor" value="0.09 0.14 0.11 1"/>
+      <CustomParameter name="underwaterFogDepth" value="2.4 2.5 1.3 1"/>
+      <CustomParameter name="depthScale" value="0.4"/>
+    </Material>
+    <Material name="spline_waterSim_mat" materialId="9234" diffuseColor="1 1 1 1" specularColor="1 1 1" customShaderId="647">
+      <Normalmap fileId="646"/>
+      <Refractionmap coeff="1" bumpScale="0.01" withSSRData="true"/>
+      <CustomParameter name="underwaterFogColor" value="0.09 0.14 0.11 1"/>
+      <CustomParameter name="underwaterFogDepth" value="2.4 2.5 1.3 1"/>
+      <CustomParameter name="depthScale" value="0.4"/>
     </Material>
     <Material name="terrainMaterial_mat" materialId="7" customShaderId="2">
     </Material>
@@ -763,7 +778,7 @@
 
   <Scene>
     <Light name="sun" translation="0 400 0" rotation="-39.5664 39.1063 0" objectMask="0x83ff0000" nodeId="12" type="directional" color="1 1 1" emitDiffuse="true" emitSpecular="true" castShadowMap="true" depthMapBias="0.001" depthMapSlopeScaleBias="2" depthMapSlopeClamp="0.001" depthMapResolution="2048" shadowFarDistance="1000" shadowExtrusionDistance="200" softShadowsLightSize="0.5" softShadowsLightDistance="15" softShadowsDepthBiasFactor="1" softShadowsMaxPenumbraSize="0.5" numShadowMapSplits="5" shadowMapSplitDistancesParameter="0.9" lastShadowMapSplitBboxMin="-4096,-128,-4096" lastShadowMapSplitBboxMax="4096,148,4096" range="10000" scattering="true"/>
-    <Camera name="persp" translation="3226.86 156.066 -3319.66" rotation="121.58 1.99557 -180" visibility="false" nodeId="13" fov="60" nearClip="0.01" farClip="6000" orthographicHeight="1500"/>
+    <Camera name="persp" translation="201.614 140.81 30.7703" rotation="-18.5467 86.333 9.69965e-06" visibility="false" nodeId="13" fov="60" nearClip="0.01" farClip="6000" orthographicHeight="1500"/>
     <TerrainTransformGroup name="terrain" static="true" collisionFilterGroup="0x100" collisionFilterMask="0xfffff9c3" nodeId="15" heightMapId="1" patchSize="65" maxLODDistance="750" heightScale="255" unitsPerPixel="1" lodBlendStart="200" lodBlendEnd="300" lodTextureSize="8192" lodBlendStartDynamic="50" lodBlendEndDynamic="65" detailLodBlendDelta="5" materialId="7" castShadowMap="true" occNumLODs="1" occMaxLODDistance="300" occPatchSize="65" occLevel="2" occDistanceWeight="1" occMaxAdjacentFaces="10">
       <OccluderLods>
         <OccluderLod occLodLevel="0" occFaceCount="100" occMaxHausdorffDistance="7" occMaxHausdorffDistanceExtra="9" occMinHorizontalDistance="1" />
@@ -1231,22 +1246,22 @@
           </FoliageMultiLayer>
         </FoliageSystem>
       </Layers>
-      <ProceduralPlacementMasks blockMaskFileId="740">
-        <Mask name="PG_Acres" fileId="650" />
-        <Mask name="PG_Grasslands" fileId="651" />
-        <Mask name="PG_Meadows" fileId="652" />
-        <Mask name="PG_Forests" fileId="653" />
-        <Mask name="PG_Roads" fileId="654" />
-        <Mask name="PG_SideRoads" fileId="655" />
-        <Mask name="PG_DirtPaths" fileId="656" />
-        <Mask name="PG_Buildings" fileId="657" />
-        <Mask name="PG_Farmyards" fileId="658" />
-        <Mask name="PG_Water" fileId="659" />
-        <Mask name="PG_Drains" fileId="660" />
-        <Mask name="PG_Railways" fileId="661" />
+      <ProceduralPlacementMasks blockMaskFileId="746">
+        <Mask name="PG_Acres" fileId="656" />
+        <Mask name="PG_Grasslands" fileId="657" />
+        <Mask name="PG_Meadows" fileId="658" />
+        <Mask name="PG_Forests" fileId="659" />
+        <Mask name="PG_Roads" fileId="660" />
+        <Mask name="PG_SideRoads" fileId="661" />
+        <Mask name="PG_DirtPaths" fileId="662" />
+        <Mask name="PG_Buildings" fileId="663" />
+        <Mask name="PG_Farmyards" fileId="664" />
+        <Mask name="PG_Water" fileId="665" />
+        <Mask name="PG_Drains" fileId="666" />
+        <Mask name="PG_Railways" fileId="667" />
       </ProceduralPlacementMasks>
     </TerrainTransformGroup>
-    <TransformGroup name="careerStartPoint" translation="-785.635 0 162.752" rotation="-180 51.6196 -180" nodeId="34"/>
+    <TransformGroup name="careerStartPoint" translation="49.1097 52.1779 22.7349" rotation="180 51.6196 180" nodeId="34"/>
     <TransformGroup name="gameplay" nodeId="35">
       <TransformGroup name="fields" nodeId="36">
         <TransformGroup name="field113" translation="-3649 0 -911" nodeId="37">
@@ -2816,15 +2831,35 @@
           <TransformGroup name="storeSpawnPlace2End" translation="42.8742 0 0" nodeId="1243"/>
         </TransformGroup>
       </TransformGroup>
+      <TransformGroup name="trafficSystem" nodeId="11455">
+        <Shape name="spline" translation="-4063.67 53.9377 4.57494" rotation="-180 0 -180" shapeId="3" visibility="false" nodeId="9912" castsShadows="false" receiveShadows="false" distanceBlending="false"/>
+        <TransformGroup name="parkedCars" nodeId="11456"/>
+      </TransformGroup>
+      <TransformGroup name="pedestrianSystem" nodeId="11693">
+        <TransformGroup name="staticGroups" nodeId="11694">
+          <TransformGroup name="standardStatic" nodeId="11697"/>
+        </TransformGroup>
+        <Shape name="spline" translation="-3360.61 51.519 78.9228" shapeId="4" visibility="false" nodeId="11700" castsShadows="false" receiveShadows="false" distanceBlending="false"/>
+        <Shape name="spline" translation="124.337 52.1596 13.7177" shapeId="5" visibility="false" nodeId="11730" castsShadows="false" receiveShadows="false" distanceBlending="false"/>
+        <Shape name="spline" translation="3358.57 52.5253 107.196" shapeId="6" visibility="false" nodeId="11754" castsShadows="false" receiveShadows="false" distanceBlending="false"/>
+      </TransformGroup>
     </TransformGroup>
     <TransformGroup name="map" nodeId="1244">
       <TransformGroup name="locations" nodeId="1245"/>
+      <TransformGroup name="waterPlanes" nodeId="9232">
+        <TransformGroup name="waterPlane01" translation="0 20.5 0" nodeId="9233">
+          <Shape name="waterSimulation" translation="-1195.31 0 2731.61" shapeId="7" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" clipDistance="8500" objectMask="0xffff" nodeId="9230" castsShadows="false" receiveShadows="true" materialIds="9234"/>
+          <Shape name="waterInMirror" translation="-1195.31 0 2731.61" shapeId="7" clipDistance="3500" objectMask="0x8000" nodeId="9231" castsShadows="false" receiveShadows="true" materialIds="9235"/>
+        </TransformGroup>
+      </TransformGroup>
     </TransformGroup>
-    <ReferenceNode name="background_terrain_part_01" referenceId="646" nodeId="1249"/>
-    <ReferenceNode name="background_terrain_part_02" referenceId="647" nodeId="1253"/>
-    <ReferenceNode name="background_terrain_part_03" referenceId="648" nodeId="1257"/>
-    <ReferenceNode name="background_terrain_part_04" referenceId="649" nodeId="1261"/>
-    <Camera name="camera" translation="25.7232 948.26 -1.7146" rotation="155.477 -46.1377 180" nodeId="16445" fov="60" nearClip="0.1" farClip="6000" orthographicHeight="1"/>
+    <ReferenceNode name="background_terrain_part_01" referenceId="652" nodeId="1249"/>
+    <ReferenceNode name="background_terrain_part_02" referenceId="653" nodeId="1253"/>
+    <ReferenceNode name="background_terrain_part_03" referenceId="654" nodeId="1257"/>
+    <ReferenceNode name="background_terrain_part_04" referenceId="655" nodeId="1261"/>
+    <Camera name="camera" translation="-371.901 864.167 -1.79321" rotation="150.001 -86.1929 180" nodeId="1263" fov="60" nearClip="0.1" farClip="6000" orthographicHeight="1"/>
+    <TransformGroup name="Procedural_Placement" nodeId="1264"/>
+    <Shape name="water_spline" translation="-4025.34 149.381 1378.28" shapeId="8" visibility="false" nodeId="8886" castsShadows="false" receiveShadows="false" distanceBlending="false"/>
   </Scene>
 
   <ProceduralPlacement>
@@ -2906,84 +2941,84 @@
       <Object type="terrainFoliage" name="F_slenderMountainMint" foliageTypeName="decoFoliage" channels="417" ppType="defaultFoliage" />
       <Object type="terrainFoliage" name="F_wildBergamot" foliageTypeName="decoFoliage" channels="449" ppType="defaultFoliage" />
       <Object type="terrainFoliage" name="F_prairyBlazingStar" foliageTypeName="decoFoliage" channels="481" ppType="defaultFoliage" />
-      <Object type="reference" name="americanElm_stage01" fileId="662" ppType="smallTrees" />
-      <Object type="reference" name="americanElm_stage02" fileId="663" ppType="defaultReference" />
-      <Object type="reference" name="americanElm_stage03" fileId="664" ppType="mediumTree" />
-      <Object type="reference" name="americanElm_stage04" fileId="665" ppType="parentTrees" />
-      <Object type="reference" name="americanElm_stage05" fileId="666" ppType="defaultReference" />
-      <Object type="reference" name="apple_stage03" fileId="667" ppType="mediumTree" />
-      <Object type="reference" name="aspen_stage01" fileId="668" ppType="smallTrees" />
-      <Object type="reference" name="aspen_stage02" fileId="669" ppType="defaultReference" />
-      <Object type="reference" name="aspen_stage03" fileId="670" ppType="mediumTree" />
-      <Object type="reference" name="aspen_stage04" fileId="671" ppType="parentTrees" />
-      <Object type="reference" name="aspen_stage05" fileId="672" ppType="defaultReference" />
-      <Object type="reference" name="aspen_stage06_var01" fileId="673" ppType="defaultReference" />
-      <Object type="reference" name="aspen_stage06_var02" fileId="674" ppType="defaultReference" />
-      <Object type="reference" name="beech_stage01" fileId="675" ppType="smallTrees" />
-      <Object type="reference" name="beech_stage02" fileId="676" ppType="defaultReference" />
-      <Object type="reference" name="beech_stage02_var02" fileId="677" ppType="defaultReference" />
-      <Object type="reference" name="beech_stage02_var03" fileId="678" ppType="defaultReference" />
-      <Object type="reference" name="beech_stage03" fileId="679" ppType="mediumTree" />
-      <Object type="reference" name="beech_stage04" fileId="680" ppType="parentTrees" />
-      <Object type="reference" name="beech_stage05" fileId="681" ppType="defaultReference" />
-      <Object type="reference" name="beech_stage06_var01" fileId="682" ppType="defaultReference" />
-      <Object type="reference" name="beech_stage06_var02" fileId="683" ppType="defaultReference" />
-      <Object type="reference" name="betulaErmanii_stage01" fileId="684" ppType="defaultReference" />
-      <Object type="reference" name="betulaErmanii_stage02" fileId="685" ppType="defaultReference" />
-      <Object type="reference" name="betulaErmanii_stage03" fileId="686" ppType="mediumTree" />
-      <Object type="reference" name="betulaErmanii_stage04" fileId="687" ppType="parentTrees" />
-      <Object type="reference" name="boxelder_stage01" fileId="688" ppType="smallTrees" />
-      <Object type="reference" name="boxelder_stage02" fileId="689" ppType="defaultReference" />
-      <Object type="reference" name="boxelder_stage03" fileId="690" ppType="mediumTree" />
-      <Object type="reference" name="cherry_stage01" fileId="691" ppType="smallTrees" />
-      <Object type="reference" name="cherry_stage02" fileId="692" ppType="defaultReference" />
-      <Object type="reference" name="cherry_stage03" fileId="693" ppType="mediumTree" />
-      <Object type="reference" name="cherry_stage04" fileId="694" ppType="parentTrees" />
-      <Object type="reference" name="chineseElm_stage01" fileId="695" ppType="smallTrees" />
-      <Object type="reference" name="chineseElm_stage02" fileId="696" ppType="defaultReference" />
-      <Object type="reference" name="chineseElm_stage03" fileId="697" ppType="mediumTree" />
-      <Object type="reference" name="chineseElm_stage04" fileId="698" ppType="parentTrees" />
-      <Object type="reference" name="downyServiceBerry_stage01" fileId="699" ppType="defaultReference" />
-      <Object type="reference" name="downyServiceBerry_stage02" fileId="700" ppType="defaultReference" />
-      <Object type="reference" name="downyServiceBerry_stage03" fileId="701" ppType="mediumTree" />
-      <Object type="reference" name="goldenRain_stage01" fileId="702" ppType="smallTrees" />
-      <Object type="reference" name="goldenRain_stage02" fileId="703" ppType="defaultReference" />
-      <Object type="reference" name="goldenRain_stage03" fileId="704" ppType="defaultReference" />
-      <Object type="reference" name="goldenRain_stage04" fileId="705" ppType="parentTrees" />
-      <Object type="reference" name="japaneseZelkova_stage01" fileId="706" ppType="smallTrees" />
-      <Object type="reference" name="japaneseZelkova_stage02" fileId="707" ppType="defaultReference" />
-      <Object type="reference" name="japaneseZelkova_stage03" fileId="708" ppType="mediumTree" />
-      <Object type="reference" name="japaneseZelkova_stage04" fileId="709" ppType="parentTrees" />
-      <Object type="reference" name="lodgepolePine_stage01" fileId="710" ppType="smallTrees" />
-      <Object type="reference" name="lodgepolePine_stage02" fileId="711" ppType="defaultReference" />
-      <Object type="reference" name="lodgepolePine_stage03" fileId="712" ppType="mediumTree" />
-      <Object type="reference" name="northernCatalpa_stage01" fileId="713" ppType="smallTrees" />
-      <Object type="reference" name="northernCatalpa_stage02" fileId="714" ppType="defaultReference" />
-      <Object type="reference" name="northernCatalpa_stage03" fileId="715" ppType="mediumTree" />
-      <Object type="reference" name="northernCatalpa_stage04" fileId="716" ppType="parentTrees" />
-      <Object type="reference" name="oak_stage01" fileId="717" ppType="smallTrees" />
-      <Object type="reference" name="oak_stage02" fileId="718" ppType="defaultReference" />
-      <Object type="reference" name="oak_stage03" fileId="719" ppType="mediumTree" />
-      <Object type="reference" name="oak_stage04" fileId="720" ppType="parentTrees" />
-      <Object type="reference" name="oak_stage05" fileId="721" ppType="defaultReference" />
-      <Object type="reference" name="pinusSylvestris_stage01" fileId="722" ppType="smallTrees" />
-      <Object type="reference" name="pinusSylvestris_stage02" fileId="723" ppType="defaultReference" />
-      <Object type="reference" name="pinusSylvestris_stage03" fileId="724" ppType="mediumTree" />
-      <Object type="reference" name="pinusSylvestris_stage04" fileId="725" ppType="parentTrees" />
-      <Object type="reference" name="pinusSylvestris_stage05" fileId="726" ppType="defaultReference" />
-      <Object type="reference" name="pinusTabuliformis_stage01" fileId="727" ppType="smallTrees" />
-      <Object type="reference" name="pinusTabuliformis_stage02" fileId="728" ppType="defaultReference" />
-      <Object type="reference" name="pinusTabuliformis_stage03" fileId="729" ppType="mediumTree" />
-      <Object type="reference" name="pinusTabuliformis_stage04" fileId="730" ppType="parentTrees" />
-      <Object type="reference" name="pinusTabuliformis_stage05" fileId="731" ppType="defaultReference" />
-      <Object type="reference" name="shagbarkHickory_stage01" fileId="732" ppType="smallTrees" />
-      <Object type="reference" name="shagbarkHickory_stage02" fileId="733" ppType="defaultReference" />
-      <Object type="reference" name="shagbarkHickory_stage03" fileId="734" ppType="mediumTree" />
-      <Object type="reference" name="shagbarkHickory_stage04" fileId="735" ppType="parentTrees" />
-      <Object type="reference" name="tiliaAmurensis_stage01" fileId="736" ppType="smallTrees" />
-      <Object type="reference" name="tiliaAmurensis_stage02" fileId="737" ppType="defaultReference" />
-      <Object type="reference" name="tiliaAmurensis_stage03" fileId="738" ppType="mediumTree" />
-      <Object type="reference" name="tiliaAmurensis_stage04" fileId="739" ppType="parentTrees" />
+      <Object type="reference" name="americanElm_stage01" fileId="668" ppType="smallTrees" />
+      <Object type="reference" name="americanElm_stage02" fileId="669" ppType="defaultReference" />
+      <Object type="reference" name="americanElm_stage03" fileId="670" ppType="mediumTree" />
+      <Object type="reference" name="americanElm_stage04" fileId="671" ppType="parentTrees" />
+      <Object type="reference" name="americanElm_stage05" fileId="672" ppType="defaultReference" />
+      <Object type="reference" name="apple_stage03" fileId="673" ppType="mediumTree" />
+      <Object type="reference" name="aspen_stage01" fileId="674" ppType="smallTrees" />
+      <Object type="reference" name="aspen_stage02" fileId="675" ppType="defaultReference" />
+      <Object type="reference" name="aspen_stage03" fileId="676" ppType="mediumTree" />
+      <Object type="reference" name="aspen_stage04" fileId="677" ppType="parentTrees" />
+      <Object type="reference" name="aspen_stage05" fileId="678" ppType="defaultReference" />
+      <Object type="reference" name="aspen_stage06_var01" fileId="679" ppType="defaultReference" />
+      <Object type="reference" name="aspen_stage06_var02" fileId="680" ppType="defaultReference" />
+      <Object type="reference" name="beech_stage01" fileId="681" ppType="smallTrees" />
+      <Object type="reference" name="beech_stage02" fileId="682" ppType="defaultReference" />
+      <Object type="reference" name="beech_stage02_var02" fileId="683" ppType="defaultReference" />
+      <Object type="reference" name="beech_stage02_var03" fileId="684" ppType="defaultReference" />
+      <Object type="reference" name="beech_stage03" fileId="685" ppType="mediumTree" />
+      <Object type="reference" name="beech_stage04" fileId="686" ppType="parentTrees" />
+      <Object type="reference" name="beech_stage05" fileId="687" ppType="defaultReference" />
+      <Object type="reference" name="beech_stage06_var01" fileId="688" ppType="defaultReference" />
+      <Object type="reference" name="beech_stage06_var02" fileId="689" ppType="defaultReference" />
+      <Object type="reference" name="betulaErmanii_stage01" fileId="690" ppType="defaultReference" />
+      <Object type="reference" name="betulaErmanii_stage02" fileId="691" ppType="defaultReference" />
+      <Object type="reference" name="betulaErmanii_stage03" fileId="692" ppType="mediumTree" />
+      <Object type="reference" name="betulaErmanii_stage04" fileId="693" ppType="parentTrees" />
+      <Object type="reference" name="boxelder_stage01" fileId="694" ppType="smallTrees" />
+      <Object type="reference" name="boxelder_stage02" fileId="695" ppType="defaultReference" />
+      <Object type="reference" name="boxelder_stage03" fileId="696" ppType="mediumTree" />
+      <Object type="reference" name="cherry_stage01" fileId="697" ppType="smallTrees" />
+      <Object type="reference" name="cherry_stage02" fileId="698" ppType="defaultReference" />
+      <Object type="reference" name="cherry_stage03" fileId="699" ppType="mediumTree" />
+      <Object type="reference" name="cherry_stage04" fileId="700" ppType="parentTrees" />
+      <Object type="reference" name="chineseElm_stage01" fileId="701" ppType="smallTrees" />
+      <Object type="reference" name="chineseElm_stage02" fileId="702" ppType="defaultReference" />
+      <Object type="reference" name="chineseElm_stage03" fileId="703" ppType="mediumTree" />
+      <Object type="reference" name="chineseElm_stage04" fileId="704" ppType="parentTrees" />
+      <Object type="reference" name="downyServiceBerry_stage01" fileId="705" ppType="defaultReference" />
+      <Object type="reference" name="downyServiceBerry_stage02" fileId="706" ppType="defaultReference" />
+      <Object type="reference" name="downyServiceBerry_stage03" fileId="707" ppType="mediumTree" />
+      <Object type="reference" name="goldenRain_stage01" fileId="708" ppType="smallTrees" />
+      <Object type="reference" name="goldenRain_stage02" fileId="709" ppType="defaultReference" />
+      <Object type="reference" name="goldenRain_stage03" fileId="710" ppType="defaultReference" />
+      <Object type="reference" name="goldenRain_stage04" fileId="711" ppType="parentTrees" />
+      <Object type="reference" name="japaneseZelkova_stage01" fileId="712" ppType="smallTrees" />
+      <Object type="reference" name="japaneseZelkova_stage02" fileId="713" ppType="defaultReference" />
+      <Object type="reference" name="japaneseZelkova_stage03" fileId="714" ppType="mediumTree" />
+      <Object type="reference" name="japaneseZelkova_stage04" fileId="715" ppType="parentTrees" />
+      <Object type="reference" name="lodgepolePine_stage01" fileId="716" ppType="smallTrees" />
+      <Object type="reference" name="lodgepolePine_stage02" fileId="717" ppType="defaultReference" />
+      <Object type="reference" name="lodgepolePine_stage03" fileId="718" ppType="mediumTree" />
+      <Object type="reference" name="northernCatalpa_stage01" fileId="719" ppType="smallTrees" />
+      <Object type="reference" name="northernCatalpa_stage02" fileId="720" ppType="defaultReference" />
+      <Object type="reference" name="northernCatalpa_stage03" fileId="721" ppType="mediumTree" />
+      <Object type="reference" name="northernCatalpa_stage04" fileId="722" ppType="parentTrees" />
+      <Object type="reference" name="oak_stage01" fileId="723" ppType="smallTrees" />
+      <Object type="reference" name="oak_stage02" fileId="724" ppType="defaultReference" />
+      <Object type="reference" name="oak_stage03" fileId="725" ppType="mediumTree" />
+      <Object type="reference" name="oak_stage04" fileId="726" ppType="parentTrees" />
+      <Object type="reference" name="oak_stage05" fileId="727" ppType="defaultReference" />
+      <Object type="reference" name="pinusSylvestris_stage01" fileId="728" ppType="smallTrees" />
+      <Object type="reference" name="pinusSylvestris_stage02" fileId="729" ppType="defaultReference" />
+      <Object type="reference" name="pinusSylvestris_stage03" fileId="730" ppType="mediumTree" />
+      <Object type="reference" name="pinusSylvestris_stage04" fileId="731" ppType="parentTrees" />
+      <Object type="reference" name="pinusSylvestris_stage05" fileId="732" ppType="defaultReference" />
+      <Object type="reference" name="pinusTabuliformis_stage01" fileId="733" ppType="smallTrees" />
+      <Object type="reference" name="pinusTabuliformis_stage02" fileId="734" ppType="defaultReference" />
+      <Object type="reference" name="pinusTabuliformis_stage03" fileId="735" ppType="mediumTree" />
+      <Object type="reference" name="pinusTabuliformis_stage04" fileId="736" ppType="parentTrees" />
+      <Object type="reference" name="pinusTabuliformis_stage05" fileId="737" ppType="defaultReference" />
+      <Object type="reference" name="shagbarkHickory_stage01" fileId="738" ppType="smallTrees" />
+      <Object type="reference" name="shagbarkHickory_stage02" fileId="739" ppType="defaultReference" />
+      <Object type="reference" name="shagbarkHickory_stage03" fileId="740" ppType="mediumTree" />
+      <Object type="reference" name="shagbarkHickory_stage04" fileId="741" ppType="parentTrees" />
+      <Object type="reference" name="tiliaAmurensis_stage01" fileId="742" ppType="smallTrees" />
+      <Object type="reference" name="tiliaAmurensis_stage02" fileId="743" ppType="defaultReference" />
+      <Object type="reference" name="tiliaAmurensis_stage03" fileId="744" ppType="mediumTree" />
+      <Object type="reference" name="tiliaAmurensis_stage04" fileId="745" ppType="parentTrees" />
     </Objects>
     <Rules>
       <Rule name="ClearAll" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
@@ -4750,6 +4785,42 @@
     <UserAttribute nodeId="1242">
       <Attribute name="onCreate" type="scriptCallback" value="BaseMission.onCreateStoreSpawnPlace"/>
       <Attribute name="yOffset" type="float" value="0.1"/>
+    </UserAttribute>
+    <UserAttribute nodeId="11455">
+      <Attribute name="onCreate" type="scriptCallback" value="TrafficSystem.onCreate"/>
+      <Attribute name="xmlFile" type="string" value="map/config/trafficSystem.xml"/>
+    </UserAttribute>
+    <UserAttribute nodeId="9912">
+      <Attribute name="maxSpeedScale" type="float" value="2"/>
+      <Attribute name="speedLimit" type="integer" value="92"/>
+    </UserAttribute>
+    <UserAttribute nodeId="11693">
+      <Attribute name="onCreate" type="scriptCallback" value="PedestrianSystem.onCreate"/>
+      <Attribute name="xmlFile" type="string" value="map/config/pedestrianSystem.xml"/>
+    </UserAttribute>
+    <UserAttribute nodeId="11697">
+      <Attribute name="groupName" type="string" value="standardStatic"/>
+    </UserAttribute>
+    <UserAttribute nodeId="11700">
+      <Attribute name="density" type="float" value="0.1"/>
+      <Attribute name="groupName" type="string" value="standard"/>
+      <Attribute name="width" type="float" value="1.5"/>
+    </UserAttribute>
+    <UserAttribute nodeId="11730">
+      <Attribute name="density" type="float" value="0.1"/>
+      <Attribute name="groupName" type="string" value="standard"/>
+      <Attribute name="width" type="float" value="1.5"/>
+    </UserAttribute>
+    <UserAttribute nodeId="11754">
+      <Attribute name="density" type="float" value="0.1"/>
+      <Attribute name="groupName" type="string" value="standard"/>
+      <Attribute name="width" type="float" value="1.5"/>
+    </UserAttribute>
+    <UserAttribute nodeId="9230">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater"/>
+    </UserAttribute>
+    <UserAttribute nodeId="9231">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater"/>
     </UserAttribute>
   </UserAttributes>
 
