@@ -34,6 +34,19 @@ def smoothstep(t):
     return t * t * (3.0 - 2.0 * t)
 
 
+def smootherstep(t):
+    """Like `smoothstep`, but with zero *second* derivative at both ends as well.
+
+    Where a sculpted surface has to arrive at flat ground and stop, this is the one to
+    use. A smoothstep leaves a jump in curvature there, and the order-3 spline that
+    resamples the working grid to 1 m rings on it: the valley rim came out with a 24 cm
+    levee running along both sides of it, which is invisible in a hillshade of a 15 m
+    valley and is a bank the water cannot get over.
+    """
+    t = np.clip(t, 0.0, 1.0)
+    return t * t * t * (t * (t * 6.0 - 15.0) + 10.0)
+
+
 def soft_min(a, b, k):
     """Polynomial smooth minimum. C1 everywhere, and equal to min(a, b) once the two are
     more than k apart.
@@ -122,9 +135,10 @@ def polyline_arclen(pts):
 
 def sample_bilinear(z, X0, Y0, dx, dy, xs, ys):
     """Sample a grid at arbitrary metre coordinates."""
-    cols = (np.asarray(xs, dtype=np.float64) - X0) / dx
-    rows = (np.asarray(ys, dtype=np.float64) - Y0) / dy
-    return ndimage.map_coordinates(z, np.stack([rows, cols]), order=1, mode='nearest')
+    cols = (np.atleast_1d(np.asarray(xs, dtype=np.float64)) - X0) / dx
+    rows = (np.atleast_1d(np.asarray(ys, dtype=np.float64)) - Y0) / dy
+    out = ndimage.map_coordinates(z, np.stack([rows, cols]), order=1, mode='nearest')
+    return out if np.ndim(xs) else float(out[0])
 
 
 # ----------------------------------------------------------------------------------
@@ -196,6 +210,18 @@ def rect_sdf(X, Y, x0, y0, x1, y1):
     return outside + inside
 
 
+def grad_mag(f, dx, floor=1e-6):
+    """|grad f|, floored so it can be divided by.
+
+    Dividing a level-set field by this turns it into an approximate signed distance,
+    which is what a normalised radius like `ellipse_r`'s is not: multiply that by a mean
+    radius instead and every section built on it comes out narrow wherever the level sets
+    are crowded together, which on an ellipse is the whole of the short axis.
+    """
+    gy, gx = np.gradient(np.asarray(f, dtype=np.float32), dx)
+    return np.maximum(np.hypot(gx, gy), floor)
+
+
 def ellipse_r(X, Y, cx, cy, a, b, rot_deg, harmonics=()):
     """Normalised elliptical radius: 1 on the shore.
 
@@ -214,6 +240,68 @@ def ellipse_r(X, Y, cx, cy, a, b, rot_deg, harmonics=()):
     for amp, k, ph in harmonics:
         m = m + amp * np.sin(k * theta + ph)
     return q / m
+
+
+def rim_along(X, Y, playable_m):
+    """Where a pixel sits *around* the rim: the fraction of the way clockwise round the
+    perimeter of the playable square, taken at the nearest point on it.
+
+    One coordinate for the whole ring, so one profile modulates every side, and it wraps
+    - which is why a profile built on it needs a whole number of lobes, or the crest
+    steps where the west edge meets the north edge at the corner.
+
+    It is a perimeter parameter and not "Y on a range, X on a sill" for a reason that cost
+    a render to find: blending the two swings the profile the length of the map inside one
+    corner - 9 km of ridge line crammed into 2 km of ground - and puts a bright crease
+    diagonally out of two corners of the canvas. Projecting onto the square makes the
+    whole corner map to the corner, so the ridge is simply constant across it.
+
+    The clamp that projects a point onto the square only means anything outside it. For
+    an interior point every branch falls through to the north edge - harmless here only
+    because the rim's lift is identically zero inside the playable square, and the first
+    thing that would have to be fixed if any part of it were ever asked to reach in.
+    """
+    cx = np.clip(X, 0.0, playable_m)
+    cy = np.clip(Y, 0.0, playable_m)
+    s = np.where(X < 0.0, 4.0 * playable_m - cy,
+                 np.where(X > playable_m, playable_m + cy,
+                          np.where(Y > playable_m, 3.0 * playable_m - cx, cx)))
+    return np.mod(s / (4.0 * playable_m), 1.0)
+
+
+def rim_field(X, Y, playable_m, apron_m, back_m, offset_m):
+    """The geometry of the border rim: how far up, and which way it faces.
+
+    One implementation, used by the generator to build the mountains and by the measurer
+    to find the strips it reports on. A second opinion about where the west range is
+    would be a report that passes a rim which is not the one that got built.
+
+    Each of the four sides gets its own ramp, expressed as a *progress* from 0 at its toe
+    to 1 at the crest shoulder, and the four are combined with a 4-norm rather than a
+    maximum - a plain maximum creases along the diagonals and puts four seams out of the
+    corners of the map. Three of the sides have their toe one apron past the boundary.
+
+    Returns `(d, t, w)`: the 4-norm distance outside the square, the ramp, and 1 facing
+    east or west against 0 facing north or south, blended through the corners. `w` is what
+    makes two ranges out of one ring - the crest height is interpolated along it, so the
+    east and west border carries mountains and the north and south the sill the valley
+    leaves over.
+    """
+    run = offset_m - back_m - apron_m
+    sx_e = X - playable_m
+
+    def ramp(sd):
+        return np.clip((sd - apron_m) / run, 0.0, 1.0)
+
+    pe, pn, ps, pw = ramp(sx_e), ramp(-Y), ramp(Y - playable_m), ramp(-X)
+
+    rng4 = np.maximum(pe, pw) ** 4
+    sil4 = np.maximum(pn, ps) ** 4
+    q = rng4 + sil4
+    dx = np.maximum(np.maximum(-X, sx_e), 0.0)
+    dy = np.maximum(np.maximum(-Y, Y - playable_m), 0.0)
+    return ((dx ** 4 + dy ** 4) ** 0.25, smoothstep(q ** 0.25),
+            rng4 / np.maximum(q, 1e-12))
 
 
 # ----------------------------------------------------------------------------------

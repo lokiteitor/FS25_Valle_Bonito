@@ -6,10 +6,9 @@ the tree - the same module the DEM generator sculpts its terrain from, so a rive
 here runs along the valley that was carved there, and a farmyard sits on the platform
 that was levelled for it. Neither half of the pipeline defines geometry of its own.
 
-**The registries are empty.** What this writes today is a `<bounds>` element and nothing
-inside it: the blank vector map that goes with the blank heightmap. The machinery around
-it is all still here, because it is the part that is tedious to get right and easy to get
-subtly wrong:
+What it writes today is the water, the road grid and the four towns; the parcelling is
+still to come, so there are no fields in the file yet. The machinery around all of it is
+the part that is tedious to get right and easy to get subtly wrong:
 
     Osm.node / Osm.way / Osm.area   one node per coordinate, so two ways that name the
                                     same point share it - otherwise the road network is
@@ -186,13 +185,21 @@ def emit_water(osm):
 
 
 def emit_pads(osm):
-    """Villages, farmsteads and industrial aprons: the ground the DEM levelled."""
+    """The footprint of a levelled platform, for the pads that have one.
+
+    A pad is a piece of terrain: it says where the ground was graded, not what stands on
+    it. A farmstead's yard is its own footprint and is drawn here; a town's is its
+    blocks, which are `AREAS` rings, and drawing the platform under them as well would
+    put a second farmyard polygon under all sixteen of them for nothing. So the layout
+    decides, by whether the record carries `tags`, and the generator does not guess.
+    """
+    n = 0
     for p in ml.pads():
-        tags = {'landuse': 'farmyard', 'name': p['name']}
-        if p.get('kind') == 'industry':
-            tags['building'] = 'industrial'
-        osm.area(p['ring'], tags)
-    return len(ml.pads())
+        if not p.get('tags'):
+            continue
+        osm.area(p['ring'], dict(p['tags'], name=p['name']))
+        n += 1
+    return n
 
 
 def emit_areas(osm):

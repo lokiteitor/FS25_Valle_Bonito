@@ -17,8 +17,7 @@ the things that are wrong in a way no picture would show:
     quiet while `map_layout` still carries features is exactly the failure the
     shared-geometry rule exists to catch
 
-Exits non-zero if an invariant is broken, so it can gate the pipeline. On the blank map
-most of them are vacuously true and the inventory is empty, which is the point.
+Exits non-zero if an invariant is broken, so it can gate the pipeline.
 """
 import os
 import sys

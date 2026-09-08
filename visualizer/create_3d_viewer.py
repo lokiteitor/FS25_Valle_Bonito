@@ -166,6 +166,7 @@ def main():
     style_rules = [
         ("natural", "water", "#2563EB", 4),       # Water blue
         ("water", None, "#2563EB", 4),
+        ("leaf_type", "needleleaved", "#14532D", 4),  # Conifer, darker than broadleaf
         ("natural", "wood", "#166534", 4),        # Forest green
         ("landuse", "forest", "#166534", 4),
         ("landuse", "farmyard", "#EC4899", 4),    # Pink for farmyard

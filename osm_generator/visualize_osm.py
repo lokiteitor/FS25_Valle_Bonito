@@ -52,7 +52,7 @@ def main():
     ax.add_patch(patches.Rectangle((0, 0), ms.PLAYABLE_M, ms.PLAYABLE_M, fill=False,
                                    edgecolor='#6366F1', linewidth=2.0, linestyle='--'))
 
-    counts = {'farmland': 0, 'wood': 0, 'farmyard': 0, 'water': 0}
+    counts = {'farmland': 0, 'wood': 0, 'farmyard': 0, 'industry': 0, 'water': 0}
     for way in ways:
         coords = way['coords']
         if len(coords) < 2:
@@ -64,8 +64,13 @@ def main():
         # natural=wood is checked before landuse: woods carry both tags and the wood
         # reading is the meaningful one.
         if tags.get('natural') == 'wood':
-            ax.add_patch(patches.Polygon(coords, closed=True, facecolor='#15803D',
-                                         edgecolor='#22C55E', alpha=0.55, linewidth=0.8))
+            # Conifer against broadleaf, the same way an industrial apron is drawn apart
+            # from a farmyard: they are one tag to the renderer's own vocabulary, and
+            # telling them apart here is the only place `leaf_type` shows.
+            needle = tags.get('leaf_type') == 'needleleaved'
+            ax.add_patch(patches.Polygon(
+                coords, closed=True, facecolor='#14532D' if needle else '#15803D',
+                edgecolor='#34D399' if needle else '#22C55E', alpha=0.55, linewidth=0.8))
             counts['wood'] += 1
         elif tags.get('natural') == 'water':
             ax.add_patch(patches.Polygon(coords, closed=True, facecolor='#0284C7',
@@ -78,10 +83,15 @@ def main():
             colour = '#6366F1' if industrial else '#DB2777'
             ax.add_patch(patches.Polygon(coords, closed=True, facecolor=colour,
                                          edgecolor=colour, alpha=0.55, linewidth=1.2))
-            ax.text(sum(xs) / len(xs), sum(ys) / len(ys), name.split(' (')[0][:18],
-                    color='white', fontsize=6, fontweight='bold', ha='center',
-                    va='center', zorder=8)
-            counts['farmyard'] += 1
+            # Only a ring wide enough to hold the label gets one. A town block is
+            # 100 m on an eight-kilometre plot - sixteen characters of bold white text
+            # across seventeen pixels - and sixty-four of them turned the four towns
+            # into a smear that hid the street grid underneath.
+            if max(xs) - min(xs) >= 300.0:
+                ax.text(sum(xs) / len(xs), sum(ys) / len(ys), name.split(' (')[0][:18],
+                        color='white', fontsize=6, fontweight='bold', ha='center',
+                        va='center', zorder=8)
+            counts['industry' if industrial else 'farmyard'] += 1
         elif tags.get('landuse') == 'farmland':
             ax.add_patch(patches.Polygon(coords, closed=True, facecolor='#A3E635',
                                          edgecolor='#65A30D', alpha=0.25, linewidth=0.6))
@@ -121,8 +131,11 @@ def main():
         Line2D([], [], color='#CBD5E1', lw=1, label='Farm lane'),
         Line2D([], [], color='#F43F5E', lw=3, label='Bridge'),
         patches.Patch(facecolor='#A3E635', alpha=0.4, label=f"Farmland ({counts['farmland']})"),
-        patches.Patch(facecolor='#15803D', alpha=0.6, label=f"Wood ({counts['wood']})"),
+        patches.Patch(facecolor='#14532D', alpha=0.6,
+                      label=f"Wood, needleleaf ({counts['wood']})"),
         patches.Patch(facecolor='#DB2777', alpha=0.6, label=f"Farmyard ({counts['farmyard']})"),
+        patches.Patch(facecolor='#6366F1', alpha=0.6,
+                      label=f"Industrial ({counts['industry']})"),
         patches.Patch(facecolor='#0284C7', alpha=0.8, label='River'),
     ]
     ax.legend(handles=legend, loc='upper right', facecolor='#111827',
@@ -137,7 +150,7 @@ def main():
     plt.close()
     print(f"[+] Saved visualization to '{output_png}'  "
           f"({counts['farmland']} fields, {counts['wood']} woods, "
-          f"{counts['farmyard']} farmyards)")
+          f"{counts['farmyard']} farmyards, {counts['industry']} industrial)")
 
 
 if __name__ == '__main__':
