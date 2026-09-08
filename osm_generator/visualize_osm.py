@@ -72,15 +72,15 @@ def main():
                                          edgecolor='#38BDF8', alpha=0.85, linewidth=1.0))
             counts['water'] += 1
         elif tags.get('landuse') == 'farmyard':
-            village = name.startswith('Village')
-            colour = '#6366F1' if village else '#DB2777'
+            # An industrial apron is drawn apart from a yard: they are the same tag to
+            # the renderers, and telling them apart here is the only place it shows.
+            industrial = tags.get('building') == 'industrial'
+            colour = '#6366F1' if industrial else '#DB2777'
             ax.add_patch(patches.Polygon(coords, closed=True, facecolor=colour,
                                          edgecolor=colour, alpha=0.55, linewidth=1.2))
-            cx = sum(xs) / len(xs)
-            cy = sum(ys) / len(ys)
-            ax.text(cx, cy, 'VILLAGE' if village else name.split(' (')[0].replace(
-                'Industry Pad ', 'IND '), color='white', fontsize=6,
-                fontweight='bold', ha='center', va='center', zorder=8)
+            ax.text(sum(xs) / len(xs), sum(ys) / len(ys), name.split(' (')[0][:18],
+                    color='white', fontsize=6, fontweight='bold', ha='center',
+                    va='center', zorder=8)
             counts['farmyard'] += 1
         elif tags.get('landuse') == 'farmland':
             ax.add_patch(patches.Polygon(coords, closed=True, facecolor='#A3E635',

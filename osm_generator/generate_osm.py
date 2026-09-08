@@ -1,30 +1,41 @@
 #!/usr/bin/env python3
 """Write `map.osm`: the vector layout of the playable area.
 
-Northwest Iowa farm country, laid out from `map_layout.py` at the root of the tree - the
-same module the DEM generator sculpts its terrain from, so the river drawn here runs
-along the valley that was carved there, and the farmyards sit on the platforms that were
-levelled for them.
+Everything it draws comes out of the four registries in `map_layout.py` at the root of
+the tree - the same module the DEM generator sculpts its terrain from, so a river drawn
+here runs along the valley that was carved there, and a farmyard sits on the platform
+that was levelled for it. Neither half of the pipeline defines geometry of its own.
 
-What goes in the file:
+**The registries are empty.** What this writes today is a `<bounds>` element and nothing
+inside it: the blank vector map that goes with the blank heightmap. The machinery around
+it is all still here, because it is the part that is tedious to get right and easy to get
+subtly wrong:
 
-    highway=primary                               420th Street, the straight east-west
-                                                  trunk through the middle of the map
-    highway=secondary                             the Public Land Survey grid, one mile
-                                                  apart, meeting at right angles
-    highway=tertiary                              farm lanes and village streets
-    railway=rail                                  the branch line, straight north-south,
-                                                  crossing the primary at the centre
-    landuse=farmland                              the fields
-    landuse=farmyard                              three villages and seven farmsteads
-    natural=wood + landuse=farmyard + leaf_type   river timber and farm shelterbelts
-    natural=water                                 the river and the lake
-    bridge=yes                                    the three river crossings
+    Osm.node / Osm.way / Osm.area   one node per coordinate, so two ways that name the
+                                    same point share it - otherwise the road network is
+                                    a pile of disconnected sticks - and a ring that
+                                    closes on its own first node id, which is the only
+                                    way the 3D viewer will read it as a polygon
+    emit_corridors                  splits each alignment at every crossing and at every
+                                    bridge abutment, so junctions are shared nodes and a
+                                    span can carry bridge=yes on a way of its own
+    connect_road_crossings          stitches in a node wherever two alignments actually
+                                    cross geometrically, railway included: filtered to
+                                    `'highway' in tags`, none of the level crossings gets
+                                    a shared node and the network falls into two
+                                    disconnected components, which nothing downstream
+                                    would complain about - it would just be wrong
+    clip_to_playable / strip_ring   trim to the map edge and to the clean strip. Rings
+                                    are clipped, never clamped: clamping folds whatever
+                                    hangs over the boundary onto the boundary itself, and
+                                    once put a run of nodes straight across a river.
 
-The vocabulary is deliberately closed: it is exactly what `visualize_osm.py` and
-`visualizer/create_3d_viewer.py` already understand. A way tagged with anything else is
-dropped by both without a word, so the floodplain pasture is left as unclaimed ground -
-no field is placed there - rather than tagged with something neither renderer draws.
+The tag vocabulary is deliberately closed - `map_layout.RENDERED_TAGS` is exactly what
+`visualize_osm.py` and `visualizer/create_3d_viewer.py` know how to draw. A way tagged
+with anything else is dropped by both renderers without a word, so ground that has no
+tag in the vocabulary is left unclaimed (no field placed there) rather than tagged with
+something nothing draws. `check_osm.py` fails the build if a way slips through that
+neither renderer can see.
 """
 import math
 import os
@@ -43,9 +54,6 @@ import map_layout as ml                                             # noqa: E402
 OUT_NAME = "map.osm"
 STAMP = {'version': '1', 'timestamp': '2026-09-02T12:00:00Z',
          'changeset': '1', 'uid': '1', 'user': 'generator'}
-
-HIGHWAY_CLASS = {'primary': 'primary', 'section': 'secondary',
-                 'track': 'tertiary', 'street': 'tertiary'}
 
 
 # ==================================================================================
@@ -133,11 +141,11 @@ def _edge_point(inside_pt, outside_pt, lo, hi):
 def clamp_ring(ring):
     """Pull a ring back inside the playable square.
 
-    The river polygons are the centreline buffered outwards, so where the river leaves
-    the map the buffer overhangs the edge by up to its own width. Clamping is what a map
-    boundary does anyway; the alternative is nodes outside the declared bounds, which the
-    3D viewer would stretch the whole map to fit. Water is the only thing clamped: it has
-    to leave the map, and folding the overhang onto the boundary costs it nothing.
+    Water is the only thing clamped, and only because it has to leave the map: a channel
+    polygon is the centreline buffered outwards, so where the river leaves the map the
+    buffer overhangs the edge by up to its own width. Clamping is what a map boundary
+    does anyway, and folding that overhang onto the boundary costs the water nothing. Do
+    not reach for it for anything planted - use `strip_ring`.
     """
     return [(min(max(x, 0.0), ml.PLAYABLE_M), min(max(y, 0.0), ml.PLAYABLE_M))
             for x, y in ring]
@@ -146,7 +154,7 @@ def clamp_ring(ring):
 def strip_ring(ring):
     """Cut a planted ring back to the clean strip.
 
-    Clipped, not clamped: clamping folded the part of a timber strip that hangs over the
+    Clipped, not clamped: clamping folded the part of a timber strip that hung over the
     boundary onto the boundary itself, and put a run of nodes straight across the river
     channel. What comes back has the same straight edge 100 m in that the fields have.
     """
@@ -158,64 +166,49 @@ def strip_ring(ring):
 # features
 # ==================================================================================
 def emit_water(osm):
-    """The river, the creek and the lake the two of them feed.
-
-    The channel polygons stop at the lake shore. Two overlapping water areas would fight
-    over the same ground in the editor, and the lake is the one that should win there.
-    """
+    """Standing water by its shore ring, a watercourse by its centreline buffered out to
+    the drawn half-width - which `map_layout.validate()` holds equal to the half-width at
+    which the carved trough reaches the waterline, so the map never paints water over dry
+    bank or leaves an open trough with nothing in it."""
     n = 0
-    for ring in ml.river_water_ring():
-        osm.area(clamp_ring(ring), {'natural': 'water', 'water': 'river',
-                                    'name': 'Ocheyedan River'})
-        n += 1
-    osm.area(ml.lake_ring(), {'natural': 'water', 'water': 'lake',
-                              'name': 'Silver Lake'})
-    return n + 1
-
-
-def emit_woods(osm):
-    """River timber and the tree rows: yard groves, block edges and belts between fields.
-
-    Each side of a farmstead grove is its own way rather than one ring around the yard -
-    which is how they were actually planted, and leaves the lane a gap to come in
-    through.
-    """
-    n = 0
-    tags = {'natural': 'wood', 'landuse': 'farmyard', 'leaf_type': 'broadleaved'}
-    for ring in ml.river_woods():
-        ring = strip_ring(ring)
-        if ml.ring_area_ha(ring) < 0.15:
+    for w in ml.water():
+        tags = {'natural': 'water', 'water': w.get('kind', 'water'), 'name': w['name']}
+        if w.get('ring'):
+            osm.area(w['ring'], tags)
+            n += 1
             continue
-        osm.area(ring, dict(tags, name='River timber'))
-        n += 1
-    for wb in ml.windbreaks():
-        ring = strip_ring(wb['ring'])
-        if ml.ring_area_ha(ring) < 0.15:
-            continue
-        osm.area(ring, dict(tags, name=wb['name']))
-        n += 1
+        for run in ml.clip_polyline(w['axis'], -ml.EXTEND_M, -ml.EXTEND_M,
+                                    ml.PLAYABLE_M + ml.EXTEND_M,
+                                    ml.PLAYABLE_M + ml.EXTEND_M):
+            osm.area(clamp_ring(ml.buffer_ring(run, w['water_half_w'])), dict(tags))
+            n += 1
     return n
 
 
 def emit_pads(osm):
-    for p in ml.village_pads():
-        osm.area(p['ring'], {'landuse': 'farmyard', 'name': p['name']})
-    for p in ml.farm_pads():
-        osm.area(p['ring'], {'landuse': 'farmyard', 'name': p['name']})
-    # The grain elevator by the tracks is what put the town there in the first place.
-    # Its rectangle lives in map_layout with every other pad, so the parcelling keeps
-    # fields off it and the DEM flattens the ground under it.
-    for p in ml.industry_pads() + ml.lot_pads():
-        osm.area(p['ring'], {'landuse': 'farmyard', 'building': 'industrial',
-                             'name': p['name']})
+    """Villages, farmsteads and industrial aprons: the ground the DEM levelled."""
+    for p in ml.pads():
+        tags = {'landuse': 'farmyard', 'name': p['name']}
+        if p.get('kind') == 'industry':
+            tags['building'] = 'industrial'
+        osm.area(p['ring'], tags)
     return len(ml.pads())
 
 
-def emit_fields(osm, rough):
-    fs = ml.fields(rough)
-    for i, f in enumerate(sorted(fs, key=lambda f: (-f['ha'], f['ring'][0])), 1):
-        osm.area(f['ring'], {'landuse': 'farmland', 'name': f"Field {i:03d}"})
-    return fs
+def emit_areas(osm):
+    """Fields, woods and anything else that is a tagged ring and nothing more.
+
+    Cut back to the clean strip and dropped if what survives is a sliver: a ring of a few
+    ares is nodes spent on something no one will see.
+    """
+    n = 0
+    for a in ml.areas():
+        ring = strip_ring(a['ring'])
+        if len(ring) < 4 or ml.ring_area_ha(ring) < 0.15:
+            continue
+        osm.area(ring, dict(a['tags'], name=a['name']))
+        n += 1
+    return n
 
 
 def _corridor_vertices(c, others):
@@ -236,16 +229,13 @@ def _corridor_vertices(c, others):
         ofixed = oax[0][0] if ov else oax[0][1]
         olo = min(p[1] for p in oax) if ov else min(p[0] for p in oax)
         ohi = max(p[1] for p in oax) if ov else max(p[0] for p in oax)
-        if vertical:
-            if lo <= ofixed <= hi and olo <= fixed <= ohi:
-                out.append((fixed, ofixed))
-        else:
-            if lo <= ofixed <= hi and olo <= fixed <= ohi:
-                out.append((ofixed, fixed))
+        if lo <= ofixed <= hi and olo <= fixed <= ohi:
+            out.append((fixed, ofixed) if vertical else (ofixed, fixed))
     return out
 
 
-def emit_roads(osm):
+def emit_corridors(osm):
+    """Roads and railway, split at every junction and every bridge abutment."""
     corr = ml.corridors()
     counts = Counter()
     bridges = 0
@@ -259,26 +249,23 @@ def emit_roads(osm):
         # The abutments become vertices, so the span can be split off into a way of its
         # own and carry bridge=yes.
         dense = ml.densify(c['axis'], 5.0)
-        spans = list(c['bridge_spans'])
+        spans = list(c.get('bridge_spans', ()))
         abutments = [_point_at(dense, s) for span in spans for s in span]
         pts = sorted(set(pts + abutments), key=key)
 
-        base = {}
         if c['kind'] == 'rail':
             base = {'railway': 'rail', 'name': c['name']}
         else:
-            base = {'highway': HIGHWAY_CLASS[c['kind']], 'name': c['name']}
+            base = {'highway': ml.HIGHWAY_CLASS[c['kind']], 'name': c['name']}
             if c.get('ref'):
                 base['ref'] = c['ref']
 
         for i in range(len(pts) - 1):
             a, b = pts[i], pts[i + 1]
-            seg = [a, b]
-            runs = clip_to_playable(seg)
             mid = ((a[0] + b[0]) / 2.0, (a[1] + b[1]) / 2.0)
             s_mid = _arc_at(dense, mid)
             on_bridge = any(s0 - 1.0 <= s_mid <= s1 + 1.0 for s0, s1 in spans)
-            for run in runs:
+            for run in clip_to_playable([a, b]):
                 tags = dict(base)
                 if on_bridge:
                     tags['bridge'] = 'yes'
@@ -315,10 +302,9 @@ def _arc_at(dense, pt):
 def connect_road_crossings(osm):
     """Split ways where their geometry crosses, so junctions share a node.
 
-    The filter has to take the railway too. Left as `'highway' in tags`, the way it was
-    in the old generator, none of the level crossings gets a shared node and the network
-    falls into two disconnected components - which nothing downstream would complain
-    about, it would just be wrong.
+    The filter has to take the railway too. Left as `'highway' in tags`, none of the
+    level crossings gets a shared node and the network falls into two disconnected
+    components - which nothing downstream would complain about, it would just be wrong.
     """
     roads = [w for w in osm.ways if 'highway' in w['tags'] or 'railway' in w['tags']]
     added = 0
@@ -369,13 +355,13 @@ def write_osm(osm, path):
     root.append(ET.Comment(
         f"\n       Playable area: {ml.PLAYABLE_M:.0f} x {ml.PLAYABLE_M:.0f} m, "
         f"centre {ml.LAT_CENTER:.4f}, {ml.LON_CENTER:.4f}\n"
-        "       (Clay County, Iowa - Des Moines Lobe farmland around Royal).\n"
         "       Local coordinates are playable metres, x east, y south from the north\n"
         f"       edge, so the centre of the map is ({ml.HALF_M:.0f}, {ml.HALF_M:.0f}).\n"
         f"       Projection: equirectangular about the centre, {ml.M_PER_DEG:.1f} m per\n"
         f"       degree of latitude and {ml.M_PER_DEG:.1f} * cos(LAT_CENTER) m per\n"
         "       degree of longitude.\n"
-        "       Geometry comes from map_layout.py, shared with the DEM generator.\n  "))
+        "       Geometry comes from map_layout.py, shared with the DEM generator.\n"
+        f"       Layout: {ml.summary()}\n  "))
     ET.SubElement(root, 'bounds', {
         'minlat': f"{minlat:.10f}", 'minlon': f"{minlon:.10f}",
         'maxlat': f"{maxlat:.10f}", 'maxlon': f"{maxlon:.10f}"})
@@ -398,8 +384,9 @@ def write_osm(osm, path):
 
 
 def main():
-    print("=== Generating OSM data for the Iowa map ===")
-    print(f"   centre {ml.LAT_CENTER:.4f}, {ml.LON_CENTER:.4f} - Clay County, Iowa")
+    print("=== Generating OSM data ===")
+    print(f"   centre {ml.LAT_CENTER:.4f}, {ml.LON_CENTER:.4f}")
+    print(f"   {ml.summary()}")
     problems = ml.validate()
     if problems:
         print("!! layout problems:")
@@ -409,25 +396,17 @@ def main():
 
     rough = ml.load_roughness()
     if rough is None:
-        print("   note: dem_generator/terrain_stats.json is missing, so the parcelling "
-              "cannot size fields to the ground. Run the DEM generator first.")
+        print("   note: dem_generator/terrain_stats.json is missing, so nothing that "
+              "sizes itself to the ground can. Run the DEM generator first.")
 
     osm = Osm()
-    print("1. Water...")
-    nw = emit_water(osm)
-    print("2. Timber...")
-    nwd = emit_woods(osm)
-    print("3. Villages and farmsteads...")
-    npad = emit_pads(osm)
-    print("4. Fields...")
-    fs = emit_fields(osm, rough)
-    print(f"   {len(fs)} fields, {sum(f['ha'] for f in fs):.0f} ha, "
-          f"largest {max(f['ha'] for f in fs):.1f} ha")
-    print("5. Roads and railway...")
-    counts, bridges = emit_roads(osm)
+    print(f"1. Water...            {emit_water(osm)} way(s)")
+    print(f"2. Pads...             {emit_pads(osm)} way(s)")
+    print(f"3. Areas...            {emit_areas(osm)} way(s)")
+    counts, bridges = emit_corridors(osm)
     added = connect_road_crossings(osm)
-    print(f"   {sum(counts.values())} ways, {bridges} on bridges, "
-          f"{added} junction nodes stitched in")
+    print(f"4. Roads and railway...{sum(counts.values()):4d} way(s), {bridges} on "
+          f"bridges, {added} junction node(s) stitched in")
 
     out = os.path.join(os.path.dirname(os.path.abspath(__file__)), OUT_NAME)
     write_osm(osm, out)
@@ -445,6 +424,10 @@ def main():
                        and -0.5 <= p[1] <= ml.PLAYABLE_M + 0.5)]
     print(f"   extent {abs(ne[0] - sw[0]):.3f} x {abs(sw[1] - ne[1]):.3f} m, "
           f"{len(nodes)} nodes, {len(root.findall('way'))} ways")
+    if abs(abs(ne[0] - sw[0]) - ml.PLAYABLE_M) > 0.5 or \
+            abs(abs(sw[1] - ne[1]) - ml.PLAYABLE_M) > 0.5:
+        print(f"!! the bounds do not round-trip to {ml.PLAYABLE_M:.0f} m square")
+        return 1
     if outside:
         print(f"!! {len(outside)} nodes outside the playable area, e.g. "
               f"{outside[0][0]:.1f},{outside[0][1]:.1f}")

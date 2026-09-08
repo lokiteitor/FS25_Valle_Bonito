@@ -63,6 +63,14 @@ def main():
     h_min_m = h_min_raw / 100.0
     h_max_m = h_max_raw / 100.0
     print(f"Elevation range: {h_min_m:.2f}m to {h_max_m:.2f}m (raw: {h_min_raw:.1f} to {h_max_raw:.1f})")
+
+    # The colour ramp and the playable-area guide box both span MIN..MAX. A flat DEM
+    # collapses that span to a point: the ramp divides by zero and the box has no
+    # height. Half a metre either side gives them something to work with, and the range
+    # reported to the reader stays the real one.
+    js_h_min, js_h_max = h_min_m, h_max_m
+    if js_h_max - js_h_min < 1e-6:
+        js_h_min, js_h_max = h_min_m - 0.5, h_max_m + 0.5
     
     # 2. Save 16-bit RGB encoded heightmap
     # Red channel = height % 256
@@ -1065,8 +1073,8 @@ def main():
 
     <script>
         // Elevation ranges from Python
-        const MIN_HEIGHT = {h_min_m};
-        const MAX_HEIGHT = {h_max_m};
+        const MIN_HEIGHT = {js_h_min};
+        const MAX_HEIGHT = {js_h_max};
         const MAP_SIZE = {dem_size_m};        // Full DEM canvas in metres
         const PLAYABLE_SIZE = {playable_size_m}; // Playable area, centered in the canvas
         const PLAYABLE_OFFSET = (MAP_SIZE - PLAYABLE_SIZE) / 2;

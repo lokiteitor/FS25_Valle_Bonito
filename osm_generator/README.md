@@ -1,30 +1,32 @@
 # osm_generator
 
-`generate_osm.py` writes `map.osm` for the 8192 x 8192 m playable area: northwest Iowa
-farm country, laid out from `map_layout.py` at the root of the tree.
+`generate_osm.py` writes `map.osm` for the 8192 x 8192 m playable area, from the four
+registries in `map_layout.py` at the root of the tree. Those registries are empty, so
+what it writes today is a `<bounds>` element with nothing inside it - the blank vector
+map that goes with the blank heightmap.
 
-- `map_extent.py`         re-exports the projection from `map_layout.py`
-- `generate_osm.py`       write map.osm from the shared layout
-- `visualize_osm.py`      render map.osm to map_osm_visual.png
-- `check_forest_nodes.py` inventory and invariants; exits 1 if one is broken
+- `map_extent.py`    re-exports the projection from `map_layout.py`
+- `generate_osm.py`  write map.osm from the shared layout
+- `visualize_osm.py` render map.osm to map_osm_visual.png
+- `check_osm.py`     inventory and invariants; exits 1 if one is broken
 
-Standard library plus matplotlib for the render. The DEM has to run first: the parcelling
-reads `dem_generator/terrain_stats.json` to make smaller fields on broken ground.
+Standard library plus matplotlib for the render. The DEM goes first: anything that sizes
+itself to the ground reads `dem_generator/terrain_stats.json`.
 
     python3 ../dem_generator/generate_new_dem_12k.py
-    python3 generate_osm.py         # -> map.osm
-    python3 check_forest_nodes.py   # -> inventory + invariants
-    python3 visualize_osm.py        # -> map_osm_visual.png
+    python3 generate_osm.py     # -> map.osm
+    python3 check_osm.py        # -> inventory + invariants
+    python3 visualize_osm.py    # -> map_osm_visual.png
 
 ## Map centre
 
     LAT_CENTER =  43.0600
     LON_CENTER = -95.2800
 
-They live in `map_layout.py`, and everything else is derived from them. Royal, Clay
-County, Iowa: the western edge of the Des Moines Lobe, deep prairie soils, and the flat
-open country the map is modelled on. Moving the map means changing those two numbers and
-re-running both generators.
+They live in `map_layout.py`, and everything else is derived from them. Moving the map
+means changing those two numbers and re-running both generators - and moving them means
+every node in `map.osm` moves relative to the heightmap, which no check downstream would
+catch, so change them deliberately or not at all.
 
 ## Extent
 
@@ -36,65 +38,60 @@ Projection: equirectangular about the centre, 111111.0 m per degree of latitude 
 
     minlat  43.0231359631      south edge, y = 8192
     maxlat  43.0968640369      north edge, y = 0
-    minlon -95.3304546325      west edge,  x = 0
-    maxlon -95.2295453675      east edge,  x = 8192
+    minlon -95.3304545078      west edge,  x = 0
+    maxlon -95.2295454922      east edge,  x = 8192
 
 These are the four values in the `<bounds>` element of `map.osm`. The 3D viewer stretches
-that box to fill the playable square whatever it says, so it has to stay right.
+that box to fill the playable square whatever it says, so it has to stay right;
+`generate_osm.py` reads the file back and round-trips them through the projection before
+it reports success, because a sign slip is invisible in the raw degrees.
 
-## What is on the map
+## What can go on the map
+
+The vocabulary is closed on purpose: `map_layout.RENDERED_TAGS` is exactly what
+`visualize_osm.py` and `visualizer/create_3d_viewer.py` know how to draw, and both drop
+anything else without a word. Ground that has no tag in the list is better left unclaimed
+- floodplain pasture is simply ground the parcelling leaves out of cultivation - than
+tagged with something nothing draws. `check_osm.py` fails the build if a way was emitted
+that neither renderer can see.
 
 | Feature | Tags |
 |---|---|
-| 420th Street, straight east-west through the middle | `highway=primary`, `ref=B40` |
-| The Public Land Survey grid, one mile apart | `highway=secondary` |
+| Trunk road | `highway=primary` (+ `ref`) |
+| Section roads | `highway=secondary` |
 | Farm lanes and village streets | `highway=tertiary` |
-| The branch line, straight north-south, crossing the primary at the centre | `railway=rail` |
-| Three river bridges and three creek culverts | the way's own tag plus `bridge=yes`, `layer=1` |
-| 200 fields, 3 to 84 ha, 72% of the playable area | `landuse=farmland` |
-| Three villages, seven farmsteads, the co-op elevator | `landuse=farmyard` |
-| River timber, farmstead groves, snow fences and field hedgerows | `natural=wood` + `landuse=farmyard` + `leaf_type` |
-| The river, the tributary feeding the lake, and the lake itself | `natural=water` (+ `water=river` / `water=lake`) |
-
-The vocabulary is closed on purpose: it is exactly what `visualize_osm.py` and
-`visualizer/create_3d_viewer.py` know how to draw, and both drop anything else without a
-word. That is why the floodplain pasture carries no tag of its own - it is simply ground
-the parcelling leaves out of cultivation, which is what wet bottom land amounts to
-anyway. `check_forest_nodes.py` verifies that no way was emitted that neither renderer
-can see.
+| Railway | `railway=rail` |
+| Bridges | the way's own tag plus `bridge=yes`, `layer=1` |
+| Fields | `landuse=farmland` |
+| Villages, farmsteads, industrial aprons | `landuse=farmyard` (+ `building=industrial`) |
+| Timber, groves, shelterbelts | `natural=wood` + `landuse=farmyard` + `leaf_type` |
+| Rivers and lakes | `natural=water` (+ `water=river` / `water=lake`) |
 
 ## Invariants
 
-`check_forest_nodes.py` fails the build if any of these break:
+`check_osm.py` fails the build if any of these break:
 
-- at most 200 fields, none over 100 ha, none under 3 ha
-- no field inside the river basin: 348 m clear of the river centreline (the edge of the
-  floodplain the DEM cuts), 125 m clear of the creek, and outside the lake margin
-- no timber standing in the water
+- the file declares bounds that round-trip to an 8192 m square
+- every way points at nodes that exist, and no node is in no way
 - every node inside the playable area
 - every area closed on its own first node - the 3D viewer decides polygon versus line by
   comparing the first and last coordinate exactly
 - every way carrying a tag both renderers draw
+- nothing planted inside the 100 m clean strip along the boundary
+- the file and `map_layout` agreeing on whether the map is empty. Both halves of the
+  pipeline describe the same world or neither does, and an OSM that quietly stopped
+  emitting what the layout carries is the failure that rule exists to catch
 
-## Windbreaks
+Add an invariant here as each kind of feature comes back, rather than only fixing the
+coordinates that broke: on the map this replaces, three of the seven farmsteads turned
+out to be misplaced once the road-clearance rule existed, and only one had been visible.
 
-Three jobs, and the job decides the placement:
+## Building the new map
 
-- **Farmstead groves** around the buildings, one way per side with the lane side left
-  open, for the heating and cooling bill.
-- **Living snow fences** upwind of a road so the drift piles up in the trees. The winter
-  wind is out of the northwest, so they stand on the **north** side of an east-west road
-  and the **west** side of a north-south one - which is the south and east edge of a
-  block. On the wrong side it is just a hedge.
-- **Field hedgerows** across the inside of a block. They are laid before the parcelling,
-  so the fields form either side of the trees rather than being cut up afterwards.
-
-River timber is two strips, one per bank, starting outside the water's edge and
-alternating sides along the reach. Buffering the centreline instead would put the inner
-22 m of every wood in the river.
-
-## The bocage generator
-
-`generate_osm_bocage.py` is the previous English layout, centred on 52.0620, -1.3400.
-Reference only: it needs a `map_source` API that no longer exists, and it writes to
-`map.osm`, so running it would overwrite the real file.
+Fill the registries in `map_layout.py` - `CORRIDORS`, `WATER`, `PADS`, `AREAS` - and the
+emit functions here pick them up as they are; the record each one holds is documented
+above it. The parts worth not rewriting are the node pool (one node per coordinate, so
+junctions are shared rather than coincident), the corridor splitting (at every crossing
+and every bridge abutment) and `strip_ring` (clip rings, never clamp them). Whatever goes
+into the layout has to be sculpted by the DEM in the same pass, or
+`generate_new_dem_12k.py` will stop the build and say so.

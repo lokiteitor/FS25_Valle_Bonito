@@ -7,7 +7,7 @@ and two copies of a map centre is one copy too many: the terrain and the vectors
 quietly describe different places.
 
 This module stays as the name the scripts in this folder import, and re-exports the
-projection unchanged, so `visualize_osm.py` and `check_forest_nodes.py` keep working
+projection unchanged, so `visualize_osm.py` and `check_osm.py` keep working
 without a line changed:
 
     local_to_global(x, y) / global_to_local(lat, lon)   playable metres <-> lat, lon
