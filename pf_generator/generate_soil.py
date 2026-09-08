@@ -8,6 +8,9 @@ Generates two files:
 
 This script produces natural organic soil distributions using multi-scale noise
 and guarantees realistic pixel counts matching FS25 Precision Farming.
+
+--size renders the same map at a coarser resolution, roughly 12x faster: generate a
+batch of previews, pick one by eye, then re-run with its seed at full size.
 """
 
 import os
@@ -17,6 +20,12 @@ from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor, as_compl
 import numpy as np
 import scipy.ndimage as ndimage
 from PIL import Image, ImageDraw, ImageFont
+
+# The resolution the soil map is *defined* at. --size only decides how finely it
+# is rasterised: the noise is always drawn on this lattice, so a preview and the
+# full render of the same seed are the same map.
+BASE = 2048
+
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Generate natural soil maps for FS25 Precision Farming")
@@ -31,14 +40,27 @@ def parse_args():
     parser.add_argument("--scale-fine", type=float, default=12.0,
                         help="Sigma for fine details/borders (default: 12)")
     parser.add_argument("--pixel-scale", type=float, default=2.0,
-                        help="Scale ratio: meters per pixel (default: 2.0, i.e. 1px = 2m for a 4096x4096m map)")
+                        help="Scale ratio: meters per pixel at full resolution (default: 2.0, "
+                             "i.e. 1px = 2m for a 4096x4096m map). Reporting only; a smaller "
+                             "--size covers the same ground with bigger pixels.")
+    parser.add_argument("--size", type=int, default=BASE,
+                        help=f"Raster size in pixels, a power-of-two divisor of {BASE} "
+                             f"(default: {BASE}). A smaller size is the SAME map rendered "
+                             "coarser - use it to generate a batch of previews fast, then "
+                             "re-run with -s <seed> at full size for the one you picked.")
     parser.add_argument("-n", "--batch", type=int, default=1,
                         help="Number of maps to generate. With N > 1, files are saved flat in "
                              "<output-dir> as NN_seed_<seed>_soilMap[_vis].png (default: 1)")
     parser.add_argument("-j", "--jobs", type=int, default=None,
                         help="Number of maps to generate in parallel in batch mode "
                              "(default: half the CPU cores, capped to the batch size)")
-    return parser.parse_args()
+    args = parser.parse_args()
+
+    if args.size < 1 or args.size > BASE or BASE % args.size:
+        raise SystemExit(f"[!] --size must be a divisor of {BASE} (e.g. "
+                         f"{', '.join(str(BASE >> i) for i in range(5))})")
+
+    return args
 
 
 def submit_noise_field(executor, seed, size, sigma_coarse, sigma_medium, sigma_fine):
@@ -46,10 +68,25 @@ def submit_noise_field(executor, seed, size, sigma_coarse, sigma_medium, sigma_f
     Draws the 3 raw noise layers (coarse/medium/fine) and submits their gaussian
     filters to the executor. scipy releases the GIL, so the filters — the
     expensive part — run concurrently in threads. Returns a list of 3 futures.
+
+    The white noise is always drawn at BASE and block-averaged down to `size`, and
+    the sigmas shrink by the same ratio. That is what makes a preview the same map
+    as the full render rather than an unrelated one with the same statistics:
+    drawing size*size values directly would consume a different slice of the RNG
+    stream and correspond to nothing. Block-averaging white noise is white noise, so
+    the coarse structure survives the reduction intact; only detail finer than a
+    block is lost, and at sigma_fine=12 there is none to speak of.
     """
     rng = np.random.default_rng(seed)
-    return [executor.submit(ndimage.gaussian_filter, rng.standard_normal((size, size)), sigma=s)
-            for s in (sigma_coarse, sigma_medium, sigma_fine)]
+    k = BASE // size
+    futures = []
+    for sigma in (sigma_coarse, sigma_medium, sigma_fine):
+        # One independent draw per layer, in this order, exactly as at full size.
+        noise = rng.standard_normal((BASE, BASE))
+        if k > 1:
+            noise = noise.reshape(size, k, size, k).mean(axis=(1, 3))
+        futures.append(executor.submit(ndimage.gaussian_filter, noise, sigma=sigma / k))
+    return futures
 
 
 def combine_noise_field(futures):
@@ -67,13 +104,12 @@ def combine_noise_field(futures):
 
 def generate_map(seed, output_dir, args, prefix=""):
     """Generates one <prefix>soilMap.png + <prefix>soilMap_vis.png pair into output_dir."""
-    print(f"[*] Starting soil map generation using seed: {seed}")
+    S = args.size
+    kind = "full" if S >= BASE else "preview"
+    print(f"[*] Starting soil map generation using seed: {seed} ({S}x{S}, {kind})")
 
     # Create output directory if it doesn't exist
     os.makedirs(output_dir, exist_ok=True)
-
-    # Size of the map (2048 x 2048)
-    S = 2048
     
     # Generate two independent noise fields for nested categorization.
     # All 6 gaussian filters (2 fields x 3 layers) run concurrently.
@@ -138,8 +174,10 @@ def generate_map(seed, output_dir, args, prefix=""):
     print("-" * 85)
     print(f"{'Val':<3} | {'Tipo de Suelo (ES)':<20} | {'Tipo de Suelo (EN)':<15} | {'Hectáreas':<12} | {'Porcentaje':<10}")
     print("-" * 85)
-    # 1 pixel = pixel_scale meters -> 1 pixel area = (pixel_scale)^2 m^2
-    pixel_area_m2 = args.pixel_scale ** 2
+    # --pixel-scale is metres per pixel at full resolution. A coarser raster covers
+    # the same ground with bigger pixels, so the hectare figures stay comparable.
+    metres_per_px = args.pixel_scale * (BASE / S)
+    pixel_area_m2 = metres_per_px ** 2
     total_area_ha = (S * S * pixel_area_m2) / 10000.0
     
     for v in range(4):
@@ -170,8 +208,13 @@ def generate_map(seed, output_dir, args, prefix=""):
     # Save soilMap_vis.png (RGB Visualization + Legend)
     # ----------------------------------------------------
     print("[*] Creating soilMap_vis.png...")
-    vis_h = S + 200
-    img_vis = Image.new("RGB", (S, vis_h), (20, 24, 33)) # Dark theme background
+    # The legend strip is laid out in absolute pixels and needs the full 2048 of
+    # width; below that it would be unreadable anyway. A preview gets a one-line
+    # caption instead - the class shares are identical in every map of a batch, so
+    # the seed is the only thing that varies and the only thing worth carrying.
+    full_legend = S >= BASE
+    legend_h = 200 if full_legend else 26
+    img_vis = Image.new("RGB", (S, S + legend_h), (20, 24, 33)) # Dark theme background
     
     # 1. Fill the map section (top 2048 x 2048)
     # Create RGB representation of the map
@@ -201,12 +244,21 @@ def generate_map(seed, output_dir, args, prefix=""):
         # Fallback to default if fonts are missing
         font_title = font_subtitle = font_bold = font_regular = font_small = ImageFont.load_default()
         
+    if not full_legend:
+        draw.text((8, S + 6), f"seed {seed}  ·  {S}px preview  ·  1px = {metres_per_px:g} m",
+                  fill=(200, 180, 100), font=font_small)
+        output_vis_path = os.path.join(output_dir, f"{prefix}soilMap_vis.png")
+        img_vis.save(output_vis_path)
+        print(f"[+] Visualization soil map saved to: {output_vis_path}")
+        print("[*] Successfully generated both images.")
+        return
+
     # Draw Title and Seed Info
     draw.text((40, S + 35), "DISTRIBUCIÓN DE SUELOS", fill=(255, 255, 255), font=font_title)
     draw.text((40, S + 70), "Precision Farming - Farming Simulator 25", fill=(150, 160, 180), font=font_subtitle)
     draw.text((40, S + 105), f"Semilla (Seed): {seed}", fill=(200, 180, 100), font=font_subtitle)
     # Format pixel scale label. If integer, show without decimal places.
-    scale_val_str = f"{int(args.pixel_scale)}" if args.pixel_scale.is_integer() else f"{args.pixel_scale}"
+    scale_val_str = f"{int(metres_per_px)}" if float(metres_per_px).is_integer() else f"{metres_per_px}"
     draw.text((40, S + 130), f"Escala: 1 píxel = {scale_val_str} metros", fill=(120, 130, 150), font=font_small)
     draw.text((40, S + 150), f"Área total: {total_area_ha:.2f} Hectáreas", fill=(120, 130, 150), font=font_small)
 

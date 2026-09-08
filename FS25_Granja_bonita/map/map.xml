@@ -106,4 +106,9 @@
         <groundTypeMapping type="tiles01" title="$l10n_groundType_cobblestones" layer="ROCK_FLOOR_TILES" />
         <groundTypeMapping type="tiles02" title="$l10n_groundType_flagstones" layer="ROCK_FLOOR_TILES_PATTERN" />
     </groundTypeMappings>
+    <thPFConfig>
+    </thPFConfig>
+    <precisionFarming>
+        <soilMap filename="map/data/soilMap.png"/>
+    </precisionFarming>
 </map>
