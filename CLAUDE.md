@@ -131,7 +131,7 @@ happened to be left over. The nearest miss on the north-south side is `este_medi
 where the river's east swing brings the belt to 493 m of open water against the 500 m a
 planting is held off - seven metres, on a rule that could be moved. It is not moved.
 
-Fourteen stands of riverside timber, 757 ha, cover the valley side down both banks of the
+Fourteen stands of riverside timber, 762 ha, cover the valley side down both banks of the
 river and all the way round the lake. They are the one planting here that is not placed on
 the survey - they follow the water, which is the only thing on this map that does not run
 on a section line - and they are the timber this country actually has: the uplands were
@@ -179,7 +179,7 @@ They are laid out **after** the fields and not before, and that is the dependenc
 than a preference: the parcelling does not need to know the timber is there, but the
 timber is defined by where the parcelling stopped.
 
-The ground between all of that is parcelled into 145 fields, and they are laid out the
+The ground between all of that is parcelled into 115 fields, and they are laid out the
 way the ground was actually subdivided: by aliquot parts of a section. A section is a
 mile square, 259.0 ha, and the survey halves it and halves it again, so the sizes are not
 chosen - a quarter section is 64.75 ha, a forty 16.19 and a ten 4.05, and those are the
@@ -202,14 +202,21 @@ wood and belt on the map is already held off the water by, rather than coming do
 valley side to the top of the bank. The ground down that side is under five degrees and a
 machine would work it; holding the fields off it costs 901 ha, a fifth of everything the
 parcelling lays out, and it is the whole reason the corridor reads as floodplain. The
-second is the **count**, `FIELD_MAX_COUNT`: at most 150 fields on the map, which is the
+second is the **count**, `FIELD_MAX_COUNT`: at most 120 fields on the map, which is the
 one number here that is a ceiling somebody chose rather than something the survey
 implies. It binds, and it is what every band was set against - the parcelling was run and
 counted, because the count falls out of the geometry rather than out of any constant and
-is not even monotone in the obvious direction: merging one step harder cuts twenty fields
-and covers exactly the same ground. `validate()` holds the cap, so the next feature added
-to the map cannot quietly push it over. What lands is 145 fields of 3.3 to 94.2 ha,
-3252 ha in all, 49% of the playable square.
+is not even monotone in the obvious direction: merging one step harder cuts sixteen
+fields and covers six hectares *more* ground, because the union of two flush rectangles
+is exactly the two of them. That is the cheap half of a cap. The dear half is
+`FIELD_SPLIT_GAIN`, which buys the rest of the count by declining to cut cells that would
+go on splitting, and that does cost ground - 63 ha between 150 fields and 120, under one
+per cent of the map. Coverage is flat in all of it: what the cap decides is field *size*,
+not how much of the map is farmed. `validate()` holds the cap, so the next feature added
+to the map cannot quietly push it over - which is why the parcelling is left at 115 and
+not at the 119 the constants would also reach, the same five fields of headroom the
+150 cap ran with. What lands is 115 fields of 3.5 to 94.2 ha, 3189 ha in all, 48% of the
+playable square.
 
 The rest is the technical base: the projection, the coordinates, the canvas geometry, the
 16-bit centimetre encoding, the geometry primitives, the terrain operators in
@@ -559,6 +566,16 @@ thing not worth emitting; a way whose *only* tags are outside the vocabulary is 
 `check_osm.py` fails the build over. That is why floodplain pasture carries no
 tag - it is simply ground nothing is drawn on. `check_osm.py` fails the build if a way
 was emitted that neither renderer can see.
+
+Every ring drawn as timber carries **both** `natural=wood` and `landuse=farmyard`, out of
+the one helper `map_layout.wood_tags` - the woods, the shelterbelts, the riverside timber
+and the island. The wood tag is what draws it; the farmyard tag beside it is the only word
+in the closed vocabulary for ground somebody owns, which is what puts the trees inside a
+parcel the game can sell. It is safe to carry both only because all three renderers here -
+`visualize_osm`, `create_3d_viewer` and `render_pda` - test the wood first and never reach
+the landuse, so a wood is drawn as timber and not as a pink yard. `validate()` holds the
+pair on every wood ring, because a ring written out by hand rather than through the helper
+draws correctly everywhere and is owned by nobody.
 
 An area is a polygon to the 3D viewer only if its first and last coordinates are *exactly*
 equal, so rings must close on the same node id.

@@ -769,7 +769,9 @@ WOOD_ASPECT = 2.0             # long side along the road, so it reads as a belt
 # apart from a broadleaf one, the same way `visualize_osm` tells an industrial apron from
 # a farmyard. A tag no renderer reads is the one thing not worth emitting. The woods and
 # the island are the conifer; the shelterbelts are hardwood (`SHELTER_LEAF_TYPE`), and
-# that difference is the whole reason this tag earns its place on the ring.
+# that difference is the whole reason this tag earns its place on the ring. It is not
+# written out here: `wood_tags` carries it along with the `landuse=farmyard` every
+# planting stands on, so all five kinds of timber are tagged the same way.
 WOOD_LEAF_TYPE = 'needleleaved'
 # Same table shape as the yards: which road, how far along, which side. The setback is
 # the shared roadside one, measured from the edge of the running surface - so the trees
@@ -815,7 +817,7 @@ def wood_area(wid, name, road_id, station, side):
     (cx, cy), ring = wood_geometry(road_id, station, side, WOOD_AREA_HA)
     return {'id': wid, 'name': name, 'road': road_id, 'station': station, 'side': side,
             'area_ha': WOOD_AREA_HA, 'centre': (cx, cy), 'ring': ring,
-            'tags': {'natural': 'wood', 'leaf_type': WOOD_LEAF_TYPE}}
+            'tags': wood_tags(WOOD_LEAF_TYPE)}
 
 
 # --- the shelterbelts -------------------------------------------------------------
@@ -930,7 +932,7 @@ def shelter_area_ew(bid, name, band, row):
             'area_ha': SHELTER_W_M * SHELTER_LEN_EW_M / 10000.0,
             'centre': ((x0 + x1) / 2.0, SHELTER_ROWS[row]),
             'ring': shelter_ring_ew(band, row),
-            'tags': {'natural': 'wood', 'leaf_type': SHELTER_LEAF_TYPE}}
+            'tags': wood_tags(SHELTER_LEAF_TYPE)}
 
 
 # --- the timber along the water ----------------------------------------------------
@@ -1247,7 +1249,7 @@ def _gallery_side(inner, normal, blocks, closed, tag, name, out):
                     'area_ha': ring_area_ha(r),
                     'centre': ((min(xs) + max(xs)) / 2.0, (min(ys) + max(ys)) / 2.0),
                     'ring': r,
-                    'tags': {'natural': 'wood', 'leaf_type': GALLERY_LEAF_TYPE}})
+                    'tags': wood_tags(GALLERY_LEAF_TYPE)})
 
 
 def gallery_areas(planted, fields):
@@ -1322,14 +1324,24 @@ def gallery_areas(planted, fields):
 # is not derived from the survey: at most `FIELD_MAX_COUNT` fields on the map. That
 # binds. The playable square is 6710 ha, the water's valley takes a fifth of it and the
 # roads, the towns, the yards and the plantings take their own, so what is left to
-# cultivate is about 3250 ha - which over 150 fields is a mean of 22 ha and means the
+# cultivate is about 3200 ha - which over 120 fields is a mean of 28 ha and means the
 # country has to be worked in quarter sections and pairs of them, not in forties. Every
 # band below was set by running the parcelling and counting, because the count falls out
 # of the geometry rather than out of any one constant, and it is not even monotone in
-# the obvious direction - merging harder cuts twenty fields and covers exactly the same
-# ground. There is no arithmetic short of building it that says so. `validate()` holds
-# the cap, so the next feature added to the map cannot quietly push it over.
-FIELD_MAX_COUNT = 150
+# the obvious direction - merging harder cuts twenty fields and covers very nearly the
+# same ground. There is no arithmetic short of building it that says so. `validate()`
+# holds the cap, so the next feature added to the map cannot quietly push it over.
+#
+# What the ground costs to reach the cap is worth stating, because it is almost nothing:
+# 150 laid out 3252 ha and 120 lays out 3189, a difference of 63 ha on 6710 - under one
+# per cent of the map. Coverage is flat in every constant here and what they buy is how
+# finely that ground is cut up, so the cap is a decision about field *size* and not
+# about how much of the map is farmed. The two levers that were turned for it are
+# `FIELD_MERGE_STEPS`, which joins parcels that are already flush, and
+# `FIELD_SPLIT_GAIN`, which stops cutting cells that would go on splitting - in that
+# order, because joining what the survey merely wrote down twice costs no ground at all
+# and declining to split does.
+FIELD_MAX_COUNT = 120
 FIELD_SECTION_M = MILE_M
 FIELD_ANCHOR = (ROAD_W_X, PLSS_EW_ANCHOR_M)   # the survey's own corner
 FIELD_SPLITS = 3                  # how many halvings a side may take: S/8 = 201.2 m
@@ -1403,15 +1415,20 @@ FIELD_MERGE_MAX_HA = 100.0
 # two parcels near a town were ever joined and the near ground came out as ten-acre
 # slivers.
 #
-# One halving is the whole of it, and one is what the size classes will carry: a ten
-# merges to 8.09 and stays small, a forty to 32.37, and the country to the 100 ha cap
-# above. Two - which is one aliquot square step, and is what this was while the map had
-# no cap on its field count - would be sixteen fields cheaper for exactly the same
-# ground, and it takes the near-town parcels up to 16.19: there would be nothing small
-# left anywhere on the map, which is the one thing the count was capped to protect. Drop
-# it to 0 instead and the merge only ever joins the two halves of a quarter section
-# again, and the count goes over two hundred for the same ground.
-FIELD_MERGE_STEPS = 1
+# Two halvings - one aliquot square step - is what the 120-field cap wants, and it is
+# the cheap half of paying for it: sixteen fields for *six hectares more* ground, because
+# the union of two flush rectangles is exactly the two of them. It takes the ceiling on
+# a near-town parcel up to 16.19 ha, which was the argument against it while the cap was
+# 150: on paper there would be nothing small left. Measured, there is - the near-town
+# band comes out 7.0 to 15.8 ha and averages 9.0 against the 29 and 31 of the forties
+# and the country, so the three bands still read apart, which is what the worry was
+# actually about. Three changes nothing: the merge is out of flush pairs by then.
+#
+# Drop it to 0 instead and the merge only ever joins the two halves of a quarter section
+# again, and the count goes over two hundred for the same ground. One - what this was -
+# reaches 122 at its hardest setting and cannot make the cap without throwing away
+# 150 ha, which is the whole reason it moved.
+FIELD_MERGE_STEPS = 2
 
 # What a field is allowed to be. The ceiling is the largest aliquot the levels above can
 # produce; the floor is *not* the smallest, because a parcel trimmed off a road comes out
@@ -1427,7 +1444,7 @@ FIELD_MERGE_STEPS = 1
 # second ten is 134 x 201 m, 2.70 ha, and it cannot be subdivided because a ten is
 # already the smallest cell the survey cuts. There are twenty-odd of those against the
 # four towns and the plantings, and they are about 120 ha of ground: under two per cent
-# of the map for a fifth of the field budget, on parcels a third the size of the smallest class
+# of the map for a quarter of the field budget, on parcels a third the size of the smallest class
 # the brief asks for. At 3.0 they go and the fields they were spending are laid out where
 # the ground is worth working; the towns keep the ring of tens outside them, which is the
 # thing the floor is really guarding.
@@ -1444,11 +1461,16 @@ FIELD_KEEP_FRAC = 0.50
 # the map comes out as ten-acre parcels from end to end whatever the size bands say.
 #
 # It is also the finest control there is over the count, and it costs almost nothing to
-# turn: 0.95 covers 3289 ha against 0.90's 3252 - one per cent more ground - and spends
-# thirteen more fields on it, which is over the cap. So the ground is nearly all reachable at any setting and what
-# the setting buys is how finely it is cut up. 0.90 is the most splitting the cap will
-# carry.
-FIELD_SPLIT_GAIN = 0.90
+# turn: 0.90 covers 3258 ha against 0.80's 3189 - two per cent more ground - and spends
+# fourteen more fields on it, which is over the cap. So the ground is nearly all
+# reachable at any setting and what the setting buys is how finely it is cut up.
+#
+# 0.80 is not quite the most splitting the cap will carry - 0.82 lands 119 - and that is
+# deliberate. 115 of 120 leaves the same five fields of headroom the old 145 of 150 had,
+# and the headroom is the point: `validate()` holds the cap so the *next* feature added
+# to the map cannot quietly push it over, and a margin of one is a cap that fails on the
+# next shelterbelt. Fifteen hectares is what that costs.
+FIELD_SPLIT_GAIN = 0.80
 
 
 _RIVER_Y = [p[1] for p in river_axis()]
@@ -1906,7 +1928,7 @@ def shelter_area(bid, name, line, gap):
             'area_ha': SHELTER_W_M * SHELTER_LEN_M / 10000.0,
             'centre': (SHELTER_LINES[line],
                        (PLSS_EW_Y[gap] + PLSS_EW_Y[gap + 1]) / 2.0), 'ring': ring,
-            'tags': {'natural': 'wood', 'leaf_type': SHELTER_LEAF_TYPE}}
+            'tags': wood_tags(SHELTER_LEAF_TYPE)}
 
 
 # --- the OSM vocabulary -----------------------------------------------------------
@@ -1917,6 +1939,19 @@ def shelter_area(bid, name, line, gap):
 RENDERED_TAGS = (('natural', 'water'), ('water', None), ('natural', 'wood'),
                  ('landuse', 'forest'), ('landuse', 'farmyard'),
                  ('landuse', 'farmland'), ('railway', None), ('highway', None))
+
+
+# Every ring drawn as timber carries both tags. `natural=wood` is the one that draws it,
+# and `landuse=farmyard` beside it is what makes the ground under it a parcel the game
+# can own - the same tag the granjas and the town blocks stand on, because that is the
+# only word in the closed vocabulary for "ground somebody holds". The pair is safe
+# because all three renderers here - `visualize_osm`, `create_3d_viewer` and
+# `render_pda` - test the wood first and never reach the landuse, so a wood is drawn as
+# timber and not as a yard. Emitted through one helper rather than written out at each
+# of the five sites, so the woods, the belts, the ribera and the island cannot drift.
+def wood_tags(leaf_type):
+    return {'natural': 'wood', 'landuse': 'farmyard', 'leaf_type': leaf_type}
+
 
 # The road classes the renderers colour, keyed by the `kind` a corridor record carries.
 HIGHWAY_CLASS = {'primary': 'primary', 'section': 'secondary',
@@ -2317,7 +2352,7 @@ PADS = ([town_pad(*site) for site in TOWN_SITES]
 # from the same ISLAND_* constants the ring is built from.
 _PLANTED = (
     [{'id': 'island', 'name': 'Isla del Lago', 'ring': island_ring(),
-      'tags': {'natural': 'wood', 'leaf_type': WOOD_LEAF_TYPE}}]
+      'tags': wood_tags(WOOD_LEAF_TYPE)}]
     + [b for site in TOWN_SITES for b in town_blocks(*site)]
     + [wood_area(*site) for site in WOOD_SITES]
     + [shelter_area(*site) for site in SHELTER_SITES]
@@ -2702,6 +2737,13 @@ def validate():
     for a in AREAS:
         if a['tags'].get('natural') != 'wood':
             continue
+        # And the landuse beside it, which is what the game owns the ground by. Measured
+        # off the ring rather than trusted to `wood_tags`, because a planting written out
+        # by hand instead of through the helper draws correctly in every renderer and is
+        # owned by nobody - there is no picture that shows this one missing.
+        if a['tags'].get('landuse') != 'farmyard':
+            bad.append(f"{a['id']}: wood with landuse "
+                       f"{a['tags'].get('landuse')!r}, not 'farmyard'")
         # The hardwood plantings are the shelterbelts and the timber along the river;
         # the conifer ones are the planted woodlots and the island. A wood on a bank is
         # cottonwood and willow whatever else is on the map.
@@ -2866,9 +2908,10 @@ def validate():
     # against a ceiling somebody chose rather than against the survey.
     if len(FIELDS) > FIELD_MAX_COUNT:
         bad.append(f"fields: {len(FIELDS)} of them, over the {FIELD_MAX_COUNT} the brief "
-                   f"allows - narrow FIELD_SMALL_M/FIELD_MEDIUM_M, drop "
-                   f"FIELD_SPLIT_GAIN or raise FIELD_MIN_HA; the ground covered barely "
-                   "moves either way")
+                   f"allows - raise FIELD_MERGE_STEPS, drop FIELD_SPLIT_GAIN, "
+                   f"narrow FIELD_SMALL_M/FIELD_MEDIUM_M or raise FIELD_MIN_HA, in "
+                   f"that order: the first joins parcels already flush and costs no "
+                   f"ground at all, and the last throws parcels away")
     riv = river_axis()
     lake = lake_ring()
     riv_box = (min(p[0] for p in riv) + max(p[0] for p in riv)) / 2.0, \
