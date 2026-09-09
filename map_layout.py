@@ -759,7 +759,9 @@ WOOD_ASPECT = 2.0             # long side along the road, so it reads as a belt
 # closed vocabulary in RENDERED_TAGS is, and `natural=wood` is what gets these rings on
 # the map - but it is not dead weight either: both renderers colour a needleleaf wood
 # apart from a broadleaf one, the same way `visualize_osm` tells an industrial apron from
-# a farmyard. A tag no renderer reads is the one thing not worth emitting.
+# a farmyard. A tag no renderer reads is the one thing not worth emitting. The woods and
+# the island are the conifer; the shelterbelts are hardwood (`SHELTER_LEAF_TYPE`), and
+# that difference is the whole reason this tag earns its place on the ring.
 WOOD_LEAF_TYPE = 'needleleaved'
 # Same table shape as the yards: which road, how far along, which side. The setback is
 # the shared roadside one, measured from the edge of the running surface - so the trees
@@ -809,7 +811,7 @@ def wood_area(wid, name, road_id, station, side):
 
 
 # --- the shelterbelts -------------------------------------------------------------
-# Rompevientos: long narrow strips of conifer along the trunk roads, a hundred metres
+# Rompevientos: long narrow strips of hardwood along the trunk roads, a hundred metres
 # across and a full section of frontage long.
 #
 # The length is not a choice. A belt runs from one cross road to the next, held off each
@@ -826,6 +828,12 @@ def wood_area(wid, name, road_id, station, side):
 # these are trunk-road belts, and `validate()` says so rather than leaving it to whoever
 # adds the next one to rediscover.
 SHELTER_W_M = 100.0
+# What is planted in them, and it is deliberately not what is in the woods. A windbreak
+# on this survey is a row of hardwood - the trees a farmer puts on a field boundary - and
+# the woods are conifer, so the two read apart in both renderers instead of being one
+# undifferentiated green. It is the same tag doing the same job it does on a wood; the
+# value is the only thing that differs.
+SHELTER_LEAF_TYPE = 'broadleaved'
 SHELTER_LEN_M = MILE_M - 2.0 * (ROAD_SECTION['half_width_m'] + ROADSIDE_SETBACK_M)
 
 # The north-south lines a belt may run on. Two kinds, and both of them are lines the
@@ -914,7 +922,7 @@ def shelter_area_ew(bid, name, band, row):
             'area_ha': SHELTER_W_M * SHELTER_LEN_EW_M / 10000.0,
             'centre': ((x0 + x1) / 2.0, SHELTER_ROWS[row]),
             'ring': shelter_ring_ew(band, row),
-            'tags': {'natural': 'wood', 'leaf_type': WOOD_LEAF_TYPE}}
+            'tags': {'natural': 'wood', 'leaf_type': SHELTER_LEAF_TYPE}}
 
 
 # (id, name, line, which section it covers). The section index `k` is the stretch between
@@ -956,7 +964,7 @@ def shelter_area(bid, name, line, gap):
             'area_ha': SHELTER_W_M * SHELTER_LEN_M / 10000.0,
             'centre': (SHELTER_LINES[line],
                        (PLSS_EW_Y[gap] + PLSS_EW_Y[gap + 1]) / 2.0), 'ring': ring,
-            'tags': {'natural': 'wood', 'leaf_type': WOOD_LEAF_TYPE}}
+            'tags': {'natural': 'wood', 'leaf_type': SHELTER_LEAF_TYPE}}
 
 
 # --- the OSM vocabulary -----------------------------------------------------------
@@ -1709,11 +1717,17 @@ def validate():
     want = len(WOOD_SITES) + len(SHELTER_SITES) + len(SHELTER_EW_SITES)
     if len(woods) != want:
         bad.append(f"plantings: {len(woods)} built from {want} sites")
+    # Every ring drawn as a wood carries a leaf type, and which one is not free: a belt
+    # is a hardwood windbreak on a field boundary and a wood - the island included - is
+    # conifer. Both renderers colour the two apart, so a ring with the wrong value is a
+    # planting drawn as the other kind rather than a tag nobody reads.
     for a in AREAS:
-        if a['tags'].get('natural') == 'wood' \
-                and a['tags'].get('leaf_type') != WOOD_LEAF_TYPE:
-            bad.append(f"{a['id']}: a wood with no leaf type, or the wrong one - every "
-                       f"wood on this map is {WOOD_LEAF_TYPE}")
+        if a['tags'].get('natural') != 'wood':
+            continue
+        want_leaf = SHELTER_LEAF_TYPE if ('line' in a or 'band' in a) else WOOD_LEAF_TYPE
+        if a['tags'].get('leaf_type') != want_leaf:
+            bad.append(f"{a['id']}: leaf type "
+                       f"{a['tags'].get('leaf_type')!r}, not {want_leaf!r}")
     # Belts come in two orientations and neither of them has its length chosen: a
     # north-south belt spans one section between two cross roads, and a transversal one
     # spans the band a trunk road and the map edge leave. Both are the mile less two

@@ -2558,7 +2558,7 @@
     <nd ref="952"/>
     <nd ref="949"/>
     <tag k="natural" v="wood"/>
-    <tag k="leaf_type" v="needleleaved"/>
+    <tag k="leaf_type" v="broadleaved"/>
     <tag k="name" v="Rompevientos Oeste 1"/>
   </way>
   <way id="92" version="1" timestamp="2026-09-02T12:00:00Z" changeset="1" uid="1" user="generator">
@@ -2568,7 +2568,7 @@
     <nd ref="956"/>
     <nd ref="953"/>
     <tag k="natural" v="wood"/>
-    <tag k="leaf_type" v="needleleaved"/>
+    <tag k="leaf_type" v="broadleaved"/>
     <tag k="name" v="Rompevientos Oeste 2"/>
   </way>
   <way id="93" version="1" timestamp="2026-09-02T12:00:00Z" changeset="1" uid="1" user="generator">
@@ -2578,7 +2578,7 @@
     <nd ref="960"/>
     <nd ref="957"/>
     <tag k="natural" v="wood"/>
-    <tag k="leaf_type" v="needleleaved"/>
+    <tag k="leaf_type" v="broadleaved"/>
     <tag k="name" v="Rompevientos Este 1"/>
   </way>
   <way id="94" version="1" timestamp="2026-09-02T12:00:00Z" changeset="1" uid="1" user="generator">
@@ -2588,7 +2588,7 @@
     <nd ref="964"/>
     <nd ref="961"/>
     <tag k="natural" v="wood"/>
-    <tag k="leaf_type" v="needleleaved"/>
+    <tag k="leaf_type" v="broadleaved"/>
     <tag k="name" v="Rompevientos Este 2"/>
   </way>
   <way id="95" version="1" timestamp="2026-09-02T12:00:00Z" changeset="1" uid="1" user="generator">
@@ -2598,7 +2598,7 @@
     <nd ref="968"/>
     <nd ref="965"/>
     <tag k="natural" v="wood"/>
-    <tag k="leaf_type" v="needleleaved"/>
+    <tag k="leaf_type" v="broadleaved"/>
     <tag k="name" v="Rompevientos Este 3"/>
   </way>
   <way id="96" version="1" timestamp="2026-09-02T12:00:00Z" changeset="1" uid="1" user="generator">
@@ -2608,7 +2608,7 @@
     <nd ref="972"/>
     <nd ref="969"/>
     <tag k="natural" v="wood"/>
-    <tag k="leaf_type" v="needleleaved"/>
+    <tag k="leaf_type" v="broadleaved"/>
     <tag k="name" v="Rompevientos Transversal Oeste 1"/>
   </way>
   <way id="97" version="1" timestamp="2026-09-02T12:00:00Z" changeset="1" uid="1" user="generator">
@@ -2618,7 +2618,7 @@
     <nd ref="976"/>
     <nd ref="973"/>
     <tag k="natural" v="wood"/>
-    <tag k="leaf_type" v="needleleaved"/>
+    <tag k="leaf_type" v="broadleaved"/>
     <tag k="name" v="Rompevientos Transversal Este 1"/>
   </way>
   <way id="98" version="1" timestamp="2026-09-02T12:00:00Z" changeset="1" uid="1" user="generator">
@@ -2628,7 +2628,7 @@
     <nd ref="980"/>
     <nd ref="977"/>
     <tag k="natural" v="wood"/>
-    <tag k="leaf_type" v="needleleaved"/>
+    <tag k="leaf_type" v="broadleaved"/>
     <tag k="name" v="Rompevientos Transversal Oeste 2"/>
   </way>
   <way id="99" version="1" timestamp="2026-09-02T12:00:00Z" changeset="1" uid="1" user="generator">
@@ -2638,7 +2638,7 @@
     <nd ref="984"/>
     <nd ref="981"/>
     <tag k="natural" v="wood"/>
-    <tag k="leaf_type" v="needleleaved"/>
+    <tag k="leaf_type" v="broadleaved"/>
     <tag k="name" v="Rompevientos Transversal Este 2"/>
   </way>
   <way id="100" version="1" timestamp="2026-09-02T12:00:00Z" changeset="1" uid="1" user="generator">
@@ -2648,7 +2648,7 @@
     <nd ref="988"/>
     <nd ref="985"/>
     <tag k="natural" v="wood"/>
-    <tag k="leaf_type" v="needleleaved"/>
+    <tag k="leaf_type" v="broadleaved"/>
     <tag k="name" v="Rompevientos Transversal Oeste 3"/>
   </way>
   <way id="101" version="1" timestamp="2026-09-02T12:00:00Z" changeset="1" uid="1" user="generator">
@@ -2658,7 +2658,7 @@
     <nd ref="992"/>
     <nd ref="989"/>
     <tag k="natural" v="wood"/>
-    <tag k="leaf_type" v="needleleaved"/>
+    <tag k="leaf_type" v="broadleaved"/>
     <tag k="name" v="Rompevientos Transversal Este 3"/>
   </way>
   <way id="102" version="1" timestamp="2026-09-02T12:00:00Z" changeset="1" uid="1" user="generator">

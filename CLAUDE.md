@@ -98,8 +98,9 @@ deep by `aspect` times that - with no rounding anywhere in it. They are the firs
 the map that is *only* vectors: nobody levels ground to grow trees on, so a wood is an
 `AREAS` ring with no pad, no feather and no drain, and the heightmap does not change when
 one is added. Every wood on the map, the island included, is tagged
-`leaf_type=needleleaved`, and both renderers colour a conifer wood apart from a broadleaf
-one so the tag is not dead weight.
+`leaf_type=needleleaved` and every shelterbelt `leaf_type=broadleaved` - a windbreak on a
+field boundary is hardwood - and both renderers colour a conifer wood apart from a
+broadleaf one, so the tag is not dead weight and the two kinds of planting read apart.
 
 The one rule a wood has that a yard does not is that the 10 m clearance is held against
 **every** alignment on the map and not only the road it hangs off. A road through the
@@ -541,8 +542,8 @@ centreline instead of the kerb, a yard that is not square or not its stated area
 corner has landed inside the water's valley, one standing on the verge of the class of road
 it is on, one another road runs through, and a farm that has wandered onto a trunk road.
 
-The shelterbelts are `SHELTER_W_M` - the only free number in them, both lengths coming out
-of `MILE_M` and a clearance - with `SHELTER_LINES`/`SHELTER_SITES` for the north-south ones
+The shelterbelts are `SHELTER_W_M` and `SHELTER_LEAF_TYPE` - the only free numbers in
+them, both lengths coming out of `MILE_M` and a clearance - with `SHELTER_LINES`/`SHELTER_SITES` for the north-south ones
 and `SHELTER_BANDS`/`SHELTER_ROWS`/`SHELTER_EW_SITES` for the transversal. `validate()`
 holds the width and the length against the drawn ring, and holds each belt to the
 orientation its length was derived for.

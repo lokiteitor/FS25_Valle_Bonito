@@ -52,7 +52,8 @@ def main():
     ax.add_patch(patches.Rectangle((0, 0), ms.PLAYABLE_M, ms.PLAYABLE_M, fill=False,
                                    edgecolor='#6366F1', linewidth=2.0, linestyle='--'))
 
-    counts = {'farmland': 0, 'wood': 0, 'farmyard': 0, 'industry': 0, 'water': 0}
+    counts = {'farmland': 0, 'wood': 0, 'belt': 0, 'farmyard': 0, 'industry': 0,
+              'water': 0}
     for way in ways:
         coords = way['coords']
         if len(coords) < 2:
@@ -71,7 +72,7 @@ def main():
             ax.add_patch(patches.Polygon(
                 coords, closed=True, facecolor='#14532D' if needle else '#15803D',
                 edgecolor='#34D399' if needle else '#22C55E', alpha=0.55, linewidth=0.8))
-            counts['wood'] += 1
+            counts['wood' if needle else 'belt'] += 1
         elif tags.get('natural') == 'water':
             ax.add_patch(patches.Polygon(coords, closed=True, facecolor='#0284C7',
                                          edgecolor='#38BDF8', alpha=0.85, linewidth=1.0))
@@ -133,6 +134,8 @@ def main():
         patches.Patch(facecolor='#A3E635', alpha=0.4, label=f"Farmland ({counts['farmland']})"),
         patches.Patch(facecolor='#14532D', alpha=0.6,
                       label=f"Wood, needleleaf ({counts['wood']})"),
+        patches.Patch(facecolor='#15803D', alpha=0.6,
+                      label=f"Wood, broadleaf ({counts['belt']})"),
         patches.Patch(facecolor='#DB2777', alpha=0.6, label=f"Farmyard ({counts['farmyard']})"),
         patches.Patch(facecolor='#6366F1', alpha=0.6,
                       label=f"Industrial ({counts['industry']})"),
@@ -150,6 +153,7 @@ def main():
     plt.close()
     print(f"[+] Saved visualization to '{output_png}'  "
           f"({counts['farmland']} fields, {counts['wood']} woods, "
+          f"{counts['belt']} broadleaf, "
           f"{counts['farmyard']} farmyards, {counts['industry']} industrial)")
 
 
