@@ -130,7 +130,7 @@ happened to be left over. The nearest miss on the north-south side is `este_medi
 where the river's east swing brings the belt to 493 m of open water against the 500 m a
 planting is held off - seven metres, on a rule that could be moved. It is not moved.
 
-The ground between all of that is parcelled into 146 fields, and they are laid out the
+The ground between all of that is parcelled into 145 fields, and they are laid out the
 way the ground was actually subdivided: by aliquot parts of a section. A section is a
 mile square, 259.0 ha, and the survey halves it and halves it again, so the sizes are not
 chosen - a quarter section is 64.75 ha, a forty 16.19 and a ten 4.05, and those are the
@@ -147,27 +147,20 @@ merge did not join stand 5 m off each other instead of sharing an edge. That ord
 load-bearing: inset first and there are no whole shared edges left for the merge to find,
 nothing is ever joined, and the count goes over two hundred.
 
-Two things about it are not the survey's. The first is how close cultivation comes to
-the water, and it is deliberately *not* the `VALLEY_HALF_W_M` the yards and the plantings
-are held off by. The valley side is ground a machine works - it falls 22 m over 440 m, so
-under five degrees the whole way down, gentler than plenty of the moraine the fields
-already cover - so the fields come down it and stop at the top of the bank plus a 45 m
-headland: 150 m from the river's centreline, 105 m in from the lake's shore. Below that
-is the bank and then water, and nothing is grown on either. Holding them off by the whole
-valley instead is a kilometre-wide strip of nothing down the length of the map and costs
-810 ha, a fifth of everything the parcelling lays out. The difference between a yard and
-a field here is not an inconsistency, it is what the two things are: a yard is a platform
-*levelled* into the ground and a cut into a valley side is a cut nobody makes, while a
-field is a crop on the ground as it lies. The second is the **count**, `FIELD_MAX_COUNT`: at most 150 fields on the map, which is the
+Two things about it are not the survey's. The first is that **the fields stay out of the
+water's valley entirely** - the full `VALLEY_HALF_W_M`, the same clearance every yard,
+wood and belt on the map is already held off the water by, rather than coming down the
+valley side to the top of the bank. The ground down that side is under five degrees and a
+machine would work it; holding the fields off it costs 901 ha, a fifth of everything the
+parcelling lays out, and it is the whole reason the corridor reads as floodplain. The
+second is the **count**, `FIELD_MAX_COUNT`: at most 150 fields on the map, which is the
 one number here that is a ceiling somebody chose rather than something the survey
 implies. It binds, and it is what every band was set against - the parcelling was run and
 counted, because the count falls out of the geometry rather than out of any constant and
 is not even monotone in the obvious direction: merging one step harder cuts twenty fields
-and covers exactly the same ground. It is also what the fields coming down to the bank
-are paid for out of - `FIELD_SPLIT_GAIN` had to drop from 0.90 to 0.70 to fit the extra
-810 ha under the ceiling, so the country comes out blockier than it did. `validate()`
-holds the cap, so the next feature added to the map cannot quietly push it over. What
-lands is 146 fields of 3.2 to 94.2 ha, 4062 ha in all, 61% of the playable square.
+and covers exactly the same ground. `validate()` holds the cap, so the next feature added
+to the map cannot quietly push it over. What lands is 145 fields of 3.3 to 94.2 ha,
+3252 ha in all, 49% of the playable square.
 
 The rest is the technical base: the projection, the coordinates, the canvas geometry, the
 16-bit centimetre encoding, the geometry primitives, the terrain operators in
@@ -595,14 +588,12 @@ the constraint every other number here was set against), the two band radii
 `FIELD_MIN_SIDE_M` for what is worth drawing at all, `FIELD_CLEAR_M` for the headland off
 anything built, `FIELD_GAP_M` for the headland between two fields, `FIELD_RIVER_CLEAR_M`
 / `FIELD_LAKE_CLEAR_M` for the water, and the two that decide trim-versus-split,
-`FIELD_KEEP_FRAC` and `FIELD_SPLIT_GAIN`. Coverage is almost flat in the last two - every
-setting of them reaches 4050-4080 ha - and what they buy is how finely that ground is cut
-up, so tune them against the count and not against the acres; the water clearances are
-the ones that actually move the acres. `validate()` measures the output rather than the
-rules: that every field is an axis-aligned rectangle inside its size band, that no two
-overlap, that none stands closer than `FIELD_GAP_M` to another, that none is in the
-channel or on the bank of one, and that there are no more than `FIELD_MAX_COUNT` of
-them.
+`FIELD_KEEP_FRAC` and `FIELD_SPLIT_GAIN`. Coverage is almost flat in all of them - every
+setting reaches 3250-3300 ha - and what they buy is how finely that ground is cut up, so
+tune them against the count and not against the acres. `validate()` measures the output
+rather than the rules: that every field is an axis-aligned rectangle inside its size band,
+that no two overlap, that none stands closer than `FIELD_GAP_M` to another, that none is
+in the water's valley, and that there are no more than `FIELD_MAX_COUNT` of them.
 
 The roads are `MILE_M` and what hangs off it: `ROAD_MAIN_INSET_M`, `PLSS_EW_ANCHOR_M`,
 `PLSS_BRIDGED` (which section lines get a crossing), `ROAD_STUB_SETBACK_M` (where the

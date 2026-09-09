@@ -17,13 +17,13 @@ grid between them, of which only the outer two are bridged. And on the four corn
 a trunk road meets a bridged section line there is a town: a grid of blocks with the
 trunk road running up the middle of it, standing on a platform levelled out of the till
 plain. Hung off the roads are twelve industrial aprons and six farms, all square; five
-woods and eleven shelterbelts stand along them. The rest is parcelled into 146 fields on
+woods and eleven shelterbelts stand along them. The rest is parcelled into 145 fields on
 the survey's own aliquot grid - quarter sections out in the country, forties nearer the
 towns, ten-acre parcels against them, merged where they share a whole edge and held 5 m
-off each other after that - coming down the valley side to the top of the river's bank
-and stopping there. That is 4062 ha, 61% of the playable square, and the 146 is a ceiling
-somebody set rather than a number that fell out: the bands are as wide as 150 fields will
-pay for.
+off each other after that - stopping at the rim of the water's valley, which nothing is
+grown in. That is 3252 ha, 49% of the playable square, and the 145 is a ceiling somebody
+set rather than a number that fell out: the bands are as wide as 150 fields will pay
+for.
 
 **What the ground already is** is the frame all of that goes in: the border around the
 playable square is the wall of a valley. Two mountain ranges stand in the east and west
@@ -963,7 +963,7 @@ def shelter_area_ew(bid, name, band, row):
 # is not derived from the survey: at most `FIELD_MAX_COUNT` fields on the map. That
 # binds. The playable square is 6710 ha, the water's valley takes a fifth of it and the
 # roads, the towns, the yards and the plantings take their own, so what is left to
-# cultivate is about 4050 ha - which over 150 fields is a mean of 28 ha and means the
+# cultivate is about 3250 ha - which over 150 fields is a mean of 22 ha and means the
 # country has to be worked in quarter sections and pairs of them, not in forties. Every
 # band below was set by running the parcelling and counting, because the count falls out
 # of the geometry rather than out of any one constant, and it is not even monotone in
@@ -999,28 +999,25 @@ FIELD_CLEAR_M = 10.0              # headland between a field and anything built
 # planning and every rectangle comes in by 2.5 m at the end.
 FIELD_GAP_M = 5.0
 
-# How close cultivation comes to the water, and it is deliberately *not* the full
-# `VALLEY_HALF_W_M` the yards and the plantings are held off by. That distance is where
-# the ground is back on the till plain, and holding the fields off by the whole of it
-# left a kilometre-wide strip of nothing down the length of the map and cost 810 ha - a
-# fifth of everything the parcelling lays out.
+# How close cultivation comes to the water, and it is the full `VALLEY_HALF_W_M`: the
+# fields stay out of the water's valley altogether and start where the ground is back on
+# the till plain. That is the same clearance every yard, wood and shelterbelt on this map
+# is already held off the water by, so the rule is now one rule rather than a general one
+# with the fields exempted from it, and `validate()` reads the same for all of them.
 #
-# The valley side is ground a machine works. It falls 22 m over the 440 m between the
-# bank run and the valley rim, and a smootherstep is steepest at 1.875*rise/run, so it is
-# under five degrees the whole way down - gentler than plenty of ground the fields cover
-# out on the moraine. So the fields come down it and stop at the top of the bank plus a
-# headland. Below that is the bank itself and then water, and nothing is grown on either.
-#
-# The difference between a yard and a field here is not an inconsistency, it is what the
-# two things are: a yard is a platform *levelled* into the ground and a cut into a valley
-# side is a cut nobody makes, while a field is a crop on the ground as it lies.
+# It is also the most expensive constant here. The valley is a kilometre across and runs
+# the length of the map: cultivating down its side to the top of the bank - which the
+# ground allows, the section falling 20 m over 440 m at under five degrees - is 901 ha,
+# a fifth of everything the parcelling lays out. What that would buy is fields on a
+# hillside, in a corridor whose whole purpose is that it is not the till plain. The
+# ground is left as floodplain, which carries no tag: nothing is drawn on it and nothing
+# is grown on it.
 #
 # Two numbers because the two bodies are measured from different things: the river's
-# distance is to its *centreline*, so the bank top is a half-width plus the bank run out;
-# the lake's is to its *shore*, where the bank top is just the bank run in.
-FIELD_BANK_CLEAR_M = 45.0         # headland above the top of the bank
-FIELD_RIVER_CLEAR_M = RIVER_HALF_W_M + BANK_RUN_M + FIELD_BANK_CLEAR_M      # 150 m
-FIELD_LAKE_CLEAR_M = BANK_RUN_M + FIELD_BANK_CLEAR_M                        # 105 m
+# distance is to its *centreline* and the lake's to its *shore*, which is exactly the
+# convention the yard and planting rules below already use.
+FIELD_RIVER_CLEAR_M = VALLEY_HALF_W_M
+FIELD_LAKE_CLEAR_M = VALLEY_HALF_W_M
 
 # The aliquot ladder, in hectares, from halving a section alternately in each direction.
 # Halves matter as much as quarters and were missing at first: with only square cells the
@@ -1088,13 +1085,11 @@ FIELD_KEEP_FRAC = 0.50
 # the map comes out as ten-acre parcels from end to end whatever the size bands say.
 #
 # It is also the finest control there is over the count, and it costs almost nothing to
-# turn, which is exactly why it is the one that pays for the fields coming down to the
-# bank: 0.78 covers 4080 ha against 0.70's 4062 - half a per cent more ground - and
-# spends seven more fields on it, which is over the cap. Bringing the cultivation 350 m
-# nearer the water is worth 810 ha; what it costs is this constant coming down from 0.90,
-# and the country coming out blockier for it. 0.70 is the most splitting the cap carries
-# at this clearance.
-FIELD_SPLIT_GAIN = 0.70
+# turn: 0.95 covers 3289 ha against 0.90's 3252 - one per cent more ground - and spends
+# thirteen more fields on it, which is over the cap. So the ground is nearly all reachable at any setting and what
+# the setting buys is how finely it is cut up. 0.90 is the most splitting the cap will
+# carry.
+FIELD_SPLIT_GAIN = 0.90
 
 
 _RIVER_Y = [p[1] for p in river_axis()]
@@ -2382,7 +2377,7 @@ def validate():
 
     # The parcelling. Everything here is a property of the *output* rather than of the
     # rules that made it, which is the point of checking it at all: the generator and the
-    # checker agreeing about a predicate proves nothing, but a hundred and forty-six
+    # checker agreeing about a predicate proves nothing, but a hundred and forty-five
     # rectangles that do not overlap, are all inside their size band and are none of them
     # in the river's valley is a fact about the map.
     #
@@ -2420,10 +2415,11 @@ def validate():
             bad.append(f"{f['id']}: {min(rect[2] - rect[0], rect[3] - rect[1]):.0f} m on "
                        f"its short side, under the {FIELD_MIN_SIDE_M:.0f} m worth "
                        "cultivating")
-        # The hard exclusion: no field in the channel or on the bank of one. Not the
-        # whole valley - the fields come down its side, which is under five degrees - but
-        # everything below the top of the bank is the water's, and the headland above it
-        # is the last dry ground anything is grown on.
+        # The hard exclusion: no field in the water's valley at all. The ground down
+        # the valley side is under five degrees and a machine would work it, which is
+        # exactly why this is a rule and not an observation - the valley is the one
+        # corridor on the map that is deliberately not till plain, and the fields stop
+        # where it starts.
         #
         # This is measured against the same constants the parcelling was cut with, and it
         # is worth saying why that is not circular: the two are separate implementations
@@ -2442,11 +2438,11 @@ def validate():
                 _polyline_rect_dist(band, rect, FIELD_RIVER_CLEAR_M) \
                 < FIELD_RIVER_CLEAR_M:
             bad.append(f"{f['id']}: comes within {FIELD_RIVER_CLEAR_M:.0f} m of the "
-                       "river's centreline - that is its bank, not a field")
+                       "river's centreline - that is inside its valley, not a field")
             break
         if _polyline_rect_dist(lake, rect, FIELD_LAKE_CLEAR_M) < FIELD_LAKE_CLEAR_M:
             bad.append(f"{f['id']}: comes within {FIELD_LAKE_CLEAR_M:.0f} m of the "
-                       "lake shore - that is its bank, not a field")
+                       "lake shore - that is inside its valley, not a field")
             break
     # No two fields on the same ground, and none closer to another than the headland
     # between them. The parcelling cuts them out of a nesting grid so they cannot overlap
