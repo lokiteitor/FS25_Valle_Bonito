@@ -17,10 +17,8 @@ grid between them, of which only the outer two are bridged. And on the four corn
 a trunk road meets a bridged section line there is a town: a grid of blocks with the
 trunk road running up the middle of it, standing on a platform levelled out of the till
 plain. Hung off the roads are twelve industrial aprons and six farms, all square; five
-woods and eleven shelterbelts stand along them. The rest is parcelled into 167 fields on
-the survey's own aliquot grid - quarter sections out in the country, forties nearer the
-towns, ten-acre parcels against them, merged where they share a whole edge - coming down
-the valley side to the top of the river's bank and stopping there.
+woods and eleven shelterbelts stand along them. The ground between all of that is not
+parcelled: it carries no tag and is simply open country the map leaves alone.
 
 **What the ground already is** is the frame all of that goes in: the border around the
 playable square is the wall of a valley. Two mountain ranges stand in the east and west
@@ -72,15 +70,15 @@ EXTEND_M = 300.0
 EDGE_MIN = -OFFSET_M - EXTEND_M               # -2348
 EDGE_MAX = PLAYABLE_M + OFFSET_M + EXTEND_M   # 10540
 
-# A clean strip inside the playable boundary. Nothing the parcelling or the planting
-# places may stand in it: no parcel, no shelterbelt, no yard. Only the things that have
-# to leave the map cross it - the roads, the railway and the water. Without it a field is
-# cut off square by the boundary and reads as half a field, and the ground the player
-# sees at the edge is the ground the rim rises out of.
+# A clean strip inside the playable boundary. Nothing the planting places may stand in
+# it: no wood, no shelterbelt, no yard. Only the things that have to leave the map cross
+# it - the roads, the railway and the water. Without it a ring is cut off square by the
+# boundary and reads as half of itself, and the ground the player sees at the edge is
+# the ground the rim rises out of.
 EDGE_CLEAR_M = 100.0
 
 # --- the datum --------------------------------------------------------------------
-# The elevation of the floodplain: the flat ground the fields go on, everywhere the
+# The elevation of the floodplain: the flat ground of the till plain, everywhere the
 # valley of the water does not reach.
 #
 # It is 75 m and not the 20 m it started at because of what gets cut into it. The datum
@@ -473,10 +471,10 @@ def _ew_road(rid, name, y, spec, bridged):
 #
 # The block sizes are the brief and everything else falls out of them. What a road takes
 # out of the grid is its own nominal feather either side of the centreline - the same
-# clearance the parcelling uses, and the reason a primary takes 28 m of the grid where a
-# town street takes 16 - so the blocks come out at exactly the size they are quoted at
-# whatever class of road happens to bound them. `validate()` measures the rings rather
-# than trusting the arithmetic.
+# clearance everything else is held off a road by, and the reason a primary takes 28 m
+# of the grid where a town street takes 16 - so the blocks come out at exactly the size
+# they are quoted at whatever class of road happens to bound them. `validate()` measures
+# the rings rather than trusting the arithmetic.
 TOWN_COLS, TOWN_ROWS = 4, 4
 TOWN_BLOCK_W_M = 100.0        # east-west, across the trunk road
 TOWN_BLOCK_H_M = 100.0        # north-south, along it
@@ -599,7 +597,7 @@ def town_pad(tid, name, cx, cy):
 # The setback is measured from the edge of the running surface and not from the
 # centreline, because that is what "ten metres off the road" means to anyone standing on
 # it. Against a primary that puts the fence 15.5 m from the centreline and against a
-# section line 14 m, both of which clear the per-class road clearance the parcelling uses
+# section line 14 m, both of which clear the per-class road clearance the plantings use
 # (14 m and 11 m) - so a yard placed this way is inside the letter of the brief and
 # outside the verge of the road, which is the only way both can be true at once.
 #
@@ -917,517 +915,6 @@ def shelter_area_ew(bid, name, band, row):
             'centre': ((x0 + x1) / 2.0, SHELTER_ROWS[row]),
             'ring': shelter_ring_ew(band, row),
             'tags': {'natural': 'wood', 'leaf_type': WOOD_LEAF_TYPE}}
-
-
-# --- the parcelling ---------------------------------------------------------------
-# The fields, and they are laid out the way the ground was actually subdivided: by
-# *aliquot* parts of a section. A section is a mile square - 259.0 ha - and the survey
-# halves it and halves it again, so the parcel sizes are not chosen, they fall out:
-#
-#     a quarter section    804.7 m square    64.75 ha    ("a hundred and sixty acres")
-#     a quarter-quarter    402.3 m square    16.19 ha    ("a forty")
-#     a quarter of that    201.2 m square     4.05 ha    ("a ten")
-#
-# Those three land where the brief asked for large (20-100 ha) and medium (10-20 ha)
-# exactly, and a hectare under it on the small (5 ha): a ten-acre parcel is 4.05 ha and
-# there is no aliquot part of a section that is 5.00. Breaking the ladder to hit the
-# round number would cost the one thing that makes this a survey rather than a grid -
-# that every parcel nests inside the one above it - so it is not broken. `FIELD_LEVELS`
-# is where to change that if the round number matters more.
-#
-# The nesting is also what fills the map. A cell is offered at the size its position
-# calls for; if anything is in the way - the water's valley, a road and its verge, a
-# yard, a wood, the clean strip - it is quartered and the four children are offered
-# instead, down to a ten. So open country comes out in quarter sections, the ground
-# around a town in tens, and the awkward corners against a river valley or a shelterbelt
-# fill with whatever aliquot fits. That is what real parcelling looks like, and it is
-# one rule rather than a special case per obstacle.
-#
-# Size by distance to a town, which is the brief and is also how it works: land near a
-# settlement is worth more, gets sold in smaller pieces and stays that way.
-FIELD_SECTION_M = MILE_M
-FIELD_ANCHOR = (ROAD_W_X, PLSS_EW_ANCHOR_M)   # the survey's own corner
-FIELD_SPLITS = 3                  # how many halvings a side may take: S/8 = 201.2 m
-FIELD_SMALL_M = 900.0             # inside this of a town centre, parcels are tens
-FIELD_MEDIUM_M = 1800.0           # ... and forties out to here; quarter sections beyond
-FIELD_CLEAR_M = 10.0              # headland between a field and anything built
-
-# How close cultivation comes to the water. Not the full `VALLEY_HALF_W_M`: that is where
-# the ground is back on the till plain, and holding the fields off by the whole of it left
-# a kilometre-wide strip of nothing down the middle of the map. The valley side is under
-# five degrees - the section falls 20 m over 440 m and a smootherstep is steepest at
-# 1.875*rise/run - which is ground a machine works, so the fields come down it and stop at
-# the top of the bank plus a headland. Below that is the bank itself and then water.
-#
-# Two numbers because the two bodies are measured from different things: the river's
-# distance is to its *centreline*, so the bank top is a half-width plus the bank run out;
-# the lake's is to its *shore*, where the bank top is just the bank run in.
-FIELD_BANK_CLEAR_M = 45.0         # headland above the top of the bank
-FIELD_RIVER_CLEAR_M = RIVER_HALF_W_M + BANK_RUN_M + FIELD_BANK_CLEAR_M      # 150 m
-FIELD_LAKE_CLEAR_M = BANK_RUN_M + FIELD_BANK_CLEAR_M                        # 105 m
-
-# The aliquot ladder, in hectares, from halving a section alternately in each direction.
-# Halves matter as much as quarters and were missing at first: with only square cells the
-# far country came out in forties, because an 805 m square does not fit between a
-# shelterbelt and a river valley while the 402 x 805 m half of one does. `N1/2 NE1/4` is
-# as real a parcel as `NE1/4` and the brief allows a rectangle, so both are cut.
-#
-#     259.0  129.5  64.75  32.37  16.19  8.09  4.05 ha
-#     section  1/2  1/4    1/8    1/16   1/32  1/64
-FIELD_SECTION_HA = FIELD_SECTION_M ** 2 / 10000.0
-FIELD_CAP_LARGE_HA = FIELD_SECTION_HA / 4.0        # 64.75, a quarter section
-FIELD_CAP_MEDIUM_HA = FIELD_SECTION_HA / 16.0      # 16.19, a forty
-FIELD_CAP_SMALL_HA = FIELD_SECTION_HA / 64.0       # 4.05, a ten
-# What a merge may reach out in the country. The aliquot above a quarter section is a
-# half at 129.5 ha, over the hundred the brief allows, so merging is the one step here
-# that is *not* aliquot: two parcels that share a whole edge become one field, and a
-# farmer working two fields as one does not consult the survey. The generating grid stays
-# aliquot; this is what is done with it afterwards.
-FIELD_MERGE_MAX_HA = 100.0
-# How far a merge may climb over the band the survey sold in, in halvings. The bands say
-# how the ground was *subdivided* - tens against a town, forties beyond, quarter sections
-# in the country - and holding a merge to the same ceiling made the rule dead everywhere
-# but the far country: a ten that merges is 8.09 ha, over the ten the band allows, so no
-# two parcels within 900 m of a town were ever joined and the near ground came out as 129
-# ten-acre slivers. Two halvings is one aliquot square step, which is exactly what a
-# farmer does with two forties either side of a line nobody planted anything on: 4.05 ha
-# merges up to a forty, 16.19 to a quarter section, and the country to the 100 ha cap
-# above. Raise it and the whole map converges on that cap; drop it to 0 and the merge
-# only ever joins the two halves of a quarter section again.
-FIELD_MERGE_STEPS = 2
-
-# What a field is allowed to be. The ceiling is the largest aliquot the levels above can
-# produce; the floor is *not* the smallest, because a parcel trimmed off a road comes out
-# under its aliquot and that is the point of trimming. It is a floor on what is worth
-# drawing at all: under this, or under a hundred metres on its short side, a parcel is a
-# headland rather than a field and the ground is better left out of cultivation than cut
-# into slivers.
-#
-# The floor is what decides whether there is anything at the edge of a town. A town
-# stands on the corner four sections meet at, and its platform is 516 x 510 m centred
-# there, so it takes 258 m out of a section in x and 255 m in y - one whole ten and a
-# bite of 67 m out of the next. Near a town the ten is also the *smallest* cell the
-# survey cuts, so what is left of that second ten cannot be subdivided: it is offered
-# whole, 134 x 201 m of it, and a floor of three hectares threw all 2.70 ha of it away.
-# The towns then stood in 144 m of nothing - not a setback anyone chose, just the
-# distance from the platform to the next line of the survey. At 2.5 the ring of ground
-# round a town is a field again, which is what is actually there.
-FIELD_MAX_HA = FIELD_MERGE_MAX_HA
-FIELD_MIN_HA = 2.5
-FIELD_MIN_SIDE_M = 100.0
-# How much of a side a parcel has to keep for trimming to be the right answer. Past this
-# the obstacle is not along an edge, it is *in* the cell, and the cell wants quartering
-# so its children can take the ground on both sides of it - trim instead and one side is
-# thrown away.
-FIELD_KEEP_FRAC = 0.50
-# How much more ground quartering a cell has to recover before it is preferred to
-# trimming it. Without the hysteresis every cell with anything along an edge splits, and
-# the map comes out as ten-acre parcels from end to end whatever the size bands say.
-FIELD_SPLIT_GAIN = 0.75
-
-
-_RIVER_Y = [p[1] for p in river_axis()]
-
-
-def _pt_rect_dist(p, x0, y0, x1, y1):
-    return math.hypot(max(x0 - p[0], 0.0, p[0] - x1), max(y0 - p[1], 0.0, p[1] - y1))
-
-
-def _seg_rect_dist(a, b, x0, y0, x1, y1):
-    """Exact distance from a segment to an axis-aligned rectangle.
-
-    Both are convex, so the closest pair is realised at a vertex of one of them - which
-    is why taking the rectangle's corners against the segment *and* the segment's ends
-    against the rectangle is exact, and why either one on its own is not.
-    """
-    if (x0 <= a[0] <= x1 and y0 <= a[1] <= y1) or (x0 <= b[0] <= x1 and y0 <= b[1] <= y1):
-        return 0.0
-    corners = ((x0, y0), (x1, y0), (x1, y1), (x0, y1))
-    for i in range(4):
-        if segs_cross(a, b, corners[i], corners[(i + 1) % 4]):
-            return 0.0
-    return min(min(seg_point_dist(c, a, b) for c in corners),
-               _pt_rect_dist(a, x0, y0, x1, y1), _pt_rect_dist(b, x0, y0, x1, y1))
-
-
-def _polyline_rect_dist(pts, rect, stop):
-    """Min distance from a polyline to a rectangle, giving up as soon as it is under
-    `stop`. The caller only ever asks "is this closer than the clearance", so there is no
-    reason to walk eight kilometres of river once the answer is known."""
-    x0, y0, x1, y1 = rect
-    best = 1.0e18
-    for i in range(len(pts) - 1):
-        a, b = pts[i], pts[i + 1]
-        if (min(a[0], b[0]) - x1 > best or x0 - max(a[0], b[0]) > best
-                or min(a[1], b[1]) - y1 > best or y0 - max(a[1], b[1]) > best):
-            continue
-        d = _seg_rect_dist(a, b, x0, y0, x1, y1)
-        if d < best:
-            best = d
-            if best < stop:
-                return best
-    return best
-
-
-def _rects_apart(rect, cx, cy, w, h, gap):
-    x0, y0, x1, y1 = rect
-    return not (x0 < cx + w / 2.0 + gap and x1 > cx - w / 2.0 - gap
-                and y0 < cy + h / 2.0 + gap and y1 > cy - h / 2.0 - gap)
-
-
-def _trim_one(rect, axis, lo, hi, keep_frac):
-    """Pull `rect` clear of the band `lo..hi` on `axis` (0 = x, 1 = y).
-
-    Returns the trimmed rectangle, or None if the band sits far enough into the cell that
-    clearing it would eat more than `keep_frac` of that side. That case is not a failure -
-    it is a cell that wants quartering, and its children will find the ground on both
-    sides of the obstacle instead of the parcelling throwing one side away.
-    """
-    r = list(rect)
-    a, b = r[axis], r[axis + 2]
-    if hi <= a or lo >= b:
-        return rect
-    span = b - a
-    cut_lo, cut_hi = hi - a, b - lo          # what each side would cost
-    if cut_lo <= cut_hi:
-        if cut_lo > (1.0 - keep_frac) * span:
-            return None
-        r[axis] = hi
-    else:
-        if cut_hi > (1.0 - keep_frac) * span:
-            return None
-        r[axis + 2] = lo
-    return tuple(r)
-
-
-def _trim_water(rect, water):
-    """Pull `rect` clear of the water's valley.
-
-    The valley is not a box - it is a 1 km band following a meander - so it cannot go in
-    with the yards and the woods. What can be said about it *for one cell* is how far it
-    reaches in x over that cell's own range of y, which is a band, and a band is what
-    `_trim_one` takes. Taking the extreme over the range makes it a superset of the true
-    intrusion, so this can only ever cut too much; `_field_clear` measures the real
-    distance afterwards.
-
-    Trimming rather than rejecting is what "avoid the valley" has to mean if the ground
-    beside it is to be used at all. Rejecting whole cells cost a fifth of the map: a
-    quarter section is 805 m and the valley is wider than that, so every parcel within
-    reach of the river came back as tens or as nothing.
-    """
-    for pts, bbox, kind, clear in water:
-        if _rects_apart(rect, *bbox, 0.0):
-            continue
-        if kind == 'axis':
-            # The river axis is a single-valued function of northing, so it comes out of
-            # `river_axis()` sorted in y and the band can be sliced rather than scanned.
-            lo = rect[1] - clear
-            hi = rect[3] + clear
-            i0 = bisect.bisect_left(_RIVER_Y, lo)
-            i1 = bisect.bisect_right(_RIVER_Y, hi)
-            xs = [p[0] for p in pts[i0:i1]]
-            if not xs:
-                continue
-            rect = _trim_one(rect, 0, min(xs) - clear, max(xs) + clear,
-                             FIELD_KEEP_FRAC)
-        else:
-            best = None
-            for axis in (0, 1):
-                lo = bbox[axis] - bbox[axis + 2] / 2.0
-                cand = _trim_one(rect, axis, lo, lo + bbox[axis + 2], FIELD_KEEP_FRAC)
-                if cand is None:
-                    continue
-                area = (cand[2] - cand[0]) * (cand[3] - cand[1])
-                if best is None or area > best[0]:
-                    best = (area, cand)
-            rect = None if best is None else best[1]
-        if rect is None:
-            return None
-    return rect
-
-
-def _trim(rect, water, corridors, boxes):
-    """Pull a parcel's edges in off the water, off anything built and off any road that
-    runs along them.
-
-    An aliquot part of a section is flush with the section lines, and the section lines
-    are where the roads are - so *every* quarter section on this map has a road along one
-    edge and a straight clearance test rejects the lot of them. It did: the first run
-    came back with 342 ten-acre parcels, no forties on a boundary and not one quarter
-    section anywhere, because the only cells that passed were the ones buried in the
-    middle of a section.
-
-    A parcel and a field are not the same thing. The parcel is the forty; the field is
-    the forty less the road allowance along it, which is why a field abutting a road is a
-    little smaller than one that does not. Trimming is that. A road through the *middle*
-    of a cell is a different thing and comes back as None - the cell is quartered and its
-    children are offered instead, which is how the parcelling finds the two halves either
-    side of a road on its own.
-
-    The order is load-bearing where a road stops beside a platform, which is every town
-    street on the map. A box knows its own extent in both directions and can only reach a
-    cell it truly touches; a corridor is tested as a band along its axis with the reach
-    it has *along* that axis, so a street that runs up to the town and stops still counts
-    against a cell whose only overlap with it is ground the town's own platform takes
-    out. Trimmed in that order the street ate a full-width band out of the ten north of
-    every town - 201 x 137 m of it, down to 1.26 ha and under any floor - and the towns
-    came out with 147 m of nothing along two sides and a field at the ten-metre headland
-    along the others. Take the platform off first and the street no longer reaches.
-    """
-    rect = _trim_water(rect, water)
-    if rect is None:
-        return None
-    for cx, cy, w, h, gap in boxes:
-        if _rects_apart(rect, cx, cy, w, h, gap):
-            continue
-        # Take whichever axis costs less, so a yard against a corner takes the corner
-        # off and not half the field.
-        best = None
-        for axis, c, s in ((0, cx, w), (1, cy, h)):
-            cand = _trim_one(rect, axis, c - s / 2.0 - gap, c + s / 2.0 + gap,
-                             FIELD_KEEP_FRAC)
-            if cand is None:
-                continue
-            area = (cand[2] - cand[0]) * (cand[3] - cand[1])
-            if best is None or area > best[0]:
-                best = (area, cand)
-        if best is None:
-            return None
-        rect = best[1]
-    for pts, keep in corridors:
-        vertical = abs(pts[0][0] - pts[-1][0]) < abs(pts[0][1] - pts[-1][1])
-        along = min((p[1] if vertical else p[0]) for p in pts), \
-            max((p[1] if vertical else p[0]) for p in pts)
-        axis = 0 if vertical else 1
-        if along[1] < rect[1 - axis] or along[0] > rect[3 - axis]:
-            continue                     # the road does not reach this far along
-        at = pts[0][0] if vertical else pts[0][1]
-        rect = _trim_one(rect, axis, at - keep, at + keep, FIELD_KEEP_FRAC)
-        if rect is None:
-            return None
-    return rect
-
-
-def _field_clear(rect, obstacles):
-    """Is this rectangle ground a field can be laid on?
-
-    `obstacles` is everything already on the map, gathered once by the caller: walking
-    `CORRIDORS` and `river_axis()` afresh for each of a couple of thousand candidate
-    cells is the difference between a layout that loads in a second and one that does
-    not.
-    """
-    x0, y0, x1, y1 = rect
-    m = EDGE_CLEAR_M
-    if x0 < m or y0 < m or x1 > PLAYABLE_M - m or y1 > PLAYABLE_M - m:
-        return False
-    if (x1 - x0) * (y1 - y0) < FIELD_MIN_HA * 10000.0:
-        return False
-    if min(x1 - x0, y1 - y0) < FIELD_MIN_SIDE_M:
-        return False
-    water, corridors, boxes = obstacles
-    for pts, bbox, _, clear in water:
-        if _rects_apart(rect, *bbox, 0.0):
-            continue                     # nowhere near this body of water
-        if _polyline_rect_dist(pts, rect, clear) < clear:
-            return False
-    for cx, cy, w, h, gap in boxes:
-        if not _rects_apart(rect, cx, cy, w, h, gap):
-            return False
-    return True
-
-
-def _field_cap(cx, cy, towns, merging=False):
-    """The largest parcel allowed at this point: a ten near a town, a forty beyond it, a
-    quarter section out in the country. Land near a settlement is worth more, gets sold
-    in smaller pieces and stays that way.
-
-    A merge is allowed `FIELD_MERGE_STEPS` halvings over that, up to the merge cap: what
-    the band governs is how the ground was subdivided, and a merge is what is worked
-    afterwards. Held to the band itself the rule can only ever join the two halves of the
-    largest parcel the band allows, which is nothing at all wherever the aliquot grid
-    already cuts at the band's own size.
-    """
-    d = min(math.dist((cx, cy), t) for t in towns) if towns else 1.0e18
-    if d < FIELD_SMALL_M:
-        cap = FIELD_CAP_SMALL_HA
-    elif d < FIELD_MEDIUM_M:
-        cap = FIELD_CAP_MEDIUM_HA
-    else:
-        cap = FIELD_CAP_LARGE_HA
-    if not merging:
-        return cap
-    return min(cap * 2.0 ** FIELD_MERGE_STEPS, FIELD_MERGE_MAX_HA)
-
-
-def _union_if_flush(a, b, tol=1e-6):
-    """The rectangle covering both, if they share a whole edge - otherwise None.
-
-    A *whole* edge and not a partial one: two rectangles that merely touch along part of
-    a side have a union that is L-shaped, and an L is not a field. That is the only thing
-    keeping this from producing a shape the brief rules out.
-    """
-    ax0, ay0, ax1, ay1 = a
-    bx0, by0, bx1, by1 = b
-    if abs(ay0 - by0) < tol and abs(ay1 - by1) < tol:
-        if abs(ax1 - bx0) < tol:
-            return (ax0, ay0, bx1, ay1)
-        if abs(bx1 - ax0) < tol:
-            return (bx0, ay0, ax1, ay1)
-    if abs(ax0 - bx0) < tol and abs(ax1 - bx1) < tol:
-        if abs(ay1 - by0) < tol:
-            return (ax0, ay0, ax1, by1)
-        if abs(by1 - ay0) < tol:
-            return (ax0, by0, ax1, ay1)
-    return None
-
-
-def _merge_fields(rects, towns):
-    """Join parcels that share a whole edge, while the result stays inside its band.
-
-    The aliquot grid cuts a field wherever a halving line falls, whether or not anything
-    on the ground calls for one: two tens either side of a line with nothing between them
-    are one field that the survey happened to write down as two. This puts them back
-    together, and it is safe to do after the fact rather than during - the union of two
-    rectangles sharing a whole edge is exactly the two of them, no new ground, so
-    whatever they were both clear of the union is clear of too.
-    """
-    rects = list(rects)
-    again = True
-    while again:
-        again = False
-        i = 0
-        while i < len(rects):
-            j = i + 1
-            while j < len(rects):
-                u = _union_if_flush(rects[i], rects[j])
-                cap = None if u is None else _field_cap(
-                    (u[0] + u[2]) / 2.0, (u[1] + u[3]) / 2.0, towns, merging=True)
-                if u is not None and \
-                        (u[2] - u[0]) * (u[3] - u[1]) / 10000.0 <= cap * 1.000001:
-                    rects[i] = u
-                    rects.pop(j)
-                    again = True
-                else:
-                    j += 1
-            i += 1
-    return rects
-
-
-def _plan(rect, obstacles, towns, memo):
-    """The best parcelling of one cell, as `(hectares, [rectangles])`.
-
-    Three things can be done with a cell an obstacle reaches into: trim it back and keep
-    one large field, halve it north-south, or halve it east-west. None of them is right
-    on its own. Trimming everything cost a twentieth of the map - a quarter section
-    pulled back off the river's valley throws away whatever was on the far side of it -
-    and splitting everything gave a map of nothing but ten-acre parcels, because near
-    enough every cell on a map this full has *something* along an edge.
-
-    So all three are worked out and the best is taken, with `FIELD_SPLIT_GAIN` of
-    hysteresis in favour of the whole cell: splitting has to recover meaningfully more
-    ground, not merely a hectare more, or the parcelling dissolves into the smallest
-    aliquot everywhere and the size bands the brief asked for stop meaning anything.
-
-    Halving alternately in each direction reaches the same cell by more than one route -
-    north half then east half is the same quarter as east half then north half - so the
-    results are memoised on the rectangle. Without it the tree is 4^6 nodes a section and
-    takes minutes; with it there are 225 distinct cells in a section and it takes
-    seconds.
-    """
-    if rect in memo:
-        return memo[rect]
-    x0, y0, x1, y1 = rect
-    if x1 <= EDGE_CLEAR_M or y1 <= EDGE_CLEAR_M \
-            or x0 >= PLAYABLE_M - EDGE_CLEAR_M or y0 >= PLAYABLE_M - EDGE_CLEAR_M:
-        memo[rect] = (0.0, [])
-        return memo[rect]
-
-    area = (x1 - x0) * (y1 - y0) / 10000.0
-    keep = None
-    if area <= _field_cap((x0 + x1) / 2.0, (y0 + y1) / 2.0, towns) * 1.000001:
-        cut = _trim(rect, *obstacles)
-        if cut is not None and _field_clear(cut, obstacles):
-            keep = cut
-    kept = 0.0 if keep is None \
-        else (keep[2] - keep[0]) * (keep[3] - keep[1]) / 10000.0
-
-    best = (kept, [keep]) if keep else (0.0, [])
-    floor = FIELD_SECTION_M / 2 ** FIELD_SPLITS
-    for axis in (0, 1):
-        side = (x1 - x0) if axis == 0 else (y1 - y0)
-        if side / 2.0 < floor - 1e-6:
-            continue                     # a ten is the smallest parcel this survey cuts
-        mid = (x0 + x1) / 2.0 if axis == 0 else (y0 + y1) / 2.0
-        halves = (((x0, y0, mid, y1), (mid, y0, x1, y1)) if axis == 0
-                  else ((x0, y0, x1, mid), (x0, mid, x1, y1)))
-        total, got = 0.0, []
-        for half in halves:
-            a, r = _plan(half, obstacles, towns, memo)
-            total += a
-            got += r
-        if total * FIELD_SPLIT_GAIN > best[0]:
-            best = (total, got)
-    memo[rect] = best
-    return best
-
-
-def build_fields(planted):
-    """Every field on the map, as `AREAS` records.
-
-    `planted` is what is already drawn - the island, the town blocks, the woods and the
-    belts - passed in rather than read from `AREAS`, because this is what fills `AREAS`
-    and a registry cannot be its own input.
-    """
-    def bbox(pts, grow):
-        xs = [q[0] for q in pts]
-        ys = [q[1] for q in pts]
-        cx, cy = (min(xs) + max(xs)) / 2.0, (min(ys) + max(ys)) / 2.0
-        return cx, cy, max(xs) - min(xs) + 2 * grow, max(ys) - min(ys) + 2 * grow
-
-    water = [(river_axis(), bbox(river_axis(), FIELD_RIVER_CLEAR_M), 'axis',
-              FIELD_RIVER_CLEAR_M),
-             (lake_ring(), bbox(lake_ring(), FIELD_LAKE_CLEAR_M), 'ring',
-              FIELD_LAKE_CLEAR_M)]
-    corridors = [(c['axis'], c['half_width_m'] + c['feather_m']) for c in CORRIDORS]
-    boxes = [(p['centre'][0], p['centre'][1], p['size'][0], p['size'][1], FIELD_CLEAR_M)
-             for p in PADS]
-    for a in planted:
-        xs = [q[0] for q in a['ring']]
-        ys = [q[1] for q in a['ring']]
-        boxes.append(((min(xs) + max(xs)) / 2.0, (min(ys) + max(ys)) / 2.0,
-                      max(xs) - min(xs), max(ys) - min(ys), FIELD_CLEAR_M))
-    obstacles = (water, corridors, boxes)
-    towns = [p['centre'] for p in PADS if p['kind'] == 'town']
-
-    ax, ay = FIELD_ANCHOR
-    i0 = int(math.floor(-ax / FIELD_SECTION_M))
-    i1 = int(math.ceil((PLAYABLE_M - ax) / FIELD_SECTION_M))
-    j0 = int(math.floor(-ay / FIELD_SECTION_M))
-    j1 = int(math.ceil((PLAYABLE_M - ay) / FIELD_SECTION_M))
-    rects = []
-    for j in range(j0, j1 + 1):
-        for i in range(i0, i1 + 1):
-            x0 = ax + i * FIELD_SECTION_M
-            y0 = ay + j * FIELD_SECTION_M
-            sec = (x0, y0, x0 + FIELD_SECTION_M, y0 + FIELD_SECTION_M)
-            # Only the obstacles this section can reach. Every cell inside it tests the
-            # list once, so cutting a hundred and forty-five down to the handful that are
-            # actually nearby is most of the time this takes.
-            near = (
-                [w for w in water if not _rects_apart(sec, *w[1], 0.0)],
-                [c for c in corridors
-                 if not _rects_apart(sec, *bbox(c[0], c[1]), 0.0)],
-                [b for b in boxes if not _rects_apart(sec, *b[:4], b[4])],
-            )
-            rects += _plan(sec, near, towns, {})[1]
-    # North to south then west to east, so the numbering runs the way the survey does
-    # and adding a feature renumbers the fields after it rather than shuffling them all.
-    rects = _merge_fields(rects, towns)
-    rects.sort(key=lambda r: (r[1], r[0]))
-    return [{'id': f'field_{n + 1:03d}', 'name': f'Campo {n + 1:03d}',
-             'ring': rect_ring(*r), 'area_ha': (r[2] - r[0]) * (r[3] - r[1]) / 10000.0,
-             'tags': {'landuse': 'farmland'}}
-            for n, r in enumerate(rects)]
 
 
 # (id, name, line, which section it covers). The section index `k` is the stretch between
@@ -1841,8 +1328,8 @@ PADS = ([town_pad(*site) for site in TOWN_SITES]
         + [industry_pad(*site) for site in INDUSTRY_SITES]
         + [farm_pad(*site) for site in FARM_SITES])
 
-# Tagged rings the OSM draws and the terrain mostly ignores: fields, farmyard polygons,
-# woods and shelterbelts. One record per ring:
+# Tagged rings the OSM draws and the terrain mostly ignores: the island, the town
+# blocks, the woods and the shelterbelts. One record per ring:
 #     id, name
 #     ring           closed outline in playable metres
 #     tags           OSM tags; every one of them has to match RENDERED_TAGS or both
@@ -1851,7 +1338,7 @@ PADS = ([town_pad(*site) for site in TOWN_SITES]
 # The island is here rather than on the lake record because that is all it is to the
 # vectors: a tagged ring, drawn after the water and so on top of it. The terrain knows it
 # from the same ISLAND_* constants the ring is built from.
-_PLANTED = (
+AREAS = (
     [{'id': 'island', 'name': 'Isla del Lago', 'ring': island_ring(),
       'tags': {'natural': 'wood', 'leaf_type': WOOD_LEAF_TYPE}}]
     + [b for site in TOWN_SITES for b in town_blocks(*site)]
@@ -1859,8 +1346,6 @@ _PLANTED = (
     + [shelter_area(*site) for site in SHELTER_SITES]
     + [shelter_area_ew(*site) for site in SHELTER_EW_SITES]
 )
-FIELDS = build_fields(_PLANTED)
-AREAS = _PLANTED + FIELDS
 
 
 def corridors():
@@ -1889,10 +1374,10 @@ def load_roughness(path=None):
     """Read `terrain_stats.json` and return a roughness lookup, or None if it is not
     there yet.
 
-    The parcelling wants smaller fields on broken ground, and this is how it finds out
-    where the broken ground is without re-deriving the terrain in a second
-    implementation that would drift. The DEM has to run first; the OSM degrades
-    gracefully if it has not. On a flat map every cell reads 0.
+    This is how the OSM side finds out where the broken ground is without re-deriving
+    the terrain in a second implementation that would drift - anything that wants to
+    size itself to the ground reads it from here. The DEM has to run first; the OSM
+    degrades gracefully if it has not. On a flat map every cell reads 0.
     """
     path = path or os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                 'dem_generator', 'terrain_stats.json')
@@ -2294,78 +1779,6 @@ def validate():
                            "- a section of frontage is north to south, a band is east "
                            "to west")
 
-    # The parcelling. Everything here is a property of the *output* rather than of the
-    # rules that made it, which is the point of checking it at all: the generator and the
-    # checker agreeing about a predicate proves nothing, but 291 rectangles that do not
-    # overlap, are all inside their size band and are none of them in the river's valley
-    # is a fact about the map.
-    riv = river_axis()
-    lake = lake_ring()
-    riv_box = (min(p[0] for p in riv) + max(p[0] for p in riv)) / 2.0, \
-        (min(p[1] for p in riv) + max(p[1] for p in riv)) / 2.0, \
-        max(p[0] for p in riv) - min(p[0] for p in riv) + 2 * FIELD_RIVER_CLEAR_M, \
-        max(p[1] for p in riv) - min(p[1] for p in riv) + 2 * FIELD_RIVER_CLEAR_M
-    for f in FIELDS:
-        r = f['ring']
-        xs = [q[0] for q in r]
-        ys = [q[1] for q in r]
-        rect = (min(xs), min(ys), max(xs), max(ys))
-        if len(r) != 5 or len(set(xs)) != 2 or len(set(ys)) != 2:
-            bad.append(f"{f['id']}: not an axis-aligned rectangle")
-            continue
-        area = ring_area_ha(r)
-        if not FIELD_MIN_HA - 1e-6 <= area <= FIELD_MAX_HA + 1e-6:
-            bad.append(f"{f['id']}: {area:.2f} ha, outside the "
-                       f"{FIELD_MIN_HA:.1f} .. {FIELD_MAX_HA:.0f} ha a parcel may be")
-        if min(rect[2] - rect[0], rect[3] - rect[1]) < FIELD_MIN_SIDE_M - 1e-6:
-            bad.append(f"{f['id']}: {min(rect[2] - rect[0], rect[3] - rect[1]):.0f} m on "
-                       f"its short side, under the {FIELD_MIN_SIDE_M:.0f} m worth "
-                       "cultivating")
-        # The hard exclusion: no field in the channel or on the bank of one. Not the
-        # whole valley - the fields come down its side, which is under five degrees - but
-        # everything below the top of the bank is the water's, and the headland above it
-        # is the last dry ground anything is grown on.
-        #
-        # This is measured against the same constants the parcelling was cut with, and it
-        # is worth saying why that is not circular: the two are separate implementations
-        # of the same statement, one that trims rectangles to a band and one that takes
-        # an exact polyline-to-rectangle distance afterwards. Loosening the parcelling
-        # from `VALLEY_HALF_W_M` to the bank and forgetting this line is exactly what
-        # happened, and this is the check that said so.
-        #
-        # Sliced to the field's own band of northing first - the axis is sorted in y -
-        # because walking eight kilometres of river for each of three hundred parcels is
-        # most of what this whole function costs otherwise.
-        i0 = bisect.bisect_left(_RIVER_Y, rect[1] - FIELD_RIVER_CLEAR_M)
-        i1 = bisect.bisect_right(_RIVER_Y, rect[3] + FIELD_RIVER_CLEAR_M)
-        band = riv[max(0, i0 - 1):i1 + 1]
-        if not _rects_apart(rect, *riv_box, 0.0) and len(band) > 1 and \
-                _polyline_rect_dist(band, rect, FIELD_RIVER_CLEAR_M) \
-                < FIELD_RIVER_CLEAR_M:
-            bad.append(f"{f['id']}: comes within {FIELD_RIVER_CLEAR_M:.0f} m of the "
-                       "river's centreline - that is its bank, not a field")
-            break
-        if _polyline_rect_dist(lake, rect, FIELD_LAKE_CLEAR_M) < FIELD_LAKE_CLEAR_M:
-            bad.append(f"{f['id']}: comes within {FIELD_LAKE_CLEAR_M:.0f} m of the "
-                       "lake shore - that is its bank, not a field")
-            break
-    # No two fields on the same ground. The parcelling cuts them out of a nesting grid so
-    # they cannot overlap by construction - which is exactly the kind of reasoning that
-    # is worth one cheap sweep to confirm, because it stops being true the moment
-    # anything is trimmed, shifted or added by hand.
-    rects = []
-    for f in FIELDS:
-        xs = [q[0] for q in f['ring']]
-        ys = [q[1] for q in f['ring']]
-        rects.append((f['id'], min(xs), min(ys), max(xs), max(ys)))
-    rects.sort(key=lambda r: r[1])
-    for i, a in enumerate(rects):
-        for b in rects[i + 1:]:
-            if b[1] >= a[3] - 1e-9:
-                break
-            if a[2] < b[4] - 1e-9 and a[4] > b[2] + 1e-9:
-                bad.append(f"{a[0]}: overlaps {b[0]}")
-
     m = EDGE_CLEAR_M
     for p in PADS:
         x0 = p['centre'][0] - p['size'][0] / 2
@@ -2415,10 +1828,8 @@ def summary():
             f"{sum(p['area_ha'] for p in ind):.0f} ha, {len(farms)} farms of "
             f"{sum(p['area_ha'] for p in farms):.0f} ha, {len(woods)} woods of "
             f"{sum(a['area_ha'] for a in woods):.0f} ha and {len(belts)} shelterbelts "
-            f"of {sum(a['area_ha'] for a in belts):.0f} ha, {len(FIELDS)} fields on "
-            f"the aliquot grid totalling {sum(a['area_ha'] for a in FIELDS):.0f} ha "
-            f"({sum(a['area_ha'] for a in FIELDS) / (PLAYABLE_M ** 2 / 10000.0) * 100:.0f}"
-            f"%), rim to {RIM_CREST_M:.0f} m")
+            f"of {sum(a['area_ha'] for a in belts):.0f} ha, rim to "
+            f"{RIM_CREST_M:.0f} m")
 
 
 if __name__ == '__main__':

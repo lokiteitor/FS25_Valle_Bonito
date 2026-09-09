@@ -54,12 +54,13 @@ up the middle of the grid - the middle street line *is* the highway, so main str
 through road - and the section line does the same across it, which puts the junction the
 town is named for at the crossroads in its centre with two columns and two rows of blocks
 on every side of it. What a road takes out of the block grid is its own nominal feather
-either side of the centreline, the same clearance the parcelling uses, so a primary takes
-28 m of grid where a section line takes 22 and a town street 16 - which is the whole reason
-a town of square blocks comes out 516 m across and 510 m from end to end rather than square
-itself, and why the blocks still measure exactly 100x100 whatever class of road happens to
-bound them. Eight streets per town, 15.1 km of them; the whole thing stands on a 516x510 m
-platform levelled out of the till plain with a third of a percent of fall to the south so
+either side of the centreline, the same clearance everything else is held off a road by,
+so a primary takes 28 m of grid where a section line takes 22 and a town street 16 -
+which is the whole reason a town of square blocks comes out 516 m across and 510 m from
+end to end rather than square itself, and why the blocks still measure exactly 100x100
+whatever class of road happens to bound them. Eight streets per town, 15.1 km of them;
+the whole thing stands on a 516x510 m platform levelled out of the till plain with a
+third of a percent of fall to the south so
 it drains. That is a grade and not a height, and the checks on it are written the same way,
 because the platform is sized from the block grid: change the block and the fall end to end
 changes with it.
@@ -73,7 +74,7 @@ yard gate opening onto one of them is a thing nobody builds. All of them stand 1
 **edge of the running surface** rather than off the centreline,
 because that is what "ten metres off the road" means to anyone standing on it. Against a
 primary that puts the fence 15.5 m from the centreline and against a section line 14 m,
-and both clear the per-class road clearance the parcelling uses (14 m and 11 m) - so a
+and both clear the per-class road clearance the plantings use (14 m and 11 m) - so a
 yard placed this way is inside the letter of the brief and outside the verge of the road,
 which is the only way both can be true at once. Square and a stated area means the side is
 neither number but what falls out of them, `sqrt(area)`: 141.42 m, 223.61 m and 447.21 m.
@@ -128,55 +129,13 @@ happened to be left over. The nearest miss on the north-south side is `este_medi
 where the river's east swing brings the belt to 493 m of open water against the 500 m a
 planting is held off - seven metres, on a rule that could be moved. It is not moved.
 
-The fields are laid out by *aliquot* parts of a section, which is how the ground was
-actually subdivided. A section is a mile square - 259.0 ha - and the survey halves it and
-halves it again, so the parcel sizes are not chosen, they fall out: 129.5, 64.75, 32.37,
-16.19, 8.09, 4.05 ha. The three the brief names are a quarter section (64.75, "a hundred
-and sixty acres"), a quarter-quarter (16.19, "a forty") and a quarter of that (4.05, "a
-ten"), and a cell is offered at the largest its position allows - tens within 900 m of a
-town, forties out to 1800 m, quarter sections beyond. Afterwards, parcels that share a
-whole edge are merged, which is the one step here that is not aliquot: the aliquot above a
-quarter section is a half at 129.5 ha, over the hundred the brief allows, and a farmer
-working two fields as one does not consult the survey. What the bands govern is how the
-ground was *subdivided*, so a merge is allowed `FIELD_MERGE_STEPS` halvings over the band
-it stands in - two, one aliquot square step - up to the 100 ha cap: a ten merges to a
-forty, a forty to a quarter section. Held to the band itself the rule was dead everywhere
-but the far country, because the grid already cuts at the band's own size: nothing within
-900 m of a town was ever joined and the near ground came out as 129 ten-acre slivers.
-167 fields, 4274 ha, 64% of the playable area, running 2.5 to 95.3 ha, median 15.9.
-
-**How close cultivation comes to the water is not `VALLEY_HALF_W_M`.** That is where the
-ground is back on the till plain, and holding the fields off by the whole of it left a
-kilometre-wide strip of nothing down the middle of the map - it cost fourteen points of
-coverage. The valley side is under five degrees (the section falls 20 m over 440 m and a
-smootherstep is steepest at 1.875*rise/run), which is ground a machine works, so the fields
-come down it and stop at the top of the bank plus a headland: 150 m from the river's
-centreline, 105 m from the lake's shore. Two numbers because the two bodies are measured
-from different things - the river's distance is to its centreline, so its bank top is a
-half-width plus the bank run *out*; the lake's is to its shore, where the bank top is the
-bank run *in*.
-
-**Halves matter as much as quarters.** With only square cells the far country came out in
-forties, because an 805 m square does not fit between a shelterbelt and a river valley
-while the 402 x 805 m half of one does. `N½ NE¼` is as real a parcel as `NE¼`.
-
-**A parcel and a field are not the same thing.** The parcel is the forty; the field is the
-forty less the road allowance along it. Every aliquot cell is flush with the section lines
-and the section lines are where the roads are, so a straight clearance test rejects the
-lot: the first run came back with 342 tens, no forties on a boundary and not one quarter
-section anywhere, because the only cells that passed were buried in the middle of a
-section. Trimming is the fix, and it is what makes a field abutting a road slightly smaller
-than one that does not.
-
-**Trimming and splitting are both wrong on their own.** A cell an obstacle reaches into can
-be trimmed back to one large field or halved so the children take the ground on both sides.
-Trimming everything cost a twentieth of the map - a quarter section pulled off the river's
-valley throws away whatever was on the far side. Splitting everything gave a map of nothing
-but tens, because near enough every cell on a map this full has something along an edge. So
-all three options are worked out per cell and the best is taken, with `FIELD_SPLIT_GAIN` of
-hysteresis in favour of the whole cell. Reaching the same cell by two routes - north half
-then east half is the same quarter as east half then north half - is what the memo on the
-rectangle is for; without it the tree is 4^6 nodes a section and takes minutes.
+The ground between all of that is not parcelled. There are no `landuse=farmland` rings
+on the map: the open country carries no tag, the same way floodplain pasture does not,
+and the OSM writes out only the water, the roads, the towns, the yards, the woods and the
+belts. The aliquot parcelling that used to fill it - a section halved and halved again
+into quarter sections, forties and tens, sized by distance to a town, trimmed off the
+roads, split where an obstacle reached into a cell and merged where two shared a whole
+edge - is in git history at commit `f6ecb39` if it is worth reading back.
 
 The rest is the technical base: the projection, the coordinates, the canvas geometry, the
 16-bit centimetre encoding, the geometry primitives, the terrain operators in
@@ -224,7 +183,7 @@ lake, `CORRIDORS` the roads and the town streets, `PADS` the four town platforms
     CORRIDORS    roads and railway - alignment, class, platform width, bridge spans
     WATER        rivers, creeks, lakes - centreline or shore, drawn half-width, depth
     PADS         levelled platforms - centre, size, ring, feather
-    AREAS        tagged rings the OSM draws - fields, woods, yards
+    AREAS        tagged rings the OSM draws - island, town blocks, woods, shelterbelts
 
 A pad is a piece of *terrain* and nothing else: it says where the ground was levelled, not
 what stands on it. A town's drawn form is its blocks, which are `AREAS` rings, the same way
@@ -237,10 +196,11 @@ the rule rather than trusting it: `measure_elevation.py` fails if a platform in 
 was levelled with nothing drawn over it, and `check_osm.py` fails if the layout and
 `map.osm` disagree about whether the map is empty.
 
-Where the OSM side needs to know about the ground (smaller fields on broken ground), the
-DEM publishes `dem_generator/terrain_stats.json` - a 128x128 height and roughness grid -
-and `map_layout.load_roughness()` reads it with the standard library. Do not import numpy
-into `osm_generator/`, and do not re-derive the terrain there.
+Where the OSM side needs to know about the ground - anything that sizes itself to how
+broken the ground is - the DEM publishes `dem_generator/terrain_stats.json`, a 128x128
+height and roughness grid, and `map_layout.load_roughness()` reads it with the standard
+library. Do not import numpy into `osm_generator/`, and do not re-derive the terrain
+there.
 
 ## Coordinates
 
@@ -274,9 +234,9 @@ subtracted the difference from every acre within half a kilometre of the water.
 ## Things that have already gone wrong here
 
 Each of these was a real bug found by measurement, not by looking at the output. Most of
-the code that hit them has been cleared out with the Iowa map, but the mistakes have not
-gone anywhere - they are what any terrain written back into this pipeline will hit again,
-in the same order.
+the code that hit them has been cleared out - with the Iowa map, and then with the
+parcelling - but the mistakes have not gone anywhere: they are what any terrain written
+back into this pipeline will hit again, in the same order.
 
 - **Offsetting a polyline** by more than its radius of curvature folds the ring through
   itself, and an even-odd fill then punches holes in the tightest meanders. Reserves along
@@ -523,8 +483,8 @@ on rings that `landuse=farmyard` and `natural=wood` already put on the map, and 
 read - one or other renderer colours them apart. An attribute no renderer reads is the one
 thing not worth emitting; a way whose *only* tags are outside the vocabulary is the thing
 `check_osm.py` fails the build over. That is why floodplain pasture carries no
-tag - it is simply ground the parcelling leaves out of cultivation. `check_osm.py` fails
-the build if a way was emitted that neither renderer can see.
+tag - it is simply ground nothing is drawn on. `check_osm.py` fails the build if a way
+was emitted that neither renderer can see.
 
 An area is a polygon to the 3D viewer only if its first and last coordinates are *exactly*
 equal, so rings must close on the same node id.
@@ -580,24 +540,6 @@ trusting the arithmetic that built both - so it catches the setback being taken 
 centreline instead of the kerb, a yard that is not square or not its stated area, one whose
 corner has landed inside the water's valley, one standing on the verge of the class of road
 it is on, one another road runs through, and a farm that has wandered onto a trunk road.
-
-The parcelling is `FIELD_SECTION_M` and `FIELD_ANCHOR` (the survey the grid is cut on),
-`FIELD_SPLITS` (how many halvings a side may take, so how small a parcel gets),
-`FIELD_SMALL_M`/`FIELD_MEDIUM_M` (the rings round a town), `FIELD_CLEAR_M` (the headland),
-`FIELD_BANK_CLEAR_M` (how far above the bank top cultivation stops, and so how close the
-fields come to the water), `FIELD_MERGE_MAX_HA` (what a merge may reach in the country) and `FIELD_MERGE_STEPS`
-(how far it may climb over the band it stands in),
-`FIELD_MIN_HA`/`FIELD_MIN_SIDE_M` (under which a parcel is a headland rather than a field
-and the ground is better left out of cultivation - and so also whether the ring a town's
-platform leaves against the survey is cultivated), and the two that decide trimming against
-splitting: `FIELD_KEEP_FRAC` - how much of a side a parcel must keep for trimming to be the
-right answer - and `FIELD_SPLIT_GAIN`. `validate()` checks the *output* rather than the
-rules that made it, which is the whole point: that all 290 are axis-aligned rectangles, are
-inside their size band, keep their short side, do not overlap each other, and none of them
-stands on a bank. That last one earned its keep immediately: loosening the parcelling off
-`VALLEY_HALF_W_M` and down to the bank left this check still holding the old number, and it
-failed the build on `field_008` rather than shipping two halves of the pipeline that
-disagreed about where cultivation stops.
 
 The shelterbelts are `SHELTER_W_M` - the only free number in them, both lengths coming out
 of `MILE_M` and a clearance - with `SHELTER_LINES`/`SHELTER_SITES` for the north-south ones

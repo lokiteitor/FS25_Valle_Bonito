@@ -6,9 +6,10 @@ the tree - the same module the DEM generator sculpts its terrain from, so a rive
 here runs along the valley that was carved there, and a farmyard sits on the platform
 that was levelled for it. Neither half of the pipeline defines geometry of its own.
 
-What it writes today is the water, the road grid and the four towns; the parcelling is
-still to come, so there are no fields in the file yet. The machinery around all of it is
-the part that is tedious to get right and easy to get subtly wrong:
+What it writes today is the water, the road grid, the four towns, the roadside yards,
+the woods and the shelterbelts. The open country between them carries no tag, so there
+are no fields in the file. The machinery around all of it is the part that is tedious to
+get right and easy to get subtly wrong:
 
     Osm.node / Osm.way / Osm.area   one node per coordinate, so two ways that name the
                                     same point share it - otherwise the road network is
