@@ -168,9 +168,9 @@ def main():
     check("every way carries a tag both renderers draw", not unrendered,
           f"{len(unrendered)} invisible")
 
-    # Nothing the planting places may stand in the clean strip along the boundary: a
-    # ring cut off square by the map edge reads as half of itself, and that strip is the
-    # ground the rim rises out of. Water is exempt - it has to leave
+    # Nothing the parcelling or the planting places may stand in the clean strip along
+    # the boundary: a field cut off square by the map edge reads as half a field, and
+    # that strip is the ground the rim rises out of. Water is exempt - it has to leave
     # the map - and so are the roads, for the same reason.
     in_strip = []
     closest = -1e9

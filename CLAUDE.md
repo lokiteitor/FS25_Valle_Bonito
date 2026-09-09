@@ -130,13 +130,37 @@ happened to be left over. The nearest miss on the north-south side is `este_medi
 where the river's east swing brings the belt to 493 m of open water against the 500 m a
 planting is held off - seven metres, on a rule that could be moved. It is not moved.
 
-The ground between all of that is not parcelled. There are no `landuse=farmland` rings
-on the map: the open country carries no tag, the same way floodplain pasture does not,
-and the OSM writes out only the water, the roads, the towns, the yards, the woods and the
-belts. The aliquot parcelling that used to fill it - a section halved and halved again
-into quarter sections, forties and tens, sized by distance to a town, trimmed off the
-roads, split where an obstacle reached into a cell and merged where two shared a whole
-edge - is in git history at commit `f6ecb39` if it is worth reading back.
+The ground between all of that is parcelled into 145 fields, and they are laid out the
+way the ground was actually subdivided: by aliquot parts of a section. A section is a
+mile square, 259.0 ha, and the survey halves it and halves it again, so the sizes are not
+chosen - a quarter section is 64.75 ha, a forty 16.19 and a ten 4.05, and those are the
+brief's large, medium and small to within a hectare. Which one a cell is offered at comes
+from its distance to the nearest town, because land near a settlement is worth more and
+was sold in smaller pieces. If anything is in the way - a road and its verge, a yard, a
+wood, the clean strip, the water's valley - the cell is trimmed if the obstacle is along
+an edge and quartered if it reaches inside, which is what fills the awkward corners with
+whatever aliquot fits rather than with a special case per obstacle. Afterwards, two
+parcels that share a *whole* edge become one field, up to one halving over the band they
+stand in, because a farmer working two forties as one does not consult the survey - and
+then every field comes in by half of `FIELD_GAP_M` on all four sides, so the ones the
+merge did not join stand 5 m off each other instead of sharing an edge. That order is
+load-bearing: inset first and there are no whole shared edges left for the merge to find,
+nothing is ever joined, and the count goes over two hundred.
+
+Two things about it are not the survey's. The first is that **the fields stay out of the
+water's valley entirely** - the full `VALLEY_HALF_W_M`, the same clearance every yard,
+wood and belt on the map is already held off the water by, rather than coming down the
+valley side to the top of the bank. The ground down that side is under five degrees and a
+machine would work it; holding the fields off it costs 901 ha, a fifth of everything the
+parcelling lays out, and it is the whole reason the corridor reads as floodplain. The
+second is the **count**, `FIELD_MAX_COUNT`: at most 150 fields on the map, which is the
+one number here that is a ceiling somebody chose rather than something the survey
+implies. It binds, and it is what every band was set against - the parcelling was run and
+counted, because the count falls out of the geometry rather than out of any constant and
+is not even monotone in the obvious direction: merging one step harder cuts twenty fields
+and covers exactly the same ground. `validate()` holds the cap, so the next feature added
+to the map cannot quietly push it over. What lands is 145 fields of 3.3 to 94.2 ha,
+3252 ha in all, 49% of the playable square.
 
 The rest is the technical base: the projection, the coordinates, the canvas geometry, the
 16-bit centimetre encoding, the geometry primitives, the terrain operators in
@@ -234,10 +258,10 @@ subtracted the difference from every acre within half a kilometre of the water.
 
 ## Things that have already gone wrong here
 
-Each of these was a real bug found by measurement, not by looking at the output. Most of
-the code that hit them has been cleared out - with the Iowa map, and then with the
-parcelling - but the mistakes have not gone anywhere: they are what any terrain written
-back into this pipeline will hit again, in the same order.
+Each of these was a real bug found by measurement, not by looking at the output. Some of
+the code that hit them went out with the Iowa map, but the mistakes have not gone
+anywhere: they are what any terrain written back into this pipeline will hit again, in
+the same order.
 
 - **Offsetting a polyline** by more than its radius of curvature folds the ring through
   itself, and an even-odd fill then punches holes in the tightest meanders. Reserves along
@@ -555,6 +579,21 @@ other alignment, the water's valley, and every pad and wood it might overlap. Th
 is measured off the ring too, not off a half-side: it comes to the same thing for a
 rectangle and it did not for the lobed outline these were drawn with first, so it stays
 measuring the ring - the shape is one constant away from changing again.
+
+The parcelling is `FIELD_MAX_COUNT` (the ceiling on how many fields there may be, and
+the constraint every other number here was set against), the two band radii
+`FIELD_SMALL_M` and `FIELD_MEDIUM_M`, the aliquot caps `FIELD_CAP_SMALL_HA` /
+`_MEDIUM_HA` / `_LARGE_HA` that fall out of `FIELD_SECTION_M`, `FIELD_MERGE_MAX_HA` and
+`FIELD_MERGE_STEPS` for joining two parcels into one field, `FIELD_MIN_HA` /
+`FIELD_MIN_SIDE_M` for what is worth drawing at all, `FIELD_CLEAR_M` for the headland off
+anything built, `FIELD_GAP_M` for the headland between two fields, `FIELD_RIVER_CLEAR_M`
+/ `FIELD_LAKE_CLEAR_M` for the water, and the two that decide trim-versus-split,
+`FIELD_KEEP_FRAC` and `FIELD_SPLIT_GAIN`. Coverage is almost flat in all of them - every
+setting reaches 3250-3300 ha - and what they buy is how finely that ground is cut up, so
+tune them against the count and not against the acres. `validate()` measures the output
+rather than the rules: that every field is an axis-aligned rectangle inside its size band,
+that no two overlap, that none stands closer than `FIELD_GAP_M` to another, that none is
+in the water's valley, and that there are no more than `FIELD_MAX_COUNT` of them.
 
 The roads are `MILE_M` and what hangs off it: `ROAD_MAIN_INSET_M`, `PLSS_EW_ANCHOR_M`,
 `PLSS_BRIDGED` (which section lines get a crossing), `ROAD_STUB_SETBACK_M` (where the

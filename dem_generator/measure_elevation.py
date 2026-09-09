@@ -7,7 +7,7 @@ the ceiling of the 16-bit range, that the playable square really is the datum ra
 nearly it, that the valley rim in the border is the valley the brief asked for - two
 ranges standing 200 to 250 m over a floor at 20 m, a sill low enough at either end that
 the valley runs through rather than being walled in - and that `terrain_stats.json`,
-which the OSM side reads instead of re-deriving the terrain, describes the same surface
+which the parcelling reads instead of re-deriving the terrain, describes the same surface
 the PNG does.
 
 The rim is the interesting half, and every number it is judged on is read back out of the
@@ -400,8 +400,8 @@ def main():
 
     # The apron is the whole point of the rim starting where it starts: a mountain that
     # began at the boundary would put its own toe inside the playable square, and the
-    # last ground on the map would be a hillside. The river's own valley crosses it,
-    # and is not the rim's doing.
+    # last field on the map would be growing up a hillside. The river's own valley
+    # crosses it, and is not the rim's doing.
     # The apron is the whole point of the rim starting where it starts: a mountain that
     # began at the boundary would put its toe inside the playable square. With relief
     # under it the question is no longer "is it 75.00" but "is it still the till plain",
@@ -852,9 +852,9 @@ def main():
          "the lake is allowed to be 38 m deep inside its own shore")
 
     # ---------------------------------------------------------------- stats
-    # The OSM side sizes what it places off this file rather than re-deriving the
-    # terrain. If it and the PNG disagree the two halves of the pipeline are describing
-    # different ground, which is invisible in either output on its own.
+    # The parcelling sizes fields off this file rather than re-deriving the terrain. If
+    # it and the PNG disagree the two halves of the pipeline are describing different
+    # ground, which is invisible in either output on its own.
     print("\nterrain_stats.json:")
     if not check("published", os.path.exists(stats_path)):
         return 1
@@ -904,10 +904,10 @@ def main():
              & ~on_built)
     in_valley = in_valley & ~on_built
     up_r, val_r = rgh.reshape(-1)[clear], rgh.reshape(-1)[in_valley]
-    # It is not enough that roughness is non-zero somewhere: anything that sizes itself
-    # to the ground reads this file, so it has to *separate* the ground a machine works
-    # from the ground it does not. A scale that saturates on the till plain's own swells
-    # reads 1.000 everywhere and says nothing.
+    # It is not enough that roughness is non-zero somewhere: the parcelling sizes fields
+    # off this file, so it has to *separate* the ground the fields go on from the ground
+    # they should not. A scale that saturates on the till plain's own swells reads 1.000
+    # everywhere and says nothing.
     check("the uplands read as ground you can farm",
           float(up_r.mean()) < 0.35 and float(np.percentile(up_r, 90)) < 0.6,
           f"{int(clear.sum())} cells a whole baseline clear of the valley: mean "

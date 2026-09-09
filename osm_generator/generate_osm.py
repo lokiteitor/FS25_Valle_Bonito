@@ -7,9 +7,9 @@ here runs along the valley that was carved there, and a farmyard sits on the pla
 that was levelled for it. Neither half of the pipeline defines geometry of its own.
 
 What it writes today is the water, the road grid, the four towns, the roadside yards,
-the woods and the shelterbelts. The open country between them carries no tag, so there
-are no fields in the file. The machinery around all of it is the part that is tedious to
-get right and easy to get subtly wrong:
+the woods and the shelterbelts, and the parcelling that fills the ground between them.
+The machinery around all of it is the part that is tedious to get right and easy to get
+subtly wrong:
 
     Osm.node / Osm.way / Osm.area   one node per coordinate, so two ways that name the
                                     same point share it - otherwise the road network is
