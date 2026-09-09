@@ -131,32 +131,53 @@ happened to be left over. The nearest miss on the north-south side is `este_medi
 where the river's east swing brings the belt to 493 m of open water against the 500 m a
 planting is held off - seven metres, on a rule that could be moved. It is not moved.
 
-Ten strips of gallery timber, 62 ha, follow both banks of the river down 6.9 km of it.
-They are the one planting here that is not placed on the survey - they follow the water,
-which is the only thing on this map that does not run on a section line - and they are
-the timber this country actually has: the uplands were prairie and were ploughed, and
-what was left standing was the strip along the river nobody could plough. Neither edge of
-one is a number: the inner is `GALLERY_SETBACK_M` off the **drawn waterline** and not off
-the centreline, the same way a yard is measured off the kerb, so it is 60 m out from the
-axis; the outer is the top of the bank, `BANK_RUN_M` out from the waterline, at 105 m.
-The strip covers the bank and nothing else, and it is 45 m wide because that is what the
-two landmarks leave.
+Fourteen stands of riverside timber, 757 ha, cover the valley side down both banks of the
+river and all the way round the lake. They are the one planting here that is not placed on
+the survey - they follow the water, which is the only thing on this map that does not run
+on a section line - and they are the timber this country actually has: the uplands were
+prairie and were ploughed, and what was left standing was the ground along the water
+nobody could plough. Neither edge is a number. The inner one is `GALLERY_SETBACK_M` off
+the **drawn waterline** and not off the river's centreline, the same way a yard is
+measured off the kerb; the outer one is `GALLERY_CLEAR_M` short of whatever stopped it,
+which is nearly always a field.
 
-**The width is bounded by the meanders and not by taste.** This is the one shape on the
-map built by offsetting a polyline, which is the first entry in the list of things that
-have gone wrong here: these meanders bend to a 255 m radius, the far edge of the strip is
-105 m out, and past about 200 m the ring folds through itself and an even-odd fill draws
-it with holes in the tightest bends. `validate()` holds that two ways - the drawn area
-against `(b - a) L - (b^2 - a^2)/2 dtheta`, which is what a band between two offsets of a
-curve of length L and total turning dtheta covers exactly and which a fold comes out well
-under, and then a sweep for crossing edges, which names the failure directly.
+**How they are built is the whole of it, because the obvious construction does not work.**
+A band along a curve is an offset of that curve, and the first entry in the list below is
+that offsetting a polyline by more than its radius of curvature folds the ring through
+itself. These meanders bend to 255 m and the far edge of this wood is 485 m out: the
+offset at that distance is not even monotone in northing, which is one line to measure.
+So the outer edge is not an offset of the water at all. Every station on the waterline
+**casts a ray outwards** along its own normal, and the wood runs as far as that ray gets
+before it meets a field, a yard, a road's clearance, the other body of water, the clean
+strip, or `GALLERY_MAX_W_M` of valley side. The inner edge stays a true offset, which is
+safe at 60 m against a 255 m radius.
 
-Where the strips stop is derived rather than tabled, because everything that interrupts
-them is already on the map: the clean strip at either end, the lake - the river has no
-banks inside it - and every road, tested with the strip's own reach added to the
-clearance so the whole width clears what the axis clears. That last one takes in the
-three section lines that dead-end at the river, because they stop *inside* the strip, and
-it only works because they are tested as the finite polylines they are.
+Three things then have to hold, and each of them was a complaint from `validate()` before
+it was a rule:
+
+  * **A ray stops where the ground stops belonging to its own water.** A ray starts
+    `GALLERY_SETBACK_M` off its waterline and walks away, so `s + d` is how far the point
+    at `d` stands from the water it belongs to; the moment some *other* piece of water is
+    nearer than that, the ground is nearer that water instead. Stopping there is the
+    medial axis between the two, and it is one statement that keeps the two arms of a
+    meander neck from growing into each other, keeps the lake's timber and the river's
+    apart where the river runs in, and keeps any ray out of open water.
+  * **Converging rays stop short of where they meet.** Rays cast off the inside of a bend
+    point at each other, and a wood drawn past that point has an outer edge that crosses
+    itself. Every pair is checked, not just neighbours: the pair that was still crossing
+    was two rays 1020 m apart along the river and 733 m apart on the ground, on the two
+    arms of a meander that comes back on itself. Frontage says nothing about that; how
+    far apart the two stations *stand* does, and no two rays capped at `GALLERY_MAX_W_M`
+    can meet unless that is under twice it, which is the pre-filter.
+  * **The panel between two rays is tested, not the rays.** A rectangle can be missed by
+    both rays and still be clipped by the quadrilateral joining them - no vertex of
+    either inside the other, which is the crossing case a containment test passes every
+    time. The panels are tested and the two casts behind one that is not clear come back
+    together until it is.
+
+They are laid out **after** the fields and not before, and that is the dependency rather
+than a preference: the parcelling does not need to know the timber is there, but the
+timber is defined by where the parcelling stopped.
 
 The ground between all of that is parcelled into 145 fields, and they are laid out the
 way the ground was actually subdivided: by aliquot parts of a section. A section is a
@@ -600,13 +621,16 @@ and `SHELTER_BANDS`/`SHELTER_ROWS`/`SHELTER_EW_SITES` for the transversal. `vali
 holds the width and the length against the drawn ring, and holds each belt to the
 orientation its length was derived for.
 
-The gallery timber is `GALLERY_SETBACK_M` and `GALLERY_LEAF_TYPE`, with `GALLERY_MIN_LEN_M`
-for what is worth drawing and `GALLERY_STEP_M` for how finely the reaches are walked; the
-two edges and therefore the width come out of `RIVER_HALF_W_M` and `BANK_RUN_M`, and there
-is no site table because `gallery_reaches()` derives where it can stand. Widening it is the
-one change here that can break the geometry rather than the placement - see the radius of
-curvature above - so `validate()` checks the drawn ring for a fold rather than the constant
-for a value.
+The riverside timber is `GALLERY_SETBACK_M` off the water and `GALLERY_CLEAR_M` off
+everything else, capped at `GALLERY_MAX_W_M` of valley side, with `GALLERY_MIN_W_M` and
+`GALLERY_MIN_LEN_M` for what is worth drawing, `GALLERY_STEP_M` for how finely the
+waterline is walked and `GALLERY_LEAF_TYPE` for what grows in it. There is no site table:
+`gallery_areas()` derives where it can stand from the fields and everything else already
+on the map. `GALLERY_MEET_FRAC`, `GALLERY_RELAX_FRAC` and `GALLERY_RELAX_PASSES` are
+margins rather than knobs - the first keeps the outer edge short of where two rays would
+cross, the other two only have to converge. This is the one thing here where a change can
+break the *geometry* and not just the placement, so `validate()` sweeps the drawn rings
+for crossings rather than checking a constant for a value.
 
 The woods are `WOOD_AREA_HA`, `WOOD_ASPECT` and `WOOD_LEAF_TYPE`, with `WOOD_SITES` in the
 same shape as the yard tables. `validate()` holds the area against the drawn ring rather

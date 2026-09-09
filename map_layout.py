@@ -17,8 +17,9 @@ grid between them, of which only the outer two are bridged. And on the four corn
 a trunk road meets a bridged section line there is a town: a grid of blocks with the
 trunk road running up the middle of it, standing on a platform levelled out of the till
 plain. Hung off the roads are twelve industrial aprons and six farms, all square; five
-woods and eleven shelterbelts stand along them, and a strip of hardwood follows both
-banks of the river, coming down to fifteen metres of the water. The rest is parcelled
+woods and eleven shelterbelts stand along them, and hardwood covers the valley side down
+both banks of the river and all round the lake, coming to fifteen metres of the water on
+one side and stopping fifteen metres short of the fields on the other. The rest is parcelled
 into 145 fields on
 the survey's own aliquot grid - quarter sections out in the country, forties nearer the
 towns, ten-acre parcels against them, merged where they share a whole edge and held 5 m
@@ -932,41 +933,62 @@ def shelter_area_ew(bid, name, band, row):
             'tags': {'natural': 'wood', 'leaf_type': SHELTER_LEAF_TYPE}}
 
 
-# --- the gallery timber -----------------------------------------------------------
-# Bosque de ribera: a strip of hardwood down both banks of the river, coming to
-# GALLERY_SETBACK_M of the water's edge. It is the one planting on this map that is not
-# placed on the survey - it follows the river, which is the only thing here that does not
-# run on a section line - and it is the timber that is actually there in this country:
-# the uplands were prairie and were ploughed, and what was left standing was the strip
-# along the water that nobody could plough.
+# --- the timber along the water ----------------------------------------------------
+# Bosque de ribera: the trees along the river and round the lake. It is the one planting
+# on this map that is not placed on the survey - it follows the water, which is the only
+# thing here that does not run on a section line - and it is the timber this country
+# actually has. The uplands were prairie and were ploughed; what was left standing was
+# the ground along the water that nobody could plough, and that is exactly the ground
+# this fills: from GALLERY_SETBACK_M off the drawn waterline out across the valley side,
+# stopping GALLERY_CLEAR_M short of the nearest field.
 #
-# Neither edge of it is a number somebody picked. The inner one is the brief, a setback
-# off the *drawn waterline* and not off the centreline, the same way a roadside yard is
-# measured off the kerb - so it is `RIVER_HALF_W_M` plus the setback, 60 m out from the
-# axis. The outer one is the top of the bank, `BANK_RUN_M` out from the waterline, which
-# is where the bank stops being bank and the valley side begins. So the strip covers the
-# bank and nothing else, and it is 45 m wide because that is what the two landmarks
-# leave: move the setback or the bank run and the width follows.
+# **How it is built is the whole of it, because the obvious construction does not work.**
+# A band along a curve is an offset of that curve, and the first entry in the list of
+# things that have gone wrong here is that offsetting a polyline by more than its radius
+# of curvature folds the ring through itself. These meanders bend to 255 m and the far
+# edge of this wood is 485 m out: the offset at that distance is not even monotone in
+# northing any more, which is measurable in one line and is what the first version of
+# this - a 45 m strip that stopped at the top of the bank - was sized to avoid.
 #
-# **The width is bounded by the meanders and not by taste.** This is the one shape on the
-# map built by offsetting a polyline, which is the first entry in the list of things that
-# have gone wrong here: offset a curve by more than its radius of curvature and the ring
-# folds through itself, and an even-odd fill then punches holes in the tightest bends.
-# These meanders bend to 255 m, and the far edge of this strip is 105 m out - well inside
-# it, and `validate()` holds that rather than trusting it. Anything wider than about
-# 200 m has to be stamped by distance to the centreline instead, which is not a thing an
-# OSM ring can be.
-GALLERY_SETBACK_M = 15.0
-GALLERY_INNER_M = RIVER_HALF_W_M + GALLERY_SETBACK_M       # 60 m off the axis
-GALLERY_OUTER_M = RIVER_HALF_W_M + BANK_RUN_M              # 105 m: the top of the bank
+# So the outer edge is not an offset of the water at all. Every station on the waterline
+# **casts a ray outwards** along its own normal and the wood runs as far as that ray gets
+# before it meets something: a field, a yard, a road's clearance, the other body of
+# water, the clean strip, or GALLERY_MAX_W_M of valley side, whichever comes first. The
+# inner edge stays a true offset, which is safe because GALLERY_INNER_M is 60 m against a
+# 255 m radius. What that buys is a shape whose width answers to what is actually beside
+# it - wide where the fields stand back, pinched to nothing at a bridge - and a ring that
+# cannot fold, because a ray never crosses its neighbour while the cast stays under the
+# radius of curvature. `validate()` sweeps the drawn rings for crossings rather than
+# taking that on trust.
+#
+# It is also why this is laid out **after** the fields and not before. The parcelling
+# does not need to know the timber is there - it is inside the reserve the water already
+# keeps the fields out of - but the timber is defined by where the fields stopped, so the
+# order is: parcel the ground, then plant what the parcelling left along the water.
+GALLERY_SETBACK_M = 15.0          # from the drawn waterline to the first tree
+GALLERY_CLEAR_M = 15.0            # from the last tree to whatever stopped it
+# How far up the valley side it may go. The valley reaches VALLEY_HALF_W_M from the
+# waterline and the ground is till plain beyond that, so past this the wood would be
+# standing on the flats rather than on the side - and the fields are the ones that are
+# supposed to stop it, so this is only the backstop for a station that has no field
+# opposite it at all.
+GALLERY_MAX_W_M = VALLEY_HALF_W_M - GALLERY_SETBACK_M
+GALLERY_MIN_W_M = 40.0            # thinner than this is a verge, not a wood
+GALLERY_MIN_LEN_M = 250.0         # and shorter than this is a fragment between crossings
+GALLERY_STEP_M = 20.0             # how finely the waterline is walked
+# How much of the way to where two converging rays meet the wood is allowed to go, and
+# how hard a panel that is not clear pulls its two rays back. Neither is a tuning knob so
+# much as a margin: the first keeps the outer edge short of the point where it would
+# cross itself, the second only has to converge.
+GALLERY_MEET_FRAC = 0.80
+GALLERY_RELAX_FRAC = 0.80
+GALLERY_RELAX_PASSES = 16
 # Riparian timber is hardwood - cottonwood, willow, silver maple - so it reads with the
 # shelterbelts rather than with the planted conifer woodlots, and both renderers colour
 # the two apart.
 GALLERY_LEAF_TYPE = 'broadleaved'
-# What is worth drawing. A reach shorter than this is a fragment between two crossings,
-# not a wood, and it costs nodes to say so.
-GALLERY_MIN_LEN_M = 250.0
-GALLERY_STEP_M = 20.0             # how finely the reaches are walked and the ring drawn
+
+GALLERY_INNER_M = RIVER_HALF_W_M + GALLERY_SETBACK_M       # 60 m off the river's axis
 
 
 def _river_dense():
@@ -978,80 +1000,293 @@ def _river_dense():
     return dense, arc
 
 
-def gallery_reaches():
-    """The stretches of river that have a bank a wood can stand on, as `(s0, s1)` arc
-    lengths, and it is derived rather than tabled because everything that interrupts it
-    is already on the map.
+_RIVER_AXIS = river_axis()
+_RIVER_YS = [q[1] for q in _RIVER_AXIS]
+_LAKE_RING = lake_ring()
+_WATER_BAND_M = GALLERY_MAX_W_M + RIVER_HALF_W_M + GALLERY_SETBACK_M
+_LAKE_BOX = (min(q[0] for q in _LAKE_RING), min(q[1] for q in _LAKE_RING),
+             max(q[0] for q in _LAKE_RING), max(q[1] for q in _LAKE_RING))
 
-    Three things cut the strip, and each one is tested against the *axis* with the
-    strip's own reach added to the clearance. That is what makes the cut conservative in
-    the right direction: every vertex of the ring is within `GALLERY_OUTER_M` of the axis
-    point it came from, so an axis point that clears an obstacle by clearance + reach
-    puts the whole width of the strip outside it.
 
-      * **the map edge** - the ring has to stay out of the clean strip like any planting;
-      * **the lake** - the river has no banks inside it, and a strip drawn across the
-        lake is timber painted on open water;
-      * **every road** - a crossing has no trees on it, and the three section lines that
-        dead-end at the river stop *inside* the strip, so they cut it too. Testing them
-        as finite polylines rather than as lines is what gets that right.
+def gallery_blocks(planted, fields):
+    """Everything a ray stops at, as rectangles already grown by GALLERY_CLEAR_M.
+
+    A road goes in as the bounding box of its axis grown by the clearance it keeps, which
+    for an axis-aligned alignment is exactly its own reserve and a little over at the two
+    ends. That is the right direction to be wrong in: it stops the wood short of a road
+    rather than letting it onto one, and the ends of an alignment are where a bridge
+    abutment or a stub's turning head is anyway.
     """
-    dense, arc = _river_dense()
-    ring = lake_ring()
-    lx = (min(q[0] for q in ring), max(q[0] for q in ring))
-    ly = (min(q[1] for q in ring), max(q[1] for q in ring))
-    lake_keep = GALLERY_SETBACK_M + GALLERY_OUTER_M
-    keeps = [(c['axis'], c['half_width_m'] + ROADSIDE_SETBACK_M + GALLERY_OUTER_M)
-             for c in CORRIDORS]
-    out, run = [], None
-    for i, p in enumerate(dense):
-        ok = playable_sdf(*p) <= -(EDGE_CLEAR_M + GALLERY_OUTER_M)
-        if ok and lx[0] - lake_keep <= p[0] <= lx[1] + lake_keep \
-                and ly[0] - lake_keep <= p[1] <= ly[1] + lake_keep:
-            ok = not (point_in_ring(p, ring)
-                      or min(math.dist(p, q) for q in ring) < lake_keep)
-        if ok:
-            ok = all(dist_to_polyline(p, ax) >= keep for ax, keep in keeps)
-        if ok and run is None:
-            run = arc[i]
-        elif not ok and run is not None:
-            out.append((run, arc[i - 1]))
-            run = None
-    if run is not None:
-        out.append((run, arc[-1]))
-    return [(a, b) for a, b in out if b - a >= GALLERY_MIN_LEN_M]
-
-
-def gallery_ring(s0, s1, side):
-    """The band between the two offsets on one side of the reach `s0 .. s1`.
-
-    `side` is +1 for the east bank and -1 for the west, which is what the sign of an
-    offset means on an axis that runs north to south.
-    """
-    dense, arc = _river_dense()
-    pts = [p for p, s in zip(dense, arc) if s0 - 1e-9 <= s <= s1 + 1e-9]
-    inner = offset_polyline(pts, side * GALLERY_INNER_M)
-    outer = offset_polyline(pts, side * GALLERY_OUTER_M)
-    return close_ring(inner + outer[::-1])
-
-
-def gallery_areas():
-    """Both banks of every reach, numbered from the north."""
+    g = GALLERY_CLEAR_M
     out = []
-    for k, (s0, s1) in enumerate(gallery_reaches()):
-        for side, bank in ((-1, 'Oeste'), (+1, 'Este')):
-            ring = gallery_ring(s0, s1, side)
-            xs = [q[0] for q in ring]
-            ys = [q[1] for q in ring]
-            out.append({'id': f'gallery_{k + 1}_{"w" if side < 0 else "e"}',
-                        'name': f'Bosque de Ribera {bank} {k + 1}',
-                        'reach': (s0, s1), 'side': side, 'length_m': s1 - s0,
-                        'area_ha': ring_area_ha(ring),
-                        'centre': ((min(xs) + max(xs)) / 2.0,
-                                   (min(ys) + max(ys)) / 2.0),
-                        'ring': ring,
-                        'tags': {'natural': 'wood', 'leaf_type': GALLERY_LEAF_TYPE}})
+    for p in PADS:
+        cx, cy = p['centre']
+        w, h = p['size']
+        out.append((cx - w / 2.0 - g, cy - h / 2.0 - g,
+                    cx + w / 2.0 + g, cy + h / 2.0 + g))
+    for a in list(planted) + list(fields):
+        xs = [q[0] for q in a['ring']]
+        ys = [q[1] for q in a['ring']]
+        out.append((min(xs) - g, min(ys) - g, max(xs) + g, max(ys) + g))
+    for c in CORRIDORS:
+        keep = c['half_width_m'] + ROADSIDE_SETBACK_M
+        xs = [q[0] for q in c['axis']]
+        ys = [q[1] for q in c['axis']]
+        out.append((min(xs) - keep, min(ys) - keep, max(xs) + keep, max(ys) + keep))
+    m = EDGE_CLEAR_M
+    far = 10.0 * PLAYABLE_M
+    out += [(-far, -far, m, far), (PLAYABLE_M - m, -far, far, far),
+            (-far, -far, far, m), (-far, PLAYABLE_M - m, far, far)]
     return out
+
+
+def _cast(p, n, limit, rects):
+    """How far from `p` along the unit vector `n` the wood may run before it meets one of
+    `rects`. The slab test, which is exact for an axis-aligned box and is the reason
+    everything above was turned into one."""
+    t = limit
+    bx0, bx1 = min(p[0], p[0] + limit * n[0]), max(p[0], p[0] + limit * n[0])
+    by0, by1 = min(p[1], p[1] + limit * n[1]), max(p[1], p[1] + limit * n[1])
+    for x0, y0, x1, y1 in rects:
+        # The ray's own box first. The slab test below is exact and costs twenty
+        # operations; four comparisons throw out the several hundred rectangles on the
+        # map that are nowhere near this station.
+        if x1 < bx0 or x0 > bx1 or y1 < by0 or y0 > by1:
+            continue
+        lo, hi = 0.0, t
+        for k, (a, b) in enumerate(((x0, x1), (y0, y1))):
+            if abs(n[k]) < 1e-12:
+                if not (a <= p[k] <= b):
+                    lo = 1e18
+                    break
+            else:
+                u, v = (a - p[k]) / n[k], (b - p[k]) / n[k]
+                if u > v:
+                    u, v = v, u
+                lo, hi = max(lo, u), min(hi, v)
+        if lo <= hi and lo < t:
+            t = max(0.0, lo)
+    return t
+
+
+def water_dist(q, cutoff=None):
+    """Distance from `q` to the nearest drawn waterline, 0 inside the water.
+
+    `cutoff` is how far the caller still cares: anything further comes back as at least
+    that, which is what lets the search be sliced. The river is a single-valued function
+    of northing, so its axis is sorted in y and only the stretch inside `q`'s own band of
+    northing can be within the cutoff - a bisect with a vertex of margin either end,
+    exact here and *not* exact on a watercourse that doubled back. The lake is skipped
+    outright unless `q` is inside its box grown by the same. Without both of those this
+    walks 322 river vertices and 97 lake ones for every sample of every ray, which was
+    most of what the timber cost to lay out.
+    """
+    band = _WATER_BAND_M if cutoff is None else cutoff + RIVER_HALF_W_M
+    lo = bisect.bisect_left(_RIVER_YS, q[1] - band)
+    hi = bisect.bisect_right(_RIVER_YS, q[1] + band)
+    seg = _RIVER_AXIS[max(0, lo - 1):hi + 1]
+    d = (dist_to_polyline(q, seg) - RIVER_HALF_W_M) if len(seg) > 1 else 1.0e18
+    if _LAKE_BOX[0] - band <= q[0] <= _LAKE_BOX[2] + band \
+            and _LAKE_BOX[1] - band <= q[1] <= _LAKE_BOX[3] + band:
+        if point_in_ring(q, _LAKE_RING):
+            return 0.0
+        d = min(d, min(math.dist(q, r) for r in _LAKE_RING))
+    return max(0.0, d)
+
+
+def _cast_medial(p, n, t, s):
+    """Pull a cast back where it reaches ground that belongs to a different piece of
+    waterline, which is the rule that keeps one stand of timber out of another.
+
+    A ray starts `s` off its own waterline and walks away from it, so `s + d` is how far
+    the point at `d` stands from the water it belongs to. The moment some *other* piece of
+    water is nearer than that, the ground under the ray is nearer that water instead, and
+    the stand growing out of it is the one that owns it. Stopping there is the medial
+    axis between the two, and it is one statement that does three jobs: it keeps the two
+    banks of a meander neck from growing into each other, it keeps the lake's timber and
+    the river's apart where the river runs in, and it keeps any ray out of open water,
+    because water is at distance zero and zero is under `s + d` for every d.
+
+    Sampled rather than solved. The step is the one the waterline itself is walked at, so
+    nothing wider than a station can be stepped over, and the metre of slack is for the
+    curvature the `s + d` reading ignores on the inside of a bend.
+    """
+    d = GALLERY_STEP_M
+    while d <= t:
+        q = (p[0] + d * n[0], p[1] + d * n[1])
+        if water_dist(q, s + d) < s + d - 1.0:
+            return max(0.0, d - GALLERY_STEP_M)
+        d += GALLERY_STEP_M
+    return t
+
+
+def _gallery_runs(width, closed):
+    """Runs of consecutive stations wide enough to be a wood, as index spans."""
+    ok = [w >= GALLERY_MIN_W_M for w in width]
+    n = len(ok)
+    if closed:
+        if all(ok):
+            return [(0, n - 1)]
+        k = next(i for i in range(n) if not ok[i])
+        order = [(k + i) % n for i in range(n)]
+    else:
+        order = list(range(n))
+    runs, run = [], []
+    for i in order:
+        if ok[i]:
+            run.append(i)
+        elif run:
+            runs.append((run[0], run[-1]))
+            run = []
+    if run:
+        runs.append((run[0], run[-1]))
+    return runs
+
+
+def _gallery_ring(inner, normal, width, i0, i1, closed):
+    """Out along the ray at one end, down the outer edge, back along the waterline."""
+    n = len(inner)
+    idx = [(i0 + k) % n for k in range((i1 - i0) % n + 1)] if closed \
+        else list(range(i0, i1 + 1))
+    edge = [(inner[i][0] + width[i] * normal[i][0],
+             inner[i][1] + width[i] * normal[i][1]) for i in idx]
+    return close_ring([inner[i] for i in idx] + edge[::-1])
+
+
+def _ray_meet(p, n, q, m):
+    """Where two rays converge, as a distance along the first, or infinity if they do not.
+
+    Rays cast off the inside of a bend point at each other and meet at the centre of
+    curvature. A wood drawn out past that point has an outer edge that crosses itself, so
+    this is the distance the pair of them has to stop short of, and it is solved rather
+    than estimated from a radius: two lines, one determinant.
+    """
+    den = n[0] * m[1] - n[1] * m[0]
+    if abs(den) < 1e-12:
+        return float('inf')
+    t = ((q[0] - p[0]) * m[1] - (q[1] - p[1]) * m[0]) / den
+    return t if t > 0.0 else float('inf')
+
+
+def _gallery_side(inner, normal, blocks, closed, tag, name, out):
+    """Cast from every station, pull the casts back until what is drawn between them is
+    as clear as they are, take the runs that are wide enough, draw them."""
+    n = len(inner)
+    width = [_cast_medial(p, nv, _cast(p, nv, GALLERY_MAX_W_M, blocks),
+                          GALLERY_SETBACK_M)
+             for p, nv in zip(inner, normal)]
+    pairs = [(i, (i + 1) % n) for i in range(n if closed else n - 1)]
+    # Converging rays first, because that failure is in the pair and not in the ground.
+    #
+    # Every pair, and not the next ray along or a window of frontage either side of it:
+    # the pair that had one stand still crossing itself was two rays 1020 m apart along
+    # the river and 733 m apart on the ground, on the two arms of a meander that comes
+    # back on itself, meeting 468 m out where both wanted 485. Frontage says nothing
+    # about that. What does is how far apart the two stations *stand*, and no two rays
+    # capped at GALLERY_MAX_W_M can meet at all unless that is under twice it - which is
+    # the pre-filter, and is why this stays a sweep rather than a cost.
+    span = 2.0 * GALLERY_MAX_W_M
+    for i in range(n):
+        px, py = inner[i]
+        for j in range(i + 1, n):
+            qx, qy = inner[j]
+            if abs(qx - px) > span or abs(qy - py) > span:
+                continue
+            t = _ray_meet(inner[i], normal[i], inner[j], normal[j])
+            if t < float('inf'):
+                width[i] = min(width[i], GALLERY_MEET_FRAC * t)
+                width[j] = min(width[j], GALLERY_MEET_FRAC * t)
+    # Then the ground. A ray is a line and what is drawn between two of them is a
+    # quadrilateral, and a rectangle can be missed by both rays and still be clipped by
+    # the panel that joins them - neither ray has a point in it and no corner of it is on
+    # a ray, which is the crossing case a vertex test passes every time. So the panels
+    # are tested, and the two casts behind one that is not clear come back together until
+    # it is. It terminates because at zero width the panel is a segment of the waterline
+    # offset, which is clear by construction.
+    near = {}
+    for i, j in pairs:
+        x0 = min(inner[i][0], inner[j][0]) - GALLERY_MAX_W_M
+        x1 = max(inner[i][0], inner[j][0]) + GALLERY_MAX_W_M
+        y0 = min(inner[i][1], inner[j][1]) - GALLERY_MAX_W_M
+        y1 = max(inner[i][1], inner[j][1]) + GALLERY_MAX_W_M
+        near[i] = [b for b in blocks
+                   if not (b[2] < x0 or b[0] > x1 or b[3] < y0 or b[1] > y1)]
+    for _ in range(GALLERY_RELAX_PASSES):
+        moved = False
+        for i, j in pairs:
+            if width[i] < 1e-6 and width[j] < 1e-6:
+                continue
+            quad = close_ring([inner[i], inner[j],
+                               (inner[j][0] + width[j] * normal[j][0],
+                                inner[j][1] + width[j] * normal[j][1]),
+                               (inner[i][0] + width[i] * normal[i][0],
+                                inner[i][1] + width[i] * normal[i][1])])
+            for b in near[i]:
+                if rings_overlap(quad, rect_ring(*b)):
+                    width[i] *= GALLERY_RELAX_FRAC
+                    width[j] *= GALLERY_RELAX_FRAC
+                    moved = True
+                    break
+        if not moved:
+            break
+    span = width
+    for k, (i0, i1) in enumerate(_gallery_runs(span, closed)):
+        idx = [(i0 + j) % n for j in range((i1 - i0) % n + 1)] if closed \
+            else list(range(i0, i1 + 1))
+        length = sum(math.dist(inner[idx[j]], inner[idx[j + 1]])
+                     for j in range(len(idx) - 1))
+        if length < GALLERY_MIN_LEN_M:
+            continue
+        r = _gallery_ring(inner, normal, span, i0, i1, closed)
+        xs = [q[0] for q in r]
+        ys = [q[1] for q in r]
+        out.append({'id': f'{tag}_{k + 1}', 'name': f'{name} {k + 1}',
+                    'reach': (idx[0], idx[-1]), 'length_m': length,
+                    'width_m': (min(span[i] for i in idx),
+                                max(span[i] for i in idx)),
+                    'area_ha': ring_area_ha(r),
+                    'centre': ((min(xs) + max(xs)) / 2.0, (min(ys) + max(ys)) / 2.0),
+                    'ring': r,
+                    'tags': {'natural': 'wood', 'leaf_type': GALLERY_LEAF_TYPE}})
+
+
+def gallery_areas(planted, fields):
+    """Every stand of timber along the water: both banks of the river, and the lake."""
+    blocks = gallery_blocks(planted, fields)
+    dense, _ = _river_dense()
+    lake = lake_ring()
+    out = []
+    for sgn, bank in ((-1.0, 'Oeste'), (+1.0, 'Este')):
+        off = offset_polyline(dense, sgn * GALLERY_INNER_M)
+        # Which sign of the offset is the east bank depends on which way the axis runs,
+        # so it is read off the geometry rather than argued about.
+        if (off[0][0] - dense[0][0]) * sgn < 0:
+            off = offset_polyline(dense, -sgn * GALLERY_INNER_M)
+        normal = [((q[0] - p[0]) / GALLERY_INNER_M, (q[1] - p[1]) / GALLERY_INNER_M)
+                  for p, q in zip(dense, off)]
+        _gallery_side(off, normal, blocks, False,
+                      f'ribera_{"w" if sgn < 0 else "e"}',
+                      f'Bosque de Ribera {bank}', out)
+    # The lake. Its shore is walked as the same closed ring the water is drawn from, so
+    # the setback is off the drawn shore and not off some finer sampling of the same
+    # level set. The outward normal is taken from the ring itself: which way is out of a
+    # lobed ellipse is not something to assume.
+    pts = lake[:-1]
+    inner, normal = [], []
+    for i, p in enumerate(pts):
+        a, b = pts[i - 1], pts[(i + 1) % len(pts)]
+        dx, dy = b[0] - a[0], b[1] - a[1]
+        ll = math.hypot(dx, dy) or 1.0
+        nv = (-dy / ll, dx / ll)
+        if point_in_ring((p[0] + nv[0], p[1] + nv[1]), lake):
+            nv = (-nv[0], -nv[1])
+        inner.append((p[0] + GALLERY_SETBACK_M * nv[0],
+                      p[1] + GALLERY_SETBACK_M * nv[1]))
+        normal.append(nv)
+    _gallery_side(inner, normal, blocks, True,
+                  'ribera_lago', 'Bosque de Ribera del Lago', out)
+    return out
+
 
 
 # --- the parcelling ---------------------------------------------------------------
@@ -1587,15 +1822,9 @@ def build_fields(planted):
     boxes = [(p['centre'][0], p['centre'][1], p['size'][0], p['size'][1], FIELD_CLEAR_M)
              for p in PADS]
     for a in planted:
-        # A planting goes in as its bounding box, which is exact for a rectangle and is
-        # what every one of these is - except the gallery timber, which follows the
-        # river. Its box is the whole swing of a meander, hundreds of metres of it
-        # ground the strip never touches, and boxing it would take that out of the
-        # parcelling. It needs no entry at all: it stands inside the reserve the water
-        # already keeps the fields out of, and `validate()` holds that rather than
-        # leaving it as the assumption this skip would otherwise be.
-        if 'reach' in a:
-            continue
+        # A planting goes in as its bounding box, which is exact because every one of
+        # them is a rectangle. The timber along the water is not, and it is not here: it
+        # is laid out after the fields rather than before them, off the edges they leave.
         xs = [q[0] for q in a['ring']]
         ys = [q[1] for q in a['ring']]
         boxes.append(((min(xs) + max(xs)) / 2.0, (min(ys) + max(ys)) / 2.0,
@@ -2093,10 +2322,16 @@ _PLANTED = (
     + [wood_area(*site) for site in WOOD_SITES]
     + [shelter_area(*site) for site in SHELTER_SITES]
     + [shelter_area_ew(*site) for site in SHELTER_EW_SITES]
-    + gallery_areas()
 )
+# The order is the dependency and not a preference. The parcelling reads what is already
+# planted; the timber along the water reads where the parcelling stopped, because that is
+# what its outer edge is measured off. The fields do not need to know the timber is
+# there - it stands inside the reserve the water already keeps them out of, and
+# `validate()` holds that rather than leaving it as the assumption this order would
+# otherwise be.
 FIELDS = build_fields(_PLANTED)
-AREAS = _PLANTED + FIELDS
+GALLERY = gallery_areas(_PLANTED, FIELDS)
+AREAS = _PLANTED + FIELDS + GALLERY
 
 
 def corridors():
@@ -2540,68 +2775,68 @@ def validate():
                            "- a section of frontage is north to south, a band is east "
                            "to west")
 
-    # The gallery timber. It is the only planting on the map whose ring is an offset of a
-    # curve rather than a rectangle, so it gets the checks that shape needs and not the
-    # ones the tables get: there is no area to hold it to, because its area is whatever
-    # the reach and the meanders in it come to.
+    # The timber along the water. It is the only planting on the map whose ring is not a
+    # rectangle, and the checks it gets are the ones that shape needs rather than the ones
+    # the tables get: there is no area to hold it to, because its area is whatever the
+    # ground between the water and the fields came to.
     #
-    # The area *is* checkable, though, and it is worth doing because it is what catches a
-    # fold. The band between two offsets `a` and `b` of an open curve of length L and
-    # total turning dtheta covers exactly (b - a) L - (b^2 - a^2)/2 dtheta - the second
-    # term being the ground the inside of every bend loses and the outside gains, which
-    # is why the two banks of a reach are not the same size. A ring that has folded
-    # through itself has an even-odd hole in it and comes out well under that, so the
-    # comparison is a fold detector that does not have to know what a fold looks like.
-    # The edges are then tested for crossings as well, which does.
+    # What is worth asserting is the two edges and the fact that it is a polygon at all.
+    # The ring is built by casting a ray from every station on the waterline, and rays
+    # that cross make a ring that crosses itself, which an even-odd fill then draws with
+    # holes in it - the first entry in the list of things that have gone wrong here, in
+    # the shape this construction takes. It is swept for rather than argued about.
     gallery = [a for a in AREAS if 'reach' in a]
-    if len(gallery) != 2 * len(gallery_reaches()):
-        bad.append(f"gallery: {len(gallery)} rings for {len(gallery_reaches())} reaches "
-                   "- both banks of every reach or neither")
-    riv = river_axis()
-    dense, arc = _river_dense()
+    grown = []
+    for o in list(_PLANTED) + list(FIELDS):
+        xs = [q[0] for q in o['ring']]
+        ys = [q[1] for q in o['ring']]
+        grown.append((o['id'], min(xs), min(ys), max(xs), max(ys)))
+    for o in PADS:
+        cx, cy = o['centre']
+        w, h = o['size']
+        grown.append((o['id'], cx - w / 2.0, cy - h / 2.0, cx + w / 2.0, cy + h / 2.0))
     for a in gallery:
-        s0, s1 = a['reach']
-        if s1 - s0 < GALLERY_MIN_LEN_M - 1e-6:
-            bad.append(f"{a['id']}: {s1 - s0:.0f} m long, under the "
-                       f"{GALLERY_MIN_LEN_M:.0f} m worth drawing")
-        # Both edges off the axis, measured on the drawn ring. The inner one is the
-        # brief - a setback off the waterline and not off the centreline - and the outer
-        # one is the top of the bank.
-        #
-        # The slack is a quarter of a metre and it is not fudge: the offset takes its
-        # normal from the chord through a vertex's two neighbours rather than from a
-        # tangent, and the axis it is measured against is itself a chain of chords, so on
-        # a curve sampled at GALLERY_STEP_M the two disagree by a sagitta. It measures
-        # 12 cm at the tightest bend on the river. Tighten this and what fails is the
-        # discretisation; loosen it past a metre and it stops saying anything about where
-        # the trees are.
-        d = [dist_to_polyline(q, riv) for q in a['ring']]
-        if min(d) < GALLERY_INNER_M - 0.25 or max(d) > GALLERY_OUTER_M + 0.25:
-            bad.append(f"{a['id']}: its ring runs {min(d):.1f} .. {max(d):.1f} m off the "
-                       f"river axis, not the {GALLERY_INNER_M:.0f} .. "
-                       f"{GALLERY_OUTER_M:.0f} m between the setback and the bank top")
-        pts = [q for q, t in zip(dense, arc) if s0 - 1e-9 <= t <= s1 + 1e-9]
-        turn = 0.0
-        for i in range(1, len(pts) - 1):
-            v1 = (pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1])
-            v2 = (pts[i + 1][0] - pts[i][0], pts[i + 1][1] - pts[i][1])
-            turn += math.atan2(v1[0] * v2[1] - v1[1] * v2[0],
-                               v1[0] * v2[0] + v1[1] * v2[1])
-        want = ((GALLERY_OUTER_M - GALLERY_INNER_M) * polyline_length(pts)
-                - a['side'] * (GALLERY_OUTER_M ** 2 - GALLERY_INNER_M ** 2)
-                / 2.0 * turn) / 10000.0
-        if abs(want - a['area_ha']) > 0.005 * want:
-            bad.append(f"{a['id']}: draws {a['area_ha']:.3f} ha where the reach and its "
-                       f"turning come to {want:.3f} - the ring has folded through itself")
+        xs = [q[0] for q in a['ring']]
+        ys = [q[1] for q in a['ring']]
+        box = (min(xs), min(ys), max(xs), max(ys))
         if not ring_is_simple(a['ring']):
-            bad.append(f"{a['id']}: its ring crosses itself - the offset is wider than "
-                       "the meanders bend, which an even-odd fill draws with holes in it")
-        # Inside the reserve the water already keeps the fields out of, which is what
-        # lets `build_fields` skip it instead of boxing the whole swing of a meander.
-        if max(d) > FIELD_RIVER_CLEAR_M:
-            bad.append(f"{a['id']}: reaches {max(d):.0f} m off the river, outside the "
-                       f"{FIELD_RIVER_CLEAR_M:.0f} m the parcelling keeps clear - the "
-                       "fields would be laid over it")
+            bad.append(f"{a['id']}: its ring crosses itself - two of the rays it was cast "
+                       "from have met, and an even-odd fill draws that with holes in it")
+        # The inner edge is on the water and the setback is the brief: measured off the
+        # *drawn* waterline, not off the river's centreline, which is what "fifteen metres
+        # from the bank" means to anyone standing on it. A quarter of a metre of slack for
+        # the offset taking its normal from a chord rather than from a tangent.
+        d = [water_dist(q) for q in a['ring']]
+        if min(d) < GALLERY_SETBACK_M - 0.25:
+            bad.append(f"{a['id']}: comes to {min(d):.1f} m of open water, inside the "
+                       f"{GALLERY_SETBACK_M:.0f} m setback off the bank")
+        if min(d) > GALLERY_SETBACK_M + 0.25:
+            bad.append(f"{a['id']}: its nearest point is {min(d):.1f} m off the water - "
+                       "it has come away from the bank it is supposed to be growing on")
+        if max(d) > GALLERY_SETBACK_M + GALLERY_MAX_W_M + 0.25:
+            bad.append(f"{a['id']}: reaches {max(d):.0f} m from the water, past the "
+                       f"{VALLEY_HALF_W_M:.0f} m the valley side is - it would be "
+                       "standing on the till plain")
+        lo, hi = a['width_m']
+        if lo < GALLERY_MIN_W_M - 1e-6:
+            bad.append(f"{a['id']}: {lo:.0f} m across at its narrowest, under the "
+                       f"{GALLERY_MIN_W_M:.0f} m that is a wood rather than a verge")
+        if a['length_m'] < GALLERY_MIN_LEN_M - 1e-6:
+            bad.append(f"{a['id']}: {a['length_m']:.0f} m of frontage, under the "
+                       f"{GALLERY_MIN_LEN_M:.0f} m worth drawing")
+        # And the outer edge, against everything it was cast at. Boxes first so the ring
+        # test only runs for what is actually beside it; the ring test itself because a
+        # rectangle can cross a stand without either of them having a vertex in the other,
+        # which is the case a containment test passes every time.
+        for oid, x0, y0, x1, y1 in grown:
+            g = GALLERY_CLEAR_M - 0.01
+            if x1 + g < box[0] or x0 - g > box[2] or y1 + g < box[1] or y0 - g > box[3]:
+                continue
+            if rings_overlap(close_ring(a['ring']),
+                             rect_ring(x0 - g, y0 - g, x1 + g, y1 + g)):
+                bad.append(f"{a['id']}: stands inside the {GALLERY_CLEAR_M:.0f} m it "
+                           f"keeps off {oid}")
+                break
         for c in CORRIDORS:
             keep = c['half_width_m'] + ROADSIDE_SETBACK_M
             dc = min(dist_to_polyline(q, c['axis']) for q in a['ring'])
@@ -2609,18 +2844,12 @@ def validate():
                 bad.append(f"{a['id']}: {c['id']} comes within {dc:.0f} m of it, inside "
                            f"the {keep:.0f} m every road is held off")
                 break
-        for o in PADS:
-            px, py = o['centre']
-            pw, ph = o['size']
-            if any(abs(q[0] - px) < pw / 2.0 and abs(q[1] - py) < ph / 2.0
-                   for q in a['ring']):
-                bad.append(f"{a['id']}: overlaps {o['id']}")
-                break
-        for o in AREAS:
-            if o['id'] == a['id'] or o['id'] <= a['id'] or 'ring' not in o:
+        for b2 in gallery:
+            if b2['id'] <= a['id']:
                 continue
-            if rings_overlap(close_ring(a['ring']), close_ring(o['ring'])):
-                bad.append(f"{a['id']}: overlaps {o['id']}")
+            if rings_overlap(close_ring(a['ring']), close_ring(b2['ring'])):
+                bad.append(f"{a['id']}: overlaps {b2['id']} - the medial rule that keeps "
+                           "one stand out of another has let two rays cross")
 
     # The parcelling. Everything here is a property of the *output* rather than of the
     # rules that made it, which is the point of checking it at all: the generator and the
@@ -2775,8 +3004,8 @@ def summary():
             f"{sum(p['area_ha'] for p in farms):.0f} ha, {len(woods)} woods of "
             f"{sum(a['area_ha'] for a in woods):.0f} ha, {len(belts)} shelterbelts "
             f"of {sum(a['area_ha'] for a in belts):.0f} ha and {len(gal)} strips of "
-            f"gallery timber of {sum(a['area_ha'] for a in gal):.0f} ha down "
-            f"{sum(a['length_m'] for a in gal) / 2000.0:.1f} km of river bank, "
+            f"riverside timber of {sum(a['area_ha'] for a in gal):.0f} ha along "
+            f"{sum(a['length_m'] for a in gal) / 1000.0:.1f} km of waterline, "
             f"{len(FIELDS)} of a "
             f"maximum {FIELD_MAX_COUNT} fields on "
             f"the aliquot grid totalling {sum(a['area_ha'] for a in FIELDS):.0f} ha "
