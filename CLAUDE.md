@@ -135,10 +135,15 @@ halves it again, so the parcel sizes are not chosen, they fall out: 129.5, 64.75
 and sixty acres"), a quarter-quarter (16.19, "a forty") and a quarter of that (4.05, "a
 ten"), and a cell is offered at the largest its position allows - tens within 900 m of a
 town, forties out to 1800 m, quarter sections beyond. Afterwards, parcels that share a
-whole edge are merged while the result stays inside its band, which is the one step here
-that is not aliquot: the aliquot above a quarter section is a half at 129.5 ha, over the
-hundred the brief allows, and a farmer working two fields as one does not consult the
-survey. 290 fields, 4148 ha, 62% of the playable area, running 3.1 to 95.3 ha.
+whole edge are merged, which is the one step here that is not aliquot: the aliquot above a
+quarter section is a half at 129.5 ha, over the hundred the brief allows, and a farmer
+working two fields as one does not consult the survey. What the bands govern is how the
+ground was *subdivided*, so a merge is allowed `FIELD_MERGE_STEPS` halvings over the band
+it stands in - two, one aliquot square step - up to the 100 ha cap: a ten merges to a
+forty, a forty to a quarter section. Held to the band itself the rule was dead everywhere
+but the far country, because the grid already cuts at the band's own size: nothing within
+900 m of a town was ever joined and the near ground came out as 129 ten-acre slivers.
+167 fields, 4274 ha, 64% of the playable area, running 2.5 to 95.3 ha, median 15.9.
 
 **How close cultivation comes to the water is not `VALLEY_HALF_W_M`.** That is where the
 ground is back on the till plain, and holding the fields off by the whole of it left a
@@ -352,6 +357,18 @@ in the same order.
   blocks cut on the grid the road ran 26 m inside the field next to it and sliced it in
   two. Road clearance is per class for the same reason: 14 m to the centreline leaves
   three metres of verge against an 11 m primary.
+- **A road that stops is not a stripe, so trim the platforms off a cell before the
+  roads.** A box in the parcelling knows its extent in both directions and can only reach
+  a cell it truly touches; a corridor is tested as a band along its axis, with the reach
+  it has *along* that axis, against the cell as it arrived. Every town street stops at
+  its town - so for the ten north of a town, whose only overlap with those streets is the
+  strip the town's own platform takes out, the streets were counted first and ate a
+  201 x 137 m band out of ground they never come near. It left 1.26 ha, under any floor,
+  and the towns stood in 147 m of nothing to the north and south with a field at the
+  ten-metre headland to the east and west - the asymmetry is the tell, because a street
+  grid is symmetric and the trim order is not. Take the platform off first and the street
+  no longer reaches. The general shape: an obstacle tested against the *untrimmed* cell
+  is being asked a question about ground that is already gone.
 - **Both halves of the pipeline define geometry or neither does.** The co-op elevator was
   once a rectangle the OSM generator worked out from a village pad. The parcelling could
   not see it and laid fields over it, and the DEM never flattened the ground under it. It
@@ -568,9 +585,11 @@ The parcelling is `FIELD_SECTION_M` and `FIELD_ANCHOR` (the survey the grid is c
 `FIELD_SPLITS` (how many halvings a side may take, so how small a parcel gets),
 `FIELD_SMALL_M`/`FIELD_MEDIUM_M` (the rings round a town), `FIELD_CLEAR_M` (the headland),
 `FIELD_BANK_CLEAR_M` (how far above the bank top cultivation stops, and so how close the
-fields come to the water), `FIELD_MERGE_MAX_HA` (what a merge may reach in the country),
+fields come to the water), `FIELD_MERGE_MAX_HA` (what a merge may reach in the country) and `FIELD_MERGE_STEPS`
+(how far it may climb over the band it stands in),
 `FIELD_MIN_HA`/`FIELD_MIN_SIDE_M` (under which a parcel is a headland rather than a field
-and the ground is better left out of cultivation), and the two that decide trimming against
+and the ground is better left out of cultivation - and so also whether the ring a town's
+platform leaves against the survey is cultivated), and the two that decide trimming against
 splitting: `FIELD_KEEP_FRAC` - how much of a side a parcel must keep for trimming to be the
 right answer - and `FIELD_SPLIT_GAIN`. `validate()` checks the *output* rather than the
 rules that made it, which is the whole point: that all 290 are axis-aligned rectangles, are

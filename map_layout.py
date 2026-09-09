@@ -17,7 +17,7 @@ grid between them, of which only the outer two are bridged. And on the four corn
 a trunk road meets a bridged section line there is a town: a grid of blocks with the
 trunk road running up the middle of it, standing on a platform levelled out of the till
 plain. Hung off the roads are twelve industrial aprons and six farms, all square; five
-woods and eleven shelterbelts stand along them. The rest is parcelled into 291 fields on
+woods and eleven shelterbelts stand along them. The rest is parcelled into 167 fields on
 the survey's own aliquot grid - quarter sections out in the country, forties nearer the
 towns, ten-acre parcels against them, merged where they share a whole edge - coming down
 the valley side to the top of the river's bank and stopping there.
@@ -984,15 +984,36 @@ FIELD_CAP_SMALL_HA = FIELD_SECTION_HA / 64.0       # 4.05, a ten
 # farmer working two fields as one does not consult the survey. The generating grid stays
 # aliquot; this is what is done with it afterwards.
 FIELD_MERGE_MAX_HA = 100.0
+# How far a merge may climb over the band the survey sold in, in halvings. The bands say
+# how the ground was *subdivided* - tens against a town, forties beyond, quarter sections
+# in the country - and holding a merge to the same ceiling made the rule dead everywhere
+# but the far country: a ten that merges is 8.09 ha, over the ten the band allows, so no
+# two parcels within 900 m of a town were ever joined and the near ground came out as 129
+# ten-acre slivers. Two halvings is one aliquot square step, which is exactly what a
+# farmer does with two forties either side of a line nobody planted anything on: 4.05 ha
+# merges up to a forty, 16.19 to a quarter section, and the country to the 100 ha cap
+# above. Raise it and the whole map converges on that cap; drop it to 0 and the merge
+# only ever joins the two halves of a quarter section again.
+FIELD_MERGE_STEPS = 2
 
 # What a field is allowed to be. The ceiling is the largest aliquot the levels above can
 # produce; the floor is *not* the smallest, because a parcel trimmed off a road comes out
 # under its aliquot and that is the point of trimming. It is a floor on what is worth
-# drawing at all: under three hectares, or under a hundred metres on its short side, a
-# parcel is a headland rather than a field and the ground is better left out of
-# cultivation than cut into slivers.
+# drawing at all: under this, or under a hundred metres on its short side, a parcel is a
+# headland rather than a field and the ground is better left out of cultivation than cut
+# into slivers.
+#
+# The floor is what decides whether there is anything at the edge of a town. A town
+# stands on the corner four sections meet at, and its platform is 516 x 510 m centred
+# there, so it takes 258 m out of a section in x and 255 m in y - one whole ten and a
+# bite of 67 m out of the next. Near a town the ten is also the *smallest* cell the
+# survey cuts, so what is left of that second ten cannot be subdivided: it is offered
+# whole, 134 x 201 m of it, and a floor of three hectares threw all 2.70 ha of it away.
+# The towns then stood in 144 m of nothing - not a setback anyone chose, just the
+# distance from the platform to the next line of the survey. At 2.5 the ring of ground
+# round a town is a field again, which is what is actually there.
 FIELD_MAX_HA = FIELD_MERGE_MAX_HA
-FIELD_MIN_HA = 3.0
+FIELD_MIN_HA = 2.5
 FIELD_MIN_SIDE_M = 100.0
 # How much of a side a parcel has to keep for trimming to be the right answer. Past this
 # the obstacle is not along an edge, it is *in* the cell, and the cell wants quartering
@@ -1126,10 +1147,8 @@ def _trim_water(rect, water):
 
 
 def _trim(rect, water, corridors, boxes):
-    rect = _trim_water(rect, water)
-    if rect is None:
-        return None
-    """Pull a parcel's edges in off any road that runs along them.
+    """Pull a parcel's edges in off the water, off anything built and off any road that
+    runs along them.
 
     An aliquot part of a section is flush with the section lines, and the section lines
     are where the roads are - so *every* quarter section on this map has a road along one
@@ -1144,18 +1163,20 @@ def _trim(rect, water, corridors, boxes):
     of a cell is a different thing and comes back as None - the cell is quartered and its
     children are offered instead, which is how the parcelling finds the two halves either
     side of a road on its own.
+
+    The order is load-bearing where a road stops beside a platform, which is every town
+    street on the map. A box knows its own extent in both directions and can only reach a
+    cell it truly touches; a corridor is tested as a band along its axis with the reach
+    it has *along* that axis, so a street that runs up to the town and stops still counts
+    against a cell whose only overlap with it is ground the town's own platform takes
+    out. Trimmed in that order the street ate a full-width band out of the ten north of
+    every town - 201 x 137 m of it, down to 1.26 ha and under any floor - and the towns
+    came out with 147 m of nothing along two sides and a field at the ten-metre headland
+    along the others. Take the platform off first and the street no longer reaches.
     """
-    for pts, keep in corridors:
-        vertical = abs(pts[0][0] - pts[-1][0]) < abs(pts[0][1] - pts[-1][1])
-        along = min((p[1] if vertical else p[0]) for p in pts), \
-            max((p[1] if vertical else p[0]) for p in pts)
-        axis = 0 if vertical else 1
-        if along[1] < rect[1 - axis] or along[0] > rect[3 - axis]:
-            continue                     # the road does not reach this far along
-        at = pts[0][0] if vertical else pts[0][1]
-        rect = _trim_one(rect, axis, at - keep, at + keep, FIELD_KEEP_FRAC)
-        if rect is None:
-            return None
+    rect = _trim_water(rect, water)
+    if rect is None:
+        return None
     for cx, cy, w, h, gap in boxes:
         if _rects_apart(rect, cx, cy, w, h, gap):
             continue
@@ -1173,6 +1194,17 @@ def _trim(rect, water, corridors, boxes):
         if best is None:
             return None
         rect = best[1]
+    for pts, keep in corridors:
+        vertical = abs(pts[0][0] - pts[-1][0]) < abs(pts[0][1] - pts[-1][1])
+        along = min((p[1] if vertical else p[0]) for p in pts), \
+            max((p[1] if vertical else p[0]) for p in pts)
+        axis = 0 if vertical else 1
+        if along[1] < rect[1 - axis] or along[0] > rect[3 - axis]:
+            continue                     # the road does not reach this far along
+        at = pts[0][0] if vertical else pts[0][1]
+        rect = _trim_one(rect, axis, at - keep, at + keep, FIELD_KEEP_FRAC)
+        if rect is None:
+            return None
     return rect
 
 
@@ -1207,13 +1239,24 @@ def _field_clear(rect, obstacles):
 def _field_cap(cx, cy, towns, merging=False):
     """The largest parcel allowed at this point: a ten near a town, a forty beyond it, a
     quarter section out in the country. Land near a settlement is worth more, gets sold
-    in smaller pieces and stays that way."""
+    in smaller pieces and stays that way.
+
+    A merge is allowed `FIELD_MERGE_STEPS` halvings over that, up to the merge cap: what
+    the band governs is how the ground was subdivided, and a merge is what is worked
+    afterwards. Held to the band itself the rule can only ever join the two halves of the
+    largest parcel the band allows, which is nothing at all wherever the aliquot grid
+    already cuts at the band's own size.
+    """
     d = min(math.dist((cx, cy), t) for t in towns) if towns else 1.0e18
     if d < FIELD_SMALL_M:
-        return FIELD_CAP_SMALL_HA
-    if d < FIELD_MEDIUM_M:
-        return FIELD_CAP_MEDIUM_HA
-    return FIELD_MERGE_MAX_HA if merging else FIELD_CAP_LARGE_HA
+        cap = FIELD_CAP_SMALL_HA
+    elif d < FIELD_MEDIUM_M:
+        cap = FIELD_CAP_MEDIUM_HA
+    else:
+        cap = FIELD_CAP_LARGE_HA
+    if not merging:
+        return cap
+    return min(cap * 2.0 ** FIELD_MERGE_STEPS, FIELD_MERGE_MAX_HA)
 
 
 def _union_if_flush(a, b, tol=1e-6):
@@ -2273,7 +2316,7 @@ def validate():
         area = ring_area_ha(r)
         if not FIELD_MIN_HA - 1e-6 <= area <= FIELD_MAX_HA + 1e-6:
             bad.append(f"{f['id']}: {area:.2f} ha, outside the "
-                       f"{FIELD_MIN_HA:.0f} .. {FIELD_MAX_HA:.0f} ha a parcel may be")
+                       f"{FIELD_MIN_HA:.1f} .. {FIELD_MAX_HA:.0f} ha a parcel may be")
         if min(rect[2] - rect[0], rect[3] - rect[1]) < FIELD_MIN_SIDE_M - 1e-6:
             bad.append(f"{f['id']}: {min(rect[2] - rect[0], rect[3] - rect[1]):.0f} m on "
                        f"its short side, under the {FIELD_MIN_SIDE_M:.0f} m worth "
