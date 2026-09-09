@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<vehicles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../shared/xml/schema/savegame_vehicles.xsd">
+<!--
+    <vehicle filename="data/vehicles/claas/lexion8900/lexion8900.xml" uniqueId="combine1" age="0.0" farmId="1" propertyState="OWNED" operatingTime="0.0" selectedObjectIndex="1" subSelectedObjectIndex="1" defaultFarmProperty="true">
+        <component index="1" position="460.10717773 102.50628662 295.47067261" rotation="0 -41.4720459 0"/>
+        <component index="2" position="461.68930054 103.35428619 293.68063354" rotation="0 -41.4720459 0"/>
+        <configuration name="fillUnit" id="2"/>
+        <configuration name="pipe" id="2"/>
+        <configuration name="dischargeable" id="2"/>
+        <configuration name="fillVolume" id="2"/>
+        <configuration name="folding" id="2"/>
+        <configuration name="cylindered" id="2"/>
+        <configuration name="motor" id="3"/>
+        <configuration name="wheel" id="CRAWLER"/>
+        <boughtConfiguration name="fillUnit" id="2"/>
+        <boughtConfiguration name="pipe" id="2"/>
+        <boughtConfiguration name="dischargeable" id="2"/>
+        <boughtConfiguration name="fillVolume" id="2"/>
+        <boughtConfiguration name="folding" id="2"/>
+        <boughtConfiguration name="cylindered" id="2"/>
+        <boughtConfiguration name="motor" id="3"/>
+        <boughtConfiguration name="wheel" id="CRAWLER"/>
+        <washable>
+            <dirtNode amount="0.000065" wetness="0.000000"/>
+            <dirtNode amount="0.000065" wetness="0.000000" snowScale="0.000000"/>
+            <dirtNode amount="0.000000" wetness="0.000000"/>
+            <dirtNode amount="0.000065" wetness="0.000000" snowScale="0.000000"/>
+            <dirtNode amount="0.000000" wetness="0.000000"/>
+            <dirtNode amount="0.000065" wetness="0.000000" snowScale="0.000000"/>
+            <dirtNode amount="0.000000" wetness="0.000000"/>
+            <dirtNode amount="0.000065" wetness="0.000000" snowScale="0.000000"/>
+            <dirtNode amount="0.000000" wetness="0.000000"/>
+        </washable>
+        <wearable damage="0.000000">
+            <wearNode amount="0.000012"/>
+        </wearable>
+    </vehicle>
+-->
+</vehicles>

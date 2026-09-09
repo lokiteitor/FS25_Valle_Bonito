@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<trafficSystem licensePlates="$data/maps/mapUS/licensePlates/aiLicensePlatesUS.i3d" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../shared/xml/schema/trafficSystem.xsd">
+    <vehicles>
+        <vehicle filename="$data/trafficVehicles/vehicle01/vehicle01.xml"                           probability="1" probabilityParked="1" typeFlag="1"/>
+        <vehicle filename="$data/trafficVehicles/vehicle03/vehicle03.xml"                           probability="1" probabilityParked="1" typeFlag="1"/>
+        <vehicle filename="$data/trafficVehicles/vehicle07/vehicle07.xml"                           probability="1" probabilityParked="1" typeFlag="1"/>
+        <vehicle filename="$data/trafficVehicles/vehicle09/vehicle09.xml"                           probability="1" probabilityParked="1" typeFlag="1"/>
+        <vehicle filename="$data/trafficVehicles/vehicle10/vehicle10.xml"                           probability="1" probabilityParked="1" typeFlag="1"/>
+        <vehicle filename="$data/trafficVehicles/vehicle11/vehicle11.xml"                           probability="1" probabilityParked="1" typeFlag="1"/>
+        <vehicle filename="$data/trafficVehicles/vehicle12/vehicle12.xml"                           probability="1" probabilityParked="1" typeFlag="1"/>
+        <vehicle filename="$data/trafficVehicles/vehicle14/vehicle14.xml"                           probability="1" probabilityParked="1" typeFlag="1"/>
+        <vehicle filename="$data/trafficVehicles/vehicle15/vehicle15_iceCream.xml"                  probability="1" probabilityParked="0" typeFlag="1"/>
+        <vehicle filename="$data/trafficVehicles/vehicle15/vehicle15_post02.xml"                    probability="1" probabilityParked="0" typeFlag="1"/>
+        <vehicle filename="$data/trafficVehicles/vehicle19/vehicle19.xml"                           probability="1" probabilityParked="1" typeFlag="1"/>
+        <vehicle filename="$data/trafficVehicles/vehicle20/vehicle20.xml"                           probability="1" probabilityParked="1" typeFlag="1"/>
+        <vehicle filename="$data/trafficVehicles/cementTruck/cementTruck.xml"                       probability="1" probabilityParked="0" typeFlag="1"/>
+        <vehicle filename="$data/trafficVehicles/dumpTruck/dumpTruck.xml"                           probability="1" probabilityParked="0" typeFlag="1"/>
+        <vehicle filename="$data/trafficVehicles/internationalSchoolBus/internationalSchoolBus.xml" probability="1" probabilityParked="0" typeFlag="1"/>
+        <vehicle filename="$data/trafficVehicles/schoolBus/schoolBus.xml"                           probability="1" probabilityParked="0" typeFlag="1"/>
+        <vehicle filename="$data/trafficVehicles/postalServiceTruck/postalServiceTruck.xml"         probability="1" probabilityParked="0" typeFlag="1"/>
+        <vehicle filename="$data/trafficVehicles/tipperTruck/tipperTruck.xml"                       probability="1" probabilityParked="0" typeFlag="1"/>
+        <vehicle filename="$data/trafficVehicles/vehicle21/vehicle21.xml"                           probability="1" probabilityParked="1" typeFlag="1"/>
+        <vehicle filename="$data/trafficVehicles/vehicle21/vehicle21RS.xml"                         probability="1" probabilityParked="1" typeFlag="1"/>
+    </vehicles>
+</trafficSystem>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="sounds.i3d" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+  <Asset>
+    <Export program="GIANTS Editor 64bit" version="10.0.6"/>
+  </Asset>
+
+  <Files>
+    <File fileId="1" filename="$data/sounds/maps/mapUS/fauna/hawk/ambHawkScreamsFreedomField_01.wav"/>
+    <File fileId="2" filename="$data/sounds/maps/mapUS/fauna/hawk/ambHawkScreamsFreedomField_02.wav"/>
+    <File fileId="3" filename="$data/sounds/maps/mapUS/fauna/hawk/ambHawkScreamsFreedomField_03.wav"/>
+    <File fileId="4" filename="$data/sounds/silence/Silence10Sec_01.wav"/>
+    <File fileId="5" filename="$data/sounds/silence/Silence5Sec_01.wav"/>
+  </Files>
+
+
+  <Materials>
+  </Materials>
+
+
+  <Shapes>
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="audio_group" nodeId="6">
+      <TransformGroup name="fauna" nodeId="459">
+        <TransformGroup name="hawk" nodeId="460">
+          <AudioSource name="ambHawkField_01" translation="-49.6966 158.634 135.771" nodeId="461" fileIds="1 2 3 4 5" range="854" innerRange="500" volume="1" loops="1" audioGroup="ENVIRONMENT" minuteOfDayStart="720" minuteOfDayEnd="780" dayOfYearStart="200" dayOfYearEnd="230"/>
+        </TransformGroup>
+      </TransformGroup>
+    </TransformGroup>
+  </Scene>
+
+</i3D>
