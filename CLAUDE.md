@@ -97,10 +97,11 @@ long-side-on along their road, `WOOD_ASPECT` times as long as they are deep, so 
 deep by `aspect` times that - with no rounding anywhere in it. They are the first thing on
 the map that is *only* vectors: nobody levels ground to grow trees on, so a wood is an
 `AREAS` ring with no pad, no feather and no drain, and the heightmap does not change when
-one is added. Every wood on the map, the island included, is tagged
-`leaf_type=needleleaved` and every shelterbelt `leaf_type=broadleaved` - a windbreak on a
-field boundary is hardwood - and both renderers colour a conifer wood apart from a
-broadleaf one, so the tag is not dead weight and the two kinds of planting read apart.
+one is added. Every planted woodlot on the map, the island included, is tagged
+`leaf_type=needleleaved`, and every shelterbelt and every strip of river timber
+`leaf_type=broadleaved` - a windbreak on a field boundary is hardwood and so is a wood on
+a bank - and both renderers colour a conifer wood apart from a broadleaf one, so the tag
+is not dead weight and the two kinds of planting read apart.
 
 The one rule a wood has that a yard does not is that the 10 m clearance is held against
 **every** alignment on the map and not only the road it hangs off. A road through the
@@ -129,6 +130,33 @@ carry one on both flanks of the map, so what lands is whole rows rather than whi
 happened to be left over. The nearest miss on the north-south side is `este_media` section 1,
 where the river's east swing brings the belt to 493 m of open water against the 500 m a
 planting is held off - seven metres, on a rule that could be moved. It is not moved.
+
+Ten strips of gallery timber, 62 ha, follow both banks of the river down 6.9 km of it.
+They are the one planting here that is not placed on the survey - they follow the water,
+which is the only thing on this map that does not run on a section line - and they are
+the timber this country actually has: the uplands were prairie and were ploughed, and
+what was left standing was the strip along the river nobody could plough. Neither edge of
+one is a number: the inner is `GALLERY_SETBACK_M` off the **drawn waterline** and not off
+the centreline, the same way a yard is measured off the kerb, so it is 60 m out from the
+axis; the outer is the top of the bank, `BANK_RUN_M` out from the waterline, at 105 m.
+The strip covers the bank and nothing else, and it is 45 m wide because that is what the
+two landmarks leave.
+
+**The width is bounded by the meanders and not by taste.** This is the one shape on the
+map built by offsetting a polyline, which is the first entry in the list of things that
+have gone wrong here: these meanders bend to a 255 m radius, the far edge of the strip is
+105 m out, and past about 200 m the ring folds through itself and an even-odd fill draws
+it with holes in the tightest bends. `validate()` holds that two ways - the drawn area
+against `(b - a) L - (b^2 - a^2)/2 dtheta`, which is what a band between two offsets of a
+curve of length L and total turning dtheta covers exactly and which a fold comes out well
+under, and then a sweep for crossing edges, which names the failure directly.
+
+Where the strips stop is derived rather than tabled, because everything that interrupts
+them is already on the map: the clean strip at either end, the lake - the river has no
+banks inside it - and every road, tested with the strip's own reach added to the
+clearance so the whole width clears what the axis clears. That last one takes in the
+three section lines that dead-end at the river, because they stop *inside* the strip, and
+it only works because they are tested as the finite polylines they are.
 
 The ground between all of that is parcelled into 145 fields, and they are laid out the
 way the ground was actually subdivided: by aliquot parts of a section. A section is a
@@ -571,6 +599,14 @@ them, both lengths coming out of `MILE_M` and a clearance - with `SHELTER_LINES`
 and `SHELTER_BANDS`/`SHELTER_ROWS`/`SHELTER_EW_SITES` for the transversal. `validate()`
 holds the width and the length against the drawn ring, and holds each belt to the
 orientation its length was derived for.
+
+The gallery timber is `GALLERY_SETBACK_M` and `GALLERY_LEAF_TYPE`, with `GALLERY_MIN_LEN_M`
+for what is worth drawing and `GALLERY_STEP_M` for how finely the reaches are walked; the
+two edges and therefore the width come out of `RIVER_HALF_W_M` and `BANK_RUN_M`, and there
+is no site table because `gallery_reaches()` derives where it can stand. Widening it is the
+one change here that can break the geometry rather than the placement - see the radius of
+curvature above - so `validate()` checks the drawn ring for a fold rather than the constant
+for a value.
 
 The woods are `WOOD_AREA_HA`, `WOOD_ASPECT` and `WOOD_LEAF_TYPE`, with `WOOD_SITES` in the
 same shape as the yard tables. `validate()` holds the area against the drawn ring rather
