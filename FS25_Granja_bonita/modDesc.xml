@@ -31,5 +31,21 @@
         <dependency>FS25_mrhDecorativeBuildings</dependency>
         <dependency>FS25_rentalProperties</dependency>
         <dependency>FS25_PgrApartamentBlocks</dependency>
+        <dependency>FS25_CarrefourPack</dependency>
+        <dependency>FS25_centralEthanol</dependency>
+        <dependency>FS25_The_Mechet_Production_And_Industry_Pack</dependency>
+        <dependency>pdlc_highlandsFishingPack</dependency>
+        <dependency>FS25_Planta_de_Celulosa</dependency>
+        <dependency>FS25_waterProduction_Pack</dependency>
+        <dependency>FS25_ASM_SuperSGasStation</dependency>
+        <dependency>FS25_OldGrainMill</dependency>
+        <dependency>FS25_restaurant</dependency>
+        <dependency>FS25_orchardsAndGreenhouses_crossplay</dependency>
+        <dependency>FS25_FarmersMarketSN</dependency>
+        <dependency>FS25_FarmersCoop</dependency>
+        <dependency>FS25_DiningRoom</dependency>
+        <dependency>ACH25_Cemetery</dependency>
+        <dependency>FS25_farmSellingShed</dependency>
+        <dependency>FS25_MeatProcessingPlant</dependency>
     </dependencies>
 </modDesc>
