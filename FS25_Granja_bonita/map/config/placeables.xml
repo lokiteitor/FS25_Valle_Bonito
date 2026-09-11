@@ -1,3 +1,287 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no" ?>
-<placeables version="2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../shared/xml/schema/savegame_placeables.xsd">
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<placeables>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaSanctuary.xml" position="2518.75 55.567 -3161.25" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaMilkbar.xml" position="2521.2 54.2812 3242.47" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaPharmacy.xml" position="2511.25 55.638 -3221" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaGroceryStore.xml" position="2519.95 53.8952 3570.97" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaMotif03.xml" position="2636.95 54.3072 3217.97" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaMotif02.xml" position="2637.7 54.2382 3276.97" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaMotif01.xml" position="2638.45 54.1682 3335.97" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaMotif03.xml" position="2639.2 54.1062 3390.72" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaMotif02.xml" position="2636 55.362 -2984.75" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaApartment03.xml" position="2641.45 53.9622 3515.22" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaApartment02.xml" position="2643 55.226 -2868.5" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaApartment01.xml" position="2636.75 55.163 -2813.75" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaHouse09.xml" position="2587.2 54.2992 3223.72" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaHouse08.xml" position="2586.25 55.571 -3163.75" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaHouse08.xml" position="2580.25 55.225 -2867.75" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaHouse05.xml" position="2586.2 53.8262 3630.97" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaApartment03.xml" position="2521.45 53.8332 3623.72" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaApartment03.xml" position="2699.45 53.8282 3628.47" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaApartment02.xml" position="2700.45 53.8912 3575.22" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaApartment03.xml" position="2695.5 55.296 -2929.25" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaApartment01.xml" position="2700.2 54.0282 3458.72" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaHouse07.xml" position="2704 55.44 -3050.75" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaHouse06.xml" position="2708.7 54.1722 3332.97" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaHouse06.xml" position="2706.95 54.2452 3272.47" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaHouse05.xml" position="2706.2 54.3042 3222.22" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_RentalhousesEU" filename="$moddir$FS25_RentalhousesEU/farmBuilding02.xml" position="2460.95 54.2422 3274.97" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_RentalhousesEU" filename="$moddir$FS25_RentalhousesEU/farmBuilding03.xml" position="2461.95 54.3082 3218.47" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_RentalhousesEU" filename="$moddir$FS25_RentalhousesEU/farmBuilding03.xml" position="2394.95 54.3042 3218.47" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_RentalhousesEU" filename="$moddir$FS25_RentalhousesEU/farmBuilding02.xml" position="2395 55.576 -3168.75" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_RentalhousesEU" filename="$moddir$FS25_RentalhousesEU/farmBuilding01.xml" position="2454.45 53.8292 3627.47" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Bavarian_Deco_Pack" filename="$moddir$FS25_Bavarian_Deco_Pack/MountainHouse/smallMountainHouse01.xml" position="2345.2 54.3042 3221.72" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Bavarian_Deco_Pack" filename="$moddir$FS25_Bavarian_Deco_Pack/MountainHouse/smallMountainHouse02.xml" position="2345.2 54.2422 3275.47" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Bavarian_Deco_Pack" filename="$moddir$FS25_Bavarian_Deco_Pack/town/townHouse01.xml" position="2282.95 54.2962 3224.22" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Bavarian_Deco_Pack" filename="$moddir$FS25_Bavarian_Deco_Pack/town/townHouse07.xml" position="2279.45 54.2382 3276.47" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Bavarian_Deco_Pack" filename="$moddir$FS25_Bavarian_Deco_Pack/town/hotelpetit.xml" position="2286.95 54.0982 3396.22" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Deco_houses" filename="$moddir$FS25_Deco_houses/WohnBlock01.xml" position="2279 55.502 -3107.5" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true">
+        <configuration id="1" name="color" isActive="true"/>
+        <configuration id="1" name="solarPanels" isActive="true"/>
+    </placeable>
+    <placeable modName="FS25_Deco_houses" filename="$moddir$FS25_Deco_houses/WohnBlock03.xml" position="2281 55.362 -2983.25" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true">
+        <configuration id="1" name="solarPanels" isActive="true"/>
+    </placeable>
+    <placeable modName="FS25_Deco_houses" filename="$moddir$FS25_Deco_houses/WohnBlock01.xml" position="2281.7 53.9582 3517.47" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true">
+        <configuration id="1" name="color" isActive="true"/>
+        <configuration id="1" name="solarPanels" isActive="true"/>
+    </placeable>
+    <placeable modName="FS25_Deco_houses" filename="$moddir$FS25_Deco_houses/Haus02_3.xml" position="2279.45 53.8922 3571.97" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true">
+        <configuration id="1" name="solarPanels" isActive="true"/>
+    </placeable>
+    <placeable modName="FS25_Deco_houses" filename="$moddir$FS25_Deco_houses/Haus02_4.xml" position="2276 55.16 -2814.25" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true">
+        <configuration id="1" name="solarPanels" isActive="true"/>
+    </placeable>
+    <placeable modName="FS25_PgrApartamentBlocks" filename="$moddir$FS25_PgrApartamentBlocks/xml/apartament.xml" position="2345.45 53.8292 3628.22" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_PgrApartamentBlocks" filename="$moddir$FS25_PgrApartamentBlocks/xml/apartament.xml" position="2345.95 53.8922 3573.72" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_PgrApartamentBlocks" filename="$moddir$FS25_PgrApartamentBlocks/xml/building.xml" position="2344 55.296 -2927.25" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_PgrApartamentBlocks" filename="$moddir$FS25_PgrApartamentBlocks/xml/pgrApartament.xml" position="2346.45 54.0242 3458.72" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_LargeDecorativeBuilding" filename="$moddir$FS25_LargeDecorativeBuilding/decorativeBuilding.xml" position="2531.7 53.9892 3487.72" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_LargeDecorativeBuilding" filename="$moddir$FS25_LargeDecorativeBuilding/decorativeBuilding.xml" position="2532.7 54.1372 3365.22" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_mrhDecorativeBuildings" filename="$moddir$FS25_mrhDecorativeBuildings/placeables/community/municipalOffice01.xml" position="2464.95 53.8922 3571.97" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_mrhDecorativeBuildings" filename="$moddir$FS25_mrhDecorativeBuildings/placeables/community/municipalOffice02.xml" position="2395.2 53.8802 3583.47" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_mrhDecorativeBuildings" filename="$moddir$FS25_mrhDecorativeBuildings/placeables/residential/residentialBuildingB.xml" position="2394.95 53.8922 3565.47" rotation="0 -0 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Decolivinghouse" filename="$moddir$FS25_Decolivinghouse/farmHouse01.xml" position="2391 55.163 -2816.5" rotation="0 -0 0" boughtWithFarmlandOverwrite="true">
+        <configuration id="1" name="solarPanels" isActive="true"/>
+    </placeable>
+    <placeable modName="FS25_Decolivinghouse" filename="$moddir$FS25_Decolivinghouse/farmHouse01.xml" position="2341 55.432 -3046.5" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true">
+        <configuration id="1" name="solarPanels" isActive="true"/>
+    </placeable>
+    <placeable modName="FS25_Decolivinghouse" filename="$moddir$FS25_Decolivinghouse/farmHouse01.xml" position="2347.45 54.1682 3333.22" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true">
+        <configuration id="1" name="solarPanels" isActive="false"/>
+        <configuration id="2" name="solarPanels" isActive="true"/>
+    </placeable>
+    <placeable modName="FS25_LargeDecorativeBuilding" filename="$moddir$FS25_LargeDecorativeBuilding/decorativeBuilding.xml" position="2529.5 55.471 -3077.75" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaApartment03.xml" position="2698.7 53.9622 3513.72" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaApartment01.xml" position="2697 55.362 -2984.25" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Decolivinghouse" filename="$moddir$FS25_Decolivinghouse/farmHouse01.xml" position="2344.2 54.0982 3396.47" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true">
+        <configuration id="1" name="solarPanels" isActive="true"/>
+    </placeable>
+    <placeable modName="FS25_Decolivinghouse" filename="$moddir$FS25_Decolivinghouse/farmHouse01.xml" position="2394.2 53.8292 3626.47" rotation="0 -0 0" boughtWithFarmlandOverwrite="true">
+        <configuration id="1" name="solarPanels" isActive="true"/>
+    </placeable>
+    <placeable modName="FS25_RentalhousesEU" filename="$moddir$FS25_RentalhousesEU/farmBuilding02.xml" position="2457.75 55.576 -3168" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaMotif01.xml" position="2635.25 55.502 -3107" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaMotif02.xml" position="2634.5 55.572 -3166" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_PgrApartamentBlocks" filename="$moddir$FS25_PgrApartamentBlocks/xml/building.xml" position="2347.2 53.9622 3515.72" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Deco_houses" filename="$moddir$FS25_Deco_houses/Haus02_4.xml" position="2279.2 53.8262 3628.72" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true">
+        <configuration id="1" name="solarPanels" isActive="true"/>
+    </placeable>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaHouse08.xml" position="2583.45 53.8912 3575.22" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaMotif03.xml" position="2636 55.44 -3052.25" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Deco_houses" filename="$moddir$FS25_Deco_houses/WohnBlock03.xml" position="2284.2 54.0282 3459.72" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true">
+        <configuration id="1" name="solarPanels" isActive="true"/>
+    </placeable>
+    <placeable modName="FS25_mrhDecorativeBuildings" filename="$moddir$FS25_mrhDecorativeBuildings/placeables/residential/residentialBuildingB.xml" position="2391.75 55.226 -2877.5" rotation="0 -0 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaHouse07.xml" position="2707.2 54.1062 3392.22" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaHouse05.xml" position="2703 55.638 -3220.75" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Bavarian_Deco_Pack" filename="$moddir$FS25_Bavarian_Deco_Pack/town/townHouse07.xml" position="2276.25 55.572 -3166.5" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Bavarian_Deco_Pack" filename="$moddir$FS25_Bavarian_Deco_Pack/town/townHouse01.xml" position="2279.75 55.63 -3218.75" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Deco_houses" filename="$moddir$FS25_Deco_houses/WohnBlock01.xml" position="2278.5 55.292 -2925.5" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true">
+        <configuration id="1" name="color" isActive="true"/>
+        <configuration id="1" name="solarPanels" isActive="true"/>
+    </placeable>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaHouse08.xml" position="2589.45 54.2372 3279.22" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaApartment03.xml" position="2518.25 55.167 -2819.25" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaApartment01.xml" position="2639.95 53.8292 3629.22" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaApartment02.xml" position="2646.2 53.8922 3574.47" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Bavarian_Deco_Pack" filename="$moddir$FS25_Bavarian_Deco_Pack/MountainHouse/smallMountainHouse02.xml" position="2342 55.576 -3167.5" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaGroceryStore.xml" position="2516.75 55.229 -2872" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Decolivinghouse" filename="$moddir$FS25_Decolivinghouse/farmHouse01.xml" position="2344.25 55.502 -3109.75" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true">
+        <configuration id="1" name="solarPanels" isActive="false"/>
+        <configuration id="2" name="solarPanels" isActive="true"/>
+    </placeable>
+    <placeable modName="FS25_Bavarian_Deco_Pack" filename="$moddir$FS25_Bavarian_Deco_Pack/town/hotelpetit.xml" position="2283.75 55.432 -3046.75" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaHouse06.xml" position="2705.5 55.506 -3110" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaApartment02.xml" position="2697.25 55.225 -2867.75" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaApartment03.xml" position="2638.25 55.296 -2927.75" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaHouse09.xml" position="2584 55.633 -3219.25" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaMilkbar.xml" position="2518 55.615 -3200.5" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_mrhDecorativeBuildings" filename="$moddir$FS25_mrhDecorativeBuildings/placeables/community/municipalOffice01.xml" position="2461.75 55.226 -2871" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_PgrApartamentBlocks" filename="$moddir$FS25_PgrApartamentBlocks/xml/apartament.xml" position="2342.75 55.226 -2869.25" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Deco_houses" filename="$moddir$FS25_Deco_houses/WohnBlock01.xml" position="2282.2 54.1682 3335.47" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true">
+        <configuration id="1" name="color" isActive="true"/>
+        <configuration id="1" name="solarPanels" isActive="true"/>
+    </placeable>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaSanctuary.xml" position="2521.95 54.2332 3281.72" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Bavarian_Deco_Pack" filename="$moddir$FS25_Bavarian_Deco_Pack/MountainHouse/smallMountainHouse01.xml" position="2342 55.638 -3221.25" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaPharmacy.xml" position="2514.45 54.3042 3221.97" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaApartment03.xml" position="2696.25 55.162 -2814.5" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaHouse05.xml" position="2583 55.16 -2812" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaMotif03.xml" position="2633.75 55.641 -3225" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_RentalhousesEU" filename="$moddir$FS25_RentalhousesEU/farmBuilding02.xml" position="2398.2 54.2422 3274.22" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaHouse06.xml" position="2703.75 55.579 -3170.5" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_LargeDecorativeBuilding" filename="$moddir$FS25_LargeDecorativeBuilding/decorativeBuilding.xml" position="2528.5 55.323 -2955.25" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_RentalhousesEU" filename="$moddir$FS25_RentalhousesEU/farmBuilding03.xml" position="2458.75 55.642 -3224.5" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_mrhDecorativeBuildings" filename="$moddir$FS25_mrhDecorativeBuildings/placeables/community/municipalOffice02.xml" position="2392 55.214 -2859.5" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_PgrApartamentBlocks" filename="$moddir$FS25_PgrApartamentBlocks/xml/apartament.xml" position="2342.25 55.163 -2814.75" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Deco_houses" filename="$moddir$FS25_Deco_houses/Haus02_3.xml" position="2276.25 55.226 -2871" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true">
+        <configuration id="1" name="solarPanels" isActive="true"/>
+    </placeable>
+    <placeable modName="FS25_RentalhousesEU" filename="$moddir$FS25_RentalhousesEU/farmBuilding01.xml" position="2451.25 55.163 -2815.5" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaMotif02.xml" position="2639.2 54.0282 3458.22" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_PgrApartamentBlocks" filename="$moddir$FS25_PgrApartamentBlocks/xml/pgrApartament.xml" position="2343.25 55.358 -2984.25" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_RentalhousesEU" filename="$moddir$FS25_RentalhousesEU/farmBuilding03.xml" position="2391.75 55.638 -3224.5" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaSanctuary.xml" position="-2457.12 52.4301 3283.95" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaHouse05.xml" position="-2276.07 53.8349 -3218.52" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaGroceryStore.xml" position="-2462.32 53.4259 -2869.77" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_LargeDecorativeBuilding" filename="$moddir$FS25_LargeDecorativeBuilding/decorativeBuilding.xml" position="-2449.57 53.6679 -3075.52" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaMotif03.xml" position="-2339.87 52.3031 3392.95" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaApartment02.xml" position="-2278.62 52.0881 3577.45" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Deco_houses" filename="$moddir$FS25_Deco_houses/WohnBlock03.xml" position="-2698.07 53.5589 -2981.02" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true">
+        <configuration id="1" name="solarPanels" isActive="true"/>
+    </placeable>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaMotif03.xml" position="-2343.07 53.6369 -3050.02" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaHouse06.xml" position="-2273.57 53.7029 -3107.77" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_RentalhousesEU" filename="$moddir$FS25_RentalhousesEU/farmBuilding02.xml" position="-2518.12 52.4391 3277.2" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaApartment03.xml" position="-2279.62 52.0251 3630.7" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaApartment03.xml" position="-2280.37 52.1591 3515.95" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_LargeDecorativeBuilding" filename="$moddir$FS25_LargeDecorativeBuilding/decorativeBuilding.xml" position="-2447.37 52.1861 3489.95" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaPharmacy.xml" position="-2464.62 52.5011 3224.2" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaHouse09.xml" position="-2391.87 52.4961 3225.95" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaHouse09.xml" position="-2395.07 53.8299 -3217.02" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_RentalhousesEU" filename="$moddir$FS25_RentalhousesEU/farmBuilding01.xml" position="-2524.62 52.0261 3629.7" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaApartment01.xml" position="-2342.32 53.3599 -2811.52" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Bavarian_Deco_Pack" filename="$moddir$FS25_Bavarian_Deco_Pack/town/hotelpetit.xml" position="-2692.12 52.2951 3398.45" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_LargeDecorativeBuilding" filename="$moddir$FS25_LargeDecorativeBuilding/decorativeBuilding.xml" position="-2450.57 53.5199 -2953.02" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_PgrApartamentBlocks" filename="$moddir$FS25_PgrApartamentBlocks/xml/building.xml" position="-2631.87 52.1591 3517.95" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaApartment01.xml" position="-2339.12 52.0261 3631.45" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaHouse06.xml" position="-2275.32 53.7759 -3168.27" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_PgrApartamentBlocks" filename="$moddir$FS25_PgrApartamentBlocks/xml/apartament.xml" position="-2633.62 52.0261 3630.45" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaMilkbar.xml" position="-2461.07 53.8119 -3198.27" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaHouse07.xml" position="-2271.87 52.3031 3394.45" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaMotif02.xml" position="-2344.57 53.7689 -3163.77" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Decolivinghouse" filename="$moddir$FS25_Decolivinghouse/farmHouse01.xml" position="-2634.82 53.6989 -3107.52" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true">
+        <configuration id="1" name="solarPanels" isActive="false"/>
+        <configuration id="2" name="solarPanels" isActive="true"/>
+    </placeable>
+    <placeable modName="FS25_Decolivinghouse" filename="$moddir$FS25_Decolivinghouse/farmHouse01.xml" position="-2584.87 52.0261 3628.7" rotation="0 -0 0" boughtWithFarmlandOverwrite="true">
+        <configuration id="1" name="solarPanels" isActive="true"/>
+    </placeable>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaHouse08.xml" position="-2398.82 53.4219 -2865.52" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_mrhDecorativeBuildings" filename="$moddir$FS25_mrhDecorativeBuildings/placeables/community/municipalOffice01.xml" position="-2517.32 53.4229 -2868.77" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Decolivinghouse" filename="$moddir$FS25_Decolivinghouse/farmHouse01.xml" position="-2631.62 52.3651 3335.45" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true">
+        <configuration id="1" name="solarPanels" isActive="false"/>
+        <configuration id="2" name="solarPanels" isActive="true"/>
+    </placeable>
+    <placeable modName="FS25_RentalhousesEU" filename="$moddir$FS25_RentalhousesEU/farmBuilding01.xml" position="-2527.82 53.3599 -2813.27" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Decolivinghouse" filename="$moddir$FS25_Decolivinghouse/farmHouse01.xml" position="-2638.07 53.6289 -3044.27" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true">
+        <configuration id="1" name="solarPanels" isActive="true"/>
+    </placeable>
+    <placeable modName="FS25_Decolivinghouse" filename="$moddir$FS25_Decolivinghouse/farmHouse01.xml" position="-2588.07 53.3599 -2814.27" rotation="0 -0 0" boughtWithFarmlandOverwrite="true">
+        <configuration id="1" name="solarPanels" isActive="true"/>
+    </placeable>
+    <placeable modName="FS25_mrhDecorativeBuildings" filename="$moddir$FS25_mrhDecorativeBuildings/placeables/community/municipalOffice02.xml" position="-2587.07 53.4109 -2857.27" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_mrhDecorativeBuildings" filename="$moddir$FS25_mrhDecorativeBuildings/placeables/residential/residentialBuildingB.xml" position="-2587.32 53.4229 -2875.27" rotation="0 -0 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_mrhDecorativeBuildings" filename="$moddir$FS25_mrhDecorativeBuildings/placeables/residential/residentialBuildingB.xml" position="-2584.12 52.0891 3567.7" rotation="0 -0 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaMilkbar.xml" position="-2457.87 52.4781 3244.7" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_mrhDecorativeBuildings" filename="$moddir$FS25_mrhDecorativeBuildings/placeables/community/municipalOffice02.xml" position="-2583.87 52.0771 3585.7" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaMotif01.xml" position="-2343.82 53.6989 -3104.77" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_mrhDecorativeBuildings" filename="$moddir$FS25_mrhDecorativeBuildings/placeables/community/municipalOffice01.xml" position="-2514.12 52.0891 3574.2" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_PgrApartamentBlocks" filename="$moddir$FS25_PgrApartamentBlocks/xml/pgrApartament.xml" position="-2635.82 53.5549 -2982.02" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_LargeDecorativeBuilding" filename="$moddir$FS25_LargeDecorativeBuilding/decorativeBuilding.xml" position="-2446.37 52.3341 3367.45" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_PgrApartamentBlocks" filename="$moddir$FS25_PgrApartamentBlocks/xml/apartament.xml" position="-2636.82 53.3599 -2812.52" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_PgrApartamentBlocks" filename="$moddir$FS25_PgrApartamentBlocks/xml/apartament.xml" position="-2636.32 53.4229 -2867.02" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_PgrApartamentBlocks" filename="$moddir$FS25_PgrApartamentBlocks/xml/pgrApartament.xml" position="-2632.62 52.2211 3460.95" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaApartment02.xml" position="-2336.07 53.4229 -2866.27" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_PgrApartamentBlocks" filename="$moddir$FS25_PgrApartamentBlocks/xml/apartament.xml" position="-2633.12 52.0891 3575.95" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Deco_houses" filename="$moddir$FS25_Deco_houses/Haus02_3.xml" position="-2702.82 53.4229 -2868.77" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true">
+        <configuration id="1" name="solarPanels" isActive="true"/>
+    </placeable>
+    <placeable modName="FS25_Decolivinghouse" filename="$moddir$FS25_Decolivinghouse/farmHouse01.xml" position="-2634.87 52.2951 3398.7" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true">
+        <configuration id="1" name="solarPanels" isActive="true"/>
+    </placeable>
+    <placeable modName="FS25_Deco_houses" filename="$moddir$FS25_Deco_houses/WohnBlock01.xml" position="-2700.57 53.4889 -2923.27" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true">
+        <configuration id="1" name="color" isActive="true"/>
+        <configuration id="1" name="solarPanels" isActive="true"/>
+    </placeable>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaHouse05.xml" position="-2392.87 52.0231 3633.2" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaMotif03.xml" position="-2345.32 53.8379 -3222.77" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Deco_houses" filename="$moddir$FS25_Deco_houses/Haus02_4.xml" position="-2699.87 52.0231 3630.95" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true">
+        <configuration id="1" name="solarPanels" isActive="true"/>
+    </placeable>
+    <placeable modName="FS25_Bavarian_Deco_Pack" filename="$moddir$FS25_Bavarian_Deco_Pack/town/townHouse01.xml" position="-2696.12 52.4931 3226.45" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Deco_houses" filename="$moddir$FS25_Deco_houses/WohnBlock01.xml" position="-2700.07 53.6989 -3105.27" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true">
+        <configuration id="1" name="color" isActive="true"/>
+        <configuration id="1" name="solarPanels" isActive="true"/>
+    </placeable>
+    <placeable modName="FS25_Bavarian_Deco_Pack" filename="$moddir$FS25_Bavarian_Deco_Pack/MountainHouse/smallMountainHouse02.xml" position="-2633.87 52.4391 3277.7" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Bavarian_Deco_Pack" filename="$moddir$FS25_Bavarian_Deco_Pack/MountainHouse/smallMountainHouse01.xml" position="-2637.07 53.8349 -3219.02" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaApartment02.xml" position="-2332.87 52.0891 3576.7" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaApartment01.xml" position="-2282.07 53.5589 -2982.02" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaPharmacy.xml" position="-2467.82 53.8349 -3218.77" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Bavarian_Deco_Pack" filename="$moddir$FS25_Bavarian_Deco_Pack/town/townHouse01.xml" position="-2699.32 53.8269 -3216.52" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_RentalhousesEU" filename="$moddir$FS25_RentalhousesEU/farmBuilding02.xml" position="-2584.07 53.7729 -3166.52" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Deco_houses" filename="$moddir$FS25_Deco_houses/WohnBlock01.xml" position="-2697.37 52.1551 3519.7" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true">
+        <configuration id="1" name="color" isActive="true"/>
+        <configuration id="1" name="solarPanels" isActive="true"/>
+    </placeable>
+    <placeable modName="FS25_Bavarian_Deco_Pack" filename="$moddir$FS25_Bavarian_Deco_Pack/MountainHouse/smallMountainHouse01.xml" position="-2633.87 52.5011 3223.95" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_RentalhousesEU" filename="$moddir$FS25_RentalhousesEU/farmBuilding03.xml" position="-2587.32 53.8349 -3222.27" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Bavarian_Deco_Pack" filename="$moddir$FS25_Bavarian_Deco_Pack/town/townHouse07.xml" position="-2702.82 53.7689 -3164.27" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaHouse08.xml" position="-2395.62 52.0881 3577.45" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_RentalhousesEU" filename="$moddir$FS25_RentalhousesEU/farmBuilding02.xml" position="-2580.87 52.4391 3276.45" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_RentalhousesEU" filename="$moddir$FS25_RentalhousesEU/farmBuilding02.xml" position="-2521.32 53.7729 -3165.77" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaMotif02.xml" position="-2339.87 52.2251 3460.45" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Bavarian_Deco_Pack" filename="$moddir$FS25_Bavarian_Deco_Pack/town/townHouse07.xml" position="-2699.62 52.4351 3278.7" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_RentalhousesEU" filename="$moddir$FS25_RentalhousesEU/farmBuilding03.xml" position="-2584.12 52.5011 3220.7" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_RentalhousesEU" filename="$moddir$FS25_RentalhousesEU/farmBuilding03.xml" position="-2517.12 52.5051 3220.7" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaMotif01.xml" position="-2340.62 52.3651 3338.2" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaMotif03.xml" position="-2342.12 52.5041 3220.2" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaHouse08.xml" position="-2392.82 53.7679 -3161.52" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaApartment03.xml" position="-2282.82 53.3589 -2812.27" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaApartment03.xml" position="-2340.82 53.4929 -2925.52" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaApartment02.xml" position="-2281.82 53.4219 -2865.52" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Bavarian_Deco_Pack" filename="$moddir$FS25_Bavarian_Deco_Pack/town/hotelpetit.xml" position="-2695.32 53.6289 -3044.52" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Deco_houses" filename="$moddir$FS25_Deco_houses/WohnBlock03.xml" position="-2694.87 52.2251 3461.95" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true">
+        <configuration id="1" name="solarPanels" isActive="true"/>
+    </placeable>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaHouse08.xml" position="-2389.62 52.4341 3281.45" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaHouse06.xml" position="-2272.12 52.4421 3274.7" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Bavarian_Deco_Pack" filename="$moddir$FS25_Bavarian_Deco_Pack/MountainHouse/smallMountainHouse02.xml" position="-2637.07 53.7729 -3165.27" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaHouse06.xml" position="-2270.37 52.3691 3335.2" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaHouse07.xml" position="-2275.07 53.6369 -3048.52" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaApartment01.xml" position="-2278.87 52.2251 3460.95" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaApartment03.xml" position="-2283.57 53.4929 -2927.02" rotation="-0 90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaApartment03.xml" position="-2457.62 52.0301 3625.95" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaSanctuary.xml" position="-2460.32 53.7639 -3159.02" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Deco_houses" filename="$moddir$FS25_Deco_houses/Haus02_4.xml" position="-2703.07 53.3569 -2812.02" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true">
+        <configuration id="1" name="solarPanels" isActive="true"/>
+    </placeable>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaApartment03.xml" position="-2460.82 53.3639 -2817.02" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Deco_houses" filename="$moddir$FS25_Deco_houses/WohnBlock01.xml" position="-2696.87 52.3651 3337.7" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true">
+        <configuration id="1" name="color" isActive="true"/>
+        <configuration id="1" name="solarPanels" isActive="true"/>
+    </placeable>
+    <placeable modName="FS25_PgrApartamentBlocks" filename="$moddir$FS25_PgrApartamentBlocks/xml/building.xml" position="-2635.07 53.4929 -2925.02" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_Deco_houses" filename="$moddir$FS25_Deco_houses/Haus02_3.xml" position="-2699.62 52.0891 3574.2" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true">
+        <configuration id="1" name="solarPanels" isActive="true"/>
+    </placeable>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaMotif02.xml" position="-2341.37 52.4351 3279.2" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaHouse05.xml" position="-2396.07 53.3569 -2809.77" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaGroceryStore.xml" position="-2459.12 52.0921 3573.2" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_RentalhousesEU" filename="$moddir$FS25_RentalhousesEU/farmBuilding03.xml" position="-2520.32 53.8389 -3222.27" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaApartment03.xml" position="-2337.62 52.1591 3517.45" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaHouse05.xml" position="-2272.87 52.5011 3224.45" rotation="-180 -0 -180" boughtWithFarmlandOverwrite="true"/>
+    <placeable modName="FS25_rentalProperties" filename="$moddir$FS25_rentalProperties/xml/zielonkaMotif02.xml" position="-2343.07 53.5589 -2982.52" rotation="-0 -90 0" boughtWithFarmlandOverwrite="true"/>
 </placeables>

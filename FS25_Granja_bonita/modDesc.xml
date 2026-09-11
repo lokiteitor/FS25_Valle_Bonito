@@ -1,23 +1,16 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <modDesc xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" descVersion="92" xsi:noNamespaceSchemaLocation="https://validation.gdn.giants-software.com/xml/fs25/modDesc.xsd">
     <author>GIANTS Software</author>
     <version>1.0.0.0</version>
     <title>
         <en>Granja Bonita</en>
     </title>
-
     <description>
-<en>
-Category: Maps
-</en>
-<de>
-Shopkategorie: Maps
-</de>
+        <en>Category: Maps</en>
+        <de>Shopkategorie: Maps</de>
     </description>
-
-            <iconFilename>preview.png</iconFilename>
-
-    <multiplayer supported="true" />
+    <iconFilename>preview.png</iconFilename>
+    <multiplayer supported="true"/>
     <maps>
         <map id="MAPS4S" configFilename="map/map.xml" defaultVehiclesXMLFilename="map/config/vehicles.xml" defaultPlaceablesXMLFilename="map/config/placeables.xml" defaultHandToolsXMLFilename="map/config/handTools.xml" defaultItemsXMLFilename="map/config/items.xml">
             <title>
@@ -29,8 +22,14 @@ Shopkategorie: Maps
             <iconFilename>preview.png</iconFilename>
         </map>
     </maps>
-	
-	
-
-    
+    <dependencies>
+        <dependency>FS25_LargeDecorativeBuilding</dependency>
+        <dependency>FS25_Decolivinghouse</dependency>
+        <dependency>FS25_Deco_houses</dependency>
+        <dependency>FS25_RentalhousesEU</dependency>
+        <dependency>FS25_Bavarian_Deco_Pack</dependency>
+        <dependency>FS25_mrhDecorativeBuildings</dependency>
+        <dependency>FS25_rentalProperties</dependency>
+        <dependency>FS25_PgrApartamentBlocks</dependency>
+    </dependencies>
 </modDesc>
