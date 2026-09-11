@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="iso-8859-1"?>
+<i3D name="rails.i3d" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+    <Asset>
+        <Export program="GIANTS Editor 64bit" version="10.0.13"/>
+    </Asset>
+    <Files>
+        <File fileId="1" filename="$data/maps/mapEU/textures/props/railroads/railRoadPieces_diffuse.png"/>
+        <File fileId="2" filename="$data/maps/mapEU/textures/props/railroads/railRoadPieces_normal.png"/>
+        <File fileId="3" filename="$data/maps/mapEU/textures/props/railroads/railRoadPieces_specular.png"/>
+        <File fileId="4" filename="$data/shaders/placeableShader.xml"/>
+    </Files>
+    <Materials>
+        <Material name="lambert1" materialId="446" diffuseColor="0.501961 0.501961 0.501961 1"/>
+        <Material name="railRoadPieces_mat" materialId="539" customShaderId="4">
+            <Texture fileId="1"/>
+            <Normalmap fileId="2"/>
+            <Glossmap fileId="3"/>
+        </Material>
+    </Materials>
+    <Shapes externalShapesFile="rails.i3d.shapes"/>
+    <Scene>
+        <TransformGroup name="straight36m_lod" translation="-28.9604 32.5936 -320.083" rotation="-179.746 -67 -180" lodDistance="0 30" clipDistance="475" nodeId="44236">
+            <Shape name="LOD0" translation="0 -1e-06 1e-06" shapeId="1" nodeId="44237" castsShadows="true" receiveShadows="true" materialIds="539">
+                <Shape name="col" translation="0 1e-06 -1e-06" shapeId="2" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" density="0.0001" nodeId="44238" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="446"/>
+            </Shape>
+            <Shape name="LOD1" translation="0 -1e-06 1e-06" shapeId="3" nodeId="44239" castsShadows="true" receiveShadows="true" materialIds="539"/>
+        </TransformGroup>
+    </Scene>
+</i3D>

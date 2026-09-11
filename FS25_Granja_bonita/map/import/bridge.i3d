@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="iso-8859-1"?>
+<i3D name="bridge.i3d" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+    <Asset>
+        <Export program="GIANTS Editor 64bit" version="10.0.13"/>
+    </Asset>
+    <Files>
+        <File fileId="2" filename="nok/roadPack_darkneu/roadArrayDark_diffuse.dds"/>
+        <File fileId="3" filename="nok/roadPack_darkneu/roadArrayDark_normal.dds"/>
+        <File fileId="4" filename="nok/roadPack_darkneu/roadArrayDark_specular2.dds"/>
+        <File fileId="1" filename="$data/maps/mapUS/textures/buildings/bridgeRiver/bridgeRiver.i3d"/>
+    </Files>
+    <Materials>
+        <Material name="lambert1" materialId="552">
+            <Texture fileId="2"/>
+            <Normalmap fileId="3"/>
+            <Glossmap fileId="4"/>
+        </Material>
+    </Materials>
+    <Shapes externalShapesFile="bridge.i3d.shapes"/>
+    <Scene>
+        <TransformGroup name="bridgeRiver_PLACE" lockedgroup="true" translation="-1163.93 64 624.208" rotation="180 50 180" scale="1.5 1 1" nodeId="35638">
+            <ReferenceNode name="bridgeRiver_lod" translation="-1.52588e-05 0 0" referenceId="1" nodeId="35651"/>
+            <Shape name="geradeaus50m" translation="0 0.01 0" rotation="90 90 0.000219304" scale="1 1.149 1" shapeId="1" clipDistance="2780" nodeId="35669" castsShadows="true" receiveShadows="true" materialIds="552"/>
+            <Shape name="geradeaus50m" translation="0 0.0100021 0" rotation="90.0002 -90 0" scale="1 1.149 1" shapeId="1" clipDistance="2780" nodeId="35670" castsShadows="true" receiveShadows="true" materialIds="552"/>
+        </TransformGroup>
+    </Scene>
+</i3D>
