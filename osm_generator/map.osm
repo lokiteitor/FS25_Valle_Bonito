@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<osm version="0.6" generator="FS25 map pipeline">
+  <!--
+       Playable area: 8192 x 8192 m, centre 43.1457, -95.1451
+       Local coordinates are playable metres, x east, y south from the north
+       edge, so the centre of the map is (4096, 4096).
+       Projection: equirectangular about the centre, 111111.0 m per
+       degree of latitude and 111111.0 * cos(LAT_CENTER) m per
+       degree of longitude.
+       Geometry comes from map_layout.py, shared with the DEM generator.
+       Layout: 8192 m playable on a 12288 m canvas, clean layout (no features), base datum 46.4 m, mountain rim to 250 m
+  -->
+  <bounds minlat="43.1088283131" minlon="-95.1956038289" maxlat="43.1825563869" maxlon="-95.0945534711"/>
+</osm>
