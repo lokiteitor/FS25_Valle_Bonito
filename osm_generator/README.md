@@ -20,8 +20,8 @@ itself to the ground reads `dem_generator/terrain_stats.json`.
 
 ## Map centre
 
-    LAT_CENTER =  43.0600
-    LON_CENTER = -95.2800
+    LAT_CENTER =  43.14569235
+    LON_CENTER = -95.14507865
 
 They live in `map_layout.py`, and everything else is derived from them. Moving the map
 means changing those two numbers and re-running both generators - and moving them means
@@ -36,10 +36,10 @@ south from the north edge, so the centre of the map sits at (4096, 4096).
 Projection: equirectangular about the centre, 111111.0 m per degree of latitude and
 111111.0 * cos(LAT_CENTER) m per degree of longitude, which puts the corners at
 
-    minlat  43.0231359631      south edge, y = 8192
-    maxlat  43.0968640369      north edge, y = 0
-    minlon -95.3304545078      west edge,  x = 0
-    maxlon -95.2295454922      east edge,  x = 8192
+    minlat  43.1088283131      south edge, y = 8192
+    maxlat  43.1825563869      north edge, y = 0
+    minlon -95.1956038289      west edge,  x = 0
+    maxlon -95.0945534711      east edge,  x = 8192
 
 These are the four values in the `<bounds>` element of `map.osm`. The 3D viewer stretches
 that box to fill the playable square whatever it says, so it has to stay right;
@@ -77,7 +77,7 @@ that neither renderer can see.
 - every area closed on its own first node - the 3D viewer decides polygon versus line by
   comparing the first and last coordinate exactly
 - every way carrying a tag both renderers draw
-- nothing planted inside the 100 m clean strip along the boundary
+- nothing planted inside the 50 m clean strip along the boundary
 - the file and `map_layout` agreeing on whether the map is empty. Both halves of the
   pipeline describe the same world or neither does, and an OSM that quietly stopped
   emitting what the layout carries is the failure that rule exists to catch

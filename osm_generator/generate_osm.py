@@ -202,7 +202,10 @@ def emit_areas(osm):
     """Fields, woods and anything else that is a tagged ring."""
     n = 0
     for a in ml.areas():
-        ring = strip_ring(a['ring']) if ml.EDGE_CLEAR_M > 0 else a['ring']
+        if a.get('is_border'):
+            ring = ml.clip_ring_to_rect(a['ring'], 0.0, 0.0, ml.PLAYABLE_M, ml.PLAYABLE_M)
+        else:
+            ring = strip_ring(a['ring']) if ml.EDGE_CLEAR_M > 0 else a['ring']
         if len(ring) < 4 or ml.ring_area_ha(ring) < 0.15:
             continue
         tags = dict(a['tags'])
@@ -294,8 +297,9 @@ def _seg_cross(a, b, c, d):
         return None
     t = ((c[0] - a[0]) * s[1] - (c[1] - a[1]) * s[0]) / den
     u = ((c[0] - a[0]) * r[1] - (c[1] - a[1]) * r[0]) / den
-    if 1e-9 < t < 1 - 1e-9 and 1e-9 < u < 1 - 1e-9:
-        return (a[0] + t * r[0], a[1] + t * r[1])
+    if -1e-6 <= t <= 1.0 + 1e-6 and -1e-6 <= u <= 1.0 + 1e-6:
+        t_c = min(max(t, 0.0), 1.0)
+        return (a[0] + t_c * r[0], a[1] + t_c * r[1])
     return None
 
 

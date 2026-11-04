@@ -54,8 +54,7 @@ python3 pf_generator/generate_soil.py -s <seed>   # Precision Farming soilMap.pn
 **DEM Synthesis (`dem_generator/generate_new_dem_12k.py`):**
 - Canvas is 12288 x 12288 m (1 px = 1 m).
 - Playable area is 8192 x 8192 m centred (offset 2048 m margin on all sides).
-- Base terrain is generated at datum `BASE_ELEV_M` (46.4 m).
-- Outside the playable square, `build_rim` creates the mountain border rising up to 250 m (`RIM_CREST_M`), preceded by a 100 m flat apron (`RIM_APRON_M`).
+- Base terrain is generated on a flat canvas at datum `BASE_ELEV_M` (25.0 m).
 - Features in `PADS`, `CORRIDORS`, and `WATER` are graded/carved smoothly into the ground.
 
 ## Coordinates and Projection

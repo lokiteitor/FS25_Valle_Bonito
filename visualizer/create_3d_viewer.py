@@ -167,14 +167,17 @@ def main():
         ("natural", "water", "#2563EB", 4),       # Water blue
         ("water", None, "#2563EB", 4),
         ("leaf_type", "needleleaved", "#14532D", 4),  # Conifer, darker than broadleaf
+        ("leaf_type", "broadleaved", "#22C55E", 4),   # Broadleaved shelterbelt
         ("natural", "wood", "#166534", 4),        # Forest green
         ("landuse", "forest", "#166534", 4),
+        ("building", "industrial", "#6366F1", 4), # Indigo for industrial farmyard
         ("landuse", "farmyard", "#EC4899", 4),    # Pink for farmyard
         ("landuse", "farmland", "#86EFAC", 3),    # Light green for farmland
         ("railway", None, "#F59E0B", 5),          # Amber railway
         ("highway", "primary", "#111827", 8),     # Road hierarchy, darkest = biggest
         ("highway", "secondary", "#374151", 5),
         ("highway", "tertiary", "#78716C", 3),
+        ("highway", "track", "#A8A29E", 3),
         ("highway", None, "#9CA3AF", 3),
     ]
 
@@ -1131,6 +1134,7 @@ def main():
             {{ key: 'water',    val: null,        color: '#60A5FA', label: 'Agua' }},
             {{ key: 'natural',  val: 'wood',      color: '#22C55E', label: 'Bosque' }},
             {{ key: 'landuse',  val: 'forest',    color: '#22C55E', label: 'Bosque' }},
+            {{ key: 'building', val: 'industrial',color: '#818CF8', label: 'Industrial' }},
             {{ key: 'landuse',  val: 'farmyard',  color: '#EC4899', label: 'Farmyard' }},
             {{ key: 'landuse',  val: 'farmland',  color: '#86EFAC', label: 'Farmland' }}
         ];

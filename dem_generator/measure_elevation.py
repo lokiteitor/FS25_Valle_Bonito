@@ -358,24 +358,42 @@ def main():
 
     # ---------------------------------------------------------------- elevation and relief
     print("\nelevation and relief:")
-    band("canvas elevation minimum", lo_cm / 100.0, 1.0, 60.0, " m")
-    band("canvas elevation maximum", hi_cm / 100.0, 55.0, 110.0, " m")
-    band("playable area minimum", float(play_raw.min()) / 100.0, 1.0, ml.RIM_CREST_M + 5.0, " m")
-    band("playable area maximum", float(play_raw.max()) / 100.0, 1.0, ml.RIM_CREST_M + 5.0, " m")
-    if ml.corridors() or ml.areas() or ml.water() or ml.pads():
+    hill_peaks = [BASE_ELEV_M + h['height_m'] for h in ml.hills()]
+    max_expected_m = max([ml.RIM_CREST_M, BASE_ELEV_M] + hill_peaks) + 10.0
+    band("canvas elevation minimum", lo_cm / 100.0, 1.0, max_expected_m, " m")
+    band("canvas elevation maximum", hi_cm / 100.0, 1.0, max_expected_m, " m")
+    band("playable area minimum", float(play_raw.min()) / 100.0, 1.0, max_expected_m, " m")
+    band("playable area maximum", float(play_raw.max()) / 100.0, 1.0, max_expected_m, " m")
+    if ml.corridors() or ml.areas() or ml.water() or ml.pads() or ml.hills():
         check("playable area has features", float(play_raw.max() - play_raw.min()) / 100.0 >= 0.0,
               f"relief {float(play_raw.max() - play_raw.min()) / 100.0:.2f} m")
     else:
+        if ml.RIM_CREST_M <= BASE_ELEV_M and ml.MORAINE_AMP_M == 0.0 and ml.SWELL_AMP_M == 0.0:
+            check("clean canvas flat at datum",
+                  abs(lo_cm - want_cm) <= FLAT_TOL_CM and abs(hi_cm - want_cm) <= FLAT_TOL_CM,
+                  f"{lo_cm / 100.0:.2f} .. {hi_cm / 100.0:.2f} m (want {BASE_ELEV_M:.1f} m)")
         check("clean playable area at datum", abs(float(play_raw.mean()) / 100.0 - BASE_ELEV_M) <= 1.0,
               f"mean {float(play_raw.mean()) / 100.0:.2f} m (want {BASE_ELEV_M:.1f} m)")
+    for h in ml.hills():
+        top_z = float(zat(raw, h['cx'], h['cy']))
+        want_top = BASE_ELEV_M + h['height_m']
+        band(f"{h['name']} summit elevation", top_z, want_top - 1.0, want_top + 1.0, " m")
+        pts = h['spiral_pts']
+        arc = ops.polyline_arclen(pts)
+        zs = np.array([float(zat(raw, p[0], p[1])) for p in pts])
+        ds = np.diff(arc)
+        dz = np.diff(zs)
+        grades_pct = np.abs(dz / np.maximum(ds, 1e-6)) * 100.0
+        band(f"{h['name']} spiral ramp max grade", float(grades_pct.max()), 0.0, 8.0, "%")
     mean_play = float(play_raw.mean()) / 100.0
     info("playable mean elevation", f"{mean_play:.2f} m (datum {BASE_ELEV_M:.1f} m)")
 
     # ---------------------------------------------------------------- surface
     print(f"\nsurface ({SLOPE_BASELINE_M:.0f} m baseline):")
     worst = max_slope_deg(raw)
-    band("steepest slope on the canvas", worst, 0.0, 15.0, " deg")
-    info("moraine slopes", f"steepest slope on canvas moraine border is {worst:.1f} deg")
+    slope_limit = 38.0 if ml.hills() else 15.0
+    band("steepest slope on the canvas", worst, 0.0, slope_limit, " deg")
+    info("canvas slope", f"steepest slope on canvas is {worst:.1f} deg")
 
     # ---------------------------------------------------------------- stats
     print("\nterrain_stats.json:")

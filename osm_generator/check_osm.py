@@ -174,7 +174,12 @@ def main():
     # the map - and so are the roads, for the same reason.
     in_strip = []
     closest = -1e9
-    planted = rings['farmland'] + rings['wood'] + rings['farmyard']
+    border_names = {a['name'] for a in ml.areas() if a.get('is_border')}
+    planted = []
+    for key in ('farmland', 'wood', 'farmyard'):
+        for (name, _, _), r in zip(groups[key], rings[key]):
+            if name not in border_names:
+                planted.append(r)
     for r in planted:
         d = max(ml.playable_sdf(x, y) for x, y in r)
         closest = max(closest, d)
@@ -191,11 +196,14 @@ def main():
     # Both halves of the pipeline describe the same world or neither does. A layout that
     # carries features while the file is empty means the OSM side stopped emitting them,
     # and nothing else here would notice.
-    layout_features = (len(ml.water()) + len(ml.pads()) + len(ml.areas())
-                       + len(ml.corridors()))
+    layout_features = (len(ml.water()) + sum(1 for p in ml.pads() if p.get('tags'))
+                       + len(ml.areas()) + len(ml.corridors()))
     check("the file and the layout agree on whether the map is empty",
           (layout_features == 0) == (len(ways) == 0),
           f"{layout_features} feature(s) in map_layout, {len(ways)} way(s) in the file")
+    check("farmland count does not exceed 180",
+          len(groups['farmland']) <= 180,
+          f"{len(groups['farmland'])} farmland way(s)")
 
     problems = ml.validate()
     check("map_layout validates", not problems,

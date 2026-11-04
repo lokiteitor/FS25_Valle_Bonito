@@ -4,11 +4,8 @@
 Builds the 12288x12288 m canvas (1 px = 1 m, 16-bit uint16 PNG) with the 8192x8192 m
 playable square centred in it.
 
-- Playable area: starts at `map_layout.BASE_ELEV_M` (46.4 m), sculpted by any
-  corridors, pads, or water bodies defined in `map_layout.py`.
-- Non-playable border: 2048 m margin on all sides, separated from the playable area
-  by a 100 m flat apron, rising to mountain ranges in the east and west (up to 250 m)
-  with lower sills in the north and south.
+- Clean baseline: the entire 12288x12288 m canvas starts flat at `map_layout.BASE_ELEV_M` (25.0 m),
+  ready to be sculpted by any corridors, pads, water bodies, or border relief defined in `map_layout.py`.
 - Output: 16-bit centimetre heightmap (`raw / 100 = metres`), the format Giants Editor imports.
 - Purely procedural: does not depend on any external PNG or OSM files.
 """
@@ -46,7 +43,7 @@ WORK_PX = 3072
 WORK_DX = CANVAS_M / WORK_PX          # 4 m per working pixel
 BAND_ROWS = 1024                      # output is written in bands to save RAM
 
-BASE_ELEV_M = ml.BASE_ELEV_M          # 46.4 m datum from layout
+BASE_ELEV_M = ml.BASE_ELEV_M          # 25.0 m datum from layout
 Z_MAX_CM = 62000.0                    # Giants Editor working ceiling in centimetres
 
 FEATHER_CAP_M = 120.0
@@ -74,14 +71,57 @@ def rng_for(name):
 
 
 # ==================================================================================
-# 2. Base Surface Synthesis
+# 2. Base Surface Synthesis (Clay County, Iowa - Des Moines Lobe Till Plain)
 # ==================================================================================
 def build_base(X, Y):
-    """Generate the baseline ground surface across the canvas.
+    """Generate the Iowa glacial till plain & loess swell surface across the canvas."""
+    rng = rng_for('terrain')
 
-    Clean baseline: flat at BASE_ELEV_M, ready for layout features.
-    """
-    return np.full(X.shape, BASE_ELEV_M, dtype=np.float32)
+    # 1. Gentle regional uplift from WSW (lake basin) toward ENE uplands
+    u_x = np.clip(X / float(PLAYABLE_M), -0.25, 1.25)
+    u_y = np.clip((float(PLAYABLE_M) - Y) / float(PLAYABLE_M), -0.25, 1.25)
+    regional_tilt = ml.IOWA_TILT_M * (0.72 * ops.smoothstep(u_x) + 0.28 * ops.smoothstep(u_y))
+
+    # 2. Anisotropic NW-SE Des Moines Lobe glacial moraine swells (-35 deg grain)
+    ang = math.radians(ml.MORAINE_GRAIN_DEG)
+    ca, sa = math.cos(ang), math.sin(ang)
+    u_mor = (X * ca + Y * sa) / ml.MORAINE_STRETCH
+    v_mor = -X * sa + Y * ca
+    n_moraine = ops.value_noise(u_mor, v_mor, ml.IOWA_MORAINE_LAM_M, rng, CANVAS_M)
+
+    # 3. Intermediate loess swells and gentle prairie pothole swales
+    n_loess = ops.value_noise(X, Y, ml.IOWA_LOESS_LAM_M, rng, CANVAS_M)
+    n_swale = ops.value_noise(X, Y, ml.IOWA_SWALE_LAM_M, rng, CANVAS_M)
+
+    undulation = (
+        ml.IOWA_MORAINE_AMP_M * n_moraine
+        + ml.IOWA_LOESS_AMP_M * n_loess
+        + ml.IOWA_SWALE_AMP_M * n_swale
+    )
+    # Shift undulation so the lowest broad troughs sit slightly above 0 relative to BASE_ELEV_M
+    delta = regional_tilt + undulation + 4.5
+
+    # 4. Anchor shoreline of western lake smoothly to BASE_ELEV_M (25.0 m)
+    for w in ml.water():
+        if w.get('shape'):
+            sh = w['shape']
+            q_lake = ops.ellipse_r(
+                X, Y, sh['cx'], sh['cy'], sh['a'], sh['b'],
+                sh.get('rot_deg', 0.0), sh.get('harmonics', ())
+            )
+            w_shore = ops.smootherstep(np.clip((q_lake - 1.03) / 0.45, 0.0, 1.0))
+            delta = delta * w_shore
+
+    # 5. Anchor core of spiral hill datum to BASE_ELEV_M while blending outer foot into Iowa relief
+    for h in ml.hills():
+        q_hill = ops.ellipse_r(
+            X, Y, h['cx'], h['cy'], h['a'], h['b'],
+            h['rot_deg'], h['harmonics']
+        )
+        w_hill = ops.smootherstep(np.clip((q_hill - 0.88) / 0.25, 0.0, 1.0))
+        delta = delta * w_hill
+
+    return (BASE_ELEV_M + np.maximum(delta, -2.0)).astype(np.float32)
 
 
 # ==================================================================================
@@ -114,11 +154,16 @@ def rim_ramp(X, Y):
 
 
 def build_rim(X, Y, d_river=None):
-    """Construct rolling glacial till plain border (Royal, Clay County, Iowa).
+    """Construct non-playable border relief.
 
-    Features low recessional moraines trending NW-SE and broad swells,
-    creating a natural rolling Midwestern prairie horizon instead of alpine mountains.
+    On the clean baseline (all rim amplitudes zero and RIM_CREST_M == BASE_ELEV_M),
+    returns zero lift so the entire canvas stays flat at BASE_ELEV_M (25.0 m).
     """
+    if (ml.RIM_CREST_M <= BASE_ELEV_M and ml.RIM_SADDLE_M <= BASE_ELEV_M
+            and ml.RIM_MOUTH_M <= BASE_ELEV_M and ml.MORAINE_AMP_M == 0.0
+            and ml.SWELL_AMP_M == 0.0):
+        return np.zeros(X.shape, dtype=np.float32)
+
     _, peak, sill = rim_crest(X, Y)
     t, w = rim_ramp(X, Y)
     crest = sill + (peak - sill) * w
@@ -177,7 +222,7 @@ def grade_corridors(z, X, Y, wet):
     x0, y0 = float(X[0, 0]), float(Y[0, 0])
     dx = float(X[0, 1] - X[0, 0])
     built = np.zeros(z.shape, dtype=np.float32)
-    rank = {'track': 0, 'street': 0, 'section': 1, 'rail': 2, 'primary': 3}
+    rank = {'track': 0, 'street': 0, 'tertiary': 1, 'section': 1, 'secondary': 2, 'rail': 2, 'primary': 3}
 
     for c in sorted(ml.corridors(), key=lambda c: rank.get(c['kind'], 0)):
         dense = ml.densify(c['axis'], 20.0)
@@ -224,6 +269,17 @@ def water_fields(X, Y, land):
     d_river = None
 
     for w in ml.water():
+        if w.get('shape'):
+            sh = w['shape']
+            q = ops.ellipse_r(
+                X, Y, sh['cx'], sh['cy'], sh['a'], sh['b'],
+                sh.get('rot_deg', 0.0), sh.get('harmonics', ())
+            )
+            depth = float(w.get('depth_m', 15.0))
+            t_basin = np.clip((q - 0.35) / (1.0 - 0.35), 0.0, 1.0)
+            carve = depth * (1.0 - ops.smootherstep(t_basin))
+            water_z = np.minimum(water_z, land - carve)
+            wet = np.maximum(wet, ops.smootherstep((1.02 - q) / 0.04))
         if w.get('axis'):
             axis = w['axis']
             hw = w.get('water_half_w', 20.0)
@@ -241,6 +297,59 @@ def water_fields(X, Y, land):
     return wet, water_z, d_river
 
 
+def build_hills(z, X, Y):
+    """Sculpt natural hills with a continuous drivable spiral terrace to the summit."""
+    built = np.zeros(z.shape, dtype=np.float32)
+    if not ml.hills():
+        return z, built
+
+    rng = rng_for('terrain')
+    n_broad = ops.value_noise(X, Y, 300.0, rng, CANVAS_M)
+    n_fine = ops.value_noise(X, Y, 120.0, rng, CANVAS_M)
+
+    for h in ml.hills():
+        cx, cy = h['cx'], h['cy']
+        a, b = h['a'], h['b']
+        rot_deg = h['rot_deg']
+        harmonics = h['harmonics']
+        q_start = h['q_start']
+        q_top = h['q_top']
+        height = h['height_m']
+        turns = h['spiral_turns']
+        theta_start = h['theta_start']
+        w = h['shelf_frac']
+
+        c, s = math.cos(math.radians(rot_deg)), math.sin(math.radians(rot_deg))
+        u_rot = (X - cx) * c + (Y - cy) * s
+        v_rot = -(X - cx) * s + (Y - cy) * c
+        theta = np.arctan2(v_rot / b, u_rot / a)
+        q = ops.ellipse_r(X, Y, cx, cy, a, b, rot_deg, harmonics)
+
+        u_hill = np.clip((q_start - q) / (q_start - q_top), 0.0, 1.0)
+        nu = turns * u_hill
+        f = np.mod(nu - (theta - theta_start) / (2.0 * np.pi), 1.0)
+
+        span = 0.5 - w
+        t1 = np.clip(f / span, 0.0, 1.0)
+        t2 = np.clip((f - (0.5 + w)) / span, 0.0, 1.0)
+        S = np.where(f < 0.5, 0.5 * ops.smoothstep(t1), 0.5 + 0.5 * ops.smoothstep(t2))
+
+        env = ops.smootherstep(u_hill / 0.14) * ops.smootherstep((1.0 - u_hill) / 0.14)
+        u_eff = np.clip(u_hill + env * (S - f) / turns, 0.0, 1.0)
+
+        prof = 0.65 * ops.smoothstep(u_eff) + 0.35 * ops.smootherstep(u_eff)
+
+        on_shelf = ops.smoothstep((w + 0.03 - np.abs(f - 0.5)) / 0.03) * env
+        flank_env = (1.0 - on_shelf) * (4.0 * u_hill * (1.0 - u_hill)) ** 1.5
+        flank_noise = flank_env * (1.8 * n_broad + 0.8 * n_fine)
+
+        z_hill = z + height * prof + flank_noise
+        z = np.maximum(z, z_hill)
+        np.maximum(built, on_shelf, out=built)
+
+    return z, built
+
+
 def sculpt(z, X, Y):
     """Execute all terrain sculpting stages in order."""
     wet = np.zeros(z.shape, dtype=np.float32)
@@ -249,6 +358,11 @@ def sculpt(z, X, Y):
     if ml.water():
         wet, water_z, d_river = water_fields(X, Y, z)
         z = np.minimum(z, water_z)
+
+    if ml.hills():
+        z, built_hills = build_hills(z, X, Y)
+    else:
+        built_hills = np.zeros(z.shape, dtype=np.float32)
 
     if ml.pads():
         z, built_pads = grade_pads(z, X, Y, wet)
@@ -261,6 +375,7 @@ def sculpt(z, X, Y):
         built = np.zeros(z.shape, dtype=np.float32)
 
     np.maximum(built, built_pads, out=built)
+    np.maximum(built, built_hills, out=built)
     return z + build_rim(X, Y, d_river), wet, built
 
 
@@ -403,7 +518,7 @@ def main():
     print(f"1. Base terrain at datum {BASE_ELEV_M:.1f} m ({WORK_PX}x{WORK_PX} grid, {WORK_DX:.0f} m/px)...")
     z = build_base(X, Y)
 
-    print(f"2. Sculpting features & mountain rim (to {ml.RIM_CREST_M:.0f} m)...")
+    print(f"2. Sculpting features & border (rim target {ml.RIM_CREST_M:.1f} m)...")
     z, wet, built = sculpt(z, X, Y)
     print(f"   {float(wet.mean()) * 100:.2f}% under water, "
           f"{float((built > 0.5).mean()) * 100:.2f}% graded for roads/pads")

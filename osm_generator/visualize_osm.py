@@ -64,7 +64,7 @@ def main():
 
         # natural=wood is checked before landuse: woods carry both tags and the wood
         # reading is the meaningful one.
-        if tags.get('natural') == 'wood':
+        if tags.get('natural') == 'wood' or tags.get('landuse') == 'forest':
             # Conifer against broadleaf, the same way an industrial apron is drawn apart
             # from a farmyard: they are one tag to the renderer's own vocabulary, and
             # telling them apart here is the only place `leaf_type` shows.
@@ -105,6 +105,9 @@ def main():
                     zorder=6)
         elif tags.get('highway') == 'tertiary':
             ax.plot(xs, ys, color='#CBD5E1', linewidth=0.9, alpha=0.85, zorder=5)
+        elif tags.get('highway') == 'track':
+            ax.plot(xs, ys, color='#A8A29E', linewidth=1.2, linestyle=(0, (4, 2)),
+                    alpha=0.9, zorder=5)
         elif 'railway' in tags:
             ax.plot(xs, ys, color='#475569', linewidth=3.0, zorder=5)
             ax.plot(xs, ys, color='#FFFFFF', linewidth=0.9, linestyle='--', zorder=5)
@@ -119,8 +122,7 @@ def main():
     # Nodes shared by more than one way, i.e. the junctions.
     usage = {}
     for way in ways:
-        for pt in way['coords']:
-            key = (round(pt[0], 2), round(pt[1], 2))
+        for key in {(round(pt[0], 2), round(pt[1], 2)) for pt in way['coords']}:
             usage[key] = usage.get(key, 0) + 1
     shared = [k for k, v in usage.items() if v > 1]
     if shared:

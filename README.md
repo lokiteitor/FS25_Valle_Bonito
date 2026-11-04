@@ -7,10 +7,9 @@ Este proyecto permite generar los artefactos necesarios para la creación de un 
 ## Dimensiones del Mapa
 
 - **Área Jugable:** 8192 × 8192 m (8 km, centrado en `4096, 4096`).
-- **Lienzo Total (Canvas):** 12288 × 12288 m (12 km, con 2048 m de margen montañoso en los cuatro costados).
+- **Lienzo Total (Canvas):** 12288 × 12288 m (12 km, con 2048 m de margen en los cuatro costados).
 - **Formato de Altura:** PNG de 16 bits (`uint16`), donde `valor / 100 = metros`.
-- **Cota Base:** 46.4 metros de elevación.
-- **Borde Exterior (Rim):** Montañas perimetrales que alcanzan entre 200 y 250 metros de elevación, con un faldón plano de transición de 100 metros.
+- **Cota Base:** 25.0 metros de elevación (lienzo base completamente plano).
 
 ## Estructura del Proyecto
 
