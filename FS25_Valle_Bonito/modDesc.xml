@@ -3,7 +3,7 @@
     <author>GIANTS Software</author>
     <version>1.0.0.0</version>
     <title>
-        <en>Granja Bonita X16</en>
+        <en>Valle Bonito</en>
     </title>
 
     <description>
@@ -21,7 +21,7 @@ Shopkategorie: Maps
     <maps>
         <map id="MAPS4S" configFilename="map/map.xml" defaultVehiclesXMLFilename="map/config/vehicles.xml" defaultPlaceablesXMLFilename="map/config/placeables.xml" defaultHandToolsXMLFilename="map/config/handTools.xml" defaultItemsXMLFilename="map/config/items.xml">
             <title>
-                <en>Granja Bonita X16</en>
+                <en>Valle Bonito</en>
             </title>
             <description>
                 <en>Visit the software repo: github.com/iwatkot/maps4fs</en>
