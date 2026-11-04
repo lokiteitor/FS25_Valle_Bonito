@@ -1,0 +1,85 @@
+{
+    "mode": "raw",
+    "input_height_scale": 0.003891050583657588,
+    "original": {
+        "min": 1000.0,
+        "max": 22500.0,
+        "deviation": 21500.0,
+        "dtype": "uint16",
+        "shape": "(12288, 12288)"
+    },
+    "meters": {
+        "min": 3.891050583657588,
+        "max": 87.54863813229574,
+        "deviation": 83.65758754863815,
+        "dtype": "float64",
+        "shape": "(12288, 12288)"
+    },
+    "raised_lowered": {
+        "min": 30.0,
+        "max": 113.65758754863815,
+        "deviation": 83.65758754863815,
+        "dtype": "float64",
+        "shape": "(12288, 12288)"
+    },
+    "height_scale": {
+        "height_scale_from_settings": 255,
+        "adjusted_height_scale": 255,
+        "mesh_z_scaling_factor": 257.0,
+        "height_scale_multiplier": 1.0
+    },
+    "normalized": {
+        "min": 7710.0,
+        "max": 29210.0,
+        "deviation": 21500.0,
+        "dtype": "uint16",
+        "shape": "(12288, 12288)"
+    },
+    "blurred": {
+        "min": 7710.0,
+        "max": 29210.0,
+        "deviation": 21500.0,
+        "dtype": "uint16",
+        "shape": "(12288, 12288)"
+    },
+    "full": {
+        "min": 7710.0,
+        "max": 29210.0,
+        "deviation": 21500.0,
+        "dtype": "uint16",
+        "shape": "(12288, 12288)"
+    },
+    "not_resized": {
+        "min": 7710.0,
+        "max": 29210.0,
+        "deviation": 21500.0,
+        "dtype": "uint16",
+        "shape": "(8192, 8192)"
+    },
+    "flatten": {
+        "roads": {
+            "input": 27,
+            "applied": 27,
+            "skipped": 0,
+            "unknown_tags": [],
+            "feather": null,
+            "smooth": 25.0
+        },
+        "changed_pixels": 943693,
+        "changed_fraction": 0.00625
+    },
+    "flattened": {
+        "min": 7710.0,
+        "max": 29210.0,
+        "deviation": 21500.0,
+        "dtype": "uint16",
+        "shape": "(12288, 12288)"
+    },
+    "dem": {
+        "min": 7710.0,
+        "max": 29210.0,
+        "deviation": 21500.0,
+        "dtype": "uint16",
+        "shape": "(8193, 8193)"
+    }
+}
