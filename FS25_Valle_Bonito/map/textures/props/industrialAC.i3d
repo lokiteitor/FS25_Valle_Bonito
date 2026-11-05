@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="industrialAC" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="5" filename="$data/shaders/placeableShader.xml" />
+    <File fileId="1" filename="industrialACDecals_diffuse.png" />
+    <File fileId="2" filename="industrialAC_diffuse.png" />
+    <File fileId="3" filename="industrialAC_normal.png" />
+    <File fileId="4" filename="industrialAC_specular.png" />
+  </Files>
+
+  <Materials>
+    <Material name="lambert1" materialId="1" diffuseColor="0.5 0.5 0.5 1">
+    </Material>
+    <Material name="industrialACDecals_mat" materialId="3" specularColor="0.5 0.5 0.5">
+      <Texture fileId="1"/>
+    </Material>
+    <Material name="industrialAC_mat" materialId="2" customShaderId="5">
+      <Texture fileId="2"/>
+      <Normalmap fileId="3"/>
+      <Glossmap fileId="4"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="industrialAC.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <Shape name="industrialABig01" translation="1.32131 0 0.755708" shapeId="1" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="1">
+      <Shape name="visual" translation="-1.32131 0 -0.755708" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="150" nodeId="2"/>
+      <Shape name="decals" translation="-1.32131 0 -0.755708" shapeId="3" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="30" nodeId="3"/>
+    </Shape>
+    <Shape name="industrialABig02" translation="0 0 2" shapeId="4" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="4">
+      <Shape name="visual" shapeId="5" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="150" nodeId="5"/>
+      <Shape name="decals" shapeId="6" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="30" nodeId="6"/>
+    </Shape>
+    <Shape name="industrialACRound01" translation="0 0 4" shapeId="7" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="7">
+      <Shape name="visual" shapeId="8" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="100" nodeId="8"/>
+    </Shape>
+    <Shape name="industrialACRound02" translation="0 0 12" shapeId="9" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="9">
+      <Shape name="visual" shapeId="10" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="100" nodeId="10"/>
+    </Shape>
+    <Shape name="industrialACRound03" translation="0 0 6" rotation="0 -45 0" shapeId="11" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="11">
+      <Shape name="visual" rotation="0 45 0" shapeId="12" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="100" nodeId="12"/>
+    </Shape>
+    <Shape name="industrialACRound04" translation="0 0 7" shapeId="13" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="13">
+      <Shape name="visual" shapeId="14" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="100" nodeId="14"/>
+    </Shape>
+    <Shape name="industrialACRound05" translation="0 0 8" rotation="0 -45 0" shapeId="15" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="15">
+      <Shape name="visual" rotation="0 45 0" shapeId="16" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="100" nodeId="16"/>
+    </Shape>
+    <Shape name="industrialACWall01" translation="0 0 9" shapeId="17" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="17">
+      <Shape name="visual" shapeId="18" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="150" nodeId="18"/>
+      <Shape name="decals" translation="0.007086 0 0" shapeId="19" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="30" nodeId="19"/>
+    </Shape>
+    <Shape name="industrialACWall02" translation="0 0 10" shapeId="20" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="20">
+      <Shape name="visual" shapeId="21" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="150" nodeId="21"/>
+      <Shape name="decals" shapeId="22" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="30" nodeId="22"/>
+    </Shape>
+    <Shape name="industrialACMedium01" translation="0 0 -3" shapeId="23" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="23">
+      <Shape name="visual" shapeId="24" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="150" nodeId="24"/>
+      <Shape name="decals" shapeId="25" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="30" nodeId="25"/>
+    </Shape>
+    <Shape name="industrialACMedium02" translation="0 0 -5" shapeId="26" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="26">
+      <Shape name="visual" shapeId="27" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="150" nodeId="27"/>
+      <Shape name="decals" shapeId="28" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="30" nodeId="28"/>
+    </Shape>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

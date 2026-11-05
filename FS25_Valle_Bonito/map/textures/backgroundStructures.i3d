@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="backgroundStructures" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="4" filename="$data/shaders/buildingShader.xml" />
+    <File fileId="9" filename="$data/shaders/glowShader.xml" />
+    <File fileId="11" filename="$data/shared/default_normal.png" />
+    <File fileId="1" filename="damBackground_diffuse.png" />
+    <File fileId="5" filename="damBackground_mask.png" />
+    <File fileId="2" filename="damBackground_normal.png" />
+    <File fileId="3" filename="damBackground_specular.png" />
+    <File fileId="10" filename="distantBuildingsGlow_diffuse.png" />
+    <File fileId="6" filename="townBackground_diffuse.png" />
+    <File fileId="7" filename="townBackground_normal.png" />
+    <File fileId="8" filename="townBackground_specular.png" />
+  </Files>
+
+  <Materials>
+    <Material name="damBackground_01_mat" materialId="1" customShaderId="4">
+      <CustomParameter name="dirtMossMix" value="1.0 1.0"/>
+      <CustomParameter name="dirtMossSmoothness" value="0.12 0.12"/>
+      <Custommap name="mMaskMap" fileId="5"/>
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+    </Material>
+    <Material name="townBackground_mat" materialId="2" customShaderId="9">
+      <CustomParameter name="lightControl" value="8"/>
+      <Texture fileId="6"/>
+      <Normalmap fileId="7"/>
+      <Glossmap fileId="8"/>
+    </Material>
+    <Material name="damBackground_02_mat" materialId="3" customShaderId="9">
+      <CustomParameter name="lightControl" value="10"/>
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+    </Material>
+    <Material name="distantBuildingsGlow_mat" materialId="4" specularColor="0 1 0" alphaBlending="true" customShaderId="9" customShaderVariation="customEmissiveMap">
+      <CustomParameter name="lightControl" value="0.1"/>
+      <Custommap name="mEmissiveMap" fileId="10"/>
+      <Texture fileId="10"/>
+      <Normalmap fileId="11"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="backgroundStructures.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="backgroundStructures" nodeId="1">
+      <Shape name="damBackground01" translation="1419.810913 45.577412 992.764099" shapeId="1" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="10000" nodeId="2"/>
+      <Shape name="lightPoles" translation="1345.69873 52.070316 973.179504" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="10000" nodeId="3"/>
+      <Shape name="electricTower01" translation="1357.911499 41.609528 1033.580322" shapeId="3" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="10000" nodeId="4"/>
+      <Shape name="road" translation="311.727905 55.402668 1471.458252" shapeId="4" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="10000" nodeId="5">
+        <Shape name="city1" translation="18.509083 -4.713326 -80.471313" shapeId="5" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="10000" nodeId="6" weatherRequiredMask="0x40" renderInvisible="true"/>
+        <Shape name="city2" translation="-1387.854248 -9.328487 -83.313278" shapeId="6" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="10000" nodeId="7" weatherRequiredMask="0x40" renderInvisible="true"/>
+        <Shape name="bridge02" translation="-455.806946 -9.326265 -156.960388" shapeId="7" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="10000" nodeId="8"/>
+        <Shape name="bridge01" translation="-151.775345 -10.880666 -121.423264" shapeId="8" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="10000" nodeId="9"/>
+      </Shape>
+      <TransformGroup name="illum" nodeId="10">
+        <Shape name="buildingsIllum" translation="1358.443359 52.663071 999.876343" shapeId="9" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="10000" nodeId="11" weatherRequiredMask="0x40" renderInvisible="true"/>
+      </TransformGroup>
+      <TransformGroup name="glowGroup" nodeId="12">
+        <Shape name="glowCity01" translation="1460.093262 52.907291 925.669739" rotation="0 -28.822245 0" shapeId="10" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="6000" nodeId="13" weatherRequiredMask="0x40">
+        </Shape>
+        <Shape name="glowCity02" translation="1339.61499 64.55822 1040.776855" rotation="0 -40.14999 0" shapeId="11" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="6000" nodeId="14" weatherRequiredMask="0x40">
+        </Shape>
+        <Shape name="glowCity03" translation="1454.065308 61.080837 1066.349487" rotation="0 -40.14999 0" shapeId="12" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="6000" nodeId="15" weatherRequiredMask="0x40">
+        </Shape>
+        <Shape name="glowCity04" translation="308.65799 68.91423 1390.677246" rotation="0 -83.373398 0" shapeId="13" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="6000" nodeId="16" weatherRequiredMask="0x40">
+        </Shape>
+        <Shape name="glowCity05" translation="275.199799 57.213421 1342.969238" rotation="0 -86.390831 0" shapeId="14" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="6000" nodeId="17" weatherRequiredMask="0x40">
+        </Shape>
+        <Shape name="glowCity06" translation="378.168091 54.281006 1347.951416" rotation="0 -92.801598 0" shapeId="15" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="6000" nodeId="18" weatherRequiredMask="0x40">
+        </Shape>
+        <Shape name="glowCity07" translation="-1118.835205 65.972458 1390.689453" rotation="0 -83.373398 0" shapeId="16" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="6000" nodeId="19" weatherRequiredMask="0x40">
+        </Shape>
+        <Shape name="glowCity08" translation="-1152.293335 54.271645 1342.981445" rotation="0 -86.390831 0" shapeId="17" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="6000" nodeId="20" weatherRequiredMask="0x40">
+        </Shape>
+        <Shape name="glowCity09" translation="-1049.325073 51.33923 1347.963623" rotation="0 -92.801598 0" shapeId="18" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="6000" nodeId="21" weatherRequiredMask="0x40">
+        </Shape>
+      </TransformGroup>
+    </TransformGroup>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

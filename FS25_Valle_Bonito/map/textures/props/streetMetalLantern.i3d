@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="streetMetalLantern" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="6" filename="$data/shaders/glowShader.xml" />
+    <File fileId="2" filename="$data/shared/default_normal.png" />
+    <File fileId="3" filename="$data/shared/window02_specular.png" />
+    <File fileId="1" filename="$data/shared/window_diffuse.png" />
+    <File fileId="4" filename="streetMetalLantern_diffuse.png" />
+    <File fileId="5" filename="streetMetalLantern_normal.png" />
+  </Files>
+
+  <Materials>
+    <Material name="lambert1" materialId="1" diffuseColor="0.5 0.5 0.5 1">
+    </Material>
+    <Material name="window_alphaBlended_mat" materialId="3" alphaBlending="true">
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+    </Material>
+    <Material name="streetMetalLantern_mat" materialId="2" specularColor="0.5 0.5 0.5">
+      <Texture fileId="4"/>
+      <Normalmap fileId="5"/>
+    </Material>
+    <Material name="window_opaque_mat" materialId="4" diffuseColor="0.297 0.297 0.083754 1" customShaderId="6">
+      <CustomParameter name="lightControl" value="4"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="streetMetalLantern.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <Shape name="streetMetalLantern" shapeId="1" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="1">
+      <Shape name="visual" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="150" nodeId="2">
+        <Shape name="glass" translation="0 3.76058 0" shapeId="3" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="100" nodeId="3"/>
+        <TransformGroup name="illum" translation="0.012204 -0.011937 0" nodeId="4">
+          <TransformGroup name="selfIllum" nodeId="5">
+            <Shape name="selfIllum" translation="-0.00989 3.819577 0" shapeId="4" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="100" nodeId="6" weatherRequiredMask="0x40" visibleShaderParameter="4"/>
+          </TransformGroup>
+          <TransformGroup name="realLights" collision="false" density="0" nodeId="7" weatherRequiredMask="0x40">
+            <Light name="spotLight1" translation="-0.012204 3.744311 0" rotation="-90 0 0" type="spot" color="0.873 0.677011 0.481023" emitDiffuse="true" emitSpecular="true" range="12" coneAngle="120" dropOff="4" clipDistance="100" nodeId="8"/>
+            <Light name="pointLight1" translation="-0.012204 3.807782 0" type="point" color="0.054 0.0396071 0.029052" emitDiffuse="true" emitSpecular="true" range="5" clipDistance="100" nodeId="9"/>
+          </TransformGroup>
+        </TransformGroup>
+      </Shape>
+    </Shape>
+    <Shape name="streetMetalLanternNoSpokes" translation="2 0 0" shapeId="5" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="10">
+      <Shape name="visual" shapeId="6" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="150" nodeId="11">
+        <Shape name="glass" translation="0 3.76058 0" shapeId="7" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="100" nodeId="12"/>
+        <TransformGroup name="illum" translation="0.012204 -0.011937 0" nodeId="13">
+          <TransformGroup name="selfIllum" nodeId="14">
+            <Shape name="selfIllum" translation="-0.00989 3.819577 0" shapeId="8" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="100" nodeId="15" weatherRequiredMask="0x40" visibleShaderParameter="4"/>
+          </TransformGroup>
+          <TransformGroup name="realLights" collision="false" density="0" nodeId="16" weatherRequiredMask="0x40">
+            <Light name="spotLight1" translation="-0.012204 3.744311 0" rotation="-90 0 0" type="spot" color="0.873 0.677011 0.481023" emitDiffuse="true" emitSpecular="true" range="12" coneAngle="120" dropOff="4" clipDistance="100" nodeId="17"/>
+            <Light name="pointLight1" translation="-0.012204 3.807782 0" type="point" color="0.054 0.0396071 0.029052" emitDiffuse="true" emitSpecular="true" range="5" clipDistance="100" nodeId="18"/>
+          </TransformGroup>
+        </TransformGroup>
+      </Shape>
+    </Shape>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="rollercoasterSign" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="4" filename="mineOld_diffuse.png" />
+    <File fileId="5" filename="mineOld_normal.png" />
+    <File fileId="6" filename="mineOld_specular.png" />
+    <File fileId="1" filename="rollerCoasterDetails_diffuse.png" />
+    <File fileId="2" filename="rollerCoasterDetails_normal.png" />
+    <File fileId="3" filename="rollerCoasterDetails_specular.png" />
+  </Files>
+
+  <Materials>
+    <Material name="rollerCoasterDetails_mat" materialId="1">
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+    </Material>
+    <Material name="mineOld_mat" materialId="2">
+      <Texture fileId="4"/>
+      <Normalmap fileId="5"/>
+      <Glossmap fileId="6"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="rollercoasterSign.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="rollercoasterSign" nodeId="1">
+      <Shape name="R1" translation="-12.75 0.296411 0.366743" shapeId="1" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="2"/>
+      <Shape name="O3" translation="-10.5 0.296387 0.366819" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="3"/>
+      <Shape name="L" translation="-8.25 0.296387 0.366838" shapeId="3" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="4"/>
+      <Shape name="L2" translation="-6.5 0.296387 0.366861" shapeId="4" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="5"/>
+      <Shape name="E1" translation="-4.75 0.296387 0.366893" shapeId="5" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="6"/>
+      <Shape name="R2" translation="-2.5 0.296411 0.366739" shapeId="6" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="7"/>
+      <Shape name="C" translation="-0.5 0.296411 0.366859" shapeId="7" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="8"/>
+      <Shape name="O2" translation="1.875 0.296387 0.366911" shapeId="8" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="9"/>
+      <Shape name="A" translation="4.375 0.296387 0.366921" shapeId="9" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="10"/>
+      <Shape name="S" translation="6.625 0.296387 0.366855" shapeId="10" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="11"/>
+      <Shape name="T" translation="8.625 0.296387 0.366783" shapeId="11" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="12"/>
+      <Shape name="E2" translation="10.625 0.296387 0.366806" shapeId="12" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="13"/>
+      <Shape name="R3" translation="12.875 0.296411 0.366738" shapeId="13" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="14"/>
+      <Shape name="signSupport" shapeId="14" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="500" nodeId="15"/>
+    </TransformGroup>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

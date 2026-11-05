@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="bridgeDebris" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="4" filename="$data/shaders/vertexPaintShader.xml" />
+    <File fileId="5" filename="$data/shared/blendingNoise.png" />
+    <File fileId="6" filename="bridgeBranchDebris_diffuse.png" />
+    <File fileId="7" filename="bridgeBranchDebris_normal.png" />
+    <File fileId="8" filename="bridgeBranchDebris_specular.png" />
+    <File fileId="1" filename="bridgeDebris_diffuse.png" />
+    <File fileId="2" filename="bridgeDebris_normal.png" />
+    <File fileId="3" filename="bridgeDebris_specular.png" />
+  </Files>
+
+  <Materials>
+    <Material name="bridgeDebris_mat" materialId="1" customShaderId="4" customShaderVariation="alphaNoise">
+      <CustomParameter name="alphaShift" value="0.5"/>
+      <CustomParameter name="uvScale" value="0.5 0.5 0.5 0.5"/>
+      <Custommap name="mBlendedAlpha" fileId="5"/>
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+    </Material>
+    <Material name="bridgeBranchDebris_mat" materialId="2">
+      <Texture fileId="6"/>
+      <Normalmap fileId="7"/>
+      <Glossmap fileId="8"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="bridgeDebris.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <Shape name="bridgeDebris" shapeId="1" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="120" nodeId="1"/>
+    <Shape name="bridgeBranchDebris" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="130" nodeId="2"/>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

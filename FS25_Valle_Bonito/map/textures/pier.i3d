@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="pier" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="4" filename="$data/shaders/buildingShader.xml" />
+    <File fileId="8" filename="pierShells_diffuse.png" />
+    <File fileId="9" filename="pierShells_normal.png" />
+    <File fileId="10" filename="pierShells_specular.png" />
+    <File fileId="1" filename="pier_diffuse.png" />
+    <File fileId="6" filename="pier_mask.png" />
+    <File fileId="2" filename="pier_normal.png" />
+    <File fileId="3" filename="pier_specular.png" />
+    <File fileId="7" filename="props/dirt/pierLeaks_diffuse.png" />
+    <File fileId="5" filename="props/dirt/pierWornWood_diffuse.png" />
+  </Files>
+
+  <Materials>
+    <Material name="pier_mat" materialId="1" customShaderId="4">
+      <CustomParameter name="dirtMossMix" value="1.0 1.0"/>
+      <CustomParameter name="dirtMossSmoothness" value="0.12 0.12"/>
+      <Custommap name="mDirtDiffuse" fileId="5"/>
+      <Custommap name="mMaskMap" fileId="6"/>
+      <Custommap name="mMossDiffuse" fileId="7"/>
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+    </Material>
+    <Material name="pierShells_mat" materialId="2">
+      <Texture fileId="8"/>
+      <Normalmap fileId="9"/>
+      <Glossmap fileId="10"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="pier.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="pier" lockedgroup="true" nodeId="1">
+      <TransformGroup name="pierDeck" translation="920.216736 31.805077 927.846863" nodeId="2">
+        <TransformGroup name="poles3x2" translation="14.509479 6.409189 23.789646" nodeId="3">
+          <Shape name="poles_3x2_01" translation="1.029435 4.909555 -9.219812" rotation="0.000009 180 0" shapeId="1" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="4">
+            <Shape name="shells" translation="-6.425052 -7.147457 -1.491422" rotation="-0.000009 0 0" shapeId="2" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1200" nodeId="5"/>
+          </Shape>
+          <Shape name="poles_3x2_08" translation="-13.661779 4.92962 -9.219812" rotation="0.000009 180 0" shapeId="1" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="6">
+            <Shape name="shells" translation="-6.425052 -7.147457 -1.491422" rotation="-0.000009 0 0" shapeId="2" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1200" nodeId="7"/>
+          </Shape>
+          <Shape name="poles_3x2_09" translation="-13.661779 4.92962 -3.656963" rotation="0.000009 180 0" shapeId="1" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="8">
+            <Shape name="shells" translation="-6.425052 -7.147457 -1.491422" rotation="-0.000009 0 0" shapeId="2" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1200" nodeId="9"/>
+          </Shape>
+          <Shape name="poles_3x2_010" translation="-13.661779 4.92962 1.88949" rotation="0.000009 180 0" shapeId="1" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="10">
+            <Shape name="shells" translation="-6.425052 -7.147457 -1.491422" rotation="-0.000009 0 0" shapeId="2" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1200" nodeId="11"/>
+          </Shape>
+          <Shape name="poles_3x2_011" translation="-13.661779 4.909555 7.488093" rotation="0.000009 180 0" shapeId="1" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="12">
+            <Shape name="shells" translation="-6.425052 -7.147457 -1.491422" rotation="-0.000009 0 0" shapeId="2" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1200" nodeId="13"/>
+          </Shape>
+          <Shape name="poles_3x2_012" translation="1.029435 4.92962 -3.656961" rotation="0.000009 180 0" shapeId="1" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="14">
+            <Shape name="shells" translation="-6.425052 -7.147457 -1.491422" rotation="-0.000009 0 0" shapeId="2" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1200" nodeId="15"/>
+          </Shape>
+          <Shape name="poles_3x2_013" translation="1.029435 4.909555 1.889488" rotation="0.000009 180 0" shapeId="1" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="16">
+            <Shape name="shells" translation="-6.425052 -7.147457 -1.491422" rotation="-0.000009 0 0" shapeId="2" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1200" nodeId="17"/>
+          </Shape>
+          <Shape name="poles_3x2_014" translation="1.029435 4.92962 7.488094" rotation="0.000009 180 0" shapeId="1" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="18">
+            <Shape name="shells" translation="-6.425052 -7.147457 -1.491422" rotation="-0.000009 0 0" shapeId="2" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1200" nodeId="19"/>
+          </Shape>
+        </TransformGroup>
+        <TransformGroup name="longPlanksDeck" translation="17.572783 12.155593 14.569309" nodeId="20">
+          <Shape name="platform_planks_01" translation="-16.5427 -0.058993 -2.466296" rotation="0.000009 -90 0" shapeId="3" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="21"/>
+          <Shape name="platform_planks_02" translation="-16.5427 -0.058993 7.401569" rotation="0.000009 -90 0" shapeId="3" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="22"/>
+          <Shape name="platform_planks_03" translation="-16.5427 -0.058993 17.306959" rotation="0.000009 -90 0" shapeId="3" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="23"/>
+          <Shape name="platform_planks_04" translation="16.542749 -0.080383 17.299147" rotation="-0.000009 -270 0" shapeId="3" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="24"/>
+          <Shape name="platform_planks_05" translation="16.542749 -0.080386 7.393756" rotation="-0.000009 -270 0" shapeId="3" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="25"/>
+        </TransformGroup>
+        <TransformGroup name="pierDeckModules" translation="34.117336 13.427192 -84.675606" nodeId="26">
+          <Shape name="deck_module_01" translation="0.162619 0.000002 10.344933" rotation="0.000009 179.999985 0" shapeId="4" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="27">
+            <Shape name="shells" translation="2.902692 -9.230025 6.949314" rotation="0.000009 180.000015 0" shapeId="5" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1200" nodeId="28"/>
+          </Shape>
+          <Shape name="deck_module_02" translation="0.162618 0.000004 20.689743" rotation="0.000009 179.999985 0" shapeId="4" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="29">
+            <Shape name="shells" translation="2.902692 -9.230025 6.949314" rotation="0.000009 180.000015 0" shapeId="5" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1200" nodeId="30"/>
+          </Shape>
+          <Shape name="deck_module_03" translation="0.162616 0.000005 31.034561" rotation="0.000009 179.999985 0" shapeId="4" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="31">
+            <Shape name="shells" translation="2.902692 -9.230025 6.949314" rotation="0.000009 180.000015 0" shapeId="5" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1200" nodeId="32"/>
+          </Shape>
+          <Shape name="deck_module_04" translation="0.162615 0.000007 41.379379" rotation="0.000009 179.999985 0" shapeId="4" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="33">
+            <Shape name="shells" translation="2.902692 -9.230025 6.949314" rotation="0.000009 180.000015 0" shapeId="5" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1200" nodeId="34"/>
+          </Shape>
+          <Shape name="deck_module_05" translation="0.162613 0.000009 51.724197" rotation="0.000009 179.999985 0" shapeId="4" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="35">
+            <Shape name="shells" translation="2.902692 -9.230025 6.949314" rotation="0.000009 180.000015 0" shapeId="5" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1200" nodeId="36"/>
+          </Shape>
+          <Shape name="deck_module_06" translation="0.162612 0.00001 62.069016" rotation="0.000009 179.999985 0" shapeId="4" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="37">
+            <Shape name="shells" translation="2.902692 -9.230025 6.949314" rotation="0.000009 180.000015 0" shapeId="5" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1200" nodeId="38"/>
+          </Shape>
+          <Shape name="deck_module_07" translation="0.16261 0.000012 72.413834" rotation="0.000009 179.999985 0" shapeId="4" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="39">
+            <Shape name="shells" translation="2.902692 -9.230025 6.949314" rotation="0.000009 180.000015 0" shapeId="5" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1200" nodeId="40"/>
+          </Shape>
+          <Shape name="deck_module_08" translation="0.162608 0.000014 82.758652" rotation="0.000009 179.999985 0" shapeId="4" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="41">
+            <Shape name="shells" translation="2.902692 -9.230025 6.949314" rotation="0.000009 180.000015 0" shapeId="5" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1200" nodeId="42"/>
+          </Shape>
+          <Shape name="deck_module_09" translation="0.162607 0.000015 93.103462" rotation="0.000009 179.999985 0" shapeId="4" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="43">
+            <Shape name="shells" translation="2.902692 -9.230025 6.949314" rotation="0.000009 180.000015 0" shapeId="5" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1200" nodeId="44"/>
+          </Shape>
+        </TransformGroup>
+        <Shape name="poles_8" translation="31.766468 6.403255 24.355307" rotation="0.000009 0 0" shapeId="6" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="45">
+          <Shape name="shells" translation="-0.022225 -2.231969 -1.436111" rotation="-0.000009 0 0" shapeId="7" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1200" nodeId="46"/>
+        </Shape>
+        <Shape name="pipe" translation="28.695707 10.095331 -35.826454" rotation="0.000009 -89.999992 0" shapeId="8" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="47"/>
+        <Shape name="deck_end" translation="31.233259 12.639619 -86.5438" rotation="0.000009 0 0" shapeId="9" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="48"/>
+        <Shape name="platform" translation="12.925337 7.45679 22.532093" shapeId="10" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="49"/>
+      </TransformGroup>
+      <TransformGroup name="boatsPierDeck" nodeId="50">
+        <TransformGroup name="boatsPierPlanksLong" translation="920.216736 31.805077 927.846863" nodeId="51">
+          <Shape name="pier_planks_01" translation="-31.968836 6.288577 20.533226" rotation="0.000009 -89.999992 0" shapeId="11" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="52"/>
+          <Shape name="pier_planks_02" translation="-8.251479 6.288577 34.231621" rotation="-0.000009 -270 0" shapeId="11" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="53"/>
+        </TransformGroup>
+        <TransformGroup name="boatsPierModules" translation="920.216736 31.805077 927.846863" nodeId="54">
+          <Shape name="pier_module_01" translation="-94.085861 6.063455 23.312044" rotation="0.000009 -90 0" shapeId="12" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="55"/>
+          <Shape name="pier_module_02" translation="-83.741516 6.063455 23.312044" rotation="0.000009 -90 0" shapeId="12" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="56"/>
+          <Shape name="pier_module_03" translation="-73.396492 6.063455 23.312044" rotation="0.000009 -90 0" shapeId="12" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="57"/>
+          <Shape name="pier_module_04" translation="-63.051414 6.063455 23.312044" rotation="0.000009 -90 0" shapeId="12" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="58"/>
+          <Shape name="pier_module_05" translation="-73.396629 6.063455 23.312044" rotation="0.000009 -90 0" shapeId="12" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="59"/>
+          <Shape name="pier_module_06" translation="-63.051327 6.063455 23.312044" rotation="0.000009 -90 0" shapeId="12" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="60"/>
+          <Shape name="pier_module_07" translation="-52.706253 6.063455 23.312044" rotation="0.000009 -90 0" shapeId="12" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="61"/>
+          <Shape name="pier_module_08" translation="-42.36134 6.063455 23.312044" rotation="0.000009 -90 0" shapeId="12" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="62"/>
+        </TransformGroup>
+        <Shape name="concreteElements" translation="861.67804 32.570789 955.019531" shapeId="13" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="63"/>
+        <Shape name="pier_platform" translation="912.299316 37.868534 955.213562" rotation="0.000009 -90 0" shapeId="14" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="64"/>
+        <Shape name="pier_poles" translation="857.354919 33.12825 954.151917" shapeId="15" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="65">
+          <Shape name="shells" translation="0.720763 3.079906 0.350747" shapeId="16" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1200" nodeId="66"/>
+        </Shape>
+        <Shape name="pier_end" translation="811.768677 37.868549 951.158936" rotation="0.000009 89.999992 0" shapeId="17" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1200" nodeId="67"/>
+      </TransformGroup>
+    </TransformGroup>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='utf-8'?>
+<i3D xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="waterfallPlane" version="1.6" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="7" filename="$data/effects/waterSplash/waterSplash8x8_diffuse.png" />
+    <File fileId="8" filename="$data/effects/waterSplash/waterSplash8x8_normal.png" />
+    <File fileId="9" filename="$data/effects/waterSplash/waterSplash8x8_specular.png" />
+    <File fileId="6" filename="$data/shaders/foamShader.xml" />
+    <File fileId="2" filename="$data/shaders/oceanShader.xml" />
+    <File fileId="10" filename="$data/shaders/subUVShader.xml" />
+    <File fileId="4" filename="$data/effects/waterFall/foam_diffuse.png" />
+    <File fileId="5" filename="$data/effects/waterFall/foam_normal.png" />
+    <File fileId="1" filename="creek/water_normal.png" />
+    <File fileId="3" filename="waterfall_flowmap.png" />
+  </Files>
+
+  <Materials>
+    <Material name="water_mat" materialId="2" diffuseColor="0.5 0.5 0.5 1" specularColor="1 1 1" customShaderId="2" customShaderVariation="flowMap">
+      <Refractionmap type="planar" coeff="1" bumpScale="0.1" />
+      <CustomParameter name="depthScale" value="0.01" />
+      <CustomParameter name="uvScaleSpeedDistort" value="1.0 1.5 1.5 1.0" />
+      <CustomParameter name="windScale" value="0.5" />
+      <Custommap name="flowMap" fileId="3" />
+      <Normalmap fileId="1" />
+    </Material>
+    <Material name="foam_mat" materialId="1" specularColor="0.8 1 0" alphaBlending="true" customShaderId="6" customShaderVariation="flowMap">
+      <CustomParameter name="uvScaleSpeed" value="1.0 1.5 1.5 1.0" />
+      <Custommap name="flowMap" fileId="3" />
+      <Texture fileId="4" />
+      <Normalmap fileId="5" />
+    </Material>
+    <Material name="waterSplash8x8_mat" materialId="3" alphaBlending="true" customShaderId="10">
+      <CustomParameter name="colorAlpha" value="1.0 1.0 1.0 0.9" />
+      <Texture fileId="7" />
+      <Normalmap fileId="8" />
+      <Glossmap fileId="9" />
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="waterfallPlane.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="waterfall" nodeId="1">
+      <Shape name="foamTop" translation="-897.592896 140.115189 -229.811371" shapeId="1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="300" nodeId="2" />
+      <Shape name="waterfallPlane" translation="-897.592896 140.115189 -229.811371" shapeId="2" castsShadows="false" receiveShadows="true" materialIds="2" clipDistance="150" nodeId="3" />
+      <TransformGroup name="foam" nodeId="4">
+        <Shape name="foam01" translation="-906.086243 140.652344 -241.631683" shapeId="3" castsShadows="false" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="5" />
+        <Shape name="foam02" translation="-904.415833 120.100227 -249.446487" shapeId="4" castsShadows="false" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="6" />
+        <Shape name="foam03" translation="-902.120728 119.300987 -249.260376" shapeId="5" castsShadows="false" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="7" />
+        <Shape name="foam04" translation="-905.214905 132.411819 -244.344727" shapeId="6" castsShadows="false" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="8" />
+        <Shape name="foam05" translation="-903.262512 116.475876 -250.700897" shapeId="7" castsShadows="false" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="9" />
+        <Shape name="foam06" translation="-900.431824 108.74955 -250.317429" shapeId="8" castsShadows="false" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="10" />
+        <Shape name="foam07" translation="-900.991577 108.537987 -252.744675" shapeId="9" castsShadows="false" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="11" />
+        <Shape name="foam08" translation="-893.36792 117.655365 -239.133484" shapeId="10" castsShadows="false" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="12" />
+        <Shape name="foam09" translation="-884.497742 110.664551 -217.921616" shapeId="11" castsShadows="false" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="13" />
+        <Shape name="foam10" translation="-889.226868 110.657791 -214.147186" shapeId="12" castsShadows="false" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="14" />
+        <Shape name="foam11" translation="-886.125854 120.808556 -219.164719" shapeId="13" castsShadows="false" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="15" />
+        <Shape name="foam12" translation="-888.082703 129.858231 -221.630356" shapeId="14" castsShadows="false" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="16" />
+        <Shape name="foam13" translation="-890.013245 135.797943 -221.443451" shapeId="15" castsShadows="false" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="17" />
+        <Shape name="foam14" translation="-893.912781 132.09523 -216.582336" shapeId="16" castsShadows="false" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="18" />
+        <Shape name="foam15" translation="-897.213318 136.712402 -214.784058" shapeId="17" castsShadows="false" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="19" />
+        <Shape name="foam16" translation="-896.409058 133.294571 -214.47821" shapeId="18" castsShadows="false" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="20" />
+        <Shape name="foam17" translation="-894.185974 135.850647 -216.988815" shapeId="19" castsShadows="false" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="21" />
+        <Shape name="foam18" translation="-889.892761 119.070412 -214.535736" shapeId="20" castsShadows="false" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="22" />
+        <Shape name="foam19" translation="-891.080139 126.006882 -214.93634" shapeId="21" castsShadows="false" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="23" />
+      </TransformGroup>
+    </TransformGroup>
+  </Scene>
+
+  <UserAttributes>
+    <UserAttribute nodeId="3">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+  </UserAttributes>
+</i3D>

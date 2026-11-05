@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='utf-8'?>
+<i3D xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="sawmilOldVaccumKiln" version="1.6" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="7" filename="$data/maps/textures/shared/mapDirtAlpine_diffuse.png" />
+    <File fileId="5" filename="$data/maps/textures/shared/mapRust_diffuse.png" />
+    <File fileId="4" filename="$data/shaders/buildingShader.xml" />
+    <File fileId="11" filename="$data/shared/assets/assetLibraryDecals_diffuse.png" />
+    <File fileId="12" filename="$data/shared/assets/assetLibraryDecals_normal.png" />
+    <File fileId="13" filename="$data/shared/assets/assetLibraryDecals_vmask.png" />
+    <File fileId="1" filename="sawmilOldVaccumKiln_diffuse.png" />
+    <File fileId="6" filename="sawmilOldVaccumKiln_mask.png" />
+    <File fileId="2" filename="sawmilOldVaccumKiln_normal.png" />
+    <File fileId="3" filename="sawmilOldVaccumKiln_specular.png" />
+    <File fileId="8" filename="$data/placeables/brandless/productionPointsGeneric/shared/sawmillOldConcrete_diffuse.png" />
+    <File fileId="9" filename="$data/placeables/brandless/productionPointsGeneric/shared/sawmillOldConcrete_normal.png" />
+    <File fileId="10" filename="$data/placeables/brandless/productionPointsGeneric/shared/sawmillOldConcrete_specular.png" />
+    <File fileId="14" filename="sawmillOldGrid01_diffuse.png" />
+    <File fileId="15" filename="sawmillOldGrid01_normal.png" />
+    <File fileId="16" filename="sawmillOldGrid01_specular.png" />
+  </Files>
+
+  <Materials>
+    <Material name="lambert1" materialId="5" diffuseColor="0.5 0.5 0.5 1">
+    </Material>
+    <Material name="sawmilOldVaccumKiln_mat" materialId="1" customShaderId="4">
+      <CustomParameter name="dirtMossMix" value="1.0 1.0" />
+      <CustomParameter name="dirtMossSmoothness" value="0.12 0.12" />
+      <Custommap name="mDirtDiffuse" fileId="5" />
+      <Custommap name="mMaskMap" fileId="6" />
+      <Custommap name="mMossDiffuse" fileId="7" />
+      <Texture fileId="1" />
+      <Normalmap fileId="2" />
+      <Glossmap fileId="3" />
+    </Material>
+    <Material name="sawmillOldConcrete_mat" materialId="4" customShaderId="4">
+      <CustomParameter name="dirtMossMix" value="1.0 1.0" />
+      <CustomParameter name="dirtMossSmoothness" value="0.12 0.12" />
+      <Custommap name="mDirtDiffuse" fileId="5" />
+      <Custommap name="mMaskMap" fileId="6" />
+      <Custommap name="mMossDiffuse" fileId="7" />
+      <Texture fileId="8" />
+      <Normalmap fileId="9" />
+      <Glossmap fileId="10" />
+    </Material>
+    <Material name="assetLibraryDecals_mat" materialId="2">
+      <Texture fileId="11" />
+      <Normalmap fileId="12" />
+      <Glossmap fileId="13" />
+    </Material>
+    <Material name="sawmillOldGrid01_mat" materialId="3">
+      <Texture fileId="14" />
+      <Normalmap fileId="15" />
+      <Glossmap fileId="16" />
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="sawmilOldVaccumKiln.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="sawmilOldVaccumKiln" lodDistance="0 100" collision="false" density="0" nodeId="1">
+      <TransformGroup name="LOD0" nodeId="2">
+        <TransformGroup name="halls" nodeId="3">
+          <Shape name="vaccumKilnShed02" translation="13.942475 -0.2736 -8.675301" shapeId="1" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="150" nodeId="4" />
+          <Shape name="vaccumKilnShed01" translation="13.942475 -0.2736 8.579953" shapeId="1" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="150" nodeId="5" />
+          <Shape name="vaccumKilnMainhall1" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="150" nodeId="6" />
+        </TransformGroup>
+        <Shape name="screwDecals" shapeId="3" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="2" clipDistance="120" nodeId="7" />
+        <Shape name="grid" shapeId="4" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="120" nodeId="8" />
+        <Shape name="concrete" shapeId="5" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="200" nodeId="9" />
+      </TransformGroup>
+      <Shape name="LOD1" shapeId="6" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="450" nodeId="10" />
+      <Shape name="collision" shapeId="7" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="5" nodeId="11" />
+    </TransformGroup>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

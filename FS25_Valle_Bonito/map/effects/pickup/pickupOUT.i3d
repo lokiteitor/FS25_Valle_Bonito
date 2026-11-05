@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="pickupOUT.i3d" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+  <Asset>
+    <Export program="GIANTS Editor 64bit" version="10.0.13"/>
+  </Asset>
+
+  <Files>
+    <File fileId="1" filename="../../fillPlanes/peanutCut_diffuse.dds"/>
+    <File fileId="8" filename="$data/effects/pickup/fillTypes/greenbean_normal.png"/>
+    <File fileId="2" filename="$data/effects/pickup/fillTypes/shared_normal.png"/>
+    <File fileId="7" filename="$data/effects/pickup/shared/gradient_diffuse.png"/>
+    <File fileId="5" filename="$data/effects/pickup/sharedPickupArrayOUT.png"/>
+    <File fileId="4" filename="$data/shaders/motionPathShader.xml"/>
+    <File fileId="3" filename="$data/shared/default_specular.png"/>
+  </Files>
+
+
+  <Materials>
+    <Material name="greenbean_OUT_mat" materialId="5" customShaderId="4" customShaderVariation="rotateByLife_cosOffsetY_alphaMapGradient">
+      <Texture fileId="1"/>
+      <Normalmap fileId="8"/>
+      <Glossmap fileId="3"/>
+      <Custommap name="shapeArray" fileId="5"/>
+      <Custommap name="alphaMap" fileId="7"/>
+      <CustomParameter name="rotateSpeed" value="5"/>
+    </Material>
+    <Material name="straw_OUT_mat" materialId="21" customShaderId="4" customShaderVariation="rotateByLife_cosOffsetY_alphaMapGradient">
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+      <Custommap name="shapeArray" fileId="5"/>
+      <Custommap name="alphaMap" fileId="7"/>
+      <CustomParameter name="rotateSpeed" value="5"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="pickupOUT.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="pickupEffects_particleMeshesOUT" nodeId="10">
+      <TransformGroup name="pickupEffects_particleMeshesOUT_meshes" nodeId="11">
+        <Shape name="pickupEffects_particleMeshesOUT_nr4_rl22_v1" shapeId="1" nodeId="12" castsShadows="true" receiveShadows="true" materialIds="21"/>
+      </TransformGroup>
+      <TransformGroup name="pickupEffects_particleMeshesOUT_materials" nodeId="13">
+        <Shape name="peanut" shapeId="2" clipDistance="30" nodeId="14" castsShadows="true" receiveShadows="true" materialIds="5"/>
+      </TransformGroup>
+    </TransformGroup>
+  </Scene>
+
+</i3D>

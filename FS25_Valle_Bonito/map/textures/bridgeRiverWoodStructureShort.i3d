@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="bridgeRiverWoodStructureShort" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="7" filename="$data/shaders/buildingShader.xml" />
+    <File fileId="1" filename="$data/shared/assets/assetLibraryDecals_diffuse.png" />
+    <File fileId="2" filename="$data/shared/assets/assetLibraryDecals_normal.png" />
+    <File fileId="3" filename="$data/shared/default_specular.png" />
+    <File fileId="4" filename="bridgeRiverWoodStructureShort_diffuse.png" />
+    <File fileId="8" filename="bridgeRiverWoodStructureShort_mask.png" />
+    <File fileId="5" filename="bridgeRiverWoodStructureShort_normal.png" />
+    <File fileId="6" filename="bridgeRiverWoodStructureShort_specular.png" />
+  </Files>
+
+  <Materials>
+    <Material name="lambert1" materialId="1" diffuseColor="0.5 0.5 0.5 1">
+    </Material>
+    <Material name="assetLibraryDecals_mat" materialId="3">
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+    </Material>
+    <Material name="bridgeRiverWoodStructureShort_01_mat" materialId="2" customShaderId="7">
+      <Custommap name="mMaskMap" fileId="8"/>
+      <Texture fileId="4"/>
+      <Normalmap fileId="5"/>
+      <Glossmap fileId="6"/>
+    </Material>
+    <Material name="bridgeRiverWoodStructureShort_02_mat" materialId="4" customShaderId="7" shadingRate="2x4">
+      <Custommap name="mMaskMap" fileId="8"/>
+      <Texture fileId="4"/>
+      <Normalmap fileId="5"/>
+      <Glossmap fileId="6"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="bridgeRiverWoodStructureShort.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="riverBridgeWoodStructureShort_lod" translation="746.31311 38.44788 -506.712799" lodDistance="0 70" collision="false" density="0" nodeId="1">
+      <TransformGroup name="LOD0" translation="0 0.000149 0" nodeId="2">
+        <Shape name="riverBridgeWoodStructureShort" translation="-0.001613 -3.846726 0.003818" rotation="0 13.303 0" shapeId="1" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="3">
+          <Shape name="visual" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="600" nodeId="4"/>
+          <Shape name="screwDecals" shapeId="3" castsShadows="false" receiveShadows="true" materialIds="3" clipDistance="100" nodeId="5"/>
+        </Shape>
+      </TransformGroup>
+      <TransformGroup name="LOD1" translation="-0.002392 -0.000155 0.000115" nodeId="6">
+        <Shape name="riverBridgeWoodStructureShortLOD" translation="0.001276 -3.846725 0.003676" rotation="0 13.303 0" shapeId="4" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="600" nodeId="7"/>
+      </TransformGroup>
+    </TransformGroup>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

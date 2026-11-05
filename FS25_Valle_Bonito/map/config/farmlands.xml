@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <map xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../shared/xml/schema/farmlands.xsd">
   <farmlands infoLayer="farmlands" pricePerHa="12500">
-    <farmland id="1" priceScale="1" npcName="FARMER" />
-    <farmland id="2" priceScale="1" npcName="FARMER" />
-    <farmland id="3" priceScale="1" npcName="FARMER" />
+    <farmland id="1" priceScale="1" npcName="FARMER" defaultFarmProperty="true"/>
+    <farmland id="2" priceScale="1" npcName="FARMER" defaultFarmProperty="true"/>
+    <farmland id="3" priceScale="1" npcName="FARMER" defaultFarmProperty="true"/>
     <farmland id="4" priceScale="1" npcName="FARMER" />
     <farmland id="5" priceScale="1" npcName="FARMER" />
     <farmland id="6" priceScale="1" npcName="FARMER" />
@@ -14,7 +14,7 @@
     <farmland id="11" priceScale="1" npcName="FARMER" />
     <farmland id="12" priceScale="1" npcName="FARMER" />
     <farmland id="13" priceScale="1" npcName="FARMER" />
-    <farmland id="14" priceScale="1" npcName="FARMER" />
+    <farmland id="14" priceScale="1" npcName="FARMER" defaultFarmProperty="true"/>
     <farmland id="15" priceScale="1" npcName="FARMER" />
     <farmland id="16" priceScale="1" npcName="FARMER" />
     <farmland id="17" priceScale="1" npcName="FARMER" />

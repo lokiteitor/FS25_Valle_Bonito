@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='utf-8'?>
+<i3D xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="bridgeSwampLong" version="1.6" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="4" filename="$data/shaders/buildingShader.xml" />
+    <File fileId="1" filename="bridgeSwampLong_diffuse.png" />
+    <File fileId="5" filename="$data/maps/mapUS/textures/buildings/bridgeConcreteLong/bridgeSwampLong_mask.png" />
+    <File fileId="2" filename="bridgeSwampLong_normal.png" />
+    <File fileId="3" filename="bridgeSwampLong_specular.png" />
+  </Files>
+
+  <Materials>
+    <Material name="lambert1" materialId="1" diffuseColor="0.5 0.5 0.5 1">
+    </Material>
+    <Material name="bridgeSwampLong_01_mat" materialId="2" customShaderId="4">
+      <Custommap name="mMaskMap" fileId="5" />
+      <Texture fileId="1" />
+      <Normalmap fileId="2" />
+      <Glossmap fileId="3" />
+    </Material>
+    <Material name="bridgeSwampLong_02_mat" materialId="3" customShaderId="4" shadingRate="2x4">
+      <Custommap name="mMaskMap" fileId="5" />
+      <Texture fileId="1" />
+      <Normalmap fileId="2" />
+      <Glossmap fileId="3" />
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="bridgeSwampLong.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="swampBridges" translation="661.981873 43.335564 272.616791" nodeId="1">
+      <TransformGroup name="swampBridgeLong" translation="-11.230693 -3.734846 -0.015632" lodDistance="0 100" collision="false" density="0" nodeId="2">
+        <TransformGroup name="LOD0" translation="0.000219 0.000195 0.000184" nodeId="3">
+          <Shape name="swampBridgeLong" translation="0.000012 -0.000002 0.000009" shapeId="1" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="4">
+            <TransformGroup name="pillars" translation="0 0 -0.000001" nodeId="5">
+              <Shape name="pillar01" translation="-0.000018 -5.368522 -31.921761" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="600" nodeId="6" />
+              <Shape name="pillar06" translation="-0.000018 -5.368522 -15.94844" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="600" nodeId="7" />
+              <Shape name="pillar07" translation="-0.000018 -5.368522 -0.005999" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="600" nodeId="8" />
+              <Shape name="pillar08" translation="-0.000018 -5.368522 15.936404" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="600" nodeId="9" />
+              <Shape name="pillar09" translation="-0.000018 -5.368522 31.878786" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="600" nodeId="10" />
+            </TransformGroup>
+            <TransformGroup name="ends" translation="0 0 -0.000001" nodeId="11">
+              <Shape name="end01" translation="-0.000004 -5.368526 39.859001" shapeId="3" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="600" nodeId="12" />
+              <Shape name="end02" translation="-0.000005 -5.368526 -39.859013" shapeId="4" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="600" nodeId="13" />
+            </TransformGroup>
+            <TransformGroup name="center" translation="0 0 -0.000001" nodeId="14">
+              <Shape name="center01" translation="0 3.883125 23.913595" shapeId="5" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="600" nodeId="15" />
+              <Shape name="center02" translation="0 3.883125 7.971191" shapeId="5" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="600" nodeId="16" />
+              <Shape name="center03" translation="0 3.883125 -7.971213" shapeId="5" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="600" nodeId="17" />
+              <Shape name="center04" translation="0 3.883125 -23.913618" shapeId="5" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="600" nodeId="18" />
+            </TransformGroup>
+          </Shape>
+        </TransformGroup>
+        <TransformGroup name="LOD1" translation="-0.000211 -0.000186 -0.000175" nodeId="19">
+          <Shape name="swampBridgeLongLOD" translation="0.000039 0.000004 0.00002" shapeId="6" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="700" nodeId="20" />
+        </TransformGroup>
+        <Shape name="col" translation="-0.000163 -0.000186 -0.000142" shapeId="7" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="21" />
+      </TransformGroup>
+      <TransformGroup name="swampBridgeLongRailways" translation="8.932185 0 0" lodDistance="0 100" collision="false" density="0" nodeId="22">
+        <TransformGroup name="LOD0" translation="0.000032 0.000221 -0.003192" nodeId="23">
+          <Shape name="swampBridgeLongRailways" translation="0.000001 -3.82282 -0.00001" shapeId="8" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="24">
+            <TransformGroup name="pillars" translation="0 0 0.000001" rotation="0 182.778 0" nodeId="25">
+              <Shape name="pillar01" translation="-0.000017 -5.368522 -31.921761" shapeId="9" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="600" nodeId="26" />
+              <Shape name="pillar02" translation="-0.000017 -5.368522 -15.94844" shapeId="9" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="600" nodeId="27" />
+              <Shape name="pillar03" translation="-0.000017 -5.368522 -0.005999" shapeId="9" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="600" nodeId="28" />
+              <Shape name="pillar04" translation="-0.000017 -5.368522 15.936404" shapeId="9" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="600" nodeId="29" />
+              <Shape name="pillar05" translation="-0.000017 -5.368522 31.878786" shapeId="9" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="600" nodeId="30" />
+            </TransformGroup>
+            <TransformGroup name="ends" translation="0 0 0.000001" rotation="0 182.778 0" nodeId="31">
+              <Shape name="end01" translation="0.000003 2.577355 -39.859013" shapeId="10" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="600" nodeId="32" />
+              <Shape name="end02" translation="0 1.198805 39.858994" shapeId="11" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="600" nodeId="33" />
+            </TransformGroup>
+            <TransformGroup name="center" translation="0 0 0.000001" rotation="0 182.778 0" nodeId="34">
+              <Shape name="centerPiece01" translation="0 3.883125 23.913597" shapeId="12" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="600" nodeId="35" />
+              <Shape name="centerPiece02" translation="-0.000001 3.883125 7.971191" shapeId="12" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="600" nodeId="36" />
+              <Shape name="centerPiece03" translation="-0.000001 3.883125 -7.971213" shapeId="12" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="600" nodeId="37" />
+              <Shape name="centerPiece04" translation="0 3.883125 -23.913618" shapeId="12" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="600" nodeId="38" />
+            </TransformGroup>
+          </Shape>
+        </TransformGroup>
+        <TransformGroup name="LOD1" translation="-0.000048 -3.823028 0.003175" nodeId="39">
+          <Shape name="swampBridgeLongRailwaysLOD" translation="0 0 0.00001" shapeId="13" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="700" nodeId="40" />
+        </TransformGroup>
+        <Shape name="col" translation="-0.000067 -3.823032 0.003171" shapeId="14" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="41" />
+      </TransformGroup>
+    </TransformGroup>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

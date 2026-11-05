@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="napier.i3d" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+  <Asset>
+    <Export program="GIANTS Editor 64bit" version="10.0.11"/>
+  </Asset>
+
+  <Files>
+    <File fileId="4" filename="$data/shaders/fruitGrowthFoliageShader.xml"/>
+    <File fileId="10" filename="foliage_napierStraw_alpha.dds"/>
+    <File fileId="7" filename="foliage_napierStraw_diffuse.dds"/>
+    <File fileId="9" filename="foliage_napierStraw_mask.dds"/>
+    <File fileId="8" filename="foliage_napierStraw_normal.dds"/>
+    <File fileId="13" filename="napier01LOD_alpha_H.dds"/>
+    <File fileId="11" filename="napier01LOD_diffuse_H.png"/>
+    <File fileId="12" filename="napier01LOD_normal_H.png"/>
+    <File fileId="16" filename="napier02LOD_alpha_H.dds"/>
+    <File fileId="14" filename="napier02LOD_diffuse_H.png"/>
+    <File fileId="15" filename="napier02LOD_normal_H.png"/>
+    <File fileId="19" filename="napier03LOD_alpha_H.dds"/>
+    <File fileId="17" filename="napier03LOD_diffuse_H.png"/>
+    <File fileId="18" filename="napier03LOD_normal_H.png"/>
+    <File fileId="22" filename="napier04LOD_alpha_H.dds"/>
+    <File fileId="20" filename="napier04LOD_diffuse_H.png"/>
+    <File fileId="21" filename="napier04LOD_normal_H.png"/>
+    <File fileId="25" filename="napier05LOD_alpha_H.dds"/>
+    <File fileId="23" filename="napier05LOD_diffuse_H.png"/>
+    <File fileId="24" filename="napier05LOD_normal_H.png"/>
+    <File fileId="6" filename="napier_alpha.dds"/>
+    <File fileId="1" filename="napier_diffuse.png"/>
+    <File fileId="3" filename="napier_mask.dds"/>
+    <File fileId="2" filename="napier_normal.dds"/>
+  </Files>
+
+
+  <Materials>
+    <Material name="default" materialId="5" customShaderId="4">
+      <Texture fileId="7"/>
+      <Normalmap fileId="8"/>
+      <Glossmap fileId="9"/>
+      <Custommap name="alphaMap" fileId="10"/>
+      <CustomParameter name="cellSizeTerrainSizeScaleXZScaleY" value="0 0 0 0"/>
+    </Material>
+    <Material name="napier01LOD_mat" materialId="6" customShaderId="4" customShaderVariation="BILLBOARD">
+      <Texture fileId="11"/>
+      <Normalmap fileId="12"/>
+      <Custommap name="alphaMap" fileId="13"/>
+      <CustomParameter name="cellSizeTerrainSizeScaleXZScaleY" value="0 0 0 0"/>
+    </Material>
+    <Material name="napier02LOD_mat" materialId="7" customShaderId="4" customShaderVariation="BILLBOARD">
+      <Texture fileId="14"/>
+      <Normalmap fileId="15"/>
+      <Custommap name="alphaMap" fileId="16"/>
+      <CustomParameter name="cellSizeTerrainSizeScaleXZScaleY" value="0 0 0 0"/>
+    </Material>
+    <Material name="napier03LOD_mat" materialId="8" customShaderId="4" customShaderVariation="BILLBOARD">
+      <Texture fileId="17"/>
+      <Normalmap fileId="18"/>
+      <Custommap name="alphaMap" fileId="19"/>
+      <CustomParameter name="cellSizeTerrainSizeScaleXZScaleY" value="0 0 0 0"/>
+    </Material>
+    <Material name="napier04LOD_mat" materialId="9" customShaderId="4" customShaderVariation="BILLBOARD">
+      <Texture fileId="20"/>
+      <Normalmap fileId="21"/>
+      <Custommap name="alphaMap" fileId="22"/>
+      <CustomParameter name="cellSizeTerrainSizeScaleXZScaleY" value="0 0 0 0"/>
+    </Material>
+    <Material name="napier05LOD_mat" materialId="10" customShaderId="4" customShaderVariation="BILLBOARD">
+      <Texture fileId="23"/>
+      <Normalmap fileId="24"/>
+      <Custommap name="alphaMap" fileId="25"/>
+      <CustomParameter name="cellSizeTerrainSizeScaleXZScaleY" value="0 0 0 0"/>
+    </Material>
+    <Material name="napier_mat" materialId="11" customShaderId="4">
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+      <Custommap name="alphaMap" fileId="6"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="napier.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="napier" nodeId="25">
+      <Shape name="napier1" shapeId="1" clipDistance="500" nodeId="26" castsShadows="true" receiveShadows="true" materialIds="11"/>
+      <Shape name="napier2" shapeId="2" clipDistance="500" nodeId="27" castsShadows="true" receiveShadows="true" materialIds="11"/>
+      <Shape name="napier3" shapeId="3" clipDistance="500" nodeId="28" castsShadows="true" receiveShadows="true" materialIds="11"/>
+      <Shape name="napier4" shapeId="4" clipDistance="500" nodeId="29" castsShadows="true" receiveShadows="true" materialIds="11"/>
+      <Shape name="napier6" shapeId="5" clipDistance="500" nodeId="30" castsShadows="true" receiveShadows="true" materialIds="11"/>
+      <Shape name="napier5_cut" shapeId="6" clipDistance="1000" nodeId="31" castsShadows="true" receiveShadows="true" materialIds="5"/>
+    </TransformGroup>
+    <TransformGroup name="LOD" nodeId="32">
+      <Shape name="_01_" shapeId="7" clipDistance="500" nodeId="33" castsShadows="false" receiveShadows="true" materialIds="6"/>
+      <Shape name="_02_" shapeId="8" clipDistance="500" nodeId="34" castsShadows="false" receiveShadows="true" materialIds="7"/>
+      <Shape name="_03_" shapeId="9" clipDistance="500" nodeId="35" castsShadows="false" receiveShadows="true" materialIds="8"/>
+      <Shape name="_04_" shapeId="10" clipDistance="500" nodeId="36" castsShadows="false" receiveShadows="true" materialIds="9"/>
+      <Shape name="_05_" shapeId="11" clipDistance="500" nodeId="37" castsShadows="false" receiveShadows="true" materialIds="10"/>
+      <Shape name="_06_" shapeId="12" clipDistance="500" nodeId="38" castsShadows="false" receiveShadows="true" materialIds="9"/>
+    </TransformGroup>
+  </Scene>
+
+</i3D>

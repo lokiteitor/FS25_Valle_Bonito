@@ -56,6 +56,8 @@ COLOR_INDUSTRIAL = (112, 118, 126)      # Edificios e industria (#70767E)
 COLOR_INDUSTRIAL_BORDE = (82, 88, 96)
 COLOR_ASFALTO = (62, 65, 72)            # Asfalto real de carreteras (#3E4148)
 COLOR_ASFALTO_BORDE = (45, 48, 54)
+COLOR_TIERRA = (130, 105, 75)            # Terracera / Caminos de tierra
+COLOR_TIERRA_BORDE = (95, 75, 50)
 COLOR_PUENTE = (180, 50, 50)            # Puentes (#B43232)
 COLOR_LIMITE_JUGABLE = (255, 255, 255)  # Línea límite del área jugable 2K
 
@@ -63,7 +65,11 @@ COLOR_LIMITE_JUGABLE = (255, 255, 255)  # Línea límite del área jugable 2K
 # 3. RUTAS DE ARCHIVOS Y DETECCIÓN
 # ==========================================
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-MAPA_DIR = os.path.join(SCRIPT_DIR, "FS25_Granja_bonita")
+MAPA_DIR_CANDIDATOS = [
+    os.path.join(SCRIPT_DIR, "FS25_Valle_Bonito"),
+    os.path.join(SCRIPT_DIR, "FS25_Granja_bonita"),
+]
+MAPA_DIR = next((cand for cand in MAPA_DIR_CANDIDATOS if os.path.exists(cand)), os.path.join(SCRIPT_DIR, "FS25_Valle_Bonito"))
 MAP_DIR = os.path.join(MAPA_DIR, "map")
 TEXTURES_JSON = os.path.join(MAPA_DIR, "info_layers", "textures.json")
 BG_TEXTURE_PATH = os.path.join(MAPA_DIR, "assets", "background", "background_texture.png")
@@ -180,13 +186,21 @@ def renderizar_pda(size_total=4096):
     x1, y1 = borde + jugable, borde + jugable
     draw.rectangle([x0, y0, x1, y1], fill=COLOR_PASTO)
 
-    # 2. Campos de cultivo (Polígonos exactos de textures.json)
+    # 2. Campos de cultivo (textures.json o de map.osm)
     borde_campo = max(1, int(1.2 * escala))
-    if 'fields' in tex_data:
+    if 'fields' in tex_data and tex_data['fields']:
         for f in tex_data['fields']:
             poly = [local_m_to_canvas_px(p[0], p[1], size_total) for p in f]
             if len(poly) >= 3:
                 draw.polygon(poly, fill=COLOR_CAMPO, outline=COLOR_CAMPO_BORDE, width=borde_campo)
+    else:
+        for way in root.findall('way'):
+            tags = {t.get('k'): t.get('v') for t in way.findall('tag')}
+            if tags.get('landuse') == 'farmland':
+                pts = [nodes[nd.get('ref')] for nd in way.findall('nd') if nd.get('ref') in nodes]
+                if len(pts) >= 3:
+                    poly = [global_to_canvas_px(lat, lon, size_total) for lat, lon in pts]
+                    draw.polygon(poly, fill=COLOR_CAMPO, outline=COLOR_CAMPO_BORDE, width=borde_campo)
 
     # 3. Bosques y rompevientos (de map.osm)
     borde_bosque = max(1, int(1.5 * escala))
@@ -199,7 +213,7 @@ def renderizar_pda(size_total=4096):
                 poly = [global_to_canvas_px(lat, lon, size_total) for lat, lon in pts]
                 draw.polygon(poly, fill=COLOR_BOSQUE, outline=COLOR_BOSQUE_BORDE, width=borde_bosque)
 
-    # 4. Cuerpos de agua: Río y Lago
+    # 4. Cuerpos de agua: Ro y Lago (de map.osm)
     borde_agua = max(1, int(2 * escala))
     for way in root.findall('way'):
         tags = {t.get('k'): t.get('v') for t in way.findall('tag')}
@@ -209,7 +223,7 @@ def renderizar_pda(size_total=4096):
                 poly = [global_to_canvas_px(lat, lon, size_total) for lat, lon in pts]
                 draw.polygon(poly, fill=COLOR_AGUA, outline=COLOR_AGUA_BORDE, width=borde_agua)
 
-    # 5. Isla del Lago (Renderizada sobre el lago si existe)
+    # 5. Isla del Lago (de map.osm)
     for way in root.findall('way'):
         tags = {t.get('k'): t.get('v') for t in way.findall('tag')}
         name = tags.get('name', '')
@@ -219,22 +233,63 @@ def renderizar_pda(size_total=4096):
                 poly = [global_to_canvas_px(lat, lon, size_total) for lat, lon in pts]
                 draw.polygon(poly, fill=COLOR_BOSQUE, outline=COLOR_BOSQUE_BORDE, width=borde_bosque)
 
-    # 6. Granjas, Patios y Cuadras Urbanas (Polígonos exactos de textures.json)
+    # 6. Granjas, Patios y Cuadras Urbanas (textures.json o de map.osm)
     borde_granja = max(1, int(1.2 * escala))
-    if 'farmyards' in tex_data:
+    if 'farmyards' in tex_data and tex_data['farmyards']:
         for f in tex_data['farmyards']:
             poly = [local_m_to_canvas_px(p[0], p[1], size_total) for p in f]
             if len(poly) >= 3:
                 draw.polygon(poly, fill=COLOR_GRANJA, outline=COLOR_GRANJA_BORDE, width=borde_granja)
+    else:
+        for way in root.findall('way'):
+            tags = {t.get('k'): t.get('v') for t in way.findall('tag')}
+            if tags.get('landuse') == 'farmyard' and tags.get('building') != 'industrial':
+                pts = [nodes[nd.get('ref')] for nd in way.findall('nd') if nd.get('ref') in nodes]
+                if len(pts) >= 3:
+                    poly = [global_to_canvas_px(lat, lon, size_total) for lat, lon in pts]
+                    draw.polygon(poly, fill=COLOR_GRANJA, outline=COLOR_GRANJA_BORDE, width=borde_granja)
 
-    # 7. Red de Carreteras y Calles EXACTAS (Polígonos reales de textures.json)
+    # 7. Edificios y Zona Industrial (textures.json o de map.osm)
+    borde_ind = max(1, int(1.2 * escala))
+    if 'buildings' in tex_data and tex_data['buildings']:
+        for b in tex_data['buildings']:
+            poly = [local_m_to_canvas_px(p[0], p[1], size_total) for p in b]
+            if len(poly) >= 3:
+                draw.polygon(poly, fill=COLOR_INDUSTRIAL, outline=COLOR_INDUSTRIAL_BORDE, width=borde_ind)
+    else:
+        for way in root.findall('way'):
+            tags = {t.get('k'): t.get('v') for t in way.findall('tag')}
+            if tags.get('building') == 'industrial' or tags.get('landuse') == 'industrial':
+                pts = [nodes[nd.get('ref')] for nd in way.findall('nd') if nd.get('ref') in nodes]
+                if len(pts) >= 3:
+                    poly = [global_to_canvas_px(lat, lon, size_total) for lat, lon in pts]
+                    draw.polygon(poly, fill=COLOR_INDUSTRIAL, outline=COLOR_INDUSTRIAL_BORDE, width=borde_ind)
+
+    # 8. Red de Carreteras y Calles (textures.json o de map.osm)
     borde_asfalto = max(1, int(1.2 * escala))
-    if 'roads' in tex_data:
+    if 'roads' in tex_data and tex_data['roads']:
         for r in tex_data['roads']:
             poly = [local_m_to_canvas_px(p[0], p[1], size_total) for p in r]
             if len(poly) >= 3:
                 draw.polygon(poly, fill=COLOR_ASFALTO, outline=COLOR_ASFALTO_BORDE, width=borde_asfalto)
-
+    else:
+        for way in root.findall('way'):
+            tags = {t.get('k'): t.get('v') for t in way.findall('tag')}
+            hw = tags.get('highway')
+            if hw:
+                pts = [nodes[nd.get('ref')] for nd in way.findall('nd') if nd.get('ref') in nodes]
+                if len(pts) >= 2:
+                    line = [global_to_canvas_px(lat, lon, size_total) for lat, lon in pts]
+                    is_dirt = (tags.get('surface') == 'dirt' or hw == 'track')
+                    if hw == 'primary':
+                        w = max(2, int(4 * escala))
+                    elif hw == 'secondary':
+                        w = max(2, int(3 * escala))
+                    elif hw == 'tertiary':
+                        w = max(1, int(2 * escala))
+                    else:
+                        w = max(1, int(1.5 * escala))
+                    draw.line(line, fill=COLOR_TIERRA if is_dirt else COLOR_ASFALTO, width=w, joint='round')
     # 9. Puentes (de map.osm)
     ancho_puente = max(3, int(10 * escala))
     for way in root.findall('way'):

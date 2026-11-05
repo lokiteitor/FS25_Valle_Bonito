@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="sawmillOldWoodChipBin" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="5" filename="$data/maps/textures/shared/mapLeaks_diffuse.png" />
+    <File fileId="7" filename="$data/maps/textures/shared/mapRust_diffuse.png" />
+    <File fileId="4" filename="$data/shaders/buildingShader.xml" />
+    <File fileId="14" filename="$data/shared/assets/assetLibraryDecals_diffuse.png" />
+    <File fileId="15" filename="$data/shared/assets/assetLibraryDecals_normal.png" />
+    <File fileId="16" filename="$data/shared/assets/assetLibraryDecals_vmask.png" />
+    <File fileId="8" filename="sawmillOldGrid01_diffuse.png" />
+    <File fileId="9" filename="sawmillOldGrid01_normal.png" />
+    <File fileId="10" filename="sawmillOldGrid01_specular.png" />
+    <File fileId="11" filename="sawmillOldGrid02_diffuse.png" />
+    <File fileId="12" filename="sawmillOldGrid02_normal.png" />
+    <File fileId="13" filename="sawmillOldGrid02_specular.png" />
+    <File fileId="1" filename="sawmillOld_woodChipLoader_diffuse.png" />
+    <File fileId="6" filename="sawmillOld_woodChipLoader_mask.png" />
+    <File fileId="2" filename="sawmillOld_woodChipLoader_normal.png" />
+    <File fileId="3" filename="sawmillOld_woodChipLoader_specular.png" />
+  </Files>
+
+  <Materials>
+    <Material name="lambert1" materialId="1" diffuseColor="0.5 0.5 0.5 1">
+    </Material>
+    <Material name="sawmillOld_mat" materialId="2" customShaderId="4">
+      <CustomParameter name="dirtMossMix" value="1.0 1.0"/>
+      <CustomParameter name="dirtMossSmoothness" value="0.12 0.12"/>
+      <Custommap name="mDirtDiffuse" fileId="5"/>
+      <Custommap name="mMaskMap" fileId="6"/>
+      <Custommap name="mMossDiffuse" fileId="7"/>
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+    </Material>
+    <Material name="sawmillOldGrid01_mat" materialId="5">
+      <Texture fileId="8"/>
+      <Normalmap fileId="9"/>
+      <Glossmap fileId="10"/>
+    </Material>
+    <Material name="sawmillOldGrid02_mat" materialId="4">
+      <Texture fileId="11"/>
+      <Normalmap fileId="12"/>
+      <Glossmap fileId="13"/>
+    </Material>
+    <Material name="assetLibraryDecals_mat" materialId="3">
+      <Texture fileId="14"/>
+      <Normalmap fileId="15"/>
+      <Glossmap fileId="16"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="sawmillOldWoodChipBin.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="woodChipLoader_lod" lodDistance="0 120" collision="false" density="0" nodeId="1">
+      <TransformGroup name="LOD0" nodeId="2">
+        <Shape name="woodChipLoader" shapeId="1" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" clipDistance="300" nodeId="3">
+          <Shape name="sawmillOld_woodChipLoader" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="450" nodeId="4"/>
+          <Shape name="screwDecals" shapeId="3" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="80" nodeId="5"/>
+          <Shape name="gridGreen" shapeId="4" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="150" nodeId="6"/>
+          <Shape name="gridYellow" shapeId="5" castsShadows="true" receiveShadows="true" materialIds="5" clipDistance="150" nodeId="7"/>
+        </Shape>
+      </TransformGroup>
+      <TransformGroup name="LOD1" nodeId="8">
+        <Shape name="woodChipLoaderLOD1" shapeId="6" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="500" nodeId="9"/>
+      </TransformGroup>
+    </TransformGroup>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

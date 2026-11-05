@@ -1,0 +1,204 @@
+<?xml version='1.0' encoding='utf-8'?>
+<i3D xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="structureBigRestaurant01" version="1.6" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="5" filename="$data/maps/textures/shared/mapDirt_diffuse.png" />
+    <File fileId="7" filename="$data/maps/textures/shared/mapMoss_diffuse.png" />
+    <File fileId="45" filename="$data/maps/textures/shared/props/icicles_diffuse.png" />
+    <File fileId="46" filename="$data/maps/textures/shared/props/icicles_normal.png" />
+    <File fileId="47" filename="$data/maps/textures/shared/props/icicles_specular.png" />
+    <File fileId="40" filename="$data/maps/textures/shared/snow_diffuse.png" />
+    <File fileId="41" filename="$data/maps/textures/shared/snow_normal.png" />
+    <File fileId="42" filename="$data/maps/textures/shared/snow_specular.png" />
+    <File fileId="4" filename="$data/shaders/buildingShader.xml" />
+    <File fileId="31" filename="$data/shaders/decalShader.xml" />
+    <File fileId="34" filename="$data/shaders/glowShader.xml" />
+    <File fileId="43" filename="$data/shaders/snowHeapShader.xml" />
+    <File fileId="27" filename="$data/shaders/translucencyShader.xml" />
+    <File fileId="23" filename="$data/shared/default_normal.png" />
+    <File fileId="33" filename="$data/shared/default_specular.png" />
+    <File fileId="44" filename="$data/shared/sparkles_normal.png" />
+    <File fileId="22" filename="$data/shared/window02_diffuse.png" />
+    <File fileId="37" filename="$data/placeables/brandless/productionPointsGeneric/shared/autumnLeafs_diffuse.png" />
+    <File fileId="38" filename="$data/placeables/brandless/productionPointsGeneric/shared/autumnLeafs_normal.png" />
+    <File fileId="39" filename="$data/placeables/brandless/productionPointsGeneric/shared/autumnLeafs_specular.png" />
+    <File fileId="28" filename="buildingDecalsGrunge_diffuse.png" />
+    <File fileId="29" filename="buildingDecalsGrunge_normal.png" />
+    <File fileId="30" filename="buildingDecalsGrunge_specular.png" />
+    <File fileId="24" filename="$data/maps/mapUS/textures/curtainsSet_diffuse.png" />
+    <File fileId="25" filename="$data/maps/mapUS/textures/curtainsSet_normal.png" />
+    <File fileId="26" filename="$data/maps/mapUS/textures/curtainsSet_specular.png" />
+    <File fileId="16" filename="$data/maps/textures/shared/pierBuildingGutters_diffuse.png" />
+    <File fileId="17" filename="$data/maps/textures/shared/pierBuildingGutters_normal.png" />
+    <File fileId="18" filename="pierBuildingGutters_specular.png" />
+    <File fileId="10" filename="props/dirt/dirtPier_diffuse.png" />
+    <File fileId="14" filename="props/dirt/pierLeaks_diffuse.png" />
+    <File fileId="1" filename="residentialBuildings01_diffuse.png" />
+    <File fileId="2" filename="residentialBuildings01_normal.png" />
+    <File fileId="11" filename="residentialBuildings02_diffuse.png" />
+    <File fileId="15" filename="residentialBuildings02_height.png" />
+    <File fileId="12" filename="residentialBuildings02_normal.png" />
+    <File fileId="13" filename="residentialBuildings02_specular.png" />
+    <File fileId="19" filename="residentialSetDetails_diffuse.png" />
+    <File fileId="20" filename="residentialSetDetails_normal.png" />
+    <File fileId="21" filename="residentialSetDetails_specular.png" />
+    <File fileId="6" filename="structureBigRestaurant01_mask.png" />
+    <File fileId="36" filename="structureBranded_decals.png" />
+    <File fileId="8" filename="structuresWoodFloor_diffuse.png" />
+    <File fileId="9" filename="structuresWoodFloor_normal.png" />
+    <File fileId="3" filename="structuresWoodFloor_specular.png" />
+    <File fileId="35" filename="windowsRoomInteriorsDay_diffuse.png" />
+    <File fileId="32" filename="windowsRoomInteriorsNight_diffuse.png" />
+  </Files>
+
+  <Materials>
+    <Material name="lambert1" materialId="14" diffuseColor="0.5 0.5 0.5 1">
+    </Material>
+    <Material name="residentialBuildings01_mat" materialId="4" customShaderId="4">
+      <CustomParameter name="dirtMossMix" value="1.0 1.0" />
+      <CustomParameter name="dirtMossSmoothness" value="0.12 0.12" />
+      <Custommap name="mDirtDiffuse" fileId="5" />
+      <Custommap name="mMaskMap" fileId="6" />
+      <Custommap name="mMossDiffuse" fileId="7" />
+      <Texture fileId="1" />
+      <Normalmap fileId="2" />
+      <Glossmap fileId="3" />
+    </Material>
+    <Material name="structuresWoodFloor_mat" materialId="2" customShaderId="4">
+      <CustomParameter name="dirtMossMix" value="1.0 1.0" />
+      <CustomParameter name="dirtMossSmoothness" value="0.12 0.12" />
+      <Custommap name="mDirtDiffuse" fileId="5" />
+      <Custommap name="mMaskMap" fileId="6" />
+      <Custommap name="mMossDiffuse" fileId="10" />
+      <Texture fileId="8" />
+      <Normalmap fileId="9" />
+      <Glossmap fileId="3" />
+    </Material>
+    <Material name="residentialBuildings02_mat" materialId="1" customShaderId="4" customShaderVariation="colorScale_customParallax">
+      <CustomParameter name="colorScale0" value="0.53 0.063 0.024 0.9" />
+      <CustomParameter name="colorScale1" value="0.082 0.068 0.061 0.85" />
+      <CustomParameter name="dirtMossMix" value="1.0 1.0" />
+      <CustomParameter name="dirtMossSmoothness" value="0.12 0.12" />
+      <Custommap name="mDirtDiffuse" fileId="10" />
+      <Custommap name="mMaskMap" fileId="6" />
+      <Custommap name="mMossDiffuse" fileId="14" />
+      <Custommap name="mParallaxMap" fileId="15" />
+      <Texture fileId="11" />
+      <Normalmap fileId="12" />
+      <Glossmap fileId="13" />
+    </Material>
+    <Material name="pierBuildingGutters_mat" materialId="3">
+      <Texture fileId="16" />
+      <Normalmap fileId="17" />
+      <Glossmap fileId="18" />
+    </Material>
+    <Material name="residentialSetDetails_mat" materialId="6">
+      <Texture fileId="19" />
+      <Normalmap fileId="20" />
+      <Glossmap fileId="21" />
+    </Material>
+    <Material name="window02_mat" materialId="7" specularColor="0.7 1 1" alphaBlending="true">
+      <Texture fileId="22" />
+      <Normalmap fileId="23" />
+    </Material>
+    <Material name="curtainsSet_mat" materialId="8" customShaderId="27">
+      <CustomParameter name="translucencyAmount" value="0.7" />
+      <Texture fileId="24" />
+      <Normalmap fileId="25" />
+      <Glossmap fileId="26" />
+    </Material>
+    <Material name="buildingDecalsGrunge_mat" materialId="9" alphaBlending="true" customShaderId="31">
+      <Texture fileId="28" />
+      <Normalmap fileId="29" />
+      <Glossmap fileId="30" />
+    </Material>
+    <Material name="windowsRoomInteriorsNight_mat" materialId="10" customShaderId="34" customShaderVariation="alphaTestDisable_extraBaseMap">
+      <CustomParameter name="lightControl" value="1.0" />
+      <Custommap name="mExtraBaseMap" fileId="35" />
+      <Texture fileId="32" />
+      <Normalmap fileId="23" />
+      <Glossmap fileId="33" />
+    </Material>
+    <Material name="structureBranded_mat" materialId="5" specularColor="0 0 0">
+      <Texture fileId="36" />
+      <Normalmap fileId="23" />
+    </Material>
+    <Material name="autumnLeafs_mat" materialId="11">
+      <Texture fileId="37" />
+      <Normalmap fileId="38" />
+      <Glossmap fileId="39" />
+    </Material>
+    <Material name="snow_mat" materialId="12" customShaderId="43">
+      <Custommap name="mSparklesNormal" fileId="44" />
+      <Texture fileId="40" />
+      <Normalmap fileId="41" bumpDepth="0.5" />
+      <Glossmap fileId="42" />
+    </Material>
+    <Material name="icicles_mat" materialId="13" alphaBlending="true" customShaderId="43" customShaderVariation="icicle">
+      <Texture fileId="45" />
+      <Normalmap fileId="46" />
+      <Glossmap fileId="47" />
+    </Material>
+    <Material name="gasStationOpaque_mat" materialId="15" diffuseColor="0.0301205 0.0301205 0.0301205 1" specularColor="1 1 0.5" customShaderId="34" customShaderVariation="additive_colorScale">
+      <CustomParameter name="colorScale" value="1.0 1.0 0.5" />
+      <CustomParameter name="lightControl" value="3.0" />
+      <Normalmap fileId="23" />
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="structureBigRestaurant01.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="structuresBigRestaurant01_lod" lodDistance="0 120" collision="false" density="0" nodeId="1">
+      <TransformGroup name="LOD0" nodeId="2">
+        <Shape name="structureBigRestaurant01" shapeId="1" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="300" nodeId="3" />
+        <Shape name="woodFloor" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="300" nodeId="4" />
+        <Shape name="structureBigRestaurant01Gutters" translation="1.023281 7.793052 11.089297" shapeId="3" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="300" nodeId="5" />
+        <Shape name="partsConcrete" shapeId="4" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="300" nodeId="6" />
+        <Shape name="brandedDecal" translation="1.121641 5.402889 -12.070317" rotation="0 -180 0" shapeId="5" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="5" clipDistance="120" nodeId="7" />
+        <TransformGroup name="interior" nodeId="8">
+          <Shape name="framesWindows" shapeId="6" castsShadows="true" receiveShadows="true" materialIds="6" clipDistance="300" nodeId="9" />
+          <Shape name="glass" shapeId="7" castsShadows="false" receiveShadows="true" materialIds="7" clipDistance="175" nodeId="10" />
+          <Shape name="curtains" shapeId="8" castsShadows="true" receiveShadows="true" materialIds="8" clipDistance="175" nodeId="11" />
+          <Shape name="dirtDecals" shapeId="9" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="9" clipDistance="85" nodeId="12" />
+          <TransformGroup name="illum" nodeId="13">
+            <Shape name="interiorDay" shapeId="10" castsShadows="true" receiveShadows="true" materialIds="10" clipDistance="300" nodeId="14" weatherRequiredMask="0x40" renderInvisible="true" />
+            <TransformGroup name="realLights" collision="false" density="0" nodeId="15" weatherRequiredMask="0x40">
+              <Light name="pointLight01" translation="1.122617 0.425663 -12.443984" rotation="0 90 0" type="point" color="0.118 0.12 0.084" emitDiffuse="true" emitSpecular="true" range="5" nodeId="16" />
+              <Light name="pointLight02" translation="6.565547 0.425658 1.605117" type="point" color="0.118 0.12 0.084" emitDiffuse="true" emitSpecular="true" range="5" nodeId="17" />
+              <Light name="pointLight03" translation="2.113477 3.127529 10.443984" rotation="0 -90 0" type="point" color="0.118 0.12 0.084" emitDiffuse="true" emitSpecular="true" range="5" nodeId="18" />
+              <Light name="pointLight04" translation="-1.681094 0.210532 -12.443984" rotation="0 90 0" type="point" color="0.118 0.12 0.084" emitDiffuse="true" emitSpecular="true" range="5" nodeId="19" />
+              <Light name="pointLight05" translation="3.927344 0.210532 -12.443984" rotation="0 90 0" type="point" color="0.118 0.12 0.084" emitDiffuse="true" emitSpecular="true" range="5" nodeId="20" />
+              <Light name="pointLight06" translation="3.925938 3.501582 -12.443984" rotation="0 90 0" type="point" color="0.118 0.12 0.084" emitDiffuse="true" emitSpecular="true" range="5" nodeId="21" />
+              <Light name="pointLight07" translation="-4.322422 3.501577 4.128281" rotation="0 180 0" type="point" color="0.118 0.12 0.084" emitDiffuse="true" emitSpecular="true" range="5" nodeId="22" />
+              <Light name="pointLight08" translation="-0.773711 0.475203 10.443984" rotation="0 -90 0" type="point" color="0.118 0.12 0.084" emitDiffuse="true" emitSpecular="true" range="5" nodeId="23" />
+              <Light name="pointLight09" translation="6.565547 3.905317 -2.415352" type="point" color="0.118 0.12 0.084" emitDiffuse="true" emitSpecular="true" range="5" nodeId="24" />
+            </TransformGroup>
+          </TransformGroup>
+        </TransformGroup>
+        <TransformGroup name="seasons" nodeId="25">
+          <TransformGroup name="autumn" nodeId="26">
+            <Shape name="autumnLeafsDecal" shapeId="11" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="11" clipDistance="75" nodeId="27" weatherRequiredMask="0x200" />
+          </TransformGroup>
+          <TransformGroup name="winter" nodeId="28">
+            <Shape name="snow" shapeId="12" castsShadows="true" receiveShadows="true" materialIds="12" clipDistance="150" nodeId="29" weatherRequiredMask="0x400" />
+            <Shape name="icicles" shapeId="13" castsShadows="true" receiveShadows="true" materialIds="13" clipDistance="75" nodeId="30" weatherRequiredMask="0x400" />
+          </TransformGroup>
+        </TransformGroup>
+        <Shape name="occluderMesh" translation="1.098374 3.034482 -1.118735" shapeId="14" castsShadows="true" receiveShadows="true" nonRenderable="true" occluder="true" materialIds="14" clipDistance="300" nodeId="31" />
+      </TransformGroup>
+      <TransformGroup name="LOD1" nodeId="32">
+        <Shape name="framesWindows" translation="7.50166 0.469691 9.985675" shapeId="15" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="6" clipDistance="300" nodeId="33" />
+        <Shape name="glass" shapeId="16" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" materialIds="15" clipDistance="600" nodeId="34" weatherRequiredMask="0x40" renderInvisible="true" />
+        <Shape name="structureBigRestaurant01" shapeId="17" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="600" nodeId="35" />
+        <Shape name="woodFloor" shapeId="18" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="450" nodeId="36" />
+        <Shape name="partsConcrete" translation="5.325743 -3.417742 -8.330742" shapeId="19" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="450" nodeId="37" />
+      </TransformGroup>
+    </TransformGroup>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

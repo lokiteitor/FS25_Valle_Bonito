@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='utf-8'?>
+<i3D xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="waffleHut" version="1.6" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="24" filename="$data/maps/textures/shared/props/icicles_diffuse.png" />
+    <File fileId="25" filename="$data/maps/textures/shared/props/icicles_normal.png" />
+    <File fileId="26" filename="$data/maps/textures/shared/props/icicles_specular.png" />
+    <File fileId="19" filename="$data/maps/textures/shared/snow_diffuse.png" />
+    <File fileId="20" filename="$data/maps/textures/shared/snow_normal.png" />
+    <File fileId="21" filename="$data/maps/textures/shared/snow_specular.png" />
+    <File fileId="4" filename="$data/shaders/buildingShader.xml" />
+    <File fileId="13" filename="$data/shaders/glowShader.xml" />
+    <File fileId="22" filename="$data/shaders/snowHeapShader.xml" />
+    <File fileId="18" filename="$data/shaders/translucencyShader.xml" />
+    <File fileId="27" filename="$data/shared/default_normal.png" />
+    <File fileId="23" filename="$data/shared/sparkles_normal.png" />
+    <File fileId="15" filename="$data/maps/mapUS/textures/curtainsSet_diffuse.png" />
+    <File fileId="16" filename="$data/maps/mapUS/textures/curtainsSet_normal.png" />
+    <File fileId="17" filename="$data/maps/mapUS/textures/curtainsSet_specular.png" />
+    <File fileId="10" filename="waffleHutProps_diffuse.png" />
+    <File fileId="11" filename="waffleHutProps_normal.png" />
+    <File fileId="12" filename="waffleHutProps_specular.png" />
+    <File fileId="1" filename="waffleHut_diffuse.png" />
+    <File fileId="14" filename="waffleHut_emissive.png" />
+    <File fileId="6" filename="waffleHut_height.png" />
+    <File fileId="5" filename="waffleHut_mask.png" />
+    <File fileId="2" filename="waffleHut_normal.png" />
+    <File fileId="3" filename="waffleHut_specular.png" />
+    <File fileId="7" filename="$data/maps/mapEU/textures/windowsGlass_diffuse.png" />
+    <File fileId="8" filename="$data/maps/mapEU/textures/windowsGlass_normal.png" />
+    <File fileId="9" filename="$data/maps/mapEU/textures/windowsGlass_specular.png" />
+  </Files>
+
+  <Materials>
+    <Material name="lambert1" materialId="1" diffuseColor="0.5 0.5 0.5 1">
+    </Material>
+    <Material name="waffleHut_01_mat" materialId="2" customShaderId="4" customShaderVariation="customParallax">
+      <Custommap name="mMaskMap" fileId="5" />
+      <Custommap name="mParallaxMap" fileId="6" />
+      <Texture fileId="1" />
+      <Normalmap fileId="2" />
+      <Glossmap fileId="3" />
+    </Material>
+    <Material name="windowsGlass_mat" materialId="3" alphaBlending="true">
+      <Texture fileId="7" />
+      <Normalmap fileId="8" />
+      <Glossmap fileId="9" />
+    </Material>
+    <Material name="waffleHutProps_mat" materialId="6" customShaderId="13" customShaderVariation="customEmissiveMap_secondUV">
+      <CustomParameter name="lightControl" value="0.5" />
+      <Custommap name="mEmissiveMap" fileId="14" />
+      <Texture fileId="10" />
+      <Normalmap fileId="11" />
+      <Glossmap fileId="12" />
+    </Material>
+    <Material name="waffleHut_02_mat" materialId="7" customShaderId="13" customShaderVariation="customEmissiveMap_secondUV">
+      <CustomParameter name="lightControl" value="0.5" />
+      <Custommap name="mEmissiveMap" fileId="14" />
+      <Texture fileId="1" />
+      <Normalmap fileId="2" />
+      <Glossmap fileId="3" />
+    </Material>
+    <Material name="waffleHut_03_mat" materialId="5" customShaderId="13">
+      <CustomParameter name="lightControl" value="0.7" />
+      <Texture fileId="1" />
+      <Normalmap fileId="2" />
+      <Glossmap fileId="3" />
+    </Material>
+    <Material name="curtainsSet_mat" materialId="4" customShaderId="18">
+      <CustomParameter name="translucencyAmount" value="0.7" />
+      <Texture fileId="15" />
+      <Normalmap fileId="16" />
+      <Glossmap fileId="17" />
+    </Material>
+    <Material name="snow_mat" materialId="8" customShaderId="22">
+      <Custommap name="mSparklesNormal" fileId="23" />
+      <Texture fileId="19" />
+      <Normalmap fileId="20" bumpDepth="0.5" />
+      <Glossmap fileId="21" />
+    </Material>
+    <Material name="icicles_mat" materialId="9" alphaBlending="true" customShaderId="22" customShaderVariation="icicle">
+      <Refractionmap type="planar" coeff="1" bumpScale="0.1" />
+      <Texture fileId="24" />
+      <Normalmap fileId="25" />
+      <Glossmap fileId="26" />
+    </Material>
+    <Material name="gasStationOpaque_mat" materialId="10" diffuseColor="0.0301205 0.0301205 0.0301205 1" specularColor="1 1 0.5" customShaderId="13">
+      <CustomParameter name="colorScale" value="1.0 1.0 0.5" />
+      <CustomParameter name="lightControl" value="1.5" />
+      <Normalmap fileId="27" />
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="waffleHut.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="waffleHut" lodDistance="0 120" collision="false" density="0" nodeId="1">
+      <Shape name="LOD0" shapeId="1" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="2">
+        <Shape name="visual" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="500" nodeId="3">
+          <Shape name="glass" rotation="-90 0 0" shapeId="3" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="500" nodeId="4" />
+          <Shape name="posters" shapeId="4" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="5" />
+          <Shape name="curtains" shapeId="5" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="120" nodeId="6" />
+          <TransformGroup name="illum" nodeId="7">
+            <TransformGroup name="selfIllum" nodeId="8">
+              <Shape name="logoIllum" shapeId="6" castsShadows="true" receiveShadows="true" materialIds="5" clipDistance="300" nodeId="9" weatherRequiredMask="0x40" renderInvisible="true" visibleShaderParameter="0.7" />
+              <Shape name="props" shapeId="7" castsShadows="true" receiveShadows="true" materialIds="6" clipDistance="500" nodeId="10" weatherRequiredMask="0x40" renderInvisible="true" visibleShaderParameter="0.5" />
+              <Shape name="waffleHutInterior" shapeId="8" castsShadows="true" receiveShadows="true" materialIds="7" clipDistance="300" nodeId="11" weatherRequiredMask="0x40" renderInvisible="true" visibleShaderParameter="0.5" />
+            </TransformGroup>
+            <TransformGroup name="realLights" collision="false" clipDistance="75" nodeId="12" weatherRequiredMask="0x40">
+              <Light name="pointLight1" translation="-4.333334 2.83859 0.104404" type="point" color="0.067 0.067 0.033031" emitDiffuse="true" emitSpecular="true" range="8" nodeId="13" />
+              <Light name="pointLight2" translation="-0.02485 2.83859 0.104404" type="point" color="0.067 0.067 0.033031" emitDiffuse="true" emitSpecular="true" range="8" nodeId="14" />
+              <Light name="pointLight3" translation="-8.62999 2.83859 0.104404" type="point" color="0.067 0.067 0.033031" emitDiffuse="true" emitSpecular="true" range="8" nodeId="15" />
+              <Light name="pointLight4" translation="-13.02485 2.676239 0.104404" type="point" color="0.067 0.067 0.033031" emitDiffuse="true" emitSpecular="true" range="8" nodeId="16" />
+              <Light name="pointLight5" translation="-15.821108 1.487971 -2.691517" type="point" color="0.067 0.067 0.033031" emitDiffuse="true" emitSpecular="true" range="8" nodeId="17" />
+              <Light name="spotLight1" translation="-0.115316 3.728612 0.097758" rotation="79.249214 0 0" type="spot" color="0.272 0.2602 0.118592" emitDiffuse="true" emitSpecular="true" range="15" coneAngle="155" dropOff="4" clipDistance="100" nodeId="18" />
+              <Light name="spotLight2" translation="-5.349439 3.728612 0.097758" rotation="79.249214 0 0" type="spot" color="0.272 0.2602 0.118592" emitDiffuse="true" emitSpecular="true" range="15" coneAngle="130" dropOff="4" clipDistance="100" nodeId="19" />
+              <Light name="spotLight3" translation="-7.939716 3.728612 0.097758" rotation="79.249214 0 0" type="spot" color="0.272 0.2602 0.118592" emitDiffuse="true" emitSpecular="true" range="15" coneAngle="130" dropOff="4" clipDistance="100" nodeId="20" />
+              <Light name="spotLight4" translation="-13.229169 3.728612 0.097758" rotation="79.249214 0 0" type="spot" color="0.272 0.2602 0.118592" emitDiffuse="true" emitSpecular="true" range="15" coneAngle="130" dropOff="4" clipDistance="100" nodeId="21" />
+              <Light name="blueLight1" translation="2.167601 2.885338 0.307237" type="point" color="0.00877933 0.0547486 0.0662651" emitDiffuse="true" emitSpecular="true" range="6.98795" nodeId="22" />
+              <Light name="blueLight2" translation="3.933877 4.604182 1.279272" type="point" color="0.0119718 0.0746572 0.0903614" emitDiffuse="true" emitSpecular="true" range="7.5" nodeId="23" />
+            </TransformGroup>
+          </TransformGroup>
+          <TransformGroup name="winter" nodeId="24">
+            <Shape name="snow" shapeId="9" castsShadows="true" receiveShadows="true" materialIds="8" clipDistance="150" nodeId="25" weatherRequiredMask="0x400" />
+            <Shape name="icicles" shapeId="10" castsShadows="true" receiveShadows="true" materialIds="9" clipDistance="110" nodeId="26" weatherRequiredMask="0x400" />
+          </TransformGroup>
+        </Shape>
+      </Shape>
+      <Shape name="LOD1" shapeId="11" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="600" nodeId="27">
+        <Shape name="glass_LOD" shapeId="12" castsShadows="true" receiveShadows="true" materialIds="10" clipDistance="600" nodeId="28" weatherRequiredMask="0x40" renderInvisible="true" visibleShaderParameter="1.5" />
+        <Shape name="logoIllum_LOD" shapeId="13" castsShadows="true" receiveShadows="true" materialIds="5" clipDistance="600" nodeId="29" weatherRequiredMask="0x40" renderInvisible="true" visibleShaderParameter="0.7" />
+      </Shape>
+    </TransformGroup>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

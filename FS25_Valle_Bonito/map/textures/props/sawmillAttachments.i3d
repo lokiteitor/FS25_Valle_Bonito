@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="sawmillAttachments" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="4" filename="$data/shaders/buildingShader.xml" />
+    <File fileId="9" filename="$data/shaders/decalShader.xml" />
+    <File fileId="10" filename="$data/shared/assets/assetLibraryDecals_diffuse.png" />
+    <File fileId="11" filename="$data/shared/assets/assetLibraryDecals_normal.png" />
+    <File fileId="12" filename="$data/shared/assets/assetLibraryDecals_vmask.png" />
+    <File fileId="1" filename="grainDividerSET_diffuse.png" />
+    <File fileId="5" filename="grainDividerSET_mask.png" />
+    <File fileId="2" filename="grainDividerSET_normal.png" />
+    <File fileId="3" filename="grainDividerSET_specular.png" />
+    <File fileId="6" filename="siloTower_platform_diffuse.png" />
+    <File fileId="7" filename="siloTower_platform_normal.png" />
+    <File fileId="8" filename="siloTower_platform_specular.png" />
+  </Files>
+
+  <Materials>
+    <Material name="lambert1" materialId="1" diffuseColor="0.5 0.5 0.5 1">
+    </Material>
+    <Material name="grainDividerSET_mat" materialId="2" customShaderId="4">
+      <Custommap name="mMaskMap" fileId="5"/>
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+    </Material>
+    <Material name="siloTower_mat" materialId="3" alphaBlending="true" customShaderId="9">
+      <Texture fileId="6"/>
+      <Normalmap fileId="7"/>
+      <Glossmap fileId="8"/>
+    </Material>
+    <Material name="assetLibraryDecals_mat" materialId="4">
+      <Texture fileId="10"/>
+      <Normalmap fileId="11"/>
+      <Glossmap fileId="12"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="sawmillAttachments.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <Shape name="attachment02" lockedgroup="true" translation="0 0 4" shapeId="1" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="1">
+      <Shape name="attachment02Vis" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="100" nodeId="2"/>
+    </Shape>
+    <Shape name="insideCatwalk" lockedgroup="true" translation="-9.626575 1.43795 -12.195686" shapeId="3" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="3">
+      <Shape name="insideCatwalkVis" translation="-1.781915 -0.743918 -2.950566" shapeId="4" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="300" nodeId="4">
+        <Shape name="grid" shapeId="5" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="100" nodeId="5"/>
+        <Shape name="screwsDecals" shapeId="6" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="4" clipDistance="50" nodeId="6"/>
+      </Shape>
+    </Shape>
+    <Shape name="sideStairs" lockedgroup="true" translation="0 0 26" shapeId="7" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="7">
+      <Shape name="sideStairsVis" translation="0.02938 0.081156 0.713698" shapeId="8" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="300" nodeId="8">
+        <Shape name="grid" shapeId="9" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="100" nodeId="9"/>
+        <Shape name="screwsDecals" shapeId="10" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="4" clipDistance="50" nodeId="10"/>
+      </Shape>
+    </Shape>
+    <Shape name="rollgateCover" lockedgroup="true" translation="0 0.0004 -20" shapeId="11" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="11">
+      <Shape name="rollgateCoverVis" translation="0.257689 0 -0.269962" shapeId="12" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="200" nodeId="12">
+        <Shape name="screwsDecals" shapeId="13" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="4" clipDistance="50" nodeId="13"/>
+      </Shape>
+    </Shape>
+    <Shape name="roadFillerFrame" lockedgroup="true" translation="0 0 -8" shapeId="14" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="14">
+      <Shape name="roadFillerFrameVis" shapeId="15" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="400" nodeId="15">
+        <Shape name="screwsDecals" shapeId="16" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="4" clipDistance="50" nodeId="16"/>
+      </Shape>
+      <Shape name="roadFiller" shapeId="17" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="17">
+        <Shape name="roadFillerVis" shapeId="18" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="400" nodeId="18">
+          <Shape name="screwsDecals" shapeId="19" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="4" clipDistance="50" nodeId="19"/>
+          <Shape name="grid" shapeId="20" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="100" nodeId="20"/>
+        </Shape>
+      </Shape>
+    </Shape>
+    <Shape name="roadFillerWindow" lockedgroup="true" translation="-5.986902 18.790777 -0.296989" shapeId="21" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="21">
+      <Shape name="roadFillerWindowVis" shapeId="22" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="400" nodeId="22"/>
+    </Shape>
+    <Shape name="attachment04" lockedgroup="true" shapeId="23" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="23">
+      <Shape name="attachment04Vis" translation="6.292019 1.000449 -13.776139" shapeId="24" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="400" nodeId="24">
+        <Shape name="grid" translation="1.706868 5.377016 3.355709" shapeId="25" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="100" nodeId="25"/>
+        <Shape name="screwsDecals" shapeId="26" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="4" clipDistance="50" nodeId="26"/>
+        <Shape name="outsideCatwalk" translation="1.706868 5.377016 3.355709" shapeId="27" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="400" nodeId="27">
+          <Shape name="screwsDecals" shapeId="28" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="4" clipDistance="50" nodeId="28"/>
+        </Shape>
+      </Shape>
+    </Shape>
+    <Shape name="attachment01" lockedgroup="true" translation="0 0 20" shapeId="29" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="29">
+      <Shape name="attachment01Vis" shapeId="30" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="300" nodeId="30">
+        <Shape name="screwsDecals" shapeId="31" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="4" clipDistance="50" nodeId="31"/>
+      </Shape>
+      <Shape name="pipe01" translation="-0.000202 4.279231 0.871859" shapeId="32" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="32">
+        <Shape name="pipe01Vis" translation="0.000195 -4.723207 1.800408" shapeId="33" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="300" nodeId="33"/>
+      </Shape>
+      <Shape name="pipe02" translation="-0.021237 0.96024 -1.475134" shapeId="34" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="34">
+        <Shape name="pipe02Vis" translation="-0.037246 -2.618694 -3.074026" shapeId="35" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="300" nodeId="35"/>
+      </Shape>
+    </Shape>
+    <Shape name="attachment03" lockedgroup="true" translation="0 0 8" shapeId="36" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="36">
+      <Shape name="attachment03Vis" translation="1.837586 0.508435 0.000432" shapeId="37" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="300" nodeId="37">
+        <Shape name="screwsDecals" shapeId="38" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="4" clipDistance="50" nodeId="38"/>
+      </Shape>
+    </Shape>
+    <Shape name="platform03" lockedgroup="true" translation="0 0 56" rotation="0 -90 0" shapeId="39" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="39">
+      <Shape name="platform03Vis" translation="0 -0.5625 -0.562543" shapeId="40" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="300" nodeId="40">
+        <Shape name="grid" shapeId="41" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="100" nodeId="41"/>
+        <Shape name="screwsDecals" shapeId="42" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="4" clipDistance="50" nodeId="42"/>
+      </Shape>
+    </Shape>
+    <Shape name="platform02" lockedgroup="true" translation="9.506419 -0.064054 -39.442688" shapeId="43" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="43">
+      <Shape name="platform02Vis" translation="-0.122071 0.054919 -4.001408" shapeId="44" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="300" nodeId="44">
+        <Shape name="screwsDecals" shapeId="45" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="4" clipDistance="50" nodeId="45"/>
+        <Shape name="grid" shapeId="46" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="100" nodeId="46"/>
+      </Shape>
+    </Shape>
+    <Shape name="conveyor" lockedgroup="true" translation="0 0.022501 -80" shapeId="47" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="47">
+      <Shape name="conveyorVis" translation="0.000118 -0.022499 -0.007238" shapeId="48" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="400" nodeId="48">
+        <Shape name="screwsDecals" shapeId="49" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="4" clipDistance="50" nodeId="49"/>
+      </Shape>
+    </Shape>
+    <Shape name="platform01" lockedgroup="true" translation="-4 0 56" rotation="0 90 0" shapeId="50" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="50">
+      <Shape name="platform01Vis" translation="0.009104 0.536202 1.632954" shapeId="51" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="300" nodeId="51">
+        <Shape name="screwsDecals" shapeId="52" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="4" clipDistance="50" nodeId="52"/>
+        <Shape name="grid" shapeId="53" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="100" nodeId="53"/>
+      </Shape>
+    </Shape>
+    <Shape name="plattforms" lockedgroup="true" translation="8.814459 28.475384 -46.747494" shapeId="54" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="54">
+      <Shape name="plattformsVis" translation="-0.002463 0.679734 0.594102" shapeId="55" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="300" nodeId="55">
+        <Shape name="grid" shapeId="56" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="100" nodeId="56"/>
+        <Shape name="screwsDecals" shapeId="57" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="4" clipDistance="50" nodeId="57"/>
+      </Shape>
+    </Shape>
+    <Shape name="ladder05" lockedgroup="true" translation="-12 0 32" shapeId="58" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="58">
+      <Shape name="ladder05Vis" translation="-0.003054 0.000001 0.761392" shapeId="59" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="300" nodeId="59">
+        <Shape name="screwsDecals" shapeId="60" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="4" clipDistance="50" nodeId="60"/>
+      </Shape>
+    </Shape>
+    <Shape name="ladder04" lockedgroup="true" translation="4 0 32" shapeId="61" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="61">
+      <Shape name="ladder04Vis" translation="-0.000396 -0.000002 0.766377" shapeId="62" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="300" nodeId="62">
+        <Shape name="screwDecals" shapeId="63" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="4" clipDistance="50" nodeId="63"/>
+      </Shape>
+    </Shape>
+    <Shape name="ladder03" lockedgroup="true" translation="0 0 32" shapeId="64" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="64">
+      <Shape name="ladder03Vis" translation="0 -0.000002 0.766387" shapeId="65" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="300" nodeId="65">
+        <Shape name="screwsDecals" shapeId="66" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="4" clipDistance="50" nodeId="66"/>
+      </Shape>
+    </Shape>
+    <Shape name="ladder02" lockedgroup="true" translation="-8 0 32" shapeId="67" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="67">
+      <Shape name="ladder02Vis" translation="0.000259 -0.000001 0.832657" shapeId="68" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="300" nodeId="68">
+        <Shape name="screwsDecals" shapeId="69" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="4" clipDistance="50" nodeId="69"/>
+      </Shape>
+    </Shape>
+    <Shape name="ladder01" lockedgroup="true" translation="-4 0 32" shapeId="70" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="70">
+      <Shape name="ladder01Vis" translation="0.000254 -0.000001 0.68188" shapeId="71" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="300" nodeId="71"/>
+      <Shape name="screwsDecals" translation="0.000254 -0.000001 0.68188" shapeId="72" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="4" clipDistance="50" nodeId="72"/>
+    </Shape>
+    <Shape name="dividerVis1_notused" lockedgroup="true" translation="0.549559 -4.671982 -37.634621" rotation="0.34569 0 0.00033" visibility="false" shapeId="73" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="300" nodeId="73">
+      <Shape name="screwsDecals" translation="-0.030619 1.586935 -0.110193" shapeId="74" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="4" clipDistance="50" nodeId="74"/>
+    </Shape>
+    <TransformGroup name="conveyor10m" lockedgroup="true" translation="0 0 -44" nodeId="75">
+      <Shape name="conveyor10m" shapeId="75" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="300" nodeId="76"/>
+      <Shape name="conveyor10mFrame" shapeId="76" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="120" nodeId="77"/>
+      <Shape name="divider01" translation="0 0.75 0.5" shapeId="77" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="300" nodeId="78"/>
+      <Shape name="conveyor01Lever" translation="0.514082 0.387687 9.482767" rotation="23.358219 0 0" shapeId="78" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="300" nodeId="79"/>
+      <Shape name="dividerExit01" translation="-0.5 -0.230736 9.333772" rotation="0 180 0" shapeId="79" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="300" nodeId="80">
+        <Shape name="screwsDecals" translation="0.415645 -2.500257 -0.918851" shapeId="80" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="4" clipDistance="50" nodeId="81"/>
+      </Shape>
+      <Shape name="dividerArm01" translation="0 6 -2" rotation="90 0 0" shapeId="81" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="300" nodeId="82">
+        <Shape name="screwsDecals" shapeId="82" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="4" clipDistance="50" nodeId="83"/>
+      </Shape>
+      <Shape name="dividerArm02" translation="-4 0 0" shapeId="83" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="120" nodeId="84">
+        <Shape name="screwsDecals" shapeId="84" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="4" clipDistance="50" nodeId="85"/>
+      </Shape>
+      <Shape name="dividerArm03" translation="4 0 0" shapeId="85" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="120" nodeId="86">
+        <Shape name="screwsDecals" shapeId="86" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="4" clipDistance="50" nodeId="87"/>
+      </Shape>
+    </TransformGroup>
+    <TransformGroup name="conveyor8m" lockedgroup="true" translation="12 0 -44" nodeId="88">
+      <Shape name="conveyor08" shapeId="87" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="300" nodeId="89"/>
+      <Shape name="conveyor8mFrame" shapeId="88" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="120" nodeId="90"/>
+    </TransformGroup>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

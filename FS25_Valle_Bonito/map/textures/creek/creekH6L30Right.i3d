@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='utf-8'?>
+<i3D xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="creekH6L30Right" version="1.6" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="7" filename="$data/maps/mapUS/textures/creek/creekSet_diffuse.png" />
+    <File fileId="14" filename="$data/maps/mapUS/textures/creek/creekSet_height.png" />
+    <File fileId="12" filename="$data/maps/mapUS/textures/creek/creekSet_mask.png" />
+    <File fileId="8" filename="$data/maps/mapUS/textures/creek/creekSet_normal.png" />
+    <File fileId="9" filename="$data/maps/mapUS/textures/creek/creekSet_specular.png" />
+    <File fileId="11" filename="$data/maps/textures/shared/mapLeaks_diffuse.png" />
+    <File fileId="13" filename="$data/maps/textures/shared/mapMoss_diffuse.png" />
+    <File fileId="10" filename="$data/shaders/buildingShader.xml" />
+    <File fileId="6" filename="$data/shaders/foamShader.xml" />
+    <File fileId="2" filename="$data/shaders/oceanShader.xml" />
+    <File fileId="3" filename="$data/maps/mapUS/textures/creek/creekH6L30Right_flowmap.png" />
+    <File fileId="4" filename="$data/effects/waterFall/foam_diffuse.png" />
+    <File fileId="5" filename="$data/effects/waterFall/foam_normal.png" />
+    <File fileId="1" filename="water_normal.png" />
+  </Files>
+
+  <Materials>
+    <Material name="lambert1" materialId="2" diffuseColor="0.5 0.5 0.5 1">
+    </Material>
+    <Material name="water_mat" materialId="4" diffuseColor="0.5 0.5 0.5 1" specularColor="1 1 1" customShaderId="2" customShaderVariation="flowMap">
+      <Refractionmap type="planar" coeff="1" bumpScale="0.1" />
+      <CustomParameter name="depthScale" value="0.01" />
+      <CustomParameter name="uvScaleSpeedDistort" value="0.25 1.0 0.75 1" />
+      <CustomParameter name="windScale" value="0.5" />
+      <Custommap name="flowMap" fileId="3" />
+      <Normalmap fileId="1" />
+    </Material>
+    <Material name="foam_mat" materialId="3" specularColor="0.8 1 0" alphaBlending="true" customShaderId="6" customShaderVariation="flowMap">
+      <CustomParameter name="uvScaleSpeed" value="0.25 1.0 0.75 1" />
+      <Custommap name="flowMap" fileId="3" />
+      <Texture fileId="4" />
+      <Normalmap fileId="5" />
+    </Material>
+    <Material name="creekSet_mat" materialId="1" customShaderId="10" customShaderVariation="customParallax">
+      <Custommap name="mDirtDiffuse" fileId="11" />
+      <Custommap name="mMaskMap" fileId="12" />
+      <Custommap name="mMossDiffuse" fileId="13" />
+      <Custommap name="mParallaxMap" fileId="14" />
+      <Texture fileId="7" />
+      <Normalmap fileId="8" />
+      <Glossmap fileId="9" />
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="creekH6L30Right.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="creekH6L30Right_lod" lodDistance="0 75" collision="false" density="0" nodeId="1">
+      <Shape name="LOD0" shapeId="1" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="600" nodeId="2">
+        <Shape name="rocks" translation="-5.331997 -3.038333 15.045394" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="50" nodeId="3" />
+        <Shape name="terrainSnap" visibility="false" shapeId="3" castsShadows="true" receiveShadows="true" materialIds="2" nodeId="4" />
+        <TransformGroup name="waterGrp" nodeId="5">
+          <Shape name="foamTop" shapeId="4" castsShadows="false" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="6" />
+          <Shape name="waterplane" rotation="11.906678 0 0" shapeId="5" castsShadows="false" receiveShadows="true" materialIds="4" clipDistance="50" nodeId="7" />
+        </TransformGroup>
+      </Shape>
+      <Shape name="LOD1" shapeId="6" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="450" nodeId="8" />
+    </TransformGroup>
+  </Scene>
+
+  <UserAttributes>
+    <UserAttribute nodeId="7">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+  </UserAttributes>
+</i3D>

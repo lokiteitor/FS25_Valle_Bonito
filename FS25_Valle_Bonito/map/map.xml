@@ -30,7 +30,7 @@
 
     <animals filename="$dataS/character/animals.xml">
         <names filename="$dataS/character/animalNames.xml" />
-        <food filename="$dataS/character/animalFood.xml" />
+        <food filename="map/config/animalFood.xml" />
     </animals>
 
     <npcs filename="$data/maps/maps_npcs.xml" />
@@ -54,15 +54,10 @@
 
     <treeTypes maxNumTrees="14000" />
     <bales filename="$data/maps/maps_bales.xml" />
-    <motionPathEffects filename="$data/effects/motionPathEffects.xml" />
-
-    <fruitTypes>
-        <fruitType filename="$data/foliage/meadow/meadowUS/meadowUS.xml" />
-    </fruitTypes>
-
-    <fruitTypeCategories>
-        <fruitTypeCategory name="MOWER">MEADOW</fruitTypeCategory>
-    </fruitTypeCategories>
+    <motionPathEffects filename="map/effects/motionPathEffects.xml" />
+    <fillTypes filename="map/config/maps_fillTypes.xml" />
+    <fruitTypes filename="map/config/maps_fruitTypes.xml" />
+    <densityMapHeightTypes filename="map/config/maps_densityMapHeightTypes.xml" />
 
     <additionalFiles>
         <additionalFile filename="$data/shared/materialHolders/tensionBelts/tensionBeltMaterialHolder.i3d" />

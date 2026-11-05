@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="waterfallBridge" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+  </Files>
+
+  <Materials>
+    <Material name="lambert1" materialId="1" diffuseColor="0.5 0.5 0.5 1">
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="waterfallBridge.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="waterfallBridge" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" clipDistance="500" nodeId="1">
+      <Shape name="board01" translation="-0.256596 0.281432 0" shapeId="1" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="2"/>
+      <Shape name="board02" translation="-0.256596 0.281432 -9" shapeId="2" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="3"/>
+      <Shape name="board03" translation="-0.256596 0.281432 -4.5" shapeId="3" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="4"/>
+      <Shape name="board05" translation="-0.256596 0.281432 -9" shapeId="4" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="5"/>
+      <Shape name="post01" translation="1.410401 0.351745 -4.5" shapeId="5" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="6"/>
+      <Shape name="post02" translation="1.410401 0.351745 -9" shapeId="6" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="7"/>
+      <Shape name="post03" translation="1.410401 0.351745 0.025466" shapeId="7" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="8"/>
+      <Shape name="plank01" translation="1.340088 1.051489 0.417003" shapeId="8" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="9"/>
+      <Shape name="plankTrunk01" translation="1.355871 1.591602 0.608204" shapeId="9" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="10"/>
+      <Shape name="trunk01" translation="-0.208361 0 0" shapeId="10" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="11"/>
+      <Shape name="trunk02" translation="0.456308 0 0" shapeId="11" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="12"/>
+      <Shape name="trunk03" translation="1.191502 0 0" shapeId="12" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="13"/>
+      <Shape name="support01" translation="2.627502 0.260265 -0.013912" shapeId="13" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="14"/>
+      <Shape name="support02" translation="2.633385 0.260265 -4.545394" shapeId="14" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="15"/>
+      <Shape name="support03" translation="2.632479 0.260265 -9.010463" shapeId="15" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="16"/>
+      <TransformGroup name="boards" translation="-0.220079 0 0" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" clipDistance="500" nodeId="17">
+        <Shape name="pCube21" translation="-0.404004 0.281432 -0.263038" shapeId="16" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="18"/>
+        <Shape name="pCube20" translation="-0.355687 0.281432 -0.558321" shapeId="17" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="19"/>
+        <Shape name="pCube19" translation="-0.322555 0.281432 -0.831271" shapeId="18" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="20"/>
+        <Shape name="pCube18" translation="-0.371394 0.281432 -1.120999" shapeId="19" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="21"/>
+        <Shape name="pCube17" translation="-0.393996 0.281432 -1.405148" shapeId="20" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="22"/>
+        <Shape name="pCube16" translation="-0.355687 0.281432 -1.672629" shapeId="21" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="23"/>
+        <Shape name="pCube15" translation="-0.339636 0.281432 -1.973419" shapeId="22" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="24"/>
+        <Shape name="pCube14" translation="-0.3061 0.281432 -2.251997" shapeId="23" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="25"/>
+        <Shape name="pCube13" translation="-0.372761 0.281432 -2.530574" shapeId="24" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="26"/>
+        <Shape name="pCube12" translation="-0.355687 0.281432 -2.809152" shapeId="25" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="27"/>
+        <Shape name="pCube11" translation="-0.39888 0.281432 -3.08773" shapeId="26" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="28"/>
+        <Shape name="pCube10" translation="-0.369949 0.281432 -3.366307" shapeId="27" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="29"/>
+        <Shape name="pCube9" translation="-0.350111 0.281432 -3.644885" shapeId="28" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="30"/>
+        <Shape name="pCube8" translation="-0.349868 0.281432 -3.923463" shapeId="29" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="31"/>
+        <Shape name="pCube7" translation="-0.392736 0.281432 -4.202041" shapeId="30" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="32"/>
+        <Shape name="pCube22" translation="-0.404004 0.281432 -4.78242" shapeId="31" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="33"/>
+        <Shape name="pCube23" translation="-0.355687 0.281432 -5.077703" shapeId="32" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="34"/>
+        <Shape name="pCube24" translation="-0.322555 0.281432 -5.350653" shapeId="33" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="35"/>
+        <Shape name="pCube25" translation="-0.371394 0.281432 -5.64038" shapeId="34" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="36"/>
+        <Shape name="pCube26" translation="-0.393996 0.281432 -5.924529" shapeId="35" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="37"/>
+        <Shape name="pCube27" translation="-0.355687 0.281432 -6.19201" shapeId="36" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="38"/>
+        <Shape name="pCube28" translation="-0.339636 0.281432 -6.4928" shapeId="37" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="39"/>
+        <Shape name="pCube29" translation="-0.3061 0.281432 -6.771378" shapeId="38" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="40"/>
+        <Shape name="pCube30" translation="-0.372761 0.281432 -7.049956" shapeId="39" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="41"/>
+        <Shape name="pCube31" translation="-0.355687 0.281432 -7.328534" shapeId="40" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="42"/>
+        <Shape name="pCube32" translation="-0.39888 0.281432 -7.607111" shapeId="41" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="43"/>
+        <Shape name="pCube33" translation="-0.369949 0.281432 -7.885689" shapeId="42" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="44"/>
+        <Shape name="pCube34" translation="-0.350111 0.281432 -8.164267" shapeId="43" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="45"/>
+        <Shape name="pCube35" translation="-0.349868 0.281432 -8.442844" shapeId="44" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="46"/>
+        <Shape name="pCube36" translation="-0.392736 0.281432 -8.721422" shapeId="45" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="47"/>
+      </TransformGroup>
+    </TransformGroup>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

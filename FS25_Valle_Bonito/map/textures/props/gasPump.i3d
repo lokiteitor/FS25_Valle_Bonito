@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="gasPump" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="2" filename="$data/shared/default_normal.png" />
+    <File fileId="1" filename="$data/shared/window02_diffuse.png" />
+    <File fileId="3" filename="gasPump_decals.png" />
+    <File fileId="4" filename="gasPump_diffuse.png" />
+    <File fileId="5" filename="gasPump_normal.png" />
+    <File fileId="6" filename="gasPump_specular.png" />
+  </Files>
+
+  <Materials>
+    <Material name="lambert1" materialId="1" diffuseColor="0.5 0.5 0.5 1">
+    </Material>
+    <Material name="glass_mat" materialId="4" specularColor="0.85 1 1" alphaBlending="true">
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+    </Material>
+    <Material name="gasPump_01_mat" materialId="3" specularColor="0.5 0.5 0.5">
+      <Texture fileId="3"/>
+    </Material>
+    <Material name="gasPump_02_mat" materialId="2">
+      <Texture fileId="4"/>
+      <Normalmap fileId="5"/>
+      <Glossmap fileId="6"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="gasPump.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <Shape name="gasPump" lockedgroup="true" shapeId="1" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" clipDistance="150" nodeId="1">
+      <Shape name="gasPump" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="2" nodeId="2"/>
+      <Shape name="gasPump_decals" shapeId="3" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" nodeId="3"/>
+      <Shape name="gasPump_glass" shapeId="4" castsShadows="true" receiveShadows="true" materialIds="4" nodeId="4"/>
+    </Shape>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

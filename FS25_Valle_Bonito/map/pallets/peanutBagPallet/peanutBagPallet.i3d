@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="peanutBagPallet.i3d" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+  <Asset>
+    <Export program="GIANTS Editor 64bit" version="10.0.13"/>
+  </Asset>
+
+  <Files>
+    <File fileId="5" filename="PeanutSpecular.png"/>
+    <File fileId="4" filename="Peanut_normal.png"/>
+    <File fileId="3" filename="peanutDiffusePallets.png"/>
+  </Files>
+
+
+  <Materials>
+    <Material name="lambert1" materialId="5" diffuseColor="0.501961 0.501961 0.501961 1">
+    </Material>
+    <Material name="Material.002" materialId="6">
+      <Texture fileId="3"/>
+      <Normalmap fileId="4"/>
+      <Glossmap fileId="5"/>
+    </Material>
+    <Material name="UnnamedMaterial" materialId="7" diffuseColor="1 1 1 1">
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="peanutBagPallet.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <Shape name="PeanutPalletbags_component1" shapeId="1" dynamic="true" compound="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" clipDistance="150" nodeId="15" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="7">
+      <Shape name="dynamicMountTrigger" translation="0 0.090475 0" shapeId="2" kinematic="true" trigger="true" collisionFilterGroup="0x20000000" collisionFilterMask="0x20000" nodeId="16" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="5"/>
+      <TransformGroup name="content" translation="-0.00672012 0.387369 0.00322621" nodeId="17">
+        <Shape name="sacaria" translation="0.533925 -0.18119 -0.00478116" scale="0.925981 1 1" shapeId="3" nodeId="18" castsShadows="true" receiveShadows="true" materialIds="6">
+          <Shape name="sacaria_Tension00" shapeId="4" nodeId="19" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="5"/>
+        </Shape>
+        <Shape name="sacaria1" translation="0.178285 -0.18119 -0.00478116" scale="0.925981 1 1" shapeId="3" nodeId="20" castsShadows="true" receiveShadows="true" materialIds="6">
+          <Shape name="sacaria_Tension01" shapeId="4" nodeId="21" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="5"/>
+        </Shape>
+        <Shape name="sacaria2" translation="-0.166263 -0.18119 -0.00478116" scale="0.925981 1 1" shapeId="3" nodeId="22" castsShadows="true" receiveShadows="true" materialIds="6">
+          <Shape name="sacaria_Tension02" shapeId="4" nodeId="23" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="5"/>
+        </Shape>
+        <Shape name="sacaria3" translation="-0.521904 -0.18119 -0.00478116" scale="0.925981 1 1" shapeId="3" nodeId="24" castsShadows="true" receiveShadows="true" materialIds="6">
+          <Shape name="sacaria_Tension03" shapeId="4" nodeId="25" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="5"/>
+        </Shape>
+        <Shape name="sacaria4" translation="-0.353237 -0.0516193 -0.186213" rotation="-0 90 0" scale="0.925981 1 1" shapeId="5" nodeId="26" castsShadows="true" receiveShadows="true" materialIds="6">
+          <Shape name="sacaria_Tension04" shapeId="4" nodeId="27" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="5"/>
+        </Shape>
+        <Shape name="sacaria5" translation="-0.353237 -0.0516193 0.195776" rotation="-0 90 0" scale="0.925981 1 1" shapeId="5" nodeId="28" castsShadows="true" receiveShadows="true" materialIds="6">
+          <Shape name="sacaria_Tension05" shapeId="4" nodeId="29" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="5"/>
+        </Shape>
+        <Shape name="sacaria6" translation="0.341215 -0.0516193 -0.186213" rotation="-0 90 0" scale="0.925981 1 1" shapeId="5" nodeId="30" castsShadows="true" receiveShadows="true" materialIds="6">
+          <Shape name="sacaria_Tension06" shapeId="4" nodeId="31" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="5"/>
+        </Shape>
+        <Shape name="sacaria7" translation="0.341215 -0.0516193 0.195776" rotation="-0 90 0" scale="0.925981 1 1" shapeId="5" nodeId="32" castsShadows="true" receiveShadows="true" materialIds="6">
+          <Shape name="sacaria_Tension07" shapeId="4" nodeId="33" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="5"/>
+        </Shape>
+        <Shape name="sacaria8" translation="0.533925 0.0516187 -0.00478116" rotation="-180 2.40399 180" scale="0.925981 1 1" shapeId="3" nodeId="34" castsShadows="true" receiveShadows="true" materialIds="6">
+          <Shape name="sacaria_Tension08" shapeId="4" nodeId="35" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="5"/>
+        </Shape>
+        <Shape name="sacaria9" translation="0.178285 0.0516187 -0.00478116" scale="0.925981 1 1" shapeId="3" nodeId="36" castsShadows="true" receiveShadows="true" materialIds="6">
+          <Shape name="sacaria_Tension09" shapeId="4" nodeId="37" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="5"/>
+        </Shape>
+        <Shape name="sacaria10" translation="-0.166263 0.0516187 -0.00478116" rotation="-180 1.682 180" scale="0.925981 1 1" shapeId="3" nodeId="38" castsShadows="true" receiveShadows="true" materialIds="6">
+          <Shape name="sacaria_Tension10" shapeId="4" nodeId="39" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="5"/>
+        </Shape>
+        <Shape name="sacaria11" translation="-0.521904 0.0516187 -0.00478116" scale="0.925981 1 1" shapeId="3" nodeId="40" castsShadows="true" receiveShadows="true" materialIds="6">
+          <Shape name="sacaria_Tension11" shapeId="4" nodeId="41" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="5"/>
+        </Shape>
+        <Shape name="sacaria12" translation="-0.353237 0.181191 -0.186213" rotation="-0 90 0" scale="0.925981 1 1" shapeId="5" nodeId="42" castsShadows="true" receiveShadows="true" materialIds="6">
+          <Shape name="sacaria_Tension12" shapeId="4" nodeId="43" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="5"/>
+        </Shape>
+        <Shape name="sacaria13" translation="-0.353237 0.181191 0.195776" rotation="-180 -87.0407 -178.217" scale="0.925981 1 1" shapeId="5" nodeId="44" castsShadows="true" receiveShadows="true" materialIds="6">
+          <Shape name="sacaria_Tension13" shapeId="4" nodeId="45" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="5"/>
+        </Shape>
+        <Shape name="sacaria14" translation="0.341215 0.181191 -0.186214" rotation="-0 -90 0" scale="0.925981 1 1" shapeId="5" nodeId="46" castsShadows="true" receiveShadows="true" materialIds="6">
+          <Shape name="sacaria_Tension14" shapeId="4" nodeId="47" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="5"/>
+        </Shape>
+        <Shape name="sacaria15" translation="0.341215 0.181191 0.195776" rotation="-180 86.5509 180" scale="0.925981 1 1" shapeId="5" nodeId="48" castsShadows="true" receiveShadows="true" materialIds="6">
+          <Shape name="sacaria_Tension15" shapeId="4" nodeId="49" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="5"/>
+        </Shape>
+      </TransformGroup>
+      <TransformGroup name="collisions" clipDistance="10" nodeId="50">
+        <Shape name="floorCollision01" translation="0.3 0 0" shapeId="6" compoundChild="true" collisionFilterGroup="0x10000" collisionFilterMask="0xfe3dfb83" staticFriction="1" dynamicFriction="1" density="0.0001" nodeId="51" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="5"/>
+        <Shape name="floorCollision02" translation="-0.3 0 0" shapeId="6" compoundChild="true" collisionFilterGroup="0x10000" collisionFilterMask="0xfe3dfb83" staticFriction="1" dynamicFriction="1" density="0.0001" nodeId="52" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="5"/>
+      </TransformGroup>
+    </Shape>
+  </Scene>
+
+</i3D>

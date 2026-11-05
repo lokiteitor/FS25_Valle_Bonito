@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="backgroundTerrain" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="3" filename="$data/shaders/placeableShader.xml" />
+    <File fileId="9" filename="$data/shaders/translucencyShader.xml" />
+    <File fileId="2" filename="$data/shared/default_normal.png" />
+    <File fileId="1" filename="backgroundTerrainSouth01_diffuse.png" />
+    <File fileId="6" filename="backgroundTerrainSouth02_diffuse.png" />
+    <File fileId="5" filename="props/rocks/rockDetail_normal.png" />
+    <File fileId="4" filename="terrain/sandSeaweed01_diffuse.png" />
+    <File fileId="24" filename="trees/giantSequoiaStage01LOD2_diffuse.png" />
+    <File fileId="25" filename="trees/giantSequoiaStage01LOD2_normal.png" />
+    <File fileId="26" filename="trees/giantSequoiaStage02LOD2_diffuse.png" />
+    <File fileId="27" filename="trees/giantSequoiaStage02LOD2_normal.png" />
+    <File fileId="28" filename="trees/giantSequoiaStage03LOD2_diffuse.png" />
+    <File fileId="29" filename="trees/giantSequoiaStage03LOD2_normal.png" />
+    <File fileId="14" filename="trees/lodgepolePineStage02LOD2_diffuse.png" />
+    <File fileId="15" filename="trees/lodgepolePineStage02LOD2_normal.png" />
+    <File fileId="16" filename="trees/lodgepolePineStage03LOD2_diffuse.png" />
+    <File fileId="17" filename="trees/lodgepolePineStage03LOD2_normal.png" />
+    <File fileId="18" filename="trees/lodgepolePineStage03Var2LOD2_diffuse.png" />
+    <File fileId="19" filename="trees/lodgepolePineStage03Var2LOD2_normal.png" />
+    <File fileId="7" filename="trees/ponderosaPine_Stage02LOD_diffuse.png" />
+    <File fileId="8" filename="trees/ponderosaPine_Stage02LOD_normal.png" />
+    <File fileId="10" filename="trees/ponderosaPine_Stage03LOD_diffuse.png" />
+    <File fileId="11" filename="trees/ponderosaPine_Stage03LOD_normal.png" />
+    <File fileId="12" filename="trees/ponderosaPine_Stage04LOD_diffuse.png" />
+    <File fileId="13" filename="trees/ponderosaPine_Stage04LOD_normal.png" />
+    <File fileId="20" filename="trees/spruce2Var1LOD_diffuse.png" />
+    <File fileId="21" filename="trees/spruce2Var1LOD_normal.png" />
+    <File fileId="22" filename="trees/spruce3Var1LOD_diffuse.png" />
+    <File fileId="23" filename="trees/spruce3Var1LOD_normal.png" />
+  </Files>
+
+  <Materials>
+    <Material name="backgroundTerrainSouth01_mat" materialId="2" specularColor="0 1 0" customShaderId="3" customShaderVariation="rockDetail">
+      <CustomParameter name="mossLevel" value="0.5"/>
+      <Custommap name="mMossDetail" fileId="4"/>
+      <Custommap name="mNormalDetail" fileId="5"/>
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+    </Material>
+    <Material name="backgroundTerrainSouth02_mat" materialId="1" specularColor="0.1 1 0" customShaderId="3" customShaderVariation="rockDetail">
+      <CustomParameter name="mossLevel" value="0.5"/>
+      <Custommap name="mMossDetail" fileId="4"/>
+      <Custommap name="mNormalDetail" fileId="5"/>
+      <Texture fileId="6"/>
+      <Normalmap fileId="2"/>
+    </Material>
+    <Material name="ponderosaPine_01_mat" materialId="3" customShaderId="9" customShaderVariation="vertexColor">
+      <Texture fileId="7"/>
+      <Normalmap fileId="8"/>
+    </Material>
+    <Material name="ponderosaPine_02_mat" materialId="4" customShaderId="9" customShaderVariation="vertexColor">
+      <Texture fileId="10"/>
+      <Normalmap fileId="11"/>
+    </Material>
+    <Material name="ponderosaPine_03_mat" materialId="5" customShaderId="9" customShaderVariation="vertexColor">
+      <Texture fileId="12"/>
+      <Normalmap fileId="13"/>
+    </Material>
+    <Material name="lodgepolePineStage02LOD2_mat" materialId="6" customShaderId="9" customShaderVariation="vertexColor">
+      <Texture fileId="14"/>
+      <Normalmap fileId="15"/>
+    </Material>
+    <Material name="lodgepolePineStage03LOD2_mat" materialId="7" customShaderId="9" customShaderVariation="vertexColor">
+      <Texture fileId="16"/>
+      <Normalmap fileId="17"/>
+    </Material>
+    <Material name="lodgepolePineStage03Var2LOD2_mat" materialId="8" customShaderId="9" customShaderVariation="vertexColor">
+      <Texture fileId="18"/>
+      <Normalmap fileId="19"/>
+    </Material>
+    <Material name="spruce2Var1LOD_mat" materialId="9" customShaderId="9" customShaderVariation="vertexColor">
+      <Texture fileId="20"/>
+      <Normalmap fileId="21"/>
+    </Material>
+    <Material name="spruce3Var1LOD_mat" materialId="13" customShaderId="9" customShaderVariation="vertexColor">
+      <Texture fileId="22"/>
+      <Normalmap fileId="23"/>
+    </Material>
+    <Material name="giantSequoiaStage01LOD2_mat" materialId="12" customShaderId="9" customShaderVariation="vertexColor">
+      <Texture fileId="24"/>
+      <Normalmap fileId="25"/>
+    </Material>
+    <Material name="giantSequoiaStage02LOD2_mat" materialId="11" customShaderId="9" customShaderVariation="vertexColor">
+      <Texture fileId="26"/>
+      <Normalmap fileId="27"/>
+    </Material>
+    <Material name="giantSequoiaStage03LOD2_mat" materialId="10" customShaderId="9" customShaderVariation="vertexColor">
+      <Texture fileId="28"/>
+      <Normalmap fileId="29"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="backgroundTerrain.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="backgroundTerrain" nodeId="1">
+      <Shape name="backgroundTerrainSouth02" translation="-224.779007 114.838776 1362.300049" rotation="0.000017 0 0" shapeId="1" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="50000" nodeId="2"/>
+      <Shape name="backgroundTerrainSouth01" translation="1999.578735 40.228363 1012.904053" rotation="0.000009 0 0" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="50000" nodeId="3"/>
+      <Shape name="backgroundNorthWest" translation="1547.199951 91.6772 -1230.640015" shapeId="3" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="50000" nodeId="4"/>
+      <Shape name="backgroundNorth" translation="-12.917 55.766281 -1732.880005" shapeId="4" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="50000" nodeId="5"/>
+      <Shape name="backgroundWest" translation="-1330.079956 110.136116 -719.828979" shapeId="5" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="50000" nodeId="6"/>
+      <Shape name="backgroundEast" translation="1789.390015 94.420952 314.615021" shapeId="6" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="50000" nodeId="7"/>
+      <TransformGroup name="backgroundTrees" nodeId="8">
+        <TransformGroup name="ponderosaPine_Stage02LOD" nodeId="9">
+          <Shape name="ponderosaPine_Stage02LOD" shapeId="7" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="5000" nodeId="10"/>
+          <Shape name="ponderosaPine_Stage02LOD1" shapeId="8" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="5000" nodeId="11"/>
+          <Shape name="ponderosaPine_Stage02LOD2" shapeId="9" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="5000" nodeId="12"/>
+          <Shape name="ponderosaPine_Stage02LOD3" shapeId="10" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="5000" nodeId="13"/>
+        </TransformGroup>
+        <TransformGroup name="ponderosaPine_Stage03LOD" nodeId="14">
+          <Shape name="ponderosaPine_Stage03LOD" shapeId="11" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="5000" nodeId="15"/>
+          <Shape name="ponderosaPine_Stage03LOD1" shapeId="12" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="5000" nodeId="16"/>
+          <Shape name="ponderosaPine_Stage03LOD2" shapeId="13" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="5000" nodeId="17"/>
+          <Shape name="ponderosaPine_Stage03LOD3" shapeId="14" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="5000" nodeId="18"/>
+        </TransformGroup>
+        <TransformGroup name="ponderosaPine_Stage04LOD" nodeId="19">
+          <Shape name="ponderosaPine_Stage04LOD" shapeId="15" castsShadows="true" receiveShadows="true" materialIds="5" clipDistance="5000" nodeId="20"/>
+          <Shape name="ponderosaPine_Stage04LOD1" shapeId="16" castsShadows="true" receiveShadows="true" materialIds="5" clipDistance="5000" nodeId="21"/>
+          <Shape name="ponderosaPine_Stage04LOD2" shapeId="17" castsShadows="true" receiveShadows="true" materialIds="5" clipDistance="5000" nodeId="22"/>
+          <Shape name="ponderosaPine_Stage04LOD3" shapeId="18" castsShadows="true" receiveShadows="true" materialIds="5" clipDistance="5000" nodeId="23"/>
+        </TransformGroup>
+        <TransformGroup name="lodgepolePineStage02LOD2" nodeId="24">
+          <Shape name="lodgepolePineStage02LOD2" shapeId="19" castsShadows="true" receiveShadows="true" materialIds="6" clipDistance="5000" nodeId="25"/>
+          <Shape name="lodgepolePineStage02LOD3" shapeId="20" castsShadows="true" receiveShadows="true" materialIds="6" clipDistance="5000" nodeId="26"/>
+          <Shape name="lodgepolePineStage02LOD4" shapeId="21" castsShadows="true" receiveShadows="true" materialIds="6" clipDistance="5000" nodeId="27"/>
+        </TransformGroup>
+        <TransformGroup name="lodgepolePineStage03LOD2" nodeId="28">
+          <Shape name="lodgepolePineStage03LOD2" shapeId="22" castsShadows="true" receiveShadows="true" materialIds="7" clipDistance="5000" nodeId="29"/>
+          <Shape name="lodgepolePineStage03LOD3" shapeId="23" castsShadows="true" receiveShadows="true" materialIds="7" clipDistance="5000" nodeId="30"/>
+          <Shape name="lodgepolePineStage03LOD4" shapeId="24" castsShadows="true" receiveShadows="true" materialIds="7" clipDistance="5000" nodeId="31"/>
+        </TransformGroup>
+        <TransformGroup name="lodgepolePineStage03Var2LOD2" nodeId="32">
+          <Shape name="lodgepolePineStage03Var2LOD2" shapeId="25" castsShadows="true" receiveShadows="true" materialIds="8" clipDistance="5000" nodeId="33"/>
+          <Shape name="lodgepolePineStage03Var2LOD3" shapeId="26" castsShadows="true" receiveShadows="true" materialIds="8" clipDistance="5000" nodeId="34"/>
+          <Shape name="lodgepolePineStage03Var2LOD4" shapeId="27" castsShadows="true" receiveShadows="true" materialIds="8" clipDistance="5000" nodeId="35"/>
+        </TransformGroup>
+        <TransformGroup name="spruce2Var1LOD" nodeId="36">
+          <Shape name="spruce2Var1LOD" shapeId="28" castsShadows="true" receiveShadows="true" materialIds="9" clipDistance="5000" nodeId="37"/>
+          <Shape name="spruce2Var1LOD1" shapeId="29" castsShadows="true" receiveShadows="true" materialIds="9" clipDistance="5000" nodeId="38"/>
+          <Shape name="spruce2Var1LOD2" shapeId="30" castsShadows="true" receiveShadows="true" materialIds="9" clipDistance="5000" nodeId="39"/>
+        </TransformGroup>
+        <Shape name="giantSequoiaStage03LOD2" shapeId="31" castsShadows="true" receiveShadows="true" materialIds="10" clipDistance="5000" nodeId="40"/>
+        <Shape name="giantSequoiaStage02LOD2" shapeId="32" castsShadows="true" receiveShadows="true" materialIds="11" clipDistance="5000" nodeId="41"/>
+        <Shape name="giantSequoiaStage01LOD2" shapeId="33" castsShadows="true" receiveShadows="true" materialIds="12" clipDistance="5000" nodeId="42"/>
+        <Shape name="spruce3Var1LOD1" shapeId="34" castsShadows="true" receiveShadows="true" materialIds="13" clipDistance="5000" nodeId="43"/>
+      </TransformGroup>
+    </TransformGroup>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

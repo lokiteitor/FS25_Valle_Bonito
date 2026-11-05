@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="puddle" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="4" filename="$data/shaders/puddleShader.xml" />
+    <File fileId="1" filename="puddle_diffuse.png" />
+    <File fileId="5" filename="puddle_mask.png" />
+    <File fileId="2" filename="puddle_normal.png" />
+    <File fileId="3" filename="puddle_specular.png" />
+  </Files>
+
+  <Materials>
+    <Material name="puddle_mat" materialId="1" customShaderId="4">
+      <CustomParameter name="waterColor" value="0.5 0.5 0.75"/>
+      <CustomParameter name="waterOpacity" value="0.53"/>
+      <Custommap name="mHeightMask" fileId="5"/>
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="puddle.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <Shape name="puddleDecal" shapeId="1" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="1" clipDistance="60" nodeId="1"/>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

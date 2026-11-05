@@ -12,6 +12,10 @@
     <storeItem xmlFilename="$data/placeables/mapUS/oilPlantUS/oilPlantUS.xml"/>
     <storeItem xmlFilename="$data/placeables/mapUS/sawmillUS/sawmillUS.xml"/>
     <storeItem xmlFilename="$data/placeables/mapUS/spinnery/spinneryUS.xml"/>
+    <storeItem xmlFilename="map/placeables/factory/peanutbag/dairy.xml"/>
+    <storeItem xmlFilename="map/placeables/factory/dairy/dairy.xml"/>
+    <storeItem xmlFilename="map/placeables/factory/grainFlourMill/grainFlourMill.xml"/>
+    <storeItem xmlFilename="map/pallets/peanutBagPallet/peanutBagPallet.xml"/>
 
 <!-- SELLING POINTS -->
     <storeItem xmlFilename="$data/placeables/mapUS/wagonBuilder/wagonBuilder.xml"/>

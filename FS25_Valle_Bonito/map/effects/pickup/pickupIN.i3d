@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="pickupIN.i3d" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+  <Asset>
+    <Export program="GIANTS Editor 64bit" version="10.0.13"/>
+  </Asset>
+
+  <Files>
+    <File fileId="1" filename="../../fillPlanes/peanutCut_diffuse.dds"/>
+    <File fileId="8" filename="$data/effects/pickup/fillTypes/greenbean_normal.png"/>
+    <File fileId="2" filename="$data/effects/pickup/fillTypes/shared_normal.png"/>
+    <File fileId="7" filename="$data/effects/pickup/shared/gradient_diffuse.png"/>
+    <File fileId="5" filename="$data/effects/pickup/sharedPickupArrayIN.png"/>
+    <File fileId="4" filename="$data/shaders/motionPathShader.xml"/>
+    <File fileId="3" filename="$data/shared/default_specular.png"/>
+  </Files>
+
+
+  <Materials>
+    <Material name="greenbean_IN_mat" materialId="5" customShaderId="4" customShaderVariation="alphaMapGradient">
+      <Texture fileId="1"/>
+      <Normalmap fileId="8"/>
+      <Glossmap fileId="3"/>
+      <Custommap name="shapeArray" fileId="5"/>
+      <Custommap name="alphaMap" fileId="7"/>
+    </Material>
+    <Material name="straw_IN_mat" materialId="6" customShaderId="4" customShaderVariation="alphaMapGradient">
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+      <Custommap name="shapeArray" fileId="5"/>
+      <Custommap name="alphaMap" fileId="7"/>
+      <CustomParameter name="visibilityX" value="1.5 -1.5"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="pickupIN.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="pickupEffects_particleMeshesIN" nodeId="21">
+      <TransformGroup name="pickupEffects_particleMeshesIN_meshes" nodeId="22">
+        <Shape name="pickupEffects_particleMeshesIN_nr6_rl18_v1" shapeId="1" nodeId="23" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="6"/>
+        <Shape name="pickupEffects_particleMeshesIN_nr9_rl11_v1" shapeId="2" nodeId="24" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="6"/>
+        <Shape name="pickupEffects_particleMeshesIN_nr10_rl5_v1" shapeId="3" nodeId="25" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="6"/>
+        <Shape name="pickupEffects_particleMeshesIN_nr10_rl15_v1" shapeId="4" nodeId="26" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="6"/>
+        <Shape name="pickupEffects_particleMeshesIN_nr10_rl10_v1" shapeId="5" nodeId="27" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="6"/>
+        <Shape name="pickupEffects_particleMeshesIN_nr12_rl10_v1" shapeId="6" nodeId="28" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="6"/>
+        <Shape name="pickupEffects_particleMeshesIN_nr14_rl10_v1" shapeId="7" nodeId="29" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="6"/>
+        <Shape name="pickupEffects_particleMeshesIN_nr14_rl25_v1" shapeId="8" nodeId="30" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="6"/>
+        <Shape name="pickupEffects_particleMeshesIN_nr16_rl15_v1" shapeId="9" nodeId="31" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="6"/>
+        <Shape name="pickupEffects_particleMeshesIN_nr18_rl20_v1" shapeId="10" nodeId="32" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="6"/>
+        <Shape name="pickupEffects_particleMeshesIN_nr24_rl10_v1" shapeId="11" nodeId="33" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="6"/>
+        <Shape name="pickupEffects_particleMeshesIN_nr24_rl25_v1" shapeId="12" nodeId="34" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="6"/>
+        <Shape name="pickupEffects_particleMeshesIN_nr24_rl25_v1" shapeId="12" nodeId="35" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="6"/>
+      </TransformGroup>
+      <TransformGroup name="pickupEffects_particleMeshesIN_materials" nodeId="36">
+        <Shape name="peanut" shapeId="13" clipDistance="30" nodeId="37" castsShadows="true" receiveShadows="true" materialIds="5"/>
+      </TransformGroup>
+    </TransformGroup>
+  </Scene>
+
+</i3D>

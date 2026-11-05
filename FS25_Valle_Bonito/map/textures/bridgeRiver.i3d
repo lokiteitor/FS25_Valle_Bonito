@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='utf-8'?>
+<i3D xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="bridgeRiver" version="1.6" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="4" filename="$data/shaders/buildingShader.xml" />
+    <File fileId="6" filename="$data/shared/assets/assetLibraryDecals_diffuse.png" />
+    <File fileId="7" filename="$data/shared/assets/assetLibraryDecals_normal.png" />
+    <File fileId="8" filename="$data/shared/default_specular.png" />
+    <File fileId="9" filename="$data/maps/mapUS/textures/buildings/bridgeRailroadShort/bridgeNuts_diffuse.png" />
+    <File fileId="10" filename="$data/maps/mapUS/textures/buildings/bridgeRailroadShort/bridgeNuts_normal.png" />
+    <File fileId="11" filename="$data/maps/mapUS/textures/buildings/bridgeRailroadShort/bridgeNuts_specular.png" />
+    <File fileId="1" filename="$data/maps/mapUS/textures/buildings/bridgeRiver/bridgeRiver_diffuse.png" />
+    <File fileId="5" filename="bridgeRiver_mask.png" />
+    <File fileId="2" filename="$data/maps/mapUS/textures/buildings/bridgeRiver/bridgeRiver_normal.png" />
+    <File fileId="3" filename="$data/maps/mapUS/textures/buildings/bridgeRiver/bridgeRiver_specular.png" />
+  </Files>
+
+  <Materials>
+    <Material name="lambert1" materialId="4" diffuseColor="0.5 0.5 0.5 1">
+    </Material>
+    <Material name="bridgeRiver_01_mat" materialId="1" customShaderId="4">
+      <Custommap name="mMaskMap" fileId="5" />
+      <Texture fileId="1" />
+      <Normalmap fileId="2" />
+      <Glossmap fileId="3" />
+    </Material>
+    <Material name="assetLibraryDecals_mat" materialId="2">
+      <Texture fileId="6" />
+      <Normalmap fileId="7" />
+      <Glossmap fileId="8" />
+    </Material>
+    <Material name="bridgeNuts_mat" materialId="3">
+      <Texture fileId="9" />
+      <Normalmap fileId="10" />
+      <Glossmap fileId="11" />
+    </Material>
+    <Material name="bridgeRiver_02_mat" materialId="5" customShaderId="4" shadingRate="2x2">
+      <Custommap name="mMaskMap" fileId="5" />
+      <Texture fileId="1" />
+      <Normalmap fileId="2" />
+      <Glossmap fileId="3" />
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="bridgeRiver.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="bridgeRiver_lod" translation="-505.613831 49.37394 680.835022" lodDistance="0 220" collision="false" density="0" nodeId="1">
+      <TransformGroup name="LOD0" nodeId="2">
+        <TransformGroup name="ends" translation="151.342804 1.704584 -44.040844" rotation="0 16.225 0" nodeId="3">
+          <TransformGroup name="end01" nodeId="4">
+            <Shape name="end01" shapeId="1" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1000" nodeId="5" />
+            <Shape name="screwDecals" shapeId="2" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="2" clipDistance="120" nodeId="6" />
+          </TransformGroup>
+          <TransformGroup name="end02" translation="-323.424133 0.000004 0.000158" nodeId="7">
+            <Shape name="end" shapeId="3" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1000" nodeId="8" />
+            <Shape name="screwDecals" shapeId="4" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="2" clipDistance="120" nodeId="9" />
+          </TransformGroup>
+        </TransformGroup>
+        <TransformGroup name="pillars" translation="505.613831 -49.37394 -680.835022" nodeId="10">
+          <Shape name="pillar01" translation="-556.68512 51.078526 695.696838" rotation="0 16.225 0" shapeId="5" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1000" nodeId="11" />
+          <Shape name="pillar02" translation="-470.256653 51.078526 670.546143" rotation="0 16.225 0" shapeId="6" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1000" nodeId="12" />
+        </TransformGroup>
+        <TransformGroup name="elements" translation="-7.932805 3.391568 2.30838" nodeId="13">
+          <TransformGroup name="riverBridgeElement01" translation="-86.352898 -1.686984 25.128704" rotation="0 16.225 0" nodeId="14">
+            <Shape name="riverBridge01" shapeId="7" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1000" nodeId="15" />
+          </TransformGroup>
+          <TransformGroup name="riverBridgeElement02" translation="0.075646 -1.686984 -0.022021" rotation="0 16.225 0" nodeId="16">
+            <Shape name="riverBridge01" shapeId="7" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1000" nodeId="17" />
+          </TransformGroup>
+          <TransformGroup name="riverBridgeElement03" translation="86.504219 -1.686984 -25.172747" rotation="0 16.225 0" nodeId="18">
+            <Shape name="riverBridge01" shapeId="7" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="1000" nodeId="19" />
+          </TransformGroup>
+        </TransformGroup>
+        <TransformGroup name="screwDecals" translation="4.301219 3.378561 -1.251559" collision="false" clipDistance="110" nodeId="20">
+          <Shape name="screwDecals01" translation="-163.501129 -1.673973 47.578831" rotation="0 16.225 0" shapeId="8" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="120" nodeId="21" />
+          <Shape name="screwDecals02" translation="147.04158 -1.673977 -42.789288" rotation="0 16.225 0" shapeId="9" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="120" nodeId="22" />
+          <Shape name="screwDecals03" translation="74.270203 -1.673977 -21.612808" rotation="0 16.225 0" shapeId="10" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="120" nodeId="23" />
+          <Shape name="screwDecals04" translation="-12.158377 -1.673977 3.537917" rotation="0 16.225 0" shapeId="11" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="120" nodeId="24" />
+          <Shape name="screwDecals05" translation="-98.586922 -1.673977 28.688795" rotation="0 16.225 0" shapeId="12" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="120" nodeId="25" />
+        </TransformGroup>
+        <Shape name="col" translation="0.000021 0.000002 0.000002" shapeId="13" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="4" nodeId="26" />
+      </TransformGroup>
+      <TransformGroup name="LOD1" nodeId="27">
+        <Shape name="bridgeRiverLOD" translation="0.000021 -0.005009 0" shapeId="14" castsShadows="true" receiveShadows="true" materialIds="5" clipDistance="800" nodeId="28" />
+      </TransformGroup>
+    </TransformGroup>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

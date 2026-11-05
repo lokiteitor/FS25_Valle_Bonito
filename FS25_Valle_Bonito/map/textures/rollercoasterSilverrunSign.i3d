@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="rollercoasterSilverrunSign" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="4" filename="mineOld_diffuse.png" />
+    <File fileId="5" filename="mineOld_normal.png" />
+    <File fileId="6" filename="mineOld_specular.png" />
+    <File fileId="1" filename="rollerCoasterDetails_diffuse.png" />
+    <File fileId="2" filename="rollerCoasterDetails_normal.png" />
+    <File fileId="3" filename="rollerCoasterDetails_specular.png" />
+  </Files>
+
+  <Materials>
+    <Material name="rollerCoasterDetails_mat" materialId="1">
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+    </Material>
+    <Material name="mineOld_mat" materialId="2">
+      <Texture fileId="4"/>
+      <Normalmap fileId="5"/>
+      <Glossmap fileId="6"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="rollercoasterSilverrunSign.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="rollercoasterSilverrunSign" nodeId="1">
+      <Shape name="S" translation="-3.425367 8.488822 0.132809" shapeId="1" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="2"/>
+      <Shape name="I" translation="-2.694424 8.488822 0.132809" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="3"/>
+      <Shape name="L" translation="-2.170725 8.488822 0.132809" shapeId="3" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="4"/>
+      <Shape name="V" translation="-1.375374 8.488822 0.132809" shapeId="4" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="5"/>
+      <Shape name="E" translation="-0.486673 8.488822 0.132809" shapeId="5" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="6"/>
+      <Shape name="R" translation="0.393059 8.488822 0.132809" shapeId="6" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="7"/>
+      <Shape name="R1" translation="1.326875 8.488822 0.132809" shapeId="7" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="8"/>
+      <Shape name="U" translation="2.652723 8.996652 0.284562" shapeId="8" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="9"/>
+      <Shape name="N" translation="3.317383 8.488822 0.132809" shapeId="9" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="10"/>
+      <Shape name="boardSilverrun" shapeId="10" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="500" nodeId="11"/>
+    </TransformGroup>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

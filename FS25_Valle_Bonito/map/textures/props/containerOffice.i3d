@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<i3D xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="containerOffice" version="1.6" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="4" filename="$data/shaders/placeableShader.xml" />
+    <File fileId="6" filename="$data/shared/default_normal.png" />
+    <File fileId="5" filename="$data/shared/window_diffuse.png" />
+    <File fileId="1" filename="$data/maps/mapEU/textures/props/containerOffice_diffuse.png" />
+    <File fileId="2" filename="$data/maps/mapEU/textures/props/containerOffice_normal.png" />
+    <File fileId="3" filename="$data/maps/mapEU/textures/props/containerOffice_specular.png" />
+  </Files>
+
+  <Materials>
+    <Material name="lambert1" materialId="1" diffuseColor="0.5 0.5 0.5 1">
+    </Material>
+    <Material name="containerOffice_mat" materialId="2" customShaderId="4">
+      <Texture fileId="1" />
+      <Normalmap fileId="2" />
+      <Glossmap fileId="3" />
+    </Material>
+    <Material name="window_mat" materialId="3" specularColor="1 1 0.5" alphaBlending="true">
+      <Texture fileId="5" />
+      <Normalmap fileId="6" />
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="containerOffice.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <Shape name="containerOffice" shapeId="1" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="1">
+      <Shape name="vis" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="210" nodeId="2" />
+      <Shape name="glass" translation="0 0 -0.114149" shapeId="3" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="100" nodeId="3" />
+    </Shape>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>
