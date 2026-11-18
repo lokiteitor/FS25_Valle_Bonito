@@ -1173,8 +1173,10 @@ def _point_at_harmonic_q(q_target, th, cx, cy, a, b, rot_deg, harmonics, margin_
     return (cx + u * cos_r - v * sin_r, cy + u * sin_r + v * cos_r)
 
 
+LAKE_CLEAR_MARGIN_M = 100.0
+
 _CURVED_OBSTACLES = [
-    (6000.0, 2000.0, 930.0, 930.0, 15.0, HILL_SPIRAL_HARMONICS, 12.0),
+    (6000.0, 2000.0, 930.0, 930.0, 15.0, HILL_SPIRAL_HARMONICS, 20.0),
     (
         LAKE_WEST_SHAPE['cx'],
         LAKE_WEST_SHAPE['cy'],
@@ -1182,7 +1184,7 @@ _CURVED_OBSTACLES = [
         LAKE_WEST_SHAPE['b'],
         LAKE_WEST_SHAPE['rot_deg'],
         LAKE_WEST_SHAPE['harmonics'],
-        12.0,
+        LAKE_CLEAR_MARGIN_M,
     ),
 ]
 
@@ -1262,56 +1264,49 @@ def _plss_subdivide_section(x0, y0, x1, y1, gap=10.0):
 
 
 def _trim_box_to_curved_obstacles(x0, y0, x1, y1):
-    """Trim box [x0,y0,x1,y1] smoothly along the buffered contour of curved obstacles."""
-    for cx, cy, a, b, rot_deg, harm, marg in _CURVED_OBSTACLES:
-        if x0 - 20.0 <= cx <= x1 + 20.0 and y0 - 20.0 <= cy <= y1 + 20.0:
-            return None
-        corner_qs = [
-            _harmonic_q(sx, sy, cx, cy, a, b, rot_deg, harm, marg)[0]
-            for sx in (x0, x1)
-            for sy in (y0, y1)
+    """Keep box strictly square or rectangular with an expanded margin from curved obstacles (lake & hill)."""
+    cx, cy = LAKE_WEST_SHAPE['cx'], LAKE_WEST_SHAPE['cy']
+    a, b = LAKE_WEST_SHAPE['a'], LAKE_WEST_SHAPE['b']
+    rot, harm = LAKE_WEST_SHAPE['rot_deg'], LAKE_WEST_SHAPE['harmonics']
+    marg = LAKE_CLEAR_MARGIN_M
+
+    def lake_q(bx0, by0, bx1, by1):
+        test_pts = [
+            (bx0, by0), (bx0, by1), (bx1, by0), (bx1, by1),
+            (bx0, 0.5 * (by0 + by1)), (bx1, 0.5 * (by0 + by1)),
+            (0.5 * (bx0 + bx1), by0), (0.5 * (bx0 + bx1), by1),
+            (0.5 * (bx0 + bx1), 0.5 * (by0 + by1)),
+            (bx0, 0.25 * by0 + 0.75 * by1), (bx0, 0.75 * by0 + 0.25 * by1),
         ]
-        if max(corner_qs) < 1.02:
+        return min(_harmonic_q(px, py, cx, cy, a, b, rot, harm, marg)[0] for px, py in test_pts)
+
+    if lake_q(x0, y0, x1, y1) < 1.0:
+        cur_x0 = x0
+        while cur_x0 < x1 - 90.0 and lake_q(cur_x0, y0, x1, y1) < 1.0:
+            cur_x0 += 5.0
+        if lake_q(cur_x0, y0, x1, y1) >= 1.0 and (x1 - cur_x0) >= 90.0 and (x1 - cur_x0) * (y1 - y0) / 10000.0 >= 2.5:
+            x0 = cur_x0
+        else:
             return None
 
-    needs_curve = False
-    for cx, cy, a, b, rot_deg, harm, marg in _CURVED_OBSTACLES:
-        sample_qs = [
-            _harmonic_q(sx, sy, cx, cy, a, b, rot_deg, harm, marg)[0]
-            for sx in (x0, 0.5 * (x0 + x1), x1)
-            for sy in (y0, 0.5 * (y0 + y1), y1)
-        ]
-        if min(sample_qs) < 1.01:
-            needs_curve = True
-            break
-
-    base_ring = rect_ring(x0, y0, x1, y1)
-    if not needs_curve:
-        return base_ring
-
-    dense = densify(base_ring, 16.0)[:-1]
-    out = []
-    for px, py in dense:
-        for cx, cy, a, b, rot_deg, harm, marg in _CURVED_OBSTACLES:
-            q, th, _, _ = _harmonic_q(px, py, cx, cy, a, b, rot_deg, harm, marg)
-            if q < 1.0:
-                px, py = _point_at_harmonic_q(1.0, th, cx, cy, a, b, rot_deg, harm, marg)
-        px = max(EDGE_CLEAR_M + 4.0, min(PLAYABLE_M - EDGE_CLEAR_M - 4.0, px))
-        py = max(EDGE_CLEAR_M + 4.0, min(PLAYABLE_M - EDGE_CLEAR_M - 4.0, py))
-        if not out or math.dist(out[-1], (px, py)) >= 6.0:
-            out.append((px, py))
-    if len(out) >= 2 and math.dist(out[0], out[-1]) < 6.0:
-        out.pop()
-    if len(out) < 3:
+    hcx, hcy = 6000.0, 2000.0
+    ha, hb = 930.0, 930.0
+    hrot, hharm, hmarg = 15.0, HILL_SPIRAL_HARMONICS, 20.0
+    hill_pts = [
+        (x0, y0), (x0, y1), (x1, y0), (x1, y1),
+        (0.5 * (x0 + x1), 0.5 * (y0 + y1)),
+        (x0, 0.5 * (y0 + y1)), (x1, 0.5 * (y0 + y1)),
+        (0.5 * (x0 + x1), y0), (0.5 * (x0 + x1), y1)
+    ]
+    if min(_harmonic_q(px, py, hcx, hcy, ha, hb, hrot, hharm, hmarg)[0] for px, py in hill_pts) < 1.0:
         return None
-    ring = close_ring(out)
-    if not ring_is_simple(ring) or ring_area_ha(ring) < 2.0:
-        return None
+
+    ring = rect_ring(x0, y0, x1, y1)
     for w in WATER:
         if w.get('ring') and rings_overlap(ring, w['ring']):
             return None
-    for a in AREAS:
-        if a['id'] == 'wood_hill_spiral' and rings_overlap(ring, a['ring']):
+    for a_rec in AREAS:
+        if a_rec['id'] == 'wood_hill_spiral' and rings_overlap(ring, a_rec['ring']):
             return None
     return ring
 
