@@ -21,9 +21,9 @@ import random
 # ==================================================================================
 # 1. Map Coordinates & Canvas Dimensions
 # ==================================================================================
-# The projection anchor (geographic centre of the map)
-LAT_CENTER = 43.14569235
-LON_CENTER = -95.14507865
+# The projection anchor (geographic centre of the map: Valle del Yaqui / Mayo, Sonora, México)
+LAT_CENTER = 27.122396320368672
+LON_CENTER = -109.83513739579864
 
 # Map dimensions (in metres)
 PLAYABLE_M = 8192.0

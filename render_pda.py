@@ -24,8 +24,8 @@ PLAYABLE_M = 8192.0     # 8192 metros reales del área jugable
 HALF_M = PLAYABLE_M / 2.0
 
 # Ancla de proyección geográfica (por defecto de map_layout.py si está disponible)
-LAT_CENTER = 43.14569235
-LON_CENTER = -95.14507865
+LAT_CENTER = 27.122396320368672
+LON_CENTER = -109.83513739579864
 
 try:
     import map_layout
