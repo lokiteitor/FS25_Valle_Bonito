@@ -82,8 +82,9 @@
     <File fileId="579" filename="data/infoLayer_placementCollisionGenerated.png"/>
     <File fileId="576" filename="data/infoLayer_tipCollision.png"/>
     <File fileId="577" filename="data/infoLayer_tipCollisionGenerated.png"/>
-    <File fileId="740" filename="data/masks/BLOCKMASK.png"/>
+    <File fileId="742" filename="data/masks/BLOCKMASK.png"/>
     <File fileId="650" filename="data/masks/PG_acres.png"/>
+    <File fileId="662" filename="data/masks/PG_broadleaved.png"/>
     <File fileId="657" filename="data/masks/PG_buildings.png"/>
     <File fileId="656" filename="data/masks/PG_dirtpaths.png"/>
     <File fileId="660" filename="data/masks/PG_drains.png"/>
@@ -91,6 +92,7 @@
     <File fileId="653" filename="data/masks/PG_forests.png"/>
     <File fileId="651" filename="data/masks/PG_grasslands.png"/>
     <File fileId="652" filename="data/masks/PG_meadows.png"/>
+    <File fileId="663" filename="data/masks/PG_needleleaved.png"/>
     <File fileId="661" filename="data/masks/PG_railways.png"/>
     <File fileId="654" filename="data/masks/PG_roads.png"/>
     <File fileId="655" filename="data/masks/PG_sideroads.png"/>
@@ -660,84 +662,84 @@
     <File fileId="567" filename="$data/maps/textures/terrain/ground/spray_straw_displacement.png"/>
     <File fileId="566" filename="$data/maps/textures/terrain/ground/spray_straw_height.png"/>
     <File fileId="565" filename="$data/maps/textures/terrain/ground/spray_straw_normal.png"/>
-    <File fileId="662" filename="$data/maps/trees/americanElm/americanElm_stage01.i3d"/>
-    <File fileId="663" filename="$data/maps/trees/americanElm/americanElm_stage02.i3d"/>
-    <File fileId="664" filename="$data/maps/trees/americanElm/americanElm_stage03.i3d"/>
-    <File fileId="665" filename="$data/maps/trees/americanElm/americanElm_stage04.i3d"/>
-    <File fileId="666" filename="$data/maps/trees/americanElm/americanElm_stage05.i3d"/>
-    <File fileId="667" filename="$data/maps/trees/apple/apple_stage03.i3d"/>
-    <File fileId="668" filename="$data/maps/trees/aspen/aspen_stage01.i3d"/>
-    <File fileId="669" filename="$data/maps/trees/aspen/aspen_stage02.i3d"/>
-    <File fileId="670" filename="$data/maps/trees/aspen/aspen_stage03.i3d"/>
-    <File fileId="671" filename="$data/maps/trees/aspen/aspen_stage04.i3d"/>
-    <File fileId="672" filename="$data/maps/trees/aspen/aspen_stage05.i3d"/>
-    <File fileId="673" filename="$data/maps/trees/aspen/aspen_stage06_var01.i3d"/>
-    <File fileId="674" filename="$data/maps/trees/aspen/aspen_stage06_var02.i3d"/>
-    <File fileId="675" filename="$data/maps/trees/beech/beech_stage01.i3d"/>
-    <File fileId="676" filename="$data/maps/trees/beech/beech_stage02.i3d"/>
-    <File fileId="677" filename="$data/maps/trees/beech/beech_stage02_var02.i3d"/>
-    <File fileId="678" filename="$data/maps/trees/beech/beech_stage02_var03.i3d"/>
-    <File fileId="679" filename="$data/maps/trees/beech/beech_stage03.i3d"/>
-    <File fileId="680" filename="$data/maps/trees/beech/beech_stage04.i3d"/>
-    <File fileId="681" filename="$data/maps/trees/beech/beech_stage05.i3d"/>
-    <File fileId="682" filename="$data/maps/trees/beech/beech_stage06_var01.i3d"/>
-    <File fileId="683" filename="$data/maps/trees/beech/beech_stage06_var02.i3d"/>
-    <File fileId="684" filename="$data/maps/trees/betulaErmanii/betulaErmanii_stage01.i3d"/>
-    <File fileId="685" filename="$data/maps/trees/betulaErmanii/betulaErmanii_stage02.i3d"/>
-    <File fileId="686" filename="$data/maps/trees/betulaErmanii/betulaErmanii_stage03.i3d"/>
-    <File fileId="687" filename="$data/maps/trees/betulaErmanii/betulaErmanii_stage04.i3d"/>
-    <File fileId="688" filename="$data/maps/trees/boxelder/boxelder_stage01.i3d"/>
-    <File fileId="689" filename="$data/maps/trees/boxelder/boxelder_stage02.i3d"/>
-    <File fileId="690" filename="$data/maps/trees/boxelder/boxelder_stage03.i3d"/>
-    <File fileId="691" filename="$data/maps/trees/cherry/cherry_stage01.i3d"/>
-    <File fileId="692" filename="$data/maps/trees/cherry/cherry_stage02.i3d"/>
-    <File fileId="693" filename="$data/maps/trees/cherry/cherry_stage03.i3d"/>
-    <File fileId="694" filename="$data/maps/trees/cherry/cherry_stage04.i3d"/>
-    <File fileId="695" filename="$data/maps/trees/chineseElm/chineseElm_stage01.i3d"/>
-    <File fileId="696" filename="$data/maps/trees/chineseElm/chineseElm_stage02.i3d"/>
-    <File fileId="697" filename="$data/maps/trees/chineseElm/chineseElm_stage03.i3d"/>
-    <File fileId="698" filename="$data/maps/trees/chineseElm/chineseElm_stage04.i3d"/>
-    <File fileId="699" filename="$data/maps/trees/downyServiceBerry/downyServiceBerry_stage01.i3d"/>
-    <File fileId="700" filename="$data/maps/trees/downyServiceBerry/downyServiceBerry_stage02.i3d"/>
-    <File fileId="701" filename="$data/maps/trees/downyServiceBerry/downyServiceBerry_stage03.i3d"/>
-    <File fileId="702" filename="$data/maps/trees/goldenRain/goldenRain_stage01.i3d"/>
-    <File fileId="703" filename="$data/maps/trees/goldenRain/goldenRain_stage02.i3d"/>
-    <File fileId="704" filename="$data/maps/trees/goldenRain/goldenRain_stage03.i3d"/>
-    <File fileId="705" filename="$data/maps/trees/goldenRain/goldenRain_stage04.i3d"/>
-    <File fileId="706" filename="$data/maps/trees/japaneseZelkova/japaneseZelkova_stage01.i3d"/>
-    <File fileId="707" filename="$data/maps/trees/japaneseZelkova/japaneseZelkova_stage02.i3d"/>
-    <File fileId="708" filename="$data/maps/trees/japaneseZelkova/japaneseZelkova_stage03.i3d"/>
-    <File fileId="709" filename="$data/maps/trees/japaneseZelkova/japaneseZelkova_stage04.i3d"/>
-    <File fileId="710" filename="$data/maps/trees/lodgepolePine/lodgepolePine_stage01.i3d"/>
-    <File fileId="711" filename="$data/maps/trees/lodgepolePine/lodgepolePine_stage02.i3d"/>
-    <File fileId="712" filename="$data/maps/trees/lodgepolePine/lodgepolePine_stage03.i3d"/>
-    <File fileId="713" filename="$data/maps/trees/northernCatalpa/northernCatalpa_stage01.i3d"/>
-    <File fileId="714" filename="$data/maps/trees/northernCatalpa/northernCatalpa_stage02.i3d"/>
-    <File fileId="715" filename="$data/maps/trees/northernCatalpa/northernCatalpa_stage03.i3d"/>
-    <File fileId="716" filename="$data/maps/trees/northernCatalpa/northernCatalpa_stage04.i3d"/>
-    <File fileId="717" filename="$data/maps/trees/oak/oak_stage01.i3d"/>
-    <File fileId="718" filename="$data/maps/trees/oak/oak_stage02.i3d"/>
-    <File fileId="719" filename="$data/maps/trees/oak/oak_stage03.i3d"/>
-    <File fileId="720" filename="$data/maps/trees/oak/oak_stage04.i3d"/>
-    <File fileId="721" filename="$data/maps/trees/oak/oak_stage05.i3d"/>
-    <File fileId="722" filename="$data/maps/trees/pinusSylvestris/pinusSylvestris_stage01.i3d"/>
-    <File fileId="723" filename="$data/maps/trees/pinusSylvestris/pinusSylvestris_stage02.i3d"/>
-    <File fileId="724" filename="$data/maps/trees/pinusSylvestris/pinusSylvestris_stage03.i3d"/>
-    <File fileId="725" filename="$data/maps/trees/pinusSylvestris/pinusSylvestris_stage04.i3d"/>
-    <File fileId="726" filename="$data/maps/trees/pinusSylvestris/pinusSylvestris_stage05.i3d"/>
-    <File fileId="727" filename="$data/maps/trees/pinusTabuliformis/pinusTabuliformis_stage01.i3d"/>
-    <File fileId="728" filename="$data/maps/trees/pinusTabuliformis/pinusTabuliformis_stage02.i3d"/>
-    <File fileId="729" filename="$data/maps/trees/pinusTabuliformis/pinusTabuliformis_stage03.i3d"/>
-    <File fileId="730" filename="$data/maps/trees/pinusTabuliformis/pinusTabuliformis_stage04.i3d"/>
-    <File fileId="731" filename="$data/maps/trees/pinusTabuliformis/pinusTabuliformis_stage05.i3d"/>
-    <File fileId="732" filename="$data/maps/trees/shagbarkHickory/shagbarkHickory_stage01.i3d"/>
-    <File fileId="733" filename="$data/maps/trees/shagbarkHickory/shagbarkHickory_stage02.i3d"/>
-    <File fileId="734" filename="$data/maps/trees/shagbarkHickory/shagbarkHickory_stage03.i3d"/>
-    <File fileId="735" filename="$data/maps/trees/shagbarkHickory/shagbarkHickory_stage04.i3d"/>
-    <File fileId="736" filename="$data/maps/trees/tiliaAmurensis/tiliaAmurensis_stage01.i3d"/>
-    <File fileId="737" filename="$data/maps/trees/tiliaAmurensis/tiliaAmurensis_stage02.i3d"/>
-    <File fileId="738" filename="$data/maps/trees/tiliaAmurensis/tiliaAmurensis_stage03.i3d"/>
-    <File fileId="739" filename="$data/maps/trees/tiliaAmurensis/tiliaAmurensis_stage04.i3d"/>
+    <File fileId="664" filename="$data/maps/trees/americanElm/americanElm_stage01.i3d"/>
+    <File fileId="665" filename="$data/maps/trees/americanElm/americanElm_stage02.i3d"/>
+    <File fileId="666" filename="$data/maps/trees/americanElm/americanElm_stage03.i3d"/>
+    <File fileId="667" filename="$data/maps/trees/americanElm/americanElm_stage04.i3d"/>
+    <File fileId="668" filename="$data/maps/trees/americanElm/americanElm_stage05.i3d"/>
+    <File fileId="669" filename="$data/maps/trees/apple/apple_stage03.i3d"/>
+    <File fileId="670" filename="$data/maps/trees/aspen/aspen_stage01.i3d"/>
+    <File fileId="671" filename="$data/maps/trees/aspen/aspen_stage02.i3d"/>
+    <File fileId="672" filename="$data/maps/trees/aspen/aspen_stage03.i3d"/>
+    <File fileId="673" filename="$data/maps/trees/aspen/aspen_stage04.i3d"/>
+    <File fileId="674" filename="$data/maps/trees/aspen/aspen_stage05.i3d"/>
+    <File fileId="675" filename="$data/maps/trees/aspen/aspen_stage06_var01.i3d"/>
+    <File fileId="676" filename="$data/maps/trees/aspen/aspen_stage06_var02.i3d"/>
+    <File fileId="677" filename="$data/maps/trees/beech/beech_stage01.i3d"/>
+    <File fileId="678" filename="$data/maps/trees/beech/beech_stage02.i3d"/>
+    <File fileId="679" filename="$data/maps/trees/beech/beech_stage02_var02.i3d"/>
+    <File fileId="680" filename="$data/maps/trees/beech/beech_stage02_var03.i3d"/>
+    <File fileId="681" filename="$data/maps/trees/beech/beech_stage03.i3d"/>
+    <File fileId="682" filename="$data/maps/trees/beech/beech_stage04.i3d"/>
+    <File fileId="683" filename="$data/maps/trees/beech/beech_stage05.i3d"/>
+    <File fileId="684" filename="$data/maps/trees/beech/beech_stage06_var01.i3d"/>
+    <File fileId="685" filename="$data/maps/trees/beech/beech_stage06_var02.i3d"/>
+    <File fileId="686" filename="$data/maps/trees/betulaErmanii/betulaErmanii_stage01.i3d"/>
+    <File fileId="687" filename="$data/maps/trees/betulaErmanii/betulaErmanii_stage02.i3d"/>
+    <File fileId="688" filename="$data/maps/trees/betulaErmanii/betulaErmanii_stage03.i3d"/>
+    <File fileId="689" filename="$data/maps/trees/betulaErmanii/betulaErmanii_stage04.i3d"/>
+    <File fileId="690" filename="$data/maps/trees/boxelder/boxelder_stage01.i3d"/>
+    <File fileId="691" filename="$data/maps/trees/boxelder/boxelder_stage02.i3d"/>
+    <File fileId="692" filename="$data/maps/trees/boxelder/boxelder_stage03.i3d"/>
+    <File fileId="693" filename="$data/maps/trees/cherry/cherry_stage01.i3d"/>
+    <File fileId="694" filename="$data/maps/trees/cherry/cherry_stage02.i3d"/>
+    <File fileId="695" filename="$data/maps/trees/cherry/cherry_stage03.i3d"/>
+    <File fileId="696" filename="$data/maps/trees/cherry/cherry_stage04.i3d"/>
+    <File fileId="697" filename="$data/maps/trees/chineseElm/chineseElm_stage01.i3d"/>
+    <File fileId="698" filename="$data/maps/trees/chineseElm/chineseElm_stage02.i3d"/>
+    <File fileId="699" filename="$data/maps/trees/chineseElm/chineseElm_stage03.i3d"/>
+    <File fileId="700" filename="$data/maps/trees/chineseElm/chineseElm_stage04.i3d"/>
+    <File fileId="701" filename="$data/maps/trees/downyServiceBerry/downyServiceBerry_stage01.i3d"/>
+    <File fileId="702" filename="$data/maps/trees/downyServiceBerry/downyServiceBerry_stage02.i3d"/>
+    <File fileId="703" filename="$data/maps/trees/downyServiceBerry/downyServiceBerry_stage03.i3d"/>
+    <File fileId="704" filename="$data/maps/trees/goldenRain/goldenRain_stage01.i3d"/>
+    <File fileId="705" filename="$data/maps/trees/goldenRain/goldenRain_stage02.i3d"/>
+    <File fileId="706" filename="$data/maps/trees/goldenRain/goldenRain_stage03.i3d"/>
+    <File fileId="707" filename="$data/maps/trees/goldenRain/goldenRain_stage04.i3d"/>
+    <File fileId="708" filename="$data/maps/trees/japaneseZelkova/japaneseZelkova_stage01.i3d"/>
+    <File fileId="709" filename="$data/maps/trees/japaneseZelkova/japaneseZelkova_stage02.i3d"/>
+    <File fileId="710" filename="$data/maps/trees/japaneseZelkova/japaneseZelkova_stage03.i3d"/>
+    <File fileId="711" filename="$data/maps/trees/japaneseZelkova/japaneseZelkova_stage04.i3d"/>
+    <File fileId="712" filename="$data/maps/trees/lodgepolePine/lodgepolePine_stage01.i3d"/>
+    <File fileId="713" filename="$data/maps/trees/lodgepolePine/lodgepolePine_stage02.i3d"/>
+    <File fileId="714" filename="$data/maps/trees/lodgepolePine/lodgepolePine_stage03.i3d"/>
+    <File fileId="715" filename="$data/maps/trees/northernCatalpa/northernCatalpa_stage01.i3d"/>
+    <File fileId="716" filename="$data/maps/trees/northernCatalpa/northernCatalpa_stage02.i3d"/>
+    <File fileId="717" filename="$data/maps/trees/northernCatalpa/northernCatalpa_stage03.i3d"/>
+    <File fileId="718" filename="$data/maps/trees/northernCatalpa/northernCatalpa_stage04.i3d"/>
+    <File fileId="719" filename="$data/maps/trees/oak/oak_stage01.i3d"/>
+    <File fileId="720" filename="$data/maps/trees/oak/oak_stage02.i3d"/>
+    <File fileId="721" filename="$data/maps/trees/oak/oak_stage03.i3d"/>
+    <File fileId="722" filename="$data/maps/trees/oak/oak_stage04.i3d"/>
+    <File fileId="723" filename="$data/maps/trees/oak/oak_stage05.i3d"/>
+    <File fileId="724" filename="$data/maps/trees/pinusSylvestris/pinusSylvestris_stage01.i3d"/>
+    <File fileId="725" filename="$data/maps/trees/pinusSylvestris/pinusSylvestris_stage02.i3d"/>
+    <File fileId="726" filename="$data/maps/trees/pinusSylvestris/pinusSylvestris_stage03.i3d"/>
+    <File fileId="727" filename="$data/maps/trees/pinusSylvestris/pinusSylvestris_stage04.i3d"/>
+    <File fileId="728" filename="$data/maps/trees/pinusSylvestris/pinusSylvestris_stage05.i3d"/>
+    <File fileId="729" filename="$data/maps/trees/pinusTabuliformis/pinusTabuliformis_stage01.i3d"/>
+    <File fileId="730" filename="$data/maps/trees/pinusTabuliformis/pinusTabuliformis_stage02.i3d"/>
+    <File fileId="731" filename="$data/maps/trees/pinusTabuliformis/pinusTabuliformis_stage03.i3d"/>
+    <File fileId="732" filename="$data/maps/trees/pinusTabuliformis/pinusTabuliformis_stage04.i3d"/>
+    <File fileId="733" filename="$data/maps/trees/pinusTabuliformis/pinusTabuliformis_stage05.i3d"/>
+    <File fileId="734" filename="$data/maps/trees/shagbarkHickory/shagbarkHickory_stage01.i3d"/>
+    <File fileId="735" filename="$data/maps/trees/shagbarkHickory/shagbarkHickory_stage02.i3d"/>
+    <File fileId="736" filename="$data/maps/trees/shagbarkHickory/shagbarkHickory_stage03.i3d"/>
+    <File fileId="737" filename="$data/maps/trees/shagbarkHickory/shagbarkHickory_stage04.i3d"/>
+    <File fileId="738" filename="$data/maps/trees/tiliaAmurensis/tiliaAmurensis_stage01.i3d"/>
+    <File fileId="739" filename="$data/maps/trees/tiliaAmurensis/tiliaAmurensis_stage02.i3d"/>
+    <File fileId="740" filename="$data/maps/trees/tiliaAmurensis/tiliaAmurensis_stage03.i3d"/>
+    <File fileId="741" filename="$data/maps/trees/tiliaAmurensis/tiliaAmurensis_stage04.i3d"/>
     <File fileId="637" filename="$data/shaders/groundHeightShader.xml"/>
     <File fileId="2" filename="$data/shaders/terrainShader.xml"/>
     <File fileId="645" filename="$data/shared/assets/marker/markerIconShopping.i3d"/>
@@ -763,7 +765,7 @@
 
   <Scene>
     <Light name="sun" translation="0 400 0" rotation="-39.5664 39.1063 0" objectMask="0x83ff0000" nodeId="12" type="directional" color="1 1 1" emitDiffuse="true" emitSpecular="true" castShadowMap="true" depthMapBias="0.001" depthMapSlopeScaleBias="2" depthMapSlopeClamp="0.001" depthMapResolution="2048" shadowFarDistance="1000" shadowExtrusionDistance="200" softShadowsLightSize="0.5" softShadowsLightDistance="15" softShadowsDepthBiasFactor="1" softShadowsMaxPenumbraSize="0.5" numShadowMapSplits="5" shadowMapSplitDistancesParameter="0.9" lastShadowMapSplitBboxMin="-4096,-128,-4096" lastShadowMapSplitBboxMax="4096,148,4096" range="10000" scattering="true"/>
-    <Camera name="persp" translation="423.531 153.311 3211.83" rotation="2.08574 -81.9773 0" visibility="false" nodeId="13" fov="60" nearClip="0.01" farClip="6000" orthographicHeight="1500"/>
+    <Camera name="persp" translation="3115.81 54.3298 914.013" rotation="-7.54107 4.83364 2.54201e-06" visibility="false" nodeId="13" fov="60" nearClip="0.01" farClip="6000" orthographicHeight="1500"/>
     <TerrainTransformGroup name="terrain" static="true" collisionFilterGroup="0x100" collisionFilterMask="0xfffff9c3" nodeId="15" heightMapId="1" patchSize="65" maxLODDistance="750" heightScale="255" unitsPerPixel="1" lodBlendStart="200" lodBlendEnd="300" lodTextureSize="8192" lodBlendStartDynamic="50" lodBlendEndDynamic="65" detailLodBlendDelta="5" materialId="7" castShadowMap="true" occNumLODs="1" occMaxLODDistance="300" occPatchSize="65" occLevel="2" occDistanceWeight="1" occMaxAdjacentFaces="10">
       <OccluderLods>
         <OccluderLod occLodLevel="0" occFaceCount="100" occMaxHausdorffDistance="7" occMaxHausdorffDistanceExtra="9" occMinHorizontalDistance="1" />
@@ -1231,7 +1233,7 @@
           </FoliageMultiLayer>
         </FoliageSystem>
       </Layers>
-      <ProceduralPlacementMasks blockMaskFileId="740">
+      <ProceduralPlacementMasks blockMaskFileId="742">
         <Mask name="PG_Acres" fileId="650" />
         <Mask name="PG_Grasslands" fileId="651" />
         <Mask name="PG_Meadows" fileId="652" />
@@ -1244,6 +1246,10 @@
         <Mask name="PG_Water" fileId="659" />
         <Mask name="PG_Drains" fileId="660" />
         <Mask name="PG_Railways" fileId="661" />
+        <Mask name="PG_sideroads" fileId="655" />
+        <Mask name="PG_roads" fileId="654" />
+        <Mask name="PG_broadleaved" fileId="662" />
+        <Mask name="PG_needleleaved" fileId="663" />
       </ProceduralPlacementMasks>
     </TerrainTransformGroup>
     <TransformGroup name="careerStartPoint" translation="-785.635 0 162.752" rotation="-180 51.6196 -180" nodeId="34"/>
@@ -3552,6 +3558,9 @@
     <ReferenceNode name="background_terrain_part_02" referenceId="647" nodeId="1820"/>
     <ReferenceNode name="background_terrain_part_03" referenceId="648" nodeId="1826"/>
     <ReferenceNode name="background_terrain_part_04" referenceId="649" nodeId="1832"/>
+    <TransformGroup name="Procedural_Placement" nodeId="20417">
+      <TransformGroup name="procGenGroup" nodeId="20418"/>
+    </TransformGroup>
   </Scene>
 
   <ProceduralPlacement>
@@ -3633,87 +3642,87 @@
       <Object type="terrainFoliage" name="F_slenderMountainMint" foliageTypeName="decoFoliage" channels="417" ppType="defaultFoliage" />
       <Object type="terrainFoliage" name="F_wildBergamot" foliageTypeName="decoFoliage" channels="449" ppType="defaultFoliage" />
       <Object type="terrainFoliage" name="F_prairyBlazingStar" foliageTypeName="decoFoliage" channels="481" ppType="defaultFoliage" />
-      <Object type="reference" name="americanElm_stage01" fileId="662" ppType="smallTrees" />
-      <Object type="reference" name="americanElm_stage02" fileId="663" ppType="defaultReference" />
-      <Object type="reference" name="americanElm_stage03" fileId="664" ppType="mediumTree" />
-      <Object type="reference" name="americanElm_stage04" fileId="665" ppType="parentTrees" />
-      <Object type="reference" name="americanElm_stage05" fileId="666" ppType="defaultReference" />
-      <Object type="reference" name="apple_stage03" fileId="667" ppType="mediumTree" />
-      <Object type="reference" name="aspen_stage01" fileId="668" ppType="smallTrees" />
-      <Object type="reference" name="aspen_stage02" fileId="669" ppType="defaultReference" />
-      <Object type="reference" name="aspen_stage03" fileId="670" ppType="mediumTree" />
-      <Object type="reference" name="aspen_stage04" fileId="671" ppType="parentTrees" />
-      <Object type="reference" name="aspen_stage05" fileId="672" ppType="defaultReference" />
-      <Object type="reference" name="aspen_stage06_var01" fileId="673" ppType="defaultReference" />
-      <Object type="reference" name="aspen_stage06_var02" fileId="674" ppType="defaultReference" />
-      <Object type="reference" name="beech_stage01" fileId="675" ppType="smallTrees" />
-      <Object type="reference" name="beech_stage02" fileId="676" ppType="defaultReference" />
-      <Object type="reference" name="beech_stage02_var02" fileId="677" ppType="defaultReference" />
-      <Object type="reference" name="beech_stage02_var03" fileId="678" ppType="defaultReference" />
-      <Object type="reference" name="beech_stage03" fileId="679" ppType="mediumTree" />
-      <Object type="reference" name="beech_stage04" fileId="680" ppType="parentTrees" />
-      <Object type="reference" name="beech_stage05" fileId="681" ppType="defaultReference" />
-      <Object type="reference" name="beech_stage06_var01" fileId="682" ppType="defaultReference" />
-      <Object type="reference" name="beech_stage06_var02" fileId="683" ppType="defaultReference" />
-      <Object type="reference" name="betulaErmanii_stage01" fileId="684" ppType="defaultReference" />
-      <Object type="reference" name="betulaErmanii_stage02" fileId="685" ppType="defaultReference" />
-      <Object type="reference" name="betulaErmanii_stage03" fileId="686" ppType="mediumTree" />
-      <Object type="reference" name="betulaErmanii_stage04" fileId="687" ppType="parentTrees" />
-      <Object type="reference" name="boxelder_stage01" fileId="688" ppType="smallTrees" />
-      <Object type="reference" name="boxelder_stage02" fileId="689" ppType="defaultReference" />
-      <Object type="reference" name="boxelder_stage03" fileId="690" ppType="mediumTree" />
-      <Object type="reference" name="cherry_stage01" fileId="691" ppType="smallTrees" />
-      <Object type="reference" name="cherry_stage02" fileId="692" ppType="defaultReference" />
-      <Object type="reference" name="cherry_stage03" fileId="693" ppType="mediumTree" />
-      <Object type="reference" name="cherry_stage04" fileId="694" ppType="parentTrees" />
-      <Object type="reference" name="chineseElm_stage01" fileId="695" ppType="smallTrees" />
-      <Object type="reference" name="chineseElm_stage02" fileId="696" ppType="defaultReference" />
-      <Object type="reference" name="chineseElm_stage03" fileId="697" ppType="mediumTree" />
-      <Object type="reference" name="chineseElm_stage04" fileId="698" ppType="parentTrees" />
-      <Object type="reference" name="downyServiceBerry_stage01" fileId="699" ppType="defaultReference" />
-      <Object type="reference" name="downyServiceBerry_stage02" fileId="700" ppType="defaultReference" />
-      <Object type="reference" name="downyServiceBerry_stage03" fileId="701" ppType="mediumTree" />
-      <Object type="reference" name="goldenRain_stage01" fileId="702" ppType="smallTrees" />
-      <Object type="reference" name="goldenRain_stage02" fileId="703" ppType="defaultReference" />
-      <Object type="reference" name="goldenRain_stage03" fileId="704" ppType="defaultReference" />
-      <Object type="reference" name="goldenRain_stage04" fileId="705" ppType="parentTrees" />
-      <Object type="reference" name="japaneseZelkova_stage01" fileId="706" ppType="smallTrees" />
-      <Object type="reference" name="japaneseZelkova_stage02" fileId="707" ppType="defaultReference" />
-      <Object type="reference" name="japaneseZelkova_stage03" fileId="708" ppType="mediumTree" />
-      <Object type="reference" name="japaneseZelkova_stage04" fileId="709" ppType="parentTrees" />
-      <Object type="reference" name="lodgepolePine_stage01" fileId="710" ppType="smallTrees" />
-      <Object type="reference" name="lodgepolePine_stage02" fileId="711" ppType="defaultReference" />
-      <Object type="reference" name="lodgepolePine_stage03" fileId="712" ppType="mediumTree" />
-      <Object type="reference" name="northernCatalpa_stage01" fileId="713" ppType="smallTrees" />
-      <Object type="reference" name="northernCatalpa_stage02" fileId="714" ppType="defaultReference" />
-      <Object type="reference" name="northernCatalpa_stage03" fileId="715" ppType="mediumTree" />
-      <Object type="reference" name="northernCatalpa_stage04" fileId="716" ppType="parentTrees" />
-      <Object type="reference" name="oak_stage01" fileId="717" ppType="smallTrees" />
-      <Object type="reference" name="oak_stage02" fileId="718" ppType="defaultReference" />
-      <Object type="reference" name="oak_stage03" fileId="719" ppType="mediumTree" />
-      <Object type="reference" name="oak_stage04" fileId="720" ppType="parentTrees" />
-      <Object type="reference" name="oak_stage05" fileId="721" ppType="defaultReference" />
-      <Object type="reference" name="pinusSylvestris_stage01" fileId="722" ppType="smallTrees" />
-      <Object type="reference" name="pinusSylvestris_stage02" fileId="723" ppType="defaultReference" />
-      <Object type="reference" name="pinusSylvestris_stage03" fileId="724" ppType="mediumTree" />
-      <Object type="reference" name="pinusSylvestris_stage04" fileId="725" ppType="parentTrees" />
-      <Object type="reference" name="pinusSylvestris_stage05" fileId="726" ppType="defaultReference" />
-      <Object type="reference" name="pinusTabuliformis_stage01" fileId="727" ppType="smallTrees" />
-      <Object type="reference" name="pinusTabuliformis_stage02" fileId="728" ppType="defaultReference" />
-      <Object type="reference" name="pinusTabuliformis_stage03" fileId="729" ppType="mediumTree" />
-      <Object type="reference" name="pinusTabuliformis_stage04" fileId="730" ppType="parentTrees" />
-      <Object type="reference" name="pinusTabuliformis_stage05" fileId="731" ppType="defaultReference" />
-      <Object type="reference" name="shagbarkHickory_stage01" fileId="732" ppType="smallTrees" />
-      <Object type="reference" name="shagbarkHickory_stage02" fileId="733" ppType="defaultReference" />
-      <Object type="reference" name="shagbarkHickory_stage03" fileId="734" ppType="mediumTree" />
-      <Object type="reference" name="shagbarkHickory_stage04" fileId="735" ppType="parentTrees" />
-      <Object type="reference" name="tiliaAmurensis_stage01" fileId="736" ppType="smallTrees" />
-      <Object type="reference" name="tiliaAmurensis_stage02" fileId="737" ppType="defaultReference" />
-      <Object type="reference" name="tiliaAmurensis_stage03" fileId="738" ppType="mediumTree" />
-      <Object type="reference" name="tiliaAmurensis_stage04" fileId="739" ppType="parentTrees" />
+      <Object type="reference" name="americanElm_stage01" fileId="664" ppType="smallTrees" />
+      <Object type="reference" name="americanElm_stage02" fileId="665" ppType="defaultReference" />
+      <Object type="reference" name="americanElm_stage03" fileId="666" ppType="mediumTree" />
+      <Object type="reference" name="americanElm_stage04" fileId="667" ppType="parentTrees" />
+      <Object type="reference" name="americanElm_stage05" fileId="668" ppType="defaultReference" />
+      <Object type="reference" name="apple_stage03" fileId="669" ppType="mediumTree" />
+      <Object type="reference" name="aspen_stage01" fileId="670" ppType="smallTrees" />
+      <Object type="reference" name="aspen_stage02" fileId="671" ppType="defaultReference" />
+      <Object type="reference" name="aspen_stage03" fileId="672" ppType="mediumTree" />
+      <Object type="reference" name="aspen_stage04" fileId="673" ppType="parentTrees" />
+      <Object type="reference" name="aspen_stage05" fileId="674" ppType="defaultReference" />
+      <Object type="reference" name="aspen_stage06_var01" fileId="675" ppType="defaultReference" />
+      <Object type="reference" name="aspen_stage06_var02" fileId="676" ppType="defaultReference" />
+      <Object type="reference" name="beech_stage01" fileId="677" ppType="smallTrees" />
+      <Object type="reference" name="beech_stage02" fileId="678" ppType="defaultReference" />
+      <Object type="reference" name="beech_stage02_var02" fileId="679" ppType="defaultReference" />
+      <Object type="reference" name="beech_stage02_var03" fileId="680" ppType="defaultReference" />
+      <Object type="reference" name="beech_stage03" fileId="681" ppType="mediumTree" />
+      <Object type="reference" name="beech_stage04" fileId="682" ppType="parentTrees" />
+      <Object type="reference" name="beech_stage05" fileId="683" ppType="defaultReference" />
+      <Object type="reference" name="beech_stage06_var01" fileId="684" ppType="defaultReference" />
+      <Object type="reference" name="beech_stage06_var02" fileId="685" ppType="defaultReference" />
+      <Object type="reference" name="betulaErmanii_stage01" fileId="686" ppType="defaultReference" />
+      <Object type="reference" name="betulaErmanii_stage02" fileId="687" ppType="defaultReference" />
+      <Object type="reference" name="betulaErmanii_stage03" fileId="688" ppType="mediumTree" />
+      <Object type="reference" name="betulaErmanii_stage04" fileId="689" ppType="parentTrees" />
+      <Object type="reference" name="boxelder_stage01" fileId="690" ppType="smallTrees" />
+      <Object type="reference" name="boxelder_stage02" fileId="691" ppType="defaultReference" />
+      <Object type="reference" name="boxelder_stage03" fileId="692" ppType="mediumTree" />
+      <Object type="reference" name="cherry_stage01" fileId="693" ppType="smallTrees" />
+      <Object type="reference" name="cherry_stage02" fileId="694" ppType="defaultReference" />
+      <Object type="reference" name="cherry_stage03" fileId="695" ppType="mediumTree" />
+      <Object type="reference" name="cherry_stage04" fileId="696" ppType="parentTrees" />
+      <Object type="reference" name="chineseElm_stage01" fileId="697" ppType="smallTrees" />
+      <Object type="reference" name="chineseElm_stage02" fileId="698" ppType="defaultReference" />
+      <Object type="reference" name="chineseElm_stage03" fileId="699" ppType="mediumTree" />
+      <Object type="reference" name="chineseElm_stage04" fileId="700" ppType="parentTrees" />
+      <Object type="reference" name="downyServiceBerry_stage01" fileId="701" ppType="defaultReference" />
+      <Object type="reference" name="downyServiceBerry_stage02" fileId="702" ppType="defaultReference" />
+      <Object type="reference" name="downyServiceBerry_stage03" fileId="703" ppType="mediumTree" />
+      <Object type="reference" name="goldenRain_stage01" fileId="704" ppType="smallTrees" />
+      <Object type="reference" name="goldenRain_stage02" fileId="705" ppType="defaultReference" />
+      <Object type="reference" name="goldenRain_stage03" fileId="706" ppType="defaultReference" />
+      <Object type="reference" name="goldenRain_stage04" fileId="707" ppType="parentTrees" />
+      <Object type="reference" name="japaneseZelkova_stage01" fileId="708" ppType="smallTrees" />
+      <Object type="reference" name="japaneseZelkova_stage02" fileId="709" ppType="defaultReference" />
+      <Object type="reference" name="japaneseZelkova_stage03" fileId="710" ppType="mediumTree" />
+      <Object type="reference" name="japaneseZelkova_stage04" fileId="711" ppType="parentTrees" />
+      <Object type="reference" name="lodgepolePine_stage01" fileId="712" ppType="smallTrees" />
+      <Object type="reference" name="lodgepolePine_stage02" fileId="713" ppType="defaultReference" />
+      <Object type="reference" name="lodgepolePine_stage03" fileId="714" ppType="mediumTree" />
+      <Object type="reference" name="northernCatalpa_stage01" fileId="715" ppType="smallTrees" />
+      <Object type="reference" name="northernCatalpa_stage02" fileId="716" ppType="defaultReference" />
+      <Object type="reference" name="northernCatalpa_stage03" fileId="717" ppType="mediumTree" />
+      <Object type="reference" name="northernCatalpa_stage04" fileId="718" ppType="parentTrees" />
+      <Object type="reference" name="oak_stage01" fileId="719" ppType="smallTrees" />
+      <Object type="reference" name="oak_stage02" fileId="720" ppType="defaultReference" />
+      <Object type="reference" name="oak_stage03" fileId="721" ppType="mediumTree" />
+      <Object type="reference" name="oak_stage04" fileId="722" ppType="parentTrees" />
+      <Object type="reference" name="oak_stage05" fileId="723" ppType="defaultReference" />
+      <Object type="reference" name="pinusSylvestris_stage01" fileId="724" ppType="smallTrees" />
+      <Object type="reference" name="pinusSylvestris_stage02" fileId="725" ppType="defaultReference" />
+      <Object type="reference" name="pinusSylvestris_stage03" fileId="726" ppType="mediumTree" />
+      <Object type="reference" name="pinusSylvestris_stage04" fileId="727" ppType="parentTrees" />
+      <Object type="reference" name="pinusSylvestris_stage05" fileId="728" ppType="defaultReference" />
+      <Object type="reference" name="pinusTabuliformis_stage01" fileId="729" ppType="smallTrees" />
+      <Object type="reference" name="pinusTabuliformis_stage02" fileId="730" ppType="defaultReference" />
+      <Object type="reference" name="pinusTabuliformis_stage03" fileId="731" ppType="mediumTree" />
+      <Object type="reference" name="pinusTabuliformis_stage04" fileId="732" ppType="parentTrees" />
+      <Object type="reference" name="pinusTabuliformis_stage05" fileId="733" ppType="defaultReference" />
+      <Object type="reference" name="shagbarkHickory_stage01" fileId="734" ppType="smallTrees" />
+      <Object type="reference" name="shagbarkHickory_stage02" fileId="735" ppType="defaultReference" />
+      <Object type="reference" name="shagbarkHickory_stage03" fileId="736" ppType="mediumTree" />
+      <Object type="reference" name="shagbarkHickory_stage04" fileId="737" ppType="parentTrees" />
+      <Object type="reference" name="tiliaAmurensis_stage01" fileId="738" ppType="smallTrees" />
+      <Object type="reference" name="tiliaAmurensis_stage02" fileId="739" ppType="defaultReference" />
+      <Object type="reference" name="tiliaAmurensis_stage03" fileId="740" ppType="mediumTree" />
+      <Object type="reference" name="tiliaAmurensis_stage04" fileId="741" ppType="parentTrees" />
     </Objects>
     <Rules>
-      <Rule name="ClearAll" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="ClearAll" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_ClearAll.lua" >
           <Arg name="optionalFillLayerName" type="string" value="" />
           <Arg name="skipTextures" type="boolean" value="false" />
@@ -3721,141 +3730,143 @@
           <Arg name="skipI3DReferences" type="boolean" value="false" />
         </Script>
       </Rule>
-      <Rule name="Acres" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="Acres" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Load.lua" >
           <Arg name="genMaskName" type="string" value="Acres" />
           <Arg name="mask" type="mask" value="PG_Acres" />
         </Script>
       </Rule>
-      <Rule name="Grasslands" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="Grasslands" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Load.lua" >
           <Arg name="genMaskName" type="string" value="Grasslands" />
           <Arg name="mask" type="mask" value="PG_Grasslands" />
         </Script>
       </Rule>
-      <Rule name="Meadows" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="Meadows" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Load.lua" >
           <Arg name="genMaskName" type="string" value="Meadows" />
           <Arg name="mask" type="mask" value="PG_Meadows" />
         </Script>
       </Rule>
-      <Rule name="Forests" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="Forests" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Load.lua" >
           <Arg name="genMaskName" type="string" value="Forests" />
           <Arg name="mask" type="mask" value="PG_Forests" />
         </Script>
       </Rule>
       <Rule name="Roads" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
-        <Script name="PG_Mask_Load.lua" >
-          <Arg name="genMaskName" type="string" value="Roads" />
+        <Script name="scatterInMask.lua" >
           <Arg name="mask" type="mask" value="PG_Roads" />
         </Script>
+        <Object id="1" childRule="" objectName="ASPHALT" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="8" />
+        <Object id="2" childRule="" objectName="ASPHALT_CRACKS" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="1" />
       </Rule>
-      <Rule name="SideRoads" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
-        <Script name="PG_Mask_Load.lua" >
-          <Arg name="genMaskName" type="string" value="SideRoads" />
+      <Rule name="SideRoads" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+        <Script name="scatterInMask.lua" >
           <Arg name="mask" type="mask" value="PG_SideRoads" />
         </Script>
+        <Object id="1" childRule="" objectName="ASPHALT_DUSTY" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="1" />
       </Rule>
-      <Rule name="DirtPaths" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
-        <Script name="PG_Mask_Load.lua" >
-          <Arg name="genMaskName" type="string" value="DirtPaths" />
+      <Rule name="DirtPaths" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+        <Script name="scatterInMask.lua" >
           <Arg name="mask" type="mask" value="PG_DirtPaths" />
         </Script>
+        <Object id="1" childRule="" objectName="MUDLIGHT" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="8" />
+        <Object id="2" childRule="" objectName="MUD" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="1" />
       </Rule>
-      <Rule name="Buildings" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="Buildings" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Load.lua" >
           <Arg name="genMaskName" type="string" value="Buildings" />
           <Arg name="mask" type="mask" value="PG_Buildings" />
         </Script>
       </Rule>
-      <Rule name="Farmyards" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="Farmyards" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Load.lua" >
           <Arg name="genMaskName" type="string" value="Farmyards" />
           <Arg name="mask" type="mask" value="PG_Farmyards" />
         </Script>
       </Rule>
-      <Rule name="Water" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="Water" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Load.lua" >
           <Arg name="genMaskName" type="string" value="Water" />
           <Arg name="mask" type="mask" value="PG_Water" />
         </Script>
       </Rule>
-      <Rule name="Drains" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="Drains" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Load.lua" >
           <Arg name="genMaskName" type="string" value="Drains" />
           <Arg name="mask" type="mask" value="PG_Drains" />
         </Script>
       </Rule>
-      <Rule name="Railways" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="Railways" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Load.lua" >
           <Arg name="genMaskName" type="string" value="Railways" />
           <Arg name="mask" type="mask" value="PG_Railways" />
         </Script>
       </Rule>
-      <Rule name="Shrink_Acres" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="Shrink_Acres" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Resize.lua" >
           <Arg name="genMaskName" type="string" value="Acres" />
           <Arg name="width" type="int" value="-2" />
         </Script>
       </Rule>
-      <Rule name="Substract_Forests_Roads" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="Substract_Forests_Roads" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_SubstractMask.lua" >
           <Arg name="genMaskName" type="string" value="Forests" />
           <Arg name="genMaskNameToSubstract" type="string" value="Roads" />
           <Arg name="width" type="int" value="2" />
         </Script>
       </Rule>
-      <Rule name="Substract_Forests_SideRoads" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="Substract_Forests_SideRoads" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_SubstractMask.lua" >
           <Arg name="genMaskName" type="string" value="Forests" />
           <Arg name="genMaskNameToSubstract" type="string" value="SideRoads" />
           <Arg name="width" type="int" value="2" />
         </Script>
       </Rule>
-      <Rule name="Substract_Forests_DirtPaths" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="Substract_Forests_DirtPaths" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_SubstractMask.lua" >
           <Arg name="genMaskName" type="string" value="Forests" />
           <Arg name="genMaskNameToSubstract" type="string" value="DirtPaths" />
           <Arg name="width" type="int" value="2" />
         </Script>
       </Rule>
-      <Rule name="Substract_Acres_Roads" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="Substract_Acres_Roads" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_SubstractMask.lua" >
           <Arg name="genMaskName" type="string" value="Acres" />
           <Arg name="genMaskNameToSubstract" type="string" value="Roads" />
           <Arg name="width" type="int" value="2" />
         </Script>
       </Rule>
-      <Rule name="Substract_Acres_SideRoads" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="Substract_Acres_SideRoads" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_SubstractMask.lua" >
           <Arg name="genMaskName" type="string" value="Acres" />
           <Arg name="genMaskNameToSubstract" type="string" value="SideRoads" />
           <Arg name="width" type="int" value="2" />
         </Script>
       </Rule>
-      <Rule name="Substract_Acres_DirtPaths" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="Substract_Acres_DirtPaths" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_SubstractMask.lua" >
           <Arg name="genMaskName" type="string" value="Acres" />
           <Arg name="genMaskNameToSubstract" type="string" value="DirtPaths" />
           <Arg name="width" type="int" value="0" />
         </Script>
       </Rule>
-      <Rule name="Substract_Acres_Water" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="Substract_Acres_Water" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_SubstractMask.lua" >
           <Arg name="genMaskName" type="string" value="Acres" />
           <Arg name="genMaskNameToSubstract" type="string" value="Water" />
           <Arg name="width" type="int" value="0" />
         </Script>
       </Rule>
-      <Rule name="Substract_Forests_Acres" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="Substract_Forests_Acres" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_SubstractMask.lua" >
           <Arg name="genMaskName" type="string" value="Forests" />
           <Arg name="genMaskNameToSubstract" type="string" value="Acres" />
           <Arg name="width" type="int" value="1" />
         </Script>
       </Rule>
-      <Rule name="T_Forests" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="T_Forests" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Fill.lua" >
           <Arg name="genMaskName" type="string" value="Forests" />
           <Arg name="optionalSyncGroup" type="int" value="0" />
@@ -3869,7 +3880,7 @@
         <Object id="1" childRule="" objectName="FOREST_GROUND" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="1" />
         <Object id="2" childRule="" objectName="FOREST_GRASS" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="1" />
       </Rule>
-      <Rule name="T_Forests_BorderBase" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="T_Forests_BorderBase" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_MaskBorder_Fill.lua" >
           <Arg name="genMaskName" type="string" value="Forests" />
           <Arg name="borderIn" type="int" value="2" />
@@ -3884,7 +3895,7 @@
         </Script>
         <Object id="1" childRule="" objectName="GRASS" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="1" />
       </Rule>
-      <Rule name="T_Forests_Border" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="T_Forests_Border" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_MaskBorder_Fill.lua" >
           <Arg name="genMaskName" type="string" value="Forests" />
           <Arg name="borderIn" type="int" value="2" />
@@ -3899,7 +3910,7 @@
         </Script>
         <Object id="1" childRule="" objectName="FOREST_GROUND" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="1" />
       </Rule>
-      <Rule name="T_Acres" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="T_Acres" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Fill.lua" >
           <Arg name="genMaskName" type="string" value="Acres" />
           <Arg name="optionalSyncGroup" type="int" value="0" />
@@ -3912,7 +3923,7 @@
         </Script>
         <Object id="1" childRule="" objectName="MUD" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="1" />
       </Rule>
-      <Rule name="T_Grasslands" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="T_Grasslands" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Fill.lua" >
           <Arg name="genMaskName" type="string" value="Grasslands" />
           <Arg name="optionalSyncGroup" type="int" value="0" />
@@ -3927,7 +3938,7 @@
         <Object id="2" childRule="" objectName="GRASS_DIRT" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="3" />
         <Object id="3" childRule="" objectName="GRASS_PATCHY" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="12" />
       </Rule>
-      <Rule name="T_Meadows" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="T_Meadows" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Fill.lua" >
           <Arg name="genMaskName" type="string" value="Meadows" />
           <Arg name="optionalSyncGroup" type="int" value="0" />
@@ -3941,7 +3952,7 @@
         <Object id="1" childRule="" objectName="GRASSFRESH_MID" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="1" />
         <Object id="2" childRule="" objectName="GRASSFRESH_SHORT" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="1" />
       </Rule>
-      <Rule name="T_Buildings" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="T_Buildings" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Fill.lua" >
           <Arg name="genMaskName" type="string" value="Buildings" />
           <Arg name="optionalSyncGroup" type="int" value="0" />
@@ -3954,7 +3965,7 @@
         </Script>
         <Object id="1" childRule="" objectName="CONCRETE" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="1" />
       </Rule>
-      <Rule name="T_Farmyards" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="T_Farmyards" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Fill.lua" >
           <Arg name="genMaskName" type="string" value="Farmyards" />
           <Arg name="optionalSyncGroup" type="int" value="0" />
@@ -3967,7 +3978,7 @@
         </Script>
         <Object id="1" childRule="" objectName="GRASS_PATCHY" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="1" />
       </Rule>
-      <Rule name="T_Water" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="T_Water" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Fill.lua" >
           <Arg name="genMaskName" type="string" value="Water" />
           <Arg name="optionalSyncGroup" type="int" value="0" />
@@ -3980,7 +3991,7 @@
         </Script>
         <Object id="1" childRule="" objectName="SAND" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="1" />
       </Rule>
-      <Rule name="T_Drains" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="T_Drains" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Fill.lua" >
           <Arg name="genMaskName" type="string" value="Drains" />
           <Arg name="optionalSyncGroup" type="int" value="0" />
@@ -3992,7 +4003,7 @@
           <Arg name="limitNoise" type="boolean" value="false" />
         </Script>
       </Rule>
-      <Rule name="T_Railways" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="T_Railways" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Fill.lua" >
           <Arg name="genMaskName" type="string" value="Railways" />
           <Arg name="optionalSyncGroup" type="int" value="0" />
@@ -4005,7 +4016,7 @@
         </Script>
         <Object id="1" childRule="" objectName="GRAVEL" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="1" />
       </Rule>
-      <Rule name="T_Railways_BorderBase" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="T_Railways_BorderBase" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_MaskBorder_Fill.lua" >
           <Arg name="genMaskName" type="string" value="Railways" />
           <Arg name="borderIn" type="int" value="2" />
@@ -4020,7 +4031,7 @@
         </Script>
         <Object id="1" childRule="" objectName="GRASS" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="1" />
       </Rule>
-      <Rule name="T_Railways_BorderFade" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="T_Railways_BorderFade" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_MaskBorder_Fill.lua" >
           <Arg name="genMaskName" type="string" value="Railways" />
           <Arg name="borderIn" type="int" value="2" />
@@ -4035,7 +4046,7 @@
         </Script>
         <Object id="1" childRule="" objectName="GRAVEL" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="1" />
       </Rule>
-      <Rule name="T_Grasslands_Detail" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="T_Grasslands_Detail" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Fill.lua" >
           <Arg name="genMaskName" type="string" value="Grasslands" />
           <Arg name="optionalSyncGroup" type="int" value="0" />
@@ -4048,7 +4059,7 @@
         <Object id="2" childRule="" objectName="GRASS_DIRT" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="32" />
         <Object id="3" childRule="" objectName="GRASSFRESH_CLOVERS" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="32" />
       </Rule>
-      <Rule name="T_Meadows_Detail" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="T_Meadows_Detail" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Fill.lua" >
           <Arg name="genMaskName" type="string" value="Meadows" />
           <Arg name="optionalSyncGroup" type="int" value="0" />
@@ -4061,7 +4072,7 @@
         <Object id="2" childRule="" objectName="GRASS_DIRT" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="32" />
         <Object id="3" childRule="" objectName="GRASSFRESH_CLOVERS" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="32" />
       </Rule>
-      <Rule name="T_Forests_Detail" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="T_Forests_Detail" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Fill.lua" >
           <Arg name="genMaskName" type="string" value="Forests" />
           <Arg name="optionalSyncGroup" type="int" value="12" />
@@ -4075,7 +4086,7 @@
         <Object id="3" childRule="" objectName="FOREST_NEEDELS" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="32" />
         <Object id="4" childRule="" objectName="FOREST_STONES" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="32" />
       </Rule>
-      <Rule name="T_Forests_Patches" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="T_Forests_Patches" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Fill.lua" >
           <Arg name="genMaskName" type="string" value="Forests" />
           <Arg name="optionalSyncGroup" type="int" value="16" />
@@ -4087,7 +4098,7 @@
         <Object id="1" childRule="" objectName="GRASS_PATCHY" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="12" />
         <Object id="2" childRule="" objectName="GRASS_DIRT" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="32" />
       </Rule>
-      <Rule name="T_Roads" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="T_Roads" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Fill.lua" >
           <Arg name="genMaskName" type="string" value="Roads" />
           <Arg name="optionalSyncGroup" type="int" value="0" />
@@ -4100,7 +4111,7 @@
         </Script>
         <Object id="1" childRule="" objectName="ASPHALT" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="1" />
       </Rule>
-      <Rule name="T_SideRoads" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="T_SideRoads" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Fill.lua" >
           <Arg name="genMaskName" type="string" value="SideRoads" />
           <Arg name="optionalSyncGroup" type="int" value="0" />
@@ -4113,7 +4124,7 @@
         </Script>
         <Object id="1" childRule="" objectName="ASPHALT" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="1" />
       </Rule>
-      <Rule name="T_DirtPaths" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="T_DirtPaths" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Fill.lua" >
           <Arg name="genMaskName" type="string" value="DirtPaths" />
           <Arg name="optionalSyncGroup" type="int" value="0" />
@@ -4126,7 +4137,7 @@
         </Script>
         <Object id="1" childRule="" objectName="GRAVEL" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="1" />
       </Rule>
-      <Rule name="F_Grasslands_Detail_Grass" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="F_Grasslands_Detail_Grass" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Fill.lua" >
           <Arg name="genMaskName" type="string" value="Grasslands" />
           <Arg name="optionalSyncGroup" type="int" value="0" />
@@ -4138,7 +4149,7 @@
         <Object id="1" childRule="" objectName="F_GrassMedium" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="12" />
         <Object id="2" childRule="" objectName="F_GrassSmall" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="32" />
       </Rule>
-      <Rule name="F_Grasslands_Detail_Bushes" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="F_Grasslands_Detail_Bushes" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Fill.lua" >
           <Arg name="genMaskName" type="string" value="Grasslands" />
           <Arg name="optionalSyncGroup" type="int" value="0" />
@@ -4151,7 +4162,7 @@
         <Object id="2" childRule="" objectName="F_prairyBlazingStar" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="32" />
         <Object id="3" childRule="" objectName="F_slenderMountainMint" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="72" />
       </Rule>
-      <Rule name="F_Grasslands_Detail_BushesVar" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="F_Grasslands_Detail_BushesVar" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Fill.lua" >
           <Arg name="genMaskName" type="string" value="Grasslands" />
           <Arg name="optionalSyncGroup" type="int" value="13" />
@@ -4164,7 +4175,7 @@
         <Object id="2" childRule="" objectName="F_hazelnutMedium" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="32" />
         <Object id="3" childRule="" objectName="F_boxWoodMedium" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="32" />
       </Rule>
-      <Rule name="R_Meadows_Trees" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="R_Meadows_Trees" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Fill.lua" >
           <Arg name="genMaskName" type="string" value="Meadows" />
           <Arg name="optionalSyncGroup" type="int" value="0" />
@@ -4179,7 +4190,7 @@
         <Object id="2" childRule="" objectName="aspen_stage03" childMinCount="8" childMaxCount="20" childMinRadius="4" childMaxRadius="20" scaleMin="1" scaleMax="1" probability="1" />
         <Object id="3" childRule="" objectName="northernCatalpa_stage03" childMinCount="8" childMaxCount="20" childMinRadius="4" childMaxRadius="20" scaleMin="1" scaleMax="1" probability="1" />
       </Rule>
-      <Rule name="F_Meadows_Detail_Grass" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="F_Meadows_Detail_Grass" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Fill.lua" >
           <Arg name="genMaskName" type="string" value="Meadows" />
           <Arg name="optionalSyncGroup" type="int" value="0" />
@@ -4191,7 +4202,7 @@
         <Object id="1" childRule="" objectName="F_GrassMedium" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="12" />
         <Object id="2" childRule="" objectName="F_GrassSmall" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="32" />
       </Rule>
-      <Rule name="F_Meadows_Detail_Bushes" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="F_Meadows_Detail_Bushes" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Fill.lua" >
           <Arg name="genMaskName" type="string" value="Meadows" />
           <Arg name="optionalSyncGroup" type="int" value="2" />
@@ -4204,7 +4215,7 @@
         <Object id="2" childRule="" objectName="F_prairyBlazingStar" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="32" />
         <Object id="3" childRule="" objectName="F_slenderMountainMint" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="72" />
       </Rule>
-      <Rule name="R_Forests_Trees" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="R_Forests_Trees" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Fill.lua" >
           <Arg name="genMaskName" type="string" value="Forests" />
           <Arg name="optionalSyncGroup" type="int" value="0" />
@@ -4220,7 +4231,7 @@
         <Object id="5" childRule="R_Forests_ChildTrees" objectName="pinusSylvestris_stage04" childMinCount="8" childMaxCount="20" childMinRadius="4" childMaxRadius="20" scaleMin="1" scaleMax="1" probability="1" />
         <Object id="6" childRule="R_Forests_ChildTrees" objectName="pinusTabuliformis_stage04" childMinCount="8" childMaxCount="20" childMinRadius="4" childMaxRadius="20" scaleMin="1" scaleMax="1" probability="1" />
       </Rule>
-      <Rule name="R_Forests_ChildTrees" isMainRule="false" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="R_Forests_ChildTrees" isMainRule="false" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Fill.lua" >
           <Arg name="genMaskName" type="string" value="Forests" />
           <Arg name="optionalSyncGroup" type="int" value="0" />
@@ -4248,7 +4259,7 @@
         <Object id="17" childRule="" objectName="pinusTabuliformis_stage02" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" scaleMin="1" scaleMax="1" probability="4" />
         <Object id="18" childRule="" objectName="pinusTabuliformis_stage03" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" scaleMin="1" scaleMax="1" probability="6" />
       </Rule>
-      <Rule name="F_Forests_Grass" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="F_Forests_Grass" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Fill.lua" >
           <Arg name="genMaskName" type="string" value="Forests" />
           <Arg name="optionalSyncGroup" type="int" value="3" />
@@ -4262,7 +4273,7 @@
         <Object id="8" childRule="" objectName="F_GrassMedium" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="1" />
         <Object id="12" childRule="" objectName="F_GrassDenseMix" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="3" />
       </Rule>
-      <Rule name="F_Forests_Patches" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="F_Forests_Patches" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Fill.lua" >
           <Arg name="genMaskName" type="string" value="Forests" />
           <Arg name="optionalSyncGroup" type="int" value="16" />
@@ -4274,7 +4285,7 @@
         <Object id="1" childRule="" objectName="F_ForestClover" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="4" />
         <Object id="2" childRule="" objectName="F_ForestDryBranch" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="4" />
       </Rule>
-      <Rule name="F_Forests_Clutter" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="F_Forests_Clutter" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Fill.lua" >
           <Arg name="genMaskName" type="string" value="Forests" />
           <Arg name="optionalSyncGroup" type="int" value="5" />
@@ -4290,7 +4301,7 @@
         <Object id="10" childRule="" objectName="F_ForestSwordFern" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="1" />
         <Object id="11" childRule="" objectName="F_ForestDeerFern" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="2" />
       </Rule>
-      <Rule name="F_Forests_Detail" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="F_Forests_Detail" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Fill.lua" >
           <Arg name="genMaskName" type="string" value="Forests" />
           <Arg name="optionalSyncGroup" type="int" value="0" />
@@ -4309,7 +4320,7 @@
         <Object id="13" childRule="" objectName="F_hazelnutMedium" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="2" />
         <Object id="14" childRule="" objectName="F_hazelnutBig" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="3" />
       </Rule>
-      <Rule name="F_Railways_BorderInverted" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="F_Railways_BorderInverted" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_MaskBorder_Fill.lua" >
           <Arg name="genMaskName" type="string" value="Buildings" />
           <Arg name="borderIn" type="int" value="2" />
@@ -4324,7 +4335,7 @@
         </Script>
         <Object id="1" childRule="" objectName="F_GrassSmall" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="1" />
       </Rule>
-      <Rule name="F_Acres" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="F_Acres" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Fill.lua" >
           <Arg name="genMaskName" type="string" value="Acres" />
           <Arg name="optionalSyncGroup" type="int" value="0" />
@@ -4337,7 +4348,7 @@
         </Script>
         <Object id="1" childRule="" objectName="F_AcreTerrainDetail" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="1" />
       </Rule>
-      <Rule name="Clear_Water" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="Clear_Water" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Clear.lua" >
           <Arg name="genMaskName" type="string" value="Water" />
           <Arg name="optionalFillLayerName" type="string" value="" />
@@ -4346,7 +4357,7 @@
           <Arg name="skipI3DReferences" type="boolean" value="false" />
         </Script>
       </Rule>
-      <Rule name="F_Water_Border" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="F_Water_Border" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_MaskBorder_Fill.lua" >
           <Arg name="genMaskName" type="string" value="Water" />
           <Arg name="borderIn" type="int" value="2" />
@@ -4365,7 +4376,7 @@
         <Object id="4" childRule="" objectName="F_typhaLarge" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="7" />
         <Object id="5" childRule="" objectName="F_stipaLarge" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="5" />
       </Rule>
-      <Rule name="Clear_Buildings" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="Clear_Buildings" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Clear.lua" >
           <Arg name="genMaskName" type="string" value="Buildings" />
           <Arg name="optionalFillLayerName" type="string" value="" />
@@ -4374,7 +4385,7 @@
           <Arg name="skipI3DReferences" type="boolean" value="false" />
         </Script>
       </Rule>
-      <Rule name="F_Buildings_BorderInverted" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="F_Buildings_BorderInverted" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_MaskBorder_Fill.lua" >
           <Arg name="genMaskName" type="string" value="Buildings" />
           <Arg name="borderIn" type="int" value="2" />
@@ -4389,7 +4400,7 @@
         </Script>
         <Object id="1" childRule="" objectName="F_GrassSmall" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="1" />
       </Rule>
-      <Rule name="Clear_Roads" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="Clear_Roads" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Clear.lua" >
           <Arg name="genMaskName" type="string" value="Roads" />
           <Arg name="optionalFillLayerName" type="string" value="" />
@@ -4398,7 +4409,7 @@
           <Arg name="skipI3DReferences" type="boolean" value="false" />
         </Script>
       </Rule>
-      <Rule name="F_Roads_BorderInverted" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="F_Roads_BorderInverted" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_MaskBorder_Fill.lua" >
           <Arg name="genMaskName" type="string" value="Roads" />
           <Arg name="borderIn" type="int" value="1" />
@@ -4413,7 +4424,7 @@
         </Script>
         <Object id="1" childRule="" objectName="F_GrassSmall" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="1" />
       </Rule>
-      <Rule name="Clear_SideRoads" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="Clear_SideRoads" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Clear.lua" >
           <Arg name="genMaskName" type="string" value="SideRoads" />
           <Arg name="optionalFillLayerName" type="string" value="" />
@@ -4422,7 +4433,7 @@
           <Arg name="skipI3DReferences" type="boolean" value="false" />
         </Script>
       </Rule>
-      <Rule name="F_SideRoads_BorderInverted" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="F_SideRoads_BorderInverted" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_MaskBorder_Fill.lua" >
           <Arg name="genMaskName" type="string" value="SideRoads" />
           <Arg name="borderIn" type="int" value="1" />
@@ -4437,7 +4448,7 @@
         </Script>
         <Object id="1" childRule="" objectName="F_GrassSmall" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="1" />
       </Rule>
-      <Rule name="Clear_DirtPaths" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="Clear_DirtPaths" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_Mask_Clear.lua" >
           <Arg name="genMaskName" type="string" value="DirtPaths" />
           <Arg name="optionalFillLayerName" type="string" value="" />
@@ -4446,7 +4457,7 @@
           <Arg name="skipI3DReferences" type="boolean" value="false" />
         </Script>
       </Rule>
-      <Rule name="F_DirtPaths_BorderInverted" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="F_DirtPaths_BorderInverted" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_MaskBorder_Fill.lua" >
           <Arg name="genMaskName" type="string" value="DirtPaths" />
           <Arg name="borderIn" type="int" value="1" />
@@ -4461,7 +4472,7 @@
         </Script>
         <Object id="1" childRule="" objectName="F_GrassSmall" childMinCount="1" childMaxCount="10" childMinRadius="0" childMaxRadius="20" probability="1" />
       </Rule>
-      <Rule name="F_Drains_Border" isMainRule="true" isEnabled="true" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
+      <Rule name="F_Drains_Border" isMainRule="true" isEnabled="false" objectMinDistance="0" slopeStart="0" slopeEnd="90" >
         <Script name="PG_MaskBorder_Fill.lua" >
           <Arg name="genMaskName" type="string" value="Drains" />
           <Arg name="borderIn" type="int" value="2" />
