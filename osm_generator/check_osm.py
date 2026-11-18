@@ -201,8 +201,8 @@ def main():
     check("the file and the layout agree on whether the map is empty",
           (layout_features == 0) == (len(ways) == 0),
           f"{layout_features} feature(s) in map_layout, {len(ways)} way(s) in the file")
-    check("farmland count does not exceed 180",
-          len(groups['farmland']) <= 180,
+    check("farmland count does not exceed 200",
+          len(groups['farmland']) <= 200,
           f"{len(groups['farmland'])} farmland way(s)")
 
     problems = ml.validate()

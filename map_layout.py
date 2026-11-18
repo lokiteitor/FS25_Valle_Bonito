@@ -678,17 +678,18 @@ add_pad(
     tags={'landuse': 'farmyard'},
 )
 
-# 8x8 town of 200x100 m blocks (X x Y) with secondary streets at the NW intersection (x=1000, y=800)
+# 4x8 town of 120x120 m blocks (X x Y) with secondary streets at the NW intersection (x=1000, y=800)
 _TOWN_NW_X0 = 1000.0
 _TOWN_NW_Y0 = 800.0
-_TOWN_NW_N = 8
-_TOWN_NW_BLOCK_X_M = 200.0
-_TOWN_NW_BLOCK_Y_M = 100.0
+_TOWN_NW_NX = 4
+_TOWN_NW_NY = 8
+_TOWN_NW_BLOCK_X_M = 120.0
+_TOWN_NW_BLOCK_Y_M = 120.0
 _TOWN_NW_STREET_GAP_M = 16.0
-_TOWN_NW_PITCH_X_M = _TOWN_NW_BLOCK_X_M + _TOWN_NW_STREET_GAP_M  # 216.0 m
-_TOWN_NW_PITCH_Y_M = _TOWN_NW_BLOCK_Y_M + _TOWN_NW_STREET_GAP_M  # 116.0 m
-_TOWN_NW_SPAN_X_M = _TOWN_NW_N * _TOWN_NW_PITCH_X_M              # 1728.0 m
-_TOWN_NW_SPAN_Y_M = _TOWN_NW_N * _TOWN_NW_PITCH_Y_M              # 928.0 m
+_TOWN_NW_PITCH_X_M = _TOWN_NW_BLOCK_X_M + _TOWN_NW_STREET_GAP_M  # 136.0 m
+_TOWN_NW_PITCH_Y_M = _TOWN_NW_BLOCK_Y_M + _TOWN_NW_STREET_GAP_M  # 136.0 m
+_TOWN_NW_SPAN_X_M = _TOWN_NW_NX * _TOWN_NW_PITCH_X_M              # 544.0 m
+_TOWN_NW_SPAN_Y_M = _TOWN_NW_NY * _TOWN_NW_PITCH_Y_M              # 1088.0 m
 
 add_pad(
     pid='pad_town_nw',
@@ -702,7 +703,7 @@ add_pad(
     tags={'landuse': 'farmyard'},
 )
 
-for _k in range(1, _TOWN_NW_N + 1):
+for _k in range(1, _TOWN_NW_NX + 1):
     _sx = _TOWN_NW_X0 + _k * _TOWN_NW_PITCH_X_M
     add_corridor(
         cid=f'road_town_nw_v{_k}',
@@ -714,6 +715,8 @@ for _k in range(1, _TOWN_NW_N + 1):
         grade_max=0.05,
         tags={'highway': 'secondary', 'name': f'Calle Norte-Sur {_k}'},
     )
+
+for _k in range(1, _TOWN_NW_NY + 1):
     _sy = _TOWN_NW_Y0 + _k * _TOWN_NW_PITCH_Y_M
     add_corridor(
         cid=f'road_town_nw_h{_k}',
@@ -867,6 +870,8 @@ while _fy15_count < 10:
 
     if _fy15_valid_box(_x0, _y0, _x1, _y1, margin=120.0):
         _fy15_count += 1
+        if _fy15_count == 6:
+            continue
         add_pad(
             pid=f'pad_farmyard_{_fy15_count}',
             name=f'Granja {_fy15_count}',
@@ -878,6 +883,57 @@ while _fy15_count < 10:
             level=True,
             tags={'landuse': 'farmyard'},
         )
+
+# 4x4 town of 120x120 m blocks at the former Granja 6 site (x=7200, y=3760)
+_TOWN_E_X0 = 7200.0
+_TOWN_E_Y0 = 3760.0
+_TOWN_E_NX = 4
+_TOWN_E_NY = 4
+_TOWN_E_BLOCK_X_M = 120.0
+_TOWN_E_BLOCK_Y_M = 120.0
+_TOWN_E_STREET_GAP_M = 16.0
+_TOWN_E_PITCH_X_M = _TOWN_E_BLOCK_X_M + _TOWN_E_STREET_GAP_M  # 136.0 m
+_TOWN_E_PITCH_Y_M = _TOWN_E_BLOCK_Y_M + _TOWN_E_STREET_GAP_M  # 136.0 m
+_TOWN_E_SPAN_X_M = _TOWN_E_NX * _TOWN_E_PITCH_X_M              # 544.0 m
+_TOWN_E_SPAN_Y_M = _TOWN_E_NY * _TOWN_E_PITCH_Y_M              # 544.0 m
+
+add_pad(
+    pid='pad_town_east',
+    name='Pueblo Este',
+    kind='village',
+    centre=(_TOWN_E_X0 + _TOWN_E_SPAN_X_M / 2.0, _TOWN_E_Y0 + _TOWN_E_SPAN_Y_M / 2.0),
+    size=(_TOWN_E_SPAN_X_M, _TOWN_E_SPAN_Y_M),
+    feather_m=25.0,
+    drain_grade=0.0,
+    level=True,
+    tags={'landuse': 'farmyard'},
+)
+
+for _k in range(1, _TOWN_E_NX + 1):
+    _sx = _TOWN_E_X0 + _k * _TOWN_E_PITCH_X_M
+    add_corridor(
+        cid=f'road_town_e_v{_k}',
+        name=f'Calle Norte-Sur Este {_k}',
+        kind='secondary',
+        axis=[(_sx, _TOWN_E_Y0), (_sx, _TOWN_E_Y0 + _TOWN_E_SPAN_Y_M)],
+        half_width_m=3.5,
+        feather_m=6.0,
+        grade_max=0.05,
+        tags={'highway': 'secondary', 'name': f'Calle Norte-Sur Este {_k}'},
+    )
+
+for _k in range(0, _TOWN_E_NY + 1):
+    _sy = _TOWN_E_Y0 + _k * _TOWN_E_PITCH_Y_M
+    add_corridor(
+        cid=f'road_town_e_h{_k}',
+        name=f'Calle Este-Oeste Este {_k}',
+        kind='secondary',
+        axis=[(_TOWN_E_X0, _sy), (_TOWN_E_X0 + _TOWN_E_SPAN_X_M, _sy)],
+        half_width_m=3.5,
+        feather_m=6.0,
+        grade_max=0.05,
+        tags={'highway': 'secondary', 'name': f'Calle Este-Oeste Este {_k}'},
+    )
 
 # Broadleaved shelterbelts (rompevientos) in long stretches along primary roads and dirt tracks
 _BELT_WIDTH_M = 48.0

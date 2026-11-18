@@ -248,5 +248,10 @@
     <farmland id="245" priceScale="1" npcName="FORESTER" />
     <farmland id="246" priceScale="1" npcName="FORESTER" />
     <farmland id="247" priceScale="1" npcName="FORESTER" />
+    <farmland id="248" priceScale="1" npcName="FORESTER" />
+    <farmland id="249" priceScale="1" npcName="FORESTER" />
+    <farmland id="250" priceScale="1" npcName="FORESTER" />
+    <farmland id="251" priceScale="1" npcName="FORESTER" />
+    <farmland id="252" priceScale="1" npcName="FORESTER" />
   </farmlands>
 </map>
