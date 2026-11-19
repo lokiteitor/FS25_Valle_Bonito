@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="woodScuptures" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="1" filename="wood_diffuse.png" />
+    <File fileId="2" filename="wood_normal.png" />
+    <File fileId="3" filename="wood_specular.png" />
+  </Files>
+
+  <Materials>
+    <Material name="lambert1" materialId="1" diffuseColor="0.5 0.5 0.5 1">
+    </Material>
+    <Material name="wood_mat" materialId="2">
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="woodScuptures.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <Shape name="bear" translation="-2 0 -2" shapeId="1" static="true" trigger="true" collisionFilterGroup="0x20000000" collisionFilterMask="0x100000" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" clipDistance="150" nodeId="1">
+      <Shape name="bearCol" shapeId="2" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="2">
+        <Shape name="visual" shapeId="3" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="150" nodeId="3"/>
+      </Shape>
+    </Shape>
+    <Shape name="boar" translation="-1 0 -2" shapeId="4" static="true" trigger="true" collisionFilterGroup="0x20000000" collisionFilterMask="0x100000" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" clipDistance="150" nodeId="4">
+      <Shape name="boarCol" shapeId="5" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="5">
+        <Shape name="visual" shapeId="6" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="150" nodeId="6"/>
+      </Shape>
+    </Shape>
+    <Shape name="deer" translation="0 0 -2" shapeId="7" static="true" trigger="true" collisionFilterGroup="0x20000000" collisionFilterMask="0x100000" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" clipDistance="150" nodeId="7">
+      <Shape name="deerCol" shapeId="8" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="8">
+        <Shape name="visual" shapeId="9" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="150" nodeId="9"/>
+      </Shape>
+    </Shape>
+    <Shape name="dog01" translation="1 0 -2" shapeId="10" static="true" trigger="true" collisionFilterGroup="0x20000000" collisionFilterMask="0x100000" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" clipDistance="150" nodeId="10">
+      <Shape name="dog01Col" shapeId="11" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="11">
+        <Shape name="visual" shapeId="12" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="150" nodeId="12"/>
+      </Shape>
+    </Shape>
+    <Shape name="dog02" translation="2 0 -2" shapeId="13" static="true" trigger="true" collisionFilterGroup="0x20000000" collisionFilterMask="0x100000" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" clipDistance="150" nodeId="13">
+      <Shape name="dog02Col" shapeId="14" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="14">
+        <Shape name="visual" shapeId="15" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="150" nodeId="15"/>
+      </Shape>
+    </Shape>
+    <Shape name="eagle" translation="-2 0 -1" shapeId="16" static="true" trigger="true" collisionFilterGroup="0x20000000" collisionFilterMask="0x100000" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" clipDistance="150" nodeId="16">
+      <Shape name="eagleCol" shapeId="17" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="17">
+        <Shape name="visual" shapeId="18" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="150" nodeId="18"/>
+      </Shape>
+    </Shape>
+    <Shape name="bass" translation="-1 0 -1" shapeId="19" static="true" trigger="true" collisionFilterGroup="0x20000000" collisionFilterMask="0x100000" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" clipDistance="150" nodeId="19">
+      <Shape name="bassCol" shapeId="20" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="20">
+        <Shape name="visual" shapeId="21" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="150" nodeId="21"/>
+      </Shape>
+    </Shape>
+    <Shape name="fox" translation="0 0 -1" shapeId="22" static="true" trigger="true" collisionFilterGroup="0x20000000" collisionFilterMask="0x100000" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" clipDistance="150" nodeId="22">
+      <Shape name="foxCol" shapeId="23" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="23">
+        <Shape name="visual" shapeId="24" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="150" nodeId="24"/>
+      </Shape>
+    </Shape>
+    <Shape name="frog" translation="1 0 -1" shapeId="25" static="true" trigger="true" collisionFilterGroup="0x20000000" collisionFilterMask="0x100000" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" clipDistance="150" nodeId="25">
+      <Shape name="frogCol" shapeId="26" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="26">
+        <Shape name="visual" shapeId="27" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="150" nodeId="27"/>
+      </Shape>
+    </Shape>
+    <Shape name="hare" translation="2 0 -1" shapeId="28" static="true" trigger="true" collisionFilterGroup="0x20000000" collisionFilterMask="0x100000" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" clipDistance="150" nodeId="28">
+      <Shape name="hareCol" shapeId="29" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="29">
+        <Shape name="visual" shapeId="30" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="150" nodeId="30"/>
+      </Shape>
+    </Shape>
+    <Shape name="rooster" translation="-2 0 0" shapeId="31" static="true" trigger="true" collisionFilterGroup="0x20000000" collisionFilterMask="0x100000" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" clipDistance="150" nodeId="31">
+      <Shape name="roosterCol" shapeId="32" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="32">
+        <Shape name="visual" shapeId="33" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="150" nodeId="33"/>
+      </Shape>
+    </Shape>
+    <Shape name="owl" translation="-1 0 0" shapeId="34" static="true" trigger="true" collisionFilterGroup="0x20000000" collisionFilterMask="0x100000" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" clipDistance="150" nodeId="34">
+      <Shape name="owlCol" shapeId="35" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="35">
+        <Shape name="visual" shapeId="36" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="150" nodeId="36"/>
+      </Shape>
+    </Shape>
+    <Shape name="marmot" shapeId="37" static="true" trigger="true" collisionFilterGroup="0x20000000" collisionFilterMask="0x100000" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" clipDistance="150" nodeId="37">
+      <Shape name="marmotCol" shapeId="38" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="38">
+        <Shape name="visual" shapeId="39" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="150" nodeId="39"/>
+      </Shape>
+    </Shape>
+    <Shape name="kingfisher" translation="1 0 0" shapeId="40" static="true" trigger="true" collisionFilterGroup="0x20000000" collisionFilterMask="0x100000" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" clipDistance="150" nodeId="40">
+      <Shape name="kingfisherCol" shapeId="41" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="41">
+        <Shape name="visual" shapeId="42" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="150" nodeId="42"/>
+      </Shape>
+    </Shape>
+    <Shape name="hedgehog" translation="2 0 0" shapeId="43" static="true" trigger="true" collisionFilterGroup="0x20000000" collisionFilterMask="0x100000" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" clipDistance="150" nodeId="43">
+      <Shape name="hedgehogCol" shapeId="44" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="44">
+        <Shape name="visual" shapeId="45" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="150" nodeId="45"/>
+      </Shape>
+    </Shape>
+    <Shape name="squirrel" translation="-2 0 1" shapeId="46" static="true" trigger="true" collisionFilterGroup="0x20000000" collisionFilterMask="0x100000" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" clipDistance="150" nodeId="46">
+      <Shape name="squirrelCol" shapeId="47" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="47">
+        <Shape name="visual" shapeId="48" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="150" nodeId="48"/>
+      </Shape>
+    </Shape>
+    <Shape name="turtle" translation="-1 0 1" shapeId="49" static="true" trigger="true" collisionFilterGroup="0x20000000" collisionFilterMask="0x100000" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" clipDistance="150" nodeId="49">
+      <Shape name="turtleCol" shapeId="50" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="50">
+        <Shape name="visual" shapeId="51" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="150" nodeId="51"/>
+      </Shape>
+    </Shape>
+    <Shape name="wolf" translation="0 0 1" shapeId="52" static="true" trigger="true" collisionFilterGroup="0x20000000" collisionFilterMask="0x100000" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" clipDistance="150" nodeId="52">
+      <Shape name="wolfCol" shapeId="53" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="53">
+        <Shape name="visual" shapeId="54" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="150" nodeId="54"/>
+      </Shape>
+    </Shape>
+    <Shape name="woodpecker" translation="1 0 1" shapeId="55" static="true" trigger="true" collisionFilterGroup="0x20000000" collisionFilterMask="0x100000" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" clipDistance="150" nodeId="55">
+      <Shape name="woodpeckerCol" shapeId="56" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="56">
+        <Shape name="visual" shapeId="57" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="150" nodeId="57"/>
+      </Shape>
+    </Shape>
+    <Shape name="sheep" translation="2 0 1" shapeId="58" static="true" trigger="true" collisionFilterGroup="0x20000000" collisionFilterMask="0x100000" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" clipDistance="150" nodeId="58">
+      <Shape name="sheepCol" shapeId="59" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="59">
+        <Shape name="visual" shapeId="60" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="150" nodeId="60"/>
+      </Shape>
+    </Shape>
+  </Scene>
+
+  <UserAttributes>
+    <UserAttribute nodeId="1">
+      <Attribute name="name" type="string" value="bear"/>
+      <Attribute name="onCreate" type="scriptCallback" value="Collectible.onCreate"/>
+    </UserAttribute>
+    <UserAttribute nodeId="4">
+      <Attribute name="name" type="string" value="boar"/>
+      <Attribute name="onCreate" type="scriptCallback" value="Collectible.onCreate"/>
+    </UserAttribute>
+    <UserAttribute nodeId="7">
+      <Attribute name="name" type="string" value="deer"/>
+      <Attribute name="onCreate" type="scriptCallback" value="Collectible.onCreate"/>
+    </UserAttribute>
+    <UserAttribute nodeId="10">
+      <Attribute name="name" type="string" value="dog01"/>
+      <Attribute name="onCreate" type="scriptCallback" value="Collectible.onCreate"/>
+    </UserAttribute>
+    <UserAttribute nodeId="13">
+      <Attribute name="name" type="string" value="dog02"/>
+      <Attribute name="onCreate" type="scriptCallback" value="Collectible.onCreate"/>
+    </UserAttribute>
+    <UserAttribute nodeId="16">
+      <Attribute name="name" type="string" value="eagle"/>
+      <Attribute name="onCreate" type="scriptCallback" value="Collectible.onCreate"/>
+    </UserAttribute>
+    <UserAttribute nodeId="19">
+      <Attribute name="name" type="string" value="bass"/>
+      <Attribute name="onCreate" type="scriptCallback" value="Collectible.onCreate"/>
+    </UserAttribute>
+    <UserAttribute nodeId="22">
+      <Attribute name="name" type="string" value="fox"/>
+      <Attribute name="onCreate" type="scriptCallback" value="Collectible.onCreate"/>
+    </UserAttribute>
+    <UserAttribute nodeId="25">
+      <Attribute name="name" type="string" value="frog"/>
+      <Attribute name="onCreate" type="scriptCallback" value="Collectible.onCreate"/>
+    </UserAttribute>
+    <UserAttribute nodeId="28">
+      <Attribute name="name" type="string" value="hare"/>
+      <Attribute name="onCreate" type="scriptCallback" value="Collectible.onCreate"/>
+    </UserAttribute>
+    <UserAttribute nodeId="31">
+      <Attribute name="name" type="string" value="rooster"/>
+      <Attribute name="onCreate" type="scriptCallback" value="Collectible.onCreate"/>
+    </UserAttribute>
+    <UserAttribute nodeId="34">
+      <Attribute name="name" type="string" value="owl"/>
+      <Attribute name="onCreate" type="scriptCallback" value="Collectible.onCreate"/>
+    </UserAttribute>
+    <UserAttribute nodeId="37">
+      <Attribute name="name" type="string" value="marmot"/>
+      <Attribute name="onCreate" type="scriptCallback" value="Collectible.onCreate"/>
+    </UserAttribute>
+    <UserAttribute nodeId="40">
+      <Attribute name="name" type="string" value="kingfisher"/>
+      <Attribute name="onCreate" type="scriptCallback" value="Collectible.onCreate"/>
+    </UserAttribute>
+    <UserAttribute nodeId="43">
+      <Attribute name="name" type="string" value="hedgehog"/>
+      <Attribute name="onCreate" type="scriptCallback" value="Collectible.onCreate"/>
+    </UserAttribute>
+    <UserAttribute nodeId="46">
+      <Attribute name="name" type="string" value="squirrel"/>
+      <Attribute name="onCreate" type="scriptCallback" value="Collectible.onCreate"/>
+    </UserAttribute>
+    <UserAttribute nodeId="49">
+      <Attribute name="name" type="string" value="turtle"/>
+      <Attribute name="onCreate" type="scriptCallback" value="Collectible.onCreate"/>
+    </UserAttribute>
+    <UserAttribute nodeId="52">
+      <Attribute name="name" type="string" value="wolf"/>
+      <Attribute name="onCreate" type="scriptCallback" value="Collectible.onCreate"/>
+    </UserAttribute>
+    <UserAttribute nodeId="55">
+      <Attribute name="name" type="string" value="woodpecker"/>
+      <Attribute name="onCreate" type="scriptCallback" value="Collectible.onCreate"/>
+    </UserAttribute>
+    <UserAttribute nodeId="58">
+      <Attribute name="name" type="string" value="sheep"/>
+      <Attribute name="onCreate" type="scriptCallback" value="Collectible.onCreate"/>
+    </UserAttribute>
+  </UserAttributes>
+</i3D>

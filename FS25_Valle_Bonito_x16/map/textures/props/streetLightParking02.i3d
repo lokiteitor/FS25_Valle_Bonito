@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="streetLightParking02" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="1" filename="$data/shaders/glowShader.xml" />
+    <File fileId="5" filename="$data/shaders/placeableShader.xml" />
+    <File fileId="2" filename="streetLightParking02_diffuse.png" />
+    <File fileId="3" filename="streetLightParking02_normal.png" />
+    <File fileId="4" filename="streetLightParking02_specular.png" />
+  </Files>
+
+  <Materials>
+    <Material name="lambert1" materialId="1" diffuseColor="0.5 0.5 0.5 1">
+    </Material>
+    <Material name="light_mat" materialId="3" diffuseColor="0.783133 0.783133 0.783133 0.331325" specularColor="1 1 1" alphaBlending="true" customShaderId="1">
+      <CustomParameter name="lightControl" value="1.0"/>
+    </Material>
+    <Material name="streetLightParking02_01_mat" materialId="4" customShaderId="1">
+      <CustomParameter name="lightControl" value="6"/>
+      <Texture fileId="2"/>
+      <Normalmap fileId="3"/>
+      <Glossmap fileId="4"/>
+    </Material>
+    <Material name="streetLightParking02_02_mat" materialId="2" customShaderId="5">
+      <Texture fileId="2"/>
+      <Normalmap fileId="3"/>
+      <Glossmap fileId="4"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="streetLightParking02.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <Shape name="streetLightParking02" shapeId="1" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="1">
+      <Shape name="visual" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="140" nodeId="2"/>
+      <TransformGroup name="illum" nodeId="3">
+        <Shape name="glass" shapeId="3" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="100" nodeId="4" weatherRequiredMask="0x40" renderInvisible="true"/>
+        <Shape name="selfIllum" translation="-0.000001 6.142288 0" shapeId="4" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="100" nodeId="5" weatherRequiredMask="0x40" renderInvisible="true" visibleShaderParameter="6"/>
+        <Light name="spotLight" translation="0 5.957655 0" rotation="-90 0 0" type="spot" color="0.572289 0.572289 0.572289" emitDiffuse="true" emitSpecular="true" range="20" coneAngle="130" dropOff="4" clipDistance="120" nodeId="6" weatherRequiredMask="0x40"/>
+        <Light name="pointLight1" translation="0 6.148887 0" type="point" color="0.138554 0.138554 0.138554" emitDiffuse="true" emitSpecular="true" range="5" clipDistance="120" nodeId="7" weatherRequiredMask="0x40"/>
+      </TransformGroup>
+    </Shape>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

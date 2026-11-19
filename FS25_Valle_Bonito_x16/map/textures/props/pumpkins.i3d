@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="pumpkins" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="1" filename="pumpkins_diffuse.png" />
+    <File fileId="2" filename="pumpkins_normal.png" />
+    <File fileId="3" filename="pumpkins_specular.png" />
+  </Files>
+
+  <Materials>
+    <Material name="lambert1" materialId="1" diffuseColor="0.5 0.5 0.5 1">
+    </Material>
+    <Material name="pumpkins_mat" materialId="2">
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="pumpkins.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <Shape name="pumpkin01" shapeId="1" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="1">
+      <Shape name="visual" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="80" nodeId="2" weatherRequiredMask="0x200"/>
+    </Shape>
+    <Shape name="pumpkin02" shapeId="3" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="3">
+      <Shape name="visual" shapeId="4" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="80" nodeId="4" weatherRequiredMask="0x200"/>
+    </Shape>
+    <Shape name="pumpkin03" shapeId="5" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="5">
+      <Shape name="visual" shapeId="6" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="80" nodeId="6" weatherRequiredMask="0x200"/>
+    </Shape>
+    <Shape name="pumpkin04" shapeId="7" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="7">
+      <Shape name="visual" shapeId="8" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="80" nodeId="8" weatherRequiredMask="0x200"/>
+    </Shape>
+    <Shape name="pumpkin05" shapeId="9" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="9">
+      <Shape name="visual" shapeId="10" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="80" nodeId="10" weatherRequiredMask="0x200"/>
+    </Shape>
+    <Shape name="pumpkin06" shapeId="11" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="11">
+      <Shape name="visual" shapeId="12" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="80" nodeId="12" weatherRequiredMask="0x200"/>
+    </Shape>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='utf-8'?>
+<i3D xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="waterFallRock04m" version="1.6" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="11" filename="$data/effects/waterSplash/waterSplash8x8_diffuse.png" />
+    <File fileId="12" filename="$data/effects/waterSplash/waterSplash8x8_normal.png" />
+    <File fileId="13" filename="$data/effects/waterSplash/waterSplash8x8_specular.png" />
+    <File fileId="5" filename="$data/maps/textures/shared/mapLeaks_diffuse.png" />
+    <File fileId="7" filename="$data/maps/textures/shared/mapMoss_diffuse.png" />
+    <File fileId="4" filename="$data/shaders/buildingShader.xml" />
+    <File fileId="10" filename="$data/shaders/foamShader.xml" />
+    <File fileId="19" filename="$data/shaders/oceanShader.xml" />
+    <File fileId="14" filename="$data/shaders/subUVShader.xml" />
+    <File fileId="17" filename="$data/shaders/waterfallShader.xml" />
+    <File fileId="8" filename="$data/effects/waterFall/foam_diffuse.png" />
+    <File fileId="9" filename="$data/effects/waterFall/foam_normal.png" />
+    <File fileId="15" filename="$data/effects/waterFall/waterArray_diffuse.png" />
+    <File fileId="16" filename="$data/effects/waterFall/waterArray_normal.png" />
+    <File fileId="20" filename="$data/maps/mapUS/textures/creek/waterFallRock04_flowmap.png" />
+    <File fileId="18" filename="water_normal.png" />
+    <File fileId="6" filename="waterfallRocks_mask.png" />
+    <File fileId="1" filename="$data/maps/textures/shared/props/rocks/modularRock01_diffuse.png" />
+    <File fileId="2" filename="$data/maps/textures/shared/props/rocks/modularRock01_normal.png" />
+    <File fileId="3" filename="$data/maps/textures/shared/props/rocks/modularRock01_specular.png" />
+  </Files>
+
+  <Materials>
+    <Material name="lambert1" materialId="8" diffuseColor="0.5 0.5 0.5 1">
+    </Material>
+    <Material name="modularRock01_mat" materialId="1" customShaderId="4">
+      <CustomParameter name="dirtMossMix" value="1.0 1.0" />
+      <CustomParameter name="dirtMossSmoothness" value="0.52 0.52" />
+      <Custommap name="mDirtDiffuse" fileId="5" />
+      <Custommap name="mMaskMap" fileId="6" />
+      <Custommap name="mMossDiffuse" fileId="7" />
+      <Texture fileId="1" />
+      <Normalmap fileId="2" />
+      <Glossmap fileId="3" />
+    </Material>
+    <Material name="foam_01_mat" materialId="4" specularColor="0.8 1 0" alphaBlending="true" customShaderId="10" customShaderVariation="secondUV">
+      <CustomParameter name="uvScaleSpeed" value="1.0 1.0 0.0 0.8" />
+      <Texture fileId="8" />
+      <Normalmap fileId="9" />
+    </Material>
+    <Material name="waterSplash8x8_mat" materialId="5" alphaBlending="true" customShaderId="14">
+      <CustomParameter name="colorAlpha" value="1.0 1.0 1.0 0.9" />
+      <Texture fileId="11" />
+      <Normalmap fileId="12" />
+      <Glossmap fileId="13" />
+    </Material>
+    <Material name="waterArray_mat" materialId="6" specularColor="0.8 1 0" customShaderId="17">
+      <Refractionmap type="planar" coeff="1" bumpScale="0.1" />
+      <Texture fileId="15" />
+      <Normalmap fileId="16" />
+    </Material>
+    <Material name="water_01_mat" materialId="2" diffuseColor="0.5 0.5 0.5 1" specularColor="1 1 1" customShaderId="19" customShaderVariation="flowMap">
+      <Refractionmap type="planar" coeff="1" bumpScale="0.1" />
+      <CustomParameter name="depthScale" value="0.01" />
+      <CustomParameter name="uvScaleSpeedDistort" value="1 1 0.25 2" />
+      <CustomParameter name="windScale" value="0.5" />
+      <Custommap name="flowMap" fileId="20" />
+      <Normalmap fileId="18" />
+    </Material>
+    <Material name="foam_02_mat" materialId="7" specularColor="0.8 1 0" alphaBlending="true" customShaderId="10" customShaderVariation="flowMap">
+      <CustomParameter name="uvScaleSpeed" value="0.5 0.5 0.5 2" />
+      <Custommap name="flowMap" fileId="20" />
+      <Texture fileId="8" />
+      <Normalmap fileId="9" />
+    </Material>
+    <Material name="water_02_mat" materialId="3" diffuseColor="0.5 0.5 0.5 1" specularColor="1 1 1" customShaderId="19" customShaderVariation="simple">
+      <CustomParameter name="depthScale" value="0.01" />
+      <CustomParameter name="windScale" value="0.5" />
+      <Normalmap fileId="18" />
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="waterFallRock04m.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="waterFallRock4m_lod" lodDistance="0 95" collision="false" nodeId="1">
+      <Shape name="LOD0" shapeId="1" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="100" nodeId="2">
+        <TransformGroup name="waterGrp" nodeId="3">
+          <TransformGroup name="waterPlane" nodeId="4">
+            <Shape name="visibleWater" shapeId="2" castsShadows="false" receiveShadows="true" materialIds="2" clipDistance="300" nodeId="5" />
+            <Shape name="visibleWaterOnlyInMirrors" shapeId="3" castsShadows="false" receiveShadows="true" materialIds="3" objectMask="0x8000" clipDistance="300" nodeId="6" />
+          </TransformGroup>
+          <TransformGroup name="foamBottom" translation="0.43497 -5.252254 1.413801" nodeId="7">
+            <Shape name="foam" shapeId="4" castsShadows="false" receiveShadows="true" materialIds="4" clipDistance="100" nodeId="8" />
+            <Shape name="waterSplash" shapeId="5" castsShadows="false" receiveShadows="true" materialIds="5" clipDistance="100" nodeId="9" />
+          </TransformGroup>
+          <TransformGroup name="waterFallGrp" nodeId="10">
+            <Shape name="waterFall" shapeId="6" castsShadows="false" receiveShadows="true" materialIds="6" clipDistance="280" nodeId="11" />
+            <Shape name="foamTop" shapeId="7" castsShadows="false" receiveShadows="true" materialIds="7" clipDistance="100" nodeId="12" />
+            <Shape name="waterSplash" translation="1.137565 -1.462442 1.325226" shapeId="8" castsShadows="false" receiveShadows="true" materialIds="5" clipDistance="100" nodeId="13" />
+          </TransformGroup>
+        </TransformGroup>
+        <Shape name="terrainSnap" visibility="false" shapeId="9" castsShadows="true" receiveShadows="true" materialIds="8" nodeId="14" />
+      </Shape>
+      <Shape name="LOD1" shapeId="10" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="450" nodeId="15" />
+    </TransformGroup>
+  </Scene>
+
+  <UserAttributes>
+    <UserAttribute nodeId="5">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="11">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+  </UserAttributes>
+</i3D>

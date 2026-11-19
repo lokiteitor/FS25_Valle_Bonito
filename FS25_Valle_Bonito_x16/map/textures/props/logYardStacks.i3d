@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='utf-8'?>
+<i3D xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="logYardStacks" version="1.6" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="4" filename="$data/shaders/placeableShader.xml" />
+    <File fileId="1" filename="$data/placeables/brandless/productionPointsGeneric/shared/logYardStacks_diffuse.png" />
+    <File fileId="2" filename="$data/placeables/brandless/productionPointsGeneric/shared/logYardStacks_normal.png" />
+    <File fileId="3" filename="$data/placeables/brandless/productionPointsGeneric/shared/logYardStacks_specular.png" />
+  </Files>
+
+  <Materials>
+    <Material name="lambert1" materialId="2" diffuseColor="0.5 0.5 0.5 1">
+    </Material>
+    <Material name="logYardStacks_mat" materialId="1" customShaderId="4">
+      <Texture fileId="1" />
+      <Normalmap fileId="2" />
+      <Glossmap fileId="3" />
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="logYardStacks.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="logYardStacks01" lodDistance="0 80" collision="false" density="0" nodeId="1">
+      <Shape name="LOD0" shapeId="1" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="100" nodeId="2" />
+      <Shape name="LOD1" shapeId="2" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="600" nodeId="3" />
+    </TransformGroup>
+    <TransformGroup name="logYardStacks02" translation="0 0 16" lodDistance="0 100" collision="false" density="0" nodeId="4">
+      <Shape name="LOD0" translation="0 0 0.000283" shapeId="3" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="100" nodeId="5" />
+      <Shape name="LOD1" translation="0 0 0.000283" shapeId="4" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="600" nodeId="6" />
+    </TransformGroup>
+    <Shape name="log01" translation="32 0 0" shapeId="5" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="2" clipDistance="100" nodeId="7">
+      <Shape name="visual" shapeId="6" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="100" nodeId="8" />
+    </Shape>
+    <Shape name="logPile01" translation="36 0 0" shapeId="7" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="2" clipDistance="100" nodeId="9">
+      <Shape name="visual" shapeId="8" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="200" nodeId="10" />
+    </Shape>
+    <Shape name="logPile02" translation="40 0 0" shapeId="9" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="2" clipDistance="100" nodeId="11">
+      <Shape name="visual" shapeId="10" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="250" nodeId="12" />
+    </Shape>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

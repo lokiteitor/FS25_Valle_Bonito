@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='utf-8'?>
+<i3D xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="bridgeOldTrain" version="1.6" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="4" filename="$data/shaders/buildingShader.xml" />
+    <File fileId="1" filename="$data/maps/mapEU/textures/props/bridgeOldTrain_diffuse.png" />
+    <File fileId="5" filename="bridgeOldTrain_mask.png" />
+    <File fileId="2" filename="$data/maps/mapEU/textures/props/bridgeOldTrain_normal.png" />
+    <File fileId="3" filename="$data/maps/mapEU/textures/props/bridgeOldTrain_specular.png" />
+  </Files>
+
+  <Materials>
+    <Material name="lambert1" materialId="2" diffuseColor="0.5 0.5 0.5 1">
+    </Material>
+    <Material name="bridgeOldTrain_mat" materialId="1" customShaderId="4">
+      <Custommap name="mMaskMap" fileId="5" />
+      <Texture fileId="1" />
+      <Normalmap fileId="2" />
+      <Glossmap fileId="3" />
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="bridgeOldTrain.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="oldTrainBridge" translation="-147.603134 39.937092 155.669495" rotation="0 155.173004 0" lodDistance="0 90" collision="false" density="0" nodeId="1">
+      <TransformGroup name="LOD0" nodeId="2">
+        <TransformGroup name="middle" translation="-0.000009 -0.000015 15.91607" nodeId="3">
+          <Shape name="middle01" translation="-0.000021 0 -0.000002" shapeId="1" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="4" />
+          <Shape name="middle02" translation="-0.000017 0.000007 -15.91605" shapeId="1" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="5" />
+          <Shape name="middle03" translation="-0.000013 0.000015 -31.832098" shapeId="1" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="6" />
+        </TransformGroup>
+        <TransformGroup name="ends" translation="-0.000017 -0.00002 31.832119" nodeId="7">
+          <Shape name="end01" translation="-0.000007 0 0.000002" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="8" />
+          <Shape name="end02" translation="-0.00003 0.000015 -63.664207" rotation="0 -180 0" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="9" />
+        </TransformGroup>
+        <Shape name="col" translation="-0.000047 -2.549994 0.000017" rotation="0 204.826996 0" shapeId="3" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="2" nodeId="10" />
+      </TransformGroup>
+      <TransformGroup name="LOD1" nodeId="11">
+        <Shape name="oldTrainBridgeLOD" translation="-0.000128 -2.550071 0.000056" rotation="0 204.826996 0" shapeId="4" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="12" />
+      </TransformGroup>
+    </TransformGroup>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

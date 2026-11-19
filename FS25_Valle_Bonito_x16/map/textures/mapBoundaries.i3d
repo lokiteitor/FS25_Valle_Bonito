@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="mapBoundaries" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+  </Files>
+
+  <Materials>
+    <Material name="lambert1" materialId="1" diffuseColor="0.5 0.5 0.5 1">
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="mapBoundaries.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <Shape name="mapBoundaryE01" translation="1000 80 0" shapeId="1" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="false" nonRenderable="true" materialIds="1" nodeId="1"/>
+    <Shape name="mapBoundaryE02" translation="1000 80 0" shapeId="2" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="false" nonRenderable="true" materialIds="1" nodeId="2"/>
+    <Shape name="mapBoundaryN01" translation="0 80 -1000" shapeId="3" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="false" nonRenderable="true" materialIds="1" nodeId="3"/>
+    <Shape name="mapBoundaryN02" translation="0 80 -1000" shapeId="4" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="false" nonRenderable="true" materialIds="1" nodeId="4"/>
+    <Shape name="mapBoundaryS01" translation="0 80 1000" shapeId="5" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="false" nonRenderable="true" materialIds="1" nodeId="5"/>
+    <Shape name="mapBoundaryS02" translation="0 80 1000" shapeId="6" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="false" nonRenderable="true" materialIds="1" nodeId="6"/>
+    <Shape name="mapBoundaryW01" translation="-1000 80 0" shapeId="7" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="false" nonRenderable="true" materialIds="1" nodeId="7"/>
+    <Shape name="mapBoundaryW02" translation="-1000 80 0" shapeId="8" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="false" nonRenderable="true" materialIds="1" nodeId="8"/>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

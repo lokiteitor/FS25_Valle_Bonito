@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='utf-8'?>
+<i3D xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="trainStationRamp" version="1.6" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="1" filename="$data/maps/mapEU/textures/props/bridgeOldTrain_diffuse.png" />
+    <File fileId="2" filename="$data/maps/mapEU/textures/props/bridgeOldTrain_normal.png" />
+    <File fileId="3" filename="$data/maps/mapEU/textures/props/bridgeOldTrain_specular.png" />
+  </Files>
+
+  <Materials>
+    <Material name="bridgeOldTrain_mat" materialId="1">
+      <Texture fileId="1" />
+      <Normalmap fileId="2" />
+      <Glossmap fileId="3" />
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="trainStationRamp.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <Shape name="trainStationRamp" shapeId="1" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="1" />
+    <Shape name="trainStationPlatformStraight02" translation="20 0 -36" shapeId="2" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="2" />
+    <Shape name="trainStationPlatformStraight04" translation="20 0 -20" shapeId="3" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="3" />
+    <Shape name="trainStationPlatformStraight08" translation="20 0 20" shapeId="4" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="4" />
+    <Shape name="trainStationPlatformRamp01" translation="20 0 48" shapeId="5" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="5" />
+    <Shape name="trainStationPlatformRamp02" translation="20 0 -3" shapeId="6" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="6" />
+    <Shape name="trainStationPlatformRamp03" translation="20 0 -40" rotation="0 180 0" shapeId="7" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="7" />
+    <Shape name="trainStationPlatformRamp04" translation="20 0 41" shapeId="8" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="8" />
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

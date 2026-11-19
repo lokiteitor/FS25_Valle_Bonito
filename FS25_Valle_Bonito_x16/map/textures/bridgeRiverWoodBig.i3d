@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="bridgeRiverWoodBig" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="4" filename="$data/shaders/buildingShader.xml" />
+    <File fileId="1" filename="bridgeRiverWoodBig_diffuse.png" />
+    <File fileId="5" filename="bridgeRiverWoodBig_mask.png" />
+    <File fileId="2" filename="bridgeRiverWoodBig_normal.png" />
+    <File fileId="3" filename="bridgeRiverWoodBig_specular.png" />
+  </Files>
+
+  <Materials>
+    <Material name="lambert1" materialId="1" diffuseColor="0.5 0.5 0.5 1">
+    </Material>
+    <Material name="bridgeRiverWoodBig_01_mat" materialId="2" customShaderId="4">
+      <Custommap name="mMaskMap" fileId="5"/>
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+    </Material>
+    <Material name="bridgeRiverWoodBig_02_mat" materialId="3" customShaderId="4" shadingRate="2x4">
+      <Custommap name="mMaskMap" fileId="5"/>
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="bridgeRiverWoodBig.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="riverBridgeWoodBig_lod" translation="-470.012207 50.721436 223.628235" rotation="0 -26.700001 0" lodDistance="0 150" collision="false" density="0" nodeId="1">
+      <TransformGroup name="LOD0" nodeId="2">
+        <Shape name="col" translation="-0.000128 0 -0.000544" shapeId="1" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="3"/>
+        <Shape name="riverBridgeWoodBig" translation="0.000352 15.464367 0.000525" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1000" nodeId="4"/>
+        <TransformGroup name="top" translation="0.000293 -16.13785 -0.000425" nodeId="5">
+          <Shape name="topPart01" translation="0.000078 26.634537 -36.915306" shapeId="3" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1000" nodeId="6"/>
+          <Shape name="topPart02" translation="0.000065 26.635 -24.609911" shapeId="3" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1000" nodeId="7"/>
+          <Shape name="topPart03" translation="0.000039 26.634537 -12.304522" shapeId="3" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1000" nodeId="8"/>
+          <Shape name="topPart04" translation="0.000079 26.635 0.00095" shapeId="3" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1000" nodeId="9"/>
+          <Shape name="topPart05" translation="0.000035 26.634542 12.306336" shapeId="3" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1000" nodeId="10"/>
+          <Shape name="topPart06" translation="0.000053 26.635 24.611807" shapeId="3" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1000" nodeId="11"/>
+          <Shape name="topPart07" translation="0.000078 26.634542 36.917625" shapeId="3" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1000" nodeId="12"/>
+          <TransformGroup name="ends" nodeId="13">
+            <Shape name="end01" translation="0.00002 31.210554 -49.219093" shapeId="4" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1000" nodeId="14"/>
+            <Shape name="end02" translation="0.000039 31.210522 49.193733" rotation="0 -180 0" shapeId="4" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1000" nodeId="15"/>
+          </TransformGroup>
+          <Shape name="topPart" translation="0.000079 32.043915 43.070324" shapeId="5" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1000" nodeId="16"/>
+        </TransformGroup>
+        <TransformGroup name="pillars" nodeId="17">
+          <Shape name="pillar01" translation="-0.008602 0.254472 -30.767159" shapeId="6" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1000" nodeId="18"/>
+          <Shape name="pillar02" translation="0.017536 -1.10273 -18.383141" shapeId="7" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1000" nodeId="19"/>
+          <Shape name="pillar03" translation="-0.017614 -1.102731 -6.161031" shapeId="7" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1000" nodeId="20"/>
+          <Shape name="pillar04" translation="0.017536 -1.10273 6.162484" shapeId="7" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1000" nodeId="21"/>
+          <Shape name="pillar05" translation="-0.017576 -1.102731 18.449078" shapeId="7" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1000" nodeId="22"/>
+          <Shape name="pillar06" translation="-0.01759 4.377976 30.75564" shapeId="8" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1000" nodeId="23"/>
+          <TransformGroup name="end" nodeId="24">
+            <Shape name="endPillar01" translation="0.017671 4.377956 -43.057571" shapeId="9" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1000" nodeId="25"/>
+            <Shape name="endPillar02" translation="0.008676 5.73516 43.072865" shapeId="10" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="1000" nodeId="26"/>
+          </TransformGroup>
+        </TransformGroup>
+      </TransformGroup>
+      <TransformGroup name="LOD1" translation="0.000095 -0.003293 0.000668" rotation="0 26.700001 0" nodeId="27">
+        <Shape name="riverBridgeWoodBigLOD" translation="0.000006 0.000002 -0.000012" shapeId="11" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="800" nodeId="28"/>
+      </TransformGroup>
+    </TransformGroup>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

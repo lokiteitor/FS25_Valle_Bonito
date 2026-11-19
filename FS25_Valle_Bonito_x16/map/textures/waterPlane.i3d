@@ -1,0 +1,317 @@
+<?xml version='1.0' encoding='utf-8'?>
+<i3D xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="waterPlane" version="1.6" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="4" filename="$data/maps/textures/shared/water_normal.png" />
+    <File fileId="3" filename="$data/shaders/foamShader.xml" />
+    <File fileId="5" filename="$data/shaders/oceanShader.xml" />
+    <File fileId="1" filename="$data/effects/waterFall/foam_diffuse.png" />
+    <File fileId="2" filename="$data/effects/waterFall/foam_normal.png" />
+  </Files>
+
+  <Materials>
+    <Material name="foam_01_mat" materialId="3" specularColor="0.8 1 0" alphaBlending="true" customShaderId="3" customShaderVariation="vtxColor">
+      <CustomParameter name="uvScaleSpeed" value="1 1.0 0.0 1.0" />
+      <Texture fileId="1" />
+      <Normalmap fileId="2" />
+    </Material>
+    <Material name="foam_02_mat" materialId="4" specularColor="0.8 1 0" alphaBlending="true" customShaderId="3" customShaderVariation="vtxColor">
+      <CustomParameter name="uvScaleSpeed" value="1.5 0.5 0.0 0.65" />
+      <Texture fileId="1" />
+      <Normalmap fileId="2" />
+    </Material>
+    <Material name="waterSim_mat" materialId="1" diffuseColor="1 1 1 1" specularColor="1 1 1" customShaderId="5">
+      <Refractionmap type="planar" coeff="1" bumpScale="0.01" withSSRData="true" />
+      <CustomParameter name="depthScale" value="0.4" />
+      <CustomParameter name="underwaterFogColor" value="0.09 0.14 0.11 1.0" />
+      <CustomParameter name="underwaterFogDepth" value="2.4 2.5 1.3 1.0" />
+      <Normalmap fileId="4" />
+    </Material>
+    <Material name="waterSimple_mat" materialId="2" diffuseColor="1 1 1 1" specularColor="1 1 1" customShaderId="5" customShaderVariation="simple">
+      <CustomParameter name="depthScale" value="0.4" />
+      <CustomParameter name="underwaterFogColor" value="0.09 0.14 0.11 1.0" />
+      <CustomParameter name="underwaterFogDepth" value="2.4 2.5 1.3 1.0" />
+      <Normalmap fileId="4" />
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="waterPlane.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="waterPlanes" nodeId="1">
+      <TransformGroup name="waterSimulation" nodeId="2">
+        <Shape name="waterPlane01" translation="-806.633728 37.5 -19.293282" shapeId="1" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="3" />
+        <Shape name="waterPlane02" translation="2045.315918 43.302658 1415.60437" shapeId="2" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="4" />
+        <Shape name="waterPlane05" translation="1144.554199 74.197411 -769.74939" shapeId="3" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="5" />
+        <Shape name="waterPlane06" translation="751.942078 70.418503 -919.644165" shapeId="4" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="6" />
+        <Shape name="waterPlane07" translation="96.068253 45.587299 -299.69812" shapeId="5" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="7" />
+        <Shape name="waterPlane08" translation="61.998657 53.006702 -353.269989" shapeId="6" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="8" />
+        <Shape name="waterPlane09" translation="512.269226 66.667015 -170.646637" shapeId="7" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="9" />
+        <Shape name="waterPlane10" translation="-526.851807 102.593575 -938.94342" shapeId="8" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="10" />
+        <Shape name="waterPlane11" translation="-626.465332 114 -872.262939" shapeId="9" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="11" />
+        <Shape name="waterPlane12" translation="-108.250458 48.994999 -64.90979" shapeId="10" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="12" />
+        <Shape name="waterPlane15" translation="-273.724548 129.735016 -326.452606" shapeId="11" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="13" />
+        <Shape name="waterPlane16" translation="-253.943909 118.359016 -328.874817" shapeId="12" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="14" />
+        <Shape name="waterPlane17" translation="-199.850479 90.531952 -341.269958" shapeId="13" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="15" />
+        <Shape name="waterPlane18" translation="-168.738449 74.662956 -335.358429" shapeId="14" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="16" />
+        <Shape name="waterPlane19" translation="-649.421143 110.648506 -753.893311" shapeId="15" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="17" />
+        <Shape name="waterPlane20" translation="-709.36908 99.832466 -685.061279" shapeId="16" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="18" />
+        <Shape name="waterPlane21" translation="-744.27179 66.305458 -635.233704" shapeId="17" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="19" />
+        <Shape name="waterPlane22" translation="-915.674927 102.724998 -294.962097" shapeId="18" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="20" />
+        <Shape name="waterPlane23" translation="-905.845032 111.009384 -265.35672" shapeId="19" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="21" />
+        <Shape name="waterPlane24" translation="-884.784363 110.654007 -215.229736" shapeId="20" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="22" />
+        <Shape name="waterPlane25" translation="-762.862793 106.938019 331.656952" shapeId="21" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="23" />
+        <Shape name="waterPlane26" translation="-830.058655 91.369904 412.259521" shapeId="22" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="24" />
+        <Shape name="waterPlane27" translation="-733.676025 85.771378 488.355713" shapeId="23" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="25" />
+        <Shape name="waterPlane28" translation="300.166229 43.194717 603.065613" shapeId="24" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="26" />
+        <Shape name="waterPlane29" translation="211.466812 46.147797 428.678833" shapeId="25" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="27" />
+        <Shape name="waterPlane30" translation="270.898163 56.104237 397.457001" shapeId="26" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="28" />
+        <Shape name="waterPlane31" translation="276.198639 66.704788 286.395386" shapeId="27" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="29" />
+        <Shape name="waterPlane32" translation="111.624619 84.381706 252.39418" shapeId="28" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="30" />
+        <Shape name="waterPlane33" translation="422.424744 83.412666 321.645386" shapeId="29" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="31" />
+        <Shape name="waterPlane34" translation="447.95993 67.797401 402.487915" shapeId="30" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="32" />
+        <Shape name="waterPlane35" translation="519.711853 67.407234 199.122467" shapeId="31" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="33" />
+        <Shape name="waterPlane36" translation="555.93573 45.560562 372.321106" shapeId="32" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="34" />
+        <Shape name="waterPlane37" translation="1001.912048 74.24662 -18.647427" shapeId="33" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="35" />
+        <Shape name="waterPlane38" translation="678.236267 37.5 299.205017" shapeId="34" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="36" />
+        <Shape name="waterPlane39" translation="798.318481 61.752697 59.198494" shapeId="35" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="37" />
+        <Shape name="waterPlane40" translation="947.28717 78.813683 166.213211" shapeId="36" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="38" />
+        <Shape name="waterPlane41" translation="445.80127 51.157669 -871.54834" shapeId="37" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="39" />
+        <Shape name="waterPlane14" translation="-163.841919 40.873798 -232.455856" shapeId="38" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="40" />
+        <Shape name="waterPlane42" translation="420.167267 43.441002 820.621033" shapeId="39" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="41" />
+        <Shape name="waterPlane43" translation="556.816895 43.441002 812.082275" shapeId="40" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="1500" nodeId="42" />
+      </TransformGroup>
+      <TransformGroup name="waterInMirror" nodeId="43">
+        <Shape name="waterPlane01" translation="-806.633728 37.5 -19.293282" shapeId="41" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="44" />
+        <Shape name="waterPlane02" translation="2045.315918 43.302658 1415.60437" shapeId="42" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="45" />
+        <Shape name="waterPlane05" translation="1144.554199 74.197411 -769.74939" shapeId="43" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="46" />
+        <Shape name="waterPlane06" translation="751.942078 70.418503 -919.644165" shapeId="44" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="47" />
+        <Shape name="waterPlane07" translation="96.068253 45.587299 -299.69812" shapeId="45" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="48" />
+        <Shape name="waterPlane08" translation="61.998657 53.006702 -353.269989" shapeId="46" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="49" />
+        <Shape name="waterPlane09" translation="512.269226 66.667015 -170.646637" shapeId="47" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="50" />
+        <Shape name="waterPlane10" translation="-526.851807 102.593575 -938.94342" shapeId="48" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="51" />
+        <Shape name="waterPlane11" translation="-626.465332 114 -872.262939" shapeId="49" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="52" />
+        <Shape name="waterPlane12" translation="-108.250458 48.994999 -64.90979" shapeId="50" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="53" />
+        <Shape name="waterPlane15" translation="-273.724548 129.735016 -326.452606" shapeId="51" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="54" />
+        <Shape name="waterPlane16" translation="-253.943909 118.359016 -328.874817" shapeId="52" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="55" />
+        <Shape name="waterPlane17" translation="-199.850479 90.531952 -341.269958" shapeId="53" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="56" />
+        <Shape name="waterPlane18" translation="-168.738449 74.662956 -335.358429" shapeId="54" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="57" />
+        <Shape name="waterPlane19" translation="-649.421143 110.648506 -753.893311" shapeId="55" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="58" />
+        <Shape name="waterPlane20" translation="-709.36908 99.832466 -685.061279" shapeId="56" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="59" />
+        <Shape name="waterPlane21" translation="-744.27179 66.305458 -635.233704" shapeId="57" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="60" />
+        <Shape name="waterPlane22" translation="-915.674927 102.724998 -294.962097" shapeId="58" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="61" />
+        <Shape name="waterPlane23" translation="-905.845032 111.009384 -265.35672" shapeId="59" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="62" />
+        <Shape name="waterPlane24" translation="-884.784363 110.654007 -215.229736" shapeId="60" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="63" />
+        <Shape name="waterPlane25" translation="-762.862793 106.938019 331.656952" shapeId="61" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="64" />
+        <Shape name="waterPlane26" translation="-830.058655 91.369904 412.259521" shapeId="62" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="65" />
+        <Shape name="waterPlane27" translation="-733.676025 85.771378 488.355713" shapeId="63" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="66" />
+        <Shape name="waterPlane28" translation="300.166229 43.194717 603.065613" shapeId="64" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="67" />
+        <Shape name="waterPlane29" translation="211.466812 46.147797 428.678833" shapeId="65" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="68" />
+        <Shape name="waterPlane30" translation="270.898163 56.104237 397.457001" shapeId="66" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="69" />
+        <Shape name="waterPlane31" translation="276.198639 66.704788 286.395386" shapeId="67" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="70" />
+        <Shape name="waterPlane32" translation="111.624619 84.381706 252.39418" shapeId="68" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="71" />
+        <Shape name="waterPlane33" translation="422.424744 83.412666 321.645386" shapeId="69" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="72" />
+        <Shape name="waterPlane34" translation="447.95993 67.797401 402.487915" shapeId="70" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="73" />
+        <Shape name="waterPlane35" translation="519.711853 67.407234 199.122467" shapeId="71" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="74" />
+        <Shape name="waterPlane36" translation="555.93573 45.560562 372.321106" shapeId="72" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="75" />
+        <Shape name="waterPlane37" translation="1001.912048 74.24662 -18.647427" shapeId="73" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="76" />
+        <Shape name="waterPlane38" translation="678.236267 37.5 299.205017" shapeId="74" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="77" />
+        <Shape name="waterPlane39" translation="798.318481 61.752697 59.198494" shapeId="75" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="78" />
+        <Shape name="waterPlane40" translation="947.28717 78.813683 166.213211" shapeId="76" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="79" />
+        <Shape name="waterPlane41" translation="445.80127 51.157669 -871.54834" shapeId="77" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="80" />
+        <Shape name="waterPlane14" translation="-163.841919 40.873798 -232.455856" shapeId="78" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="81" />
+        <Shape name="waterPlane42" translation="420.167267 43.441002 820.621033" shapeId="79" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="82" />
+        <Shape name="waterPlane43" translation="556.816895 43.441002 812.082275" shapeId="80" castsShadows="false" receiveShadows="true" materialIds="2" objectMask="0x8000" clipDistance="8500" nodeId="83" />
+      </TransformGroup>
+      <TransformGroup name="foam" nodeId="84">
+        <Shape name="foam01" translation="616.768555 37.44656 296.878418" shapeId="81" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="85" />
+        <Shape name="foam02" translation="498.195892 67.430527 215.882645" shapeId="82" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="86" />
+        <Shape name="foam03" translation="538.839844 45.490219 336.473541" shapeId="83" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="87" />
+        <Shape name="foam04" translation="558.41864 45.487411 407.18988" shapeId="84" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="88" />
+        <Shape name="foam05" translation="716.021423 37.380054 214.940796" shapeId="85" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="89" />
+        <Shape name="foam06" translation="742.939392 37.253181 324.780334" shapeId="86" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="90" />
+        <Shape name="foam07" translation="814.43042 61.805447 54.131092" shapeId="87" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="91" />
+        <Shape name="foam08" translation="265.843353 43.315796 495.071198" shapeId="88" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="92" />
+        <Shape name="foam09" translation="212.486145 46.207325 422.969757" shapeId="89" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="93" />
+        <Shape name="foam10" translation="267.293915 56.20063 381.394562" shapeId="90" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="94" />
+        <Shape name="foam11" translation="288.615753 66.672935 284.571411" shapeId="91" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="95" />
+        <Shape name="foam12" translation="289.139313 66.723763 294.587769" shapeId="92" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="96" />
+        <Shape name="foam13" translation="263.739838 66.687271 291.311066" shapeId="93" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="97" />
+        <Shape name="foam14" translation="831.252808 37.257435 -535.055237" shapeId="94" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="98" />
+        <Shape name="foam15" translation="775.936829 37.479694 -561.991943" shapeId="95" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="99" />
+        <Shape name="foam16" translation="615.628235 37.50927 -423.906647" shapeId="96" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="100" />
+        <Shape name="foam17" translation="533.95929 37.513485 -362.368744" shapeId="97" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="101" />
+        <Shape name="foam18" translation="-203.75 37.032494 -981.205261" shapeId="98" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="102" />
+        <Shape name="foam19" translation="-77.133514 37.12323 -315.984894" shapeId="99" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="103" />
+        <Shape name="foam20" translation="-740.076843 85.955559 472.436218" shapeId="100" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="104" />
+        <Shape name="foam21" translation="-467.223755 37.185837 484.105804" shapeId="101" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="105" />
+        <Shape name="foam22" translation="511.440857 51.164818 -818.770203" shapeId="102" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="106" />
+        <Shape name="foam23" translation="513.819458 51.258305 -790.282227" shapeId="103" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="107" />
+        <Shape name="foam24" translation="258.050446 56.222916 396.215698" shapeId="104" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="150" nodeId="108" />
+        <Shape name="foam25" translation="219.759842 46.166035 436.110046" shapeId="105" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="150" nodeId="109" />
+        <Shape name="foam26" translation="274.381653 66.710335 303.724731" shapeId="106" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="150" nodeId="110" />
+        <Shape name="foam27" translation="400.39151 83.490028 334.386627" shapeId="107" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="150" nodeId="111" />
+        <Shape name="foam28" translation="435.226898 83.47229 279.739716" shapeId="108" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="150" nodeId="112" />
+        <Shape name="foam29" translation="404.554077 83.518867 259.387085" shapeId="109" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="150" nodeId="113" />
+        <Shape name="foam30" translation="152.229279 84.439217 239.934814" shapeId="110" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="150" nodeId="114" />
+        <Shape name="foam31" translation="509.961884 67.148514 218.248734" shapeId="111" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="150" nodeId="115" />
+        <Shape name="foam32" translation="554.889099 45.520515 340.605377" shapeId="112" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="150" nodeId="116" />
+        <Shape name="foam33" translation="926.981262 78.842453 186.529892" shapeId="113" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="150" nodeId="117" />
+        <Shape name="foam34" translation="793.016541 61.832256 76.58651" shapeId="114" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="150" nodeId="118" />
+        <Shape name="foam35" translation="966.523804 74.248131 -32.716766" shapeId="115" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="150" nodeId="119" />
+        <Shape name="foam36" translation="973.110413 74.271362 -48.019928" shapeId="116" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="150" nodeId="120" />
+        <Shape name="foam37" translation="524.362427 66.72361 -184.17334" shapeId="117" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="150" nodeId="121" />
+        <Shape name="foam38" translation="939.875244 74.259583 -801.934692" shapeId="118" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="150" nodeId="122" />
+        <Shape name="foam39" translation="933.698547 74.23085 -808.615845" shapeId="119" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="150" nodeId="123" />
+        <Shape name="foam40" translation="668.297974 70.46151 -887.795959" shapeId="120" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="150" nodeId="124" />
+        <Shape name="foam41" translation="498.942444 51.275715 -782.367371" shapeId="121" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="150" nodeId="125" />
+        <Shape name="foam42" translation="74.450546 45.641911 -298.796753" shapeId="122" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="150" nodeId="126" />
+        <Shape name="foam43" translation="-493.707001 102.725998 -942.700012" shapeId="123" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="150" nodeId="127" />
+        <Shape name="foam44" translation="-613.126465 114.007935 -829.900391" shapeId="124" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="150" nodeId="128" />
+        <Shape name="foam45" translation="-647.275085 110.761894 -758.803528" shapeId="125" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="129" />
+        <Shape name="foam46" translation="-710.164612 99.903748 -682.265747" shapeId="126" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="150" nodeId="130" />
+        <Shape name="foam47" translation="-643.160828 139.999649 -933.755432" shapeId="127" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="131" />
+        <Shape name="foam48" translation="-733.386658 93.96286 -658.901062" shapeId="128" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="132" />
+        <Shape name="foam49" translation="-746.431946 66.367081 -633.480835" shapeId="129" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="150" nodeId="133" />
+        <Shape name="foam50" translation="-761.622009 61.633675 -603.508484" shapeId="130" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="134" />
+        <Shape name="foam51" translation="-252.119308 118.376633 -329.889008" shapeId="131" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="150" nodeId="135" />
+        <Shape name="foam52" translation="-220.372208 116.766068 -339.634369" shapeId="132" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="136" />
+        <Shape name="foam53" translation="-177.828003 89.333755 -339.316956" shapeId="133" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="137" />
+        <Shape name="foam54" translation="-199.136337 90.60759 -341.505035" shapeId="134" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="150" nodeId="138" />
+        <Shape name="foam55" translation="-168.384308 74.718277 -334.951141" shapeId="135" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="150" nodeId="139" />
+        <Shape name="foam56" translation="-144.09848 72.934914 -312.377502" shapeId="136" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="140" />
+        <Shape name="foam57" translation="455.404053 67.864166 405.312836" shapeId="137" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="150" nodeId="141" />
+        <Shape name="foam58" translation="-776.032593 107.073151 360.755005" shapeId="138" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="150" nodeId="142" />
+        <Shape name="foam59" translation="-716.59259 85.897545 473.701935" shapeId="139" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="150" nodeId="143" />
+      </TransformGroup>
+    </TransformGroup>
+  </Scene>
+
+  <UserAttributes>
+    <UserAttribute nodeId="3">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="4">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="5">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="6">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="7">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="8">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="9">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="10">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="11">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="12">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="13">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="14">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="15">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="16">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="17">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="18">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="19">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="20">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="21">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="22">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="23">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="24">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="25">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="26">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="27">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="28">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="29">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="30">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="31">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="32">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="33">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="34">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="35">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="36">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="37">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="38">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="39">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="40">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="41">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="42">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+    <UserAttribute nodeId="72">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater" />
+    </UserAttribute>
+  </UserAttributes>
+</i3D>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="miningShaftOld" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="5" filename="$data/maps/textures/shared/mapDirtAlpine_diffuse.png" />
+    <File fileId="7" filename="$data/maps/textures/shared/mapLeaks_diffuse.png" />
+    <File fileId="4" filename="$data/shaders/buildingShader.xml" />
+    <File fileId="1" filename="mineOld_diffuse.png" />
+    <File fileId="6" filename="mineOld_mask.png" />
+    <File fileId="2" filename="mineOld_normal.png" />
+    <File fileId="3" filename="mineOld_specular.png" />
+  </Files>
+
+  <Materials>
+    <Material name="lambert1" materialId="3" diffuseColor="0.5 0.5 0.5 1">
+    </Material>
+    <Material name="mineOld_01_mat" materialId="1" customShaderId="4">
+      <Custommap name="mDirtDiffuse" fileId="5"/>
+      <Custommap name="mMaskMap" fileId="6"/>
+      <Custommap name="mMossDiffuse" fileId="7"/>
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+    </Material>
+    <Material name="mineOld_02_mat" materialId="2">
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="miningShaftOld.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="miningShaftOld" translation="-828.710388 49.31432 -183.282074" lodDistance="0 160" collision="false" density="0" nodeId="1">
+      <TransformGroup name="LOD0" translation="46.14389 1.756627 23.333084" nodeId="2">
+        <Shape name="miningShaft" translation="-102.792915 -1.822468 -55.125267" shapeId="1" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="400" nodeId="3"/>
+        <Shape name="trainStorage" translation="-3.04478 7.103468 14.542938" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="400" nodeId="4">
+          <Shape name="screws" translation="16.879768 -7.281166 -3.086237" shapeId="3" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="100" nodeId="5"/>
+        </Shape>
+        <Shape name="towerElevatorHouse" translation="3.481755 24.495607 -96.449158" shapeId="4" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="400" nodeId="6">
+          <Shape name="screws" translation="23.423738 8.829021 -10.908763" shapeId="5" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="100" nodeId="7"/>
+        </Shape>
+        <Shape name="railTrackScaffold" translation="-14.075903 14.352711 -18.128914" shapeId="6" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="400" nodeId="8">
+          <Shape name="screws" translation="-0.168369 0.040497 -0.025081" shapeId="7" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="100" nodeId="9"/>
+        </Shape>
+        <Shape name="rail" translation="-44.67881 18.700338 -22.86644" shapeId="8" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="400" nodeId="10"/>
+      </TransformGroup>
+      <TransformGroup name="LOD1" nodeId="11">
+        <Shape name="LOD1_miningShaft" translation="7.275132 18.274105 -0.066864" shapeId="9" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="600" nodeId="12"/>
+      </TransformGroup>
+      <Shape name="col1" translation="1.465079 20.456964 0.466644" shapeId="10" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="3" nodeId="13"/>
+      <Shape name="col2" translation="32.099251 16.111292 5.200492" shapeId="11" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="3" nodeId="14"/>
+      <Shape name="col3" translation="-5.623639 18.267836 -19.961807" shapeId="12" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="3" nodeId="15"/>
+    </TransformGroup>
+  </Scene>
+
+  <UserAttributes>
+    <UserAttribute nodeId="13">
+      <Attribute name="noTireTracks" type="boolean" value="true"/>
+    </UserAttribute>
+  </UserAttributes>
+</i3D>

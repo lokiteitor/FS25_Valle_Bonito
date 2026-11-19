@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='utf-8'?>
+<i3D xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="bridgeRiverShort" version="1.6" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="1" filename="$data/maps/mapUS/textures/props/trafficGuardrail_diffuse.png" />
+    <File fileId="2" filename="$data/maps/mapUS/textures/props/trafficGuardrail_normal.png" />
+    <File fileId="3" filename="$data/maps/mapUS/textures/props/trafficGuardrail_specular.png" />
+    <File fileId="7" filename="$data/shaders/buildingShader.xml" />
+    <File fileId="4" filename="$data/maps/mapUS/textures/buildings/bridgeRiverShort/bridgeRiverShort_diffuse.png" />
+    <File fileId="8" filename="bridgeRiverShort_mask.png" />
+    <File fileId="5" filename="$data/maps/mapUS/textures/buildings/bridgeRiverShort/bridgeRiverShort_normal.png" />
+    <File fileId="6" filename="$data/maps/mapUS/textures/buildings/bridgeRiverShort/bridgeRiverShort_specular.png" />
+  </Files>
+
+  <Materials>
+    <Material name="lambert1" materialId="1" diffuseColor="0.5 0.5 0.5 1">
+    </Material>
+    <Material name="trafficGuardrail_mat" materialId="3">
+      <Texture fileId="1" />
+      <Normalmap fileId="2" />
+      <Glossmap fileId="3" />
+    </Material>
+    <Material name="bridgeRiverShort_01_mat" materialId="2" customShaderId="7">
+      <Custommap name="mMaskMap" fileId="8" />
+      <Texture fileId="4" />
+      <Normalmap fileId="5" />
+      <Glossmap fileId="6" />
+    </Material>
+    <Material name="bridgeRiverShort_02_mat" materialId="4" customShaderId="7" shadingRate="4x2">
+      <Custommap name="mMaskMap" fileId="8" />
+      <Texture fileId="4" />
+      <Normalmap fileId="5" />
+      <Glossmap fileId="6" />
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="bridgeRiverShort.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="riverBridgeShort_lod" translation="602.888672 40.254864 -396.159027" lodDistance="0 100" collision="false" density="0" nodeId="1">
+      <TransformGroup name="LOD0" nodeId="2">
+        <Shape name="riverBridgeShort" translation="-0.000981 0.005937 -0.002109" shapeId="1" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1" nodeId="3">
+          <Shape name="visual" translation="-0.001118 -4.891883 0.000085" rotation="0 26.870001 0" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="500" nodeId="4" />
+          <Shape name="guardrail" translation="-0.001118 -4.891883 0.000085" rotation="0 26.870001 0" shapeId="3" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="200" nodeId="5" />
+        </Shape>
+      </TransformGroup>
+      <TransformGroup name="LOD1" translation="-602.888672 -40.254864 396.159027" nodeId="6">
+        <Shape name="riverBridgeShortLOD" translation="602.887024 35.368999 -396.161011" rotation="0 26.870001 0" shapeId="4" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="600" nodeId="7" />
+        <Shape name="guardrailLOD" translation="602.887024 35.368999 -396.161011" rotation="0 26.870001 0" shapeId="5" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="250" nodeId="8" />
+      </TransformGroup>
+    </TransformGroup>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

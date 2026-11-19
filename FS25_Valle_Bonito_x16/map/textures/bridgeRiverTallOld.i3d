@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='utf-8'?>
+<i3D xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="bridgeRiverTallOld" version="1.6" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="5" filename="$data/maps/textures/shared/mapRust_diffuse.png" />
+    <File fileId="4" filename="$data/shaders/buildingShader.xml" />
+    <File fileId="10" filename="$data/maps/mapUS/textures/buildings/bridgeRailroadShort/bridgeNuts_diffuse.png" />
+    <File fileId="11" filename="$data/maps/mapUS/textures/buildings/bridgeRailroadShort/bridgeNuts_normal.png" />
+    <File fileId="12" filename="$data/maps/mapUS/textures/buildings/bridgeRailroadShort/bridgeNuts_specular.png" />
+    <File fileId="1" filename="bridgeRiverTall_diffuse.png" />
+    <File fileId="2" filename="bridgeRiverTall_normal.png" />
+    <File fileId="3" filename="bridgeRiverTall_specular.png" />
+    <File fileId="7" filename="bridgeRivertallOld_diffuse.png" />
+    <File fileId="6" filename="bridgeRivertallOld_mask.png" />
+    <File fileId="8" filename="bridgeRivertallOld_normal.png" />
+    <File fileId="9" filename="bridgeRivertallOld_specular.png" />
+  </Files>
+
+  <Materials>
+    <Material name="lambert1" materialId="4" diffuseColor="0.5 0.5 0.5 1">
+    </Material>
+    <Material name="bridgeRiverTall_mat" materialId="1" customShaderId="4">
+      <CustomParameter name="dirtMossMix" value="1.0 1.0" />
+      <CustomParameter name="dirtMossSmoothness" value="0.12 0.12" />
+      <Custommap name="mDirtDiffuse" fileId="5" />
+      <Custommap name="mMaskMap" fileId="6" />
+      <Custommap name="mMossDiffuse" fileId="5" />
+      <Texture fileId="1" />
+      <Normalmap fileId="2" />
+      <Glossmap fileId="3" />
+    </Material>
+    <Material name="bridgeRivertallOld_mat" materialId="2">
+      <Texture fileId="7" />
+      <Normalmap fileId="8" />
+      <Glossmap fileId="9" />
+    </Material>
+    <Material name="bridgeNuts_mat" materialId="3">
+      <Texture fileId="10" />
+      <Normalmap fileId="11" />
+      <Glossmap fileId="12" />
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="bridgeRiverTallOld.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="bridgeRivertallOld" translation="-158.441864 64.604729 -883.786865" rotation="0 22 0" lodDistance="0 100" collision="false" clipDistance="500" nodeId="1">
+      <TransformGroup name="LOD0" nodeId="2">
+        <Shape name="bridgeRivertallOld" shapeId="1" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="600" nodeId="3" />
+        <Shape name="transparent" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="600" nodeId="4" />
+        <Shape name="screwDecals" shapeId="3" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="120" nodeId="5" />
+        <Shape name="col" translation="-0.000087 0.000271 -0.000166" shapeId="4" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="4" clipDistance="600" nodeId="6" />
+      </TransformGroup>
+      <TransformGroup name="LOD1" translation="-184.167664 -64.604729 878.786316" rotation="0 -22 0" nodeId="7">
+        <Shape name="bridgeRivertallOld_LOD" translation="-158.442001 79.042023 -883.786987" rotation="0 22 0" shapeId="5" static="true" castsShadows="true" receiveShadows="true" materialIds="1" nodeId="8" />
+      </TransformGroup>
+    </TransformGroup>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

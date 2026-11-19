@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="manholeSet" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="1" filename="manholeSet_diffuse.png" />
+    <File fileId="2" filename="manholeSet_normal.png" />
+    <File fileId="3" filename="manholeSet_specular.png" />
+  </Files>
+
+  <Materials>
+    <Material name="manholeSet_mat" materialId="1">
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="manholeSet.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <Shape name="manholeSmallModernDecal" shapeId="1" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="1" clipDistance="90" nodeId="1"/>
+    <Shape name="manholeHatchDecal" shapeId="2" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="1" clipDistance="90" nodeId="2"/>
+    <Shape name="manholeLargeRoundDecal" shapeId="3" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="1" clipDistance="90" nodeId="3"/>
+    <Shape name="manholeLargeElectricityDecal" shapeId="4" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="1" clipDistance="90" nodeId="4"/>
+    <Shape name="manholeSmallElectricityDecal" shapeId="5" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="1" clipDistance="90" nodeId="5"/>
+    <Shape name="manholeSmallRoundDecal" shapeId="6" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="1" clipDistance="90" nodeId="6"/>
+    <Shape name="manholeSmallDecal" shapeId="7" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="1" clipDistance="90" nodeId="7"/>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

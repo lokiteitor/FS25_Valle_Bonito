@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="sawmillOldDrumDryer" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="14" filename="$data/maps/textures/shared/mapDirt_diffuse.png" />
+    <File fileId="12" filename="$data/maps/textures/shared/mapRust_diffuse.png" />
+    <File fileId="11" filename="$data/shaders/buildingShader.xml" />
+    <File fileId="7" filename="$data/shaders/placeableShader.xml" />
+    <File fileId="1" filename="$data/shared/assets/assetLibraryDecals_diffuse.png" />
+    <File fileId="2" filename="$data/shared/assets/assetLibraryDecals_normal.png" />
+    <File fileId="3" filename="$data/shared/assets/assetLibraryDecals_vmask.png" />
+    <File fileId="8" filename="sawmillOldDrumDryer_diffuse.png" />
+    <File fileId="13" filename="sawmillOldDrumDryer_mask.png" />
+    <File fileId="9" filename="sawmillOldDrumDryer_normal.png" />
+    <File fileId="10" filename="sawmillOldDrumDryer_specular.png" />
+    <File fileId="4" filename="sawmillOldGrid01_diffuse.png" />
+    <File fileId="5" filename="sawmillOldGrid01_normal.png" />
+    <File fileId="6" filename="sawmillOldGrid01_specular.png" />
+  </Files>
+
+  <Materials>
+    <Material name="lambert1" materialId="4" diffuseColor="0.5 0.5 0.5 1">
+    </Material>
+    <Material name="assetLibraryDecals_mat" materialId="1">
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+    </Material>
+    <Material name="sawmillOldGrid01_mat" materialId="2" customShaderId="7">
+      <Texture fileId="4"/>
+      <Normalmap fileId="5"/>
+      <Glossmap fileId="6"/>
+    </Material>
+    <Material name="sawmillOldDrumDryer_mat" materialId="3" customShaderId="11">
+      <Custommap name="mDirtDiffuse" fileId="12"/>
+      <Custommap name="mMaskMap" fileId="13"/>
+      <Custommap name="mMossDiffuse" fileId="14"/>
+      <Texture fileId="8"/>
+      <Normalmap fileId="9"/>
+      <Glossmap fileId="10"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="sawmillOldDrumDryer.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="drumDryer" lodDistance="0 120" collision="false" nodeId="1">
+      <TransformGroup name="LOD0" nodeId="2">
+        <Shape name="screwDecals" shapeId="1" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="1" clipDistance="50" nodeId="3"/>
+        <Shape name="grid" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="70" nodeId="4"/>
+        <Shape name="drumDryer" shapeId="3" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="150" nodeId="5"/>
+      </TransformGroup>
+      <Shape name="LOD1" shapeId="4" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="400" nodeId="6"/>
+      <Shape name="collision" shapeId="5" static="true" density="0" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="4" nodeId="7"/>
+    </TransformGroup>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

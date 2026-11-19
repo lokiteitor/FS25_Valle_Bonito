@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='utf-8'?>
+<i3D xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="coffeeStand" version="1.6" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="15" filename="$data/maps/textures/shared/snow_diffuse.png" />
+    <File fileId="16" filename="$data/maps/textures/shared/snow_normal.png" />
+    <File fileId="17" filename="$data/maps/textures/shared/snow_specular.png" />
+    <File fileId="7" filename="$data/shaders/buildingShader.xml" />
+    <File fileId="12" filename="$data/shaders/glowShader.xml" />
+    <File fileId="18" filename="$data/shaders/snowHeapShader.xml" />
+    <File fileId="23" filename="$data/shaders/translucencyShader.xml" />
+    <File fileId="19" filename="$data/shared/sparkles_normal.png" />
+    <File fileId="9" filename="coffeeStandLamp_diffuse.png" />
+    <File fileId="10" filename="coffeeStandLamp_normal.png" />
+    <File fileId="11" filename="coffeeStandLamp_specular.png" />
+    <File fileId="4" filename="coffeeStand_diffuse.png" />
+    <File fileId="8" filename="coffeeStand_mask.png" />
+    <File fileId="5" filename="coffeeStand_normal.png" />
+    <File fileId="6" filename="coffeeStand_specular.png" />
+    <File fileId="20" filename="$data/maps/mapUS/textures/curtainsSet_diffuse.png" />
+    <File fileId="21" filename="$data/maps/mapUS/textures/curtainsSet_normal.png" />
+    <File fileId="22" filename="$data/maps/mapUS/textures/curtainsSet_specular.png" />
+    <File fileId="13" filename="props/selfillum/lampSelfillum01_diffuse.png" />
+    <File fileId="14" filename="props/selfillum/lampSelfillum01_normal.png" />
+    <File fileId="1" filename="$data/maps/mapEU/textures/windowsGlass_diffuse.png" />
+    <File fileId="2" filename="$data/maps/mapEU/textures/windowsGlass_normal.png" />
+    <File fileId="3" filename="$data/maps/mapEU/textures/windowsGlass_specular.png" />
+  </Files>
+
+  <Materials>
+    <Material name="windowsGlass_mat" materialId="2" alphaBlending="true">
+      <Texture fileId="1" />
+      <Normalmap fileId="2" />
+      <Glossmap fileId="3" />
+    </Material>
+    <Material name="coffeeStand_mat" materialId="1" customShaderId="7">
+      <Custommap name="mMaskMap" fileId="8" />
+      <Texture fileId="4" />
+      <Normalmap fileId="5" bumpDepth="0.3" />
+      <Glossmap fileId="6" />
+    </Material>
+    <Material name="coffeeStandLamp_01_mat" materialId="4" customShaderId="12" customShaderVariation="baseMap_colorScale_blink">
+      <CustomParameter name="colorScale" value="0.0 0.0 1.0" />
+      <CustomParameter name="lightControl" value="5.0" />
+      <Texture fileId="9" />
+      <Normalmap fileId="10" bumpDepth="0.3" />
+      <Glossmap fileId="11" />
+    </Material>
+    <Material name="coffeeStandLamp_02_mat" materialId="5" customShaderId="12" customShaderVariation="baseMap_colorScale_blink">
+      <CustomParameter name="colorScale" value="1.0 1.0 0.0" />
+      <CustomParameter name="lightControl" value="5.0" />
+      <Texture fileId="9" />
+      <Normalmap fileId="10" bumpDepth="0.3" />
+      <Glossmap fileId="11" />
+    </Material>
+    <Material name="coffeeStandLamp_03_mat" materialId="6" customShaderId="12" customShaderVariation="baseMap_colorScale_blink">
+      <CustomParameter name="colorScale" value="1.0 0.0 0.0" />
+      <CustomParameter name="lightControl" value="5.0" />
+      <Texture fileId="9" />
+      <Normalmap fileId="10" bumpDepth="0.3" />
+      <Glossmap fileId="11" />
+    </Material>
+    <Material name="lampSelfillum01_mat" materialId="7" specularColor="0 0 0" customShaderId="12" customShaderVariation="additive_colorScale">
+      <CustomParameter name="colorScale" value="0.105 0.101 0.063" />
+      <CustomParameter name="lightControl" value="5.0" />
+      <Texture fileId="13" />
+      <Normalmap fileId="14" />
+    </Material>
+    <Material name="snow_mat" materialId="3" customShaderId="18">
+      <Custommap name="mSparklesNormal" fileId="19" />
+      <Texture fileId="15" />
+      <Normalmap fileId="16" bumpDepth="0.5" />
+      <Glossmap fileId="17" />
+    </Material>
+    <Material name="curtainsSet_mat" materialId="8" customShaderId="23">
+      <CustomParameter name="translucencyAmount" value="0.7" />
+      <Texture fileId="20" />
+      <Normalmap fileId="21" />
+      <Glossmap fileId="22" />
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="coffeeStand.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <Shape name="coffeeStand" shapeId="1" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="300" nodeId="1">
+      <Shape name="glass" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="300" nodeId="2" />
+      <TransformGroup name="seasons" nodeId="3">
+        <TransformGroup name="winter" nodeId="4">
+          <Shape name="snow" shapeId="3" castsShadows="true" receiveShadows="true" materialIds="3" clipDistance="120" nodeId="5" weatherRequiredMask="0x400" />
+        </TransformGroup>
+      </TransformGroup>
+      <TransformGroup name="interior" nodeId="6">
+        <TransformGroup name="illum" nodeId="7">
+          <TransformGroup name="christmasLights" collision="false" density="0" nodeId="8" weatherRequiredMask="0x40" renderInvisible="true" visibleShaderParameter="5">
+            <Shape name="lightsSupport" translation="0 0 -0.000644" shapeId="4" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="300" nodeId="9" />
+            <Shape name="yellowGlow" translation="0 0 -0.000644" shapeId="5" castsShadows="true" receiveShadows="true" materialIds="5" clipDistance="300" nodeId="10" />
+            <Shape name="redGlow" translation="0 0 -0.000644" shapeId="6" castsShadows="true" receiveShadows="true" materialIds="6" clipDistance="300" nodeId="11" />
+            <Shape name="blueGlow" translation="0 0 -0.000644" shapeId="7" castsShadows="true" receiveShadows="true" materialIds="4" clipDistance="300" nodeId="12" />
+          </TransformGroup>
+          <TransformGroup name="lamp" nodeId="13">
+            <Shape name="lampGlow" translation="0 3.005521 0" shapeId="8" castsShadows="true" receiveShadows="true" materialIds="7" clipDistance="100" nodeId="14" weatherRequiredMask="0x40" visibleShaderParameter="5" />
+          </TransformGroup>
+          <TransformGroup name="realLights" collision="false" clipDistance="125" nodeId="15" weatherRequiredMask="0x40">
+            <Light name="pointLight01" translation="-1.707553 2.897585 0" rotation="0 180 0" type="point" color="0.204 0.196229 0.1224" emitDiffuse="true" emitSpecular="true" range="8" clipDistance="75" nodeId="16" />
+            <Light name="pointLight02" translation="1.691929 2.897585 0" rotation="0 180 0" type="point" color="0.204 0.196229 0.1224" emitDiffuse="true" emitSpecular="true" range="8" clipDistance="75" nodeId="17" />
+          </TransformGroup>
+        </TransformGroup>
+        <Shape name="curtains" shapeId="9" castsShadows="true" receiveShadows="true" materialIds="8" clipDistance="80" nodeId="18" />
+      </TransformGroup>
+    </Shape>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

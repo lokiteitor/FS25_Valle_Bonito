@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="waterfallMiningMountain" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+  </Files>
+
+  <Materials>
+    <Material name="lambert2_mat" materialId="1" diffuseColor="0.25 0.740388 1 1">
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="waterfallMiningMountain.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <Shape name="waterfallPlane" translation="-900.574219 140.06189 -223.229416" shapeId="1" static="true" castsShadows="true" receiveShadows="true" materialIds="1" nodeId="1"/>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

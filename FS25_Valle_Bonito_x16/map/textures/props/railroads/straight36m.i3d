@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<i3D xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="straight36m" version="1.6" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="4" filename="$data/shaders/placeableShader.xml" />
+    <File fileId="1" filename="$data/maps/mapUS/textures/props/railroads/railRoadPieces_diffuse.png" />
+    <File fileId="2" filename="$data/maps/mapUS/textures/props/railroads/railRoadPieces_normal.png" />
+    <File fileId="3" filename="$data/maps/mapUS/textures/props/railroads/railRoadPieces_specular.png" />
+  </Files>
+
+  <Materials>
+    <Material name="lambert1" materialId="2" diffuseColor="0.5 0.5 0.5 1">
+    </Material>
+    <Material name="railRoadPieces_mat" materialId="1" customShaderId="4">
+      <Texture fileId="1" />
+      <Normalmap fileId="2" />
+      <Glossmap fileId="3" />
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="straight36m.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <Shape name="straight36m" translation="0 -0.000001 0.000001" rotation="-0.000011 -0.000017 0" shapeId="1" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="300" nodeId="1">
+      <Shape name="col" translation="0 0.000001 -0.000001" rotation="0.000011 0.000017 0" shapeId="2" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="2" nodeId="2" />
+    </Shape>
+  </Scene>
+
+  <UserAttributes>
+    <UserAttribute nodeId="2">
+      <Attribute name="noTireTracks" type="boolean" value="true" />
+    </UserAttribute>
+  </UserAttributes>
+</i3D>

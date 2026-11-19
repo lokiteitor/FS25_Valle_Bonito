@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='utf-8'?>
+<i3D xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="bridgeRailroads" version="1.6" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="8" filename="$data/maps/textures/shared/mapRust_diffuse.png" />
+    <File fileId="7" filename="$data/shaders/buildingShader.xml" />
+    <File fileId="1" filename="$data/maps/mapUS/textures/buildings/bridgeRailroadShort/bridgeNuts_diffuse.png" />
+    <File fileId="2" filename="$data/maps/mapUS/textures/buildings/bridgeRailroadShort/bridgeNuts_normal.png" />
+    <File fileId="3" filename="$data/maps/mapUS/textures/buildings/bridgeRailroadShort/bridgeNuts_specular.png" />
+    <File fileId="4" filename="$data/maps/mapUS/textures/buildings/bridgeRailroadShort/bridgeRailroads_diffuse.png" />
+    <File fileId="9" filename="bridgeRailroads_mask.png" />
+    <File fileId="5" filename="$data/maps/mapUS/textures/buildings/bridgeRailroadShort/bridgeRailroads_normal.png" />
+    <File fileId="6" filename="$data/maps/mapUS/textures/buildings/bridgeRailroadShort/bridgeRailroads_specular.png" />
+  </Files>
+
+  <Materials>
+    <Material name="lambert1" materialId="3" diffuseColor="0.5 0.5 0.5 1">
+    </Material>
+    <Material name="bridgeNuts_mat" materialId="2">
+      <Texture fileId="1" />
+      <Normalmap fileId="2" />
+      <Glossmap fileId="3" />
+    </Material>
+    <Material name="bridgeRailroads_mat" materialId="1" customShaderId="7">
+      <Custommap name="mDirtDiffuse" fileId="8" />
+      <Custommap name="mMaskMap" fileId="9" />
+      <Custommap name="mMossDiffuse" fileId="8" />
+      <Texture fileId="4" />
+      <Normalmap fileId="5" />
+      <Glossmap fileId="6" />
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="bridgeRailroads.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="railBridges" nodeId="1">
+      <TransformGroup name="longBridge" translation="-497.184418 46.012276 698.169739" lodDistance="0 210" collision="false" density="0" nodeId="2">
+        <TransformGroup name="LOD0" translation="0 0.00999 0" nodeId="3">
+          <TransformGroup name="longBridge" nodeId="4">
+            <Shape name="additionalPiece" translation="151.335358 8.496411 -43.724255" rotation="0 16.115 0" shapeId="1" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="800" nodeId="5" />
+            <TransformGroup name="bricksSmall" translation="-11.204523 2.77391 3.235956" nodeId="6">
+              <Shape name="bricksSmall01" translation="86.47731 0 -24.985014" rotation="0 16.115 0" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="800" nodeId="7" />
+              <Shape name="bricksSmall02" translation="-86.47731 0 24.985014" rotation="0 16.115 0" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="800" nodeId="8" />
+            </TransformGroup>
+            <TransformGroup name="bricksLong" translation="-11.204476 0 3.236118" nodeId="9">
+              <Shape name="bricksLong01" translation="-129.71611 0.000001 37.477402" rotation="0 16.115 0" shapeId="3" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="800" nodeId="10" />
+              <Shape name="bricksLong02" translation="43.238625 -0.000001 -12.492369" rotation="0 16.115 0" shapeId="3" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="800" nodeId="11" />
+              <Shape name="bricksLong03" translation="-43.238625 0.000001 12.492414" rotation="0 16.115 0" shapeId="3" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="800" nodeId="12" />
+              <Shape name="bricksLong04" translation="129.71611 -0.000001 -37.477402" rotation="0 16.115 0" shapeId="3" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="800" nodeId="13" />
+              <Shape name="bricksLong05" translation="-0.000156 -0.000001 0.000107" rotation="0 16.115 0" shapeId="3" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="800" nodeId="14" />
+            </TransformGroup>
+            <TransformGroup name="longRailroad" translation="10.414896 8.565075 -3.010092" nodeId="15">
+              <Shape name="longRailroad01" translation="-0.000155 0 0.000167" rotation="0 16.115 0" shapeId="4" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="800" nodeId="16" />
+              <Shape name="longRailroad02" translation="-43.238773 0 12.492637" rotation="0 16.115 0" shapeId="4" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="800" nodeId="17" />
+              <Shape name="longRailroad03" translation="-86.477356 0 24.98481" rotation="0 16.115 0" shapeId="4" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="800" nodeId="18" />
+              <Shape name="longRailroad04" translation="-129.71608 0 37.477333" rotation="0 16.115 0" shapeId="4" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="800" nodeId="19" />
+              <Shape name="longRailroad05" translation="43.238571 0 -12.492353" rotation="0 16.115 0" shapeId="4" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="800" nodeId="20" />
+              <Shape name="longRailroad06" translation="86.477341 0 -24.984865" rotation="0 16.115 0" shapeId="4" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="800" nodeId="21" />
+              <Shape name="longRailroad07" translation="129.71608 0 -37.477333" rotation="0 16.115 0" shapeId="4" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="800" nodeId="22" />
+            </TransformGroup>
+            <TransformGroup name="ends" translation="0 8.067765 0" nodeId="23">
+              <Shape name="end01" translation="167.546967 0 -48.406609" rotation="0 196.115005 0" shapeId="5" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="800" nodeId="24" />
+              <Shape name="end02" translation="-167.546967 0 48.406609" rotation="0 16.115 0" shapeId="6" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="800" nodeId="25" />
+            </TransformGroup>
+            <TransformGroup name="screwDecals" translation="0.000009 8.477613 -0.00001" nodeId="26">
+              <Shape name="screwdDecals01" translation="37.833611 0.002979 -10.931801" shapeId="7" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="2" clipDistance="120" nodeId="27" />
+              <Shape name="screwdDecals02" translation="-48.643742 0.002975 14.05309" shapeId="8" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="2" clipDistance="120" nodeId="28" />
+              <Shape name="screwdDecals03" translation="-134.841721 0.000002 38.959209" shapeId="9" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="2" clipDistance="120" nodeId="29" />
+              <Shape name="screwdDecals04" translation="129.436768 -0.000002 -37.398487" shapeId="10" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="2" clipDistance="120" nodeId="30" />
+            </TransformGroup>
+            <TransformGroup name="collisions" translation="0.000008 0.019723 0.00002" nodeId="31">
+              <Shape name="col01" translation="-134.891403 0.000001 38.254238" shapeId="11" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="3" nodeId="32" />
+              <Shape name="col02" translation="-32.802559 -0.019708 9.408787" shapeId="12" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="3" nodeId="33" />
+              <Shape name="col03" translation="64.484474 -0.019709 -18.699146" shapeId="13" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="3" nodeId="34" />
+              <Shape name="col04" translation="145.327637 -0.000001 -41.337776" shapeId="14" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="3" nodeId="35" />
+            </TransformGroup>
+          </TransformGroup>
+        </TransformGroup>
+        <TransformGroup name="LOD1" translation="-0.000452 0.00999 0.642297" nodeId="36">
+          <Shape name="railBridgeLOD" translation="0.011105 -0.019979 -0.665156" shapeId="15" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="900" nodeId="37" />
+        </TransformGroup>
+      </TransformGroup>
+      <TransformGroup name="shortBridge" translation="573.313538 42.868988 -386.91452" lodDistance="0 120" collision="false" density="0" nodeId="38">
+        <TransformGroup name="LOD0" nodeId="39">
+          <TransformGroup name="bricksSmall" translation="-0.232716 0 -0.33818" nodeId="40">
+            <Shape name="bricksSmall01" translation="6.401199 0.00002 9.253576" rotation="0 -55.326 0" shapeId="16" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="600" nodeId="41" />
+            <Shape name="bricksSmall02" translation="-6.401199 -0.00002 -9.253576" rotation="0 -55.326 0" shapeId="16" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="600" nodeId="42" />
+          </TransformGroup>
+          <TransformGroup name="ends" translation="0 4.900536 0" nodeId="43">
+            <Shape name="end01" translation="-22.401571 0 -32.384895" rotation="0 -55.326 0" shapeId="17" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="600" nodeId="44" />
+            <Shape name="end02" translation="22.401571 0 32.384895" rotation="0 -235.320007 0" shapeId="17" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="600" nodeId="45" />
+          </TransformGroup>
+          <Shape name="screwDecals" translation="0.000001 5.310404 0.000002" shapeId="18" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="2" clipDistance="140" nodeId="46" />
+          <Shape name="additionalPiece" translation="12.802861 5.329216 18.506012" rotation="0 -55.326 0" shapeId="19" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="600" nodeId="47" />
+          <Shape name="col" translation="0 0.019708 0" shapeId="20" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="3" nodeId="48" />
+        </TransformGroup>
+        <TransformGroup name="LOD1" translation="0.000919 -0.000014 -0.000623" nodeId="49">
+          <Shape name="shortBridgeLOD" translation="-0.009356 -0.000002 -0.013442" shapeId="21" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="800" nodeId="50" />
+        </TransformGroup>
+      </TransformGroup>
+    </TransformGroup>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

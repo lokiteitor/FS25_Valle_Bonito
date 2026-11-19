@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='utf-8'?>
+<i3D xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="horizontalRock02" version="1.6" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="4" filename="$data/shaders/placeableShader.xml" />
+    <File fileId="1" filename="$data/maps/textures/shared/props/rocks/modularRock01_diffuse.png" />
+    <File fileId="2" filename="$data/maps/textures/shared/props/rocks/modularRock01_normal.png" />
+    <File fileId="3" filename="$data/maps/textures/shared/props/rocks/modularRock01_specular.png" />
+    <File fileId="5" filename="$data/maps/textures/shared/props/rocks/modularRock02_animationArray.png" />
+    <File fileId="7" filename="rockDetail_normal.png" />
+    <File fileId="6" filename="../../terrain/sandSeaweed01_diffuse.png" />
+  </Files>
+
+  <Materials>
+    <Material name="modularRock01_01_mat" materialId="1" customShaderId="4" customShaderVariation="vertexAnimationTexture_rockDetail">
+      <CustomParameter name="hideByIndex" value="0" />
+      <CustomParameter name="mossLevel" value="0.875" />
+      <Custommap name="animationArray" fileId="5" />
+      <Custommap name="mMossDetail" fileId="6" />
+      <Custommap name="mNormalDetail" fileId="7" />
+      <Texture fileId="1" />
+      <Normalmap fileId="2" />
+      <Glossmap fileId="3" />
+    </Material>
+    <Material name="modularRock01_02_mat" materialId="2" customShaderId="4" customShaderVariation="rockDetail">
+      <CustomParameter name="mossLevel" value="0.875" />
+      <Custommap name="mMossDetail" fileId="6" />
+      <Custommap name="mNormalDetail" fileId="7" />
+      <Texture fileId="1" />
+      <Normalmap fileId="2" />
+      <Glossmap fileId="3" />
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="horizontalRock02.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="horizontalRock02_lod" lodDistance="0 45" collision="false" density="0" nodeId="1">
+      <Shape name="LOD0" shapeId="1" castsShadows="true" receiveShadows="true" materialIds="1" nodeId="2" />
+      <Shape name="LOD1" shapeId="2" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="600" nodeId="3" />
+    </TransformGroup>
+  </Scene>
+
+  <UserAttributes>
+    <UserAttribute nodeId="2">
+      <Attribute name="hideByIndexMaxIndex" type="integer" value="30" />
+    </UserAttribute>
+    <UserAttribute nodeId="3">
+      <Attribute name="noTireTracks" type="boolean" value="true" />
+    </UserAttribute>
+  </UserAttributes>
+</i3D>

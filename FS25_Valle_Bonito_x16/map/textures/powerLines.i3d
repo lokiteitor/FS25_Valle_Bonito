@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8'?>
+<i3D xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="powerLines" version="1.6" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="1" filename="$data/maps/mapUS/textures/props/railroads/railRoadPieces_diffuse.png" />
+  </Files>
+
+  <Materials>
+    <Material name="railRoadPieces_mat" materialId="1" specularColor="0 0 0">
+      <Texture fileId="1" />
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="powerLines.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="powerLines" nodeId="1">
+      <Shape name="powerLines1" translation="803.761169 57.93158 598.838623" shapeId="1" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="2" />
+      <Shape name="powerLines2" translation="232.742142 53.912792 640.57489" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="3" />
+      <Shape name="powerLines3" translation="675.979675 55.220261 28.854111" shapeId="3" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="4" />
+      <Shape name="powerLines4" translation="439.355408 54.980469 -767.877319" shapeId="4" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="5" />
+    </TransformGroup>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

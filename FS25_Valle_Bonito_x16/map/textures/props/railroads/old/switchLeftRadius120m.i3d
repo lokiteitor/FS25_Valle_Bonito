@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="switchLeftRadius120m" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="4" filename="$data/shaders/placeableShader.xml" />
+    <File fileId="1" filename="railRoadPiecesOld_diffuse.png" />
+    <File fileId="2" filename="railRoadPiecesOld_normal.png" />
+    <File fileId="3" filename="railRoadPiecesOld_specular.png" />
+  </Files>
+
+  <Materials>
+    <Material name="lambert1" materialId="2" diffuseColor="0.5 0.5 0.5 1">
+    </Material>
+    <Material name="railRoadPiecesOld_mat" materialId="1" customShaderId="4">
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="switchLeftRadius120m.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <Shape name="switchLeftRadius120m" translation="0 -0.000004 0.000005" rotation="0.000009 -0.000041 0" shapeId="1" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="300" nodeId="1">
+      <Shape name="col" translation="0 0.000004 -0.000005" rotation="-0.000009 0.000041 0" shapeId="2" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="2" nodeId="2"/>
+      <Shape name="col2" translation="0 0.000004 -0.000005" rotation="-0.000009 0.000041 0" shapeId="3" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="2" nodeId="3"/>
+    </Shape>
+  </Scene>
+
+  <UserAttributes>
+    <UserAttribute nodeId="2">
+      <Attribute name="noTireTracks" type="boolean" value="true"/>
+    </UserAttribute>
+    <UserAttribute nodeId="3">
+      <Attribute name="noTireTracks" type="boolean" value="true"/>
+    </UserAttribute>
+  </UserAttributes>
+</i3D>

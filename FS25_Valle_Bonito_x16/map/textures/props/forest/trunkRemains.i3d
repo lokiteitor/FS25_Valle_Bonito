@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="trunkRemains" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="1" filename="trunkRemains_diffuse.png" />
+    <File fileId="2" filename="trunkRemains_normal.png" />
+  </Files>
+
+  <Materials>
+    <Material name="lambert1" materialId="2" diffuseColor="0.5 0.5 0.5 1">
+    </Material>
+    <Material name="trunkRemains_mat" materialId="1">
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="trunkRemains.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <Shape name="twig03" shapeId="1" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="150" nodeId="1"/>
+    <Shape name="twig05" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="150" nodeId="2"/>
+    <Shape name="twig01" shapeId="3" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="150" nodeId="3"/>
+    <Shape name="twig02" shapeId="4" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="150" nodeId="4"/>
+    <Shape name="twig04" shapeId="5" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="300" nodeId="5"/>
+    <Shape name="treeBroken02" shapeId="6" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="2" clipDistance="150" nodeId="6">
+      <Shape name="visualize" translation="0 0 -0.005142" shapeId="7" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="150" nodeId="7"/>
+    </Shape>
+    <Shape name="trunk02" shapeId="8" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="2" nodeId="8">
+      <Shape name="visualize" translation="0 0 -0.260433" shapeId="9" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="150" nodeId="9"/>
+    </Shape>
+    <Shape name="stump02" shapeId="10" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="2" nodeId="10">
+      <Shape name="visualize" translation="0 0 -0.176437" shapeId="11" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="150" nodeId="11"/>
+    </Shape>
+    <Shape name="stump05" shapeId="12" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="2" nodeId="12">
+      <Shape name="visualize" shapeId="13" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="150" nodeId="13"/>
+    </Shape>
+    <Shape name="trunk03" shapeId="14" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="2" nodeId="14">
+      <Shape name="visualize" translation="0 0 -0.038878" shapeId="15" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="150" nodeId="15"/>
+    </Shape>
+    <Shape name="stump04" shapeId="16" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="2" nodeId="16">
+      <Shape name="visualize" translation="-0.21813 0 0.239186" shapeId="17" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="150" nodeId="17"/>
+    </Shape>
+    <Shape name="trunk01" shapeId="18" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="2" nodeId="18">
+      <Shape name="visualize" translation="0 0 0.004752" shapeId="19" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="150" nodeId="19"/>
+    </Shape>
+    <Shape name="stump03" shapeId="20" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="2" nodeId="20">
+      <Shape name="visualize" translation="0 0 -0.038878" shapeId="21" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="150" nodeId="21"/>
+    </Shape>
+    <Shape name="stump01" shapeId="22" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="2" nodeId="22">
+      <Shape name="visualize" translation="0 0 -0.038878" shapeId="23" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="150" nodeId="23"/>
+    </Shape>
+    <Shape name="treeBroken01" shapeId="24" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="2" nodeId="24">
+      <Shape name="visualize" translation="1.737607 0 -0.038878" shapeId="25" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="150" nodeId="25"/>
+    </Shape>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

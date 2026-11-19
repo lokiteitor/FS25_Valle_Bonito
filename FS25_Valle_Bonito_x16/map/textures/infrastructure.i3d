@@ -1,0 +1,766 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="infrastructure" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="28" filename="$data/maps/mapUS/textures/buildings/infrastructure/mudPebbles_diffuse.png" />
+    <File fileId="29" filename="$data/maps/mapUS/textures/buildings/infrastructure/mudPebbles_normal.png" />
+    <File fileId="30" filename="$data/maps/mapUS/textures/buildings/infrastructure/mudPebbles_specular.png" />
+    <File fileId="24" filename="$data/maps/mapUS/textures/buildings/infrastructure/mudTracks_diffuse.png" />
+    <File fileId="25" filename="$data/maps/mapUS/textures/buildings/infrastructure/mudTracks_normal.png" />
+    <File fileId="26" filename="$data/maps/mapUS/textures/buildings/infrastructure/mudTracks_specular.png" />
+    <File fileId="44" filename="$data/maps/mapUS/textures/props/railroads/railroadCrossingPlastic_diffuse.png" />
+    <File fileId="45" filename="$data/maps/mapUS/textures/props/railroads/railroadCrossingPlastic_normal.png" />
+    <File fileId="46" filename="$data/maps/mapUS/textures/props/railroads/railroadCrossingPlastic_specular.png" />
+    <File fileId="41" filename="$data/maps/mapUS/textures/props/railroads/railroadCrossingWood_diffuse.png" />
+    <File fileId="42" filename="$data/maps/mapUS/textures/props/railroads/railroadCrossingWood_normal.png" />
+    <File fileId="43" filename="$data/maps/mapUS/textures/props/railroads/railroadCrossingWood_specular.png" />
+    <File fileId="47" filename="$data/maps/mapUS/textures/props/smallBridgesConcrete_diffuse.png" />
+    <File fileId="48" filename="$data/maps/mapUS/textures/props/smallBridgesConcrete_normal.png" />
+    <File fileId="49" filename="$data/maps/mapUS/textures/props/smallBridgesConcrete_specular.png" />
+    <File fileId="50" filename="$data/maps/mapUS/textures/props/smallBridgesWood_diffuse.png" />
+    <File fileId="51" filename="$data/maps/mapUS/textures/props/smallBridgesWood_normal.png" />
+    <File fileId="52" filename="$data/maps/mapUS/textures/props/smallBridgesWood_specular.png" />
+    <File fileId="27" filename="$data/shaders/decalShader.xml" />
+    <File fileId="37" filename="$data/shaders/placeableShader.xml" />
+    <File fileId="60" filename="$data/shaders/puddleShader.xml" />
+    <File fileId="4" filename="$data/shaders/vertexPaintShader.xml" />
+    <File fileId="10" filename="$data/shared/blendingNoise.png" />
+    <File fileId="56" filename="$data/shared/default_normal.png" />
+    <File fileId="40" filename="$data/shared/default_specular.png" />
+    <File fileId="53" filename="bridgeSwampLong_diffuse.png" />
+    <File fileId="54" filename="bridgeSwampLong_normal.png" />
+    <File fileId="55" filename="bridgeSwampLong_specular.png" />
+    <File fileId="38" filename="dirt_diffuse.png" />
+    <File fileId="39" filename="dirt_normal.png" />
+    <File fileId="34" filename="manholeSet_diffuse.png" />
+    <File fileId="35" filename="manholeSet_normal.png" />
+    <File fileId="36" filename="manholeSet_specular.png" />
+    <File fileId="57" filename="props/puddles/puddle_diffuse.png" />
+    <File fileId="61" filename="props/puddles/puddle_mask.png" />
+    <File fileId="58" filename="props/puddles/puddle_normal.png" />
+    <File fileId="59" filename="props/puddles/puddle_specular.png" />
+    <File fileId="31" filename="roadsDebrisAutumn_diffuse.png" />
+    <File fileId="32" filename="roadsDebrisAutumn_normal.png" />
+    <File fileId="33" filename="roadsDebrisAutumn_specular.png" />
+    <File fileId="7" filename="roadsForestry01_diffuse.png" />
+    <File fileId="8" filename="roadsForestry01_normal.png" />
+    <File fileId="9" filename="roadsForestry01_specular.png" />
+    <File fileId="13" filename="roadsForestryPebbles_diffuse.png" />
+    <File fileId="14" filename="roadsForestryPebbles_normal.png" />
+    <File fileId="15" filename="roadsForestryPebbles_specular.png" />
+    <File fileId="18" filename="roadsMetalGrip_diffuse.png" />
+    <File fileId="19" filename="roadsMetalGrip_normal.png" />
+    <File fileId="20" filename="roadsMetalGrip_specular.png" />
+    <File fileId="21" filename="roadsWaterDrainTrees_diffuse.png" />
+    <File fileId="22" filename="roadsWaterDrainTrees_normal.png" />
+    <File fileId="23" filename="roadsWaterDrainTrees_specular.png" />
+    <File fileId="1" filename="roads_diffuse.png" />
+    <File fileId="2" filename="roads_normal.png" />
+    <File fileId="3" filename="roads_specular.png" />
+    <File fileId="11" filename="terrain/dirtRoad03_diffuse.png" />
+    <File fileId="12" filename="terrain/dirtRoad03_normal.png" />
+    <File fileId="16" filename="terrain/gravel01_diffuse.png" />
+    <File fileId="17" filename="terrain/gravel01_normal.png" />
+    <File fileId="5" filename="terrain/tarmac01_diffuse.png" />
+    <File fileId="6" filename="terrain/tarmac01_normal.pnge" />
+  </Files>
+
+  <Materials>
+    <Material name="lambert1" materialId="20" diffuseColor="0.5 0.5 0.5 1">
+    </Material>
+    <Material name="roads_mat" materialId="1" customShaderId="4" customShaderVariation="terrainFormat">
+      <CustomParameter name="uvScale" value="0.25 0.25 0.25 0.25"/>
+      <Custommap name="mBlendedDiffuse" fileId="5"/>
+      <Custommap name="mBlendedNormal" fileId="6"/>
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+    </Material>
+    <Material name="roadsForestry01_01_mat" materialId="2">
+      <Texture fileId="7"/>
+      <Normalmap fileId="8"/>
+      <Glossmap fileId="9"/>
+    </Material>
+    <Material name="roadsForestry01_02_mat" materialId="3" customShaderId="4" customShaderVariation="alphaNoise_terrainFormat">
+      <CustomParameter name="alphaShift" value="0.25"/>
+      <CustomParameter name="uvScale" value="0.5 0.5 0.5 0.5"/>
+      <Custommap name="mBlendedAlpha" fileId="10"/>
+      <Custommap name="mBlendedDiffuse" fileId="11"/>
+      <Custommap name="mBlendedNormal" fileId="12"/>
+      <Texture fileId="7"/>
+      <Normalmap fileId="8"/>
+      <Glossmap fileId="9"/>
+    </Material>
+    <Material name="roadsForestryPebbles_mat" materialId="4" customShaderId="4" customShaderVariation="alphaNoise_terrainFormat">
+      <CustomParameter name="alphaShift" value="0.1"/>
+      <CustomParameter name="uvScale" value="0.5 0.5 0.5 0.5"/>
+      <Custommap name="mBlendedAlpha" fileId="10"/>
+      <Custommap name="mBlendedDiffuse" fileId="16"/>
+      <Custommap name="mBlendedNormal" fileId="17"/>
+      <Texture fileId="13"/>
+      <Normalmap fileId="14"/>
+      <Glossmap fileId="15"/>
+    </Material>
+    <Material name="roadsMetalGrip_mat" materialId="5">
+      <Texture fileId="18"/>
+      <Normalmap fileId="19"/>
+      <Glossmap fileId="20"/>
+    </Material>
+    <Material name="roadsWaterDrainTrees_mat" materialId="6">
+      <Texture fileId="21"/>
+      <Normalmap fileId="22"/>
+      <Glossmap fileId="23"/>
+    </Material>
+    <Material name="mudTracks_mat" materialId="7" alphaBlending="true" customShaderId="27">
+      <Texture fileId="24"/>
+      <Normalmap fileId="25"/>
+      <Glossmap fileId="26"/>
+    </Material>
+    <Material name="mudPebbles_01_mat" materialId="8" customShaderId="4" customShaderVariation="alphaNoise">
+      <CustomParameter name="alphaShift" value="0.2"/>
+      <CustomParameter name="uvScale" value="0.5 0.5 0.5 0.5"/>
+      <Custommap name="mBlendedAlpha" fileId="10"/>
+      <Texture fileId="28"/>
+      <Normalmap fileId="29"/>
+      <Glossmap fileId="30"/>
+    </Material>
+    <Material name="mudPebbles_02_mat" materialId="9" customShaderId="4" customShaderVariation="alphaNoise_terrainFormat">
+      <CustomParameter name="alphaShift" value="1.0"/>
+      <CustomParameter name="uvScale" value="1.0 1.0 1.0 1.0"/>
+      <Custommap name="mBlendedAlpha" fileId="10"/>
+      <Texture fileId="28"/>
+      <Normalmap fileId="29"/>
+      <Glossmap fileId="30"/>
+    </Material>
+    <Material name="roadsDebrisAutumn_mat" materialId="10" customShaderId="4" customShaderVariation="alphaNoise_autumn">
+      <CustomParameter name="alphaShift" value="0.9"/>
+      <Custommap name="mBlendedAlpha" fileId="10"/>
+      <Custommap name="mBlendedDiffuse" fileId="31"/>
+      <Custommap name="mBlendedNormal" fileId="32"/>
+      <Texture fileId="31"/>
+      <Normalmap fileId="32"/>
+      <Glossmap fileId="33"/>
+    </Material>
+    <Material name="manholeSet_mat" materialId="11" customShaderId="37">
+      <Texture fileId="34"/>
+      <Normalmap fileId="35"/>
+      <Glossmap fileId="36"/>
+    </Material>
+    <Material name="dirt_mat" materialId="13" customShaderId="37">
+      <Texture fileId="38"/>
+      <Normalmap fileId="39"/>
+      <Glossmap fileId="40"/>
+    </Material>
+    <Material name="railroadCrossingWood_mat" materialId="14" customShaderId="37">
+      <Texture fileId="41"/>
+      <Normalmap fileId="42"/>
+      <Glossmap fileId="43"/>
+    </Material>
+    <Material name="railroadCrossingPlastic_mat" materialId="15" customShaderId="37">
+      <Texture fileId="44"/>
+      <Normalmap fileId="45"/>
+      <Glossmap fileId="46"/>
+    </Material>
+    <Material name="smallBridgesConcrete_mat" materialId="16" customShaderId="37">
+      <Texture fileId="47"/>
+      <Normalmap fileId="48"/>
+      <Glossmap fileId="49"/>
+    </Material>
+    <Material name="smallBridgesWood_mat" materialId="17" customShaderId="37">
+      <Texture fileId="50"/>
+      <Normalmap fileId="51"/>
+      <Glossmap fileId="52"/>
+    </Material>
+    <Material name="bridgeSwampLong_mat" materialId="18" customShaderId="37">
+      <Texture fileId="53"/>
+      <Normalmap fileId="54"/>
+      <Glossmap fileId="55"/>
+    </Material>
+    <Material name="black_mat" materialId="19" diffuseColor="0.0498961 0.0498961 0.0498961 1" specularColor="0 0 0">
+      <Normalmap fileId="56"/>
+    </Material>
+    <Material name="puddle_mat" materialId="12" customShaderId="60">
+      <CustomParameter name="waterColor" value="0.5 0.5 0.65"/>
+      <CustomParameter name="waterOpacity" value="0.53"/>
+      <Custommap name="mHeightMask" fileId="61"/>
+      <Texture fileId="57"/>
+      <Normalmap fileId="58"/>
+      <Glossmap fileId="59"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="infrastructure.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="infrastructure" nodeId="1">
+      <TransformGroup name="roads" nodeId="2">
+        <TransformGroup name="interstateDoubleLane" nodeId="3">
+          <Shape name="interstateDoubleLane01" translation="109.704079 67.544205 -121.014412" shapeId="1" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="4"/>
+          <Shape name="interstateDoubleLane02" translation="-906.401428 118.012238 -804.443176" shapeId="2" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="5"/>
+          <Shape name="interstateDoubleLane03" translation="-149.361084 72.566231 31.606443" rotation="116.372643 0.000175 90.000229" shapeId="3" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="6"/>
+          <Shape name="interstateDoubleLane04" translation="-91.783966 90.37841 -366.880341" shapeId="4" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="7"/>
+        </TransformGroup>
+        <TransformGroup name="interstateSimple" nodeId="8">
+          <Shape name="interstateSimple01" translation="341.918549 44.440311 -839.711853" shapeId="5" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="9"/>
+          <Shape name="interstateSimple02" translation="-642.341187 51.397594 671.704651" shapeId="6" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="10"/>
+          <Shape name="interstateSimple03" translation="155.046829 44.243923 589.310608" shapeId="7" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="11"/>
+          <Shape name="interstateSimple04" translation="-78.542259 44.146221 688.822083" shapeId="8" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="12"/>
+          <Shape name="interstateSimple05" translation="1.468848 44.07785 788.205139" shapeId="9" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="13"/>
+          <Shape name="interstateSimple06" translation="194.027344 44.077831 840.802551" shapeId="10" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="14"/>
+          <Shape name="interstateSimple07" translation="460.956177 44.077831 886.200867" shapeId="11" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="15"/>
+          <Shape name="interstateSimple08" translation="414.499725 44.088669 714.178345" shapeId="12" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="16"/>
+          <Shape name="interstateSimple09" translation="655.12793 45.33913 -49.806595" shapeId="13" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="17"/>
+          <Shape name="interstateSimple010" translation="527.963379 45.130638 -445.959229" shapeId="14" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="18"/>
+          <Shape name="interstateSimple011" translation="654.215393 44.486263 381.055786" shapeId="15" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="19"/>
+          <Shape name="interstateSimple012" translation="1087.815308 49.019779 -308.15918" shapeId="16" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="20"/>
+        </TransformGroup>
+        <TransformGroup name="narrowStreetTown" nodeId="21">
+          <Shape name="narrowStreetTown1" translation="750.416931 47.569206 605.464172" shapeId="17" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="22"/>
+          <Shape name="narrowStreetTown02" translation="854.692017 46.049519 763.530762" shapeId="18" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="23"/>
+          <Shape name="narrowStreetTown03" translation="854.692078 49.816944 669.989563" shapeId="19" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="24"/>
+          <Shape name="narrowStreetTown04" translation="772.536865 45.991936 770.939758" shapeId="20" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="25"/>
+          <Shape name="narrowStreetTown05" translation="772.525024 48.921234 669.989563" shapeId="21" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="26"/>
+          <Shape name="narrowStreetTown07" translation="695.156372 45.357269 783.834229" shapeId="22" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="27"/>
+          <Shape name="narrowStreetTown08" translation="638.085815 44.320965 629.24646" shapeId="23" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="28"/>
+        </TransformGroup>
+        <TransformGroup name="narrowStreetUnmarkedOld" nodeId="29">
+          <Shape name="narrowStreetUnmarkedOld01" translation="733.845459 44.496632 781.88501" shapeId="24" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="30"/>
+          <Shape name="narrowStreetUnmarkedOld02" translation="741.872986 44.085602 781.88501" shapeId="25" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="31"/>
+          <Shape name="narrowStreetUnmarkedOld03" shapeId="26" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="32"/>
+          <Shape name="narrowStreetUnmarkedOld04" translation="-150.996246 81.46228 -823.222168" shapeId="27" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="33"/>
+          <Shape name="narrowStreetUnmarkedOld05" translation="418.513245 42.963478 -527.77179" shapeId="28" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="34"/>
+          <Shape name="narrowStreetUnmarkedOld06" translation="-421.04657 118.928825 -490.671356" shapeId="29" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="35"/>
+        </TransformGroup>
+        <TransformGroup name="wideStreetTown" nodeId="36">
+          <Shape name="wideStreetTown01" translation="813.167664 44.164566 811.934814" shapeId="30" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="37"/>
+          <Shape name="wideStreetTown02" translation="792.598022 46.918571 717.761841" shapeId="31" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="38"/>
+          <Shape name="wideStreetTown03" translation="935.457214 51.672398 610.792603" shapeId="32" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="39"/>
+          <Shape name="wideStreetTown04" translation="740.718872 44.161037 836.521179" shapeId="33" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="40"/>
+          <Shape name="wideStreetTown05" translation="961.095032 46.790134 749.651184" shapeId="34" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="41"/>
+        </TransformGroup>
+        <TransformGroup name="intersections" nodeId="42">
+          <Shape name="intersectionCity01" translation="772.70105 49.233192 635.066101" shapeId="35" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="43"/>
+          <Shape name="intersectionCity02" translation="939.960144 50.849274 629.623657" shapeId="36" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="44"/>
+          <Shape name="intersectionCity03" translation="857.087402 48.156616 717.74408" shapeId="37" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="45"/>
+          <Shape name="intersectionCity04" translation="771.917236 48.024803 717.74408" shapeId="38" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="46"/>
+          <Shape name="intersectionCity05" translation="694.555115 46.698795 729.595459" shapeId="39" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="47"/>
+          <Shape name="intersectionCity07" translation="699.144592 44.163193 848.413696" shapeId="40" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="48"/>
+          <Shape name="intersectionCity08" translation="776.951782 44.333038 822.237488" shapeId="41" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="49"/>
+          <Shape name="intersectionCity09" translation="863.904236 44.296825 804.172607" shapeId="42" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="50"/>
+          <Shape name="intersectionCity10" translation="700.848206 44.571636 783.125244" shapeId="43" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="51"/>
+          <Shape name="intersectionCity11" translation="766.842651 44.920837 780.644836" shapeId="44" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="52"/>
+          <Shape name="intersectionCity12" translation="945.280396 48.21003 710.386414" shapeId="45" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="53"/>
+          <Shape name="intersectionCity13" translation="636.13623 44.046078 853.815247" shapeId="46" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="54"/>
+          <Shape name="intersectionCity14" translation="937.777222 45.030857 792.278076" shapeId="47" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="55"/>
+          <Shape name="intersectionCity15" translation="901.009827 54.707832 547.341675" shapeId="48" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="56"/>
+          <Shape name="intersectionCity16" translation="842.464661 54.702187 544.659912" shapeId="49" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="57"/>
+          <Shape name="intersectionCity17" translation="646.747314 44.89846 712.638428" shapeId="50" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="58"/>
+          <Shape name="intersectionCity18" translation="855.176025 50.986946 634.87323" shapeId="51" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="59"/>
+          <Shape name="intersectionCity19" translation="634.70575 44.086449 633.954956" shapeId="52" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="60"/>
+          <Shape name="intersectionCity20" translation="622.700684 44.114567 788.612793" shapeId="53" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="61"/>
+          <Shape name="intersectionCity21" translation="323.404816 44.158478 816.760986" shapeId="54" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="62"/>
+          <Shape name="intersectionCity22" translation="-87.095955 47.436382 573.407837" shapeId="55" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="63"/>
+          <Shape name="intersectionCity23" translation="641.879211 46.372955 -112.324196" shapeId="56" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="64"/>
+          <Shape name="intersectionCity26" translation="740.098999 49.594761 544.659912" shapeId="57" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="65"/>
+          <Shape name="intersectionCity27" translation="900.41803 55.170902 461.207397" shapeId="58" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="66"/>
+          <Shape name="intersectionCity28" translation="871.762939 54.94257 538.076782" shapeId="59" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="67"/>
+          <Shape name="intersectionCity29" translation="640.951477 44.229015 573.424255" shapeId="60" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="68"/>
+          <Shape name="intersectionCity35" translation="540.599548 45.452286 -476.845642" shapeId="61" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="69"/>
+          <Shape name="intersectionCity34" translation="304.390137 44.314259 -807.13147" shapeId="62" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="70"/>
+          <Shape name="intersectionCity33" translation="673.182983 44.731373 -173.820786" shapeId="63" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="71"/>
+          <Shape name="intersectionCity36" translation="-837.282898 51.314964 726.749756" shapeId="64" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="72"/>
+          <Shape name="intersectionCity37" translation="-740.870789 43.710392 -114.304779" shapeId="65" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="73"/>
+          <Shape name="intersectionCity38" translation="-495.224457 118.487106 -541.555786" shapeId="66" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="74"/>
+          <Shape name="intersectionCity39" translation="-455.071838 120.054642 -400.89328" shapeId="67" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="75"/>
+          <Shape name="intersectionCity40" translation="-605.742676 118.207939 -668.249084" shapeId="68" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="76"/>
+          <TransformGroup name="streetSigns" nodeId="77">
+            <Shape name="signDecal01" translation="762.514099 44.824196 781.808899" shapeId="69" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="1" clipDistance="150" nodeId="78"/>
+            <Shape name="signDecal02" translation="951.410706 47.960999 716.426941" shapeId="70" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="1" clipDistance="150" nodeId="79"/>
+            <Shape name="signDecal03" translation="933.600037 51.024734 629.926941" shapeId="71" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="1" clipDistance="150" nodeId="80"/>
+            <Shape name="signDecal04" translation="855.140015 50.990398 640.317871" shapeId="72" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="1" clipDistance="150" nodeId="81"/>
+            <Shape name="signDecal05" translation="772.695435 49.256519 640.496826" shapeId="73" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="1" clipDistance="150" nodeId="82"/>
+            <Shape name="signDecal06" translation="634.477478 44.252785 631.998718" shapeId="74" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="1" clipDistance="150" nodeId="83"/>
+            <Shape name="signDecal07" translation="648.56012 44.522827 544.598633" shapeId="75" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="1" clipDistance="150" nodeId="84"/>
+            <Shape name="signDecal08" translation="704.155579 44.824192 781.80896" shapeId="76" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="1" clipDistance="150" nodeId="85"/>
+            <Shape name="signDecal09" translation="849.289307 44.174252 805.050598" shapeId="77" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="1" clipDistance="150" nodeId="86"/>
+            <Shape name="signDecal10" translation="767.298645 44.172867 829.789795" shapeId="78" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="1" clipDistance="150" nodeId="87"/>
+            <Shape name="signDecal11" translation="693.146301 44.174252 837.580994" shapeId="79" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="1" clipDistance="150" nodeId="88"/>
+            <Shape name="signDecal12" translation="636.230469 44.309216 714.855408" shapeId="80" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="1" clipDistance="150" nodeId="89"/>
+            <Shape name="signDecal23" translation="697.41095 47.500645 730.997375" shapeId="81" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="1" clipDistance="150" nodeId="90"/>
+            <Shape name="signDecal24" translation="854.7547 48.004429 717.231018" shapeId="82" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="1" clipDistance="150" nodeId="91"/>
+            <Shape name="signDecal25" translation="772.587646 48.074036 717.231018" shapeId="83" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="1" clipDistance="150" nodeId="92"/>
+          </TransformGroup>
+        </TransformGroup>
+        <Shape name="sidewalks" translation="841.565552 50.074146 629.769775" shapeId="84" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="93"/>
+      </TransformGroup>
+      <TransformGroup name="dirtRoads" nodeId="94">
+        <Shape name="dirtRoads01" translation="104.035698 51.163074 -395.566193" shapeId="85" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="2" clipDistance="450" nodeId="95"/>
+        <Shape name="dirtRoads02" translation="-735.691772 79.89624 41.123066" shapeId="86" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="2" clipDistance="450" nodeId="96"/>
+        <Shape name="dirtRoads04" translation="366.460815 44.940357 -604.893799" shapeId="87" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="2" clipDistance="450" nodeId="97"/>
+        <Shape name="dirtRoads05" translation="379.057556 38.985363 -439.070557" shapeId="88" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="98"/>
+        <Shape name="dirtRoads06" translation="389.032654 40.723759 -367.089233" shapeId="89" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="99"/>
+        <Shape name="dirtRoads07" translation="455.512451 55.508858 -307.252533" shapeId="90" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="100"/>
+        <Shape name="dirtRoads08" translation="765.898254 61.242683 310.612305" shapeId="91" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="2" clipDistance="450" nodeId="101"/>
+        <Shape name="dirtRoads09" translation="457.496948 65.676727 389.363525" shapeId="92" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="102"/>
+        <Shape name="dirtRoads10" translation="791.076843 60.042919 -242.476395" shapeId="93" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="2" clipDistance="450" nodeId="103"/>
+        <Shape name="dirtRoads11" translation="530.736938 49.322319 -672.504333" shapeId="94" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="104"/>
+        <Shape name="dirtRoads12" translation="52.17498 62.200672 261.541656" shapeId="95" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="2" clipDistance="450" nodeId="105"/>
+        <Shape name="dirtRoads13" translation="-436.782837 57.123413 300.484802" shapeId="96" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="2" clipDistance="450" nodeId="106"/>
+        <Shape name="dirtRoads14" translation="-562.051392 70.514412 -215.088196" shapeId="97" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="2" clipDistance="450" nodeId="107"/>
+        <Shape name="dirtRoads15" translation="-802.462341 81.537903 -595.579834" shapeId="98" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="2" clipDistance="450" nodeId="108"/>
+        <Shape name="dirtRoads16" translation="-593.442139 134.370468 -665.567261" shapeId="99" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="2" clipDistance="450" nodeId="109"/>
+        <Shape name="dirtRoads17" translation="-111.28479 65.033798 -1003.973145" shapeId="100" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="2" clipDistance="450" nodeId="110"/>
+        <Shape name="dirtRoads18" translation="-232.58667 82.321259 -394.283203" shapeId="101" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="2" clipDistance="450" nodeId="111"/>
+        <Shape name="dirtRoads19" translation="1.351523 55.008751 -117.600128" shapeId="102" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="2" clipDistance="450" nodeId="112"/>
+        <Shape name="dirtRoads20" translation="454.701447 47.227524 -295.724426" shapeId="103" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="113"/>
+        <Shape name="dirtRoads21" translation="-5.620674 54.634163 -659.236816" shapeId="104" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="2" clipDistance="450" nodeId="114"/>
+        <Shape name="dirtRoads22" translation="195.893173 44.086994 -625.285583" shapeId="105" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="2" clipDistance="450" nodeId="115"/>
+        <Shape name="dirtRoads23" translation="-747.787354 103.728157 399.112" shapeId="106" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="116"/>
+        <Shape name="dirtRoads24" translation="-721.946716 70.099075 -523.118469" shapeId="107" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="117"/>
+        <Shape name="dirtRoads25" translation="-436.782837 57.123413 300.484802" shapeId="108" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="118"/>
+        <Shape name="dirtRoads26" translation="-593.442139 134.370468 -665.567261" shapeId="109" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="119"/>
+        <TransformGroup name="gravelRoad" nodeId="120">
+          <Shape name="gravelRoad01" translation="-735.691772 79.89624 41.123066" shapeId="110" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="4" clipDistance="450" nodeId="121"/>
+          <TransformGroup name="gravelIntersection" translation="-763.44635 44.696781 -121.657539" nodeId="122">
+            <Shape name="gravelIntersectionDecal01" shapeId="111" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="4" clipDistance="125" nodeId="123"/>
+            <Shape name="gravelIntersectionDecal02" translation="763.44635 -44.696781 121.657539" shapeId="112" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="4" clipDistance="450" nodeId="124"/>
+            <Shape name="gravelIntersectionDecal03" translation="-68.502502 39.643417 -86.630371" shapeId="113" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="4" clipDistance="450" nodeId="125"/>
+            <Shape name="gravelIntersectionDecal04" translation="-29.635313 32.604897 -253.872818" shapeId="114" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="4" clipDistance="450" nodeId="126"/>
+            <Shape name="gravelIntersectionDecal05" translation="-124.418907 -0.633513 -420.621704" shapeId="115" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="4" clipDistance="450" nodeId="127"/>
+          </TransformGroup>
+        </TransformGroup>
+        <Shape name="dirtRoads27" translation="530.736938 49.322319 -672.504333" shapeId="116" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="128"/>
+      </TransformGroup>
+      <TransformGroup name="dirtRoadIntersections" nodeId="129">
+        <Shape name="dirtRoadIntersectionDecal01" translation="-246.392288 50.742302 588.762695" shapeId="117" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="100" nodeId="130"/>
+        <Shape name="dirtRoadIntersectionDecal04" translation="653.166443 44.281815 507.947083" shapeId="118" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="100" nodeId="131"/>
+        <Shape name="dirtRoadIntersectionDecal05" translation="676.197571 47.092762 -25.101461" shapeId="119" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="100" nodeId="132"/>
+        <Shape name="dirtRoadIntersectionDecal07" translation="751.720581 41.418961 -480.18808" rotation="5.018013 -13.862255 -1.44247" shapeId="120" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="133"/>
+        <Shape name="dirtRoadIntersectionDecal08" translation="740.106934 41.431664 -534.648804" shapeId="121" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="134"/>
+        <Shape name="dirtRoadIntersectionDecal10" translation="315.951508 44.259632 -841.012512" rotation="0 11.505538 0" shapeId="122" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="100" nodeId="135"/>
+        <Shape name="dirtRoadIntersectionDecal11" translation="41.102242 68.566032 -158.893539" shapeId="123" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="100" nodeId="136"/>
+        <Shape name="dirtRoadIntersectionDecal17" translation="-658.869568 118.05722 -703.255249" shapeId="124" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="100" nodeId="137"/>
+        <Shape name="dirtRoadIntersectionDecal18" translation="-646.74823 117.212593 -730.414856" shapeId="125" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="100" nodeId="138"/>
+        <Shape name="dirtRoadIntersectionDecal27" translation="-495.886108 65.979706 274.881836" shapeId="126" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="139"/>
+        <Shape name="dirtRoadIntersectionDecal28" translation="-236.180527 75.078018 79.604012" rotation="3.04056 -9.988261 -1.639116" shapeId="127" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="100" nodeId="140"/>
+        <Shape name="dirtRoadIntersectionDecal57" translation="-55.384205 78.871849 -916.221436" rotation="0 -70.672119 0" shapeId="128" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="100" nodeId="141"/>
+        <Shape name="dirtRoadIntersectionDecal78" translation="-710.956055 51.601963 729.883301" rotation="0 -28.711838 3.084021" shapeId="129" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="100" nodeId="142"/>
+        <Shape name="dirtRoadIntersectionDecal79" translation="-772.365234 65.790985 621.101257" rotation="3.976125 18.877937 1.283581" shapeId="130" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="100" nodeId="143"/>
+        <Shape name="dirtRoadIntersectionDecal80" translation="-576.995361 59.971916 65.763275" rotation="2.0737 -43.742832 -6.045427" shapeId="131" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="100" nodeId="144"/>
+        <Shape name="dirtRoadIntersectionDecal81" translation="-814.186218 91.392952 455.700836" rotation="16.677828 60.900162 11.905773" shapeId="132" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="100" nodeId="145"/>
+        <Shape name="dirtRoadIntersectionDecal82" translation="-865.708923 89.895943 222.957275" rotation="-177.665359 10.532985 -179.585968" shapeId="133" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="100" nodeId="146"/>
+        <Shape name="dirtRoadIntersectionDecal86" translation="-252.117584 78.231384 44.961369" rotation="177.620804 11.302308 -190.799408" shapeId="134" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="100" nodeId="147"/>
+        <Shape name="dirtRoadIntersectionDecal91" translation="-753.402344 118.525726 -770.250366" rotation="0 9.29306 0" shapeId="135" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="100" nodeId="148"/>
+        <Shape name="dirtRoadIntersectionDecal29" translation="321.370789 44.66605 -738.549011" shapeId="136" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="100" nodeId="149"/>
+        <Shape name="dirtRoadIntersectionDecal30" translation="495.772827 45.049667 -546.07019" shapeId="137" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="100" nodeId="150"/>
+        <Shape name="dirtRoadIntersectionDecal31" translation="474.477051 48.148312 -624.291199" shapeId="138" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="151"/>
+        <Shape name="dirtRoadIntersectionDecal32" translation="445.505585 44.750885 -575.61969" rotation="0 -177.357239 0" shapeId="139" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="100" nodeId="152"/>
+        <Shape name="dirtRoadIntersectionDecal33" translation="399.321503 44.970592 -622.0896" rotation="0 -183.707504 0" shapeId="140" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="100" nodeId="153"/>
+        <Shape name="dirtRoadIntersectionDecal34" translation="375.322388 42.06279 -493.449249" shapeId="141" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="100" nodeId="154"/>
+        <Shape name="dirtRoadIntersectionDecal35" translation="330.15741 44.38089 -588.160339" shapeId="142" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="100" nodeId="155"/>
+        <Shape name="dirtRoadIntersectionDecal36" translation="381.865601 41.041634 -472.808777" rotation="-0.685712 -150.01268 0.194195" shapeId="143" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="100" nodeId="156"/>
+        <Shape name="dirtRoadIntersectionDecal37" translation="294.112762 43.75201 -612.790344" shapeId="144" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="157"/>
+        <Shape name="dirtRoadIntersectionDecal38" translation="225.202087 43.480034 -521.358643" shapeId="145" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="158"/>
+        <Shape name="dirtRoadIntersectionDecal39" translation="189.382095 51.34713 -486.986084" shapeId="146" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="159"/>
+        <Shape name="dirtRoadIntersectionDecal40" translation="248.014359 42.415821 -417.815491" shapeId="147" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="160"/>
+        <Shape name="dirtRoadIntersectionDecal41" translation="178.80986 62.014912 -395.612701" shapeId="148" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="161"/>
+        <Shape name="dirtRoadIntersectionDecal42" translation="109.49939 57.663021 -369.146576" shapeId="149" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="162"/>
+        <Shape name="dirtRoadIntersectionDecal43" translation="273.611511 40.045406 -387.303131" shapeId="150" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="163"/>
+        <Shape name="dirtRoadIntersectionDecal45" translation="270.180908 38.518978 -358.166748" shapeId="151" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="164"/>
+        <Shape name="dirtRoadIntersectionDecal46" translation="149.023666 45.872349 -268.61264" shapeId="152" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="165"/>
+        <Shape name="dirtRoadIntersectionDecal47" translation="103.874344 48.861465 -241.435806" shapeId="153" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="166"/>
+        <Shape name="dirtRoadIntersectionDecal48" translation="34.571766 48.268913 -475.790253" shapeId="154" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="167"/>
+        <Shape name="dirtRoadIntersectionDecal49" translation="78.905724 44.750645 -506.62326" shapeId="155" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="168"/>
+        <Shape name="dirtRoadIntersectionDecal50" translation="8.84509 47.736794 -484.074738" shapeId="156" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="169"/>
+        <Shape name="dirtRoadIntersectionDecal51" translation="169.468979 43.561859 -610.868652" shapeId="157" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="170"/>
+        <Shape name="dirtRoadIntersectionDecal52" translation="37.805408 70.579765 -617.875488" shapeId="158" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="171"/>
+        <Shape name="dirtRoadIntersectionDecal53" translation="-55.73082 47.748383 -579.749329" shapeId="159" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="172"/>
+        <Shape name="dirtRoadIntersectionDecal54" translation="-40.787243 41.176098 -525.828796" shapeId="160" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="173"/>
+        <Shape name="dirtRoadIntersectionDecal55" translation="-56.318993 39.57164 -489.871124" shapeId="161" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="174"/>
+        <Shape name="dirtRoadIntersectionDecal56" translation="-151.577179 55.763229 -789.610596" shapeId="162" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="175"/>
+        <Shape name="dirtRoadIntersectionDecal110" translation="-134.036758 55.814938 -964.302856" shapeId="163" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="176"/>
+        <Shape name="dirtRoadIntersectionDecal58" translation="11.404646 74.366219 -953.371155" shapeId="164" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="100" nodeId="177"/>
+        <Shape name="dirtRoadIntersectionDecal59" translation="-48.045593 41.30711 -402.435486" shapeId="165" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="178"/>
+        <Shape name="dirtRoadIntersectionDecal60" translation="-32.381279 40.582821 -327.433319" shapeId="166" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="179"/>
+        <Shape name="dirtRoadIntersectionDecal61" translation="-114.010368 46.675282 -172.720276" shapeId="167" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="180"/>
+        <Shape name="dirtRoadIntersectionDecal62" translation="-22.415321 42.0462 -307.73349" shapeId="168" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="181"/>
+        <Shape name="dirtRoadIntersectionDecal63" translation="-111.049934 54.516945 -137.998825" shapeId="169" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="182"/>
+        <Shape name="dirtRoadIntersectionDecal64" translation="-31.004011 70.991356 -76.794693" shapeId="170" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="100" nodeId="183"/>
+        <Shape name="dirtRoadIntersectionDecal65" translation="-29.426098 70.106773 -119.237793" shapeId="171" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="100" nodeId="184"/>
+        <Shape name="dirtRoadIntersectionDecal66" translation="640.606812 44.781029 -253.385773" rotation="0 -216.702286 0" shapeId="172" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="100" nodeId="185"/>
+        <Shape name="dirtRoadIntersectionDecal67" translation="848.127319 78.734573 59.205956" shapeId="173" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="186"/>
+        <Shape name="dirtRoadIntersectionDecal68" translation="851.547241 78.252457 -3.977845" shapeId="174" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="187"/>
+        <Shape name="dirtRoadIntersectionDecal69" translation="865.271729 64.58876 273.760345" shapeId="175" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="188"/>
+        <Shape name="dirtRoadIntersectionDecal70" translation="865.569946 48.938164 -341.366302" shapeId="176" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="100" nodeId="189"/>
+        <Shape name="dirtRoadIntersectionDecal71" translation="385.494324 78.297195 -9.168099" shapeId="177" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="190"/>
+        <Shape name="dirtRoadIntersectionDecal72" translation="463.228943 71.426315 57.622757" shapeId="178" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="191"/>
+        <Shape name="dirtRoadIntersectionDecal73" translation="179.890732 66.408005 -0.84985" shapeId="179" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="192"/>
+        <Shape name="dirtRoadIntersectionDecal74" translation="456.897003 47.975918 524.570984" shapeId="180" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="193"/>
+        <Shape name="dirtRoadIntersectionDecal75" translation="279.4216 63.625046 341.533539" shapeId="181" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="194"/>
+        <Shape name="dirtRoadIntersectionDecal76" translation="-106.729645 56.634506 279.689728" shapeId="182" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="195"/>
+        <Shape name="dirtRoadIntersectionDecal83" translation="-522.003479 64.915863 316.610107" shapeId="183" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="196"/>
+        <Shape name="dirtRoadIntersectionDecal84" translation="-667.572388 70.161873 62.682095" shapeId="184" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="197"/>
+        <Shape name="dirtRoadIntersectionDecal85" translation="-436.102478 65.769363 157.389572" shapeId="185" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="198"/>
+        <Shape name="dirtRoadIntersectionDecal111" translation="-763.44635 44.696781 -118.995773" shapeId="186" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="100" nodeId="199"/>
+        <Shape name="dirtRoadIntersectionDecal90" translation="-905.760925 45.065449 -603.688354" shapeId="187" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="200"/>
+        <Shape name="dirtRoadIntersectionDecal92" translation="-574.750061 93.43116 -410.749481" shapeId="188" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="201"/>
+        <Shape name="dirtRoadIntersectionDecal93" translation="-572.925659 93.871864 -300.164978" shapeId="189" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="202"/>
+        <Shape name="dirtRoadIntersectionDecal94" translation="-649.521301 47.873978 -154.381714" shapeId="190" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="203"/>
+        <Shape name="dirtRoadIntersectionDecal95" translation="-534.250366 54.291416 448.65094" shapeId="191" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="204"/>
+        <Shape name="dirtRoadIntersectionDecal96" translation="-211.299988 56.359898 -69.297668" shapeId="192" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="205"/>
+        <Shape name="dirtRoadIntersectionDecal97" translation="-167.698563 40.019142 -191.646881" shapeId="193" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="206"/>
+        <Shape name="dirtRoadIntersectionDecal99" translation="-248.563171 96.930809 -130.624329" shapeId="194" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="207"/>
+        <Shape name="dirtRoadIntersectionDecal98" translation="-181.64151 82.682053 -508.231689" shapeId="195" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="208"/>
+        <Shape name="dirtRoadIntersectionDecal101" translation="-246.511353 107.652756 -437.13382" shapeId="196" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="209"/>
+        <Shape name="dirtRoadIntersectionDecal100" translation="-346.909576 122.36586 -123.605339" shapeId="197" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="100" nodeId="210"/>
+        <Shape name="dirtRoadIntersectionDecal103" translation="-575.36554 118.665382 -703.096252" shapeId="198" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="100" nodeId="211"/>
+        <Shape name="dirtRoadIntersectionDecal102" translation="-419.780365 119.163818 -427.303345" shapeId="199" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="212"/>
+        <Shape name="dirtRoadIntersectionDecal104" translation="-457.572449 77.898308 27.393438" shapeId="200" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="213"/>
+        <Shape name="dirtRoadIntersectionDecal105" translation="-686.273804 143.346298 -911.638672" shapeId="201" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="214"/>
+        <Shape name="dirtRoadIntersectionDecal108" translation="-520.768799 108.952599 -867.238892" shapeId="202" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="100" nodeId="215"/>
+        <Shape name="dirtRoadIntersectionDecal106" translation="-660.464417 121.888641 -845.015381" shapeId="203" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="216"/>
+        <Shape name="dirtRoadIntersectionDecal109" translation="-280.926514 79.755005 -832.988342" shapeId="204" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="3" clipDistance="100" nodeId="217"/>
+        <Shape name="dirtRoadIntersectionDecal113" translation="-90.692162 64.910439 400.334229" shapeId="205" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="218"/>
+        <Shape name="dirtRoadIntersectionDecal114" translation="419.565857 85.540886 373.959625" shapeId="206" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="219"/>
+        <Shape name="dirtRoadIntersectionDecal115" translation="259.13028 64.190147 342.435974" shapeId="207" castsShadows="false" receiveShadows="true" terrainDecal="true" renderedInViewports="false" decalLayer="1" materialIds="3" clipDistance="450" nodeId="220"/>
+      </TransformGroup>
+      <TransformGroup name="metalGrips" nodeId="221">
+        <Shape name="metalGrip01Decal" translation="854.728577 48.077072 717.74408" shapeId="208" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="5" clipDistance="150" nodeId="222"/>
+        <Shape name="metalGrip02Decal" translation="772.561523 48.05032 717.74408" shapeId="209" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="5" clipDistance="150" nodeId="223"/>
+        <Shape name="metalGrip03Decal" translation="854.70752 44.221302 800.065796" shapeId="210" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="5" clipDistance="150" nodeId="224"/>
+        <Shape name="metalGrip04Decal" translation="695.399231 47.548553 727.199524" shapeId="211" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="5" clipDistance="150" nodeId="225"/>
+        <Shape name="metalGrip05Decal" translation="696.280334 44.21777 841.252747" shapeId="212" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="5" clipDistance="150" nodeId="226"/>
+        <Shape name="metalGrip06Decal" translation="774.101624 44.221054 815.882568" shapeId="213" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="5" clipDistance="150" nodeId="227"/>
+        <Shape name="metalGrip07Decal" translation="943.742676 48.052959 716.251892" shapeId="214" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="5" clipDistance="150" nodeId="228"/>
+      </TransformGroup>
+      <TransformGroup name="treesSupportDecal" nodeId="229">
+        <Shape name="treesSupportDecal01" translation="752.987427 47.235706 717.875793" shapeId="215" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="6" clipDistance="230" nodeId="230"/>
+        <Shape name="treesSupportDecal02" translation="699.082886 44.237278 849.423462" shapeId="216" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="6" clipDistance="230" nodeId="231"/>
+        <Shape name="treesSupportDecal03" translation="706.021423 46.627144 629.756104" shapeId="217" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="6" clipDistance="230" nodeId="232"/>
+        <Shape name="treesSupportDecal04" translation="744.51709 49.672611 544.666443" shapeId="218" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="6" clipDistance="230" nodeId="233"/>
+      </TransformGroup>
+      <TransformGroup name="decals" nodeId="234">
+        <TransformGroup name="mudTracks" nodeId="235">
+          <Shape name="mudTracks01Decals" translation="-244.09613 50.59943 597.569031" shapeId="219" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="7" clipDistance="100" nodeId="236"/>
+          <Shape name="mudTracks03Decals" translation="639.566589 44.349293 509.022003" rotation="4.403728 -117.613899 -4.647263" shapeId="220" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="7" clipDistance="100" nodeId="237"/>
+          <Shape name="mudTracks04Decals" translation="666.171448 46.918797 -23.656027" rotation="6.450565 -108.468979 -6.864429" shapeId="221" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="7" clipDistance="100" nodeId="238"/>
+          <Shape name="mudTracks05Decals" translation="306.865021 44.375488 -837.85321" rotation="28.489016 -94.279045 -29.165524" shapeId="222" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="7" clipDistance="100" nodeId="239"/>
+          <Shape name="mudTracks06Decals" translation="389.263428 75.035194 -46.907982" shapeId="223" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="7" clipDistance="100" nodeId="240"/>
+          <Shape name="mudTracks07Decals" translation="42.850433 68.601692 -148.177689" rotation="2.393529 -18.396477 -2.269322" shapeId="224" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="7" clipDistance="100" nodeId="241"/>
+          <Shape name="mudTracks08Decals" translation="-234.749573 76.308388 62" rotation="-2.032347 -201.942184 -8.83919" shapeId="225" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="7" clipDistance="100" nodeId="242"/>
+          <Shape name="mudTracks10Decals" translation="-653.280396 118.423409 -717.109253" rotation="-3.615574 -56.110577 4.296908" shapeId="226" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="7" clipDistance="100" nodeId="243"/>
+          <Shape name="mudTracks11Decals" translation="-656.696533 118.413086 -710.367065" rotation="-3.438348 126.430313 -3.986009" shapeId="227" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="7" clipDistance="100" nodeId="244"/>
+          <Shape name="mudTracks05Decals1" translation="330.950623 44.546677 -741.042969" rotation="-13.223244 -263.747437 -13.922084" shapeId="228" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="7" clipDistance="100" nodeId="245"/>
+          <Shape name="mudTracks05Decals2" translation="491.934631 44.863091 -539.953674" rotation="-182.527802 -120.559875 -176.75618" shapeId="229" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="7" clipDistance="100" nodeId="246"/>
+          <Shape name="mudTracks05Decals3" translation="448.152008 44.776001 -582.09082" rotation="-177.52446 58.723686 -176.817093" shapeId="230" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="7" clipDistance="100" nodeId="247"/>
+          <Shape name="mudTracks05Decals4" translation="402.881378 45.209286 -627.273438" rotation="-177.082397 63.860527 -176.313599" shapeId="231" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="7" clipDistance="100" nodeId="248"/>
+          <Shape name="mudTracks05Decals5" translation="-57.007786 79.204849 -924.376343" rotation="0.327504 -173.306854 -3.222203" shapeId="232" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="7" clipDistance="100" nodeId="249"/>
+          <Shape name="mudTracks04Decals1" translation="644.801697 44.84996 -255.69281" rotation="46.452702 -274.937378 46.422203" shapeId="233" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="7" clipDistance="100" nodeId="250"/>
+          <Shape name="mudTracks01Decals1" translation="-712.458069 51.753571 737.129944" rotation="-0.089932 -9.941309 3.534507" shapeId="234" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="7" clipDistance="100" nodeId="251"/>
+          <Shape name="mudTracks08Decals1" translation="-252.884659 78.59761 55.94973" rotation="-180.152649 -157.052399 -184.752228" shapeId="235" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="7" clipDistance="100" nodeId="252"/>
+          <Shape name="mudTracks05Decals6" translation="15.219038 74.629684 -946.510315" rotation="-0.583159 -359.962738 -1.771739" shapeId="236" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="7" clipDistance="100" nodeId="253"/>
+          <Shape name="mudTracks08Decals2" translation="-356.971771 122.84613 -120" rotation="-35.606087 -100.41523 31.68243" shapeId="237" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="7" clipDistance="100" nodeId="254"/>
+          <Shape name="mudTracks05Decals7" translation="-586.376099 118.790932 -701.969666" rotation="5.600423 -121.956215 -5.256479" shapeId="238" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="7" clipDistance="100" nodeId="255"/>
+          <Shape name="mudTracks05Decals8" translation="-522.568237 109.240257 -869.116577" rotation="6.268741 -137.853729 -8.208066" shapeId="239" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="7" clipDistance="100" nodeId="256"/>
+          <Shape name="mudTracks05Decals9" translation="-281.38269 80.4048 -841.501709" rotation="-0.084506 -187.892258 -4.477396" shapeId="240" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="7" clipDistance="100" nodeId="257"/>
+          <Shape name="mudTracks05Decals10" translation="-586.572449 61.450939 58.950603" rotation="-1.520054 -533.446289 -7.769854" shapeId="241" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="7" clipDistance="100" nodeId="258"/>
+          <Shape name="mudTracks05Decals11" translation="-640.419128 68.41172 44.936764" rotation="-17.16206 -609.136597 -16.712267" shapeId="242" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="7" clipDistance="100" nodeId="259"/>
+          <Shape name="mudTracks05Decals12" translation="-695.048706 74.760262 46.067497" rotation="-4.586754 -574.84845 -7.772729" shapeId="243" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="7" clipDistance="100" nodeId="260"/>
+          <Shape name="mudTracks05Decals13" translation="-855.564758 91.913055 227.7547" rotation="-184.50032 -559.74646 -184.587494" shapeId="244" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="7" clipDistance="100" nodeId="261"/>
+          <Shape name="mudTracks05Decals14" translation="-819.742615 93.158928 464.644867" rotation="-526.34314 -459.246521 159.51445" shapeId="245" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="7" clipDistance="100" nodeId="262"/>
+          <Shape name="mudTracks05Decals15" translation="-787.585754 65.734108 625.479187" rotation="-372.11618 -487.203735 -2.038017" shapeId="246" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="7" clipDistance="100" nodeId="263"/>
+          <Shape name="mudTracks05Decals16" translation="-758.60376 46.080135 -109.618347" rotation="-7.666685 -544.814819 -1.868072" shapeId="247" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="7" clipDistance="100" nodeId="264"/>
+          <Shape name="mudTracks05Decals17" translation="381.34314 41.966583 -478.892029" rotation="-182.783783 32.202232 -180.817017" shapeId="248" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="7" clipDistance="100" nodeId="265"/>
+          <Shape name="mudTracks07Decals1" translation="-19.464777 71.046089 -118.340118" rotation="0.135433 50.02282 2.306504" shapeId="249" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="7" clipDistance="100" nodeId="266"/>
+          <Shape name="mudTracks07Decals2" translation="-37.161354 72.509949 -82.182213" rotation="2.67626 -135.062454 -1.670464" shapeId="250" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="7" clipDistance="100" nodeId="267"/>
+          <Shape name="mudTracks11Decals1" translation="-750.757812 118.440063 -773.646362" rotation="-2.372111 149.372818 -2.427396" shapeId="251" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="7" clipDistance="100" nodeId="268"/>
+          <Shape name="mudTracks01Decals2" translation="867.002441 49.743675 -340.737122" rotation="2.674582 29.355017 3.743213" shapeId="252" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="7" clipDistance="100" nodeId="269"/>
+          <Shape name="mudTracks01Decals3" translation="-427.92804 119.847832 -430.06369" rotation="180.920898 -34.424946 -183.424683" shapeId="253" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="7" clipDistance="100" nodeId="270"/>
+          <Shape name="mudTracks04Decals2" translation="745.453918 41.36594 -507.428925" shapeId="254" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="7" clipDistance="100" nodeId="271"/>
+        </TransformGroup>
+        <TransformGroup name="pebbleDecals" nodeId="272">
+          <Shape name="pebblesRoad01Decals" translation="-245.382446 50.667271 593.926453" shapeId="255" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="273"/>
+          <Shape name="pebblesRoad03Decals" translation="641.070862 44.356571 508.091858" rotation="0 -100.007645 0" shapeId="256" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="274"/>
+          <Shape name="pebblesRoad04Decals" translation="668.640137 46.851295 -25.377115" rotation="0 -89.558014 0" shapeId="257" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="275"/>
+          <Shape name="pebblesRoad05Decals" translation="309.275574 44.392876 -838.516296" rotation="0 -79.519798 0" shapeId="258" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="276"/>
+          <Shape name="pebblesRoad06Decals" translation="388.897339 75.407936 -42.827641" rotation="0 -183.959549 0" shapeId="259" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="277"/>
+          <Shape name="pebblesRoad07Decals" translation="40.936348 68.608017 -151.780182" rotation="0 -360 -4.420258" shapeId="260" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="278"/>
+          <Shape name="pebblesRoad09Decals" translation="-234.24588 75.826248 65.365662" rotation="-0.702565 -548.185425 -7.298447" shapeId="261" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="279"/>
+          <Shape name="pebblesRoad10Decals" translation="-652.976746 118.418411 -720.714233" rotation="-1.733876 -403.30365 0.946777" shapeId="262" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="280"/>
+          <Shape name="pebblesRoad11Decals" translation="-657.670776 118.42186 -710.480103" rotation="1.784435 -584.999207 1.019353" shapeId="263" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="281"/>
+          <Shape name="pebblesRoad01Decals2" translation="639.200867 44.629288 -249.945419" rotation="-161.713943 102.981987 -160.516785" shapeId="264" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="282"/>
+          <Shape name="pebblesRoad01Decals3" translation="445.399506 44.807831 -575.786072" rotation="-12.040984 116.104523 -9.94423" shapeId="265" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="283"/>
+          <Shape name="pebblesRoad01Decals4" translation="401.16745 45.057938 -620.960632" rotation="-13.780128 112.340805 -11.531132" shapeId="266" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="284"/>
+          <Shape name="pebblesRoad01Decals5" translation="325.442902 44.65493 -738.179688" rotation="-80.283325 94.424545 -75.263458" shapeId="267" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="285"/>
+          <Shape name="pebblesRoad01Decals6" translation="495.438599 44.920506 -544.967346" rotation="-190.791031 245.137543 -170.920288" shapeId="268" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="286"/>
+          <Shape name="pebblesRoad01Decals7" translation="-714 51.733829 733.546387" rotation="0 -13.15204 3.703762" shapeId="269" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="287"/>
+          <Shape name="pebblesRoad09Decals1" translation="-253.284851 78.324059 52.710388" rotation="0.391709 -735.011353 -6.117065" shapeId="270" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="288"/>
+          <Shape name="pebblesRoad05Decals1" translation="14.071509 74.543701 -950.109985" rotation="-0.853994 16.408728 -4.67458" shapeId="271" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="289"/>
+          <Shape name="pebblesRoad05Decals2" translation="-56.089855 79.220711 -920.870911" rotation="-0.343866 -158.76976 -0.207315" shapeId="272" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="290"/>
+          <Shape name="pebblesRoad09Decals2" translation="-355.298798 122.46167 -118" rotation="84.354622 -801.591736 -83.961647" shapeId="273" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="291"/>
+          <Shape name="pebblesRoad05Decals3" translation="-583.209106 118.713669 -700.243164" rotation="-1.399998 -103.236473 1.030983" shapeId="274" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="292"/>
+          <Shape name="pebblesRoad05Decals4" translation="-519.504822 109.308914 -866.846863" rotation="4.831367 -122.010872 -5.068521" shapeId="275" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="293"/>
+          <Shape name="pebblesRoad05Decals5" translation="-281.053497 80.315826 -838" rotation="-0.20838 -176.206055 -2.017741" shapeId="276" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="294"/>
+          <Shape name="pebblesRoad05Decals6" translation="-583.165466 60.468555 59.084126" shapeId="277" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="295"/>
+          <Shape name="pebblesRoad05Decals7" translation="-639.968384 67.106972 47.380516" rotation="0 -63.857979 0" shapeId="278" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="296"/>
+          <Shape name="pebblesRoad05Decals8" translation="-694.183655 73.23465 47.672077" rotation="-0.166013 -32.299385 0.414832" shapeId="279" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="297"/>
+          <Shape name="pebblesRoad05Decals9" translation="-857.063232 90.182602 227.807449" rotation="-170.195908 -25.545595 173.083237" shapeId="280" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="298"/>
+          <Shape name="pebblesRoad05Decals10" translation="-819.140259 90.811554 463.622894" rotation="-201.799271 74.329842 149.774399" shapeId="281" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="299"/>
+          <Shape name="pebblesRoad05Decals11" translation="-782.574341 65.912384 626" rotation="-341.755554 47.124245 9.765716" shapeId="282" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="300"/>
+          <Shape name="pebblesRoad05Decals12" translation="-756.006226 44.274071 -108.638588" rotation="5.107131 4.44262 3.931692" shapeId="283" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="301"/>
+          <Shape name="pebblesRoad05Decals13" translation="-767.339844 44.273346 -100.448891" rotation="185.796646 -10.004695 -183.991028" shapeId="284" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="8" clipDistance="50" nodeId="302"/>
+          <Shape name="pebblesRoad10Decals1" translation="367.542755 41.705074 -483.214905" rotation="-1.402765 -385.91333 0.370503" shapeId="285" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="303"/>
+          <Shape name="pebblesRoad10Decals2" translation="384.802948 42.046928 -475.758942" rotation="-3.479326 -558.690369 1.619582" shapeId="286" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="304"/>
+          <Shape name="pebblesRoad10Decals3" translation="326.161896 44.367737 -583.935608" rotation="-0.75632 -398.895355 -0.602209" shapeId="287" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="305"/>
+          <Shape name="pebblesRoad09Decals3" translation="-33.372139 71.167534 -80.528923" rotation="4.138609 -478.845245 -5.626496" shapeId="288" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="306"/>
+          <Shape name="pebblesRoad09Decals4" translation="-22.120674 70.772408 -119.192268" rotation="0.570577 -664.570496 0.635184" shapeId="289" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="307"/>
+          <Shape name="pebblesRoad10Decals4" translation="-752.073303 118.43222 -773.033997" rotation="1.371188 -563.049744 0.294329" shapeId="290" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="308"/>
+          <Shape name="pebblesRoad09Decals5" translation="864.488159 50.186001 -342.439697" rotation="0.041614 -679.658997 2.301131" shapeId="291" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="309"/>
+          <Shape name="pebblesRoad09Decals6" translation="868.698914 50.186001 -337.625977" rotation="0.040344 -860.895447 0.106452" shapeId="292" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="310"/>
+          <Shape name="pebblesRoad09Decals7" translation="-427.351471 120.006065 -428.988098" rotation="2.706012 -853.569458 -4.086466" shapeId="293" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="311"/>
+          <Shape name="pebblesRoad04Decals1" translation="739.713013 41.388577 -534.164246" rotation="0 15 0" shapeId="294" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="312"/>
+          <Shape name="pebblesRoad04Decals2" translation="752.237854 41.388577 -479.768524" rotation="0 -165 0" shapeId="295" castsShadows="false" receiveShadows="true" decalLayer="2" materialIds="8" clipDistance="50" nodeId="313"/>
+          <Shape name="pebblesRoad05Decals14" translation="-680.929993 44.036434 -150.963776" rotation="0.043888 -9.293697 0.695074" shapeId="296" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="8" clipDistance="50" nodeId="314"/>
+          <Shape name="pebblesRoad05Decals15" translation="-728.409119 44.036434 -129.908844" rotation="0.042876 -189.376022 -0.695238" shapeId="297" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="8" clipDistance="50" nodeId="315"/>
+          <Shape name="pebblesRoad05Decals16" translation="-446.498199 66.040161 176.385666" rotation="0.560335 30.50695 0.796171" shapeId="298" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="8" clipDistance="50" nodeId="316"/>
+          <Shape name="pebblesRoad05Decals17" translation="-493.703217 66.033775 270.748444" rotation="0.552201 -149.999954 -0.792073" shapeId="299" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="8" clipDistance="50" nodeId="317"/>
+          <Shape name="pebblesRoad05Decals18" translation="-888.203979 44.109653 -545.063171" rotation="1.590605 -115.560211 -1.590002" shapeId="300" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="8" clipDistance="50" nodeId="318"/>
+          <Shape name="pebblesRoad05Decals19" translation="-894.396606 44.109653 -591.683716" rotation="1.661749 -294.497406 1.654468" shapeId="301" castsShadows="false" receiveShadows="true" decalLayer="3" materialIds="8" clipDistance="50" nodeId="319"/>
+        </TransformGroup>
+        <TransformGroup name="alphaTest" nodeId="320">
+          <TransformGroup name="summerSpring" collision="false" clipDistance="120" nodeId="321" weatherPreventMask="0x600">
+            <Shape name="roadDirtDecals01" translation="907.467346 47.96936 717.674194" shapeId="302" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="9" clipDistance="120" nodeId="322"/>
+            <Shape name="roadDirtDecals02" translation="910.304626 49.451523 671.354492" shapeId="303" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="9" clipDistance="200" nodeId="323"/>
+            <Shape name="roadDirtDecals03" translation="900.329163 54.99147 467.64743" shapeId="304" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="9" clipDistance="200" nodeId="324"/>
+            <Shape name="roadDirtDecals04" translation="704.700317 46.710087 672.812134" shapeId="305" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="9" clipDistance="200" nodeId="325"/>
+            <Shape name="roadDirtDecals05" translation="603.45459 44.191753 608.322998" shapeId="306" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="9" clipDistance="200" nodeId="326"/>
+            <Shape name="roadDirtDecals06" translation="796.989685 49.430904 582.256042" shapeId="307" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="9" clipDistance="200" nodeId="327"/>
+            <Shape name="roadDirtDecals07" translation="813.587158 49.466599 672.732849" shapeId="308" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="9" clipDistance="200" nodeId="328"/>
+            <Shape name="roadDirtDecals09" translation="665.829102 45.833168 789.795959" shapeId="309" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="9" clipDistance="200" nodeId="329"/>
+            <Shape name="roadDirtDecals08" translation="714.99353 46.056515 795.828918" shapeId="310" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="9" clipDistance="200" nodeId="330"/>
+            <Shape name="roadDirtDecals10" translation="815.512756 46.05653 777.066284" shapeId="311" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="9" clipDistance="200" nodeId="331"/>
+            <Shape name="roadDirtDecals11" translation="913.951721 46.056522 766.282593" shapeId="312" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="9" clipDistance="200" nodeId="332"/>
+          </TransformGroup>
+          <TransformGroup name="autumn" translation="0 0.001 0" collision="false" density="0" nodeId="333">
+            <Shape name="autumnLeafDecals01" translation="907.467346 47.96936 717.674194" shapeId="313" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="10" clipDistance="220" nodeId="334"/>
+            <Shape name="autumnLeafDecals02" translation="910.304626 49.451523 671.354492" shapeId="314" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="10" clipDistance="220" nodeId="335"/>
+            <Shape name="autumnLeafDecals03" translation="900.329163 54.99147 467.64743" shapeId="315" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="10" clipDistance="220" nodeId="336"/>
+            <Shape name="autumnLeafDecals04" translation="704.700317 46.710087 672.812134" shapeId="316" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="10" clipDistance="220" nodeId="337"/>
+            <Shape name="autumnLeafDecals05" translation="603.45459 44.191753 608.322998" shapeId="317" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="10" clipDistance="220" nodeId="338"/>
+            <Shape name="autumnLeafDecals06" translation="796.989685 49.430904 582.256042" shapeId="318" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="10" clipDistance="220" nodeId="339"/>
+            <Shape name="autumnLeafDecals07" translation="813.587158 49.466599 672.732849" shapeId="319" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="10" clipDistance="220" nodeId="340"/>
+            <Shape name="autumnLeafDecals08" translation="665.829102 45.833168 789.795959" shapeId="320" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="10" clipDistance="220" nodeId="341"/>
+            <Shape name="autumnLeafDecals09" translation="714.99353 46.056515 795.828918" shapeId="321" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="10" clipDistance="220" nodeId="342"/>
+            <Shape name="autumnLeafDecals10" translation="815.512756 46.05653 777.066284" shapeId="322" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="10" clipDistance="220" nodeId="343"/>
+            <Shape name="autumnLeafDecals11" translation="913.951721 46.056522 766.282593" shapeId="323" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="10" clipDistance="220" nodeId="344"/>
+            <Shape name="autumnLeafDecals12" translation="705.906982 46.61982 629.765076" shapeId="324" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="10" clipDistance="220" nodeId="345"/>
+            <Shape name="autumnLeafDecals13" translation="699.013184 44.246914 849.3349" shapeId="325" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="10" clipDistance="220" nodeId="346"/>
+            <Shape name="autumnLeafDecals14" translation="752.914795 47.077717 717.907349" shapeId="326" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="10" clipDistance="220" nodeId="347"/>
+            <Shape name="autumnLeafDecals15" translation="744.389709 49.744099 544.678589" shapeId="327" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="10" clipDistance="220" nodeId="348"/>
+            <Shape name="autumnLeafDecals16" translation="683.121582 44.453987 825.130615" shapeId="328" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="10" clipDistance="220" nodeId="349"/>
+          </TransformGroup>
+        </TransformGroup>
+        <TransformGroup name="manholes" nodeId="350">
+          <Shape name="manholeSetDecal1" translation="923.464539 46.098221 769.821411" shapeId="329" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="11" clipDistance="150" nodeId="351"/>
+          <Shape name="manholeSetDecal2" translation="673.654297 44.953003 804.734863" shapeId="330" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="11" clipDistance="150" nodeId="352"/>
+          <Shape name="manholeSetDecal3" translation="797.685486 45.568188 798.762573" shapeId="331" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="11" clipDistance="150" nodeId="353"/>
+          <Shape name="manholeSetDecal4" translation="780.785461 48.978989 680.046631" shapeId="332" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="11" clipDistance="150" nodeId="354"/>
+          <Shape name="manholeSetDecal5" translation="667.114075 46.116074 678.434082" shapeId="333" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="11" clipDistance="150" nodeId="355"/>
+          <Shape name="manholeSetDecal6" translation="893.090454 49.681171 671.71582" shapeId="334" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="11" clipDistance="150" nodeId="356"/>
+          <Shape name="manholeSetDecal7" translation="898.950684 53.813419 497.010193" shapeId="335" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="11" clipDistance="150" nodeId="357"/>
+          <Shape name="manholeSetDecal8" translation="696.68457 49.2286 582.841675" shapeId="336" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="11" clipDistance="150" nodeId="358"/>
+        </TransformGroup>
+        <TransformGroup name="puddleDecals" collision="false" density="0" nodeId="359" weatherRequiredMask="0x2">
+          <Shape name="puddleDecal" translation="430.356995 43.678188 -467.201752" shapeId="337" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="360"/>
+          <Shape name="puddleDecal1" translation="410.320129 42.760624 -472.141052" shapeId="338" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="361"/>
+          <Shape name="puddleDecal2" translation="499.729523 45.222515 -469.339294" shapeId="339" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="362"/>
+          <Shape name="puddleDecal3" translation="536.781067 45.929024 -465.127777" shapeId="340" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="363"/>
+          <Shape name="puddleDecal4" translation="284.686707 44.881973 -809.328613" shapeId="341" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="364"/>
+          <Shape name="puddleDecal5" translation="231.14473 46.008255 -841.418762" shapeId="342" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="365"/>
+          <Shape name="puddleDecal6" translation="-9.638946 75.843864 -942.437927" shapeId="343" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="366"/>
+          <Shape name="puddleDecal7" translation="-238.977936 79.145538 -853.079468" shapeId="344" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="367"/>
+          <Shape name="puddleDecal8" translation="518.105408 44.899261 -516.125916" shapeId="345" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="368"/>
+          <Shape name="puddleDecal9" translation="564.57428 45.891182 -457.601379" shapeId="346" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="369"/>
+          <Shape name="puddleDecal10" translation="628.273315 45.796246 -327.052917" shapeId="347" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="370"/>
+          <Shape name="puddleDecal11" translation="647.912109 44.645573 -254.471909" shapeId="348" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="371"/>
+          <Shape name="puddleDecal12" translation="667.291504 45.178707 -171.121796" shapeId="349" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="372"/>
+          <Shape name="puddleDecal13" translation="747.647034 46.839336 -241.675705" shapeId="350" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="373"/>
+          <Shape name="puddleDecal14" translation="823.478699 48.752758 -300.552246" shapeId="351" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="374"/>
+          <Shape name="puddleDecal15" translation="845.971008 49.312557 -324.952942" shapeId="352" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="375"/>
+          <Shape name="puddleDecal16" translation="887.92572 50.128384 -355.334045" shapeId="353" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="376"/>
+          <Shape name="puddleDecal17" translation="902.918335 50.443447 -372.935547" shapeId="354" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="377"/>
+          <Shape name="puddleDecal18" translation="694.349365 45.57122 -190.464478" shapeId="355" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="378"/>
+          <Shape name="puddleDecal19" translation="667.886475 46.841507 -87.87719" shapeId="356" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="379"/>
+          <Shape name="puddleDecal20" translation="652.918274 44.420811 -195.514679" shapeId="357" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="380"/>
+          <Shape name="puddleDecal21" translation="667.902283 46.793041 -9.058457" shapeId="358" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="381"/>
+          <Shape name="puddleDecal22" translation="666.831787 46.627586 84.150055" shapeId="359" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="382"/>
+          <Shape name="puddleDecal23" translation="664.179443 45.902386 147.045563" shapeId="360" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="383"/>
+          <Shape name="puddleDecal24" translation="670.083679 44.580265 202.475037" shapeId="361" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="384"/>
+          <Shape name="puddleDecal25" translation="671.557251 44.206085 327.234222" shapeId="362" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="385"/>
+          <Shape name="puddleDecal26" translation="674.632568 44.311264 375.436005" shapeId="363" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="386"/>
+          <Shape name="puddleDecal27" translation="654.839539 44.367809 446.82782" shapeId="364" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="387"/>
+          <Shape name="puddleDecal28" translation="645.260742 44.329636 486.344482" shapeId="365" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="388"/>
+          <Shape name="puddleDecal29" translation="633.058899 44.310825 535.274841" shapeId="366" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="389"/>
+          <Shape name="puddleDecal30" translation="636.464722 44.331051 555.218933" shapeId="367" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="390"/>
+          <Shape name="puddleDecal31" translation="631.949097 44.260742 628.595154" shapeId="368" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="391"/>
+          <Shape name="puddleDecal32" translation="636.765137 44.285774 670.922607" shapeId="369" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="392"/>
+          <Shape name="puddleDecal33" translation="632.460571 44.282406 725.198669" shapeId="370" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="393"/>
+          <Shape name="puddleDecal34" translation="636.439941 44.289635 762.000916" shapeId="371" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="394"/>
+          <Shape name="puddleDecal35" translation="632.126099 44.342701 793.599915" shapeId="372" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="395"/>
+          <Shape name="puddleDecal36" translation="636.096375 44.377605 836.42334" shapeId="373" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="396"/>
+          <Shape name="puddleDecal37" translation="636.098328 44.296215 866.801514" shapeId="374" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="397"/>
+          <Shape name="puddleDecal38" translation="696.170288 44.169613 847.239685" shapeId="375" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="398"/>
+          <Shape name="puddleDecal39" translation="775.36377 44.18494 828.271667" shapeId="376" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="399"/>
+          <Shape name="puddleDecal40" translation="858.678162 44.17252 807.005676" shapeId="377" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="400"/>
+          <Shape name="puddleDecal41" translation="960.563904 44.167114 807.003662" shapeId="378" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="401"/>
+          <Shape name="puddleDecal42" translation="937.908203 47.997345 714.805786" shapeId="379" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="402"/>
+          <Shape name="puddleDecal43" translation="849.968506 47.980003 723.203979" shapeId="380" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="403"/>
+          <Shape name="puddleDecal44" translation="799.075989 47.973442 713.066345" shapeId="381" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="404"/>
+          <Shape name="puddleDecal45" translation="741.76709 47.92046 721.27417" shapeId="382" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="405"/>
+          <Shape name="puddleDecal46" translation="695.309448 47.555973 723.295471" shapeId="383" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="406"/>
+          <Shape name="puddleDecal47" translation="699.104919 44.806862 782.256104" shapeId="384" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="407"/>
+          <Shape name="puddleDecal48" translation="732.854431 44.838257 783.474487" shapeId="385" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="408"/>
+          <Shape name="puddleDecal49" translation="857.183838 50.992535 631.987244" shapeId="386" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="409"/>
+          <Shape name="puddleDecal50" translation="928.184937 51.014694 631.517395" shapeId="387" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="410"/>
+          <Shape name="puddleDecal51" translation="868.949524 54.70253 538.194824" rotation="0 -34.936325 0" shapeId="388" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="411"/>
+          <Shape name="puddleDecal52" translation="925.542542 55.189236 422.090057" rotation="0 -34.936325 0" shapeId="389" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="412"/>
+          <Shape name="puddleDecal53" translation="874.274536 55.196114 493.548096" rotation="0 -136.225586 0" shapeId="390" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="413"/>
+          <Shape name="puddleDecal54" translation="773.601135 49.255726 633.71344" rotation="0 -136.225586 0" shapeId="391" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="414"/>
+          <Shape name="puddleDecal55" translation="768.36145 47.990856 721.986206" rotation="0 -140.705078 0" shapeId="392" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="415"/>
+          <Shape name="puddleDecal56" translation="770.341492 44.792877 778.674683" rotation="0 -80.432632 0" shapeId="393" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="416"/>
+          <Shape name="puddleDecal57" translation="552.89093 44.335396 773.369751" rotation="0 -165.469147 0" shapeId="394" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="417"/>
+          <Shape name="puddleDecal58" translation="513.34729 44.333008 779.571533" rotation="0 -375 0" shapeId="395" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="418"/>
+          <Shape name="puddleDecal59" translation="469.991425 44.346893 777.62262" shapeId="396" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="419"/>
+          <Shape name="puddleDecal60" translation="362.059967 44.339901 763.362915" rotation="0 45.700806 0" shapeId="397" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="420"/>
+          <Shape name="puddleDecal61" translation="342.069275 44.331425 760.011536" rotation="0 -465 0" shapeId="398" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="421"/>
+          <Shape name="puddleDecal62" translation="321.162781 44.42194 812.009155" rotation="0 -517.07251 0" shapeId="399" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="422"/>
+          <Shape name="puddleDecal63" translation="310.987427 44.438652 847.289124" rotation="0 -645 0" shapeId="400" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="423"/>
+          <Shape name="puddleDecal64" translation="339.01297 44.434841 783.509644" rotation="0 -795 0" shapeId="401" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="424"/>
+          <Shape name="puddleDecal65" translation="296.629608 44.326447 875.908447" rotation="0 -735 0" shapeId="402" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="425"/>
+          <Shape name="puddleDecal66" translation="203.497971 44.323174 833.658936" rotation="0 -735 0" shapeId="403" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="426"/>
+          <Shape name="puddleDecal67" translation="203.497971 44.323174 833.658936" rotation="0 -735 0" shapeId="404" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="427"/>
+          <Shape name="puddleDecal68" translation="169.922836 44.323174 831.459839" rotation="0 -668.909241 0" shapeId="405" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="428"/>
+          <Shape name="puddleDecal69" translation="139.049866 44.33363 821.852661" rotation="0 -750 0" shapeId="406" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="429"/>
+          <Shape name="puddleDecal70" translation="78.275581 44.322182 815.924744" rotation="0 -765 0" shapeId="407" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="430"/>
+          <Shape name="puddleDecal71" translation="38.791798 44.319489 806.719666" rotation="0 -945 0" shapeId="408" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="431"/>
+          <Shape name="puddleDecal72" translation="-49.641075 44.325924 803.600525" rotation="0 -945 0" shapeId="409" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="432"/>
+          <Shape name="puddleDecal73" translation="-97.072113 44.325924 758.577148" rotation="0 -1035 0" shapeId="410" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="433"/>
+          <Shape name="puddleDecal74" translation="-80.843925 44.325924 678.514587" rotation="0 -1245 0" shapeId="411" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="434"/>
+          <Shape name="puddleDecal75" translation="-53.752972 44.302692 621.103149" rotation="0 -1245 0" shapeId="412" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="435"/>
+          <Shape name="puddleDecal76" translation="-66.97789 44.475956 543.291565" rotation="0 -1290 0" shapeId="413" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="436"/>
+          <Shape name="puddleDecal77" translation="-17.36293 44.395378 524.599976" rotation="0 -1500 0" shapeId="414" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="437"/>
+          <Shape name="puddleDecal78" translation="73.173264 44.327904 536.544617" rotation="0 -1500 0" shapeId="415" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="438"/>
+          <Shape name="puddleDecal79" translation="147.352493 44.353825 566.573547" rotation="0 -1500 0" shapeId="416" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="439"/>
+          <Shape name="puddleDecal80" translation="225.51059 44.322033 642.765625" rotation="0 -1500 0" shapeId="417" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="440"/>
+          <Shape name="puddleDecal81" translation="275.766083 44.355091 699.325195" rotation="0 -1305 0" shapeId="418" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="441"/>
+          <Shape name="puddleDecal82" translation="-221.048813 49.494522 587.784241" rotation="0 -1290 0" shapeId="419" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="442"/>
+          <Shape name="puddleDecal83" translation="-291.625549 52.541378 617.97229" rotation="-1.137408 -1289.976318 2.326432" shapeId="420" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="443"/>
+          <Shape name="puddleDecal84" translation="-713.99292 51.620415 740.130493" rotation="-1.137408 -1289.976318 2.326432" shapeId="421" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="444"/>
+          <Shape name="puddleDecal85" translation="-823.57135 50.818893 738.699707" rotation="-1.137408 -1289.976318 2.326432" shapeId="422" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="445"/>
+          <Shape name="puddleDecal86" translation="-847.501587 50.918491 742.048096" rotation="-1.686426 -1139.990234 1.188546" shapeId="423" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="446"/>
+          <Shape name="puddleDecal87" translation="-941.012146 51.3232 738.65979" rotation="-1.686426 -1139.990234 1.188546" shapeId="424" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="12" clipDistance="60" nodeId="447"/>
+        </TransformGroup>
+      </TransformGroup>
+      <TransformGroup name="flowerPots" nodeId="448">
+        <Shape name="flowerPots01" translation="892.094971 47.999222 717.706665" shapeId="425" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="300" nodeId="449">
+          <Shape name="dirt" translation="0 0.022788 0.000033" shapeId="426" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" materialIds="13" clipDistance="300" nodeId="450"/>
+        </Shape>
+        <Shape name="flowerPots02" translation="813.569641 47.996925 717.727051" shapeId="427" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="300" nodeId="451">
+          <Shape name="dirt" translation="0.000001 0.025083 0" shapeId="428" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" materialIds="13" clipDistance="300" nodeId="452"/>
+        </Shape>
+        <Shape name="flowerPots03" translation="737.322083 47.772797 717.789978" shapeId="429" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="300" nodeId="453">
+          <Shape name="dirt" translation="0 0.026883 0" shapeId="430" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" materialIds="13" clipDistance="300" nodeId="454"/>
+        </Shape>
+        <Shape name="flowerPots04" translation="672.338745 46.364311 717.960571" shapeId="431" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="300" nodeId="455">
+          <Shape name="dirt" translation="0.000103 0.024524 0.000257" shapeId="432" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" materialIds="13" clipDistance="300" nodeId="456"/>
+        </Shape>
+        <Shape name="flowerPots05" translation="947.04657 49.134045 674.961853" rotation="76.274361 -86.084709 -78.268463" shapeId="433" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="300" nodeId="457">
+          <Shape name="dirt" translation="0.112357 -0.008174 0.107995" shapeId="434" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" materialIds="13" clipDistance="300" nodeId="458"/>
+        </Shape>
+        <Shape name="flowerPots06" translation="924.168091 53.07954 576.812805" shapeId="435" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="300" nodeId="459">
+          <Shape name="dirt" translation="0.56313 0.053867 -0.566182" shapeId="436" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" materialIds="13" clipDistance="300" nodeId="460"/>
+        </Shape>
+        <Shape name="flowerPots07" translation="960.550049 46.067047 761.041931" shapeId="437" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="300" nodeId="461">
+          <Shape name="dirt" translation="0.092295 0.051718 -0.078782" shapeId="438" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" materialIds="13" clipDistance="300" nodeId="462"/>
+        </Shape>
+        <Shape name="flowerPots08" translation="907.488342 44.185848 808.56543" shapeId="439" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="300" nodeId="463">
+          <Shape name="dirt" translation="0.000156 0.022789 0.000117" shapeId="440" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" materialIds="13" clipDistance="300" nodeId="464"/>
+        </Shape>
+        <Shape name="flowerPots09" translation="816.21637 44.192448 814.581177" shapeId="441" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="300" nodeId="465">
+          <Shape name="dirt" translation="-0.114414 0.022786 -0.105469" shapeId="442" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" materialIds="13" clipDistance="300" nodeId="466"/>
+        </Shape>
+        <Shape name="flowerPots10" translation="737.697388 44.171146 837.402893" rotation="0 19.653748 0" shapeId="443" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="300" nodeId="467">
+          <Shape name="dirt" translation="-0.023965 0.022788 0.022305" shapeId="444" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" materialIds="13" clipDistance="300" nodeId="468"/>
+        </Shape>
+        <Shape name="flowerPots11" translation="674.666138 44.173271 855.68158" rotation="0 14.279695 0" shapeId="445" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="300" nodeId="469">
+          <Shape name="dirt" translation="0.000215 0.025226 0.000039" shapeId="446" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" materialIds="13" clipDistance="300" nodeId="470"/>
+        </Shape>
+      </TransformGroup>
+      <TransformGroup name="trainCrossings" nodeId="471">
+        <TransformGroup name="trainCrossingsWood" translation="448.402496 42.578304 -538.829712" rotation="-90 0 0" nodeId="472">
+          <Shape name="trainWoodCrossings14" translation="-1200.614258 -401.645966 1.410786" rotation="-0.1 -0.4 157.309479" shapeId="447" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="14" clipDistance="200" nodeId="473"/>
+          <Shape name="trainWoodCrossings13" translation="-1337.276123 -1.083828 1.452427" rotation="0.6 -0.4 108.674995" shapeId="448" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="14" clipDistance="200" nodeId="474"/>
+          <Shape name="trainWoodCrossings03" translation="-72.696152 70.238884 2.535877" rotation="0 0 40" shapeId="449" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="14" clipDistance="200" nodeId="475"/>
+          <Shape name="trainWoodCrossings04" translation="-159.409607 186.958588 2.522751" rotation="0.3 -0.400003 19.615906" shapeId="450" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="14" clipDistance="200" nodeId="476"/>
+          <Shape name="trainWoodCrossings05" translation="-180.629395 282.93689 2.510752" rotation="-0.099994 0 10.045565" shapeId="451" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="14" clipDistance="200" nodeId="477"/>
+          <Shape name="trainWoodCrossings06" translation="-110.32782 52.494587 2.052494" rotation="1.3 -0.400003 19.615906" shapeId="452" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="14" clipDistance="200" nodeId="478"/>
+          <Shape name="trainWoodCrossings07" translation="-132.76152 51.089165 1.256719" rotation="2.4 0 5.045135" shapeId="453" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="14" clipDistance="200" nodeId="479"/>
+          <Shape name="trainWoodCrossings08" translation="-93.327286 -49.068279 -1.469599" rotation="2.478077 0.465327 -17.486324" shapeId="454" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="14" clipDistance="200" nodeId="480"/>
+          <Shape name="trainWoodCrossings09" translation="-105.18087 -75.97319 -2.252831" rotation="1.3 -0.400003 -34.406418" shapeId="455" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="14" clipDistance="200" nodeId="481"/>
+          <Shape name="trainWoodCrossings10" translation="-178.564072 -164.95668 -2.494377" rotation="0.597505 0.924674 -40.310215" shapeId="456" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="14" clipDistance="200" nodeId="482"/>
+          <Shape name="trainWoodCrossings12" translation="-161.298492 63.872395 1.146943" rotation="2.758748 -0.061444 -48.917629" shapeId="457" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="14" clipDistance="200" nodeId="483"/>
+          <Shape name="trainWoodCrossings11" translation="181.697525 -288.560394 2.46478" rotation="0.7 -0.400003 9.689631" shapeId="458" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="14" clipDistance="200" nodeId="484"/>
+          <Shape name="trainWoodCrossings01" translation="47.43774 -72.872108 2.53444" rotation="0 0 40" shapeId="459" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="14" clipDistance="200" nodeId="485"/>
+          <Shape name="trainWoodCrossings02" translation="-20.373558 7.941249 2.502888" rotation="0 0 40" shapeId="460" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="14" clipDistance="200" nodeId="486"/>
+        </TransformGroup>
+        <TransformGroup name="trainCrossingsPlastic" nodeId="487">
+          <Shape name="trainCrossing05" translation="652.753784 45.909683 -105.974716" rotation="-90.699997 0.046845 0" shapeId="461" castsShadows="true" receiveShadows="true" materialIds="15" clipDistance="200" nodeId="488"/>
+          <Shape name="trainCrossing03" translation="608.666321 43.652016 624.583374" rotation="-90 0.046845 0" shapeId="462" castsShadows="true" receiveShadows="true" materialIds="15" clipDistance="200" nodeId="489"/>
+          <Shape name="trainCrossing06" translation="-57.626808 43.657871 615.551941" rotation="-90.099998 75.088333 0" shapeId="463" castsShadows="true" receiveShadows="true" materialIds="15" clipDistance="200" nodeId="490"/>
+          <Shape name="trainCrossing02" translation="-255.383667 51.218082 608.297363" rotation="92.099991 88.412491 180" shapeId="464" castsShadows="true" receiveShadows="true" materialIds="15" clipDistance="200" nodeId="491"/>
+          <Shape name="trainCrossing04" translation="587.014038 44.194908 705.9599" rotation="-90.200012 -45.233017 0" shapeId="465" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="15" clipDistance="200" nodeId="492"/>
+          <Shape name="trainCrossing01" translation="277.366089 44.240158 705.064758" rotation="89.999985 -75.761467 -180" shapeId="466" castsShadows="true" receiveShadows="true" materialIds="15" clipDistance="200" nodeId="493"/>
+        </TransformGroup>
+      </TransformGroup>
+      <TransformGroup name="smallBridges" nodeId="494">
+        <Shape name="bridgeroad01" translation="878.857422 49.972889 -350.161652" rotation="-89.030884 -49.926033 0" shapeId="467" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="16" clipDistance="200" nodeId="495"/>
+        <Shape name="dirtroadBridge05" translation="501.553223 47.935585 -611.114502" rotation="-90.938744 69.734161 0" shapeId="468" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="17" clipDistance="200" nodeId="496"/>
+        <Shape name="dirtroadBridge06" translation="516.724976 53.778 -278.235809" rotation="-90.363892 57.051319 0" shapeId="469" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="17" clipDistance="200" nodeId="497"/>
+        <Shape name="dirtroadBridge07" translation="865.544983 63.914524 269.75827" rotation="89.999977 95.646881 -90.000023" shapeId="470" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="17" clipDistance="200" nodeId="498"/>
+        <Shape name="dirtroadBridge09" translation="585.195984 45.245998 326.390991" rotation="-90 -2.724 0" shapeId="471" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="17" clipDistance="200" nodeId="499"/>
+        <Shape name="dirtroadBridge10" translation="269.749664 63.400921 342.242981" rotation="-87.990425 88.65477 0" shapeId="472" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="17" clipDistance="200" nodeId="500"/>
+        <Shape name="bridgeWaterfall1" translation="-881.76886 121.533699 -216.742859" rotation="-90 92.81662 0" shapeId="473" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="17" clipDistance="200" nodeId="501"/>
+        <Shape name="bridgeWaterfall2" translation="-640.564026 136.288452 -920.480286" rotation="-90 189.212891 0" shapeId="474" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="17" clipDistance="200" nodeId="502"/>
+        <Shape name="dirtroadBridge11" translation="-758.907288 64.736252 -610.00415" rotation="-100.559555 65.961258 0" shapeId="475" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="17" clipDistance="200" nodeId="503"/>
+        <Shape name="dirtroadBridge12" translation="-534.696838 53.856892 449.68457" rotation="-93.725006 -41.752789 -0.070552" shapeId="476" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="17" clipDistance="200" nodeId="504"/>
+        <Shape name="dirtroadBridge13" translation="-491.270691 43.418736 474.897095" rotation="180 61.854469 0.000003" shapeId="477" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="17" clipDistance="200" nodeId="505"/>
+        <Shape name="dirtroadBridge14" translation="-773.190979 107.5 366.864014" rotation="-86.976143 -64.223 0" shapeId="478" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="17" clipDistance="200" nodeId="506"/>
+        <TransformGroup name="bridgeRockStream" translation="848 79.224998 46" rotation="90 -83 -180" nodeId="507">
+          <Shape name="bridgeWaterfall2" shapeId="479" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="17" clipDistance="200" nodeId="508"/>
+          <Shape name="bridgeWaterfall3" translation="18.076 0.025 0" shapeId="480" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="17" clipDistance="200" nodeId="509"/>
+        </TransformGroup>
+      </TransformGroup>
+      <TransformGroup name="tunels" nodeId="510">
+        <Shape name="tunnel01" translation="-1253.37439 56.706104 733.7854" shapeId="481" castsShadows="true" receiveShadows="true" materialIds="18" clipDistance="500" nodeId="511"/>
+        <Shape name="tunnel02" translation="189.103195 50.471317 -1253.998169" rotation="0 -77.053978 0" shapeId="482" castsShadows="true" receiveShadows="true" materialIds="18" clipDistance="500" nodeId="512"/>
+        <Shape name="tunnel03" translation="-1164.636597 48.92379 10.872205" rotation="0 7.340299 0" shapeId="483" castsShadows="true" receiveShadows="true" materialIds="18" clipDistance="500" nodeId="513"/>
+        <Shape name="tunnel1" translation="189.103195 50.471317 -1253.998169" rotation="0 -77.053978 0" shapeId="484" castsShadows="true" receiveShadows="true" materialIds="19" clipDistance="500" nodeId="514"/>
+        <Shape name="tunnel2" translation="-1164.636597 48.92379 10.872205" rotation="0 7.340299 0" shapeId="485" castsShadows="true" receiveShadows="true" materialIds="19" clipDistance="500" nodeId="515"/>
+        <Shape name="tunnel3" translation="-1253.37439 56.706104 733.7854" shapeId="486" castsShadows="true" receiveShadows="true" materialIds="19" clipDistance="500" nodeId="516"/>
+      </TransformGroup>
+      <TransformGroup name="additionalCol" nodeId="517">
+        <Shape name="col01" translation="608.66217 44.218685 628.584778" shapeId="487" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="20" nodeId="518"/>
+        <Shape name="col02" translation="277.410065 44.235607 705.092896" rotation="0 -15 0" shapeId="488" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="20" nodeId="519"/>
+        <Shape name="col03" translation="-265.448639 51.392208 606.123962" rotation="92.099991 88.412491 180" shapeId="489" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="20" nodeId="520"/>
+        <Shape name="col04" translation="-53.775234 44.233192 616.59375" shapeId="490" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="20" nodeId="521"/>
+        <Shape name="col05" translation="652.747192 46.590969 -96.069756" shapeId="491" static="true" collisionFilterGroup="0x601c" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="20" nodeId="522"/>
+      </TransformGroup>
+    </TransformGroup>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

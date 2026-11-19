@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='utf-8'?>
+<i3D xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="residentialGarage02" version="1.6" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="27" filename="$data/maps/textures/shared/props/icicles_diffuse.png" />
+    <File fileId="28" filename="$data/maps/textures/shared/props/icicles_normal.png" />
+    <File fileId="29" filename="$data/maps/textures/shared/props/icicles_specular.png" />
+    <File fileId="22" filename="$data/maps/textures/shared/snow_diffuse.png" />
+    <File fileId="23" filename="$data/maps/textures/shared/snow_normal.png" />
+    <File fileId="24" filename="$data/maps/textures/shared/snow_specular.png" />
+    <File fileId="4" filename="$data/shaders/buildingShader.xml" />
+    <File fileId="21" filename="$data/shaders/decalShader.xml" />
+    <File fileId="25" filename="$data/shaders/snowHeapShader.xml" />
+    <File fileId="11" filename="$data/shared/default_normal.png" />
+    <File fileId="26" filename="$data/shared/sparkles_normal.png" />
+    <File fileId="10" filename="$data/shared/window02_diffuse.png" />
+    <File fileId="15" filename="$data/placeables/brandless/productionPointsGeneric/shared/autumnLeafs_diffuse.png" />
+    <File fileId="16" filename="$data/placeables/brandless/productionPointsGeneric/shared/autumnLeafs_normal.png" />
+    <File fileId="17" filename="$data/placeables/brandless/productionPointsGeneric/shared/autumnLeafs_specular.png" />
+    <File fileId="18" filename="buildingDecalsGrunge_diffuse.png" />
+    <File fileId="19" filename="buildingDecalsGrunge_normal.png" />
+    <File fileId="20" filename="buildingDecalsGrunge_specular.png" />
+    <File fileId="12" filename="$data/maps/textures/shared/pierBuildingGutters_diffuse.png" />
+    <File fileId="13" filename="$data/maps/textures/shared/pierBuildingGutters_normal.png" />
+    <File fileId="14" filename="pierBuildingGutters_specular.png" />
+    <File fileId="5" filename="residentialGarage02_mask.png" />
+    <File fileId="1" filename="residentialGarage_diffuse.png" />
+    <File fileId="6" filename="residentialGarage_height.png" />
+    <File fileId="2" filename="residentialGarage_normal.png" />
+    <File fileId="3" filename="residentialGarage_specular.png" />
+    <File fileId="7" filename="residentialSetDetails_diffuse.png" />
+    <File fileId="8" filename="residentialSetDetails_normal.png" />
+    <File fileId="9" filename="residentialSetDetails_specular.png" />
+  </Files>
+
+  <Materials>
+    <Material name="residentialGarage_mat" materialId="1" customShaderId="4" customShaderVariation="customParallax">
+      <Custommap name="mMaskMap" fileId="5" />
+      <Custommap name="mParallaxMap" fileId="6" />
+      <Texture fileId="1" />
+      <Normalmap fileId="2" />
+      <Glossmap fileId="3" />
+    </Material>
+    <Material name="residentialSetDetails_mat" materialId="3">
+      <Texture fileId="7" />
+      <Normalmap fileId="8" />
+      <Glossmap fileId="9" />
+    </Material>
+    <Material name="window02_mat" materialId="2" specularColor="1 1 1" alphaBlending="true">
+      <Texture fileId="10" />
+      <Normalmap fileId="11" />
+    </Material>
+    <Material name="pierBuildingGutters_mat" materialId="4">
+      <Texture fileId="12" />
+      <Normalmap fileId="13" />
+      <Glossmap fileId="14" />
+    </Material>
+    <Material name="autumnLeafs_mat" materialId="6">
+      <Texture fileId="15" />
+      <Normalmap fileId="16" />
+      <Glossmap fileId="17" />
+    </Material>
+    <Material name="buildingDecalsGrunge_mat" materialId="5" alphaBlending="true" customShaderId="21">
+      <Texture fileId="18" />
+      <Normalmap fileId="19" />
+      <Glossmap fileId="20" />
+    </Material>
+    <Material name="snow_mat" materialId="8" customShaderId="25">
+      <Custommap name="mSparklesNormal" fileId="26" />
+      <Texture fileId="22" />
+      <Normalmap fileId="23" bumpDepth="0.5" />
+      <Glossmap fileId="24" />
+    </Material>
+    <Material name="icicles_mat" materialId="7" alphaBlending="true" customShaderId="25" customShaderVariation="icicle">
+      <Texture fileId="27" />
+      <Normalmap fileId="28" />
+      <Glossmap fileId="29" />
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="residentialGarage02.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <Shape name="residentialGarage02" lockedgroup="true" translation="0.001661 0 -0.00383" shapeId="1" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="300" nodeId="1">
+      <Shape name="glass" translation="0.259273 1.266654 -0.234882" shapeId="2" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="false" receiveShadows="true" materialIds="2" nodeId="2" />
+      <Shape name="parts" translation="0.259273 1.787334 -0.234882" shapeId="3" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="3" nodeId="3" />
+      <Shape name="gutters" translation="-5.2792 0.115303 0.234068" shapeId="4" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" castsShadows="true" receiveShadows="true" materialIds="4" nodeId="4" />
+      <TransformGroup name="decals" translation="-0.001661 0 0.00383" nodeId="5">
+        <Shape name="buildingDecalsGrunge" translation="0.05952 1.720997 -0.196154" shapeId="5" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="5" clipDistance="75" nodeId="6" />
+      </TransformGroup>
+      <TransformGroup name="seasons" translation="-0.001661 0 0.00383" nodeId="7">
+        <TransformGroup name="autumn" nodeId="8">
+          <Shape name="autumnLeafsDecal" translation="-0.08254 2.818749 0.146702" shapeId="6" castsShadows="false" receiveShadows="true" decalLayer="1" materialIds="6" clipDistance="75" nodeId="9" weatherRequiredMask="0x200" />
+        </TransformGroup>
+        <TransformGroup name="winter" nodeId="10">
+          <Shape name="icicles" shapeId="7" castsShadows="true" receiveShadows="true" materialIds="7" clipDistance="75" nodeId="11" weatherRequiredMask="0x400" />
+          <Shape name="snow" shapeId="8" castsShadows="true" receiveShadows="true" materialIds="8" clipDistance="150" nodeId="12" weatherRequiredMask="0x400" />
+        </TransformGroup>
+      </TransformGroup>
+    </Shape>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>
