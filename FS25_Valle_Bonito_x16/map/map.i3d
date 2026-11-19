@@ -176,7 +176,10 @@
     <File fileId="594" filename="$data/foliage/sunflower/sunflower.xml"/>
     <File fileId="586" filename="$data/foliage/waterPlants/waterPlants.xml"/>
     <File fileId="612" filename="$data/foliage/weed/weed.xml"/>
-    <File fileId="588" filename="$data/foliage/wheat/wheat.xml"/>
+    <File fileId="588" filename="foliage/wheat/wheat.xml"/>
+    <File fileId="9001" filename="foliage/blackbean/blackbean.xml"/>
+    <File fileId="9002" filename="foliage/napier/napier.xml"/>
+    <File fileId="9003" filename="foliage/peanut/peanut.xml"/>
     <File fileId="395" filename="$data/maps/mapAS/textures/terrain/rockFloorTiles01_diffuse.png"/>
     <File fileId="398" filename="$data/maps/mapAS/textures/terrain/rockFloorTiles01_displacement.png"/>
     <File fileId="397" filename="$data/maps/mapAS/textures/terrain/rockFloorTiles01_height.png"/>
@@ -1242,7 +1245,7 @@
           <FoliageMultiLayer densityMapId="639" numChannels="4" numTypeIndexChannels="0">
             <FoliageType name="decoBush" foliageXmlId="581"/>
           </FoliageMultiLayer>
-          <FoliageMultiLayer densityMapId="640" numChannels="10" numTypeIndexChannels="5" compressionChannels="5">
+          <FoliageMultiLayer densityMapId="640" numChannels="11" numTypeIndexChannels="6" compressionChannels="6">
             <FoliageType name="decoFoliage" foliageXmlId="582"/>
             <FoliageType name="decoBushUS" foliageXmlId="583"/>
             <FoliageType name="meadow" foliageXmlId="584"/>
@@ -1273,6 +1276,9 @@
             <FoliageType name="greenBean" foliageXmlId="609"/>
             <FoliageType name="pea" foliageXmlId="610"/>
             <FoliageType name="spinach" foliageXmlId="611"/>
+            <FoliageType name="blackbean" foliageXmlId="9001"/>
+            <FoliageType name="napier" foliageXmlId="9002"/>
+            <FoliageType name="peanut" foliageXmlId="9003"/>
           </FoliageMultiLayer>
           <FoliageMultiLayer densityMapId="641" numChannels="4" numTypeIndexChannels="0">
             <FoliageType name="weed" foliageXmlId="612"/>
@@ -34754,32 +34760,32 @@
       <Object type="terrainFoliage" name="F_hazelnutSmall" foliageTypeName="decoBush" channels="13" ppType="defaultFoliage" />
       <Object type="terrainFoliage" name="F_hazelnutMedium" foliageTypeName="decoBush" channels="14" ppType="defaultFoliage" />
       <Object type="terrainFoliage" name="F_hazelnutBig" foliageTypeName="decoBush" channels="15" ppType="defaultFoliage" />
-      <Object type="terrainFoliage" name="F_GrassSmall" foliageTypeName="decoFoliage" channels="289" ppType="defaultFoliage" />
-      <Object type="terrainFoliage" name="F_GrassMedium" foliageTypeName="decoFoliage" channels="321" ppType="defaultFoliage" />
-      <Object type="terrainFoliage" name="F_GrassDenseMix" foliageTypeName="decoFoliage" channels="33" ppType="defaultFoliage" />
+      <Object type="terrainFoliage" name="F_GrassSmall" foliageTypeName="decoFoliage" channels="577" ppType="defaultFoliage" />
+      <Object type="terrainFoliage" name="F_GrassMedium" foliageTypeName="decoFoliage" channels="641" ppType="defaultFoliage" />
+      <Object type="terrainFoliage" name="F_GrassDenseMix" foliageTypeName="decoFoliage" channels="65" ppType="defaultFoliage" />
       <Object type="terrainFoliage" name="F_AcreTerrainDetail" foliageTypeName="terrainDetail" channels="2" ppType="defaultFoliage" />
-      <Object type="terrainFoliage" name="F_Meadow" foliageTypeName="meadow" channels="67" ppType="defaultFoliage" />
-      <Object type="terrainFoliage" name="F_ForestDryBranch" foliageTypeName="forestPlants" channels="36" ppType="defaultFoliage" />
-      <Object type="terrainFoliage" name="F_ForestClover" foliageTypeName="forestPlants" channels="68" ppType="defaultFoliage" />
-      <Object type="terrainFoliage" name="F_ForestStarFlower" foliageTypeName="forestPlants" channels="100" ppType="defaultFoliage" />
-      <Object type="terrainFoliage" name="F_ForestBunchBerry" foliageTypeName="forestPlants" channels="132" ppType="defaultFoliage" />
-      <Object type="terrainFoliage" name="F_ForestSalmonBerry" foliageTypeName="forestPlants" channels="164" ppType="defaultFoliage" />
-      <Object type="terrainFoliage" name="F_ForestStarryFalse" foliageTypeName="forestPlants" channels="196" ppType="defaultFoliage" />
-      <Object type="terrainFoliage" name="F_ForestSwordFern" foliageTypeName="forestPlants" channels="228" ppType="defaultFoliage" />
-      <Object type="terrainFoliage" name="F_ForestDeerFern" foliageTypeName="forestPlants" channels="260" ppType="defaultFoliage" />
-      <Object type="terrainFoliage" name="F_ForestGrass" foliageTypeName="forestPlants" channels="292" ppType="defaultFoliage" />
-      <Object type="terrainFoliage" name="F_typhaLatifoliaMedium" foliageTypeName="waterPlants" channels="69" ppType="defaultFoliage" />
-      <Object type="terrainFoliage" name="F_miscanthusSmall" foliageTypeName="waterPlants" channels="133" ppType="defaultFoliage" />
-      <Object type="terrainFoliage" name="F_miscanthusMedium" foliageTypeName="waterPlants" channels="165" ppType="defaultFoliage" />
-      <Object type="terrainFoliage" name="F_miscanthusLarge" foliageTypeName="waterPlants" channels="197" ppType="defaultFoliage" />
-      <Object type="terrainFoliage" name="F_stipaSmall" foliageTypeName="waterPlants" channels="229" ppType="defaultFoliage" />
-      <Object type="terrainFoliage" name="F_stipaLarge" foliageTypeName="waterPlants" channels="261" ppType="defaultFoliage" />
-      <Object type="terrainFoliage" name="F_typhaSmall" foliageTypeName="waterPlants" channels="37" ppType="defaultFoliage" />
-      <Object type="terrainFoliage" name="F_typhaLarge" foliageTypeName="waterPlants" channels="101" ppType="defaultFoliage" />
-      <Object type="terrainFoliage" name="F_coneFlower" foliageTypeName="decoFoliage" channels="385" ppType="defaultFoliage" />
-      <Object type="terrainFoliage" name="F_slenderMountainMint" foliageTypeName="decoFoliage" channels="417" ppType="defaultFoliage" />
-      <Object type="terrainFoliage" name="F_wildBergamot" foliageTypeName="decoFoliage" channels="449" ppType="defaultFoliage" />
-      <Object type="terrainFoliage" name="F_prairyBlazingStar" foliageTypeName="decoFoliage" channels="481" ppType="defaultFoliage" />
+      <Object type="terrainFoliage" name="F_Meadow" foliageTypeName="meadow" channels="131" ppType="defaultFoliage" />
+      <Object type="terrainFoliage" name="F_ForestDryBranch" foliageTypeName="forestPlants" channels="68" ppType="defaultFoliage" />
+      <Object type="terrainFoliage" name="F_ForestClover" foliageTypeName="forestPlants" channels="132" ppType="defaultFoliage" />
+      <Object type="terrainFoliage" name="F_ForestStarFlower" foliageTypeName="forestPlants" channels="196" ppType="defaultFoliage" />
+      <Object type="terrainFoliage" name="F_ForestBunchBerry" foliageTypeName="forestPlants" channels="260" ppType="defaultFoliage" />
+      <Object type="terrainFoliage" name="F_ForestSalmonBerry" foliageTypeName="forestPlants" channels="324" ppType="defaultFoliage" />
+      <Object type="terrainFoliage" name="F_ForestStarryFalse" foliageTypeName="forestPlants" channels="388" ppType="defaultFoliage" />
+      <Object type="terrainFoliage" name="F_ForestSwordFern" foliageTypeName="forestPlants" channels="452" ppType="defaultFoliage" />
+      <Object type="terrainFoliage" name="F_ForestDeerFern" foliageTypeName="forestPlants" channels="516" ppType="defaultFoliage" />
+      <Object type="terrainFoliage" name="F_ForestGrass" foliageTypeName="forestPlants" channels="580" ppType="defaultFoliage" />
+      <Object type="terrainFoliage" name="F_typhaLatifoliaMedium" foliageTypeName="waterPlants" channels="133" ppType="defaultFoliage" />
+      <Object type="terrainFoliage" name="F_miscanthusSmall" foliageTypeName="waterPlants" channels="261" ppType="defaultFoliage" />
+      <Object type="terrainFoliage" name="F_miscanthusMedium" foliageTypeName="waterPlants" channels="325" ppType="defaultFoliage" />
+      <Object type="terrainFoliage" name="F_miscanthusLarge" foliageTypeName="waterPlants" channels="389" ppType="defaultFoliage" />
+      <Object type="terrainFoliage" name="F_stipaSmall" foliageTypeName="waterPlants" channels="453" ppType="defaultFoliage" />
+      <Object type="terrainFoliage" name="F_stipaLarge" foliageTypeName="waterPlants" channels="517" ppType="defaultFoliage" />
+      <Object type="terrainFoliage" name="F_typhaSmall" foliageTypeName="waterPlants" channels="69" ppType="defaultFoliage" />
+      <Object type="terrainFoliage" name="F_typhaLarge" foliageTypeName="waterPlants" channels="197" ppType="defaultFoliage" />
+      <Object type="terrainFoliage" name="F_coneFlower" foliageTypeName="decoFoliage" channels="769" ppType="defaultFoliage" />
+      <Object type="terrainFoliage" name="F_slenderMountainMint" foliageTypeName="decoFoliage" channels="833" ppType="defaultFoliage" />
+      <Object type="terrainFoliage" name="F_wildBergamot" foliageTypeName="decoFoliage" channels="897" ppType="defaultFoliage" />
+      <Object type="terrainFoliage" name="F_prairyBlazingStar" foliageTypeName="decoFoliage" channels="961" ppType="defaultFoliage" />
       <Object type="reference" name="americanElm_stage01" fileId="719" ppType="smallTrees" />
       <Object type="reference" name="americanElm_stage02" fileId="720" ppType="defaultReference" />
       <Object type="reference" name="americanElm_stage03" fileId="721" ppType="mediumTree" />

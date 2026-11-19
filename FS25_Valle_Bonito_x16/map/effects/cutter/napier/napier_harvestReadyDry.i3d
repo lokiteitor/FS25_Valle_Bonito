@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="napier_harvestReadyDry.i3d" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+  <Asset>
+    <Export program="GIANTS Editor 64bit" version="10.0.11"/>
+  </Asset>
+
+  <Files>
+    <File fileId="4" filename="$data/shaders/motionPathShader.xml"/>
+    <File fileId="3" filename="$data/shared/default_specular.dds"/>
+    <File fileId="7" filename="napierStage04dry_alpha.dds"/>
+    <File fileId="1" filename="napierStage04dry_diffuse.dds"/>
+    <File fileId="2" filename="napierStage04dry_normal.dds"/>
+  </Files>
+
+
+  <Materials>
+    <Material name="maizeStage04dry_mat1" materialId="5" customShaderId="4" customShaderVariation="scaleByTexture_verticalOffsetCut_alphaMap">
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+      <Custommap name="alphaMap" fileId="7"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="napier_harvestReadyDry.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="cutterEffects_maize" nodeId="14">
+      <TransformGroup name="cutterEffects_maize_meshes" nodeId="15">
+        <Shape name="cutterEffects_maize_nr6_rl5_v1" shapeId="1" nodeId="16" castsShadows="true" receiveShadows="true" materialIds="5"/>
+        <Shape name="cutterEffects_maize_nr6_rl20_v1" shapeId="2" nodeId="17" castsShadows="true" receiveShadows="true" materialIds="5"/>
+        <Shape name="cutterEffects_maize_nr12_rl26_v1" shapeId="3" nodeId="18" castsShadows="true" receiveShadows="true" materialIds="5"/>
+        <Shape name="cutterEffects_maize_nr20_rl36_v1" shapeId="4" nodeId="19" castsShadows="true" receiveShadows="true" materialIds="5"/>
+        <Shape name="cutterEffects_maize_nr6_rl8_v1" shapeId="5" nodeId="20" castsShadows="true" receiveShadows="true" materialIds="5"/>
+        <Shape name="cutterEffects_maize_nr12_rl8_v1" shapeId="6" nodeId="21" castsShadows="true" receiveShadows="true" materialIds="5"/>
+        <Shape name="cutterEffects_maize_nr20_rl8_v1" shapeId="7" nodeId="22" castsShadows="true" receiveShadows="true" materialIds="5"/>
+      </TransformGroup>
+    </TransformGroup>
+  </Scene>
+
+</i3D>

@@ -66,10 +66,11 @@ COLOR_LIMITE_JUGABLE = (255, 255, 255)  # Línea límite del área jugable 2K
 # ==========================================
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 MAPA_DIR_CANDIDATOS = [
+    os.path.join(SCRIPT_DIR, "FS25_Valle_Bonito_x16"),
     os.path.join(SCRIPT_DIR, "FS25_Valle_Bonito"),
     os.path.join(SCRIPT_DIR, "FS25_Granja_bonita"),
 ]
-MAPA_DIR = next((cand for cand in MAPA_DIR_CANDIDATOS if os.path.exists(cand)), os.path.join(SCRIPT_DIR, "FS25_Valle_Bonito"))
+MAPA_DIR = next((cand for cand in MAPA_DIR_CANDIDATOS if os.path.exists(cand)), os.path.join(SCRIPT_DIR, "FS25_Valle_Bonito_x16"))
 MAP_DIR = os.path.join(MAPA_DIR, "map")
 TEXTURES_JSON = os.path.join(MAPA_DIR, "info_layers", "textures.json")
 BG_TEXTURE_PATH = os.path.join(MAPA_DIR, "assets", "background", "background_texture.png")
@@ -233,21 +234,20 @@ def renderizar_pda(size_total=4096):
                 poly = [global_to_canvas_px(lat, lon, size_total) for lat, lon in pts]
                 draw.polygon(poly, fill=COLOR_BOSQUE, outline=COLOR_BOSQUE_BORDE, width=borde_bosque)
 
-    # 6. Granjas, Patios y Cuadras Urbanas (textures.json o de map.osm)
+    # 6. Granjas, Patios y Cuadras Urbanas (de map.osm, excluyendo bosques/rompevientos e industria)
     borde_granja = max(1, int(1.2 * escala))
-    if 'farmyards' in tex_data and tex_data['farmyards']:
-        for f in tex_data['farmyards']:
-            poly = [local_m_to_canvas_px(p[0], p[1], size_total) for p in f]
-            if len(poly) >= 3:
+    for way in root.findall('way'):
+        tags = {t.get('k'): t.get('v') for t in way.findall('tag')}
+        if (
+            tags.get('landuse') == 'farmyard'
+            and tags.get('natural') != 'wood'
+            and tags.get('landuse') != 'forest'
+            and tags.get('building') != 'industrial'
+        ):
+            pts = [nodes[nd.get('ref')] for nd in way.findall('nd') if nd.get('ref') in nodes]
+            if len(pts) >= 3:
+                poly = [global_to_canvas_px(lat, lon, size_total) for lat, lon in pts]
                 draw.polygon(poly, fill=COLOR_GRANJA, outline=COLOR_GRANJA_BORDE, width=borde_granja)
-    else:
-        for way in root.findall('way'):
-            tags = {t.get('k'): t.get('v') for t in way.findall('tag')}
-            if tags.get('landuse') == 'farmyard' and tags.get('building') != 'industrial':
-                pts = [nodes[nd.get('ref')] for nd in way.findall('nd') if nd.get('ref') in nodes]
-                if len(pts) >= 3:
-                    poly = [global_to_canvas_px(lat, lon, size_total) for lat, lon in pts]
-                    draw.polygon(poly, fill=COLOR_GRANJA, outline=COLOR_GRANJA_BORDE, width=borde_granja)
 
     # 7. Edificios y Zona Industrial (textures.json o de map.osm)
     borde_ind = max(1, int(1.2 * escala))
@@ -272,6 +272,16 @@ def renderizar_pda(size_total=4096):
             poly = [local_m_to_canvas_px(p[0], p[1], size_total) for p in r]
             if len(poly) >= 3:
                 draw.polygon(poly, fill=COLOR_ASFALTO, outline=COLOR_ASFALTO_BORDE, width=borde_asfalto)
+        # Pintar caminos de tierra encima para distinguirlos del asfalto
+        for way in root.findall('way'):
+            tags = {t.get('k'): t.get('v') for t in way.findall('tag')}
+            hw = tags.get('highway')
+            if hw and (tags.get('surface') == 'dirt' or hw == 'track'):
+                pts = [nodes[nd.get('ref')] for nd in way.findall('nd') if nd.get('ref') in nodes]
+                if len(pts) >= 2:
+                    line = [global_to_canvas_px(lat, lon, size_total) for lat, lon in pts]
+                    w = max(2, int(2.5 * escala))
+                    draw.line(line, fill=COLOR_TIERRA, width=w, joint='round')
     else:
         for way in root.findall('way'):
             tags = {t.get('k'): t.get('v') for t in way.findall('tag')}
@@ -359,6 +369,10 @@ if RUTA_TEXCONV and os.path.exists(RUTA_TEXCONV):
     res = subprocess.run(comando, capture_output=True, text=True)
     if res.returncode == 0:
         print(f"¡Éxito! Textura DDS 4K generada: {OVERVIEW_DDS}")
+        ui_overview_dds = os.path.join(MAP_DIR, "textures", "ui", "overview.dds")
+        if os.path.exists(os.path.dirname(ui_overview_dds)):
+            shutil.copy2(OVERVIEW_DDS, ui_overview_dds)
+            print(f"  -> Copiado a: {ui_overview_dds}")
     else:
         print(f"Error al ejecutar texconv: {res.stderr}")
 else:

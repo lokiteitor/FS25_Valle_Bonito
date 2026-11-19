@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<vehicle type="pallet" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../shared/xml/schema/vehicle.xsd">
+    <annotation>Copyright (C) GIANTS Software GmbH, All Rights Reserved.</annotation>
+
+    <storeData>
+        <name>$l10n_storeItem_peanutBagsPallet</name>
+        <image>map/pallets/peanutBagPallet/store_peanutBagsPallet.dds</image>
+        <price>2000</price>
+        <category>pallets</category>
+        <brand>NONE</brand>
+        <showInStore>false</showInStore>
+        <canBeSold>false</canBeSold>
+        <financeCategory>OTHER</financeCategory>
+
+        <storeIconRendering>
+            <settings centerIcon="true" cameraXRot="-15" cameraYRot="35"/>
+        </storeIconRendering>
+        <audioMemoryUsage>0</audioMemoryUsage>
+    </storeData>
+
+    <base>
+        <typeDesc>$l10n_typeDesc_pallet</typeDesc>
+        <filename>map/pallets/peanutBagPallet/peanutBagPallet.i3d</filename>
+        <size width="1.3" length="0.9" height="0.8" />
+        <canBeReset>false</canBeReset>
+        <components maxMass="400">
+            <component centerOfMass="0 0.1 0" solverIterationCount="10" mass="60"/>
+        </components>
+        <showInVehicleMenu>false</showInVehicleMenu>
+        <mapHotspot available="false" />
+        <input allowed="false"/>
+    </base>
+
+    <fillUnit>
+        <fillUnitConfigurations>
+            <fillUnitConfiguration>
+                <fillUnits>
+                    <fillUnit unitTextOverride="$l10n_unit_literShort" fillTypes="PEANUT_BAG" capacity="960" ignoreFillLimit="true"/>
+                </fillUnits>
+            </fillUnitConfiguration>
+        </fillUnitConfigurations>
+    </fillUnit>
+
+    <pallet fillUnitIndex="1" linkNode="PeanutPalletbags_component1">
+        <texture diffuse="$data/objects/pallets/shared/euroPallet/euroPalletNew_diffuse.dds"/>
+        <texture diffuse="$data/objects/pallets/shared/euroPallet/euroPalletMiddle_diffuse.dds"/>
+        <texture diffuse="$data/objects/pallets/shared/euroPallet/euroPalletOld_diffuse.dds"/>
+
+        <content>
+            <object node="sacaria" tensionBeltNode="sacaria_Tension00"/>
+            <object node="sacaria1" tensionBeltNode="sacaria_Tension01"/>
+            <object node="sacaria2" tensionBeltNode="sacaria_Tension02"/>
+            <object node="sacaria3" tensionBeltNode="sacaria_Tension03"/>
+            <object node="sacaria4" tensionBeltNode="sacaria_Tension04"/>
+            <object node="sacaria5" tensionBeltNode="sacaria_Tension05"/>
+            <object node="sacaria6" tensionBeltNode="sacaria_Tension06"/>
+            <object node="sacaria7" tensionBeltNode="sacaria_Tension07"/>
+            <object node="sacaria8" tensionBeltNode="sacaria_Tension08"/>
+            <object node="sacaria9" tensionBeltNode="sacaria_Tension09"/>
+            <object node="sacaria10" tensionBeltNode="sacaria_Tension10"/>
+            <object node="sacaria11" tensionBeltNode="sacaria_Tension11"/>
+            <object node="sacaria12" tensionBeltNode="sacaria_Tension12"/>
+            <object node="sacaria13" tensionBeltNode="sacaria_Tension13"/>
+            <object node="sacaria14" tensionBeltNode="sacaria_Tension14"/>
+            <object node="sacaria15" tensionBeltNode="sacaria_Tension15"/>
+        </content>
+
+        <sounds>
+            <unload template="palletsFillSugar" pitchScale="0.8" />
+        </sounds>
+    </pallet>
+
+    <dynamicMount triggerNode="dynamicMountTrigger" triggerForceAcceleration="4" additionalMountDistance="0.75" jointTransY="0.11" jointLimitToRotY="true"/>
+
+<i3dMappings>
+    <i3dMapping id="PeanutPalletbags_component1" node="0>"/>
+    <i3dMapping id="dynamicMountTrigger" node="0>0"/>
+    <i3dMapping id="content" node="0>1"/>
+    <i3dMapping id="sacaria" node="0>1|0"/>
+    <i3dMapping id="sacaria_Tension00" node="0>1|0|0"/>
+    <i3dMapping id="sacaria1" node="0>1|1"/>
+    <i3dMapping id="sacaria_Tension01" node="0>1|1|0"/>
+    <i3dMapping id="sacaria2" node="0>1|2"/>
+    <i3dMapping id="sacaria_Tension02" node="0>1|2|0"/>
+    <i3dMapping id="sacaria3" node="0>1|3"/>
+    <i3dMapping id="sacaria_Tension03" node="0>1|3|0"/>
+    <i3dMapping id="sacaria4" node="0>1|4"/>
+    <i3dMapping id="sacaria_Tension04" node="0>1|4|0"/>
+    <i3dMapping id="sacaria5" node="0>1|5"/>
+    <i3dMapping id="sacaria_Tension05" node="0>1|5|0"/>
+    <i3dMapping id="sacaria6" node="0>1|6"/>
+    <i3dMapping id="sacaria_Tension06" node="0>1|6|0"/>
+    <i3dMapping id="sacaria7" node="0>1|7"/>
+    <i3dMapping id="sacaria_Tension07" node="0>1|7|0"/>
+    <i3dMapping id="sacaria8" node="0>1|8"/>
+    <i3dMapping id="sacaria_Tension08" node="0>1|8|0"/>
+    <i3dMapping id="sacaria9" node="0>1|9"/>
+    <i3dMapping id="sacaria_Tension09" node="0>1|9|0"/>
+    <i3dMapping id="sacaria10" node="0>1|10"/>
+    <i3dMapping id="sacaria_Tension10" node="0>1|10|0"/>
+    <i3dMapping id="sacaria11" node="0>1|11"/>
+    <i3dMapping id="sacaria_Tension11" node="0>1|11|0"/>
+    <i3dMapping id="sacaria12" node="0>1|12"/>
+    <i3dMapping id="sacaria_Tension12" node="0>1|12|0"/>
+    <i3dMapping id="sacaria13" node="0>1|13"/>
+    <i3dMapping id="sacaria_Tension13" node="0>1|13|0"/>
+    <i3dMapping id="sacaria14" node="0>1|14"/>
+    <i3dMapping id="sacaria_Tension14" node="0>1|14|0"/>
+    <i3dMapping id="sacaria15" node="0>1|15"/>
+    <i3dMapping id="sacaria_Tension15" node="0>1|15|0"/>
+    <i3dMapping id="collisions" node="0>2"/>
+    <i3dMapping id="floorCollision01" node="0>2|0"/>
+    <i3dMapping id="floorCollision02" node="0>2|1"/>
+</i3dMappings>
+</vehicle>

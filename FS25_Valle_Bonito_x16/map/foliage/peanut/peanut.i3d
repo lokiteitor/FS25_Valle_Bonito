@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="peanut.i3d" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+  <Asset>
+    <Export program="GIANTS Editor 64bit" version="10.0.13"/>
+  </Asset>
+
+  <Files>
+    <File fileId="18" filename="peanutHaulm_alpha.dds"/>
+    <File fileId="16" filename="peanutHaulm_diffuse.png"/>
+    <File fileId="17" filename="peanutHaulm_normal.png"/>
+    <File fileId="6" filename="peanutStage01_alpha.png"/>
+    <File fileId="1" filename="peanutStage01_diffuse.png"/>
+    <File fileId="2" filename="peanutStage01_normal.png"/>
+    <File fileId="3" filename="peanutStage01_specular.png"/>
+    <File fileId="8" filename="peanutStage020304_normal.png"/>
+    <File fileId="9" filename="peanutStage02_alpha.png"/>
+    <File fileId="7" filename="peanutStage02_diffuse.png"/>
+    <File fileId="10" filename="peanutStage03_diffuse.png"/>
+    <File fileId="11" filename="peanutStage04_diffuse.png"/>
+    <File fileId="42" filename="$data/foliage/parsnip/cutHaulmLOD_alpha.png"/>
+    <File fileId="39" filename="$data/foliage/parsnip/cutHaulmLOD_diffuse.png"/>
+    <File fileId="40" filename="$data/foliage/parsnip/cutHaulmLOD_normal.png"/>
+    <File fileId="41" filename="$data/foliage/parsnip/cutHaulmLOD_specular.png"/>
+    <File fileId="30" filename="$data/foliage/parsnip/parsnipGreenBigLOD_alpha.png"/>
+    <File fileId="27" filename="$data/foliage/parsnip/parsnipGreenBigLOD_diffuse.png"/>
+    <File fileId="28" filename="$data/foliage/parsnip/parsnipGreenBigLOD_normal.png"/>
+    <File fileId="29" filename="$data/foliage/parsnip/parsnipGreenBigLOD_specular.png"/>
+    <File fileId="26" filename="$data/foliage/parsnip/parsnipGreenMiddleLOD_alpha.png"/>
+    <File fileId="23" filename="$data/foliage/parsnip/parsnipGreenMiddleLOD_diffuse.png"/>
+    <File fileId="24" filename="$data/foliage/parsnip/parsnipGreenMiddleLOD_normal.png"/>
+    <File fileId="25" filename="$data/foliage/parsnip/parsnipGreenMiddleLOD_specular.png"/>
+    <File fileId="22" filename="$data/foliage/parsnip/parsnipGreenSmallLOD_alpha.png"/>
+    <File fileId="19" filename="$data/foliage/parsnip/parsnipGreenSmallLOD_diffuse.png"/>
+    <File fileId="20" filename="$data/foliage/parsnip/parsnipGreenSmallLOD_normal.png"/>
+    <File fileId="21" filename="$data/foliage/parsnip/parsnipGreenSmallLOD_specular.png"/>
+    <File fileId="34" filename="$data/foliage/parsnip/parsnipHarvestReadyLOD_alpha.png"/>
+    <File fileId="31" filename="$data/foliage/parsnip/parsnipHarvestReadyLOD_diffuse.png"/>
+    <File fileId="32" filename="$data/foliage/parsnip/parsnipHarvestReadyLOD_normal.png"/>
+    <File fileId="33" filename="$data/foliage/parsnip/parsnipHarvestReadyLOD_specular.png"/>
+    <File fileId="38" filename="$data/foliage/potato/potatoStage05LOD1_alpha.png"/>
+    <File fileId="35" filename="$data/foliage/potato/potatoStage05LOD1_diffuse.png"/>
+    <File fileId="37" filename="$data/foliage/potato/potatoStage05LOD1_fmask.png"/>
+    <File fileId="36" filename="$data/foliage/potato/potatoStage05LOD1_normal.png"/>
+    <File fileId="15" filename="$data/foliage/potato/potatoStage05_alpha.png"/>
+    <File fileId="12" filename="$data/foliage/potato/potatoStage05_diffuse.png"/>
+    <File fileId="14" filename="$data/foliage/potato/potatoStage05_fmask.png"/>
+    <File fileId="13" filename="$data/foliage/potato/potatoStage05_normal.png"/>
+    <File fileId="4" filename="$data/shaders/fruitGrowthFoliageShader.xml"/>
+  </Files>
+
+
+  <Materials>
+    <Material name="cutHaulmLOD_mat" materialId="5" customShaderId="4" customShaderVariation="PLANT_FIELD_ROTATION">
+      <Texture fileId="39"/>
+      <Normalmap fileId="40"/>
+      <Glossmap fileId="41"/>
+      <Custommap name="alphaMap" fileId="42"/>
+    </Material>
+    <Material name="parsnipGreenBigLOD_mat" materialId="6" customShaderId="4" customShaderVariation="PLANT_FIELD_ROTATION">
+      <Texture fileId="27"/>
+      <Normalmap fileId="28"/>
+      <Glossmap fileId="29"/>
+      <Custommap name="alphaMap" fileId="30"/>
+    </Material>
+    <Material name="parsnipGreenMiddleLOD_mat" materialId="7" customShaderId="4" customShaderVariation="PLANT_FIELD_ROTATION">
+      <Texture fileId="23"/>
+      <Normalmap fileId="24"/>
+      <Glossmap fileId="25"/>
+      <Custommap name="alphaMap" fileId="26"/>
+    </Material>
+    <Material name="parsnipGreenSmallLOD_mat" materialId="8" customShaderId="4" customShaderVariation="PLANT_FIELD_ROTATION">
+      <Texture fileId="19"/>
+      <Normalmap fileId="20"/>
+      <Glossmap fileId="21"/>
+      <Custommap name="alphaMap" fileId="22"/>
+    </Material>
+    <Material name="parsnipHarvestReadyLOD_mat" materialId="9" customShaderId="4" customShaderVariation="PLANT_FIELD_ROTATION">
+      <Texture fileId="31"/>
+      <Normalmap fileId="32"/>
+      <Glossmap fileId="33"/>
+      <Custommap name="alphaMap" fileId="34"/>
+    </Material>
+    <Material name="peanutHaulm_mat" materialId="10" customShaderId="4">
+      <Texture fileId="16"/>
+      <Normalmap fileId="17"/>
+      <Custommap name="alphaMap" fileId="18"/>
+      <CustomParameter name="windScale" value="0"/>
+      <CustomParameter name="snowScale" value="0.45"/>
+    </Material>
+    <Material name="peanutStage03_mat" materialId="11" customShaderId="4" customShaderVariation="PLANT_FIELD_ROTATION">
+      <Texture fileId="7"/>
+      <Normalmap fileId="8"/>
+      <Glossmap fileId="3"/>
+      <Custommap name="alphaMap" fileId="9"/>
+    </Material>
+    <Material name="peanutStage03_mat" materialId="12" customShaderId="4" customShaderVariation="PLANT_FIELD_ROTATION">
+      <Texture fileId="10"/>
+      <Normalmap fileId="8"/>
+      <Glossmap fileId="3"/>
+      <Custommap name="alphaMap" fileId="9"/>
+    </Material>
+    <Material name="peanutStage04_mat" materialId="13" customShaderId="4" customShaderVariation="PLANT_FIELD_ROTATION">
+      <Texture fileId="11"/>
+      <Normalmap fileId="8"/>
+      <Glossmap fileId="3"/>
+      <Custommap name="alphaMap" fileId="9"/>
+    </Material>
+    <Material name="potatoStage05_fmask_mat" materialId="14" customShaderId="4" customShaderVariation="PLANT_FIELD_ROTATION">
+      <Texture fileId="12"/>
+      <Normalmap fileId="13"/>
+      <Glossmap fileId="14"/>
+      <Custommap name="alphaMap" fileId="15"/>
+      <CustomParameter name="snowScale" value="0.4"/>
+    </Material>
+    <Material name="potatoStage05LOD1_mat" materialId="15" customShaderId="4" customShaderVariation="PLANT_FIELD_ROTATION">
+      <Texture fileId="35"/>
+      <Normalmap fileId="36"/>
+      <Glossmap fileId="37"/>
+      <Custommap name="alphaMap" fileId="38"/>
+      <CustomParameter name="snowScale" value="0.3"/>
+    </Material>
+    <Material name="stage01" materialId="16" customShaderId="4" customShaderVariation="PLANT_FIELD_ROTATION">
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+      <Custommap name="alphaMap" fileId="6"/>
+      <CustomParameter name="snowScale" value="0.35"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="peanut.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="peanut" clipDistance="500" nodeId="47">
+      <TransformGroup name="greenSmall" visibility="false" nodeId="48">
+        <Shape name="greenSmall" shapeId="1" nodeId="49" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="16"/>
+        <Shape name="greenSmall" shapeId="2" nodeId="50" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="16"/>
+        <Shape name="greenSmall" shapeId="3" nodeId="51" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="16"/>
+        <Shape name="greenSmall" shapeId="4" nodeId="52" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="16"/>
+      </TransformGroup>
+      <TransformGroup name="greenMiddle" visibility="false" nodeId="53">
+        <Shape name="greenMiddle" shapeId="5" nodeId="54" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="11"/>
+        <Shape name="greenMiddle1" shapeId="6" nodeId="55" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="11"/>
+        <Shape name="greenMiddle2" shapeId="7" nodeId="56" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="11"/>
+        <Shape name="greenMiddle3" shapeId="8" nodeId="57" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="11"/>
+      </TransformGroup>
+      <TransformGroup name="greenBig" visibility="false" nodeId="58">
+        <Shape name="greenBig" shapeId="9" nodeId="59" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="12"/>
+        <Shape name="greenBig1" shapeId="10" nodeId="60" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="12"/>
+        <Shape name="greenBig3" shapeId="11" nodeId="61" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="12"/>
+        <Shape name="greenBig2" shapeId="12" nodeId="62" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="12"/>
+      </TransformGroup>
+      <TransformGroup name="harvestReady" nodeId="63">
+        <Shape name="harvestReady" shapeId="13" nodeId="64" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="13"/>
+        <Shape name="harvestReady3" shapeId="14" nodeId="65" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="13"/>
+        <Shape name="harvestReady1" shapeId="15" nodeId="66" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="13"/>
+        <Shape name="harvestReady2" shapeId="16" nodeId="67" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="13"/>
+      </TransformGroup>
+      <TransformGroup name="dead" visibility="false" nodeId="68">
+        <Shape name="dead01" shapeId="17" clipDistance="500" nodeId="69" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="14"/>
+        <Shape name="dead02" shapeId="18" clipDistance="500" nodeId="70" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="14"/>
+        <Shape name="dead03" shapeId="19" clipDistance="500" nodeId="71" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="14"/>
+        <Shape name="dead04" shapeId="20" clipDistance="500" nodeId="72" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="14"/>
+      </TransformGroup>
+      <TransformGroup name="cutHaulm" visibility="false" nodeId="73">
+        <Shape name="haulm" shapeId="21" clipDistance="500" nodeId="74" castsShadows="false" receiveShadows="true" materialIds="10"/>
+      </TransformGroup>
+    </TransformGroup>
+    <TransformGroup name="peanutLOD" nodeId="75">
+      <TransformGroup name="greenSmall" visibility="false" nodeId="76">
+        <Shape name="gs1" shapeId="22" clipDistance="500" nodeId="77" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="8"/>
+      </TransformGroup>
+      <TransformGroup name="greenMiddle" visibility="false" nodeId="78">
+        <Shape name="gm1" shapeId="23" clipDistance="500" nodeId="79" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="7"/>
+        <Shape name="gm1_x_inv" shapeId="24" clipDistance="500" nodeId="80" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="7"/>
+      </TransformGroup>
+      <TransformGroup name="greenBig" visibility="false" nodeId="81">
+        <Shape name="gb1" shapeId="25" clipDistance="500" nodeId="82" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="6"/>
+      </TransformGroup>
+      <TransformGroup name="harvestReady" nodeId="83">
+        <Shape name="hr1" shapeId="26" clipDistance="500" nodeId="84" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="9"/>
+        <Shape name="hr1_x_inv" shapeId="27" clipDistance="500" nodeId="85" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="9"/>
+      </TransformGroup>
+      <TransformGroup name="dead" visibility="false" nodeId="86">
+        <Shape name="dead" shapeId="28" clipDistance="500" nodeId="87" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="15"/>
+      </TransformGroup>
+      <TransformGroup name="cutHaulm" visibility="false" nodeId="88">
+        <Shape name="ch1" shapeId="29" clipDistance="500" nodeId="89" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="5"/>
+      </TransformGroup>
+    </TransformGroup>
+  </Scene>
+
+</i3D>

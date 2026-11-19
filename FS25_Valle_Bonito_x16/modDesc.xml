@@ -29,8 +29,51 @@ Shopkategorie: Maps
             <iconFilename>preview.png</iconFilename>
         </map>
     </maps>
-	
-	
+	<dependencies>
+    </dependencies>
 
-    
+    <l10n>
+        <text name="fillType_blackbean">
+            <en>Black Bean</en>
+            <es>Frijol Negro</es>
+            <de>Schwarze Bohne</de>
+            <br>Feijão Preto</br>
+        </text>
+        <text name="fillType_backbean">
+            <en>Black Bean</en>
+            <es>Frijol Negro</es>
+            <de>Schwarze Bohne</de>
+            <br>Feijão Preto</br>
+        </text>
+        <text name="fillType_peanut">
+            <en>Peanut</en>
+            <es>Maní</es>
+            <de>Erdnuss</de>
+            <br>Amendoim</br>
+        </text>
+        <text name="fillType_peanutbag">
+            <en>Peanut Bag</en>
+            <es>Bolsa de Maní</es>
+            <de>Erdnusssack</de>
+            <br>Saco de Amendoim</br>
+        </text>
+        <text name="fillType_napier">
+            <en>Elephant Grass</en>
+            <es>Pasto Elefante</es>
+            <de>Elefantengras</de>
+            <br>Capim-Elefante</br>
+        </text>
+        <text name="storeItem_peanutBagsPallet">
+            <en>Peanut Bags Pallet</en>
+            <es>Palet de Bolsas de Maní</es>
+            <de>Palette mit Erdnusssäcken</de>
+            <br>Palete de Sacos de Amendoim</br>
+        </text>
+        <text name="shopItem_peanutbag">
+            <en>Processed Peanut Factory</en>
+            <es>Fábrica de Maní Procesado</es>
+            <de>Erdnussverarbeitungsfabrik</de>
+            <br>Fábrica de Amendoim Beneficiado</br>
+        </text>
+    </l10n>
 </modDesc>

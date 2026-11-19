@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<placeable type="productionPoint" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../shared/xml/schema/placeable.xsd">
+    <storeData>
+        <name>$l10n_shopItem_peanutbag</name>
+        <functions>
+            <function>$l10n_function_productionPoint</function>
+        </functions>
+        <image>map/placeables/factory/peanutbag/store_dairy3.dds</image>
+        <price>210000</price>
+		<dailyUpkeep>80</dailyUpkeep>
+        <lifetime>1000</lifetime>
+        <rotation>0</rotation>
+        <brand>NONE</brand>
+		<showInStore>true</showInStore>
+        <canBeSold>true</canBeSold>
+        <species>PLACEABLE</species>
+        <category>productionPoints</category>
+        <brush>
+            <type>placeable</type>
+            <category>production</category>
+            <tab>factories</tab>
+        </brush>
+
+        <storeIconRendering>
+            <settings cameraXRot="-5" cameraYRot="-40" />
+        </storeIconRendering>
+    </storeData>
+
+    <base>
+        <filename>map/placeables/factory/peanutbag/dairy.i3d</filename>
+        <canBeRenamed>true</canBeRenamed>
+    </base>
+
+    <placement useRandomYRotation="false" useManualYRotation="true" >
+        <testAreas>
+        </testAreas>
+        <sounds>
+            <place template="smallImp"/>
+        </sounds>
+    </placement>
+
+    <clearAreas>
+    </clearAreas>
+
+    <leveling requireLeveling="true" maxSmoothDistance="10" maxSlope="75" maxEdgeAngle="30" >
+        <levelAreas>
+        </levelAreas>
+        <paintAreas>
+        </paintAreas>
+    </leveling>
+
+    <indoorAreas>
+    </indoorAreas>
+
+    <tipOcclusionUpdateAreas>
+    </tipOcclusionUpdateAreas>
+
+    <ai>
+        <updateAreas>
+        </updateAreas>
+    </ai>
+
+    <infoTrigger triggerNode="infoTrigger"/>
+
+    <hotspots>
+        <hotspot type="PRODUCTION_POINT" linkNode="unloadTriggerMarker" teleportNode="playerTriggerMarker" />
+    </hotspots>
+
+
+    <triggerMarkers>
+        <triggerMarker node="warningStripes01"/>
+        <triggerMarker node="warningStripes02"/>
+        <triggerMarker node="playerTriggerMarker" adjustToGround="true" filename="$data/shared/assets/marker/markerIconWrench.i3d"/>
+        <triggerMarker node="unloadTriggerMarker" adjustToGround="true" filename="$data/shared/assets/marker/markerIconUnload.i3d"/>
+    </triggerMarkers>
+
+    <productionPoint>
+        <productions>
+            <production id="peanutbag" name="$l10n_fillType_peanutbag" cyclesPerHour="5" costsPerActiveHour="10">
+                <inputs>
+                    <input fillType="PEANUT" amount="22" />
+                </inputs>
+                <outputs>
+                    <output fillType="PEANUT_BAG" amount="20" />
+                </outputs>
+            </production>
+        </productions>
+
+        <storage isExtension="false" fillLevelSyncThreshold="50">
+            <capacity fillType="PEANUT"                capacity="72000" />
+            <capacity fillType="PEANUT_BAG"            capacity="29000" />
+        </storage>
+
+        <sellingStation node="sellingStation" supportsExtension="false">
+            <unloadTrigger exactFillRootNode="exactFillRootNode" aiNode="unloadTriggerAINode" fillTypes="PEANUT"/>
+            <palletTrigger triggerNode="palletTrigger" aiNode="unloadTriggerAINode" fillTypes="PEANUT PEANUT_BAG"/>
+        </sellingStation>
+
+        <palletSpawner>
+            <spawnPlaces>
+                <spawnPlace startNode="palletAreaStart01" endNode="palletAreaEnd01"/>
+                <spawnPlace startNode="palletAreaStart02" endNode="palletAreaEnd02"/>
+            </spawnPlaces>
+        </palletSpawner>
+
+        <playerTrigger node="playerTrigger" />
+        <sounds>
+            <idle   template="dairyIdle" linkNode="0>" />
+            <active template="dairyWork" linkNode="0>" />
+        </sounds>
+    </productionPoint>
+
+    <i3dMappings>
+        <i3dMapping id="peanut_bag" node="0>" />
+        <i3dMapping id="infoTrigger" node="0>7" />
+        <i3dMapping id="sellingStation" node="0>8" />
+        <i3dMapping id="exactFillRootNode" node="0>8|0" />
+        <i3dMapping id="palletTrigger" node="0>8|1" />
+        <i3dMapping id="unloadTriggerMarker" node="0>8|2" />
+        <i3dMapping id="unloadTriggerAINode" node="0>8|3" />
+        <i3dMapping id="warningStripes01" node="0>9|0" />
+        <i3dMapping id="warningStripes02" node="0>9|1" />
+        <i3dMapping id="playerTrigger" node="0>10|0" />
+        <i3dMapping id="playerTriggerMarker" node="0>10|1" />
+        <i3dMapping id="palletSpawner" node="0>11" />
+        <i3dMapping id="palletAreaStart01" node="0>11|0" />
+        <i3dMapping id="palletAreaEnd01" node="0>11|0|0" />
+        <i3dMapping id="palletAreaStart02" node="0>11|1" />
+        <i3dMapping id="palletAreaEnd02" node="0>11|1|0" />
+        <i3dMapping id="fillTrigger" node="0>11|2" />
+    </i3dMappings>
+</placeable>

@@ -99,55 +99,58 @@
 
         <sunRotation heightAngleLimitRotation="60" heightAngleLimitRotationStart="56" heightAngleLimitRotationEnd="80">
             <key value="0"   time="0" />
-            <key value="80"  time="6.5" />
-            <key value="-80" time="6.5" /> <!-- sunrise 6 -->
+            <key value="80"  time="6.1" />
+            <key value="-80" time="6.1" /> <!-- sunrise 6 -->
             <key value="0"   time="12" />
-            <key value="80"  time="19.5" />
-            <key value="-80" time="19.5" /> <!-- sunset 20 -->
+            <key value="80"  time="19.6" />
+            <key value="-80" time="19.6" /> <!-- sunset 20 -->
             <key value="0"   time="24" />
         </sunRotation>
 
         <lightScatteringRotation>
             <!-- primary and secondary -->
             <key value="0 -180"   time="0" />
-            <key value="80 -80"    time="6.5" /> <!-- switch, sunrise ~6 -->
-            <key value="-80 80"     time="6.5" />
+            <key value="80 -80"    time="6.1" /> <!-- switch, sunrise ~6 -->
+            <key value="-80 80"     time="6.1" />
             <key value="0 180"    time="12" />
             <key value="0 -180"   time="12" />
-            <key value="80 -80"    time="19.5" /> <!-- switch, sunset ~20 -->
-            <key value="-80 80"     time="19.5" />
+            <key value="80 -80"    time="19.6" /> <!-- switch, sunset ~20 -->
+            <key value="-80 80"     time="19.6" />
             <key value="0 180"    time="24" />
         </lightScatteringRotation>
 
         <primaryDynamicLightingScale>
             <key value="1" time="0" />
-            <key value="1" time="6.2" />
+            <key value="1" time="6.1" />
             <key value="0.0" time="6.5" />  <!-- sunrise switch -->
             <key value="1" time="6.8" />
             <key value="1" time="19.2" />
-            <key value="0.0" time="19.5" /> <!-- sunset switch -->
+            <key value="0.0" time="19.6" /> <!-- sunset switch -->
             <key value="1" time="19.8" />
             <key value="1" time="24" />
         </primaryDynamicLightingScale>
 
         <primaryExtraterrestrialColor>
             <key value="0.04 0.07 0.11" time="0" />
-            <key value="0.04 0.07 0.11" time="6.5" />
+            <key value="0.04 0.07 0.11" time="6.0" />
+            <key value="0.4 0.4 0.4"    time="6.3" />
+            <key value="0.9 0.9 0.9"    time="6.4" />
             <key value="1.0 1.0 1.0"    time="6.5" />  <!-- sunrise switch -->
-            <key value="1.0 1.0 1.0"    time="19.5" /> <!-- sunset switch -->
-            <key value="0.04 0.07 0.11" time="19.5" />
+            <key value="1.0 1.0 1.0"    time="19.1" />
+            <key value="0.5 0.5 0.5"    time="19.3" /> <!-- sunset switch -->
+            <key value="0.04 0.07 0.11" time="19.6" />
             <key value="0.04 0.07 0.11" time="24" />
         </primaryExtraterrestrialColor>
 
         <secondaryExtraterrestrialColor>
             <key value="0.0 0.0 0.0"    time="0" />
             <key value="0.0 0.0 0.0"    time="5" />
-            <key value="1.0 1.0 1.0"    time="6.5" />
+            <key value="0.1 0.1 0.1"    time="6.4" />
             <key value="0.04 0.07 0.11" time="6.5" />  <!-- sunrise switch (secondary becomes moon) -->
             <key value="0.0 0.0 0.0"    time="7" />
             <key value="0.0 0.0 0.0"    time="18.5" />
-            <key value="0.04 0.07 0.11" time="19.5" /> <!-- sunset switch (secondary becomes sun) -->
-            <key value="1.0 1.0 1.0"    time="19.5" />
+            <key value="0.04 0.07 0.11" time="19.1" /> <!-- sunset switch (secondary becomes sun) -->
+            <key value="0.1 0.1 0.1"    time="19.6" />
             <key value="0.0 0.0 0.0"    time="21" />
             <key value="0.0 0.0 0.0"    time="24" />
         </secondaryExtraterrestrialColor>
@@ -197,10 +200,10 @@
 
         <sunIsPrimary>
             <key value="0" time="0" />
-            <key value="0" time="6.5" />
-            <key value="1" time="6.5" />
-            <key value="1" time="19.5" />
-            <key value="0" time="19.5" />
+            <key value="0" time="6.1" />
+            <key value="1" time="6.1" />
+            <key value="1" time="19.6" />
+            <key value="0" time="19.6" />
             <key value="0" time="24" />
         </sunIsPrimary>
 
@@ -223,16 +226,16 @@
         <rain>
             <types>
                 <type id="RAIN" filename="$data/sky/rain.i3d">
-                    <settings spawnBoxWidth="30" spawnBoxDepth="50" spawnBoxHeight="30" behindCameraBuffer="0.1" cameraVelocityMultiplier="0" />
+                    <settings spawnBoxWidth="50" spawnBoxDepth="50" spawnBoxHeight="60" cameraVelocityMultiplier="0" />
                 </type>
                 <type id="HAIL" filename="$data/sky/hail.i3d">
-                    <settings spawnBoxWidth="30" spawnBoxDepth="50" spawnBoxHeight="30" behindCameraBuffer="0.1" cameraVelocityMultiplier="0" />
+                    <settings spawnBoxWidth="50" spawnBoxDepth="50" spawnBoxHeight="60" cameraVelocityMultiplier="0" />
                 </type>
                 <type id="SNOW" filename="$data/sky/snow.i3d">
-                    <settings spawnBoxWidth="30" spawnBoxDepth="50" spawnBoxHeight="30" behindCameraBuffer="0.1" cameraVelocityMultiplier="0" />
+                    <settings spawnBoxWidth="50" spawnBoxDepth="50" spawnBoxHeight="60" cameraVelocityMultiplier="0" />
                 </type>
                 <type id="DUST" filename="$data/sky/dust.i3d">
-                    <settings spawnBoxWidth="30" spawnBoxDepth="50" spawnBoxHeight="30" behindCameraBuffer="0.1" cameraVelocityMultiplier="0" />
+                    <settings spawnBoxWidth="50" spawnBoxDepth="50" spawnBoxHeight="60" cameraVelocityMultiplier="0" />
                 </type>
             </types>
 
@@ -688,6 +691,28 @@
                 <variation weight="1" minHours="1" maxHours="3" minTemperature="13" maxTemperature="22">
                     <clouds presetId="RAIN_4"/>
                     <rain presetId="RAIN_HEAVY"/>
+                    <wind speed="68" cirrusSpeedFactor="0.80"/>
+                </variation>
+            </object>
+            <object typeName="HAIL" class="WeatherObjectHail" weight="5">
+                <variation weight="1" minHours="1" maxHours="3" minTemperature="9" maxTemperature="15">
+                    <clouds presetId="RAIN_1"/>
+                    <rain presetId="HAIL"/>
+                    <wind speed="38" cirrusSpeedFactor="0.80"/>
+                </variation>
+                <variation weight="1" minHours="1" maxHours="3" minTemperature="8" maxTemperature="14">
+                    <clouds presetId="RAIN_2"/>
+                    <rain presetId="HAIL"/>
+                    <wind speed="44" cirrusSpeedFactor="0.80"/>
+                </variation>
+                <variation weight="1" minHours="1" maxHours="3" minTemperature="7" maxTemperature="13">
+                    <clouds presetId="RAIN_3"/>
+                    <rain presetId="HAIL"/>
+                    <wind speed="57" cirrusSpeedFactor="0.80"/>
+                </variation>
+                <variation weight="1" minHours="1" maxHours="3" minTemperature="6" maxTemperature="12">
+                    <clouds presetId="RAIN_4"/>
+                    <rain presetId="HAIL"/>
                     <wind speed="68" cirrusSpeedFactor="0.80"/>
                 </variation>
             </object>
