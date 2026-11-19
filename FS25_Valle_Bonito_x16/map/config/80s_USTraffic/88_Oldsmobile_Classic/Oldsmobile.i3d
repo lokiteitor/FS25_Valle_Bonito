@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="Oldsmobile.i3d" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+  <Asset>
+    <Export program="GIANTS Editor 64bit" version="10.0.11"/>
+  </Asset>
+
+  <Files>
+    <File fileId="24" filename="badge.dds"/>
+    <File fileId="19" filename="../emissive.dds"/>
+    <File fileId="2" filename="../tire.dds"/>
+    <File fileId="6" filename="../vehicleShader.xml"/>
+    <File fileId="11" filename="$data/shaders/vehicleShader.xml"/>
+    <File fileId="25" filename="$data/shared/clearGlass_diffuse.dds"/>
+    <File fileId="5" filename="$data/shared/default_normal.dds"/>
+    <File fileId="3" filename="$data/shared/default_specular.dds"/>
+    <File fileId="13" filename="$data/shared/detailLibrary/flat_normal.png"/>
+    <File fileId="14" filename="$data/shared/detailLibrary/metallic/scratched_diffuse.dds"/>
+    <File fileId="12" filename="$data/shared/detailLibrary/metallic/scratched_specular.dds"/>
+    <File fileId="23" filename="$data/shared/detailLibrary/nonMetallic/metal/metalPainted_diffuse.png"/>
+    <File fileId="22" filename="$data/shared/detailLibrary/nonMetallic/metal/metalPainted_specular.png"/>
+    <File fileId="21" filename="$data/shared/detailLibrary/nonMetallic/plastic/plasticPainted_diffuse.dds"/>
+    <File fileId="20" filename="$data/shared/detailLibrary/nonMetallic/plastic/plasticPainted_specular.dds"/>
+    <File fileId="26" filename="$data/trafficVehicles/driver_diffuse.png"/>
+    <File fileId="27" filename="$data/trafficVehicles/driver_normal.png"/>
+    <File fileId="28" filename="$data/trafficVehicles/driver_specular.png"/>
+  </Files>
+
+
+  <Materials>
+    <Material name="black" materialId="5" diffuseColor="1 1 1 1" customShaderId="11">
+      <Normalmap fileId="5"/>
+      <Glossmap fileId="3"/>
+      <Custommap name="detailSpecular" fileId="22"/>
+      <Custommap name="detailNormal" fileId="13"/>
+      <Custommap name="detailDiffuse" fileId="23"/>
+      <CustomParameter name="colorScale" value="0.02 0.02 0.02"/>
+    </Material>
+    <Material name="coper" materialId="6" diffuseColor="1 1 1 1" customShaderId="11">
+      <Normalmap fileId="5"/>
+      <Glossmap fileId="3"/>
+      <Custommap name="detailSpecular" fileId="12"/>
+      <Custommap name="detailNormal" fileId="13"/>
+      <Custommap name="detailDiffuse" fileId="14"/>
+      <CustomParameter name="smoothnessScale" value="0.9"/>
+    </Material>
+    <Material name="driver_mat" materialId="7">
+      <Texture fileId="26"/>
+      <Normalmap fileId="27"/>
+      <Glossmap fileId="28"/>
+    </Material>
+    <Material name="lambert1" materialId="8" diffuseColor="0.494118 0.494118 0.494118 1">
+    </Material>
+    <Material name="mat_0001_tire" materialId="9">
+      <Texture fileId="2"/>
+      <Glossmap fileId="3"/>
+    </Material>
+    <Material name="mat_0004_badge" materialId="10" alphaBlending="true">
+      <Texture fileId="24"/>
+      <Glossmap fileId="3"/>
+    </Material>
+    <Material name="Material.006" materialId="13" alphaBlending="true" customShaderId="6" customShaderVariation="colorMask">
+      <Texture fileId="25"/>
+      <Normalmap fileId="5"/>
+      <Glossmap fileId="3"/>
+      <CustomParameter name="colorMat0" value="1 1 1 1"/>
+    </Material>
+    <Material name="Material.008" materialId="14" diffuseColor="0.8 0.8 0.8 1" customShaderId="6" customShaderVariation="colorMask">
+      <Normalmap fileId="5"/>
+      <Glossmap fileId="3"/>
+      <CustomParameter name="colorMat0" value="1 1 1 27"/>
+    </Material>
+    <Material name="plastic" materialId="15" diffuseColor="1 1 1 1" customShaderId="11">
+      <Normalmap fileId="5"/>
+      <Glossmap fileId="3"/>
+      <Custommap name="detailSpecular" fileId="20"/>
+      <Custommap name="detailNormal" fileId="13"/>
+      <Custommap name="detailDiffuse" fileId="21"/>
+      <CustomParameter name="colorScale" value="0.02 0.02 0.02"/>
+    </Material>
+    <Material name="vehicle02Lights_chrome_mat" materialId="67" diffuseColor="1 1 1 1" customShaderId="11" customShaderVariation="staticLight">
+      <Normalmap fileId="5"/>
+      <Glossmap fileId="3"/>
+      <Custommap name="detailSpecular" fileId="12"/>
+      <Custommap name="detailNormal" fileId="13"/>
+      <Custommap name="detailDiffuse" fileId="14"/>
+      <Custommap name="lightsIntensity" fileId="19"/>
+      <CustomParameter name="colorScale" value="1 0.3 0"/>
+      <CustomParameter name="smoothnessScale" value="0.9"/>
+      <CustomParameter name="lightIds0" value="1 0 0 0"/>
+      <CustomParameter name="lightTypeBitMask" value="5"/>
+    </Material>
+    <Material name="vehicle02Lights_chrome_mat7" materialId="68" diffuseColor="1 1 1 1" customShaderId="11" customShaderVariation="staticLight">
+      <Normalmap fileId="5"/>
+      <Glossmap fileId="3"/>
+      <Custommap name="detailSpecular" fileId="12"/>
+      <Custommap name="detailNormal" fileId="13"/>
+      <Custommap name="detailDiffuse" fileId="14"/>
+      <Custommap name="lightsIntensity" fileId="19"/>
+      <CustomParameter name="colorScale" value="1 0 0"/>
+      <CustomParameter name="smoothnessScale" value="0.9"/>
+      <CustomParameter name="lightIds0" value="1 0 0 0"/>
+    </Material>
+    <Material name="vehicle02Lights_chrome_mat8" materialId="69" diffuseColor="1 1 1 1" customShaderId="11" customShaderVariation="staticLight">
+      <Normalmap fileId="5"/>
+      <Glossmap fileId="3"/>
+      <Custommap name="detailSpecular" fileId="12"/>
+      <Custommap name="detailNormal" fileId="13"/>
+      <Custommap name="detailDiffuse" fileId="14"/>
+      <Custommap name="lightsIntensity" fileId="19"/>
+      <CustomParameter name="smoothnessScale" value="0.9"/>
+      <CustomParameter name="lightIds0" value="1 0 0 0"/>
+    </Material>
+    <Material name="vehicle07_metalPainted_mat" materialId="16" diffuseColor="1 1 1 1" customShaderId="11">
+      <Normalmap fileId="5"/>
+      <Glossmap fileId="3"/>
+      <Custommap name="detailSpecular" fileId="22"/>
+      <Custommap name="detailNormal" fileId="13"/>
+      <Custommap name="detailDiffuse" fileId="23"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="Oldsmobile.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <Shape name="Oldsmobile" shapeId="1" kinematic="true" compound="true" collisionFilterGroup="0x80024" collisionFilterMask="0x370800" clipDistance="350" nodeId="31" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="8">
+      <TransformGroup name="wheels" nodeId="32">
+        <Shape name="FL" translation="0.720866 0.323535 2.755" scale="1 0.95 0.95" shapeId="2" nodeId="33" castsShadows="true" receiveShadows="true" materialIds="9">
+          <Shape name="RimL" translation="-0.0247957 0 0" scale="1 0.92 0.92" shapeId="3" nodeId="34" castsShadows="true" receiveShadows="true" materialIds="14"/>
+        </Shape>
+        <Shape name="FR" translation="-0.720809 0.323729 2.75545" scale="1 0.95 0.95" shapeId="4" nodeId="35" castsShadows="true" receiveShadows="true" materialIds="9">
+          <Shape name="RimR" translation="0.025 0 0" scale="1 0.92 0.92" shapeId="5" nodeId="36" castsShadows="true" receiveShadows="true" materialIds="14"/>
+        </Shape>
+        <Shape name="FL" translation="0.721052 0.323173 0.000450075" scale="1 0.95 0.95" shapeId="2" nodeId="37" castsShadows="true" receiveShadows="true" materialIds="9">
+          <Shape name="RimL" translation="-0.0247957 0 0" scale="1 0.92 0.92" shapeId="3" nodeId="38" castsShadows="true" receiveShadows="true" materialIds="14"/>
+        </Shape>
+        <Shape name="FR" translation="-0.721 0.323173 0.000450075" scale="1 0.95 0.95" shapeId="4" nodeId="39" castsShadows="true" receiveShadows="true" materialIds="9">
+          <Shape name="RimR" translation="0.025 0 0" scale="1 0.92 0.92" shapeId="5" nodeId="40" castsShadows="true" receiveShadows="true" materialIds="14"/>
+        </Shape>
+      </TransformGroup>
+      <TransformGroup name="lights" translation="0 0 1.26045" nodeId="41">
+        <TransformGroup name="static" nodeId="42">
+          <Shape name="Lights" translation="0.000947171 0.612704 1.99249" shapeId="6" nodeId="78" castsShadows="true" receiveShadows="true" materialIds="69"/>
+          <Shape name="BlinkerL" translation="0.537228 0.666538 -0.746483" shapeId="7" nodeId="75" castsShadows="true" receiveShadows="true" materialIds="67"/>
+          <Shape name="BlinkerR" translation="-0.536687 0.666622 -0.750181" shapeId="8" nodeId="76" castsShadows="true" receiveShadows="true" materialIds="67"/>
+          <Shape name="Brake Lights" translation="0.000208192 0.775095 -2.27874" shapeId="9" nodeId="77" castsShadows="true" receiveShadows="true" materialIds="68"/>
+        </TransformGroup>
+        <TransformGroup name="realLights" translation="0 0 -1.22721" nodeId="47">
+          <Light name="frontLightLow" translation="7.97775e-09 0.691255 3.7349" rotation="165 0 -180" clipDistance="75" nodeId="48" type="spot" color="0.85 0.85 1" emitDiffuse="true" emitSpecular="true" range="20" coneAngle="80" dropOff="3"/>
+          <Light name="frontLightHigh1" translation="-0.583038 0.696115 3.59854" rotation="165 8 180" clipDistance="75" nodeId="49" type="spot" color="0.85 0.85 1" emitDiffuse="true" emitSpecular="true" range="25" coneAngle="70" dropOff="3">
+            <Light name="frontLightHigh2" translation="-1.15951 -0.033184 0.123844" rotation="0.575673 15.441 4.24443" clipDistance="75" nodeId="50" type="spot" color="0.85 0.85 1" emitDiffuse="true" emitSpecular="true" range="25" coneAngle="70" dropOff="3"/>
+            <Light name="backLightHigh1" translation="0.830673 -1.3356 4.9084" rotation="149.859 -7.72571 -177.917" clipDistance="75" nodeId="51" type="spot" color="0.5 0 0" emitDiffuse="true" emitSpecular="true" range="2.5" coneAngle="130" dropOff="2">
+              <Light name="backLightHigh2" translation="1.38549 0 0" clipDistance="75" nodeId="52" type="spot" color="0.5 0 0" emitDiffuse="true" emitSpecular="true" range="2.5" coneAngle="130" dropOff="2"/>
+            </Light>
+          </Light>
+        </TransformGroup>
+      </TransformGroup>
+      <TransformGroup name="visuals" translation="0 0 1.26045" nodeId="53">
+        <Shape name="Oldsmoile" translation="-0.000989867 0.64348 -0.00349009" shapeId="10" nodeId="54" castsShadows="true" receiveShadows="true" materialIds="15,6,16,5"/>
+        <Shape name="texture" rotation="-180 5.00896e-06 180" shapeId="11" nodeId="55" castsShadows="true" receiveShadows="true" materialIds="10"/>
+        <Shape name="windows" shapeId="12" nodeId="56" castsShadows="true" receiveShadows="true" materialIds="13"/>
+      </TransformGroup>
+      <Shape name="driver" translation="0.358691 0.789038 1.70169" shapeId="13" clipDistance="100" nodeId="57" castsShadows="true" receiveShadows="true" materialIds="7"/>
+      <TransformGroup name="trafficCollisionNode" translation="0 0.811488 3.77778" nodeId="58"/>
+      <TransformGroup name="licensePlates" translation="0 0 0.033238" nodeId="59">
+        <TransformGroup name="licensePlateFront" translation="0 0.4125 3.728" rotation="1.385 0 0" nodeId="60"/>
+        <TransformGroup name="licensePlateBack" translation="-1.57e-06 0.616578 -1.085" rotation="167.796 -1.867e-05 -180" nodeId="61"/>
+      </TransformGroup>
+    </Shape>
+  </Scene>
+
+</i3D>
