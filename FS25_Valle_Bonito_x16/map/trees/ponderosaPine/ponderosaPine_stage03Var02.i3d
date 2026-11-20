@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="ponderosaPine_stage03Var02" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="12" filename="$data/shaders/billboardSemiOctahedronShader.xml" />
+    <File fileId="8" filename="$data/shaders/treeBranchShader.xml" />
+    <File fileId="3" filename="$data/shaders/treeTrunkShader.xml" />
+    <File fileId="5" filename="ponderosaPineDead_diffuse.png" />
+    <File fileId="7" filename="ponderosaPineDead_fmask.png" />
+    <File fileId="6" filename="ponderosaPineDead_normal.png" />
+    <File fileId="1" filename="ponderosaPineTrunkDead_diffuse.png" />
+    <File fileId="4" filename="ponderosaPineTrunkDead_height.png" />
+    <File fileId="2" filename="ponderosaPineTrunkDead_normal.png" />
+    <File fileId="13" filename="ponderosaPine_stage03Var02LOD_depth.png" />
+    <File fileId="9" filename="ponderosaPine_stage03Var02LOD_diffuse.png" />
+    <File fileId="11" filename="ponderosaPine_stage03Var02LOD_fmask.png" />
+    <File fileId="10" filename="ponderosaPine_stage03Var02LOD_normal.png" />
+  </Files>
+
+  <Materials>
+    <Material name="ponderosaPineTrunkDead_mat" materialId="1" specularColor="0 0 0" customShaderId="3" customShaderVariation="customParallax">
+      <Custommap name="mParallaxMap" fileId="4"/>
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+    </Material>
+    <Material name="ponderosaPineDead_mat" materialId="2" customShaderId="8">
+      <Texture fileId="5"/>
+      <Normalmap fileId="6"/>
+      <Glossmap fileId="7"/>
+    </Material>
+    <Material name="ponderosaPine_mat" materialId="3" customShaderId="12" customShaderVariation="tree">
+      <CustomParameter name="aabbCenter" value="-0.164 11.287 -0.055 0"/>
+      <CustomParameter name="aabbHalfExtent" value="3.061 12.792 12.758 0"/>
+      <CustomParameter name="atlasGridSize" value="12 12 0 0"/>
+      <Custommap name="billboardDepth" fileId="13"/>
+      <Texture fileId="9"/>
+      <Normalmap fileId="10"/>
+      <Glossmap fileId="11"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="ponderosaPine_stage03Var02.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="ponderosaPine_stage03Var02" lockedgroup="true" lodDistance="0 60" collision="false" density="0" clipDistance="400" nodeId="1">
+      <Shape name="LOD0" shapeId="1" static="true" density="0.52" collisionFilterGroup="0x830" collisionFilterMask="0xfe3ffb83" splitType="23" splitUvs="0 0 0.5 0.125 1.5" castsShadows="false" receiveShadows="true" materialIds="1" nodeId="2">
+        <Shape name="LOD0Attachments" shapeId="2" castsShadows="false" receiveShadows="true" materialIds="2" nodeId="3"/>
+      </Shape>
+      <Shape name="LOD1" shapeId="3" castsShadows="true" receiveShadows="true" materialIds="3" nodeId="4"/>
+    </TransformGroup>
+  </Scene>
+
+</i3D>

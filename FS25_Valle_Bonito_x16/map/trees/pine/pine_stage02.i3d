@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="pine_stage02" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="4" filename="$data/shaders/billboardSemiOctahedronShader.xml" />
+    <File fileId="9" filename="$data/shaders/treeBranchShader.xml" />
+    <File fileId="13" filename="$data/shaders/treeTrunkShader.xml" />
+    <File fileId="6" filename="pineBranch_diffuse.png" />
+    <File fileId="8" filename="pineBranch_fmask.png" />
+    <File fileId="7" filename="pineBranch_normal.png" />
+    <File fileId="10" filename="pineTrunk_diffuse.png" />
+    <File fileId="14" filename="pineTrunk_height.png" />
+    <File fileId="11" filename="pineTrunk_normal.png" />
+    <File fileId="12" filename="pineTrunk_specular.png" />
+    <File fileId="5" filename="pine_stage02LOD_depth.png" />
+    <File fileId="1" filename="pine_stage02LOD_diffuse.png" />
+    <File fileId="3" filename="pine_stage02LOD_fmask.png" />
+    <File fileId="2" filename="pine_stage02LOD_normal.png" />
+  </Files>
+
+  <Materials>
+    <Material name="pine_mat" materialId="3" customShaderId="4" customShaderVariation="tree">
+      <CustomParameter name="aabbCenter" value="0.233 2.368 -0.087 0"/>
+      <CustomParameter name="aabbHalfExtent" value="2.526 2.776 2.807 0"/>
+      <CustomParameter name="atlasGridSize" value="8 8 0 0"/>
+      <Custommap name="billboardDepth" fileId="5"/>
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+    </Material>
+    <Material name="pineBranch_mat" materialId="2" customShaderId="9">
+      <Texture fileId="6"/>
+      <Normalmap fileId="7"/>
+      <Glossmap fileId="8"/>
+    </Material>
+    <Material name="pineTrunk_mat" materialId="1" customShaderId="13" customShaderVariation="customParallax">
+      <Custommap name="mParallaxMap" fileId="14"/>
+      <Texture fileId="10"/>
+      <Normalmap fileId="11"/>
+      <Glossmap fileId="12"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="pine_stage02.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="pine_stage02" lodDistance="0 30" collision="false" clipDistance="599" nodeId="1">
+      <Shape name="LOD0" shapeId="1" static="true" density="0.52" collisionFilterGroup="0x830" collisionFilterMask="0xfe3ffb83" splitType="2" splitUvs="0 0 1 0.064 1.8" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="500" nodeId="2">
+        <Shape name="LOD0Attachments" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="2" clipDistance="500" nodeId="3"/>
+      </Shape>
+      <Shape name="LOD1" shapeId="3" castsShadows="true" receiveShadows="true" materialIds="3" nodeId="4"/>
+    </TransformGroup>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>

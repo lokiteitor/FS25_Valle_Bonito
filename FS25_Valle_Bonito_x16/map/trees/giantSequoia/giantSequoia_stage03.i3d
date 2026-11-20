@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="giantSequoia_stage03.i3d" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+  <Asset>
+    <Export program="GIANTS Editor 64bit" version="10.0.3"/>
+  </Asset>
+
+  <Files>
+    <File fileId="12" filename="$data/shaders/billboardSemiOctahedronShader.xml"/>
+    <File fileId="8" filename="$data/shaders/treeBranchShader.xml"/>
+    <File fileId="3" filename="$data/shaders/treeTrunkShader.xml"/>
+    <File fileId="1" filename="giantSequoiaTrunk_diffuse.png"/>
+    <File fileId="5" filename="giantSequoiaTrunk_height.png"/>
+    <File fileId="2" filename="giantSequoiaTrunk_normal.png"/>
+    <File fileId="13" filename="giantSequoia_stage03LOD_depth.png"/>
+    <File fileId="9" filename="giantSequoia_stage03LOD_diffuse.png"/>
+    <File fileId="11" filename="giantSequoia_stage03LOD_fmask.png"/>
+    <File fileId="10" filename="giantSequoia_stage03LOD_normal.png"/>
+    <File fileId="6" filename="giantSequoia_diffuse.png"/>
+    <File fileId="7" filename="giantSequoia_fmask.png"/>
+  </Files>
+
+
+  <Materials>
+    <Material name="giantSequoia_01_mat" materialId="50" customShaderId="8">
+      <Texture fileId="6"/>
+      <Glossmap fileId="7"/>
+    </Material>
+    <Material name="giantSequoia_02_mat" materialId="51" customShaderId="12" customShaderVariation="tree">
+      <Texture fileId="9"/>
+      <Normalmap fileId="10"/>
+      <Glossmap fileId="11"/>
+      <Custommap name="billboardDepth" fileId="13"/>
+      <CustomParameter name="atlasGridSize" value="12 12"/>
+      <CustomParameter name="aabbCenter" value="0.315 22.262 -0.195"/>
+      <CustomParameter name="aabbHalfExtent" value="7.461 23.315 23.27"/>
+    </Material>
+    <Material name="giantSequoiaTrunk_mat" materialId="52" customShaderId="3" customShaderVariation="customParallax">
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Custommap name="mParallaxMap" fileId="5"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="giantSequoia_stage03.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="giantSequoia_stage03" lockedgroup="true" lodDistance="0 70 120" clipDistance="800" nodeId="59">
+      <Shape name="giantSequoiaStage03_LOD0" shapeId="1" static="true" collisionFilterGroup="0x830" collisionFilterMask="0xfe3ffb83" angularDamping="0.15" rollingFriction="0.27" nodeId="60" castsShadows="false" receiveShadows="true" splitType="20" splitUvs="0 0 1 0.25 0.6" materialIds="52">
+        <Shape name="giantSequoiaStage03_LOD0Attachments" shapeId="2" nodeId="61" castsShadows="false" receiveShadows="true" materialIds="50"/>
+      </Shape>
+      <Shape name="giantSequoiaStage03_LOD1" shapeId="3" nodeId="62" castsShadows="false" receiveShadows="true" materialIds="52">
+        <Shape name="branchesLOD1" translation="0.018507 25.6371 0.045103" shapeId="4" nodeId="63" castsShadows="false" receiveShadows="true" materialIds="50"/>
+      </Shape>
+      <Shape name="giantSequoiaStage03_LOD2" shapeId="5" nodeId="64" castsShadows="false" receiveShadows="true" materialIds="51"/>
+      <TransformGroup name="shadowProxy_LOD" lodDistance="0 70" static="true" nodeId="65">
+        <Shape name="proxyMesh_lod0" shapeId="3" nodeId="66" castsShadows="true" receiveShadows="false" distanceBlending="false" renderedInViewports="false" materialIds="52">
+          <Shape name="branchesLOD1" translation="0.018507 25.6371 0.045103" shapeId="4" nodeId="67" castsShadows="true" receiveShadows="false" renderedInViewports="false" materialIds="50"/>
+        </Shape>
+        <Shape name="proxyMesh_lod1" shapeId="5" nodeId="68" castsShadows="true" receiveShadows="false" renderedInViewports="false" materialIds="51"/>
+      </TransformGroup>
+    </TransformGroup>
+  </Scene>
+
+</i3D>

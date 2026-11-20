@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="spruceVar2_stage03" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="12" filename="$data/shaders/billboardSemiOctahedronShader.xml" />
+    <File fileId="4" filename="$data/shaders/treeBranchShader.xml" />
+    <File fileId="8" filename="$data/shaders/treeTrunkShader.xml" />
+    <File fileId="1" filename="spruceBranch_diffuse.png" />
+    <File fileId="3" filename="spruceBranch_fmask.png" />
+    <File fileId="2" filename="spruceBranch_normal.png" />
+    <File fileId="5" filename="spruceTrunk_diffuse.png" />
+    <File fileId="6" filename="spruceTrunk_normal.png" />
+    <File fileId="7" filename="spruceTrunk_specular.png" />
+    <File fileId="13" filename="spruceVar2_stage03LOD_depth.png" />
+    <File fileId="9" filename="spruceVar2_stage03LOD_diffuse.png" />
+    <File fileId="11" filename="spruceVar2_stage03LOD_fmask.png" />
+    <File fileId="10" filename="spruceVar2_stage03LOD_normal.png" />
+  </Files>
+
+  <Materials>
+    <Material name="spruceBranch_mat" materialId="2" customShaderId="4">
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+    </Material>
+    <Material name="spruceTrunk_mat" materialId="1" customShaderId="8">
+      <Texture fileId="5"/>
+      <Normalmap fileId="6"/>
+      <Glossmap fileId="7"/>
+    </Material>
+    <Material name="spruceVar2_mat" materialId="3" customShaderId="12" customShaderVariation="tree">
+      <CustomParameter name="aabbCenter" value="-0.024 17.748 0.361 0"/>
+      <CustomParameter name="aabbHalfExtent" value="4.404 18.892 18.851 0"/>
+      <CustomParameter name="atlasGridSize" value="12 12 0 0"/>
+      <Custommap name="billboardDepth" fileId="13"/>
+      <Texture fileId="9"/>
+      <Normalmap fileId="10"/>
+      <Glossmap fileId="11"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="spruceVar2_stage03.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="spruceVar02_stage03" lockedgroup="true" lodDistance="0 120" collision="false" density="0" clipDistance="1000" nodeId="1">
+      <Shape name="LOD0" shapeId="1" static="true" density="0.47" collisionFilterGroup="0x830" collisionFilterMask="0xfe3ffb83" splitType="1" splitUvs="0 0 1 0.064 1.3" castsShadows="true" receiveShadows="true" materialIds="1" nodeId="2">
+        <Shape name="LOD0Attachments" shapeId="2" castsShadows="true" receiveShadows="true" materialIds="2" nodeId="3"/>
+      </Shape>
+      <Shape name="LOD1" shapeId="3" castsShadows="true" receiveShadows="true" materialIds="3" nodeId="4"/>
+    </TransformGroup>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>
