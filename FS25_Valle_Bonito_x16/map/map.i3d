@@ -817,7 +817,7 @@
 
   <Scene>
     <Light name="sun" translation="0 400 0" rotation="-39.5664 39.1063 0" objectMask="0x83ff0000" nodeId="27" type="directional" color="1 1 1" emitDiffuse="true" emitSpecular="true" castShadowMap="true" depthMapBias="0.001" depthMapSlopeScaleBias="2" depthMapSlopeClamp="0.001" depthMapResolution="2048" shadowFarDistance="1000" shadowExtrusionDistance="200" softShadowsLightSize="0.5" softShadowsLightDistance="15" softShadowsDepthBiasFactor="1" softShadowsMaxPenumbraSize="0.5" numShadowMapSplits="5" shadowMapSplitDistancesParameter="0.9" lastShadowMapSplitBboxMin="-4096,-128,-4096" lastShadowMapSplitBboxMax="4096,148,4096" range="10000" scattering="true"/>
-    <Camera name="persp" translation="3432.7 636.158 6.78264" rotation="-91.2065 -90 0" visibility="false" nodeId="28" fov="60" nearClip="0.01" farClip="6000" orthographicHeight="1500"/>
+    <Camera name="persp" translation="-2994.4 110.978 -3282.72" rotation="154.111 -89.5352 -180" visibility="false" nodeId="28" fov="60" nearClip="0.01" farClip="6000" orthographicHeight="1500"/>
     <TerrainTransformGroup name="terrain" static="true" collisionFilterGroup="0x100" collisionFilterMask="0xfffff9c3" nodeId="30" heightMapId="1" patchSize="65" maxLODDistance="750" heightScale="255" unitsPerPixel="1" lodBlendStart="200" lodBlendEnd="300" lodTextureSize="8192" lodBlendStartDynamic="50" lodBlendEndDynamic="65" detailLodBlendDelta="5" materialId="9" castShadowMap="true" occNumLODs="1" occMaxLODDistance="300" occPatchSize="65" occLevel="2" occDistanceWeight="1" occMaxAdjacentFaces="10">
       <OccluderLods>
         <OccluderLod occLodLevel="0" occFaceCount="100" occMaxHausdorffDistance="7" occMaxHausdorffDistanceExtra="9" occMinHorizontalDistance="1" />
@@ -34440,269 +34440,269 @@
           <ReferenceNode name="goldenRain_stage04" translation="-2707.43 38.3619 -2984.45" rotation="0 90 0" referenceId="662" nodeId="137470"/>
           <ReferenceNode name="aspen_stage04" translation="-2707.43 38.3619 -2953.16" rotation="0 90 0" referenceId="661" nodeId="137474"/>
           <ReferenceNode name="northernCatalpa_stage04" translation="-2707.43 38.3619 -2923.01" rotation="0 89.9996 0" referenceId="664" nodeId="137478"/>
-          <ReferenceNode name="apple_stage03" translation="-2707.43 38.3619 -2856.62" rotation="0 90 0" referenceId="696" nodeId="137486"/>
-          <ReferenceNode name="betulaErmanii_stage04" translation="-2707.43 38.3619 -2822.14" rotation="0 90 0" referenceId="695" nodeId="137490"/>
-          <ReferenceNode name="boxelder_stage03" translation="-2707.43 38.3619 -2784.09" rotation="0 90 0" referenceId="694" nodeId="137497"/>
-          <ReferenceNode name="cherry_stage04_lod" translation="-2707.43 38.3619 -2739.25" rotation="0 90 0" referenceId="697" nodeId="137501"/>
-          <ReferenceNode name="oak_stage05" translation="-2707.43 38.3619 -2718.49" rotation="0 90 0" referenceId="693" nodeId="137505"/>
-          <ReferenceNode name="tiliaAmurensis_stage04" translation="-2707.43 38.3619 -2687.86" rotation="0 90 0" referenceId="692" nodeId="137511"/>
-          <ReferenceNode name="goldenRain_stage04" translation="-2707.43 38.3619 -2657.1" rotation="0 90 0" referenceId="662" nodeId="137515"/>
-          <ReferenceNode name="aspen_stage04" translation="-2707.43 38.3619 -2633.42" rotation="0 90 0" referenceId="661" nodeId="137519"/>
-          <ReferenceNode name="betulaErmanii_stage04" translation="-2707.43 38.3619 -2461.79" rotation="0 90 0" referenceId="695" nodeId="137523"/>
-          <ReferenceNode name="boxelder_stage03" translation="-2707.43 38.3619 -2441.38" rotation="0 90 0" referenceId="694" nodeId="137530"/>
-          <ReferenceNode name="cherry_stage04_lod" translation="-2707.43 38.3619 -2404.91" rotation="0 90 0" referenceId="697" nodeId="137534"/>
-          <ReferenceNode name="oak_stage05" translation="-2707.43 38.3619 -2365.31" rotation="0 90 0" referenceId="693" nodeId="137538"/>
-          <ReferenceNode name="boxelder_stage03" translation="-2983.91 38.3619 -3144.26" rotation="0 90 0" referenceId="694" nodeId="137544"/>
-          <ReferenceNode name="cherry_stage04_lod" translation="-2983.91 38.3619 -3110.28" rotation="0 90 0" referenceId="697" nodeId="137548"/>
-          <ReferenceNode name="oak_stage05" translation="-2983.91 38.3619 -3079.71" rotation="0 90 0" referenceId="693" nodeId="137552"/>
-          <ReferenceNode name="tiliaAmurensis_stage04" translation="-2983.91 38.3619 -3046.6" rotation="0 90 0" referenceId="692" nodeId="137558"/>
-          <ReferenceNode name="goldenRain_stage04" translation="-2983.91 38.3619 -3009.83" rotation="0 90 0" referenceId="662" nodeId="137562"/>
-          <ReferenceNode name="aspen_stage04" translation="-2983.91 38.3619 -2971.74" rotation="0 90 0" referenceId="661" nodeId="137566"/>
-          <ReferenceNode name="northernCatalpa_stage04" translation="-2983.91 38.3619 -2933.58" rotation="0 89.9996 0" referenceId="664" nodeId="137570"/>
-          <ReferenceNode name="americanElm_stage04" translation="-2983.91 38.3619 -2908.21" rotation="0 90 0" referenceId="663" nodeId="137574"/>
-          <ReferenceNode name="cherry_stage04_lod" translation="-2983.91 38.3619 -2739.18" rotation="0 90 0" referenceId="697" nodeId="137578"/>
-          <ReferenceNode name="oak_stage05" translation="-2983.91 38.3619 -2720.68" rotation="0 90 0" referenceId="693" nodeId="137582"/>
-          <ReferenceNode name="tiliaAmurensis_stage04" translation="-2983.91 38.3619 -2681.6" rotation="0 90 0" referenceId="692" nodeId="137588"/>
-          <ReferenceNode name="goldenRain_stage04" translation="-2983.91 38.3619 -2643.5" rotation="0 90 0" referenceId="662" nodeId="137592"/>
-          <ReferenceNode name="aspen_stage04" translation="-2983.91 38.3619 -2596.76" rotation="0 90 0" referenceId="661" nodeId="137596"/>
-          <ReferenceNode name="northernCatalpa_stage04" translation="-2983.91 38.3619 -2569.99" rotation="0 90 0" referenceId="664" nodeId="137600"/>
-          <ReferenceNode name="americanElm_stage04" translation="-2983.91 38.3619 -2537.84" rotation="0 90 0" referenceId="663" nodeId="137604"/>
-          <ReferenceNode name="apple_stage03" translation="-2983.91 38.3619 -2501.59" rotation="0 90 0" referenceId="696" nodeId="137608"/>
-          <ReferenceNode name="betulaErmanii_stage04" translation="-2983.91 38.3619 -2511.56" rotation="0 90 0" referenceId="695" nodeId="137612"/>
-          <ReferenceNode name="boxelder_stage03" translation="-2983.91 38.3619 -2432.27" rotation="0 90 0" referenceId="694" nodeId="137619"/>
-          <ReferenceNode name="cherry_stage04_lod" translation="-2983.91 38.3619 -2392.73" rotation="0 90 0" referenceId="697" nodeId="137623"/>
-          <ReferenceNode name="oak_stage05" translation="-2983.91 38.3619 -2362.76" rotation="0 90 0" referenceId="693" nodeId="137627"/>
-          <ReferenceNode name="tiliaAmurensis_stage04" translation="-2983.91 38.3619 -2322.75" rotation="0 90 0" referenceId="692" nodeId="137633"/>
-          <ReferenceNode name="goldenRain_stage04" translation="-2983.91 38.3619 -2283.48" rotation="0 90 0" referenceId="662" nodeId="137637"/>
-          <ReferenceNode name="aspen_stage04" translation="-2983.91 38.3619 -2245.27" rotation="0 90 0" referenceId="661" nodeId="137641"/>
+          <ReferenceNode name="apple_stage03" translation="-2707.43 38.3619 -2856.62" rotation="0 90 0" referenceId="696" nodeId="137482"/>
+          <ReferenceNode name="betulaErmanii_stage04" translation="-2707.43 38.3619 -2822.14" rotation="0 90 0" referenceId="695" nodeId="137486"/>
+          <ReferenceNode name="boxelder_stage03" translation="-2707.43 38.3619 -2784.09" rotation="0 90 0" referenceId="694" nodeId="137493"/>
+          <ReferenceNode name="cherry_stage04_lod" translation="-2707.43 38.3619 -2739.25" rotation="0 90 0" referenceId="697" nodeId="137497"/>
+          <ReferenceNode name="oak_stage05" translation="-2707.43 38.3619 -2718.49" rotation="0 90 0" referenceId="693" nodeId="137501"/>
+          <ReferenceNode name="tiliaAmurensis_stage04" translation="-2707.43 38.3619 -2687.86" rotation="0 90 0" referenceId="692" nodeId="137507"/>
+          <ReferenceNode name="goldenRain_stage04" translation="-2707.43 38.3619 -2657.1" rotation="0 90 0" referenceId="662" nodeId="137511"/>
+          <ReferenceNode name="aspen_stage04" translation="-2707.43 38.3619 -2633.42" rotation="0 90 0" referenceId="661" nodeId="137515"/>
+          <ReferenceNode name="betulaErmanii_stage04" translation="-2707.43 38.3619 -2461.79" rotation="0 90 0" referenceId="695" nodeId="137519"/>
+          <ReferenceNode name="boxelder_stage03" translation="-2707.43 38.3619 -2441.38" rotation="0 90 0" referenceId="694" nodeId="137526"/>
+          <ReferenceNode name="cherry_stage04_lod" translation="-2707.43 38.3619 -2404.91" rotation="0 90 0" referenceId="697" nodeId="137530"/>
+          <ReferenceNode name="oak_stage05" translation="-2707.43 38.3619 -2365.31" rotation="0 90 0" referenceId="693" nodeId="137534"/>
+          <ReferenceNode name="boxelder_stage03" translation="-2983.91 38.3619 -3144.26" rotation="0 90 0" referenceId="694" nodeId="137540"/>
+          <ReferenceNode name="cherry_stage04_lod" translation="-2983.91 38.3619 -3110.28" rotation="0 90 0" referenceId="697" nodeId="137544"/>
+          <ReferenceNode name="oak_stage05" translation="-2983.91 38.3619 -3079.71" rotation="0 90 0" referenceId="693" nodeId="137548"/>
+          <ReferenceNode name="tiliaAmurensis_stage04" translation="-2983.91 38.3619 -3046.6" rotation="0 90 0" referenceId="692" nodeId="137554"/>
+          <ReferenceNode name="goldenRain_stage04" translation="-2983.91 38.3619 -3009.83" rotation="0 90 0" referenceId="662" nodeId="137558"/>
+          <ReferenceNode name="aspen_stage04" translation="-2983.91 38.3619 -2971.74" rotation="0 90 0" referenceId="661" nodeId="137562"/>
+          <ReferenceNode name="northernCatalpa_stage04" translation="-2983.91 38.3619 -2933.58" rotation="0 89.9996 0" referenceId="664" nodeId="137566"/>
+          <ReferenceNode name="americanElm_stage04" translation="-2983.91 38.3619 -2908.21" rotation="0 90 0" referenceId="663" nodeId="137570"/>
+          <ReferenceNode name="cherry_stage04_lod" translation="-2983.91 38.3619 -2739.18" rotation="0 90 0" referenceId="697" nodeId="137574"/>
+          <ReferenceNode name="oak_stage05" translation="-2983.91 38.3619 -2720.68" rotation="0 90 0" referenceId="693" nodeId="137578"/>
+          <ReferenceNode name="tiliaAmurensis_stage04" translation="-2983.91 38.3619 -2681.6" rotation="0 90 0" referenceId="692" nodeId="137584"/>
+          <ReferenceNode name="goldenRain_stage04" translation="-2983.91 38.3619 -2643.5" rotation="0 90 0" referenceId="662" nodeId="137588"/>
+          <ReferenceNode name="aspen_stage04" translation="-2983.91 38.3619 -2596.76" rotation="0 90 0" referenceId="661" nodeId="137592"/>
+          <ReferenceNode name="northernCatalpa_stage04" translation="-2983.91 38.3619 -2569.99" rotation="0 90 0" referenceId="664" nodeId="137596"/>
+          <ReferenceNode name="americanElm_stage04" translation="-2983.91 38.3619 -2537.84" rotation="0 90 0" referenceId="663" nodeId="137600"/>
+          <ReferenceNode name="apple_stage03" translation="-2983.91 38.3619 -2501.59" rotation="0 90 0" referenceId="696" nodeId="137604"/>
+          <ReferenceNode name="betulaErmanii_stage04" translation="-2983.91 38.3619 -2511.56" rotation="0 90 0" referenceId="695" nodeId="137608"/>
+          <ReferenceNode name="boxelder_stage03" translation="-2983.91 38.3619 -2432.27" rotation="0 90 0" referenceId="694" nodeId="137615"/>
+          <ReferenceNode name="cherry_stage04_lod" translation="-2983.91 38.3619 -2392.73" rotation="0 90 0" referenceId="697" nodeId="137619"/>
+          <ReferenceNode name="oak_stage05" translation="-2983.91 38.3619 -2362.76" rotation="0 90 0" referenceId="693" nodeId="137623"/>
+          <ReferenceNode name="tiliaAmurensis_stage04" translation="-2983.91 38.3619 -2322.75" rotation="0 90 0" referenceId="692" nodeId="137629"/>
+          <ReferenceNode name="goldenRain_stage04" translation="-2983.91 38.3619 -2283.48" rotation="0 90 0" referenceId="662" nodeId="137633"/>
+          <ReferenceNode name="aspen_stage04" translation="-2983.91 38.3619 -2245.27" rotation="0 90 0" referenceId="661" nodeId="137637"/>
         </TransformGroup>
       </TransformGroup>
-      <TransformGroup name="ResidentialC" nodeId="137645">
-        <TransformGroup name="SourceObject" nodeId="137646"/>
-        <TransformGroup name="SourceSplines" nodeId="137647"/>
-        <TransformGroup name="PlacedObjects" nodeId="137648">
-          <ReferenceNode name="residentialBuilding01" translation="3142.97 39.0856 -316.003" rotation="0 -90 0" referenceId="676" nodeId="137649"/>
-          <ReferenceNode name="residentialBuilding02" translation="3142.97 39.0856 -283.239" rotation="0 -90 0" referenceId="682" nodeId="137676"/>
-          <ReferenceNode name="residentialBuilding03" translation="3142.97 39.0856 -255.812" rotation="0 -90 0" referenceId="683" nodeId="137705"/>
-          <ReferenceNode name="residentialBuilding04" translation="3142.97 39.0856 -226.104" rotation="0 -90 0" referenceId="675" nodeId="137731"/>
-          <ReferenceNode name="residentialBuilding05" translation="3142.97 39.0856 -175.117" rotation="0 -90.0005 0" referenceId="687" nodeId="137757"/>
-          <ReferenceNode name="residentialBuilding06" translation="3142.97 39.0856 -144.842" rotation="0 -90 0" referenceId="667" nodeId="137783"/>
-          <ReferenceNode name="residentialBuilding07" translation="3142.97 39.0856 -107.816" rotation="0 -90 0" referenceId="679" nodeId="137808"/>
-          <ReferenceNode name="residentialBuilding09" translation="3142.97 39.0856 -32.7352" rotation="0 -90 0" referenceId="685" nodeId="137834"/>
-          <ReferenceNode name="residentialBuilding10" translation="3142.97 39.0856 -0.648941" rotation="0 -90 0" referenceId="672" nodeId="137858"/>
-          <ReferenceNode name="residentialBuilding11" translation="3142.97 39.0856 37.5428" rotation="0 -90 0" referenceId="678" nodeId="137884"/>
-          <ReferenceNode name="residentialBuilding02_lod" translation="3270.58 39.0856 -311.954" rotation="0 -90 0" referenceId="690" nodeId="137909"/>
-          <ReferenceNode name="residentialBuilding03_lod" translation="3270.58 39.0856 -280.538" rotation="0 -90 0" referenceId="691" nodeId="137936"/>
-          <ReferenceNode name="residentialBuilding04_lod" translation="3270.58 39.0856 -247.795" rotation="0 -90 0" referenceId="684" nodeId="137967"/>
-          <ReferenceNode name="residentialBuilding05_lod" translation="3270.58 39.0856 -225.219" rotation="0 -90 0" referenceId="669" nodeId="137996"/>
-          <ReferenceNode name="residentialBuilding06" translation="3270.58 39.0856 -171.606" rotation="0 -90.0004 0" referenceId="681" nodeId="138026"/>
-          <ReferenceNode name="residentialBuilding07_lod" translation="3270.58 39.0856 -143.448" rotation="0 -90 0" referenceId="674" nodeId="138052"/>
-          <ReferenceNode name="residentialBuilding08_lod" translation="3270.58 39.0856 -103.812" rotation="0 -90 0" referenceId="688" nodeId="138081"/>
-          <ReferenceNode name="residentialBuilding01" translation="3270.58 39.0856 109.106" rotation="0 -90 0" referenceId="676" nodeId="138112"/>
-          <ReferenceNode name="residentialBuilding02" translation="3270.58 39.0856 147.53" rotation="0 -90 0" referenceId="682" nodeId="138139"/>
-          <ReferenceNode name="residentialBuilding03" translation="3270.58 39.0856 182.471" rotation="0 -90 0" referenceId="683" nodeId="138168"/>
-          <ReferenceNode name="residentialBuilding04" translation="3409.02 39.0856 -316.003" rotation="0 -90 0" referenceId="675" nodeId="138194"/>
-          <ReferenceNode name="residentialBuilding05" translation="3409.02 39.0856 -284.878" rotation="0 -90 0" referenceId="687" nodeId="138220"/>
-          <ReferenceNode name="residentialBuilding06" translation="3409.02 39.0856 -257.214" rotation="0 -90 0" referenceId="667" nodeId="138246"/>
-          <ReferenceNode name="residentialBuilding07" translation="3409.02 39.0856 -226.996" rotation="0 -90.0004 0" referenceId="679" nodeId="138271"/>
-          <ReferenceNode name="residentialBuilding12" translation="3413.89 39.0856 -29.2197" rotation="0 -90 0" referenceId="677" nodeId="138297"/>
-          <ReferenceNode name="residentialBuilding13" translation="3409.02 39.0856 2.77498" rotation="0 -90 0" referenceId="689" nodeId="138328"/>
-          <ReferenceNode name="residentialBuilding14" translation="3409.02 39.0856 41.327" rotation="0 -90 0" referenceId="666" nodeId="138354"/>
-          <ReferenceNode name="residentialBuilding02_lod" translation="3409.02 39.0856 111.896" rotation="0 -90 0" referenceId="690" nodeId="138386"/>
-          <ReferenceNode name="residentialBuilding03_lod" translation="3409.02 39.0856 142.632" rotation="0 -90 0" referenceId="691" nodeId="138413"/>
-          <ReferenceNode name="residentialBuilding04_lod" translation="3409.02 39.0856 176.313" rotation="0 -90 0" referenceId="684" nodeId="138444"/>
-          <ReferenceNode name="residentialBuilding09_lod" translation="3547.97 39.0856 -175.535" rotation="0 -90.0004 0" referenceId="670" nodeId="138473"/>
-          <ReferenceNode name="residentialBuilding10_lod" translation="3547.97 39.0856 -135.975" rotation="0 -90 0" referenceId="680" nodeId="138500"/>
-          <ReferenceNode name="residentialBuilding11_lod" translation="3547.97 39.0856 -99.062" rotation="0 -90 0" referenceId="673" nodeId="138529"/>
-          <ReferenceNode name="residentialBuilding13_lod" translation="3547.97 39.0856 -29.5331" rotation="0 -90 0" referenceId="686" nodeId="138555"/>
-          <ReferenceNode name="residentialBuilding01" translation="3547.97 39.0856 5.16109" rotation="0 -90 0" referenceId="676" nodeId="138581"/>
-          <ReferenceNode name="residentialBuilding02" translation="3547.97 39.0856 39.5962" rotation="0 -90 0" referenceId="682" nodeId="138608"/>
-          <ReferenceNode name="residentialBuilding04" translation="3547.97 39.0856 111.328" rotation="0 -90 0" referenceId="675" nodeId="138637"/>
-          <ReferenceNode name="residentialBuilding05" translation="3547.97 39.0856 144.199" rotation="0 -90 0" referenceId="687" nodeId="138663"/>
-          <ReferenceNode name="residentialBuilding06" translation="3547.97 39.0856 182.061" rotation="0 -90 0" referenceId="667" nodeId="138689"/>
+      <TransformGroup name="ResidentialC" nodeId="137641">
+        <TransformGroup name="SourceObject" nodeId="137642"/>
+        <TransformGroup name="SourceSplines" nodeId="137643"/>
+        <TransformGroup name="PlacedObjects" nodeId="137644">
+          <ReferenceNode name="residentialBuilding01" translation="3142.97 39.0856 -316.003" rotation="0 -90 0" referenceId="676" nodeId="137645"/>
+          <ReferenceNode name="residentialBuilding02" translation="3142.97 39.0856 -283.239" rotation="0 -90 0" referenceId="682" nodeId="137672"/>
+          <ReferenceNode name="residentialBuilding03" translation="3142.97 39.0856 -255.812" rotation="0 -90 0" referenceId="683" nodeId="137701"/>
+          <ReferenceNode name="residentialBuilding04" translation="3142.97 39.0856 -226.104" rotation="0 -90 0" referenceId="675" nodeId="137727"/>
+          <ReferenceNode name="residentialBuilding05" translation="3142.97 39.0856 -175.117" rotation="0 -90.0005 0" referenceId="687" nodeId="137753"/>
+          <ReferenceNode name="residentialBuilding06" translation="3142.97 39.0856 -144.842" rotation="0 -90 0" referenceId="667" nodeId="137779"/>
+          <ReferenceNode name="residentialBuilding07" translation="3142.97 39.0856 -107.816" rotation="0 -90 0" referenceId="679" nodeId="137804"/>
+          <ReferenceNode name="residentialBuilding09" translation="3142.97 39.0856 -32.7352" rotation="0 -90 0" referenceId="685" nodeId="137830"/>
+          <ReferenceNode name="residentialBuilding10" translation="3142.97 39.0856 -0.648941" rotation="0 -90 0" referenceId="672" nodeId="137854"/>
+          <ReferenceNode name="residentialBuilding11" translation="3142.97 39.0856 37.5428" rotation="0 -90 0" referenceId="678" nodeId="137880"/>
+          <ReferenceNode name="residentialBuilding02_lod" translation="3270.58 39.0856 -311.954" rotation="0 -90 0" referenceId="690" nodeId="137905"/>
+          <ReferenceNode name="residentialBuilding03_lod" translation="3270.58 39.0856 -280.538" rotation="0 -90 0" referenceId="691" nodeId="137932"/>
+          <ReferenceNode name="residentialBuilding04_lod" translation="3270.58 39.0856 -247.795" rotation="0 -90 0" referenceId="684" nodeId="137963"/>
+          <ReferenceNode name="residentialBuilding05_lod" translation="3270.58 39.0856 -225.219" rotation="0 -90 0" referenceId="669" nodeId="137992"/>
+          <ReferenceNode name="residentialBuilding06" translation="3270.58 39.0856 -171.606" rotation="0 -90.0004 0" referenceId="681" nodeId="138022"/>
+          <ReferenceNode name="residentialBuilding07_lod" translation="3270.58 39.0856 -143.448" rotation="0 -90 0" referenceId="674" nodeId="138048"/>
+          <ReferenceNode name="residentialBuilding08_lod" translation="3270.58 39.0856 -103.812" rotation="0 -90 0" referenceId="688" nodeId="138077"/>
+          <ReferenceNode name="residentialBuilding01" translation="3270.58 39.0856 109.106" rotation="0 -90 0" referenceId="676" nodeId="138108"/>
+          <ReferenceNode name="residentialBuilding02" translation="3270.58 39.0856 147.53" rotation="0 -90 0" referenceId="682" nodeId="138135"/>
+          <ReferenceNode name="residentialBuilding03" translation="3270.58 39.0856 182.471" rotation="0 -90 0" referenceId="683" nodeId="138164"/>
+          <ReferenceNode name="residentialBuilding04" translation="3409.02 39.0856 -316.003" rotation="0 -90 0" referenceId="675" nodeId="138190"/>
+          <ReferenceNode name="residentialBuilding05" translation="3409.02 39.0856 -284.878" rotation="0 -90 0" referenceId="687" nodeId="138216"/>
+          <ReferenceNode name="residentialBuilding06" translation="3409.02 39.0856 -257.214" rotation="0 -90 0" referenceId="667" nodeId="138242"/>
+          <ReferenceNode name="residentialBuilding07" translation="3409.02 39.0856 -226.996" rotation="0 -90.0004 0" referenceId="679" nodeId="138267"/>
+          <ReferenceNode name="residentialBuilding12" translation="3413.89 39.0856 -29.2197" rotation="0 -90 0" referenceId="677" nodeId="138293"/>
+          <ReferenceNode name="residentialBuilding13" translation="3409.02 39.0856 2.77498" rotation="0 -90 0" referenceId="689" nodeId="138324"/>
+          <ReferenceNode name="residentialBuilding14" translation="3409.02 39.0856 41.327" rotation="0 -90 0" referenceId="666" nodeId="138350"/>
+          <ReferenceNode name="residentialBuilding02_lod" translation="3409.02 39.0856 111.896" rotation="0 -90 0" referenceId="690" nodeId="138382"/>
+          <ReferenceNode name="residentialBuilding03_lod" translation="3409.02 39.0856 142.632" rotation="0 -90 0" referenceId="691" nodeId="138409"/>
+          <ReferenceNode name="residentialBuilding04_lod" translation="3409.02 39.0856 176.313" rotation="0 -90 0" referenceId="684" nodeId="138440"/>
+          <ReferenceNode name="residentialBuilding09_lod" translation="3547.97 39.0856 -175.535" rotation="0 -90.0004 0" referenceId="670" nodeId="138469"/>
+          <ReferenceNode name="residentialBuilding10_lod" translation="3547.97 39.0856 -135.975" rotation="0 -90 0" referenceId="680" nodeId="138496"/>
+          <ReferenceNode name="residentialBuilding11_lod" translation="3547.97 39.0856 -99.062" rotation="0 -90 0" referenceId="673" nodeId="138525"/>
+          <ReferenceNode name="residentialBuilding13_lod" translation="3547.97 39.0856 -29.5331" rotation="0 -90 0" referenceId="686" nodeId="138551"/>
+          <ReferenceNode name="residentialBuilding01" translation="3547.97 39.0856 5.16109" rotation="0 -90 0" referenceId="676" nodeId="138577"/>
+          <ReferenceNode name="residentialBuilding02" translation="3547.97 39.0856 39.5962" rotation="0 -90 0" referenceId="682" nodeId="138604"/>
+          <ReferenceNode name="residentialBuilding04" translation="3547.97 39.0856 111.328" rotation="0 -90 0" referenceId="675" nodeId="138633"/>
+          <ReferenceNode name="residentialBuilding05" translation="3547.97 39.0856 144.199" rotation="0 -90 0" referenceId="687" nodeId="138659"/>
+          <ReferenceNode name="residentialBuilding06" translation="3547.97 39.0856 182.061" rotation="0 -90 0" referenceId="667" nodeId="138685"/>
         </TransformGroup>
       </TransformGroup>
-      <TransformGroup name="TreesC" nodeId="138714">
-        <TransformGroup name="SourceObject" nodeId="138715"/>
-        <TransformGroup name="SourceSplines" nodeId="138716"/>
-        <TransformGroup name="PlacedObjects" nodeId="138717">
-          <ReferenceNode name="goldenRain_stage04" translation="3128.93 39.0898 -316.003" rotation="0 -90 0" referenceId="662" nodeId="138718"/>
-          <ReferenceNode name="aspen_stage04" translation="3128.93 39.0856 -283.52" rotation="0 -90 0" referenceId="661" nodeId="138722"/>
-          <ReferenceNode name="northernCatalpa_stage04" translation="3128.93 39.0856 -246.588" rotation="0 -90 0" referenceId="664" nodeId="138726"/>
-          <ReferenceNode name="americanElm_stage04" translation="3128.93 39.0856 -217.615" rotation="0 -90 0" referenceId="663" nodeId="138730"/>
-          <ReferenceNode name="apple_stage03" translation="3128.93 39.0856 -176.845" rotation="0 -90.0004 0" referenceId="696" nodeId="138734"/>
-          <ReferenceNode name="betulaErmanii_stage04" translation="3128.93 39.0856 -143.46" rotation="0 -90 0" referenceId="695" nodeId="138738"/>
-          <ReferenceNode name="boxelder_stage03" translation="3128.93 39.0856 -111.266" rotation="0 -90 0" referenceId="694" nodeId="138745"/>
-          <ReferenceNode name="cherry_stage04_lod" translation="3128.93 39.0856 -82.5826" rotation="0 -90 0" referenceId="697" nodeId="138749"/>
-          <ReferenceNode name="oak_stage05" translation="3128.93 39.0856 -35.2652" rotation="0 -90 0" referenceId="693" nodeId="138753"/>
-          <ReferenceNode name="tiliaAmurensis_stage04" translation="3128.93 39.0856 -5.12303" rotation="0 -90 0" referenceId="692" nodeId="138759"/>
-          <ReferenceNode name="goldenRain_stage04" translation="3128.93 39.0856 25.8633" rotation="0 -90 0" referenceId="662" nodeId="138763"/>
-          <ReferenceNode name="aspen_stage04" translation="3128.93 39.0856 58.2355" rotation="0 -90 0" referenceId="661" nodeId="138767"/>
-          <ReferenceNode name="betulaErmanii_stage04" translation="3257.98 39.0856 -316.003" rotation="0 -90 0" referenceId="695" nodeId="138771"/>
-          <ReferenceNode name="boxelder_stage03" translation="3257.98 39.0856 -278.719" rotation="0 -90 0" referenceId="694" nodeId="138778"/>
-          <ReferenceNode name="cherry_stage04_lod" translation="3257.98 39.0856 -245.745" rotation="0 -90 0" referenceId="697" nodeId="138782"/>
-          <ReferenceNode name="oak_stage05" translation="3257.98 39.0856 -216.336" rotation="0 -90 0" referenceId="693" nodeId="138786"/>
-          <ReferenceNode name="tiliaAmurensis_stage04" translation="3257.98 39.0856 -173.449" rotation="0 -90.0004 0" referenceId="692" nodeId="138792"/>
-          <ReferenceNode name="goldenRain_stage04" translation="3257.98 39.0856 -141.426" rotation="0 -90 0" referenceId="662" nodeId="138796"/>
-          <ReferenceNode name="aspen_stage04" translation="3257.98 39.0856 -110.73" rotation="0 -90 0" referenceId="661" nodeId="138800"/>
-          <ReferenceNode name="northernCatalpa_stage04" translation="3257.98 39.0856 -82.8578" rotation="0 -90 0" referenceId="664" nodeId="138804"/>
-          <ReferenceNode name="cherry_stage04_lod" translation="3257.98 39.0856 101.676" rotation="0 -90 0" referenceId="697" nodeId="138808"/>
-          <ReferenceNode name="oak_stage05" translation="3257.98 39.0856 133.912" rotation="0 -90 0" referenceId="693" nodeId="138812"/>
-          <ReferenceNode name="tiliaAmurensis_stage04" translation="3257.98 39.0856 169.479" rotation="0 -90 0" referenceId="692" nodeId="138818"/>
-          <ReferenceNode name="goldenRain_stage04" translation="3394.54 39.0856 -316.003" rotation="0 -90 0" referenceId="662" nodeId="138822"/>
-          <ReferenceNode name="aspen_stage04" translation="3394.54 39.0856 -284.339" rotation="0 -90 0" referenceId="661" nodeId="138826"/>
-          <ReferenceNode name="northernCatalpa_stage04" translation="3394.54 39.0856 -252.543" rotation="0 -90 0" referenceId="664" nodeId="138830"/>
-          <ReferenceNode name="americanElm_stage04" translation="3394.54 39.0856 -215.98" rotation="0 -90 0" referenceId="663" nodeId="138834"/>
-          <ReferenceNode name="oak_stage05" translation="3394.54 39.0856 -49.8456" rotation="0 -90 0" referenceId="693" nodeId="138838"/>
-          <ReferenceNode name="tiliaAmurensis_stage04" translation="3394.54 39.0856 -17.4591" rotation="0 -90 0" referenceId="692" nodeId="138844"/>
-          <ReferenceNode name="goldenRain_stage04" translation="3394.54 39.0856 17.1956" rotation="0 -90 0" referenceId="662" nodeId="138848"/>
-          <ReferenceNode name="aspen_stage04" translation="3394.54 39.0856 56.2673" rotation="0 -90 0" referenceId="661" nodeId="138852"/>
-          <ReferenceNode name="northernCatalpa_stage04" translation="3394.54 39.0856 87.1433" rotation="0 -90 0" referenceId="664" nodeId="138856"/>
-          <ReferenceNode name="americanElm_stage04" translation="3394.54 39.0856 122.551" rotation="0 -90 0" referenceId="663" nodeId="138860"/>
-          <ReferenceNode name="apple_stage03" translation="3394.54 39.0856 161.838" rotation="0 -90 0" referenceId="696" nodeId="138864"/>
-          <ReferenceNode name="tiliaAmurensis_stage04" translation="3533.98 39.0856 -182.35" rotation="0 -90.0004 0" referenceId="692" nodeId="138868"/>
-          <ReferenceNode name="goldenRain_stage04" translation="3533.98 39.0856 -147.003" rotation="0 -90 0" referenceId="662" nodeId="138872"/>
-          <ReferenceNode name="aspen_stage04" translation="3533.98 39.0856 -109.847" rotation="0 -90 0" referenceId="661" nodeId="138876"/>
-          <ReferenceNode name="northernCatalpa_stage04" translation="3533.98 39.0856 -84.1405" rotation="0 -90 0" referenceId="664" nodeId="138880"/>
-          <ReferenceNode name="americanElm_stage04" translation="3533.98 39.0856 -46.4952" rotation="0 -90 0" referenceId="663" nodeId="138884"/>
-          <ReferenceNode name="apple_stage03" translation="3533.98 39.0856 -7.61278" rotation="0 -90 0" referenceId="696" nodeId="138888"/>
-          <ReferenceNode name="betulaErmanii_stage04" translation="3533.98 39.0856 26.6708" rotation="0 -90 0" referenceId="695" nodeId="138892"/>
-          <ReferenceNode name="boxelder_stage03" translation="3533.98 39.0856 54.4489" rotation="0 -90 0" referenceId="694" nodeId="138899"/>
-          <ReferenceNode name="cherry_stage04_lod" translation="3533.98 39.0856 99.4308" rotation="0 -90 0" referenceId="697" nodeId="138903"/>
-          <ReferenceNode name="oak_stage05" translation="3533.98 39.0856 137.775" rotation="0 -90 0" referenceId="693" nodeId="138907"/>
-          <ReferenceNode name="tiliaAmurensis_stage04" translation="3533.98 39.0856 172.46" rotation="0 -90 0" referenceId="692" nodeId="138913"/>
+      <TransformGroup name="TreesC" nodeId="138710">
+        <TransformGroup name="SourceObject" nodeId="138711"/>
+        <TransformGroup name="SourceSplines" nodeId="138712"/>
+        <TransformGroup name="PlacedObjects" nodeId="138713">
+          <ReferenceNode name="goldenRain_stage04" translation="3128.93 39.0898 -316.003" rotation="0 -90 0" referenceId="662" nodeId="138714"/>
+          <ReferenceNode name="aspen_stage04" translation="3128.93 39.0856 -283.52" rotation="0 -90 0" referenceId="661" nodeId="138718"/>
+          <ReferenceNode name="northernCatalpa_stage04" translation="3128.93 39.0856 -246.588" rotation="0 -90 0" referenceId="664" nodeId="138722"/>
+          <ReferenceNode name="americanElm_stage04" translation="3128.93 39.0856 -217.615" rotation="0 -90 0" referenceId="663" nodeId="138726"/>
+          <ReferenceNode name="apple_stage03" translation="3128.93 39.0856 -176.845" rotation="0 -90.0004 0" referenceId="696" nodeId="138730"/>
+          <ReferenceNode name="betulaErmanii_stage04" translation="3128.93 39.0856 -143.46" rotation="0 -90 0" referenceId="695" nodeId="138734"/>
+          <ReferenceNode name="boxelder_stage03" translation="3128.93 39.0856 -111.266" rotation="0 -90 0" referenceId="694" nodeId="138741"/>
+          <ReferenceNode name="cherry_stage04_lod" translation="3128.93 39.0856 -82.5826" rotation="0 -90 0" referenceId="697" nodeId="138745"/>
+          <ReferenceNode name="oak_stage05" translation="3128.93 39.0856 -35.2652" rotation="0 -90 0" referenceId="693" nodeId="138749"/>
+          <ReferenceNode name="tiliaAmurensis_stage04" translation="3128.93 39.0856 -5.12303" rotation="0 -90 0" referenceId="692" nodeId="138755"/>
+          <ReferenceNode name="goldenRain_stage04" translation="3128.93 39.0856 25.8633" rotation="0 -90 0" referenceId="662" nodeId="138759"/>
+          <ReferenceNode name="aspen_stage04" translation="3128.93 39.0856 58.2355" rotation="0 -90 0" referenceId="661" nodeId="138763"/>
+          <ReferenceNode name="betulaErmanii_stage04" translation="3257.98 39.0856 -316.003" rotation="0 -90 0" referenceId="695" nodeId="138767"/>
+          <ReferenceNode name="boxelder_stage03" translation="3257.98 39.0856 -278.719" rotation="0 -90 0" referenceId="694" nodeId="138774"/>
+          <ReferenceNode name="cherry_stage04_lod" translation="3257.98 39.0856 -245.745" rotation="0 -90 0" referenceId="697" nodeId="138778"/>
+          <ReferenceNode name="oak_stage05" translation="3257.98 39.0856 -216.336" rotation="0 -90 0" referenceId="693" nodeId="138782"/>
+          <ReferenceNode name="tiliaAmurensis_stage04" translation="3257.98 39.0856 -173.449" rotation="0 -90.0004 0" referenceId="692" nodeId="138788"/>
+          <ReferenceNode name="goldenRain_stage04" translation="3257.98 39.0856 -141.426" rotation="0 -90 0" referenceId="662" nodeId="138792"/>
+          <ReferenceNode name="aspen_stage04" translation="3257.98 39.0856 -110.73" rotation="0 -90 0" referenceId="661" nodeId="138796"/>
+          <ReferenceNode name="northernCatalpa_stage04" translation="3257.98 39.0856 -82.8578" rotation="0 -90 0" referenceId="664" nodeId="138800"/>
+          <ReferenceNode name="cherry_stage04_lod" translation="3257.98 39.0856 101.676" rotation="0 -90 0" referenceId="697" nodeId="138804"/>
+          <ReferenceNode name="oak_stage05" translation="3257.98 39.0856 133.912" rotation="0 -90 0" referenceId="693" nodeId="138808"/>
+          <ReferenceNode name="tiliaAmurensis_stage04" translation="3257.98 39.0856 169.479" rotation="0 -90 0" referenceId="692" nodeId="138814"/>
+          <ReferenceNode name="goldenRain_stage04" translation="3394.54 39.0856 -316.003" rotation="0 -90 0" referenceId="662" nodeId="138818"/>
+          <ReferenceNode name="aspen_stage04" translation="3394.54 39.0856 -284.339" rotation="0 -90 0" referenceId="661" nodeId="138822"/>
+          <ReferenceNode name="northernCatalpa_stage04" translation="3394.54 39.0856 -252.543" rotation="0 -90 0" referenceId="664" nodeId="138826"/>
+          <ReferenceNode name="americanElm_stage04" translation="3394.54 39.0856 -215.98" rotation="0 -90 0" referenceId="663" nodeId="138830"/>
+          <ReferenceNode name="oak_stage05" translation="3394.54 39.0856 -49.8456" rotation="0 -90 0" referenceId="693" nodeId="138834"/>
+          <ReferenceNode name="tiliaAmurensis_stage04" translation="3394.54 39.0856 -17.4591" rotation="0 -90 0" referenceId="692" nodeId="138840"/>
+          <ReferenceNode name="goldenRain_stage04" translation="3394.54 39.0856 17.1956" rotation="0 -90 0" referenceId="662" nodeId="138844"/>
+          <ReferenceNode name="aspen_stage04" translation="3394.54 39.0856 56.2673" rotation="0 -90 0" referenceId="661" nodeId="138848"/>
+          <ReferenceNode name="northernCatalpa_stage04" translation="3394.54 39.0856 87.1433" rotation="0 -90 0" referenceId="664" nodeId="138852"/>
+          <ReferenceNode name="americanElm_stage04" translation="3394.54 39.0856 122.551" rotation="0 -90 0" referenceId="663" nodeId="138856"/>
+          <ReferenceNode name="apple_stage03" translation="3394.54 39.0856 161.838" rotation="0 -90 0" referenceId="696" nodeId="138860"/>
+          <ReferenceNode name="tiliaAmurensis_stage04" translation="3533.98 39.0856 -182.35" rotation="0 -90.0004 0" referenceId="692" nodeId="138864"/>
+          <ReferenceNode name="goldenRain_stage04" translation="3533.98 39.0856 -147.003" rotation="0 -90 0" referenceId="662" nodeId="138868"/>
+          <ReferenceNode name="aspen_stage04" translation="3533.98 39.0856 -109.847" rotation="0 -90 0" referenceId="661" nodeId="138872"/>
+          <ReferenceNode name="northernCatalpa_stage04" translation="3533.98 39.0856 -84.1405" rotation="0 -90 0" referenceId="664" nodeId="138876"/>
+          <ReferenceNode name="americanElm_stage04" translation="3533.98 39.0856 -46.4952" rotation="0 -90 0" referenceId="663" nodeId="138880"/>
+          <ReferenceNode name="apple_stage03" translation="3533.98 39.0856 -7.61278" rotation="0 -90 0" referenceId="696" nodeId="138884"/>
+          <ReferenceNode name="betulaErmanii_stage04" translation="3533.98 39.0856 26.6708" rotation="0 -90 0" referenceId="695" nodeId="138888"/>
+          <ReferenceNode name="boxelder_stage03" translation="3533.98 39.0856 54.4489" rotation="0 -90 0" referenceId="694" nodeId="138895"/>
+          <ReferenceNode name="cherry_stage04_lod" translation="3533.98 39.0856 99.4308" rotation="0 -90 0" referenceId="697" nodeId="138899"/>
+          <ReferenceNode name="oak_stage05" translation="3533.98 39.0856 137.775" rotation="0 -90 0" referenceId="693" nodeId="138903"/>
+          <ReferenceNode name="tiliaAmurensis_stage04" translation="3533.98 39.0856 172.46" rotation="0 -90 0" referenceId="692" nodeId="138909"/>
         </TransformGroup>
       </TransformGroup>
-      <TransformGroup name="ResidentialD" nodeId="138917">
-        <TransformGroup name="SourceObject" nodeId="138918"/>
-        <TransformGroup name="SourceSplines" nodeId="138919"/>
-        <TransformGroup name="PlacedObjects" nodeId="138920">
-          <ReferenceNode name="residentialBuilding01" translation="3216.93 39.0856 -311.003" rotation="0 90 0" referenceId="676" nodeId="138921"/>
-          <ReferenceNode name="residentialBuilding02" translation="3216.93 39.0856 -284.108" rotation="0 90 0" referenceId="682" nodeId="138948"/>
-          <ReferenceNode name="residentialBuilding03" translation="3216.93 39.0856 -251.975" rotation="0 90 0" referenceId="683" nodeId="138977"/>
-          <ReferenceNode name="residentialBuilding04" translation="3216.93 39.0856 -226.008" rotation="0 90 0" referenceId="675" nodeId="139003"/>
-          <ReferenceNode name="residentialBuilding05" translation="3216.93 39.0856 -173.105" rotation="0 89.9996 0" referenceId="687" nodeId="139029"/>
-          <ReferenceNode name="residentialBuilding06" translation="3216.93 39.0856 -146.809" rotation="0 90 0" referenceId="667" nodeId="139055"/>
-          <ReferenceNode name="residentialBuilding07" translation="3216.93 39.0856 -115.937" rotation="0 90 0" referenceId="679" nodeId="139080"/>
-          <ReferenceNode name="residentialBuilding08" translation="3216.93 39.0856 -90.0675" rotation="0 90 0" referenceId="698" nodeId="139106"/>
-          <ReferenceNode name="residentialBuilding09" translation="3216.93 39.0856 -33.1236" rotation="0 90 0" referenceId="685" nodeId="139131"/>
-          <ReferenceNode name="residentialBuilding10" translation="3216.93 39.0856 3.72096" rotation="0 90 0" referenceId="672" nodeId="139155"/>
-          <ReferenceNode name="residentialBuilding11" translation="3216.93 39.0856 40.9939" rotation="0 90 0" referenceId="678" nodeId="139181"/>
-          <ReferenceNode name="residentialBuilding02_lod" translation="3354.98 39.0856 -307.003" rotation="0 90 0" referenceId="690" nodeId="139206"/>
-          <ReferenceNode name="residentialBuilding03_lod" translation="3349.98 39.0856 -280.058" rotation="0 90 0" referenceId="691" nodeId="139233"/>
-          <ReferenceNode name="residentialBuilding04_lod" translation="3354.98 39.0856 -243.253" rotation="0 90 0" referenceId="684" nodeId="139264"/>
-          <ReferenceNode name="residentialBuilding06" translation="3354.98 39.0856 -170.593" rotation="0 89.9996 0" referenceId="681" nodeId="139293"/>
-          <ReferenceNode name="residentialBuilding07_lod" translation="3354.98 39.0856 -137.283" rotation="0 90 0" referenceId="674" nodeId="139319"/>
-          <ReferenceNode name="residentialBuilding08_lod" translation="3354.98 39.0856 -97.9311" rotation="0 90 0" referenceId="688" nodeId="139348"/>
-          <ReferenceNode name="residentialBuilding13_lod" translation="3348.98 39.0856 102.499" rotation="-0 90 0" referenceId="686" nodeId="139379"/>
-          <ReferenceNode name="residentialBuilding01" translation="3348.98 39.0856 139.65" rotation="-0 90 0" referenceId="676" nodeId="139405"/>
-          <ReferenceNode name="residentialBuilding02" translation="3348.98 39.0856 179.524" rotation="-0 90 0" referenceId="682" nodeId="139432"/>
-          <ReferenceNode name="residentialBuilding03" translation="3490.54 39.0856 -310.003" rotation="0 90 0" referenceId="683" nodeId="139461"/>
-          <ReferenceNode name="residentialBuilding04" translation="3490.54 39.0856 -283.535" rotation="0 90 0" referenceId="675" nodeId="139487"/>
-          <ReferenceNode name="residentialBuilding05" translation="3490.54 39.0856 -258.723" rotation="0 90 0" referenceId="687" nodeId="139513"/>
-          <ReferenceNode name="residentialBuilding06" translation="3490.54 39.0856 -229.69" rotation="0 90 0" referenceId="667" nodeId="139539"/>
-          <ReferenceNode name="residentialBuilding11" translation="3490.54 39.0856 -42.2294" rotation="0 90 0" referenceId="678" nodeId="139564"/>
-          <ReferenceNode name="residentialBuilding12" translation="3480.54 39.0856 -19.4335" rotation="0 90 0" referenceId="677" nodeId="139589"/>
-          <ReferenceNode name="residentialBuilding13" translation="3490.54 39.0856 12.9044" rotation="0 90 0" referenceId="689" nodeId="139620"/>
-          <ReferenceNode name="residentialBuilding14" translation="3490.54 39.0856 44.8493" rotation="0 90 0" referenceId="666" nodeId="139646"/>
-          <ReferenceNode name="residentialBuilding01_lod" translation="3490.54 39.0856 95.3507" rotation="0 90 0" referenceId="668" nodeId="139678"/>
-          <ReferenceNode name="residentialBuilding02_lod" translation="3490.54 39.0856 124.607" rotation="0 90 0" referenceId="690" nodeId="139706"/>
-          <ReferenceNode name="residentialBuilding03_lod" translation="3487.54 39.0856 159.452" rotation="0 90 0" referenceId="691" nodeId="139733"/>
-          <ReferenceNode name="residentialBuilding08_lod" translation="3628.98 39.0856 -166.621" rotation="0 90 0" referenceId="688" nodeId="139764"/>
-          <ReferenceNode name="residentialBuilding09_lod" translation="3628.98 39.0856 -129.063" rotation="0 90 0" referenceId="670" nodeId="139795"/>
-          <ReferenceNode name="residentialBuilding10_lod" translation="3628.98 39.0856 -97.4874" rotation="0 90 0" referenceId="680" nodeId="139822"/>
-          <ReferenceNode name="residentialBuilding12_lod" translation="3628.98 39.0856 -25.1064" rotation="0 90 0" referenceId="671" nodeId="139851"/>
-          <ReferenceNode name="residentialBuilding13_lod" translation="3628.98 39.0856 8.83131" rotation="0 90 0" referenceId="686" nodeId="139878"/>
-          <ReferenceNode name="residentialBuilding01" translation="3628.98 39.0856 44.2179" rotation="0 90 0" referenceId="676" nodeId="139904"/>
-          <ReferenceNode name="residentialBuilding02" translation="3622.98 39.0856 96.3402" rotation="0 90 0" referenceId="682" nodeId="139931"/>
-          <ReferenceNode name="residentialBuilding03" translation="3622.98 39.0856 125.305" rotation="0 90 0" referenceId="683" nodeId="139960"/>
-          <ReferenceNode name="residentialBuilding04" translation="3622.98 39.0856 157.196" rotation="0 90 0" referenceId="675" nodeId="139986"/>
-          <ReferenceNode name="residentialBuilding05" translation="3622.98 39.0856 187.946" rotation="0 90 0" referenceId="687" nodeId="140012"/>
+      <TransformGroup name="ResidentialD" nodeId="138913">
+        <TransformGroup name="SourceObject" nodeId="138914"/>
+        <TransformGroup name="SourceSplines" nodeId="138915"/>
+        <TransformGroup name="PlacedObjects" nodeId="138916">
+          <ReferenceNode name="residentialBuilding01" translation="3216.93 39.0856 -311.003" rotation="0 90 0" referenceId="676" nodeId="138917"/>
+          <ReferenceNode name="residentialBuilding02" translation="3216.93 39.0856 -284.108" rotation="0 90 0" referenceId="682" nodeId="138944"/>
+          <ReferenceNode name="residentialBuilding03" translation="3216.93 39.0856 -251.975" rotation="0 90 0" referenceId="683" nodeId="138973"/>
+          <ReferenceNode name="residentialBuilding04" translation="3216.93 39.0856 -226.008" rotation="0 90 0" referenceId="675" nodeId="138999"/>
+          <ReferenceNode name="residentialBuilding05" translation="3216.93 39.0856 -173.105" rotation="0 89.9996 0" referenceId="687" nodeId="139025"/>
+          <ReferenceNode name="residentialBuilding06" translation="3216.93 39.0856 -146.809" rotation="0 90 0" referenceId="667" nodeId="139051"/>
+          <ReferenceNode name="residentialBuilding07" translation="3216.93 39.0856 -115.937" rotation="0 90 0" referenceId="679" nodeId="139076"/>
+          <ReferenceNode name="residentialBuilding08" translation="3216.93 39.0856 -90.0675" rotation="0 90 0" referenceId="698" nodeId="139102"/>
+          <ReferenceNode name="residentialBuilding09" translation="3216.93 39.0856 -33.1236" rotation="0 90 0" referenceId="685" nodeId="139127"/>
+          <ReferenceNode name="residentialBuilding10" translation="3216.93 39.0856 3.72096" rotation="0 90 0" referenceId="672" nodeId="139151"/>
+          <ReferenceNode name="residentialBuilding11" translation="3216.93 39.0856 40.9939" rotation="0 90 0" referenceId="678" nodeId="139177"/>
+          <ReferenceNode name="residentialBuilding02_lod" translation="3354.98 39.0856 -307.003" rotation="0 90 0" referenceId="690" nodeId="139202"/>
+          <ReferenceNode name="residentialBuilding03_lod" translation="3349.98 39.0856 -280.058" rotation="0 90 0" referenceId="691" nodeId="139229"/>
+          <ReferenceNode name="residentialBuilding04_lod" translation="3354.98 39.0856 -243.253" rotation="0 90 0" referenceId="684" nodeId="139260"/>
+          <ReferenceNode name="residentialBuilding06" translation="3354.98 39.0856 -170.593" rotation="0 89.9996 0" referenceId="681" nodeId="139289"/>
+          <ReferenceNode name="residentialBuilding07_lod" translation="3354.98 39.0856 -137.283" rotation="0 90 0" referenceId="674" nodeId="139315"/>
+          <ReferenceNode name="residentialBuilding08_lod" translation="3354.98 39.0856 -97.9311" rotation="0 90 0" referenceId="688" nodeId="139344"/>
+          <ReferenceNode name="residentialBuilding13_lod" translation="3348.98 39.0856 102.499" rotation="-0 90 0" referenceId="686" nodeId="139375"/>
+          <ReferenceNode name="residentialBuilding01" translation="3348.98 39.0856 139.65" rotation="-0 90 0" referenceId="676" nodeId="139401"/>
+          <ReferenceNode name="residentialBuilding02" translation="3348.98 39.0856 179.524" rotation="-0 90 0" referenceId="682" nodeId="139428"/>
+          <ReferenceNode name="residentialBuilding03" translation="3490.54 39.0856 -310.003" rotation="0 90 0" referenceId="683" nodeId="139457"/>
+          <ReferenceNode name="residentialBuilding04" translation="3490.54 39.0856 -283.535" rotation="0 90 0" referenceId="675" nodeId="139483"/>
+          <ReferenceNode name="residentialBuilding05" translation="3490.54 39.0856 -258.723" rotation="0 90 0" referenceId="687" nodeId="139509"/>
+          <ReferenceNode name="residentialBuilding06" translation="3490.54 39.0856 -229.69" rotation="0 90 0" referenceId="667" nodeId="139535"/>
+          <ReferenceNode name="residentialBuilding11" translation="3490.54 39.0856 -42.2294" rotation="0 90 0" referenceId="678" nodeId="139560"/>
+          <ReferenceNode name="residentialBuilding12" translation="3480.54 39.0856 -19.4335" rotation="0 90 0" referenceId="677" nodeId="139585"/>
+          <ReferenceNode name="residentialBuilding13" translation="3490.54 39.0856 12.9044" rotation="0 90 0" referenceId="689" nodeId="139616"/>
+          <ReferenceNode name="residentialBuilding14" translation="3490.54 39.0856 44.8493" rotation="0 90 0" referenceId="666" nodeId="139642"/>
+          <ReferenceNode name="residentialBuilding01_lod" translation="3490.54 39.0856 95.3507" rotation="0 90 0" referenceId="668" nodeId="139674"/>
+          <ReferenceNode name="residentialBuilding02_lod" translation="3490.54 39.0856 124.607" rotation="0 90 0" referenceId="690" nodeId="139702"/>
+          <ReferenceNode name="residentialBuilding03_lod" translation="3487.54 39.0856 159.452" rotation="0 90 0" referenceId="691" nodeId="139729"/>
+          <ReferenceNode name="residentialBuilding08_lod" translation="3628.98 39.0856 -166.621" rotation="0 90 0" referenceId="688" nodeId="139760"/>
+          <ReferenceNode name="residentialBuilding09_lod" translation="3628.98 39.0856 -129.063" rotation="0 90 0" referenceId="670" nodeId="139791"/>
+          <ReferenceNode name="residentialBuilding10_lod" translation="3628.98 39.0856 -97.4874" rotation="0 90 0" referenceId="680" nodeId="139818"/>
+          <ReferenceNode name="residentialBuilding12_lod" translation="3628.98 39.0856 -25.1064" rotation="0 90 0" referenceId="671" nodeId="139847"/>
+          <ReferenceNode name="residentialBuilding13_lod" translation="3628.98 39.0856 8.83131" rotation="0 90 0" referenceId="686" nodeId="139874"/>
+          <ReferenceNode name="residentialBuilding01" translation="3628.98 39.0856 44.2179" rotation="0 90 0" referenceId="676" nodeId="139900"/>
+          <ReferenceNode name="residentialBuilding02" translation="3622.98 39.0856 96.3402" rotation="0 90 0" referenceId="682" nodeId="139927"/>
+          <ReferenceNode name="residentialBuilding03" translation="3622.98 39.0856 125.305" rotation="0 90 0" referenceId="683" nodeId="139956"/>
+          <ReferenceNode name="residentialBuilding04" translation="3622.98 39.0856 157.196" rotation="0 90 0" referenceId="675" nodeId="139982"/>
+          <ReferenceNode name="residentialBuilding05" translation="3622.98 39.0856 187.946" rotation="0 90 0" referenceId="687" nodeId="140008"/>
         </TransformGroup>
       </TransformGroup>
-      <TransformGroup name="TreesD" nodeId="140038">
-        <TransformGroup name="SourceObject" nodeId="140039">
-          <ReferenceNode name="goldenRain_stage04" translation="359 39.214 -4059" rotation="0 168.982 0" referenceId="662" nodeId="140040"/>
-          <ReferenceNode name="aspen_stage04" translation="412 39.1673 -4081" rotation="0 346.791 0" referenceId="661" nodeId="140044"/>
-          <ReferenceNode name="northernCatalpa_stage04" translation="343 39.2023 -4089" rotation="0 73.0674 0" referenceId="664" nodeId="140048"/>
-          <ReferenceNode name="americanElm_stage04" translation="489 39.1868 -4072" rotation="0 47.1895 0" referenceId="663" nodeId="140052"/>
-          <ReferenceNode name="apple_stage03" referenceId="696" nodeId="140056"/>
-          <ReferenceNode name="betulaErmanii_stage04" referenceId="695" nodeId="140060"/>
-          <ReferenceNode name="boxelder_stage03" referenceId="694" nodeId="140067"/>
-          <ReferenceNode name="cherry_stage04_lod" referenceId="697" nodeId="140071"/>
-          <ReferenceNode name="oak_stage05" referenceId="693" nodeId="140075"/>
-          <ReferenceNode name="tiliaAmurensis_stage04" referenceId="692" nodeId="140081"/>
+      <TransformGroup name="TreesD" nodeId="140034">
+        <TransformGroup name="SourceObject" nodeId="140035">
+          <ReferenceNode name="goldenRain_stage04" translation="359 39.214 -4059" rotation="0 168.982 0" referenceId="662" nodeId="140036"/>
+          <ReferenceNode name="aspen_stage04" translation="412 39.1673 -4081" rotation="0 346.791 0" referenceId="661" nodeId="140040"/>
+          <ReferenceNode name="northernCatalpa_stage04" translation="343 39.2023 -4089" rotation="0 73.0674 0" referenceId="664" nodeId="140044"/>
+          <ReferenceNode name="americanElm_stage04" translation="489 39.1868 -4072" rotation="0 47.1895 0" referenceId="663" nodeId="140048"/>
+          <ReferenceNode name="apple_stage03" referenceId="696" nodeId="140052"/>
+          <ReferenceNode name="betulaErmanii_stage04" referenceId="695" nodeId="140056"/>
+          <ReferenceNode name="boxelder_stage03" referenceId="694" nodeId="140063"/>
+          <ReferenceNode name="cherry_stage04_lod" referenceId="697" nodeId="140067"/>
+          <ReferenceNode name="oak_stage05" referenceId="693" nodeId="140071"/>
+          <ReferenceNode name="tiliaAmurensis_stage04" referenceId="692" nodeId="140077"/>
         </TransformGroup>
-        <TransformGroup name="SourceSplines" nodeId="140085"/>
-        <TransformGroup name="PlacedObjects" nodeId="140086">
-          <ReferenceNode name="goldenRain_stage04" translation="3225.93 39.0856 -303.003" rotation="0 90 0" referenceId="662" nodeId="140087"/>
-          <ReferenceNode name="aspen_stage04" translation="3225.93 39.0856 -293.886" rotation="0 90 0" referenceId="661" nodeId="140091"/>
-          <ReferenceNode name="northernCatalpa_stage04" translation="3225.93 39.0856 -266.882" rotation="0 90 0" referenceId="664" nodeId="140095"/>
-          <ReferenceNode name="americanElm_stage04" translation="3225.93 39.0856 -217.925" rotation="0 90 0" referenceId="663" nodeId="140099"/>
-          <ReferenceNode name="apple_stage03" translation="3225.93 39.0856 -180.974" rotation="0 89.9996 0" referenceId="696" nodeId="140103"/>
-          <ReferenceNode name="betulaErmanii_stage04" translation="3225.93 39.0856 -153.92" rotation="0 90 0" referenceId="695" nodeId="140107"/>
-          <ReferenceNode name="boxelder_stage03" translation="3225.93 39.0856 -106.305" rotation="0 90 0" referenceId="694" nodeId="140114"/>
-          <ReferenceNode name="cherry_stage04_lod" translation="3225.93 39.0856 -80.6014" rotation="0 90 0" referenceId="697" nodeId="140118"/>
-          <ReferenceNode name="oak_stage05" translation="3225.93 39.0856 -42.3521" rotation="0 90 0" referenceId="693" nodeId="140122"/>
-          <ReferenceNode name="tiliaAmurensis_stage04" translation="3225.93 39.0856 -12.2775" rotation="0 90 0" referenceId="692" nodeId="140128"/>
-          <ReferenceNode name="goldenRain_stage04" translation="3225.93 39.0856 37.4003" rotation="0 90 0" referenceId="662" nodeId="140132"/>
-          <ReferenceNode name="betulaErmanii_stage04" translation="3361.98 39.0856 -296.003" rotation="0 90 0" referenceId="695" nodeId="140136"/>
-          <ReferenceNode name="boxelder_stage03" translation="3361.98 39.0856 -262.181" rotation="0 90 0" referenceId="694" nodeId="140143"/>
-          <ReferenceNode name="cherry_stage04_lod" translation="3361.98 39.0856 -238.771" rotation="0 90 0" referenceId="697" nodeId="140147"/>
-          <ReferenceNode name="oak_stage05" translation="3361.98 39.0856 -223.327" rotation="0 89.9996 0" referenceId="693" nodeId="140151"/>
-          <ReferenceNode name="tiliaAmurensis_stage04" translation="3361.98 39.0856 -153.987" rotation="0 90 0" referenceId="692" nodeId="140157"/>
-          <ReferenceNode name="goldenRain_stage04" translation="3361.98 39.0856 -121.572" rotation="0 90 0" referenceId="662" nodeId="140161"/>
-          <ReferenceNode name="aspen_stage04" translation="3361.98 39.0856 -83.7544" rotation="0 90 0" referenceId="661" nodeId="140165"/>
-          <ReferenceNode name="boxelder_stage03" translation="3361.98 39.0856 88.6418" rotation="0 90 0" referenceId="694" nodeId="140169"/>
-          <ReferenceNode name="cherry_stage04_lod" translation="3361.98 39.0856 105.889" rotation="0 90 0" referenceId="697" nodeId="140173"/>
-          <ReferenceNode name="oak_stage05" translation="3361.98 39.0856 149.502" rotation="0 90 0" referenceId="693" nodeId="140177"/>
-          <ReferenceNode name="tiliaAmurensis_stage04" translation="3361.98 39.0856 188.398" rotation="0 90 0" referenceId="692" nodeId="140183"/>
-          <ReferenceNode name="goldenRain_stage04" translation="3498.54 39.0856 -299.003" rotation="0 90 0" referenceId="662" nodeId="140187"/>
-          <ReferenceNode name="aspen_stage04" translation="3498.54 39.0856 -277.162" rotation="0 90 0" referenceId="661" nodeId="140191"/>
-          <ReferenceNode name="northernCatalpa_stage04" translation="3498.54 39.0856 -241.066" rotation="0 90 0" referenceId="664" nodeId="140195"/>
-          <ReferenceNode name="americanElm_stage04" translation="3498.54 39.0856 -218.323" rotation="0 90 0" referenceId="663" nodeId="140199"/>
-          <ReferenceNode name="cherry_stage04_lod" translation="3498.54 39.0856 -49.8695" rotation="0 90 0" referenceId="697" nodeId="140203"/>
-          <ReferenceNode name="oak_stage05" translation="3498.54 39.0856 -30.2715" rotation="0 90 0" referenceId="693" nodeId="140207"/>
-          <ReferenceNode name="tiliaAmurensis_stage04" translation="3498.54 39.0856 -3.96706" rotation="0 90 0" referenceId="692" nodeId="140213"/>
-          <ReferenceNode name="goldenRain_stage04" translation="3498.54 39.0856 29.4471" rotation="0 90 0" referenceId="662" nodeId="140217"/>
-          <ReferenceNode name="aspen_stage04" translation="3498.54 39.0856 85.6768" rotation="0 90 0" referenceId="661" nodeId="140221"/>
-          <ReferenceNode name="northernCatalpa_stage04" translation="3498.54 39.0856 109.913" rotation="0 90 0" referenceId="664" nodeId="140225"/>
-          <ReferenceNode name="americanElm_stage04" translation="3498.54 39.0856 139.376" rotation="0 90 0" referenceId="663" nodeId="140229"/>
-          <ReferenceNode name="apple_stage03" translation="3498.54 39.0856 174.398" rotation="0 90 0" referenceId="696" nodeId="140233"/>
-          <ReferenceNode name="tiliaAmurensis_stage04" translation="3634.98 39.0856 -181.556" rotation="0 89.9996 0" referenceId="692" nodeId="140237"/>
-          <ReferenceNode name="goldenRain_stage04" translation="3634.98 39.0856 -145.363" rotation="0 90 0" referenceId="662" nodeId="140241"/>
-          <ReferenceNode name="aspen_stage04" translation="3634.98 39.0856 -105.38" rotation="0 90 0" referenceId="661" nodeId="140245"/>
-          <ReferenceNode name="northernCatalpa_stage04" translation="3634.98 39.0856 -79.8996" rotation="0 90 0" referenceId="664" nodeId="140249"/>
-          <ReferenceNode name="americanElm_stage04" translation="3634.98 39.0856 -35.733" rotation="0 90 0" referenceId="663" nodeId="140253"/>
-          <ReferenceNode name="apple_stage03" translation="3634.98 39.0856 -3.12746" rotation="0 90 0" referenceId="696" nodeId="140257"/>
-          <ReferenceNode name="betulaErmanii_stage04" translation="3634.98 39.0856 30.3975" rotation="0 90 0" referenceId="695" nodeId="140261"/>
-          <ReferenceNode name="boxelder_stage03" translation="3634.98 39.0856 56.853" rotation="0 90 0" referenceId="694" nodeId="140268"/>
-          <ReferenceNode name="cherry_stage04_lod" translation="3634.98 39.0856 104.564" rotation="0 90 0" referenceId="697" nodeId="140272"/>
-          <ReferenceNode name="oak_stage05" translation="3634.98 39.0856 138.36" rotation="0 90 0" referenceId="693" nodeId="140276"/>
-          <ReferenceNode name="tiliaAmurensis_stage04" translation="3634.98 39.0856 171.669" rotation="0 90 0" referenceId="692" nodeId="140282"/>
+        <TransformGroup name="SourceSplines" nodeId="140081"/>
+        <TransformGroup name="PlacedObjects" nodeId="140082">
+          <ReferenceNode name="goldenRain_stage04" translation="3225.93 39.0856 -303.003" rotation="0 90 0" referenceId="662" nodeId="140083"/>
+          <ReferenceNode name="aspen_stage04" translation="3225.93 39.0856 -293.886" rotation="0 90 0" referenceId="661" nodeId="140087"/>
+          <ReferenceNode name="northernCatalpa_stage04" translation="3225.93 39.0856 -266.882" rotation="0 90 0" referenceId="664" nodeId="140091"/>
+          <ReferenceNode name="americanElm_stage04" translation="3225.93 39.0856 -217.925" rotation="0 90 0" referenceId="663" nodeId="140095"/>
+          <ReferenceNode name="apple_stage03" translation="3225.93 39.0856 -180.974" rotation="0 89.9996 0" referenceId="696" nodeId="140099"/>
+          <ReferenceNode name="betulaErmanii_stage04" translation="3225.93 39.0856 -153.92" rotation="0 90 0" referenceId="695" nodeId="140103"/>
+          <ReferenceNode name="boxelder_stage03" translation="3225.93 39.0856 -106.305" rotation="0 90 0" referenceId="694" nodeId="140110"/>
+          <ReferenceNode name="cherry_stage04_lod" translation="3225.93 39.0856 -80.6014" rotation="0 90 0" referenceId="697" nodeId="140114"/>
+          <ReferenceNode name="oak_stage05" translation="3225.93 39.0856 -42.3521" rotation="0 90 0" referenceId="693" nodeId="140118"/>
+          <ReferenceNode name="tiliaAmurensis_stage04" translation="3225.93 39.0856 -12.2775" rotation="0 90 0" referenceId="692" nodeId="140124"/>
+          <ReferenceNode name="goldenRain_stage04" translation="3225.93 39.0856 37.4003" rotation="0 90 0" referenceId="662" nodeId="140128"/>
+          <ReferenceNode name="betulaErmanii_stage04" translation="3361.98 39.0856 -296.003" rotation="0 90 0" referenceId="695" nodeId="140132"/>
+          <ReferenceNode name="boxelder_stage03" translation="3361.98 39.0856 -262.181" rotation="0 90 0" referenceId="694" nodeId="140139"/>
+          <ReferenceNode name="cherry_stage04_lod" translation="3361.98 39.0856 -238.771" rotation="0 90 0" referenceId="697" nodeId="140143"/>
+          <ReferenceNode name="oak_stage05" translation="3361.98 39.0856 -223.327" rotation="0 89.9996 0" referenceId="693" nodeId="140147"/>
+          <ReferenceNode name="tiliaAmurensis_stage04" translation="3361.98 39.0856 -153.987" rotation="0 90 0" referenceId="692" nodeId="140153"/>
+          <ReferenceNode name="goldenRain_stage04" translation="3361.98 39.0856 -121.572" rotation="0 90 0" referenceId="662" nodeId="140157"/>
+          <ReferenceNode name="aspen_stage04" translation="3361.98 39.0856 -83.7544" rotation="0 90 0" referenceId="661" nodeId="140161"/>
+          <ReferenceNode name="boxelder_stage03" translation="3361.98 39.0856 88.6418" rotation="0 90 0" referenceId="694" nodeId="140165"/>
+          <ReferenceNode name="cherry_stage04_lod" translation="3361.98 39.0856 105.889" rotation="0 90 0" referenceId="697" nodeId="140169"/>
+          <ReferenceNode name="oak_stage05" translation="3361.98 39.0856 149.502" rotation="0 90 0" referenceId="693" nodeId="140173"/>
+          <ReferenceNode name="tiliaAmurensis_stage04" translation="3361.98 39.0856 188.398" rotation="0 90 0" referenceId="692" nodeId="140179"/>
+          <ReferenceNode name="goldenRain_stage04" translation="3498.54 39.0856 -299.003" rotation="0 90 0" referenceId="662" nodeId="140183"/>
+          <ReferenceNode name="aspen_stage04" translation="3498.54 39.0856 -277.162" rotation="0 90 0" referenceId="661" nodeId="140187"/>
+          <ReferenceNode name="northernCatalpa_stage04" translation="3498.54 39.0856 -241.066" rotation="0 90 0" referenceId="664" nodeId="140191"/>
+          <ReferenceNode name="americanElm_stage04" translation="3498.54 39.0856 -218.323" rotation="0 90 0" referenceId="663" nodeId="140195"/>
+          <ReferenceNode name="cherry_stage04_lod" translation="3498.54 39.0856 -49.8695" rotation="0 90 0" referenceId="697" nodeId="140199"/>
+          <ReferenceNode name="oak_stage05" translation="3498.54 39.0856 -30.2715" rotation="0 90 0" referenceId="693" nodeId="140203"/>
+          <ReferenceNode name="tiliaAmurensis_stage04" translation="3498.54 39.0856 -3.96706" rotation="0 90 0" referenceId="692" nodeId="140209"/>
+          <ReferenceNode name="goldenRain_stage04" translation="3498.54 39.0856 29.4471" rotation="0 90 0" referenceId="662" nodeId="140213"/>
+          <ReferenceNode name="aspen_stage04" translation="3498.54 39.0856 85.6768" rotation="0 90 0" referenceId="661" nodeId="140217"/>
+          <ReferenceNode name="northernCatalpa_stage04" translation="3498.54 39.0856 109.913" rotation="0 90 0" referenceId="664" nodeId="140221"/>
+          <ReferenceNode name="americanElm_stage04" translation="3498.54 39.0856 139.376" rotation="0 90 0" referenceId="663" nodeId="140225"/>
+          <ReferenceNode name="apple_stage03" translation="3498.54 39.0856 174.398" rotation="0 90 0" referenceId="696" nodeId="140229"/>
+          <ReferenceNode name="tiliaAmurensis_stage04" translation="3634.98 39.0856 -181.556" rotation="0 89.9996 0" referenceId="692" nodeId="140233"/>
+          <ReferenceNode name="goldenRain_stage04" translation="3634.98 39.0856 -145.363" rotation="0 90 0" referenceId="662" nodeId="140237"/>
+          <ReferenceNode name="aspen_stage04" translation="3634.98 39.0856 -105.38" rotation="0 90 0" referenceId="661" nodeId="140241"/>
+          <ReferenceNode name="northernCatalpa_stage04" translation="3634.98 39.0856 -79.8996" rotation="0 90 0" referenceId="664" nodeId="140245"/>
+          <ReferenceNode name="americanElm_stage04" translation="3634.98 39.0856 -35.733" rotation="0 90 0" referenceId="663" nodeId="140249"/>
+          <ReferenceNode name="apple_stage03" translation="3634.98 39.0856 -3.12746" rotation="0 90 0" referenceId="696" nodeId="140253"/>
+          <ReferenceNode name="betulaErmanii_stage04" translation="3634.98 39.0856 30.3975" rotation="0 90 0" referenceId="695" nodeId="140257"/>
+          <ReferenceNode name="boxelder_stage03" translation="3634.98 39.0856 56.853" rotation="0 90 0" referenceId="694" nodeId="140264"/>
+          <ReferenceNode name="cherry_stage04_lod" translation="3634.98 39.0856 104.564" rotation="0 90 0" referenceId="697" nodeId="140268"/>
+          <ReferenceNode name="oak_stage05" translation="3634.98 39.0856 138.36" rotation="0 90 0" referenceId="693" nodeId="140272"/>
+          <ReferenceNode name="tiliaAmurensis_stage04" translation="3634.98 39.0856 171.669" rotation="0 90 0" referenceId="692" nodeId="140278"/>
         </TransformGroup>
       </TransformGroup>
     </TransformGroup>
-    <ReferenceNode name="waterTower05" translation="-2587.26 38.3619 -3185.44" referenceId="699" nodeId="140337"/>
-    <ReferenceNode name="cafeSmall" translation="-2860.89 38.3619 -2581.45" referenceId="700" nodeId="140412"/>
-    <ReferenceNode name="fireStation" translation="-2787.5 38.3619 -2849.03" rotation="0 90 0" referenceId="701" nodeId="140517"/>
-    <ReferenceNode name="hotel" translation="-2882.47 37.9288 -3265.48" rotation="-180 0 180" referenceId="702" nodeId="140620"/>
-    <ReferenceNode name="animalTader_CLUSTER" translation="3541.95 43.9883 -3379.4" rotation="-1.52349e-11 -90 -2.73333e-05" referenceId="703" nodeId="144944"/>
-    <ReferenceNode name="vehicleDealer" translation="-3056.26 37.6537 -3382.25" referenceId="704" nodeId="148742"/>
-    <TransformGroup name="preplaced_sellingStationVehicles" lockedgroup="true" translation="-2957.69 37.6537 -3362.96" nodeId="148935">
-      <TransformGroup name="placeable" nodeId="148936">
-        <ReferenceNode name="sellingStationVehicles" referenceId="705" nodeId="148955"/>
+    <ReferenceNode name="waterTower05" translation="-2587.26 38.3619 -3185.44" referenceId="699" nodeId="140333"/>
+    <ReferenceNode name="cafeSmall" translation="-2860.89 38.3619 -2581.45" referenceId="700" nodeId="140408"/>
+    <ReferenceNode name="fireStation" translation="-2787.5 38.3619 -2849.03" rotation="0 90 0" referenceId="701" nodeId="140513"/>
+    <ReferenceNode name="hotel" translation="-2882.47 37.9288 -3265.48" rotation="-180 0 180" referenceId="702" nodeId="140616"/>
+    <ReferenceNode name="animalTader_CLUSTER" translation="3541.95 43.9883 -3379.4" rotation="-1.52349e-11 -90 -2.73333e-05" referenceId="703" nodeId="144940"/>
+    <ReferenceNode name="vehicleDealer" translation="-3056.26 37.6537 -3382.25" referenceId="704" nodeId="148738"/>
+    <TransformGroup name="preplaced_sellingStationVehicles" lockedgroup="true" translation="-2957.69 37.6537 -3362.96" nodeId="148931">
+      <TransformGroup name="placeable" nodeId="148932">
+        <ReferenceNode name="sellingStationVehicles" referenceId="705" nodeId="148951"/>
       </TransformGroup>
-      <TransformGroup name="props" nodeId="148968"/>
-      <TransformGroup name="aiSplines" nodeId="148969"/>
+      <TransformGroup name="props" nodeId="148964"/>
+      <TransformGroup name="aiSplines" nodeId="148965"/>
     </TransformGroup>
-    <ReferenceNode name="gasStation01" translation="-2587.98 37.6537 -3320.38" rotation="0 -90 0" referenceId="706" nodeId="149133"/>
-    <TransformGroup name="preplaced_gasStation" lockedgroup="true" translation="-2584.93 37.727 -3317.96" nodeId="149251">
-      <TransformGroup name="placeable" nodeId="149252">
-        <ReferenceNode name="gasStation" referenceId="707" nodeId="149258"/>
+    <ReferenceNode name="gasStation01" translation="-2587.98 37.6537 -3320.38" rotation="0 -90 0" referenceId="706" nodeId="149129"/>
+    <TransformGroup name="preplaced_gasStation" lockedgroup="true" translation="-2584.93 37.727 -3317.96" nodeId="149247">
+      <TransformGroup name="placeable" nodeId="149248">
+        <ReferenceNode name="gasStation" referenceId="707" nodeId="149254"/>
       </TransformGroup>
-      <TransformGroup name="props" nodeId="149261"/>
-      <TransformGroup name="aiSplines" nodeId="149262"/>
+      <TransformGroup name="props" nodeId="149257"/>
+      <TransformGroup name="aiSplines" nodeId="149258"/>
     </TransformGroup>
   </Scene>
 
@@ -37150,14 +37150,14 @@
     <UserAttribute nodeId="1841">
       <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater"/>
     </UserAttribute>
-    <UserAttribute nodeId="148935">
+    <UserAttribute nodeId="148931">
       <Attribute name="aiSplines" type="string" value="2"/>
       <Attribute name="boughtWithFarmlandOverwrite" type="boolean" value="false"/>
       <Attribute name="onCreate" type="scriptCallback" value="Placeable.onCreate"/>
       <Attribute name="uniqueId" type="string" value="preplaced_sellingStationVehicles_00401c5af2ba0f997b52cf0fbca61d28a"/>
       <Attribute name="xmlFilename" type="string" value="$data/placeables/mapUS/sellingPoints/sellingStationVehicles/sellingStationVehicles.xml"/>
     </UserAttribute>
-    <UserAttribute nodeId="149251">
+    <UserAttribute nodeId="149247">
       <Attribute name="aiSplines" type="string" value="2"/>
       <Attribute name="boughtWithFarmlandOverwrite" type="boolean" value="false"/>
       <Attribute name="onCreate" type="scriptCallback" value="Placeable.onCreate"/>
